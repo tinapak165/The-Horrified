@@ -5,6 +5,7 @@
 #include <vector>
 #include <optional>
 
+enum class CardType {villagersAffecting,  MonsterAffecting };
 
 enum class MonsterType {InvisibleMan , Dracula , Frenzied};
 
@@ -18,30 +19,45 @@ struct Strike{
      
     public:
         Strike(std::vector<MonsterType> m, int move, int dice)
-            : monsters(std::move(m)), move_count(move), dice_count(dice) {}   
+            : monsters(std::move(m)), move_count(move), dice_count(dice) {}  
+            
+        int get_move_count(){  return move_count;}
+        int get_dice_count(){   return dice_count;}
 
     
 };
 
 class Monstercard{
+
+    
     private:
-
-        int Item_count;
-        std::string Event;
-        std::vector<Strike> striks;
-
-        std::string character_name;
-        std::string destination_location;
-
+    
+    std::string card_name;
+    CardType type;
+    int Item_count;
+    std::string Event;
+    std::vector<Strike> striks;
+    
+    std::string character_name;
+    std::string destination_location;
+    
+    friend std::ostream& operator<<(std::ostream& os, const Monstercard& card);
         // باید بصورت دستی همه ی کارت هارو با کانستارکتور توی یک 
     public:
-    Monstercard(int itemCount, std::string event, std::vector<Strike> s): Item_count(std::move(itemCount)), Event((event)),striks((s)) {}
-    Monstercard(int itemCount, std::string event, std::vector<Strike> s,std::string name,, std::string character_name , std::string destination_location);
+    Monstercard (std::string card_name , int itemCount, std::string event, std::vector<Strike> s );
+    Monstercard( std:: string card_name ,int itemCount, std::string event, std::vector<Strike> s, std::string character , std::string location);
   
-    int get_item_count();
-    std::string get_Event();
-    std::vector get_striks();
+        std::string get_card_name()const;
+        int get_item_count() const;
+        std::string get_Event() const;
+
+        std::string get_destination_location() const;
+
+        std::string get_character_name()const ;
+        CardType get_type() const;
+//               :      توابع تا‌ثیر کارت های هیولا
     
+        void place_item(int item);
 
 };
 
