@@ -5,7 +5,8 @@
 
     
 // Monstercard form_the_bat( 2,std::string ("Dacula moved where your hero was"), { { { MonsterType::Dracula, MonsterType::InvisibleMan }, 1, 3 }}  );
-    
+Monstercard::Monstercard(){}
+
 Monstercard ::Monstercard (std::string card_name, int itemCount, std::string event, std::vector<Strike> s) : 
 card_name(card_name),type(CardType::MonsterAffecting),Item_count(std::move(itemCount)), Event((event)),striks((s)) {}
 

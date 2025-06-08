@@ -13,7 +13,7 @@ private:
 
 public:
     MonsterCardDeck(); // اضافه کردن کارت ها
-
+    
     Monstercard get_random_card(); 
     Monstercard get_card_by_id(int);
     bool is_empty() const;          

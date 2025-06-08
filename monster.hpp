@@ -4,7 +4,7 @@
 #include <string>
 #include "location.hpp"
 
-class Location; // forward declaration
+// class Location; // forward declaration
 
 class Monster {
 private:

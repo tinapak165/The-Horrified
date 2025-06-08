@@ -1,6 +1,12 @@
 #include "MonstercardDeck.hpp"
+#include "actions.hpp"
+#include <iostream>
+using namespace std;
 
 int main(){
     MonsterCardDeck deck;
-    deck.get_random_card();
+    Monstercard card;
+    deck.get_random_card() = card;
+    cout<<card;
+   
 }

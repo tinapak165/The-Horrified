@@ -4,20 +4,21 @@
 #include <vector>
 #include "item.hpp"
 #include "monster.hpp"
+#include "hero.hpp"
 
 class Location {
     private:
         std::string name;
         std::vector<Item> items;
-        // std::vector<Hero*> heroes;
+        std::vector<Hero*> heroes;
         std::vector<Monster*> monsters;
-        bool has_coffin = false; // فقط واس دراکولاس
+        bool has_coffin = false; // فقط واسio دراکولاس
     
     public:
         Location(std::string name);
     
         void add_item(const Item& item);
-        // void add_hero(Hero* hero);
+        void add_hero(Hero* hero);
         void add_monster(Monster* monster);
         void set_coffin(bool present);
         bool coffin_present() const;

@@ -60,8 +60,9 @@ Monstercard MonsterCardDeck::get_card_by_id(int id) {
             throw std::runtime_error("No cards left in the deck");
         }
         int index = std::rand() % cards.size();
+        // نشون دادن کارت
         Monstercard chosen_card = cards[index];
-        cout<<chosen_card;
+        // cout<<chosen_card;
        
         cards.erase(cards.begin() + index);
     
