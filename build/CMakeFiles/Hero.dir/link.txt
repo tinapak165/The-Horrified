@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\Hero.dir/objects.a
+C:\MinGW\bin\ar.exe qc CMakeFiles\Hero.dir/objects.a @CMakeFiles\Hero.dir\objects1.rsp
+C:\MinGW\bin\c++.exe -Wl,--whole-archive CMakeFiles\Hero.dir/objects.a -Wl,--no-whole-archive -o Hero.exe -Wl,--out-implib,libHero.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Hero.dir\linkLibs.rsp
