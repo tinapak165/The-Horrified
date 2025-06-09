@@ -2,9 +2,9 @@
 #define MONSTER_HPP
 
 #include <string>
-#include "location.hpp"
+#include "Location.hpp"
 
-// class Location; // forward declaration
+class Location; // forward declaration
 
 class Monster {
 private:

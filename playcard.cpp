@@ -16,9 +16,9 @@ int main(){
 
 
     for (const auto& loc : map.get_locations()) {
-        std::cout << "Location: " << loc->get_name() << "\n";
+        cout << "Location: " << loc->get_name() << "\n";
         for (auto adj : loc->get_neighbor()) {
-            std::cout << "  | connected to: " << adj->get_name() << "\n";
+            cout << "  | connected to: " << adj->get_name() << "\n";
         }
     }
 

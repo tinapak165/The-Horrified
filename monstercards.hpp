@@ -58,7 +58,7 @@ class Monstercard{
         CardType get_type() const;
 //               :      توابع تا‌ثیر کارت های هیولا
     
-        void place_item(int item);
+        void place_item();
 
 };
 

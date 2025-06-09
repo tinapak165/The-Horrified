@@ -14,7 +14,7 @@ public:
     ItemColor get_color() const;
     int get_power() const;
 
-    void place_item(int);
+    void place_item(int);  // every monstercard has this 
 
     void pick_up_item(int);  // for the the invisableman 
 

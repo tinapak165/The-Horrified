@@ -26,9 +26,9 @@ CardType Monstercard::get_type () const { return type; }
 
 // تاثیر ایتم ها 
 
-void Monstercard::place_item(int Item){
+void Monstercard::place_item(){
 
-    Item = Item_count;
+    
     
 
 }
@@ -44,9 +44,8 @@ std::ostream&  operator<<(std::ostream& os, const Monstercard& card) {
     if (!card.destination_location.empty())
         os << "Location: " << card.destination_location << "\n";
 
-
-
     return os;
 }
 
+// Monstercard& operator = ()
 
