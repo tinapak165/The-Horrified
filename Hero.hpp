@@ -1,36 +1,48 @@
 #ifndef HERO_H
 #define HERO_H
 #include <iostream>
-//#include "location.hpp"
-class Hero{
-    friend std::ostream& operator << (std::ostream &out , const Hero &hero) ; 
+#include <vector>
+#include "location.hpp"
 
+enum class ActionType{
+    Move ,
+    Guide ,
+    Pickup ,
+    Advance , 
+    Defeat , 
+    specialAction  
+};
+
+struct Action{
+    ActionType Type ; 
+    std::string name ; 
+    std::string Description ; 
+};
+
+class Hero{
     private:
         std::string name ; 
         int MaxActions ; 
         int RemainingActions ; 
         std::string specialAction ; 
-        std::string StartingLocation ;
-        std::string currentLocation;
+        Location* StartingLocation ;
+        Location* currentLocation;
+        std::vector<Action> ListOfActions ; 
 
     public:
-        Hero(std::string name , int MaxActions , std::string StartingLocation , std::string specialAction) ;
-        Hero() ; 
-        //virtual void DoTheSpecialAction() = 0 ; //do the special action
-        //virtual void DisplayInfo() const = 0 ; //displaying info for each hero
-        void MoveTo(std::string Newlocation) ; //change the hero placement
+        Hero(std::string name , int MaxActions , Location* StartingLocation , std::string specialAction) ;
+        void MoveTo(Location* Newlocation) ; //change the hero placement
 
         std::string GetName()const ; 
-        int GetMaxAction() const  ; // return the number of action each hero have
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
-        std::string GetCurrentLocation() const ; 
+        Location* GetCurrentLocation() const ; 
         
+        void PerformTheAction(ActionType action)  ; 
+        void DisplayActions() ; 
 
-        void SetMaxActions(int newMax) ; 
         void SetRemainingActions(int newRemaining) ;
-        void SetCurrentLocation(std::string location) ;
-        //virtual void SetSpecialActionInfo(const std::string spe) = 0 ;
+        void SetCurrentLocation(Location* location) ;
 };
 
 #endif 
