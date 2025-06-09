@@ -6,8 +6,8 @@ class Mayor : public Hero{
 
     public:
         Mayor() ; 
-        //void DoTheSpecialAction()  ; 
         void DisplayInfo() const  ; 
+        bool HasSpecialAction() const override {return false ; }
 };
 
 
