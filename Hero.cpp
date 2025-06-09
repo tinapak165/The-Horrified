@@ -5,7 +5,7 @@
 using namespace std ; 
 
 Hero::Hero( std::string name , int MaxActions , std::string StartingLocation , std::string specialAction)
-: name(name) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
+: name(name) , RemainingActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
 
     ListOfActions = {
         {ActionType::Move , "Move" , "You can move to any places near by. you can also move the villagers with you."} ,
@@ -13,29 +13,32 @@ Hero::Hero( std::string name , int MaxActions , std::string StartingLocation , s
         {ActionType::Pickup , "Pickup" , "You can take any number of item you want from the place you are."},
         {ActionType::Advance , "Advance" , "You can speed up a monster-related mission and complete it to get closer to defeating that monster."} ,
         {ActionType::Defeat , "Defeat" , "Once you have completed all the missions related to catching a monster, you can defeat it, but keep in mind that you must be present in the area where the monster is located."} ,
-        {ActionType::specialAction , "Special action" , GetSpecialActionInfo()} , 
+        {ActionType::SpecialAction , "Special" , specialAction} , 
     };
 }
 
 void Hero::DisplayActions(){
-    cout << "Here is thr list of actions you have\n" ; 
+    cout << "Here is the list of actions you have\n" ; 
     for(const auto a : ListOfActions)
-        cout << a.name << ": " << a.Description <<  '\n' ; 
+        cout << a.name << ": " << a.Description << '\n' ; 
 }
 
-void Hero::PerformTheAction(ActionType action)  {
-    for(const auto ac : ListOfActions){
-        if(ac.Type == action){
-            if(GetRemainingActions() > 0){
+void Hero::PerformTheAction(std::string act)  {
+    for(const auto& ac : ListOfActions){
+        if(ac.name == act){
+            if(act == "Special" && !HasSpecialAction()){
+                throw runtime_error("This hero does not have special action") ; 
+            }
+            if(GetRemainingActions() > 1){
                 cout << "you can do the " << ac.name << " action." ; 
-                SetRemainingActions(1-GetRemainingActions()) ; 
+                SetRemainingActions(GetRemainingActions()-1) ; 
                 return ; 
             }else
                 throw runtime_error("not enough action remaining!") ; 
-        }else
-            throw runtime_error("action not available!") ; 
-
+        }
     }
+    throw runtime_error("action not available!") ; 
+
 }
 
 std::string Hero::GetName()const{
@@ -47,13 +50,13 @@ int Hero::GetRemainingActions()const{
 std::string Hero::GetSpecialActionInfo() const{
     return specialAction ; 
 }
-Location* Hero::GetCurrentLocation() const{
+std::string Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
-void Hero::SetCurrentLocation(Location* location){
+void Hero::SetCurrentLocation(std::string location){
     currentLocation = location ;
 }
-void Hero::MoveTo(Location* Newlocation){
+void Hero::MoveTo(std::string Newlocation){
     currentLocation = Newlocation ; 
     cout << GetName() << " moved to " << GetCurrentLocation() << endl ;
 }
