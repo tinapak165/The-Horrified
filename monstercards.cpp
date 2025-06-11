@@ -1,7 +1,6 @@
 #include "item.hpp"
 #include <iostream>
 #include "monstercards.hpp"
-#include "actions.hpp"
 
     
 // Monstercard form_the_bat( 2,std::string ("Dacula moved where your hero was"), { { { MonsterType::Dracula, MonsterType::InvisibleMan }, 1, 3 }}  );
@@ -33,6 +32,30 @@ void Monstercard::place_item(int Item){
 
 }
 
+void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monsters) {
+    // فرض می‌گیریم این کارت در حال اجراست، پس اطلاعات خودش رو استفاده می‌کنه
+    for (const auto& strike : striks) {
+        int moves = strike.get_move_count();
+        int dice = strike.get_dice_count();
+        const auto& monster_list = strike.monsters;
+
+        for (MonsterType type : monster_list) {
+            if (monsters.count(type)) {
+                Monster* m = monsters[type];
+
+                for (int i = 0; i < moves; ++i) {
+                    Location* target = m->find_nearest_target(map);  // فرض: تابع نیاز به نقشه داره
+                    if (target)
+                        m->move_to(target);
+                }
+
+                std::cout << m->get_name() << " rolled " << dice << " dice!\n";
+                // اگر بخوای attack بزنه اینجا dice رو استفاده کن
+                // مثلاً: m->attack(dice);
+            }
+        }
+    }
+}
 
 
 std::ostream&  operator<<(std::ostream& os, const Monstercard& card) {
@@ -49,4 +72,4 @@ std::ostream&  operator<<(std::ostream& os, const Monstercard& card) {
     return os;
 }
 
-
+//Monstercard::operator = (){}

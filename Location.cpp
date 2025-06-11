@@ -44,6 +44,6 @@ void Location::connect(Location * other){
 
 
 
-const std::vector<Location*>& Location::get_neighbor() const {
+const std::vector<Location*>& Location::get_neighbors() const {
     return neighbors;
 }

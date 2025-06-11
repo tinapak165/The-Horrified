@@ -1,6 +1,7 @@
 #ifndef MONSTERCARDS_HPP
 #define MONSTERCARDS_HPP
 #include "item.hpp"
+#include "GameMap.hpp"
 #include <string>
 #include <vector>
 #include <optional>
@@ -59,6 +60,8 @@ class Monstercard{
 //               :      توابع تا‌ثیر کارت های هیولا
     
         void place_item(int item);
+        void play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monsters);
+
 
 };
 
