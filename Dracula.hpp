@@ -14,7 +14,7 @@ class Dracula : public Monster {
         void defeat(Hero* hero, std::vector<Item>& yellow_items);
         void activate_dark_charm(Hero* active_hero);
     
-        void move_towards_closest_person();
+        virtual Location * find_nearest_target();
         void attack_if_possible();
     };
     
