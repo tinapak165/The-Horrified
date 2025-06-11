@@ -37,15 +37,15 @@ void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType
     for (const auto& strike : striks) {
         int moves = strike.get_move_count();
         int dice = strike.get_dice_count();
-        const auto& monster_list = strike.monsters;
+        const auto& monster_list = strike.get_monsters() ;
 
         for (MonsterType type : monster_list) {
             if (monsters.count(type)) {
                 Monster* m = monsters[type];
 
                 for (int i = 0; i < moves; ++i) {
-                    Location* target = m->find_nearest_target(map);  // فرض: تابع نیاز به نقشه داره
-                    if (target)
+                    Location* target = m->find_nearest_target();  // فرض: تابع نیاز به نقشه داره                   
+                     if (target)
                         m->move_to(target);
                 }
 

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <unordered_map>
 
 enum class CardType {villagersAffecting,  MonsterAffecting };
 
@@ -22,8 +23,11 @@ struct Strike{
         Strike(std::vector<MonsterType> m, int move, int dice)
             : monsters(std::move(m)), move_count(move), dice_count(dice) {}  
             
-        int get_move_count(){  return move_count;}
-        int get_dice_count(){   return dice_count;}
+        int get_move_count()const{  return move_count;}
+        int get_dice_count()const{   return dice_count;}
+        const std::vector<MonsterType>& get_monsters() const { return monsters; }
+        
+
 
     
 };
@@ -52,7 +56,7 @@ class Monstercard{
         std::string get_card_name()const;
         int get_item_count() const;
         std::string get_Event() const;
-
+        std::vector<Strike> get_strikes();
         std::string get_destination_location() const;
 
         std::string get_character_name()const ;

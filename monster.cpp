@@ -43,3 +43,18 @@ Location* find_nearest_target(Location* start) {
 
     return nullptr; // هیچ هدفی
 }
+
+void Monster::Monster_move(Location* new_location){
+
+    if (current_location){
+
+        auto& monsters_here = current_location ->get_monster();
+        monsters_here.erase(std::remove(monsters_here.begin(), monsters_here.end(), this), monsters_here.end());
+
+
+    }
+    new_location->add_monster(this);
+    current_location = new_location;
+    std::cout<< this->get_name() << " moved to "<< new_location->get_name()<< "\n";
+
+}

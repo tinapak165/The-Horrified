@@ -16,7 +16,7 @@ class Location {
         bool has_coffin = false; // فقط واسio دراکولاس
     
     public:
-        Location(std::string name);
+        Location(std::string & name);
     
         void add_item(const Item& item);
         void add_hero(Hero* hero);
@@ -26,12 +26,15 @@ class Location {
     
         const std::string& get_name() const;
         const std::vector<Item>& get_items() const;
+        
+         std::vector<Monster*>& get_monster();
+        const std::vector<Hero*>& get_heroes()const;
+        const std::vector<Location*>& get_neighbors() const;
+        
+        void connect(Location * other);
+        
+        
         void remove_item_by_index(int index); // برای PickUp
-
-        const std::vector<Location*>& Location::get_neighbors() const;
-        void Location::connect(Location * other);
-
-    
     
     };
     
