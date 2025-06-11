@@ -47,7 +47,7 @@ vector<DiceFace> Dice::roll(int numOfDice){ //انتخاب index تاس رندو
     vector<DiceFace> res ; 
 
 
-    for(int i = 1 ; i <= numOfDice ; i++){
+    for(int i = 0 ; i < numOfDice ; i++){
         int RandomDice = DiceIndices[i] ;
         int RandomFace = rand() % 6 ; 
         res.push_back(faces[RandomDice][RandomFace]) ; 
