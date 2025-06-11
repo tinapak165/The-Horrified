@@ -29,7 +29,8 @@ class Location {
         void remove_item_by_index(int index); // برای PickUp
 
         void connect(Location * neighbor);
-        const std::vector<Location*>  & get_neighbor() const;
+        const std::vector<Location*>  & get_neighbors() const;
+        const std::vector <Hero*> & get_heroes() const;
     
     
     };
