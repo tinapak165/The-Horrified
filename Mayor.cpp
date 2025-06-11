@@ -1,6 +1,6 @@
 #include "Mayor.hpp"
 #include <iostream>
-using namespace std ; 
+using namespace st ; 
 
 Mayor::Mayor() : Hero("Mayor" , 5 , "Theatre" , "No special action.") {}
 
