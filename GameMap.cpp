@@ -11,7 +11,7 @@ void GameMap::build_map() {
     theater->connect(cave.get());
     theater->connect(tower.get());
     cave->connect(dungeon.get());
-
+    
     
     locations.push_back(std::move(theater));
     locations.push_back(std::move(cave));

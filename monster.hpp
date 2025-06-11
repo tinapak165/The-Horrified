@@ -18,6 +18,6 @@ public:
     const std::string& get_name() const { return name; }
     Location* get_location() const { return current_location; }
 
-    void move_to(Location* new_location);
+    virtual Location * find_nearest_target(Location * start);
 };
  #endif
