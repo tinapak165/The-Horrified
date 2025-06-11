@@ -2,7 +2,7 @@
 #define HERO_H
 #include <iostream>
 #include <vector>
-//#include "location.hpp"
+#include "location.hpp"
 
 enum class ActionType{
     Move ,
@@ -25,25 +25,25 @@ class Hero{
         int MaxActions ; 
         int RemainingActions ; 
         std::string specialAction ; 
-        std::string StartingLocation ;
-        std::string currentLocation;
+        Location* StartingLocation ;
+        Location* currentLocation;
         std::vector<Action> ListOfActions ; 
 
     public:
-        Hero(std::string name , int MaxActions , std::string StartingLocation , std::string specialAction) ;
-        void MoveTo(std::string Newlocation) ; 
+        Hero(std::string name , int MaxActions , Location* StartingLocation , std::string specialAction) ;
+        void MoveTo(Location* Newlocation) ; 
 
         std::string GetName()const ; 
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
-        std::string GetCurrentLocation() const ; 
+        Location* GetCurrentLocation() const ; 
         
         virtual bool HasSpecialAction() const {return true ; } 
         void PerformTheAction(std::string)  ; 
         void DisplayActions() ; 
 
         void SetRemainingActions(int newRemaining) ;
-        void SetCurrentLocation(std::string location) ;
+        void SetCurrentLocation(Location* location) ;
 };
 
 #endif 

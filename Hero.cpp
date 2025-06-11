@@ -4,7 +4,7 @@
 
 using namespace std ; 
 
-Hero::Hero( std::string name , int MaxActions , std::string StartingLocation , std::string specialAction)
+Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction)
 : name(name) , RemainingActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
 
     ListOfActions = {
@@ -53,10 +53,10 @@ std::string Hero::GetSpecialActionInfo() const{
 std::string Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
-void Hero::SetCurrentLocation(std::string location){
+void Hero::SetCurrentLocation(Location* location){
     currentLocation = location ;
 }
-void Hero::MoveTo(std::string Newlocation){
+void Hero::MoveTo(Location* Newlocation){
     currentLocation = Newlocation ; 
     cout << GetName() << " moved to " << GetCurrentLocation() << endl ;
 }
