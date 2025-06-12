@@ -56,11 +56,37 @@ void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType
             Dice d(3);  
             std::vector<DiceFace> results = d.roll(dice);
 
+            for (DiceFace face : results) {
+                if (type == MonsterType::Dracula) {
+                    if (face == DiceFace::Power) {
+                        std::cout << "Dracula uses Dark Charm!\n";
+                        // activeHero->move_to(m->get_location()); // فرض می‌گیریم تابع move_to برای هیرو داری
+                    } else if (face == DiceFace::Attack) {
+                        m->attack(); // تابع attack باید داخل Dracula یا Monster تعریف بشه
+                    }
+                }
+                else if (type == MonsterType::InvisibleMan) {
+                    if (face == DiceFace::Attack) {
+                        m->attack();
+                    }
+                   
+                }
+
+                if (monsters.count(MonsterType::InvisibleMan)) {
+                    Monster* invisibleMan = monsters[MonsterType::InvisibleMan];
+                    Location* target = invisibleMan->find_nearest_target(invisibleMan->get_location());
+                    if (target) {
+                        invisibleMan->move_towards(2);
+                        std::cout << "Invisible Man sneaks closer to target!\n";
+                    }
+                }
+
                 
             
-            }
+           } 
         }
     }
+} 
 }
 
 

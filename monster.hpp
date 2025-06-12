@@ -22,5 +22,7 @@ public:
     void Monster_move(Location* new_location);
     void move_towards(int steps);
 
+    void attack();
+
 };
  #endif

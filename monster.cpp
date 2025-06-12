@@ -156,3 +156,7 @@ void Monster::move_towards(int max_steps) {
         std::cout << name << " moved to " << current_location->get_name() << "\n";
     }
 }
+
+void Monster::attack(){
+    cout<<"Monster attackinggg";
+}
