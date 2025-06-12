@@ -55,14 +55,14 @@ vector<DiceFace> Dice::roll(int numOfDice){ //انتخاب index تاس رندو
         switch (faces[RandomDice][RandomFace])
         {
         case DiceFace::Power : 
-            cout << "Power" ; 
+            
             break;
         
         case DiceFace::Attack :
-            cout << "Attack" ; 
+            
             break ;
         case DiceFace::empty:
-            cout << "empty" ;         
+                     
         }
         cout << '\n' ; 
     }

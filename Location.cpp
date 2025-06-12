@@ -1,7 +1,7 @@
 #include "location.hpp"
 #include <iostream>
 
-Location::Location( std::string& name ) : name(name){}
+Location::Location(const std::string& name ) : name(name){}
 
 void Location::add_item(const Item& item) {
     items.push_back(item);
@@ -15,13 +15,7 @@ void Location::add_monster(Monster* monster) {
     monsters.push_back(monster);
 }
 
-void Location::set_coffin(bool present) {
-    has_coffin = present;
-}
 
-bool Location::coffin_present() const {
-    return has_coffin;
-}
 const std::string& Location::get_name() const { return name;
 }
 
@@ -40,7 +34,7 @@ void Location::remove_item_by_index(int index) {
         
     }
 
-     std::vector<Monster*>& Location::get_monster(){
+     std::vector<Monster*>& Location::get_monsters(){
         return monsters;
     }
     
@@ -51,4 +45,17 @@ void Location::remove_item_by_index(int index) {
 
 const std::vector<Location*>& Location::get_neighbors() const {
     return neighbors;
+}
+
+
+
+
+bool Location::has_coffin(){   
+    return hascoffin;
+}
+void Location::place_coffin(){ 
+     hascoffin = true;
+}
+void Location::remove_coffin(){
+    hascoffin = false;
 }

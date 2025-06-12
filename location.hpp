@@ -5,6 +5,7 @@
 #include "item.hpp"
 #include "monster.hpp"
 #include "hero.hpp"
+class Monster;
 
 class Location {
     private:
@@ -13,22 +14,24 @@ class Location {
         std::vector<Hero*> heroes;
         std::vector<Monster*> monsters;
         std::vector<Location*> neighbors;
-        bool has_coffin = false; // فقط واسio دراکولاس
+        bool hascoffin = false; // فقط واسio دراکولاس
     
     public:
-        Location(std::string & name);
+        Location(const std::string & name);
     
         void add_item(const Item& item);
         void add_hero(Hero* hero);
         void add_monster(Monster* monster);
-        void set_coffin(bool present);
-        bool coffin_present() const;
+        bool has_coffin();
+        void place_coffin();
+        void remove_coffin();
     
         const std::string& get_name() const;
         const std::vector<Item>& get_items() const;
         
-         std::vector<Monster*>& get_monster();
+         std::vector<Monster*>& get_monsters();
         const std::vector<Hero*>& get_heroes()const;
+       
         const std::vector<Location*>& get_neighbors() const;
         
         void connect(Location * other);

@@ -2,6 +2,7 @@
 #define DICE_H
 #include <array>
 #include <vector>
+#include <iostream>
 enum class DiceFace{
     empty , 
     Power , 
