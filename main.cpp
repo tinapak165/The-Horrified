@@ -2,7 +2,7 @@
 #include "Archaeologist.hpp"
 #include "Mayor.hpp"
 #include <stdexcept>
-int main(){
+int main() {
     try{
         Archaeologist h ; 
         h.DisplayInfo() ; 
