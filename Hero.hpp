@@ -4,6 +4,8 @@
 #include <vector>
 #include "location.hpp"
 
+class Location; 
+
 enum class ActionType{
     Move ,
     Guide ,
