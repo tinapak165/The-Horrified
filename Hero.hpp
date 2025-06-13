@@ -33,7 +33,7 @@ class Hero{
 
     public:
         Hero(std::string name , int MaxActions , Location* StartingLocation , std::string specialAction) ;
-        void MoveTo(Location* Newlocation) ; 
+        void MoveTo(Location* new_location) ; 
 
         std::string GetName()const ; 
         int GetRemainingActions()const ;
