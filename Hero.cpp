@@ -50,15 +50,23 @@ int Hero::GetRemainingActions()const{
 std::string Hero::GetSpecialActionInfo() const{
     return specialAction ; 
 }
-std::string Hero::GetCurrentLocation() const{
+Location* Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
 void Hero::SetCurrentLocation(Location* location){
     currentLocation = location ;
 }
-void Hero::MoveTo(Location* Newlocation){
-    currentLocation = Newlocation ; 
-    cout << GetName() << " moved to " << GetCurrentLocation() << endl ;
+void Hero::MoveTo(Location* new_location){
+     if (!new_location || new_location == currentLocation) return;
+    
+    if (currentLocation) {
+        currentLocation->remove_hero(this);
+    }
+    
+    currentLocation = new_location;
+    new_location->add_hero(this);
+    
+    cout << name << " moved to " << new_location->get_name() << endl;    
 }
 void Hero::SetRemainingActions(int newRemaining){
     RemainingActions = newRemaining ; 
