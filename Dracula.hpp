@@ -11,7 +11,7 @@ class Dracula : public Monster {
 
         Dracula(Location* start_location);
 
-        void move_towards_closest_person();
+        
         
        
         bool can_be_defeated() const;
@@ -19,7 +19,7 @@ class Dracula : public Monster {
         
         void defeat(Hero* hero, std::vector<Item>& yellow_items);
         
-        void activate_dark_charm(Hero* active_hero);
+         void special_attack() override;
         void attack_if_possible();
     
     };

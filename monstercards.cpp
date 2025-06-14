@@ -60,7 +60,8 @@ void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType
                 if (type == MonsterType::Dracula) {
                     if (face == DiceFace::Power) {
                         std::cout << "Dracula uses Dark Charm!\n";
-                        // activeHero->move_to(m->get_location()); // فرض می‌گیریم تابع move_to برای هیرو داری
+                        m->special_power();
+                    
                     } else if (face == DiceFace::Attack) {
                         m->attack(); // تابع attack باید داخل Dracula یا Monster تعریف بشه
                     }

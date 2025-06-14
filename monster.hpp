@@ -19,10 +19,13 @@ public:
 
     Location* find_nearest_target(Location* start);
     Location* find_next_step(Location* target);
-    void Monster_move(Location* new_location);
+    // برای ایونت ها
+    void Monster_move_event(Location* new_location); 
+    // برای حرکت از روی استرایک
     void move_towards(int steps);
 
-    void attack();
+    virtual void attack() = 0;
+    virtual void special_power() =0 ;
 
 };
  #endif

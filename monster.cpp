@@ -17,6 +17,8 @@ Monster::Monster (const string& name, Location* start_location)
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
 
+
+
 Location* Monster::find_nearest_target(Location* start) {
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
@@ -46,7 +48,7 @@ Location* Monster::find_nearest_target(Location* start) {
     return nullptr; // هیچ هدفی
 }
 // استفاده برای event 
-void Monster::Monster_move(Location* new_location){
+void Monster::Monster_move_event(Location* new_location){
 
     if (current_location){
 
@@ -159,4 +161,8 @@ void Monster::move_towards(int max_steps) {
 
 void Monster::attack(){
     cout<<"Monster attackinggg";
+}
+
+void Monster::special_power(){
+    
 }
