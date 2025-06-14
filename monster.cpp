@@ -11,8 +11,7 @@
 using namespace std;
 
 
-Monster::Monster (const string& name, Location* start_location)
-: name(name), current_location(start_location) {}
+Monster::Monster (const string& name, Location* start_location) : name(name), current_location(start_location) {}
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
@@ -159,10 +158,3 @@ void Monster::move_towards(int max_steps) {
     }
 }
 
-void Monster::attack(){
-    cout<<"Monster attackinggg";
-}
-
-void Monster::special_power(){
-    
-}

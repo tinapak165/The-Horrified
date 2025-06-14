@@ -16,6 +16,7 @@ void Location::add_monster(Monster* monster) {
 }
 
 
+
 const std::string& Location::get_name() const { return name;
 }
 
@@ -37,11 +38,14 @@ void Location::remove_item_by_index(int index) {
      std::vector<Monster*>& Location::get_monsters(){
         return monsters;
     }
+   
     
     const std::vector<Hero*>& Location::get_heroes()const{
         return heroes;
     }
     
+
+
 
 const std::vector<Location*>& Location::get_neighbors() const {
     return neighbors;
