@@ -8,10 +8,10 @@ class villager{
         const std::string name ; 
         std::string safePlace ;
         std::string currentLocation ; 
-
+        static std::vector<villager*> vil ; 
     public:
+        static std::vector<villager*>& all() ; 
         villager(const std::string , std::string) ; 
-        villager() ;
         bool in_the_safePlace() const ; 
         void set_currentLocation(std::string) ; 
         std::string get_currentLocation() ; 

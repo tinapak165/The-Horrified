@@ -1,9 +1,15 @@
 #include "villager.hpp"
 #include <iostream>
+#include <vector>
 using namespace std ;
-villager::villager(const string name, string place): name(name) , safePlace(place){}
 
-villager::villager(){}
+vector<villager*> villager:: vil  ; 
+
+villager::villager(const string name, string place) : name(name), currentLocation(place) //for testing if the Move action works or not (!fix!)
+{
+    vil.push_back(this) ;
+}
+
 
 bool villager::in_the_safePlace() const{
 
@@ -39,6 +45,11 @@ void villager::MoveTo(string newPlace , string charc){
     //     }
     // }
     // throw invalid_argument("villager not found!") ; 
+    if(newPlace == get_currentLocation())
+        throw runtime_error("you are in the current location") ; 
     set_currentLocation(newPlace) ; 
     cout << (*this).get_name() << " " << "moved to " << (*this).get_currentLocation() ; 
+}
+vector<villager*> &villager::all(){
+    return vil ;     
 }
