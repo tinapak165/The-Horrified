@@ -34,8 +34,7 @@ void Monstercard::place_item(int Item){
 }
 
 void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monstersmap) {
-    map.build_map();
-    // فرض می‌گیریم این کارت در حال اجراست، پس اطلاعات خودش رو استفاده می‌کنه
+  
     std::cout<< "in Monstercard::play_monster_card ";
     
     for (const auto& strike : striks) {
@@ -48,7 +47,7 @@ void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType
                 Monster* m = monstersmap[type];
 
                 for (int i = 0; i < moves; ++i) {
-                    Location* target = m->find_nearest_target();                   
+                    Location* target = m->find_nearest_target(m->get_location());                   
                      if (target)
                         m->move_towards(strike.get_move_count());
                         

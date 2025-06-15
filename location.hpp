@@ -15,8 +15,9 @@ class Location {
         std::vector<Monster*> monsters;
         std::vector<Location*> neighbors;
         bool hascoffin = false; // فقط واسio دراکولاس
-    
-    public:
+        
+        public:
+        friend std::ostream operator <<( std::ostream &output , std::vector<Monster*> &);
         Location(const std::string & name);
     
         void add_item(const Item& item);

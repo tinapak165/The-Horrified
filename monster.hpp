@@ -10,7 +10,7 @@ class Monster {
 private:
     std::string name;
     Location* current_location;
-
+    friend std::ostream operator<<(std::ostream &output, Monster);
 public:
     Monster(const std::string& name, Location* start_location);
 

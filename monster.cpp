@@ -159,3 +159,6 @@ void Monster::move_towards(int max_steps) {
     }
 }
 
+ std::ostream operator<<(std::ostream &output, Monster &m){
+    output<<m.get_name();
+ }

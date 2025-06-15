@@ -2,30 +2,25 @@
 #define ITEM_HPP
 #include <string>
 
-// enum class ItemType { STAKE,MIRRORED_BOX,GARLIC,TAROOT_DECK, FLOWER,CHARM, WOLFSBANE,TABLET,VIOLIN,SCROLL_OF_THOTH
-// ,TORCH,SHOVEL }; //tاere is 30 of them 
 
-enum class ItemColor { RED, BLUE, YELLOW };
+enum class ItemColor { RED, YELLOW, BLUE };
 
 class Item {
-public:
-    Item(std::string name, ItemColor color, int power , std::string location);
-    std::string get_name() const;
-    ItemColor get_color() const;
-    int get_power() const;
-
-    void place_item(int);
-
-    void pick_up_item(int);  // for the the invisableman 
-
 private:
-    std::string item_name;
-    // ItemType type;
-     ItemColor Item_color;
-    std::string Item_location;
-    int Item_power;
-    
+    std::string name;
+    ItemColor color;
+    int strength;
+    std::string locationName; // اسمی از مکان که در آن ظاهر می‌شود
+
+public:
+    Item(const std::string& name, ItemColor color, int strength, const std::string& locationName);
+
+    const std::string& getName() const { return name; }
+    ItemColor getColor() const { return color; }
+    int getStrength() const { return strength; }
+    const std::string& getLocationName() const { return locationName; }
 };
+
 
 
 #endif
