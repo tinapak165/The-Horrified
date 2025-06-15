@@ -29,7 +29,9 @@ class Location {
         const std::string& get_name() const;
         const std::vector<Item>& get_items() const;
         
-         std::vector<Monster*>& get_monsters();
+        std::vector<Monster*>& get_monsters();
+        
+
         const std::vector<Hero*>& get_heroes()const;
        
         const std::vector<Location*>& get_neighbors() const;
