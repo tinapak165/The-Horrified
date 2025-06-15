@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std ; 
 
-Mayor::Mayor() : Hero("Mayor" , 5 , Theater , "No special action.") {}
+Mayor::Mayor() : Hero("Mayor" , 5 , "Theater" , "No special action.") {}
 
 void Mayor::DisplayInfo()const {
     cout << GetName() << ":\n" << "location: " << GetCurrentLocation() << "\n" << "Actions: " << 
