@@ -1223,6 +1223,7 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: C:/Users/Tina/Desktop/Horrified/T
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
@@ -1305,6 +1306,7 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: C:/Users/Tina/Desktop/Horrified/T
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cctype \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cerrno \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/clocale \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/compare \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/concepts \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstddef \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdio \
@@ -1359,6 +1361,7 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: C:/Users/Tina/Desktop/Horrified/T
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/mm_malloc.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
+  C:/Users/Tina/Desktop/Horrified/The-Horrified/Dice.hpp \
   C:/Users/Tina/Desktop/Horrified/The-Horrified/GameMap.hpp \
   C:/Users/Tina/Desktop/Horrified/The-Horrified/Location.hpp \
   C:/Users/Tina/Desktop/Horrified/The-Horrified/hero.hpp \
@@ -1467,8 +1470,6 @@ CMakeFiles/Horrified.dir/item.cpp.obj: C:/Users/Tina/Desktop/Horrified/The-Horri
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   C:/Users/Tina/Desktop/Horrified/The-Horrified/item.hpp
-
-CMakeFiles/Horrified.dir/main.cpp.obj: C:/Users/Tina/Desktop/Horrified/The-Horrified/main.cpp
 
 CMakeFiles/Horrified.dir/playcard.cpp.obj: C:/Users/Tina/Desktop/Horrified/The-Horrified/playcard.cpp \
   C:/w64devkit/include/_mingw.h \
@@ -2074,7 +2075,5 @@ C:/Users/Tina/Desktop/Horrified/The-Horrified/MonstercardDeck.hpp:
 C:/Users/Tina/Desktop/Horrified/The-Horrified/monstercards.hpp:
 
 C:/Users/Tina/Desktop/Horrified/The-Horrified/Monstercards.cpp:
-
-C:/Users/Tina/Desktop/Horrified/The-Horrified/main.cpp:
 
 C:/Users/Tina/Desktop/Horrified/The-Horrified/playcard.cpp:

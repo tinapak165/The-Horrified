@@ -17,7 +17,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/Tina/Desktop/Horrified/The-Horrified/MonsterCardDeck.cpp" "CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj.d"
   "C:/Users/Tina/Desktop/Horrified/The-Horrified/Monstercards.cpp" "CMakeFiles/Horrified.dir/Monstercards.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/Monstercards.cpp.obj.d"
   "C:/Users/Tina/Desktop/Horrified/The-Horrified/item.cpp" "CMakeFiles/Horrified.dir/item.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/item.cpp.obj.d"
-  "C:/Users/Tina/Desktop/Horrified/The-Horrified/main.cpp" "CMakeFiles/Horrified.dir/main.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/main.cpp.obj.d"
   "C:/Users/Tina/Desktop/Horrified/The-Horrified/playcard.cpp" "CMakeFiles/Horrified.dir/playcard.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/playcard.cpp.obj.d"
   )
 

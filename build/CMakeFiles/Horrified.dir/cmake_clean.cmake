@@ -17,8 +17,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Horrified.dir/Monstercards.cpp.obj.d"
   "CMakeFiles/Horrified.dir/item.cpp.obj"
   "CMakeFiles/Horrified.dir/item.cpp.obj.d"
-  "CMakeFiles/Horrified.dir/main.cpp.obj"
-  "CMakeFiles/Horrified.dir/main.cpp.obj.d"
   "CMakeFiles/Horrified.dir/playcard.cpp.obj"
   "CMakeFiles/Horrified.dir/playcard.cpp.obj.d"
   "Horrified.exe"
