@@ -53,5 +53,4 @@ class Hero{
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(std::string location) ;
 };
-
 #endif 

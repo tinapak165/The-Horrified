@@ -58,7 +58,6 @@ void Hero::SetCurrentLocation(std::string location){
 }
 void Hero::MoveTo(std::string new_location , vector<villager*> vill){ // move with villagers
     // if (!new_location || new_location == currentLocation) return;
-    
     // if (currentLocation) {
     //     currentLocation->remove_hero(this);
     // }
