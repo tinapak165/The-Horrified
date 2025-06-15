@@ -1,0 +1,36 @@
+#include "villager.hpp"
+#include <iostream>
+using namespace std ;
+villager::villager(const string name, string place): name(name) , safePlace(place){}
+
+villager::villager(){
+
+}
+
+
+string villager::get_name(){ return name; }
+
+string villager::get_safeplace(){ return safePlace; }
+
+void villager::set_safeplace(string newplace){
+    safePlace = newplace ; 
+}
+
+// void villager::DisplayVillagers(){
+//     for(auto &e : vill)
+//         cout << e.get_name() << " : " << e.get_safeplace() << endl ; 
+// }
+void villager::MoveTo(string newPlace , string charc){
+    // for(auto v : vill){
+    //     if(v.get_name() == charc){
+    //         v.set_safeplace(newPlace) ; 
+    //         cout << v.get_name() << " " << "moved to " << v.get_safeplace() ; 
+    //         return ; 
+    //     }
+    // }
+    // throw invalid_argument("villager not found!") ; 
+    set_safeplace(newPlace) ;
+    cout << (*this).get_name() << " " << "moved to " << (*this).get_safeplace() ; 
+ 
+
+}
