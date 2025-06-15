@@ -3,10 +3,20 @@
 using namespace std ;
 villager::villager(const string name, string place): name(name) , safePlace(place){}
 
-villager::villager(){
+villager::villager(){}
 
+bool villager::in_the_safePlace() const{
+
+    return currentLocation == safePlace;
 }
 
+void villager::set_currentLocation(string newLocation){
+    currentLocation = newLocation ; 
+}
+
+std::string villager::get_currentLocation(){
+    return currentLocation;
+}
 
 string villager::get_name(){ return name; }
 
@@ -29,8 +39,6 @@ void villager::MoveTo(string newPlace , string charc){
     //     }
     // }
     // throw invalid_argument("villager not found!") ; 
-    set_safeplace(newPlace) ;
-    cout << (*this).get_name() << " " << "moved to " << (*this).get_safeplace() ; 
- 
-
+    set_currentLocation(newPlace) ; 
+    cout << (*this).get_name() << " " << "moved to " << (*this).get_currentLocation() ; 
 }

@@ -13,11 +13,16 @@ int main(){
         villager Fritz("Fritz" , "Institute") ; 
         villager WillburChick("Willbur & Chick" , "Dungeon") ;
         villager Maria("Maria" , "Camp") ;
-        Maria.MoveTo("mmm" , "Maria") ; 
+        Maria.MoveTo("Cave" , "Maria") ; 
 
-    }
-    catch(exception &e){
-        cout << e.what() ; 
-    }
+        if(Maria.in_the_safePlace())
+            cout << "\nyes\n" ;
+        else
+            cout << "\nno\n" ; 
+
+        }
+        catch(exception &e){
+            cout << e.what() ; 
+        }
 
 }

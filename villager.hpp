@@ -3,14 +3,18 @@
 #include <iostream>
 #include <vector>
 class villager{
-    
+
     private:
         const std::string name ; 
         std::string safePlace ;
+        std::string currentLocation ; 
 
     public:
         villager(const std::string , std::string) ; 
         villager() ;
+        bool in_the_safePlace() const ; 
+        void set_currentLocation(std::string) ; 
+        std::string get_currentLocation() ; 
         std::string get_name() ; 
         std::string get_safeplace() ; 
         void set_safeplace(std::string) ; 
