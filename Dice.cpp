@@ -43,7 +43,7 @@ vector<DiceFace> Dice::roll(int numOfDice){ //انتخاب index تاس رندو
         throw out_of_range("invalid") ; 
     }
     vector<int>DiceIndices = {1,2,3} ; 
-    random_shuffle(DiceIndices.begin() , DiceIndices.end()) ; 
+    std::random_shuffle(DiceIndices.begin() , DiceIndices.end()) ; 
     vector<DiceFace> res ; 
 
 
@@ -62,6 +62,7 @@ vector<DiceFace> Dice::roll(int numOfDice){ //انتخاب index تاس رندو
             
             break ;
         case DiceFace::empty:
+            break;
                      
         }
         cout << '\n' ; 

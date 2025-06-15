@@ -33,19 +33,22 @@ void Monstercard::place_item(int Item){
 
 }
 
-void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monsters) {
+void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monstersmap) {
+    map.build_map();
     // فرض می‌گیریم این کارت در حال اجراست، پس اطلاعات خودش رو استفاده می‌کنه
+    std::cout<< "in Monstercard::play_monster_card ";
+    
     for (const auto& strike : striks) {
         int moves = strike.get_move_count();
         int dice = strike.get_dice_count();
         const auto& monster_list = strike.get_monsters() ;
 // حرکت هیولا سمت قهرمان یا محلی 
         for (MonsterType type : monster_list) {
-            if (monsters.count(type)) {
-                Monster* m = monsters[type];
+            if (monstersmap.count(type)) {
+                Monster* m = monstersmap[type];
 
                 for (int i = 0; i < moves; ++i) {
-                    Location* target = m->find_nearest_target(m->get_location());                   
+                    Location* target = m->find_nearest_target();                   
                      if (target)
                         m->move_towards(strike.get_move_count());
                         
@@ -73,8 +76,8 @@ void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType
                    
                 }
 
-                if (monsters.count(MonsterType::InvisibleMan)) {
-                    Monster* invisibleMan = monsters[MonsterType::InvisibleMan];
+                if (monstersmap.count(MonsterType::InvisibleMan)) {
+                    Monster* invisibleMan = monstersmap[MonsterType::InvisibleMan];
                     Location* target = invisibleMan->find_nearest_target(invisibleMan->get_location());
                     if (target) {
                         invisibleMan->move_towards(2);

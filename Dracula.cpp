@@ -1,7 +1,7 @@
 #include "monster.hpp"
 #include "Dracula.hpp"
 
-bool Dracula::can_be_defeated() const{}
+bool Dracula::can_be_defeated() const{ return false;}
 
 void Dracula::special_power () {
 
@@ -27,7 +27,7 @@ void Dracula::attack() {
 
         // اگر محلی وجود دارد رو بعدااااا بنویس
         if (!monsters.empty()) {
-            Monster* local = monsters[0]; // فرض می‌کنیم فقط یک محلی وجود دارد
+            // Monster* local = monsters[0]; // فرض می‌کنیم فقط یک محلی وجود دارد
             std::cout << get_name() << " destroys the local!\n";
             
             // currentLoc->remove_local(local);

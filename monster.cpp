@@ -19,6 +19,7 @@ Location* Monster::get_location() const { return current_location; }
 
 
 Location* Monster::find_nearest_target(Location* start) {
+    std::cout<<"in fine nearest target ";
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
