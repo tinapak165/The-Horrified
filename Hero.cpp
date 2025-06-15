@@ -4,7 +4,7 @@
 
 using namespace std ; 
 
-Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction)
+Hero::Hero( std::string name , int MaxActions , std::string StartingLocation , std::string specialAction)
 : name(name) , RemainingActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
 
     ListOfActions = {
@@ -23,16 +23,16 @@ void Hero::DisplayActions(){
         cout << a.name << ": " << a.Description << '\n' ; 
 }
 
-void Hero::PerformTheAction(std::string act)  {
+bool Hero::PerformTheAction(string act)  {
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
             if(act == "Special" && !HasSpecialAction()){
                 throw runtime_error("This hero does not have special action") ; 
             }
-            if(GetRemainingActions() > 1){
-                cout << "you can do the " << ac.name << " action." ; 
+            if(GetRemainingActions() > 0){
+                cout << "[playing " << act << "]\n" ;
                 SetRemainingActions(GetRemainingActions()-1) ; 
-                return ; 
+                return true; 
             }else
                 throw runtime_error("not enough action remaining!") ; 
         }
@@ -50,25 +50,76 @@ int Hero::GetRemainingActions()const{
 std::string Hero::GetSpecialActionInfo() const{
     return specialAction ; 
 }
-Location* Hero::GetCurrentLocation() const{
+std::string Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
-void Hero::SetCurrentLocation(Location* location){
+void Hero::SetCurrentLocation(std::string location){
     currentLocation = location ;
 }
-void Hero::MoveTo(Location* new_location){
-     if (!new_location || new_location == currentLocation) return;
+void Hero::MoveTo(std::string new_location , vector<villager*> vill){ // move with villagers
+    // if (!new_location || new_location == currentLocation) return;
     
-    if (currentLocation) {
-        currentLocation->remove_hero(this);
-    }
+    // if (currentLocation) {
+    //     currentLocation->remove_hero(this);
+    // }
     
-    currentLocation = new_location;
-    new_location->add_hero(this);
+    // currentLocation = new_location;
+    // new_location->add_hero(this);
     
-    cout << name << " moved to " << new_location->get_name() << endl;    
+    // cout << name << " moved to " << new_location->get_name() << endl;
+
+    if(new_location == (*this).GetCurrentLocation())
+        throw runtime_error("already in the location!") ; 
+    
+    SetCurrentLocation(new_location) ; 
+    cout << (*this).GetName() << " moved to " << (*this).GetCurrentLocation() << '\n' ; 
+
+        for(auto *v : vill){
+            v->set_currentLocation(new_location) ;
+            cout << v->get_name() << " moved with hero to " << v->get_currentLocation() << '\n'; 
+        }
+    
+
 }
-void Hero::SetRemainingActions(int newRemaining){
-    RemainingActions = newRemaining ; 
+void Hero::MoveTo(std::string new_location){ //without villager
+    if(new_location == (*this).GetCurrentLocation())
+        throw runtime_error("already in the location!") ;
+    
+    (*this).SetCurrentLocation(new_location) ; 
+    cout << (*this).GetName() << " moved to " << (*this).GetCurrentLocation() << '\n' ; 
+
+}
+bool Hero::hasvillagerHere() const{
+
+    for(auto *v : villager::all() ){ //باید استاتیک باشد تا اینگونه ازش استفاده کنیم
+        if(v->get_currentLocation() == (*this).GetCurrentLocation())
+            return true ; 
+    } 
+    return false ;
 }
 
+void Hero::showvillagersHere() const{
+    vector<villager*> vill ; 
+    for(auto *v : villager::all() ){
+        if(v->get_currentLocation() == (*this).GetCurrentLocation()){
+            vill.push_back(v) ; 
+        }
+    }
+    for(auto *v : vill)
+        cout << v->get_name() << " , " ; 
+}
+
+vector<villager*> Hero::villagerHere() const
+{
+    vector<villager*> vill ; 
+    for(auto *v : villager::all() ){
+        if(v->get_currentLocation() == GetCurrentLocation())
+            vill.push_back(v) ; 
+    }
+    return vill ;
+}
+
+void Hero::SetRemainingActions(int newRemaining)
+{
+    RemainingActions = newRemaining ;
+}
