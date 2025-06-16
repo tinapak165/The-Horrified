@@ -1,21 +1,30 @@
 #include "Hero.hpp"
 #include "Archaeologist.hpp"
+#include "GameMap.hpp"
 #include "Mayor.hpp"
 #include "villager.hpp"
 #include <stdexcept>
 #include <iostream>
 using namespace std ; 
+
+class Hero ; 
+class Villager ; 
+class GameMap ; 
+
 int main() {
     try{
-        villager DrCranley("Dr.Cranley" , "Precint") ; 
-        villager DrReed("Dr.Reed" , "Docks") ; //wrong safeplace (!fix!)
-        villager ProfPearson("Prof.Pearson" , "Museum") ; 
-        villager Maleva("Maleva" , "Docks"); //wrong safeplace (!fix!)
-        villager Fritz("Fritz" , "Institute") ; 
-        villager WillburChick("Willbur & Chick" , "Dungeon") ;
-        villager Maria("Maria" , "Camp") ;
+        GameMap map ; 
+        map.build_map() ;
         
-        Archaeologist h ; 
+        villager DrCranley("Dr.Cranley" , map.find_location_by_name("Precint")) ;  
+        villager DrReed("Dr.Reed" , map.find_location_by_name("Docks")) ; //wrong safeplace (!fix!)
+        villager ProfPearson("Prof.Pearson" , map.find_location_by_name("Museum")) ; 
+        villager Maleva("Maleva" , map.find_location_by_name("Docks")); //wrong safeplace (!fix!)
+        villager Fritz("Fritz" , map.find_location_by_name("Institute")) ; 
+        villager WillburChick("Willbur & Chick" , map.find_location_by_name("Dungeon")) ;
+        villager Maria("Maria" , map.find_location_by_name("Camp")) ;
+
+        Archaeologist h(map) ; 
         h.DisplayInfo() ; 
         h.DisplayActions() ;
 
@@ -28,7 +37,8 @@ int main() {
                 if(chosenAction == "Move"){
                     string chosenPlace ; 
                     cout << "Which neighboring place do you want to move to? " ;
-                    cin >> chosenPlace ; 
+                    cin >> chosenPlace ;
+                    Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
 
                     if(h.hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
 
@@ -39,11 +49,11 @@ int main() {
                         cout << "\ndo you want to move the villagers with you?(yes/no) " ; 
                         cin >> villagertotake ; 
                         if(villagertotake == "yes")
-                            h.MoveTo(chosenPlace , here) ; 
+                            h.MoveTo(chosenLocation , here) ; 
                         else
-                            h.MoveTo(chosenPlace) ; 
+                            h.MoveTo(chosenLocation) ; 
                     }else
-                        h.MoveTo(chosenPlace) ; 
+                        h.MoveTo(chosenLocation) ; 
                 }
                 else if(chosenAction == "Guide"){
                     string chosenPlace , yesno , chosenVillager ; 
@@ -55,19 +65,25 @@ int main() {
                         if(yesno == "yes"){
                             cout << "who you want to move? " ; 
                             cin >> chosenVillager ; 
+                            bool found = false ; 
                             for(auto *v : villager::all()){
                                 if(chosenVillager == v->get_name()){
                                     cout << "Which neighboring place do you want to move them? " ;
                                     cin >> chosenPlace ; 
-                                    Maria.MoveTo(chosenPlace , chosenVillager) ; //calling a random villager
+                                    Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
+                                    v->MoveTo(chosenLocation , chosenVillager) ;
+                                    found = true ; 
+                                    break ; 
                                 }
-                                else
-                                    throw invalid_argument("villager not found!") ; 
-
                             }
+                            if(!found) throw invalid_argument("villager not found!") ; 
+
                         }else if(yesno == "no"){ //در اینجا از ویلیجرهای همسایه حرکت داده میشه به محل فعلی قهرمان
                             cout << "some villagers in the neigbors are: " ; 
 
+                        }
+                        else{
+                            cerr << "wrong answer!!\n" ; 
                         }
                     }
                 }
