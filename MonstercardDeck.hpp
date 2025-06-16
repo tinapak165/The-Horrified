@@ -16,7 +16,8 @@ public:
     
     Monstercard get_random_card(); 
     Monstercard get_card_by_id(int);
-    bool is_empty() const;          
+    bool is_empty() const;  
+    int remaining_cards() const;        
 };
 
 #endif

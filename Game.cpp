@@ -22,12 +22,11 @@ void  Game::start() {
         // ۱. فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
-        run_hero_turn(activeHero);
+        hero_phase(activeHero);
 
         // ۲. فاز هیولا
-        Monstercard card = deck.get_random_card();
-        std::cout << card;
-        card.play_monster_card(map, monstersMap);
+        
+        monster_phase();
 
         // ۳. بررسی پایان بازی
         if (terrorLevel >= 6) {
@@ -48,19 +47,27 @@ void  Game::start() {
     }
 }
 
-void Game::run_hero_turn(Hero* hero) {
+void Game::hero_phase(Hero* hero) {
     std::cout << "Choose your action (Move, PickUp, UseItem, ...):\n";
     // فعلاً میذاریم خالی تا بعداً پرش کنیم
 }
 
 bool Game::both_monsters_defeated() {
-    // return monstersMap[MonsterType::Dracula]->is_defeated() &&
-    //        monstersMap[MonsterType::InvisibleMan]->is_defeated();
+     return monstersMap[MonsterType::Dracula]->is_defeated() &&
+            monstersMap[MonsterType::InvisibleMan]->is_defeated();
 }
 
 
 
 void Game::monster_phase() {
+
+    if (deck.is_empty()) {
+        std::cout << "\n Monster deck is empty. Players lose!\n";
+        game_over = true;
+        return;
+    }
+
+
     Monstercard card = deck.get_random_card();
     std::cout << card;
     

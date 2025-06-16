@@ -23,13 +23,13 @@ public:
     Game();
 
     void start() ;
-    void run_hero_turn(Hero* hero);
+    void hero_phase(Hero* hero);
+    void monster_phase();
 
     bool both_monsters_defeated();
 
 
 
-    void monster_phase();
     void start() ;
 
     void distribute_initial_items();

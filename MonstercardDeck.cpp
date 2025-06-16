@@ -68,3 +68,12 @@ Monstercard MonsterCardDeck::get_card_by_id(int id) {
     
         return chosen_card;
     }
+
+
+    bool MonsterCardDeck::is_empty() const {
+        return cards.empty();
+    }
+    
+    int MonsterCardDeck::remaining_cards() const {
+        return cards.size();
+    }

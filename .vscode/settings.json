@@ -2,6 +2,7 @@
     "files.associations": {
         "array": "cpp",
         "atomic": "cpp",
+<<<<<<< HEAD
         "bit": "cpp",
         "cctype": "cpp",
         "charconv": "cpp",
@@ -9,6 +10,11 @@
         "cmath": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
+=======
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+>>>>>>> 0fbb8ce2fe550d95fef0d96d5676fbcd5f688c35
         "cstdarg": "cpp",
         "cstddef": "cpp",
         "cstdint": "cpp",
@@ -18,11 +24,15 @@
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+<<<<<<< HEAD
         "map": "cpp",
         "set": "cpp",
         "string": "cpp",
         "unordered_map": "cpp",
         "unordered_set": "cpp",
+=======
+        "unordered_map": "cpp",
+>>>>>>> 0fbb8ce2fe550d95fef0d96d5676fbcd5f688c35
         "vector": "cpp",
         "exception": "cpp",
         "algorithm": "cpp",
@@ -33,18 +43,29 @@
         "numeric": "cpp",
         "optional": "cpp",
         "random": "cpp",
+<<<<<<< HEAD
         "string_view": "cpp",
+=======
+        "string": "cpp",
+>>>>>>> 0fbb8ce2fe550d95fef0d96d5676fbcd5f688c35
         "system_error": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
+<<<<<<< HEAD
         "format": "cpp",
         "initializer_list": "cpp",
+=======
+        "fstream": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+>>>>>>> 0fbb8ce2fe550d95fef0d96d5676fbcd5f688c35
         "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
+<<<<<<< HEAD
         "numbers": "cpp",
         "ostream": "cpp",
         "ranges": "cpp",
@@ -54,5 +75,12 @@
         "text_encoding": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
+=======
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "typeinfo": "cpp"
+>>>>>>> 0fbb8ce2fe550d95fef0d96d5676fbcd5f688c35
     }
 }
