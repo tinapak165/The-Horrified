@@ -6,8 +6,9 @@
 #include "monster.hpp"
 #include "hero.hpp"
 class Monster;
-
+class Hero ; 
 class Location {
+    friend std::ostream& operator<< (std::ostream & os , const Location & loc) ; //برای نمایش اسم لوکیشن
     private:
         std::string name;
         std::vector<Item> items;

@@ -86,10 +86,12 @@ void Location::remove_coffin(){
 
 
 
- std::ostream operator <<( std::ostream &op , std::vector<Monster*> & monsters){
+std::ostream operator <<( std::ostream &op , std::vector<Monster*> & monsters){
 
     op<<monsters;
+}
 
-
-
+std::ostream& operator<< (std::ostream & os , const Location & loc) {
+    os<< loc.get_name() ;
+    return os ;  
 }
