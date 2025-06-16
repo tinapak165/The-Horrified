@@ -52,7 +52,7 @@ void villager::MoveTo(Location* newPlace , string charc){ // only villager move
             if(newPlace == v->get_currentLocation())
                 throw runtime_error("you are in the current location") ;
             v->set_currentLocation(newPlace) ; 
-            cout << v->get_name() << " " << "moved to " << v->get_currentLocation() ;
+            cout << v->get_name() << " " << "moved to " << *(v->get_currentLocation()) ;
             return ;  
         }
     }
