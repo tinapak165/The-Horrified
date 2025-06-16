@@ -4,7 +4,7 @@
 
 using namespace std ; 
 
-Hero::Hero( std::string name , int MaxActions , std::string StartingLocation , std::string specialAction)
+Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction)
 : name(name) , RemainingActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
 
     ListOfActions = {
@@ -50,13 +50,13 @@ int Hero::GetRemainingActions()const{
 std::string Hero::GetSpecialActionInfo() const{
     return specialAction ; 
 }
-std::string Hero::GetCurrentLocation() const{
+Location* Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
-void Hero::SetCurrentLocation(std::string location){
+void Hero::SetCurrentLocation(Location* location){
     currentLocation = location ;
 }
-void Hero::MoveTo(std::string new_location , vector<villager*> vill){ // move with villagers
+void Hero::MoveTo(Location* new_location , vector<villager*> vill){ // move with villagers
     // if (!new_location || new_location == currentLocation) return;
     // if (currentLocation) {
     //     currentLocation->remove_hero(this);
@@ -80,7 +80,7 @@ void Hero::MoveTo(std::string new_location , vector<villager*> vill){ // move wi
     
 
 }
-void Hero::MoveTo(std::string new_location){ //without villager
+void Hero::MoveTo(Location* new_location){ //without villager
     if(new_location == (*this).GetCurrentLocation())
         throw runtime_error("already in the location!") ;
     

@@ -5,7 +5,7 @@ using namespace std ;
 
 vector<villager*> villager:: vil  ;
 
-villager::villager(const string name, string place) : name(name), currentLocation(place) //for testing if the Move action works or not (!fix!)
+villager::villager(const string name, Location* place) : name(name), currentLocation(place) //for testing if the Move action works or not (!fix!)
 {
     vil.push_back(this) ;
 }
@@ -16,19 +16,19 @@ bool villager::in_the_safePlace() const{
     return currentLocation == safePlace;
 }
 
-void villager::set_currentLocation(string newLocation){
+void villager::set_currentLocation(Location* newLocation){
     currentLocation = newLocation ; 
 }
 
-std::string villager::get_currentLocation(){
+Location* villager::get_currentLocation(){
     return currentLocation;
 }
 
 string villager::get_name(){ return name; }
 
-string villager::get_safeplace(){ return safePlace; }
+Location* villager::get_safeplace(){ return safePlace; }
 
-void villager::set_safeplace(string newplace){
+void villager::set_safeplace(Location* newplace){
     safePlace = newplace ; 
 }
 
@@ -36,7 +36,8 @@ void villager::set_safeplace(string newplace){
 //     for(auto &e : vill)
 //         cout << e.get_name() << " : " << e.get_safeplace() << endl ; 
 // }
-void villager::MoveTo(string newPlace , string charc){ // only villager move
+
+void villager::MoveTo(Location* newPlace , string charc){ // only villager move
     // for(auto v : vill){
     //     if(v.get_name() == charc){
     //         v.set_safeplace(newPlace) ; 
