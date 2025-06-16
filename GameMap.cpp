@@ -10,11 +10,13 @@ void GameMap::build_map() {
     auto camp = std::make_unique<Location>("Camp");
     auto khali_1=std::make_unique<Location>("khali_1");
     auto barn = std::make_unique<Location> ("Barn");
+    auto Docks = std::make_unique<Location> ("Docks") ; 
 
     cave->connect(camp.get());
     camp->connect(khali_1.get());
     theater->connect(barn.get());
     theater->connect(tower.get());
+    Docks->connect(camp.get()) ; //فرضی
     
     locations.push_back(std::move(theater));
     locations.push_back(std::move(cave));
@@ -23,6 +25,8 @@ void GameMap::build_map() {
     locations.push_back(std::move(barn));
     locations.push_back(std::move(camp));
     locations.push_back(std::move(khali_1));
+    locations.push_back(std::move(Docks));
+
 }
 
 Location* GameMap::find_location_by_name(const std::string& name) {
