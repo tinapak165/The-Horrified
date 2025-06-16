@@ -19,7 +19,7 @@ class Dracula : public Monster {
         
         void defeat(Hero* hero, std::vector<Item>& yellow_items);
         
-        void special_power() override ; 
+        void special_power(Hero*) override ; 
         void attack() override ;
     
     };

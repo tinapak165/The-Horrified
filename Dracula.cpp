@@ -20,10 +20,10 @@ bool Dracula::can_be_defeated() const{ return false;}
     
         // انتقال به لوکیشن دراکولا
         dracula_location->add_hero(active_hero);
-        active_hero->set_location(dracula_location);
+        // active_hero->set_location(dracula_location);
     }
     
-}
+
 
 void Dracula::attack() {
     Location* currentLoc = get_location();

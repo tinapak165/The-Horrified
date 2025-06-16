@@ -20,7 +20,7 @@
     const std::string& Location::get_name() const { return name;
 }
 
-    const std::vector<Item>& Location::get_items() const {
+     std::vector<Item>& Location::get_items()  {
     return items;
 }
 
@@ -40,7 +40,7 @@
     }
    
     
-    const std::vector<Hero*>& Location::get_heroes()const{
+     std::vector<Hero*>& Location::get_heroes() {
         return heroes;
     }
     

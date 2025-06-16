@@ -8,14 +8,13 @@ class TurnManager {
         int current_index;
     
     public:
-        TurnManager(const std::vector<Hero*>& heroes) : heroes(heroes), current_index(0) {}
+        TurnManager(const std::vector<Hero*>& heroes);
     
-        Hero* get_active_hero() {
-            return heroes[current_index];
-        }
+        Hero* get_active_hero();
     
-        void next_turn() {
-            current_index = (current_index + 1) % heroes.size();
-        }
+        void next_turn();
+
+        
+    void add_hero(Hero* hero);
     };
     

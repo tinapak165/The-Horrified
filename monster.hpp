@@ -25,7 +25,7 @@ public:
     void move_towards(int steps);
 
     virtual void attack() = 0;
-    virtual void special_power() =0 ;
+    virtual void special_power(Hero*) =0 ;
 
 };
  #endif
