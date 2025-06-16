@@ -71,11 +71,11 @@ void Hero::MoveTo(Location* new_location , vector<villager*> vill){ // move with
         throw runtime_error("already in the location!") ; 
     
     SetCurrentLocation(new_location) ; 
-    cout << (*this).GetName() << " moved to " << (*this).GetCurrentLocation() << '\n' ; 
+    cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 
         for(auto *v : vill){
             v->set_currentLocation(new_location) ;
-            cout << v->get_name() << " moved with hero to " << v->get_currentLocation() << '\n'; 
+            cout << v->get_name() << " moved with hero to " << *(v->get_currentLocation()) << '\n'; 
         }
     
 
@@ -85,7 +85,7 @@ void Hero::MoveTo(Location* new_location){ //without villager
         throw runtime_error("already in the location!") ;
     
     (*this).SetCurrentLocation(new_location) ; 
-    cout << (*this).GetName() << " moved to " << (*this).GetCurrentLocation() << '\n' ; 
+    cout << (*this).GetName() << " moved to " << *((*this).GetCurrentLocation()) << '\n' ; 
 
 }
 bool Hero::hasvillagerHere() const{

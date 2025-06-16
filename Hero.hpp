@@ -23,13 +23,13 @@ struct Action{
     std::string Description ; 
 };
 
-class Hero{
-    private:
+class Hero{ 
+    private: 
         std::string name ; 
         int MaxActions ; 
         int RemainingActions ; 
         std::string specialAction ; 
-        std::string StartingLocation ;
+        Location* StartingLocation ;
         Location* currentLocation;
         std::vector<Action> ListOfActions ; 
 
