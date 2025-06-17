@@ -63,15 +63,16 @@ void Location::remove_monster(Monster* monster) {
         return heroes;
     }
     
-
-
-
 const std::vector<Location*>& Location::get_neighbors() const {
     return neighbors;
 }
-
-
-
+Location* Location::findNeighbor(const std::string& name) const{
+    for(auto *n : get_neighbors()){
+        if(n->get_name() == name)
+            return n ; 
+    }
+    return nullptr ; 
+}
 
 bool Location::has_coffin(){   
     return hascoffin;

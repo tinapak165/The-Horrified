@@ -40,7 +40,7 @@ class Location {
          std::vector<Hero*>& get_heroes();
        
         const std::vector<Location*>& get_neighbors() const;
-        
+        Location* findNeighbor(const std::string& name) const  ;  
         void connect(Location * other);
         
         
