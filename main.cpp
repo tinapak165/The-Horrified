@@ -5,6 +5,8 @@
 #include "villager.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std ; 
 
 class Hero ; 
@@ -30,7 +32,7 @@ int main() {
 
         while (true){
             string chosenAction ; 
-            cout << "\nwhat action do you want to play this turn ? " ;
+            cout << "what action do you want to play this turn ? " ;
             cin >> chosenAction ; 
             if(h.PerformTheAction(chosenAction)){
                 cout << "actions left: " << h.GetRemainingActions() << "/4\n" ;
@@ -38,58 +40,102 @@ int main() {
                     string chosenPlace ; 
                     cout << "Which neighboring place do you want to move to? " ;
                     cin >> chosenPlace ;
-                    Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
+                    Location* currentLoc = h.GetCurrentLocation() ; 
+                    Location* chosenLocation = map.find_location_by_name(chosenPlace);
 
-                    if(h.hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
-
+                    if(auto* dest = currentLoc->findNeighbor(chosenPlace)){ //اگر خونه ای که انتخاب کرده واقعا همسایه فعلی بود
+                        if(h.hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
                         auto here = h.villagerHere() ; // vector of villagers in the same place
                         string villagertotake ;
                         cout << "some villagers are at the same place as you. " ; 
                         h.showvillagersHere() ; 
-                        cout << "\ndo you want to move the villagers with you?(yes/no) " ; 
+                        cout << "\ndo you want to move the villagers with you?(yes = moving all villagers with you/no = moving alone) " ; 
                         cin >> villagertotake ; 
                         if(villagertotake == "yes")
                             h.MoveTo(chosenLocation , here) ; 
                         else
                             h.MoveTo(chosenLocation) ; 
                     }else
-                        h.MoveTo(chosenLocation) ; 
+                        h.MoveTo(chosenLocation) ;    
+                    }
+                    else
+                        cerr << "what you have chosen is not a neighboring place!\n";
+                    
                 }
                 else if(chosenAction == "Guide"){
-                    string chosenPlace , yesno , chosenVillager ; 
-                    if(h.hasvillagerHere()){ // حرکت دادن یک محلی که در خانه قهرمان قرار دارد به خانه همسایه
-                        cout << "some villagers are at the same place as you: " ; 
-                        h.showvillagersHere() ; 
-                        cout << "\ndo you want to move this villagers?(yes/no) " ;
-                        cin >> yesno ; 
-                        if(yesno == "yes"){
-                            cout << "who you want to move? " ; 
-                            cin >> chosenVillager ; 
+                    string chosenPlace , mode ; 
+                    Location* currentLoc = h.GetCurrentLocation() ; 
+                    cout << "Guide:\n" 
+                         << "current -> move a villager from your location to a neighbor\n"
+                         << "neighbor -> move a villager from a neighbor to your location\n"
+                         << "choose: ";
+                    
+                    cin >> mode ; 
+
+                    if(mode == "current"){
+                        if(h.hasvillagerHere()){
+                            cout << "some villagers are at the same place as you: " ;
+                            h.showvillagersHere() ;
+                            cout << "\nwho do you want to move? " ; 
+                            string chosenvillager ;
+                            cin >> chosenvillager ;  
                             bool found = false ; 
-                            for(auto *v : villager::all()){
-                                if(chosenVillager == v->get_name()){
+                            for(auto *v : h.villagerHere()){
+                                if(chosenvillager == v->get_name()){
                                     cout << "Which neighboring place do you want to move them? " ;
                                     cin >> chosenPlace ; 
-                                    Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
-                                    v->MoveTo(chosenLocation , chosenVillager) ;
-                                    found = true ; 
-                                    break ; 
+                                    if(auto* dest = currentLoc->findNeighbor(chosenPlace)){
+
+                                        Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
+                                        v->MoveTo(chosenLocation , chosenvillager) ;
+                                        //cout << chosenvillager << " has been guided to " << chosenPlace << '\n' ;
+                                        found = true ; 
+                                        break ;
+                                    }else throw invalid_argument( "what you have chosen is not a neighboring place!\n");   
                                 }
-                            }
+                            } 
                             if(!found) throw invalid_argument("villager not found!") ; 
 
-                        }else if(yesno == "no"){ //در اینجا از ویلیجرهای همسایه حرکت داده میشه به محل فعلی قهرمان
-                            cout << "some villagers in the neigbors are: " ; 
-
-                        }
-                        else{
-                            cerr << "wrong answer!!\n" ; 
-                        }
+                        }else cerr << "no villagers at your location!\n";
                     }
+                    else if(mode == "neighbor"){
+                        Location* currentLoc = h.GetCurrentLocation() ;
+                        vector<villager*> availableVillager ;
+                        for(auto *neigbor :  currentLoc->get_neighbors()){
+                            for(auto *v : villager::all()){
+                                if(v->get_currentLocation() == neigbor)
+                                    availableVillager.push_back(v) ;                                        
+                                }
+                            }
+                        if(availableVillager.empty()) cerr << "no villager nearby!\n" ;
+                        else{
+                            cout << "some villagers in the neigbors are: " ;
+                            for(auto v : availableVillager)
+                                cout << *(v->get_currentLocation()) << " -> " << v->get_name() << '\n';
+                    
+                            string chosenvillager ; 
+                            cout << "Which villager do you want to move to your location? " ; 
+                            cin >> chosenvillager ; 
+                            bool found = false ; 
+                            for(auto *v : availableVillager){
+                                if(chosenvillager == v->get_name()){
+                                    v->MoveTo(currentLoc , chosenvillager) ;
+                                    found = true ;
+                                    break ;  
+                                    } 
+                                }
+                                if(!found) throw invalid_argument("villager not found!") ;
+                            }
+
+                    }else throw invalid_argument("wrong answer!\n");        
                 }
-            } 
-        }    
-    }catch(exception& e){
+                //else if(){} //another action 
+            } // end if can play an action    
+        } //end while
+    }//end try
+    catch(exception& e){
         cout << e.what() ; 
     }
-}
+
+} //end main
+    
