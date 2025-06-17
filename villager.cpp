@@ -7,6 +7,7 @@ vector<villager*> villager:: vil  ;
 
 villager::villager(const string name, Location* place) : name(name), currentLocation(place) //for testing if the Move action works or not (!fix!)
 {
+    //set the safe place..this is the currentPlace
     vil.push_back(this) ;
 }
 
@@ -38,21 +39,13 @@ void villager::set_safeplace(Location* newplace){
 // }
 
 void villager::MoveTo(Location* newPlace , string charc){ // only villager move
-    // for(auto v : vill){
-    //     if(v.get_name() == charc){
-    //         v.set_safeplace(newPlace) ; 
-    //         cout << v.get_name() << " " << "moved to " << v.get_safeplace() ; 
-    //         return ; 
-    //     }
-    // }
-    // throw invalid_argument("villager not found!") ;  
-
+  
     for(auto *v :vil){
         if(v->get_name() == charc){
             if(newPlace == v->get_currentLocation())
                 throw runtime_error("you are in the current location") ;
             v->set_currentLocation(newPlace) ; 
-            cout << v->get_name() << " " << "moved to " << *(v->get_currentLocation()) ;
+            cout << v->get_name() << " " << "moved to " << *(v->get_currentLocation()) << '\n' ;
             return ;  
         }
     }
