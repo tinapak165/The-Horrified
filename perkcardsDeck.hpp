@@ -8,7 +8,7 @@ class PerkDeck{
     public:
         PerkDeck() ; 
         Perkcards get_random_card(); 
-        void do_the_card(const Perkcards&) ; 
+        void display_the_card(const Perkcards&) ; 
 
 };
 
