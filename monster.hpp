@@ -26,6 +26,7 @@ public:
 
     virtual void attack() = 0;
     virtual void special_power(Hero*) =0 ;
+    virtual bool is_defeated()=0;
 
 };
  #endif

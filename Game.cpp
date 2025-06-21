@@ -11,7 +11,7 @@ Game::Game() {
     turnManager.add_hero(archaeologist);
 
     //  اضافه کردن هیولاها
-    Dracula* dracula = new Dracula(map.get_location_by_name("Cave")); 
+    Monster* dracula = new Dracula(map.get_location_by_name("Cave")); 
     // InvisibleMan* invisibleMan = new InvisibleMan(map.get_lo("Barn"));
     monstersMap[MonsterType::Dracula] = dracula;
     // monstersMap[MonsterType::InvisibleMan] = invisibleMan;

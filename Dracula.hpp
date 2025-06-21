@@ -1,3 +1,6 @@
+#ifndef DRACULA_HPP
+#define DRACULA_HPP
+
 #include "monster.hpp"
 #include "Hero.hpp"
 
@@ -21,6 +24,10 @@ class Dracula : public Monster {
         
         void special_power(Hero*) override ; 
         void attack() override ;
+        bool is_defeated() override;
     
     };
     
+
+
+#endif

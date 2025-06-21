@@ -1,5 +1,6 @@
 #include "TurnManager.hpp"
 
+TurnManager::TurnManager(){}
 TurnManager::TurnManager(const std::vector<Hero*>& heroes) : heroes(heroes), current_index(0) {}
     
 Hero* TurnManager::get_active_hero() {

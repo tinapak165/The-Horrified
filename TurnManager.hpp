@@ -8,6 +8,7 @@ class TurnManager {
         int current_index;
     
     public:
+        TurnManager();
         TurnManager(const std::vector<Hero*>& heroes);
     
         Hero* get_active_hero();
