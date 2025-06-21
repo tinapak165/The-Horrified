@@ -1,13 +1,12 @@
 #include "villager.hpp"
 #include <iostream>
-#include <vector>
+#include <list>
 using namespace std ;
 
 vector<villager*> villager:: vil  ;
 
-villager::villager(const string name, Location* place) : name(name), currentLocation(place) //for testing if the Move action works or not (!fix!)
+villager::villager(const string name, Location* place) : name(name), safePlace(place) 
 {
-    //set the safe place..this is the currentPlace
     vil.push_back(this) ;
 }
 
@@ -33,11 +32,6 @@ void villager::set_safeplace(Location* newplace){
     safePlace = newplace ; 
 }
 
-// void villager::DisplayVillagers(){
-//     for(auto &e : vill)
-//         cout << e.get_name() << " : " << e.get_safeplace() << endl ; 
-// }
-
 void villager::MoveTo(Location* newPlace , string charc){ // only villager move
   
     for(auto *v :vil){
@@ -52,6 +46,25 @@ void villager::MoveTo(Location* newPlace , string charc){ // only villager move
     throw invalid_argument("villager not found!") ; 
 
 }
-vector<villager*> &villager::all(){
-    return vil ;     
+void villager::removeVillager(){
+
+    for(auto it = vil.begin() ; it != vil.end() ; ){
+        if((*it)->in_the_safePlace()){
+            delete *it ; 
+            //cout << (*it)->get_name() << " is deleted\n"; checking if the villager actually been deleted
+            it  = vil.erase(it) ;
+        }
+        else ++it ; 
+    }  
 }
+bool villager::AnyVillagerInSafePlace(){
+    for(auto *e : all()){
+        if(e->in_the_safePlace()){
+            removeVillager() ;
+            return true ; 
+        }
+    }
+    return false ;
+}
+
+vector<villager*> &villager::all(){ return vil ;}

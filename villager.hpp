@@ -23,6 +23,8 @@ class villager{
         Location* get_safeplace() ; 
         void set_safeplace(Location*) ; 
         void MoveTo(Location*, std::string) ; 
+        bool static AnyVillagerInSafePlace() ;
+        void static removeVillager();
 };
 
 #endif
