@@ -43,7 +43,7 @@ int main() {
                     Location* currentLoc = h.GetCurrentLocation() ; 
                     Location* chosenLocation = map.find_location_by_name(chosenPlace);
 
-                    if(auto* dest = currentLoc->findNeighbor(chosenPlace)){ //اگر خونه ای که انتخاب کرده واقعا همسایه فعلی بود
+                    if(currentLoc->findNeighbor(chosenPlace)){ //اگر خونه ای که انتخاب کرده واقعا همسایه فعلی بود
                         if(h.hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
                         auto here = h.villagerHere() ; // vector of villagers in the same place
                         string villagertotake ;
@@ -84,7 +84,7 @@ int main() {
                                 if(chosenvillager == v->get_name()){
                                     cout << "Which neighboring place do you want to move them? " ;
                                     cin >> chosenPlace ; 
-                                    if(auto* dest = currentLoc->findNeighbor(chosenPlace)){
+                                    if(currentLoc->findNeighbor(chosenPlace)){
 
                                         Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
                                         v->MoveTo(chosenLocation , chosenvillager) ;
