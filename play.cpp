@@ -56,14 +56,14 @@ int main(){
             cin >> firstMove ; 
             Location* currentLoc = m.GetCurrentLocation() ; 
             Location* firstMoveLoc = map.get_location_by_name(firstMove);
-            if(auto* dest = currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
+            if(currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
                 m.MoveTo(firstMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;
 
             cout << "Mayor..what is your second place to move? " ;
             cin >> secondMove ;
             Location* secondMoveLoc = map.get_location_by_name(secondMove);
-            if(auto* dest = currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
+            if(currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
                 m.MoveTo(secondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ; 
 
@@ -73,21 +73,21 @@ int main(){
             cin >> AfirstMove ; 
             Location* AcurrentLoc = a.GetCurrentLocation() ; 
             Location* AfirstMoveLoc = map.get_location_by_name(AfirstMove);
-            if(auto* dest = AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
+            if(AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
                 a.MoveTo(AfirstMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;
 
             cout << "Archaeologist..what is your second place to move? " ;
             cin >> AsecondMove ;
             Location* AsecondMoveLoc = map.get_location_by_name(AsecondMove);
-            if(auto* dest = AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
+            if(AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
                 a.MoveTo(AsecondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;     
         }
         else if (p2.get_Event() == "Repel."){
             p.display_the_card(p2) ;
-           // dracula->move_towards(2) ;//?
-           //invisibleMan->move_towards(2)
+            dracula->move_towards(2) ;
+           //invisibleMan->move_towards(2) !!!!!!!!
         }
 
         else if(p2.get_Event() == "Late into the Night."){
