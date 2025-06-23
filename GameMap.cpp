@@ -29,7 +29,7 @@ void GameMap::build_map() {
 
 }
 
-Location* GameMap::find_location_by_name(const std::string& name) {
+Location* GameMap::get_location_by_name(const std::string& name) {
     for (auto& loc : locations) {
         if (loc->get_name() == name)
             return loc.get();

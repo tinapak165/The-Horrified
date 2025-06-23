@@ -25,17 +25,17 @@ int main(){
     GameMap map ; 
     map.build_map() ;
 
-    villager DrCranley("Dr.Cranley" , map.find_location_by_name("Precinct")) ;  
-    villager DrReed("Dr.Reed" , map.find_location_by_name("Camp")) ;
-    villager ProfPearson("Prof.Pearson" , map.find_location_by_name("Museum")) ; 
-    villager Maleva("Maleva" , map.find_location_by_name("Shop"));
-    villager Fritz("Fritz" , map.find_location_by_name("Institute")) ; 
-    villager WillburChick("Willbur & Chick" , map.find_location_by_name("Dungeon")) ;
-    villager Maria("Maria" , map.find_location_by_name("Camp")) ;
+    villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precinct")) ;  
+    villager DrReed("Dr.Reed" , map.get_location_by_name("Camp")) ;
+    villager ProfPearson("Prof.Pearson" , map.get_location_by_name("Museum")) ; 
+    villager Maleva("Maleva" , map.get_location_by_name("Shop"));
+    villager Fritz("Fritz" , map.get_location_by_name("Institute")) ; 
+    villager WillburChick("Willbur & Chick" , map.get_location_by_name("Dungeon")) ;
+    villager Maria("Maria" , map.get_location_by_name("Camp")) ;
 
     //Maria.MoveTo(map.find_location_by_name("Camp") , "Maria") ; moving to its safeplace for checking
 
-    Monster* dracula = new Dracula(map.find_location_by_name("Cave"));
+    Monster* dracula = new Dracula(map.get_location_by_name("Cave"));
 
     Mayor m(map) ; 
     m.DisplayInfo() ;
@@ -55,14 +55,14 @@ int main(){
             cout << "Mayor..where do you want to move first? " ;
             cin >> firstMove ; 
             Location* currentLoc = m.GetCurrentLocation() ; 
-            Location* firstMoveLoc = map.find_location_by_name(firstMove);
+            Location* firstMoveLoc = map.get_location_by_name(firstMove);
             if(auto* dest = currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
                 m.MoveTo(firstMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;
 
             cout << "Mayor..what is your second place to move? " ;
             cin >> secondMove ;
-            Location* secondMoveLoc = map.find_location_by_name(secondMove);
+            Location* secondMoveLoc = map.get_location_by_name(secondMove);
             if(auto* dest = currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
                 m.MoveTo(secondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ; 
@@ -72,14 +72,14 @@ int main(){
             cout << "Archaeologist..where do you want to move first? " ;
             cin >> AfirstMove ; 
             Location* AcurrentLoc = a.GetCurrentLocation() ; 
-            Location* AfirstMoveLoc = map.find_location_by_name(AfirstMove);
+            Location* AfirstMoveLoc = map.get_location_by_name(AfirstMove);
             if(auto* dest = AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
                 a.MoveTo(AfirstMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;
 
             cout << "Archaeologist..what is your second place to move? " ;
             cin >> AsecondMove ;
-            Location* AsecondMoveLoc = map.find_location_by_name(AsecondMove);
+            Location* AsecondMoveLoc = map.get_location_by_name(AsecondMove);
             if(auto* dest = AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
                 a.MoveTo(AsecondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;     
@@ -102,7 +102,7 @@ int main(){
             ItemPool pool ;
             vector<Item> PoolItems = pool.draw_random_items(2) ;
             for(const auto i : PoolItems){
-                Location* Loc = map.find_location_by_name(i.getLocationName());
+                Location* Loc = map.get_location_by_name(i.getLocationName());
                 if(Loc){
                     Loc->add_item(i) ;
                     cout << "Item " << i.getName() << " placed in location " << i.getLocationName() << "\n";
@@ -115,13 +115,13 @@ int main(){
             vector<Item> PoolItems = pool.draw_random_items(2) ;
             if(PoolItems.size() < 2) cerr << "not enough items drawn from the pool !\n" ;
 
-            Location* LocFirst = map.find_location_by_name(PoolItems[0].getLocationName());
+            Location* LocFirst = map.get_location_by_name(PoolItems[0].getLocationName());
             if(LocFirst){
                 LocFirst->add_item(PoolItems[0]) ; 
                 cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
             }
             
-            Location* LocSecond = map.find_location_by_name(PoolItems[1].getLocationName());
+            Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
              if(LocSecond){
                 LocSecond->add_item(PoolItems[1]) ; 
                 cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
