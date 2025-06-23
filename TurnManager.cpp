@@ -16,3 +16,8 @@ void TurnManager:: next_turn() {
 void TurnManager::add_hero(Hero* hero) {
     heroes.push_back(hero);
 }
+
+
+std::vector<Hero*> TurnManager::get_heroes(){
+    return heroes;
+}

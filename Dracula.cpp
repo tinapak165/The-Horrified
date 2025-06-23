@@ -3,20 +3,21 @@
 
 bool Dracula::can_be_defeated() const{ return false;}
 
-
+bool Dracula:: is_defeated()  { return false;}
 
  void Dracula::special_power(Hero* active_hero) {
+    
         Location* dracula_location = get_location();
     
         std::cout << "Dracula uses Dark Charm! Pulling " << active_hero->GetName() 
                   << " to " << dracula_location->get_name() << "!" << std::endl;
     
         // برداشتن هیرو از لوکیشن فعلی
-        Location* current_hero_location = active_hero->get_location();
-        if (current_hero_location) {
-            auto& heroes_here = current_hero_location->get_heroes();
-            heroes_here.erase(std::remove(heroes_here.begin(), heroes_here.end(), active_hero), heroes_here.end());
-        }
+        // Location* current_hero_location = active_hero->get_location();
+        // if (current_hero_location) {
+        //     auto& heroes_here = current_hero_location->get_heroes();
+        //     heroes_here.erase(std::remove(heroes_here.begin(), heroes_here.end(), active_hero), heroes_here.end());
+        // }
     
         // انتقال به لوکیشن دراکولا
         dracula_location->add_hero(active_hero);

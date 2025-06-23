@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std ; 
 
-Mayor::Mayor(GameMap& Map) : Hero("Mayor" , 5 , Map.find_location_by_name("Theater") , "No special action.") {}
+Mayor::Mayor(GameMap& Map) : Hero("Mayor" , 5 , Map.get_location_by_name("Theater") , "No special action.") {}
 
 void Mayor::DisplayInfo()const {
     cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 

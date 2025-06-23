@@ -18,6 +18,7 @@ private:
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
     int terrorLevel = 0;
+    bool game_over = false;
     
 public:
     Game();

@@ -67,10 +67,34 @@ void Location::remove_coffin(){
 
 
 
- std::ostream operator <<( std::ostream &op , std::vector<Monster*> & monsters){
+ std::ostream operator <<( std::ostream & out , Location& loc){
 
-    op<<monsters;
+    out<<loc.get_name();
 
 
 
 }
+
+void Location::remove_hero(Hero* hero) {
+   
+    for ( auto it = heroes.begin() ; it != heroes.end();){
+        if (*it == hero){
+            it= heroes.erase(it);
+
+        }else{
+            ++it;
+        }
+    }
+}
+void Location::remove_monster(Monster* monster) {
+    for ( auto it = monsters.begin() ; it != monsters.end();){
+        if (*it == monster){
+            it= monsters.erase(it);
+
+        }else{
+            ++it;
+        }
+    }
+}
+
+

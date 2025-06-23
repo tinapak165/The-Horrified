@@ -1,20 +1,44 @@
 #include "Game.hpp"
+#include "Mayor.hpp"
+#include "Archaeologist.hpp"
+#include "villager.hpp"
+
 
 Game::Game() {
     // ساخت نقشه ثابت
     map.build_map();
 
    
-    Hero* mayor = new Hero("Mayor", map.get_location_by_name("Theater"));
-    Hero* archaeologist = new Hero("Archaeologist", map.get_location_by_name("Docks"));
+    Hero* mayor = new Mayor(map); // مثلاً مکان اولیه داخل constructor تعریف شده
+    Hero* archaeologist = new Archaeologist(map);
+
+   
     turnManager.add_hero(mayor);
     turnManager.add_hero(archaeologist);
 
-    //  اضافه کردن هیولاها
+    // اضافه کردن هیولاها
     Monster* dracula = new Dracula(map.get_location_by_name("Cave")); 
+
+
     // InvisibleMan* invisibleMan = new InvisibleMan(map.get_lo("Barn"));
     monstersMap[MonsterType::Dracula] = dracula;
     // monstersMap[MonsterType::InvisibleMan] = invisibleMan;
+
+
+    
+    villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precinct")) ;  
+    villager DrReed("Dr.Reed" , map.get_location_by_name("Camp")) ;
+    villager ProfPearson("Prof.Pearson" , map.get_location_by_name("Museum")) ; 
+    villager Maleva("Maleva" , map.get_location_by_name("Shop"));
+    villager Fritz("Fritz" , map.get_location_by_name("Institute")) ; 
+    villager WillburChick("Willbur & Chick" , map.get_location_by_name("Dungeon")) ;
+    villager Maria("Maria" , map.get_location_by_name("Camp")) ;
+
+}
+
+Game::~Game() {
+    for (Hero* h : turnManager.get_heroes())
+        delete h;
 }
 
 void  Game::start() {
@@ -52,6 +76,7 @@ void Game::hero_phase(Hero* hero) {
     // فعلاً میذاریم خالی تا بعداً پرش کنیم
 }
 
+
 bool Game::both_monsters_defeated() {
      return monstersMap[MonsterType::Dracula]->is_defeated() &&
             monstersMap[MonsterType::InvisibleMan]->is_defeated();
@@ -76,7 +101,7 @@ void Game::monster_phase() {
 int itemCount = card.get_item_count();
 auto newItems = pool.draw_random_items(itemCount);
 
-for (const auto& item : newItems) {
+ for (const auto& item : newItems) {
     Location* loc = map.get_location_by_name(item.getLocationName());
     if (loc) {
         loc->add_item(item);
@@ -123,7 +148,8 @@ for (const auto& item : newItems) {
             }
         }
     }
-}
+
+ }
 
 }
 void Game::distribute_initial_items() {

@@ -22,7 +22,9 @@ class Location {
     
         void add_item(const Item& item);
         void add_hero(Hero* hero);
+        void remove_hero(Hero*);
         void add_monster(Monster* monster);
+        void remove_monster(Monster* monster);
         bool has_coffin();
         void place_coffin();
         void remove_coffin();
