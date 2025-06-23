@@ -1,5 +1,6 @@
 #include "location.hpp"
 #include <iostream>
+#include <algorithm>
 
     Location::Location(const std::string& name ) : name(name){}
 
@@ -15,24 +16,10 @@
     monsters.push_back(monster);
 }
 void Location::remove_hero(Hero* hero) {
-    //heroes.erase(std::remove(heroes.begin(), heroes.end(), hero), heroes.end());
-    for (auto it = heroes.begin(); it != heroes.end(); ) {
-    if (*it == hero) {
-        it = heroes.erase(it);
-    } else {
-            ++it;
-        }
-    }
+    heroes.erase(std::remove(heroes.begin(), heroes.end(), hero), heroes.end());
 }
 void Location::remove_monster(Monster* monster) {
-    //monsters.erase(std::remove(monsters.begin(), monsters.end(), monster), monsters.end());
-    for (auto it = monsters.begin(); it != monsters.end(); ) {
-    if (*it == monster) {
-        it = monsters.erase(it);
-    } else {
-            ++it;
-        }
-    }
+    monsters.erase(std::remove(monsters.begin(), monsters.end(), monster), monsters.end());
 }
 
 
