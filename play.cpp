@@ -97,6 +97,7 @@ int main(){
             m.DisplayInfo() ; 
         }
         else if(p2.get_Event() == "Break of Dawn."){
+            //کارت بصورت رندوم نمیاد!!!!
             //فاز هیولا بعدی رد میشود !؟
             p.display_the_card(p2);
             ItemPool pool ;
@@ -110,6 +111,7 @@ int main(){
             }
         }
         else if(p2.get_Event() == "Overstock."){
+            //کارت بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
             vector<Item> PoolItems = pool.draw_random_items(2) ;
