@@ -54,25 +54,21 @@ void PerkDeck::display_the_card(const Perkcards& card){
     if(event == "Hurry.")
         cout << "[Playing Hurry - perk card] - > Move each hero by two spaces.\n" ;
         
-    else if(event == "Repel."){
-        cout << "Move each monster by two spaces.\n" ; 
-        //move EACH monster
-    }
-    else if(event == "Late into the Night."){
+    else if(event == "Repel.")
+        cout << "[Playing Repel - perk card] -> Move each monster by two spaces.\n";
+
+    else if(event == "Late into the Night.")
         cout << "[Playing Late into the Night - perk card] - > You can have 2 more actions.\n" ;
-    }
-    else if(event == "Overstock."){
-        cout << "Each player should take one item out of the item bag and place it in their location.\n" ; 
-        //item
-    }
-    else if(event == "Break of Dawn."){
-        cout << "The next monster phase is skipped. Take 2 items out of the bag and place them in their location.\n" ; 
-        //program
-        //item
-    }
+    
+    else if(event == "Overstock.")
+        cout << "[Playing Overstock - perk card] -> Each player should take one item out of the item bag and place it in their location.\n" ;
+    
+    else if(event == "Break of Dawn.")
+        cout << "[Playing Break of Dawn - perk card] -> The next monster phase is skipped. Take 2 items out of the bag and place them in their location.\n";
+
     else if(event == "Visit from the Detective."){
         cout << "Place the invisible man at a location of the player's choice on the game screen.\n" ; 
-        //change monster location
+        //change invisibleMan location
     }
 }
 
