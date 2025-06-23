@@ -35,7 +35,7 @@ int main(){
 
     //Maria.MoveTo(map.find_location_by_name("Camp") , "Maria") ; moving to its safeplace for checking
 
-  //  Monster* dracula = new Dracula(map.find_location_by_name("Cave"));
+    Monster* dracula = new Dracula(map.find_location_by_name("Cave"));
 
     Mayor m(map) ; 
     m.DisplayInfo() ;

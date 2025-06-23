@@ -4,6 +4,7 @@
 #include <vector>
 #include "villager.hpp"
 #include "location.hpp"
+#include "item.hpp"
 
 class Location ; 
 class villager ; 
@@ -25,6 +26,7 @@ struct Action{
 
 class Hero{ 
     private: 
+        std::vector<Item> ListOfitems ; 
         std::string name ; 
         int MaxActions ; 
         int RemainingActions ; 
@@ -43,12 +45,18 @@ class Hero{
         void showvillagersHere()const ; 
 
         std::string GetName()const ; 
+
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
         Location* GetCurrentLocation() const ;         
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() ; 
+
+
+        void DisplayItem() ;
+        void PickupItems() ; 
+        std::vector<Item> GetItems() ; 
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;

@@ -23,6 +23,29 @@ void Hero::DisplayActions(){
         cout << a.name << ": " << a.Description << '\n' ; 
 }
 
+vector<Item> Hero::GetItems(){ return ListOfitems ; }
+
+void Hero::PickupItems(){
+    vector<Item>& ItemsAtLocation = currentLocation->get_items() ;
+    if(ItemsAtLocation.empty()){
+        cout << (*this).GetName() << " found no items to pick up in the current location(" << (*this).GetCurrentLocation() << ")\n" ;
+        return ;
+    }
+    for(const auto& i : ItemsAtLocation){
+        ListOfitems.push_back(i) ;
+        cout << (*this).GetName() << " picked up " << i.getName() << " from location " << (*this).GetCurrentLocation()->get_name() << '\n' ;
+    }
+    ItemsAtLocation.clear() ;
+}
+
+
+void Hero::DisplayItem(){
+    cout << "items: " ;
+    for(const auto i : GetItems())
+        cout << i.getName() ;
+}
+
+
 bool Hero::PerformTheAction(string act)  {
     for(const auto& ac : ListOfActions){
         if(ac.name == act){

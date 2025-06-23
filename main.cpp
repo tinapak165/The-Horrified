@@ -129,7 +129,9 @@ int main() {
 
                     }else throw invalid_argument("wrong answer!\n");        
                 }
-                //else if(){} //another action 
+                else if(chosenAction == "Pickup"){
+
+                } 
             } // end if can play an action    
         } //end while
     }//end try
