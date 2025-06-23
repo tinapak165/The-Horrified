@@ -18,13 +18,13 @@ int main() {
         GameMap map ; 
         map.build_map() ;
         
-        villager DrCranley("Dr.Cranley" , map.find_location_by_name("Precint")) ;  
-        villager DrReed("Dr.Reed" , map.find_location_by_name("Docks")) ; //wrong safeplace (!fix!)
-        villager ProfPearson("Prof.Pearson" , map.find_location_by_name("Museum")) ; 
-        villager Maleva("Maleva" , map.find_location_by_name("Docks")); //wrong safeplace (!fix!)
-        villager Fritz("Fritz" , map.find_location_by_name("Institute")) ; 
-        villager WillburChick("Willbur & Chick" , map.find_location_by_name("Dungeon")) ;
-        villager Maria("Maria" , map.find_location_by_name("Camp")) ;
+        villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precint")) ;  
+        villager DrReed("Dr.Reed" , map.get_location_by_name("Docks")) ; //wrong safeplace (!fix!)
+        villager ProfPearson("Prof.Pearson" , map.get_location_by_name("Museum")) ; 
+        villager Maleva("Maleva" , map.get_location_by_name("Docks")); //wrong safeplace (!fix!)
+        villager Fritz("Fritz" , map.get_location_by_name("Institute")) ; 
+        villager WillburChick("Willbur & Chick" , map.get_location_by_name("Dungeon")) ;
+        villager Maria("Maria" , map.get_location_by_name("Camp")) ;
 
         Archaeologist h(map) ; 
         h.DisplayInfo() ; 
@@ -41,7 +41,7 @@ int main() {
                     cout << "Which neighboring place do you want to move to? " ;
                     cin >> chosenPlace ;
                     Location* currentLoc = h.GetCurrentLocation() ; 
-                    Location* chosenLocation = map.find_location_by_name(chosenPlace);
+                    Location* chosenLocation = map.get_location_by_name(chosenPlace);
 
                     if(currentLoc->findNeighbor(chosenPlace)){ //اگر خونه ای که انتخاب کرده واقعا همسایه فعلی بود
                         if(h.hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
@@ -86,7 +86,7 @@ int main() {
                                     cin >> chosenPlace ; 
                                     if(currentLoc->findNeighbor(chosenPlace)){
 
-                                        Location* chosenLocation = map.find_location_by_name(chosenPlace) ;  
+                                        Location* chosenLocation = map.get_location_by_name(chosenPlace) ;  
                                         v->MoveTo(chosenLocation , chosenvillager) ;
                                         //cout << chosenvillager << " has been guided to " << chosenPlace << '\n' ;
                                         found = true ; 
@@ -130,6 +130,16 @@ int main() {
                     }else throw invalid_argument("wrong answer!\n");        
                 }
                 else if(chosenAction == "Pickup"){
+
+                    // بعدا پاک شود !!
+                    Item item1("Garlic", ItemColor::RED, 2, "Barn") ; //فرضی
+                    Item item2("Stake", ItemColor::RED, 1, "Barn") ; //فرضی
+                    Location* heroLoc = h.GetCurrentLocation() ;
+                    heroLoc->add_item(item1) ; heroLoc->add_item(item2) ; //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
+                    // بعدا پاک شود !!
+                    
+                    h.PickupItems() ;
+                    h.DisplayItem() ; 
 
                 } 
             } // end if can play an action    

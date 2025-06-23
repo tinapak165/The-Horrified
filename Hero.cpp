@@ -26,10 +26,33 @@ void Hero::DisplayActions(){
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
 
 void Hero::PickupItems(){
-    vector<Item>& ItemsAtLocation = currentLocation->get_items() ;
+    vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
     if(ItemsAtLocation.empty()){
-        cout << (*this).GetName() << " found no items to pick up in the current location(" << (*this).GetCurrentLocation() << ")\n" ;
+        cout << (*this).GetName() << " found no items to pick up in the current location(" << (*this).GetCurrentLocation()->get_name() << ")\n" ;
         return ;
+    }
+    int selectedItems = -1 ; 
+    while(!ItemsAtLocation.empty()){
+        cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
+        for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++){
+            cout << (i+1) << ". " << ItemsAtLocation[i].getName() << '\n';
+        }
+        cout << "enter the item number to pick up: " ; 
+        cin >> selectedItems ;
+        if(selectedItems == 0) //هیچی انتخاب نکرد
+            return ;
+        if(selectedItems < 1 || selectedItems > ItemsAtLocation.size()){
+            cerr << "invalid selection.try again\n" ;
+            continue;
+        }
+        int index = selectedItems - 1 ;
+        ListOfitems.push_back(ItemsAtLocation[index]) ;
+        cout << (*this).GetName() << " picked up " << ItemsAtLocation[index].getName() << ".\n";
+        ItemsAtLocation.erase(ItemsAtLocation.begin() + index) ; 
+        if(ItemsAtLocation.empty()){
+            cout << "no more items available in " << (*this).GetCurrentLocation()->get_name() << ".\n" ;
+            break ;
+        }
     }
     for(const auto& i : ItemsAtLocation){
         ListOfitems.push_back(i) ;
@@ -40,9 +63,10 @@ void Hero::PickupItems(){
 
 
 void Hero::DisplayItem(){
-    cout << "items: " ;
+    cout << "items collected: " ;
+    if(GetItems().empty()) cout << "-\n" ;
     for(const auto i : GetItems())
-        cout << i.getName() ;
+        cout << i.getName() << ' ' ;
 }
 
 
