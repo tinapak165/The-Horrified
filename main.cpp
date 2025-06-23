@@ -140,8 +140,33 @@ int main() {
                     
                     h.PickupItems() ;
                     h.DisplayItem() ; 
-
                 } 
+                else if(chosenAction == "Special"){
+                    Location* heroLoc = h.GetCurrentLocation() ; 
+                    vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
+                    cout << "neighboring locations: " ;
+                    for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
+                        cout << heroLocNeighbor[i]->get_name() << " " ;
+                    cout << endl ; 
+
+                    cout << "Which neighboring place do you want to pick up its items? " ;
+                    string chosenplace ; 
+                    cin >> chosenplace ;
+
+                    if(heroLoc->findNeighbor(chosenplace)){
+                        Location* chosenLoc = map.get_location_by_name(chosenplace) ;
+
+                        // بعدا پاک شود !!
+                        Item item1("Garlic", ItemColor::RED, 2, "Camp") ; //فرضی
+                        Item item2("Stake", ItemColor::RED, 1, "Barn") ; //فرضی
+                        chosenLoc->add_item(item1) ; chosenLoc->add_item(item2) ; 
+                        // بعدا پاک شود !!
+                    
+                        h.SpecialPickup(chosenLoc) ;
+
+                    }else throw invalid_argument("what you have chosen is not a neighboring place!\n") ;
+  
+                }
             } // end if can play an action    
         } //end while
     }//end try

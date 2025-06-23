@@ -25,7 +25,7 @@ void Hero::DisplayActions(){
 
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
 
-void Hero::PickupItems(){
+void Hero::PickupItems(){ //pick up item from current location
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
     if(ItemsAtLocation.empty()){
         cout << (*this).GetName() << " found no items to pick up in the current location(" << (*this).GetCurrentLocation()->get_name() << ")\n" ;
@@ -61,6 +61,49 @@ void Hero::PickupItems(){
     ItemsAtLocation.clear() ;
 }
 
+void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring place(archaeologist)
+    vector<Item>& itemsAtNeighbor = chosenplace->get_items() ;
+
+    if(itemsAtNeighbor.empty()) 
+        cerr << "no items available in " << chosenplace->get_name() << '\n';
+    else{
+        vector<Item>& ItemsAtLocation = chosenplace->get_items() ;
+        if(ItemsAtLocation.empty()){
+            cout << "found no items to pick up in the neighbor location(" << chosenplace->get_name() << ")\n" ;
+            return ;
+        }
+        int selectedItems = -1 ; 
+        while(!ItemsAtLocation.empty()){
+            cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
+            for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++)
+                cout << (i+1) << ". " << ItemsAtLocation[i].getName() << '\n';
+        
+            cout << "enter the item number to pick up: " ; 
+            cin >> selectedItems ;
+            if(selectedItems == 0) //هیچی انتخاب نکرد
+                return ;
+            if(selectedItems < 1 || selectedItems > ItemsAtLocation.size()){
+                cerr << "invalid selection.try again\n" ;
+                continue;
+            }
+            int index = selectedItems - 1 ;
+            ListOfitems.push_back(ItemsAtLocation[index]) ;
+            cout << (*this).GetName() << " picked up " << ItemsAtLocation[index].getName() << ".\n";
+            ItemsAtLocation.erase(ItemsAtLocation.begin() + index) ; 
+            if(ItemsAtLocation.empty()){
+            cout << "no more items available in " << (*this).GetCurrentLocation()->get_name() << ".\n" ;
+            break ;
+        }
+    }
+    for(const auto& i : ItemsAtLocation){
+        ListOfitems.push_back(i) ;
+        cout << (*this).GetName() << " picked up " << i.getName() << " from location " << (*this).GetCurrentLocation()->get_name() << '\n' ;
+    }
+    ItemsAtLocation.clear() ;
+
+
+    }
+}
 
 void Hero::DisplayItem(){
     cout << "items collected: " ;
