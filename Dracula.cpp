@@ -1,5 +1,6 @@
 #include "monster.hpp"
 #include "Dracula.hpp"
+#include <algorithm> //added
 
 bool Dracula::can_be_defeated() const{ return false;}
 
@@ -12,7 +13,7 @@ bool Dracula::can_be_defeated() const{ return false;}
                   << " to " << dracula_location->get_name() << "!" << std::endl;
     
         // برداشتن هیرو از لوکیشن فعلی
-        Location* current_hero_location = active_hero->get_location();
+        Location* current_hero_location = active_hero->GetCurrentLocation(); //fixed
         if (current_hero_location) {
             auto& heroes_here = current_hero_location->get_heroes();
             heroes_here.erase(std::remove(heroes_here.begin(), heroes_here.end(), active_hero), heroes_here.end());

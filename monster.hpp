@@ -5,12 +5,12 @@
 #include "Location.hpp"
 
 class Location; // forward declaration
-
+class Hero ; //added
 class Monster {
 private:
     std::string name;
     Location* current_location;
-    friend std::ostream operator<<(std::ostream &output, Monster);
+    //friend std::ostream operator<<(std::ostream &output, Monster);    commented here to not get errors
 public:
     Monster(const std::string& name, Location* start_location);
 
