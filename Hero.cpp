@@ -62,16 +62,14 @@ void Hero::PickupItems(){ //pick up item from current location
 }
 
 void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring place(archaeologist)
-    vector<Item>& itemsAtNeighbor = chosenplace->get_items() ;
 
-    if(itemsAtNeighbor.empty()) 
-        cerr << "no items available in " << chosenplace->get_name() << '\n';
+    vector<Item>&  ItemsAtLocation= chosenplace->get_items() ;
+
+    if(ItemsAtLocation.empty()) {
+        cerr << "no items available in " << chosenplace->get_name() << '\n'; 
+        return ;  
+    }
     else{
-        vector<Item>& ItemsAtLocation = chosenplace->get_items() ;
-        if(ItemsAtLocation.empty()){
-            cout << "found no items to pick up in the neighbor location(" << chosenplace->get_name() << ")\n" ;
-            return ;
-        }
         int selectedItems = -1 ; 
         while(!ItemsAtLocation.empty()){
             cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
@@ -95,13 +93,11 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
             break ;
         }
     }
-    for(const auto& i : ItemsAtLocation){
-        ListOfitems.push_back(i) ;
-        cout << (*this).GetName() << " picked up " << i.getName() << " from location " << (*this).GetCurrentLocation()->get_name() << '\n' ;
-    }
-    ItemsAtLocation.clear() ;
-
-
+        for(const auto& i : ItemsAtLocation){
+            ListOfitems.push_back(i) ;
+            cout << (*this).GetName() << " picked up " << i.getName() << " from location " << (*this).GetCurrentLocation()->get_name() << '\n' ;
+        }
+        ItemsAtLocation.clear() ;
     }
 }
 
@@ -110,6 +106,7 @@ void Hero::DisplayItem(){
     if(GetItems().empty()) cout << "-\n" ;
     for(const auto i : GetItems())
         cout << i.getName() << ' ' ;
+    cout << '\n' ; 
 }
 
 

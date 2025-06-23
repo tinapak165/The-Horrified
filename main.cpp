@@ -163,6 +163,7 @@ int main() {
                         // بعدا پاک شود !!
                     
                         h.SpecialPickup(chosenLoc) ;
+                        h.DisplayItem() ; 
 
                     }else throw invalid_argument("what you have chosen is not a neighboring place!\n") ;
   
