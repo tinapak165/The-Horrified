@@ -33,64 +33,64 @@ void Monstercard::place_item(int Item){
 
 }
 
-void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monstersmap) {
+// void Monstercard::play_monster_card(GameMap& map, std::unordered_map<MonsterType, Monster*>& monstersmap) {
   
-    std::cout<< "in Monstercard::play_monster_card ";
+//     std::cout<< "in Monstercard::play_monster_card ";
     
-    for (const auto& strike : striks) {
-        int moves = strike.get_move_count();
-        int dice = strike.get_dice_count();
-        const auto& monster_list = strike.get_monsters() ;
-// حرکت هیولا سمت قهرمان یا محلی 
-        for (MonsterType type : monster_list) {
-            if (monstersmap.count(type)) {
-                Monster* m = monstersmap[type];
+//     for (const auto& strike : striks) {
+//         int moves = strike.get_move_count();
+//         int dice = strike.get_dice_count();
+//         const auto& monster_list = strike.get_monsters() ;
+// // حرکت هیولا سمت قهرمان یا محلی 
+//         for (MonsterType type : monster_list) {
+//             if (monstersmap.count(type)) {
+//                 Monster* m = monstersmap[type];
 
-                for (int i = 0; i < moves; ++i) {
-                    Location* target = m->find_nearest_target(m->get_location());                   
-                     if (target)
-                        m->move_towards(strike.get_move_count());
+//                 for (int i = 0; i < moves; ++i) {
+//                     Location* target = m->find_nearest_target(m->get_location());                   
+//                      if (target)
+//                         m->move_towards(strike.get_move_count());
                         
-                }
+//                 }
 
-            std::cout << m->get_name() << " rolled " << dice << " dice!\n";
+//             std::cout << m->get_name() << " rolled " << dice << " dice!\n";
             
-            Dice d(3);  
-            std::vector<DiceFace> results = d.roll(dice);
+//             Dice d(3);  
+//             std::vector<DiceFace> results = d.roll(dice);
 
-            for (DiceFace face : results) {
-                if (type == MonsterType::Dracula) {
-                    if (face == DiceFace::Power) {
-                        std::cout << "Dracula uses Dark Charm!\n";
-                        m->special_power();
+//             for (DiceFace face : results) {
+//                 if (type == MonsterType::Dracula) {
+//                     if (face == DiceFace::Power) {
+//                         std::cout << "Dracula uses Dark Charm!\n";
+//                         m->special_power()
                     
-                    } else if (face == DiceFace::Attack) {
-                        m->attack(); // تابع attack باید داخل Dracula یا Monster تعریف بشه
-                    }
-                }
-                else if (type == MonsterType::InvisibleMan) {
-                    if (face == DiceFace::Attack) {
-                        m->attack();
-                    }
+//                     } else if (face == DiceFace::Attack) {
+//                         m->attack(); // تابع attack باید داخل Dracula یا Monster تعریف بشه
+//                     }
+//                 }
+//                 else if (type == MonsterType::InvisibleMan) {
+//                     if (face == DiceFace::Attack) {
+//                         m->attack();
+//                     }
                    
-                }
+//                 }
 
-                if (monstersmap.count(MonsterType::InvisibleMan)) {
-                    Monster* invisibleMan = monstersmap[MonsterType::InvisibleMan];
-                    Location* target = invisibleMan->find_nearest_target(invisibleMan->get_location());
-                    if (target) {
-                        invisibleMan->move_towards(2);
-                        std::cout << "Invisible Man sneaks closer to target!\n";
-                    }
-                }
+//                 if (monstersmap.count(MonsterType::InvisibleMan)) {
+//                     Monster* invisibleMan = monstersmap[MonsterType::InvisibleMan];
+//                     Location* target = invisibleMan->find_nearest_target(invisibleMan->get_location());
+//                     if (target) {
+//                         invisibleMan->move_towards(2);
+//                         std::cout << "Invisible Man sneaks closer to target!\n";
+//                     }
+//                 }
 
                 
             
-           } 
-        }
-    }
-} 
-}
+//            } 
+//         }
+//     }
+// } 
+// }
 
 
 std::ostream&  operator<<(std::ostream& os, const Monstercard& card) {

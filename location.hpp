@@ -17,7 +17,7 @@ class Location {
         bool hascoffin = false; // فقط واسio دراکولاس
         
         public:
-        friend std::ostream operator <<( std::ostream &output , std::vector<Monster*> &);
+        friend std::ostream operator <<( std::ostream &output , Location&);
         Location(const std::string & name);
     
         void add_item(const Item& item);
