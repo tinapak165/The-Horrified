@@ -8,6 +8,7 @@
 class Dracula : public Monster {
     private:
         int remaining_coffins = 4;
+        Location* location ; 
     
     public:
 
