@@ -1,6 +1,7 @@
 #include "Hero.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std ; 
 
@@ -24,6 +25,66 @@ void Hero::DisplayActions(){
 }
 
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
+
+void Hero::removeItems(const Item & i){
+    for(size_t j = 0 ; j < (*this).GetItems().size() ; j++){
+        if(ListOfitems[j].getName() == i.getName()){
+            cout << "removing item " << i.getName() << " from " << (*this).GetName() << " list\n" ;
+            ListOfitems.erase(ListOfitems.begin() + j) ;
+        }
+    }
+}
+
+void Hero::AdvanceAction(){
+    int chosenNumber = -1 ; 
+    int totalStrength = 0 ;
+    vector<Item> selected ;
+
+    while(true){
+        vector<Item> items = (*this).GetItems() ;
+        if(items.empty()){
+            cerr << (*this).GetName() << " has no more items!\n" ; 
+            break; 
+        }
+        cout << "total strength: " << totalStrength << '\n' ; 
+        cout << "items to choose:\n" ;
+        for(size_t i = 0 ; i < items.size() ; i++)
+            cout << (i + 1) << "-" << items[i].getName() << "(color: " << (*this).colorItems(items[i].getColor()) << ", strength: " << items[i].getStrength() << ")\n" ;
+        
+        cout << "please select any item by number(0 to end): " ;
+        cin >> chosenNumber ; 
+        if(chosenNumber == 0) break;
+        if(chosenNumber < 1 && chosenNumber > static_cast<int>(items.size())){
+            cerr << "invalid. please try again!\n" ;
+            continue;
+        }
+        Item chosenItem = items[chosenNumber - 1] ;
+        if(chosenItem.getColor() != ItemColor::RED){
+            cerr << "what you chosen is not red! try again.\n" ; 
+            continue;
+        }
+        (*this).removeItems(chosenItem) ;
+        selected.push_back(chosenItem) ; 
+        totalStrength += chosenItem.getStrength() ;
+
+        if(totalStrength >= 6){
+            cout << "total strength has reached to " << totalStrength << ". do you want to choose more items?(yes/no) " ;
+            string ans ; cin >> ans ; 
+            if(ans == "no") break;
+        }
+        else if(totalStrength < 6 && items.empty()){
+            cout << "no more items left and strength did not reach 6\n" ;
+        }
+    }
+    if(!selected.empty()){
+        cout << "items chosen for advance action:\n " ;
+        for(size_t i = 0 ; i < selected.size() ; i++){
+            cout << (i + 1) << "-" << selected[i].getName() << "(color: " << (*this).colorItems(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
+            (*this).GetCurrentLocation()->add_item(selected[i]) ; 
+        }
+    }
+    else cout << "no item was selected for advance action!\n" ;
+}
 
 void Hero::PickupItems(){ //pick up item from current location
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
@@ -102,14 +163,12 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
 }
 
 void Hero::DisplayItem(){
-    cout << "items collected: " ;
+    cout << "items collected:\n" ;
     if(GetItems().empty()) cout << "-\n" ;
     for(const auto i : GetItems()){
         cout << i.getName() << '('  ;
         cout << colorItems(i.getColor()) ; 
-        cout << ", strength:" << i.getStrength() << ")," ; 
-
-
+        cout << ", strength:" << i.getStrength() << ")\n" ; 
     }
     cout << '\n' ; 
 }

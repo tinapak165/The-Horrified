@@ -133,9 +133,10 @@ int main() {
 
                     // بعدا پاک شود !!
                     Item item1("Garlic", ItemColor::RED, 2, "Barn") ; //فرضی
-                    Item item2("Stake", ItemColor::RED, 1, "Barn") ; //فرضی
+                    Item item2("Stake", ItemColor::BLUE, 1, "Barn") ; //فرضی
+                    Item item3("chert" , ItemColor::RED , 6 , "sss") ;
                     Location* heroLoc = h.GetCurrentLocation() ;
-                    heroLoc->add_item(item1) ; heroLoc->add_item(item2) ; //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
+                    heroLoc->add_item(item1) ; heroLoc->add_item(item2) ; heroLoc->add_item(item3); //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
                     // بعدا پاک شود !!
                     
                     h.PickupItems() ;
@@ -170,57 +171,15 @@ int main() {
   
                 }
                 else if(chosenAction == "Advance"){ //for the monster missions
-                    if( h.GetCurrentLocation() == map.get_location_by_name("Graveyard") ||
+                    if( h.GetCurrentLocation() == map.get_location_by_name("Docks") || //درستش کن
                         h.GetCurrentLocation() == map.get_location_by_name("Crypt") ||
                         h.GetCurrentLocation() == map.get_location_by_name("Dungeon") ||
                         h.GetCurrentLocation() == map.get_location_by_name("Cave") ){// اگر قهرمان در محل قرار گیری تابوتهای دراکولا بود
-                            //چک شود تابوتی در آن مکان هست یا نه
+                        //چک شود تابوتی در آن مکان هست یا نه
                         cout << "for using advance action you need to have items with red color and strength\n" ;
-                        vector<Item> items = h.GetItems() ; 
-                        for(size_t i = 0 ; i < items.size() ; i++){
-                            cout << i + 1 << "- " << items[i].getName() << "( color: " << h.colorItems(items[i].getColor()) << ",strength:" << items[i].getStrength() << '\n' ;
-                        }
-                        int selectedItems = -1 ; 
-                        int selectedstrength = 0 ;
-                        vector<Item> selected ; 
-                        
-                        while(!items.empty()){
-                            cout << "please select any item by number(0 to end): " ;
-                            cin >> selectedItems ; 
-                            if(selectedItems == 0) break ; 
-                            if(selectedItems > 0 && selectedItems < items.size()){
-                                const Item & item = items[selectedItems - 1] ;
-                                if(item.getColor() == ItemColor::RED){
-                                    selected.push_back(item) ;
-                                    selectedstrength += item.getStrength() ; 
-                                    cout << "current total strength: " << selectedstrength ; 
-                                    if(selectedstrength >= 6){
-                                        cout << "you have collected items with total strength >= 6 ... do you want to continue?(yes/no) " ; 
-                                        string yesno ; cin >> yesno ; 
-                                        if(yesno == "yes") continue;
-                                        if(yesno == "no"){
-                                            cout << "selected items:\n" ;
-                                            for(size_t j = 0 ; j < selected.size() ; j++){
-                                                cout << (j + 1) << "- " 
-                                                << selected[j].getName() << " (color: " 
-                                                << h.colorItems(selected[j].getColor()) << ", strength: " 
-                                                << selected[j].getStrength() << ")\n"; 
-                                             // + حذف شدن ایتم ها از کیف قهرمان
-                                             // انجام میشود یا نه      
-                                            }
+                        h.AdvanceAction() ;
 
-                                        }
-                                    }
-                                }
-                                else cerr << "what you chosen is not red! try again.\n";
-                                     
-                            
-                            }                            
-                        }
-
-
-
-                    } 
+                    }else cerr << "you can not do advance action unless you are in coffin places\n" ; 
                 
                 }
             } // end if can play an action    

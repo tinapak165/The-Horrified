@@ -59,7 +59,8 @@ class Hero{
         void PickupItems() ; 
         void SpecialPickup(Location*) ; 
         std::vector<Item> GetItems() ; 
-
+        void removeItems(const Item&) ; 
+        void AdvanceAction() ; 
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
