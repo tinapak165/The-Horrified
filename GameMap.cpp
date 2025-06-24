@@ -2,7 +2,17 @@
 #include "GameMap.hpp"
 
 void GameMap::build_map() {
-    
+    //added because of villager
+    auto precinct = std::make_unique<Location>("Precinct") ;
+    auto museum = std::make_unique<Location>("Museum") ;
+    auto shop = std::make_unique<Location>("Shop") ;
+    auto institute = std::make_unique<Location>("Institute") ;
+    locations.push_back(std::move(precinct)) ;
+    locations.push_back(std::move(museum)) ;
+    locations.push_back(std::move(shop)) ;
+    locations.push_back(std::move(institute)) ;
+    //
+
     auto theater = std::make_unique<Location>("Theater");
     auto cave = std::make_unique<Location>("Cave");
     auto tower = std::make_unique<Location>("Tower");
