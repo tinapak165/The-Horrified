@@ -171,16 +171,34 @@ int main() {
   
                 }
                 else if(chosenAction == "Advance"){ //for the monster missions
-                    if( h.GetCurrentLocation() == map.get_location_by_name("Docks") || //درستش کن
+                    //for dracula
+                    if( h.GetCurrentLocation() == map.get_location_by_name("Docks") || //درستش کن به Graveyard
                         h.GetCurrentLocation() == map.get_location_by_name("Crypt") ||
                         h.GetCurrentLocation() == map.get_location_by_name("Dungeon") ||
                         h.GetCurrentLocation() == map.get_location_by_name("Cave") ){// اگر قهرمان در محل قرار گیری تابوتهای دراکولا بود
                         //چک شود تابوتی در آن مکان هست یا نه
-                        cout << "for using advance action you need to have items with red color and strength\n" ;
-                        h.AdvanceAction() ;
+                        cout << "for using advance action you need to have items with red color and strength >= 6.\n" ;
+                        h.AdvanceActionForDracula() ;
+                    }
+                    //for invisible man
+                    else if(h.GetCurrentLocation() == map.get_location_by_name("Docks") || // درستش کن به Inn
+                        h.GetCurrentLocation() == map.get_location_by_name("Barn") ||
+                        h.GetCurrentLocation() == map.get_location_by_name("Institute") ||
+                        h.GetCurrentLocation() == map.get_location_by_name("Laboratory") ||
+                        h.GetCurrentLocation() == map.get_location_by_name("Mansion") ) {}
 
-                    }else cerr << "you can not do advance action unless you are in coffin places\n" ; 
+
+                    else cerr << "you can not do advance action unless you are in coffin places\n" ; 
                 
+                }
+                else if(chosenAction == "Defeat"){
+                    // اگر در همه لوکبشن های تابوت Advance بکار برده شد == 
+                    //امکان شکست هیولا 
+                    //از تابع can be defeated دراکولا استفاده شود
+                    //1-اگر قهرمان در لوکیشنی که دراکولا قرار دارد قرار داشت
+                    //2- استفاده از آیتم های زرد برای نابودی
+
+
                 }
             } // end if can play an action    
         } //end while

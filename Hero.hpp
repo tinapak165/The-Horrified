@@ -60,7 +60,7 @@ class Hero{
         void SpecialPickup(Location*) ; 
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
-        void AdvanceAction() ; 
+        void AdvanceActionForDracula() ; 
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;

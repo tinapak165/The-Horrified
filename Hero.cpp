@@ -35,7 +35,7 @@ void Hero::removeItems(const Item & i){
     }
 }
 
-void Hero::AdvanceAction(){
+void Hero::AdvanceActionForDracula(){
     int chosenNumber = -1 ; 
     int totalStrength = 0 ;
     vector<Item> selected ;
