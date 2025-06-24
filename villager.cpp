@@ -5,10 +5,12 @@ using namespace std ;
 
 vector<villager*> villager:: vil  ;
 
-villager::villager(const string name, Location* place) : name(name), safePlace(place) { 
+villager::villager(const string name, Location* safeplace , Location* current) : name(name), currentLocation(current) , safePlace(safeplace) { 
 
+    set_safeplace(safeplace) ;
     vil.push_back(this) ;
-    place->add_villager(this) ; 
+    if(current)
+        current->add_villager(this) ; 
 }
 
 bool villager::in_the_safePlace() const{

@@ -8,5 +8,5 @@ Mayor::Mayor(GameMap& Map) : Hero("Mayor" , 5 , Map.get_location_by_name("Theate
 
 void Mayor::DisplayInfo()const {
     cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 5 << "\n" << "special Action: " << GetSpecialActionInfo() << "\n"  ; 
+    GetRemainingActions() << "/" << 5 << '\n'  ; 
 }

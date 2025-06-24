@@ -6,7 +6,7 @@
 using namespace std ; 
 
 Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction)
-: name(name) , RemainingActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
+: name(name) , RemainingActions(MaxActions) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
 
     ListOfActions = {
         {ActionType::Move , "Move" , "You can move to any places near by. you can also move the villagers with you."} ,
@@ -187,12 +187,16 @@ string Hero::colorItems(const ItemColor & color){
 }
 
 bool Hero::PerformTheAction(string act)  {
+
+    if(act == "end" || act == "help") return true;
+
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
             if(act == "Special" && !HasSpecialAction()){
                 throw runtime_error("This hero does not have special action") ; 
             }
-            if(GetRemainingActions() > 0){
+
+            if(GetRemainingActions() > 0 && act != "end" && act != "help"){
                 cout << "[playing " << act << "]\n" ;
                 SetRemainingActions(GetRemainingActions()-1) ; 
                 return true; 
@@ -204,13 +208,16 @@ bool Hero::PerformTheAction(string act)  {
 
 }
 
-std::string Hero::GetName()const{
+string Hero::GetName()const{
     return name ; 
 }
-int Hero::GetRemainingActions()const{
-    return RemainingActions ; 
+int Hero::getMaxActions() const{
+    return MaxActions;
 }
-std::string Hero::GetSpecialActionInfo() const{
+int Hero::GetRemainingActions() const{
+    return RemainingActions ;
+}
+string Hero::GetSpecialActionInfo() const{
     return specialAction ; 
 }
 Location* Hero::GetCurrentLocation() const{

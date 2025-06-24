@@ -1,4 +1,6 @@
 #include "TurnManager.hpp"
+#include <iostream>
+using namespace std ; 
 
 TurnManager::TurnManager(Hero* arch , Hero* may) : archaeologist(arch) , mayor(may), archTurn(true){}
 
