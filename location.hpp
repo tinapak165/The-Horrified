@@ -8,6 +8,7 @@
 #include "villager.hpp"
 
 class villager ; 
+class Monster ; 
 
 class Location {
     friend std::ostream& operator<< (std::ostream & os , const Location & loc) ; //برای نمایش اسم لوکیشن
