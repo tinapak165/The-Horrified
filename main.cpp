@@ -18,7 +18,7 @@ int main() {
         GameMap map ; 
         map.build_map() ;
         
-        villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precint")) ;  
+        villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precinct")) ;  
         villager DrReed("Dr.Reed" , map.get_location_by_name("Docks")) ; //wrong safeplace (!fix!)
         villager ProfPearson("Prof.Pearson" , map.get_location_by_name("Museum")) ; 
         villager Maleva("Maleva" , map.get_location_by_name("Docks")); //wrong safeplace (!fix!)

@@ -5,13 +5,16 @@
 #include "item.hpp"
 #include "monster.hpp"
 #include "hero.hpp"
-class Monster;
-class Hero ; 
+#include "villager.hpp"
+
+class villager ; 
+
 class Location {
     friend std::ostream& operator<< (std::ostream & os , const Location & loc) ; //برای نمایش اسم لوکیشن
     private:
         std::string name;
         std::vector<Item> items;
+        std::vector<villager*> villagers ; 
         std::vector<Hero*> heroes;
         std::vector<Monster*> monsters;
         std::vector<Location*> neighbors;
@@ -22,9 +25,11 @@ class Location {
         Location(const std::string & name);
     
         void add_item(const Item& item);
+        void add_villager(villager*) ;
         void add_hero(Hero* hero);
         void remove_hero(Hero* hero) ; 
         void remove_monster(Monster* monster) ; 
+        void remove_villager(villager*) ; 
 
         void add_monster(Monster* monster);
         bool has_coffin();
@@ -37,7 +42,8 @@ class Location {
         std::vector<Monster*>& get_monsters();
         
 
-         std::vector<Hero*>& get_heroes();
+        std::vector<Hero*>& get_heroes();
+        std::vector<villager*>& get_villagers() ;
        
         const std::vector<Location*>& get_neighbors() const;
         Location* findNeighbor(const std::string& name) const  ;  

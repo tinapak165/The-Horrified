@@ -5,11 +5,11 @@ using namespace std ;
 
 vector<villager*> villager:: vil  ;
 
-villager::villager(const string name, Location* place) : name(name), safePlace(place) 
-{
-    vil.push_back(this) ;
-}
+villager::villager(const string name, Location* place) : name(name), safePlace(place) { 
 
+    vil.push_back(this) ;
+    place->add_villager(this) ; 
+}
 
 bool villager::in_the_safePlace() const{
 
