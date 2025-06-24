@@ -1,0 +1,3 @@
+C:/Users/sibegilan/Desktop/Final/The-Horrified/build/CMakeFiles/Horrified.dir
+C:/Users/sibegilan/Desktop/Final/The-Horrified/build/CMakeFiles/edit_cache.dir
+C:/Users/sibegilan/Desktop/Final/The-Horrified/build/CMakeFiles/rebuild_cache.dir

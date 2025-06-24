@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Horrified.dir/Archaeologist.cpp.obj"
+  "CMakeFiles/Horrified.dir/Archaeologist.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Dice.cpp.obj"
+  "CMakeFiles/Horrified.dir/Dice.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Dracula.cpp.obj"
+  "CMakeFiles/Horrified.dir/Dracula.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Game.cpp.obj"
+  "CMakeFiles/Horrified.dir/Game.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/GameMap.cpp.obj"
+  "CMakeFiles/Horrified.dir/GameMap.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Hero.cpp.obj"
+  "CMakeFiles/Horrified.dir/Hero.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Itembag.cpp.obj"
+  "CMakeFiles/Horrified.dir/Itembag.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Location.cpp.obj"
+  "CMakeFiles/Horrified.dir/Location.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/Mayor.cpp.obj"
+  "CMakeFiles/Horrified.dir/Mayor.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj"
+  "CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/TurnManager.cpp.obj"
+  "CMakeFiles/Horrified.dir/TurnManager.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/item.cpp.obj"
+  "CMakeFiles/Horrified.dir/item.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/monster.cpp.obj"
+  "CMakeFiles/Horrified.dir/monster.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/monstercards.cpp.obj"
+  "CMakeFiles/Horrified.dir/monstercards.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/realmain.cpp.obj"
+  "CMakeFiles/Horrified.dir/realmain.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/villager.cpp.obj"
+  "CMakeFiles/Horrified.dir/villager.cpp.obj.d"
+  "Horrified.exe"
+  "Horrified.exe.manifest"
+  "Horrified.pdb"
+  "libHorrified.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Horrified.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
