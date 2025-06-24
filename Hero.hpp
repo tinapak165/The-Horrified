@@ -55,6 +55,7 @@ class Hero{
 
 
         void DisplayItem() ;
+        std::string colorItems(const ItemColor&) ; //show items colors 
         void PickupItems() ; 
         void SpecialPickup(Location*) ; 
         std::vector<Item> GetItems() ; 

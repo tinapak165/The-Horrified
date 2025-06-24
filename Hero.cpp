@@ -104,11 +104,28 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
 void Hero::DisplayItem(){
     cout << "items collected: " ;
     if(GetItems().empty()) cout << "-\n" ;
-    for(const auto i : GetItems())
-        cout << i.getName() << ' ' ;
+    for(const auto i : GetItems()){
+        cout << i.getName() << '('  ;
+        cout << colorItems(i.getColor()) ; 
+        cout << ", strength:" << i.getStrength() << ")," ; 
+
+
+    }
     cout << '\n' ; 
 }
 
+string Hero::colorItems(const ItemColor & color){
+    switch (color){
+    case ItemColor::BLUE :
+        return "Blue" ;
+    case ItemColor::RED :
+        return "Red" ; 
+    case ItemColor::YELLOW :
+        return "Yellow" ; 
+    default:
+        break;
+    }
+}
 
 bool Hero::PerformTheAction(string act)  {
     for(const auto& ac : ListOfActions){
