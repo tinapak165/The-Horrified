@@ -45,6 +45,7 @@ class Hero{
         void showvillagersHere()const ; 
 
         std::string GetName()const ; 
+        virtual void DisplayInfo() const  ;
 
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;

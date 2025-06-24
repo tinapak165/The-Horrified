@@ -5,10 +5,12 @@
 #include "TurnManager.hpp"
 #include "Monster.hpp"
 #include "Dracula.hpp"
-#include "InvisibleMan.hpp"
+//#include "InvisibleMan.hpp"
 #include "Hero.hpp"
 #include "Dice.hpp"
 #include "Itembag.hpp"
+#include "Archaeologist.hpp"
+#include "Mayor.hpp"
 
 class Game {
 private:
@@ -27,10 +29,6 @@ public:
     void monster_phase();
 
     bool both_monsters_defeated();
-
-
-
-    void start() ;
 
     void distribute_initial_items();
 };

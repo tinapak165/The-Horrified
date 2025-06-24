@@ -1,18 +1,14 @@
 #include "TurnManager.hpp"
 
-TurnManager::TurnManager(){}
-TurnManager::TurnManager(const std::vector<Hero*>& heroes) : heroes(heroes), current_index(0) {}
-    
-Hero* TurnManager::get_active_hero() {
-    return heroes[current_index];
+TurnManager::TurnManager(Hero* arch , Hero* may) : archaeologist(arch) , mayor(may), archTurn(true){}
+
+TurnManager::TurnManager(): archaeologist(nullptr) , mayor(nullptr) , archTurn(true){}
+
+Hero* TurnManager::get_active_hero() const {
+    return archTurn ? archaeologist : mayor ;
 }
 
-void TurnManager:: next_turn() {
-    current_index = (current_index + 1) % heroes.size();
-
-}
-
-
-void TurnManager::add_hero(Hero* hero) {
-    heroes.push_back(hero);
+void TurnManager::next_turn()
+{
+    archTurn = !archTurn ;
 }

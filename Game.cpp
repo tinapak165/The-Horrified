@@ -1,14 +1,14 @@
 #include "Game.hpp"
-
+#include <iostream>
+using namespace std ; 
 Game::Game() {
     // ساخت نقشه ثابت
     map.build_map();
-
    
-    Hero* mayor = new Hero("Mayor", map.get_location_by_name("Theater"));
-    Hero* archaeologist = new Hero("Archaeologist", map.get_location_by_name("Docks"));
-    turnManager.add_hero(mayor);
-    turnManager.add_hero(archaeologist);
+    Hero* mayor = new Mayor(map);
+    Hero* archaeologist = new Archaeologist(map);
+
+    turnManager =  TurnManager(archaeologist , mayor) ; 
 
     //  اضافه کردن هیولاها
     Monster* dracula = new Dracula(map.get_location_by_name("Cave")); 
@@ -21,35 +21,38 @@ void  Game::start() {
     while (true) {
         // ۱. فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
-        std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+        cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
-
+/*
         // ۲. فاز هیولا
         
         monster_phase();
 
         // ۳. بررسی پایان بازی
         if (terrorLevel >= 6) {
-            std::cout << "Game Over! Terror level reached 6.\n";
+            cout << "Game Over! Terror level reached 6.\n";
             break;
         }
         if (deck.is_empty()) {
-            std::cout << "Game Over! No more Monster Cards.\n";
+            cout << "Game Over! No more Monster Cards.\n";
             break;
         }
         if (both_monsters_defeated()) {
-            std::cout << "You win! Both monsters defeated!\n";
+            cout << "You win! Both monsters defeated!\n";
             break;
         }
 
         // ۴. رفتن به نوبت قهرمان بعدی
         turnManager.next_turn();
+*/
     }
+
 }
 
 void Game::hero_phase(Hero* hero) {
-    std::cout << "Choose your action (Move, PickUp, UseItem, ...):\n";
-    // فعلاً میذاریم خالی تا بعداً پرش کنیم
+    hero->DisplayInfo() ;
+    hero->DisplayActions() ;
+    
 }
 
 bool Game::both_monsters_defeated() {
@@ -63,7 +66,7 @@ void Game::monster_phase() {
 
     if (deck.is_empty()) {
         std::cout << "\n Monster deck is empty. Players lose!\n";
-        game_over = true;
+      //  game_over = true;
         return;
     }
 
