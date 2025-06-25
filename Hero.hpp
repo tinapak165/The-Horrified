@@ -5,6 +5,7 @@
 #include "villager.hpp"
 #include "location.hpp"
 #include "item.hpp"
+#include "perkcardsDeck.hpp"
 
 class Location ; 
 class villager ; 
@@ -33,7 +34,8 @@ class Hero{
         std::string specialAction ; 
         Location* StartingLocation ;
         Location* currentLocation;
-        std::vector<Action> ListOfActions ; 
+        std::vector<Action> ListOfActions ;
+        std::vector<Perkcards> playedCards ;  
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
@@ -55,6 +57,9 @@ class Hero{
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() ; 
         void resetMaxActions() ; 
+
+        void playedPerk(Perkcards) ;
+        void displaycards() ;
 
 
         void DisplayItem() ;

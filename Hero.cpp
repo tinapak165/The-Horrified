@@ -30,6 +30,17 @@ void Hero::resetMaxActions(){
     (this)->SetRemainingActions((this)->getMaxActions()) ; 
 }
 
+void Hero::playedPerk(Perkcards card){
+    playedCards.push_back(card) ;   
+}
+
+void Hero::displaycards(){
+    cout << "perk cards: " ; 
+    for(size_t i = 0 ; i < playedCards.size() ; i++)
+        cout << playedCards[i].get_Event() << ", " ;
+    cout << endl ; 
+}
+
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
 
 void Hero::removeItems(const Item & i){
@@ -240,7 +251,7 @@ string Hero::colorItems(const ItemColor & color){
 
 bool Hero::PerformTheAction(string act)  {
 
-    if(act == "end" || act == "help") return true;
+    if(act == "Quit" || act == "Help" || act == "Perk") return true;
 
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
