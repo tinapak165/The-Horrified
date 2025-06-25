@@ -113,6 +113,8 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\villager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\location.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tempbuf.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_raw_storage_iter.h \

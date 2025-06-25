@@ -10,6 +10,8 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -273,6 +275,8 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -452,6 +456,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/codecvt.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
@@ -466,8 +471,11 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_conv.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
@@ -477,12 +485,14 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/quoted_string.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/sstream.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
@@ -492,11 +502,14 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_raw_storage_iter.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
@@ -530,11 +543,14 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/functional \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iomanip \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/locale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
@@ -546,12 +562,15 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/messages_members.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/time_members.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/numeric \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/sstream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
@@ -573,6 +592,8 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -711,6 +732,8 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -947,6 +970,8 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -1077,6 +1102,8 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Hor
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -1217,6 +1244,8 @@ CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Fin
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -1361,6 +1390,8 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/T
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -1584,6 +1615,8 @@ CMakeFiles/Horrified.dir/monster.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -1741,6 +1774,8 @@ CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -2282,6 +2317,8 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
   C:/MinGW/include/_mingw.h \
   C:/MinGW/include/ctype.h \
@@ -2422,15 +2459,21 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/time_members.h:
+
 C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp:
 
-C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp:
-
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Dice.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp:
+
+C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp:
+
+C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp:
+
+C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp:
 
 C:/MinGW/include/ctype.h:
 
@@ -2502,8 +2545,6 @@ C:/MinGW/include/w32api.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h:
@@ -2564,6 +2605,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h:
@@ -2597,6 +2640,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h:
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/locale:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc:
 
@@ -2680,6 +2725,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/codecvt.h:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error:
@@ -2730,27 +2777,47 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.hpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp:
 
-C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp:
-
-C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp:
-
 C:/MinGW/include/math.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_conv.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.tcc:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/quoted_string.h:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/sstream.tcc:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iomanip:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/messages_members.h:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/sstream:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.cpp:
 

@@ -124,6 +124,8 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\villager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\location.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tempbuf.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_raw_storage_iter.h \
@@ -140,8 +142,6 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\MonsterCardDeck.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monstercards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ctime c:\mingw\include\time.h \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\TurnManager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Monster.hpp \

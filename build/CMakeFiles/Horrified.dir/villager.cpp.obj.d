@@ -112,6 +112,8 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monster.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Location.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\list \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_list.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\allocated_ptr.h \

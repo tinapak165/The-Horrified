@@ -114,6 +114,8 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monster.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Location.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\GameMap.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tempbuf.h \

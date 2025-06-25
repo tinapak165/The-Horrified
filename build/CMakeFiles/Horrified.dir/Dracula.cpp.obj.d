@@ -112,6 +112,8 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\villager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\location.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Dracula.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Hero.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\algorithm \

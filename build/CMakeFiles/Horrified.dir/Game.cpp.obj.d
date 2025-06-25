@@ -124,6 +124,8 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\villager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\location.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tempbuf.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_raw_storage_iter.h \
@@ -140,8 +142,6 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\MonsterCardDeck.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monstercards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ctime c:\mingw\include\time.h \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\TurnManager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Monster.hpp \
@@ -164,4 +164,23 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\algorithmfwd.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_heap.h \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Archaeologist.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\Mayor.hpp
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\Mayor.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iomanip \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\locale \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_facets_nonio.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\time_members.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\messages_members.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\codecvt.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_facets_nonio.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_conv.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stringfwd.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\allocator.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\codecvt.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unique_ptr.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\quoted_string.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\sstream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\sstream.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\map \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tree.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_map.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_multimap.h

@@ -136,6 +136,8 @@ CMakeFiles/Horrified.dir/monster.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\villager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\location.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\GameMap.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_raw_storage_iter.h \

@@ -132,4 +132,6 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\item.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monster.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Location.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp

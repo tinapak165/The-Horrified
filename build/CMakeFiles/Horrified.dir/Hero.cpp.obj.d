@@ -113,6 +113,8 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monster.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Location.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\algorithm \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\utility \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_relops.h \
