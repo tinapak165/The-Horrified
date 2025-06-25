@@ -1,5 +1,7 @@
 #include "Game.hpp"
 #include <iostream>
+#include <iomanip>
+#include <map>
 using namespace std ; 
 Game::Game() {
     // ساخت نقشه ثابت
@@ -24,10 +26,11 @@ Game::Game() {
         Item item2("Stake", ItemColor::BLUE, 1, "Barn") ; //فرضی
         Item item3("chert" , ItemColor::RED , 6 , "Docks") ;
         Item item4("chert2", ItemColor::RED, 2, "Camp") ;
+        Item item5("chert3", ItemColor::RED, 2, "Camp") ;
         Location* heroLoc = arch->GetCurrentLocation() ;
         Location* secondLoc = mayor->GetCurrentLocation() ; 
         heroLoc->add_item(item1) ; secondLoc->add_item(item2) ; heroLoc->add_item(item3); //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
-        map.get_location_by_name("Camp")->add_item(item4) ;
+        map.get_location_by_name("Camp")->add_item(item4) ; map.get_location_by_name("Camp")->add_item(item5) ; 
                     // بعدا پاک شود !!
  
 
@@ -39,6 +42,7 @@ Game::Game() {
 }
 
 void  Game::start() {
+    locationOverview() ;
    while (true) {
         // ۱. فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
@@ -86,7 +90,6 @@ void  Game::start() {
 void Game::hero_phase(Hero* hero) {
 
     hero->DisplayInfo() ;
-    playPerkCard(hero) ; //بازی با پرک کارت شروع میشود
     playAction(hero) ;
     hero->resetMaxActions() ;
 
@@ -95,12 +98,14 @@ void Game::hero_phase(Hero* hero) {
 void Game::playAction(Hero *h){
     while(true){
     string chosenAction ; 
-    cout << "what action do you want to play this turn(type help to display actions , end to not do any actions on this phase) ? " ;
+    cout << "what action do you want to play this turn(Move, Guide , Pickup , Advance ,Defeat , Perk , Help , Quit) ? " ;
     cin >> chosenAction ; 
-    if(chosenAction == "help")
+    if(chosenAction == "Help")
         h->DisplayActions() ;
-    if(chosenAction == "end")
+    if(chosenAction == "Quit")
         break ;
+    if(chosenAction == "Perk")
+        playPerkCard(h) ;
         
     if(h->PerformTheAction(chosenAction)){
         cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
@@ -259,8 +264,10 @@ void Game::playPerkCard(Hero * hero){
     PerkDeck p ; 
     Perkcards p2 ;
     p2 = p.get_random_card() ;
+    hero->playedPerk(p2) ; 
+    hero->displaycards() ;
     cout << p2 << endl;
-    if(p2.get_Event() == "Hurry."){
+    if(p2.get_Event() == "Hurry"){
             string firstMove , secondMove ; 
             p.display_the_card(p2) ; 
             cout << "Mayor..where do you want to move first? " ;
@@ -295,13 +302,13 @@ void Game::playPerkCard(Hero * hero){
                 arch->MoveTo(AsecondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;     
         }
-        else if (p2.get_Event() == "Repel."){
+        else if (p2.get_Event() == "Repel"){
             p.display_the_card(p2) ;
             //dracula->move_towards(2) ;
            //invisibleMan->move_towards(2) ; 
         }
 
-        else if(p2.get_Event() == "Late into the Night."){
+        else if(p2.get_Event() == "Late into the Night"){
 
             p.display_the_card(p2) ;
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
@@ -321,7 +328,7 @@ void Game::playPerkCard(Hero * hero){
                 }
             }
         }
-        else if(p2.get_Event() == "Overstock."){
+        else if(p2.get_Event() == "Overstock"){
             //آیتم بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
@@ -342,7 +349,53 @@ void Game::playPerkCard(Hero * hero){
 
         }
 }
+void Game::locationOverview(){
+    cout << "-----------------------Location Overview-----------------------------------\n"; 
+    cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;
+    cout << right <<"----------------------------------------------------------------------------\n" ; 
+ 
+    for(const auto& locPtr : map.get_locations()){
+        Location* loc = locPtr.get() ; 
 
+        string itemStr ; 
+        const auto items = loc->get_items() ;
+        if(items.empty())
+            itemStr = "-" ; 
+        else{
+            std::map<string , int> itemcount ;
+            for(const auto & item : items)
+                itemcount[item.getName()]++ ;
+            for(const auto& pair : itemcount)
+                itemStr+= pair.first + "(" + to_string(pair.second) +"), " ;
+            if(!itemStr.empty())
+                itemStr.pop_back() , itemStr.pop_back() ;   
+        }
+        string monStr ;
+        const auto monsters = loc->get_monsters() ;
+        if(monsters.empty())
+            monStr = "-" ; 
+        else{
+            for(const auto& m : monsters)
+                monStr+= m->get_name() + ", " ;
+            
+            monStr.pop_back() ; monStr.pop_back() ;
+        }
+
+        string villagerStr;
+        const auto& villagers = loc->get_villagers();
+        if (villagers.empty()) 
+            villagerStr = "-";
+        else {
+            for (const auto& v : villagers)
+                villagerStr += v->get_name() + ", ";
+            villagerStr.pop_back(); villagerStr.pop_back();
+        }
+        cout << left << "| " << setw(13) << loc->get_name()
+             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << "|\n";
+    }
+    // نمایش تعداد تابوت های خراب شده +  آیتم های مرد نامرئی
+  cout << "---------------------------------------------------------------------------\n" ;  
+}
 Game::~Game(){
     delete mayor ;
     delete arch ;

@@ -35,7 +35,7 @@ class Game {
         void hero_phase(Hero*);
         void playAction(Hero*) ;
         void playPerkCard(Hero*) ;
-        
+        void locationOverview() ;
         void monster_phase();
 
         bool both_monsters_defeated();
