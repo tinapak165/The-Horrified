@@ -471,6 +471,54 @@ monstercards.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/monstercards.cpp.s
 .PHONY : monstercards.cpp.s
 
+perkcards.obj: perkcards.cpp.obj
+.PHONY : perkcards.obj
+
+# target to build an object file
+perkcards.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcards.cpp.obj
+.PHONY : perkcards.cpp.obj
+
+perkcards.i: perkcards.cpp.i
+.PHONY : perkcards.i
+
+# target to preprocess a source file
+perkcards.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcards.cpp.i
+.PHONY : perkcards.cpp.i
+
+perkcards.s: perkcards.cpp.s
+.PHONY : perkcards.s
+
+# target to generate assembly for a file
+perkcards.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcards.cpp.s
+.PHONY : perkcards.cpp.s
+
+perkcardsDeck.obj: perkcardsDeck.cpp.obj
+.PHONY : perkcardsDeck.obj
+
+# target to build an object file
+perkcardsDeck.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcardsDeck.cpp.obj
+.PHONY : perkcardsDeck.cpp.obj
+
+perkcardsDeck.i: perkcardsDeck.cpp.i
+.PHONY : perkcardsDeck.i
+
+# target to preprocess a source file
+perkcardsDeck.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcardsDeck.cpp.i
+.PHONY : perkcardsDeck.cpp.i
+
+perkcardsDeck.s: perkcardsDeck.cpp.s
+.PHONY : perkcardsDeck.s
+
+# target to generate assembly for a file
+perkcardsDeck.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcardsDeck.cpp.s
+.PHONY : perkcardsDeck.cpp.s
+
 realmain.obj: realmain.cpp.obj
 .PHONY : realmain.obj
 
@@ -571,6 +619,12 @@ help:
 	@echo ... monstercards.obj
 	@echo ... monstercards.i
 	@echo ... monstercards.s
+	@echo ... perkcards.obj
+	@echo ... perkcards.i
+	@echo ... perkcards.s
+	@echo ... perkcardsDeck.obj
+	@echo ... perkcardsDeck.i
+	@echo ... perkcardsDeck.s
 	@echo ... realmain.obj
 	@echo ... realmain.i
 	@echo ... realmain.s

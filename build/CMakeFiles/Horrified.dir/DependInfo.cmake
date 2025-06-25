@@ -22,6 +22,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/item.cpp" "CMakeFiles/Horrified.dir/item.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/item.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.cpp" "CMakeFiles/Horrified.dir/monster.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/monster.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.cpp" "CMakeFiles/Horrified.dir/monstercards.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/monstercards.cpp.obj.d"
+  "C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.cpp" "CMakeFiles/Horrified.dir/perkcards.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/perkcards.cpp.obj.d"
+  "C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.cpp" "CMakeFiles/Horrified.dir/perkcardsDeck.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/perkcardsDeck.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/realmain.cpp" "CMakeFiles/Horrified.dir/realmain.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/realmain.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.cpp" "CMakeFiles/Horrified.dir/villager.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/villager.cpp.obj.d"
   )

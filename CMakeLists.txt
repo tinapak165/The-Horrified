@@ -6,8 +6,6 @@ project(Horrified)
 add_executable(Horrified
 Game.hpp
 Game.cpp
-Archaeologist.cpp
-Archaeologist.hpp
 Hero.cpp
 Hero.hpp
 Mayor.cpp
@@ -19,6 +17,10 @@ MonsterCardDeck.cpp
 MonsterCardDeck.hpp
 monstercards.hpp
 monstercards.cpp
+perkcards.cpp
+perkcards.hpp
+perkcardsDeck.cpp
+perkcardsDeck.hpp
 TurnManager.hpp
 TurnManager.cpp
 Monster.hpp

@@ -140,6 +140,8 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\MonsterCardDeck.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\monstercards.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ctime c:\mingw\include\time.h \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\TurnManager.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Monster.hpp \
