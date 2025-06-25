@@ -4,26 +4,27 @@ using namespace std ;
 Game::Game() {
     // ساخت نقشه ثابت
     map.build_map();
-   
-    Hero* mayor = new Mayor(map);
-    Hero* archaeologist = new Archaeologist(map);
 
-    turnManager =  TurnManager(archaeologist , mayor) ;
+    mayor = new Mayor(map);
+    arch = new Archaeologist(map);
 
-        new villager("Dr.Cranley" , map.get_location_by_name("Precinct") , nullptr) ;  //null میذاریم چون فعلا در لوکیشنی قرار نگرفته اند 
-        new villager("Dr.Reed" , map.get_location_by_name("Camp") , map.get_location_by_name("Docks")) ;  //for testing
-        new villager("Prof.Pearson" , map.get_location_by_name("Museum") , nullptr) ; 
-        new villager("Maleva" , map.get_location_by_name("Shop") , nullptr); 
-        new villager("Fritz" , map.get_location_by_name("Institute"), nullptr) ; 
-        new villager("Willbur & Chick" , map.get_location_by_name("Dungeon") , nullptr) ;
-        new villager("Maria" , map.get_location_by_name("Camp") , nullptr) ;
+    turnManager =  TurnManager(arch , mayor) ;
 
+        auto Dr_Cranley = new villager("Dr.Cranley" , map.get_location_by_name("Precinct") , nullptr) ;  //null میذاریم چون فعلا در لوکیشنی قرار نگرفته اند 
+        auto Dr_Reed = new villager("Dr.Reed" , map.get_location_by_name("Camp") , map.get_location_by_name("Docks")) ;  //for testing
+        auto Prof_Pearson = new villager("Prof.Pearson" , map.get_location_by_name("Museum") , nullptr) ; 
+        auto Maleva = new villager("Maleva" , map.get_location_by_name("Shop") , nullptr); 
+        auto Fritz = new villager("Fritz" , map.get_location_by_name("Institute"), nullptr) ; 
+        auto Willbur_Chick = new villager("Willbur & Chick" , map.get_location_by_name("Dungeon") , nullptr) ;
+        auto Maria = new villager("Maria" , map.get_location_by_name("Camp") , nullptr) ;
+        
+        
                         // بعدا پاک شود !!
         Item item1("Garlic", ItemColor::RED, 2, "Barn") ; //فرضی
         Item item2("Stake", ItemColor::BLUE, 1, "Barn") ; //فرضی
         Item item3("chert" , ItemColor::RED , 6 , "Docks") ;
         Item item4("chert2", ItemColor::RED, 2, "Camp") ;
-        Location* heroLoc = archaeologist->GetCurrentLocation() ;
+        Location* heroLoc = arch->GetCurrentLocation() ;
         Location* secondLoc = mayor->GetCurrentLocation() ; 
         heroLoc->add_item(item1) ; secondLoc->add_item(item2) ; heroLoc->add_item(item3); //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
         map.get_location_by_name("Camp")->add_item(item4) ;
@@ -41,14 +42,15 @@ void  Game::start() {
    while (true) {
         // ۱. فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
-        cout << ">>> Before action: " << activeHero->GetName() << "\n";
         hero_phase(activeHero);
+
+        if(villager::AnyVillagerInSafePlace()){
+            villager::removeVillager() ;
+            playPerkCard(activeHero) ;
+        }
 
         turnManager.next_turn();
 
-        Hero* next = turnManager.get_active_hero();
-        cout << ">>> Next turn will be: " << next->GetName() << "\n\n";
-        
 
    } //end while
 
@@ -84,6 +86,7 @@ void  Game::start() {
 void Game::hero_phase(Hero* hero) {
 
     hero->DisplayInfo() ;
+    playPerkCard(hero) ; //بازی با پرک کارت شروع میشود
     playAction(hero) ;
     hero->resetMaxActions() ;
 
@@ -112,17 +115,17 @@ void Game::playAction(Hero *h){
             if(currentLoc->findNeighbor(chosenPlace)){ //اگر خونه ای که انتخاب کرده واقعا همسایه فعلی بود
                 if(h->hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
                     auto here = h->villagerHere() ; // vector of villagers in the same place
-                        string villagertotake ;
+                        string ans ;
                         cout << "some villagers are at the same place as you. " ; 
                         h->showvillagersHere() ; 
                         cout << "\ndo you want to move the villagers with you?(yes = moving all villagers with you/no = moving alone) " ; 
-                        cin >> villagertotake ; 
-                        if(villagertotake == "yes")
+                        cin >> ans ; 
+                        if(ans == "yes")
                             h->MoveTo(chosenLocation , here) ; 
-                        else
+                        else if(ans == "no")
                             h->MoveTo(chosenLocation) ; 
                     }else
-                        h->MoveTo(chosenLocation) ;    
+                        cerr << "wrong answer!\n" ;    
                 }
                 else
                     cerr << "what you have chosen is not a neighboring place!\n";
@@ -250,6 +253,99 @@ void Game::playAction(Hero *h){
                 }
             } // end if can play an action 
     }    
+}
+
+void Game::playPerkCard(Hero * hero){
+    PerkDeck p ; 
+    Perkcards p2 ;
+    p2 = p.get_random_card() ;
+    cout << p2 << endl;
+    if(p2.get_Event() == "Hurry."){
+            string firstMove , secondMove ; 
+            p.display_the_card(p2) ; 
+            cout << "Mayor..where do you want to move first? " ;
+            cin >> firstMove ; 
+            Location* currentLoc = mayor->GetCurrentLocation() ; 
+            Location* firstMoveLoc = map.get_location_by_name(firstMove);
+            if(currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
+                mayor->MoveTo(firstMoveLoc) ;        
+            else cerr << "what you have chosen is not a neighboring place!!\n" ;
+
+            cout << "Mayor..what is your second place to move? " ;
+            cin >> secondMove ;
+            Location* secondMoveLoc = map.get_location_by_name(secondMove);
+            if(currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
+                mayor->MoveTo(secondMoveLoc) ;        
+            else cerr << "what you have chosen is not a neighboring place!!\n" ; 
+
+            cout << "--------------\n" ;
+            string AfirstMove , AsecondMove ; 
+            cout << "Archaeologist..where do you want to move first? " ;
+            cin >> AfirstMove ; 
+            Location* AcurrentLoc = arch->GetCurrentLocation() ; 
+            Location* AfirstMoveLoc = map.get_location_by_name(AfirstMove);
+            if(AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
+                arch->MoveTo(AfirstMoveLoc) ;        
+            else cerr << "what you have chosen is not a neighboring place!!\n" ;
+
+            cout << "Archaeologist..what is your second place to move? " ;
+            cin >> AsecondMove ;
+            Location* AsecondMoveLoc = map.get_location_by_name(AsecondMove);
+            if(AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
+                arch->MoveTo(AsecondMoveLoc) ;        
+            else cerr << "what you have chosen is not a neighboring place!!\n" ;     
+        }
+        else if (p2.get_Event() == "Repel."){
+            p.display_the_card(p2) ;
+            //dracula->move_towards(2) ;
+           //invisibleMan->move_towards(2) ; 
+        }
+
+        else if(p2.get_Event() == "Late into the Night."){
+
+            p.display_the_card(p2) ;
+            hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
+            hero->DisplayInfo() ; 
+        }
+        else if(p2.get_Event() == "Break of Dawn."){
+            //آیتم بصورت رندوم نمیاد!!!!
+            //فاز هیولا بعدی رد میشود !؟
+            p.display_the_card(p2);
+            ItemPool pool ;
+            vector<Item> PoolItems = pool.draw_random_items(2) ;
+            for(const auto i : PoolItems){
+                Location* Loc = map.get_location_by_name(i.getLocationName());
+                if(Loc){
+                    Loc->add_item(i) ;
+                    cout << "Item " << i.getName() << " placed in location " << i.getLocationName() << "\n";
+                }
+            }
+        }
+        else if(p2.get_Event() == "Overstock."){
+            //آیتم بصورت رندوم نمیاد!!!!
+            p.display_the_card(p2) ;
+            ItemPool pool ; 
+            vector<Item> PoolItems = pool.draw_random_items(2) ;
+            if(PoolItems.size() < 2) cerr << "not enough items drawn from the pool !\n" ;
+
+            Location* LocFirst = map.get_location_by_name(PoolItems[0].getLocationName());
+            if(LocFirst){
+                LocFirst->add_item(PoolItems[0]) ; 
+                cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
+            }
+            
+            Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
+             if(LocSecond){
+                LocSecond->add_item(PoolItems[1]) ; 
+                cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
+            }           
+
+        }
+}
+
+Game::~Game(){
+    delete mayor ;
+    delete arch ;
 }
 
 /* //delete from here

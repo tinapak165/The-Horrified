@@ -25,13 +25,13 @@ int main(){
     GameMap map ; 
     map.build_map() ;
 
-    villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precinct")) ;  
-    villager DrReed("Dr.Reed" , map.get_location_by_name("Camp")) ;
-    villager ProfPearson("Prof.Pearson" , map.get_location_by_name("Museum")) ; 
-    villager Maleva("Maleva" , map.get_location_by_name("Shop"));
-    villager Fritz("Fritz" , map.get_location_by_name("Institute")) ; 
-    villager WillburChick("Willbur & Chick" , map.get_location_by_name("Dungeon")) ;
-    villager Maria("Maria" , map.get_location_by_name("Camp")) ;
+    // villager DrCranley("Dr.Cranley" , map.get_location_by_name("Precinct")) ;  
+    // villager DrReed("Dr.Reed" , map.get_location_by_name("Camp")) ;
+    // villager ProfPearson("Prof.Pearson" , map.get_location_by_name("Museum")) ; 
+    // villager Maleva("Maleva" , map.get_location_by_name("Shop"));
+    // villager Fritz("Fritz" , map.get_location_by_name("Institute")) ; 
+    // villager WillburChick("Willbur & Chick" , map.get_location_by_name("Dungeon")) ;
+    // villager Maria("Maria" , map.get_location_by_name("Camp")) ;
 
     //Maria.MoveTo(map.find_location_by_name("Camp") , "Maria") ; moving to its safeplace for checking
 
@@ -97,7 +97,7 @@ int main(){
             m.DisplayInfo() ; 
         }
         else if(p2.get_Event() == "Break of Dawn."){
-            //کارت بصورت رندوم نمیاد!!!!
+            //آیتم بصورت رندوم نمیاد!!!!
             //فاز هیولا بعدی رد میشود !؟
             p.display_the_card(p2);
             ItemPool pool ;
@@ -111,7 +111,7 @@ int main(){
             }
         }
         else if(p2.get_Event() == "Overstock."){
-            //کارت بصورت رندوم نمیاد!!!!
+            //آیتم بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
             vector<Item> PoolItems = pool.draw_random_items(2) ;

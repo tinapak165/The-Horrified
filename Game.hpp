@@ -2,6 +2,8 @@
 #include <unordered_map>
 #include "GameMap.hpp"
 #include "MonsterCardDeck.hpp"
+#include "perkcardsDeck.hpp"
+#include "perkcards.hpp"
 #include "TurnManager.hpp"
 #include "Monster.hpp"
 #include "Dracula.hpp"
@@ -15,8 +17,10 @@
 
 class Game {
     private:
-
+        
         GameMap map;
+        Hero* mayor ; 
+        Hero* arch ; 
         MonsterCardDeck deck;
         TurnManager turnManager;
         ItemPool pool;
@@ -30,9 +34,12 @@ class Game {
 
         void hero_phase(Hero*);
         void playAction(Hero*) ;
+        void playPerkCard(Hero*) ;
+        
         void monster_phase();
 
         bool both_monsters_defeated();
 
         void distribute_initial_items();
+        ~Game() ;
 };

@@ -62,7 +62,6 @@ void villager::removeVillager(){
 bool villager::AnyVillagerInSafePlace(){
     for(auto *e : all()){
         if(e->in_the_safePlace()){
-            removeVillager() ;
             return true ; 
         }
     }

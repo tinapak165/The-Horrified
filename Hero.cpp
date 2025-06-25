@@ -19,9 +19,11 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
 }
 
 void Hero::DisplayActions(){
-    cout << "Here is the list of actions you have\n" ; 
+
+    cout << "----ACTIONS----\n" ; 
     for(const auto a : ListOfActions)
         cout << a.name << ": " << a.Description << '\n' ; 
+    cout << "---------------\n" ; 
 }
 
 void Hero::resetMaxActions(){
@@ -146,7 +148,7 @@ void Hero::PickupItems(){ //pick up item from current location
                 "( color: " <<  colorItems(ItemsAtLocation[i].getColor()) << ", " <<
                 "strength: " << ItemsAtLocation[i].getStrength() << ")\n";
         }
-        cout << "enter the item number to pick up: " ; 
+        cout << "enter the item number to pick up(0 to end): " ; 
         cin >> selectedItems ;
         if(selectedItems == 0) //هیچی انتخاب نکرد
             return ;
@@ -183,7 +185,9 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
         while(!ItemsAtLocation.empty()){
             cout << "items available in " << chosenplace->get_name() << " :\n" ;
             for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++)
-                cout << (i+1) << ". " << ItemsAtLocation[i].getName() << '\n';
+                cout << (i+1) << ". " << ItemsAtLocation[i].getName() << 
+                    "( color : " << (*this).colorItems(ItemsAtLocation[i].getColor()) <<
+                     " , strength: " << ItemsAtLocation[i].getStrength() << ")\n";
         
             cout << "enter the item number to pick up: " ; 
             cin >> selectedItems ;
