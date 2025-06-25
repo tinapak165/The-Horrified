@@ -24,6 +24,10 @@ void Hero::DisplayActions(){
         cout << a.name << ": " << a.Description << '\n' ; 
 }
 
+void Hero::resetMaxActions(){
+    (this)->SetRemainingActions((this)->getMaxActions()) ; 
+}
+
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
 
 void Hero::removeItems(const Item & i){
@@ -86,6 +90,48 @@ void Hero::AdvanceActionForDracula(){
     else cout << "no item was selected for advance action!\n" ;
 }
 
+void Hero::AdvanceActionForInvisibleMan(){
+    int chosenNumber = -1 ; 
+    vector<Item> selected ;
+
+    while(true){
+        vector<Item> items = (*this).GetItems() ;
+        vector<Item> ItemsToChoose ; 
+        if(items.empty()){
+            cerr << (*this).GetName() << " has no more items!\n" ; 
+            break; 
+        }
+        cout << "items to choose:\n" ;
+        for(size_t i = 0 ; i < items.size() ; i++){
+            if(items[i].getLocationName() == "Inn" || items[i].getLocationName() == "Barn" || items[i].getLocationName() == "Institute" || items[i].getLocationName() == "Laboratory" || items[i].getLocationName() == "Mansion")
+                ItemsToChoose.push_back(items[i]) ;
+        }
+        for(size_t i = 0 ; i < ItemsToChoose.size() ; i++)
+                cout << (i + 1) << "-" << ItemsToChoose[i].getName() << "(location: " << ItemsToChoose[i].getLocationName() << ")\n" ;
+        
+        cout << "please select any item by number(0 to end): " ;
+        cin >> chosenNumber ; 
+        if(chosenNumber == 0) break;
+        if(chosenNumber < 1 && chosenNumber > static_cast<int>(ItemsToChoose.size())){
+            cerr << "invalid. please try again!\n" ;
+            continue;
+        }
+        Item chosenItem = items[chosenNumber - 1] ;
+
+        (*this).removeItems(chosenItem) ;
+        selected.push_back(chosenItem) ; 
+
+    }
+    if(!selected.empty()){
+        cout << "items chosen for advance action:\n " ;
+        for(size_t i = 0 ; i < selected.size() ; i++){
+            cout << (i + 1) << "-" << selected[i].getName() << "(color: " << (*this).colorItems(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ")\n" ;
+            (*this).GetCurrentLocation()->add_item(selected[i]) ; 
+        }
+    }
+    else cout << "no item was selected for advance action!\n" ;
+}
+
 void Hero::PickupItems(){ //pick up item from current location
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
     if(ItemsAtLocation.empty()){
@@ -96,7 +142,9 @@ void Hero::PickupItems(){ //pick up item from current location
     while(!ItemsAtLocation.empty()){
         cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
         for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++){
-            cout << (i+1) << ". " << ItemsAtLocation[i].getName() << '\n';
+            cout << (i+1) << ". " << ItemsAtLocation[i].getName() << 
+                "( color: " <<  colorItems(ItemsAtLocation[i].getColor()) << ", " <<
+                "strength: " << ItemsAtLocation[i].getStrength() << ")\n";
         }
         cout << "enter the item number to pick up: " ; 
         cin >> selectedItems ;
@@ -127,13 +175,13 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
     vector<Item>&  ItemsAtLocation= chosenplace->get_items() ;
 
     if(ItemsAtLocation.empty()) {
-        cerr << "no items available in " << chosenplace->get_name() << '\n'; 
+        cerr << "no item available in " << chosenplace->get_name() << "!\n"; 
         return ;  
     }
     else{
         int selectedItems = -1 ; 
         while(!ItemsAtLocation.empty()){
-            cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
+            cout << "items available in " << chosenplace->get_name() << " :\n" ;
             for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++)
                 cout << (i+1) << ". " << ItemsAtLocation[i].getName() << '\n';
         
@@ -150,13 +198,13 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
             cout << (*this).GetName() << " picked up " << ItemsAtLocation[index].getName() << ".\n";
             ItemsAtLocation.erase(ItemsAtLocation.begin() + index) ; 
             if(ItemsAtLocation.empty()){
-            cout << "no more items available in " << (*this).GetCurrentLocation()->get_name() << ".\n" ;
+            cout << "no more items available in " << chosenplace->get_name() << ".\n" ;
             break ;
         }
     }
         for(const auto& i : ItemsAtLocation){
             ListOfitems.push_back(i) ;
-            cout << (*this).GetName() << " picked up " << i.getName() << " from location " << (*this).GetCurrentLocation()->get_name() << '\n' ;
+            cout << (*this).GetName() << " picked up " << i.getName() << " from location " << chosenplace->get_name() << '\n' ;
         }
         ItemsAtLocation.clear() ;
     }

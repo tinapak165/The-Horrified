@@ -7,8 +7,8 @@ vector<villager*> villager:: vil  ;
 
 villager::villager(const string name, Location* safeplace , Location* current) : name(name), currentLocation(current) , safePlace(safeplace) { 
 
-    set_safeplace(safeplace) ;
     vil.push_back(this) ;
+    
     if(current)
         current->add_villager(this) ; 
 }

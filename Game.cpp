@@ -17,6 +17,17 @@ Game::Game() {
         new villager("Fritz" , map.get_location_by_name("Institute"), nullptr) ; 
         new villager("Willbur & Chick" , map.get_location_by_name("Dungeon") , nullptr) ;
         new villager("Maria" , map.get_location_by_name("Camp") , nullptr) ;
+
+                        // بعدا پاک شود !!
+        Item item1("Garlic", ItemColor::RED, 2, "Barn") ; //فرضی
+        Item item2("Stake", ItemColor::BLUE, 1, "Barn") ; //فرضی
+        Item item3("chert" , ItemColor::RED , 6 , "Docks") ;
+        Item item4("chert2", ItemColor::RED, 2, "Camp") ;
+        Location* heroLoc = archaeologist->GetCurrentLocation() ;
+        Location* secondLoc = mayor->GetCurrentLocation() ; 
+        heroLoc->add_item(item1) ; secondLoc->add_item(item2) ; heroLoc->add_item(item3); //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
+        map.get_location_by_name("Camp")->add_item(item4) ;
+                    // بعدا پاک شود !!
  
 
     //  اضافه کردن هیولاها
@@ -33,10 +44,8 @@ void  Game::start() {
         cout << ">>> Before action: " << activeHero->GetName() << "\n";
         hero_phase(activeHero);
 
-        // بعد از فاز هیولا، نوبت رو عوض می‌کنیم
         turnManager.next_turn();
 
-        // بلافاصله چک و چاپ می‌کنیم
         Hero* next = turnManager.get_active_hero();
         cout << ">>> Next turn will be: " << next->GetName() << "\n\n";
         
@@ -72,11 +81,11 @@ void  Game::start() {
 
 }
 
-void Game::hero_phase(Hero* h) {
+void Game::hero_phase(Hero* hero) {
 
-    h->DisplayInfo() ;
-    playAction(h) ;
-    // !ری ست کردن تعداد اکشن ها بعد از هر فاز!
+    hero->DisplayInfo() ;
+    playAction(hero) ;
+    hero->resetMaxActions() ;
 
 }
 
@@ -187,17 +196,10 @@ void Game::playAction(Hero *h){
                     }else throw invalid_argument("wrong answer!\n");        
                 }
                 else if(chosenAction == "Pickup"){
-
-                    // بعدا پاک شود !!
-                    Item item1("Garlic", ItemColor::RED, 2, "Barn") ; //فرضی
-                    Item item2("Stake", ItemColor::BLUE, 1, "Barn") ; //فرضی
-                    Item item3("chert" , ItemColor::RED , 6 , "sss") ;
-                    Location* heroLoc = h->GetCurrentLocation() ;
-                    heroLoc->add_item(item1) ; heroLoc->add_item(item2) ; heroLoc->add_item(item3); //بهتره از قبل ست شده باشن + فرضی توی لوکیشن هیرو قرار دارن
-                    // بعدا پاک شود !!
-                    
+ 
                     h->PickupItems() ;
                     h->DisplayItem() ; 
+
                 } 
                 else if(chosenAction == "Special"){
                     Location* heroLoc = h->GetCurrentLocation() ; 
@@ -213,14 +215,7 @@ void Game::playAction(Hero *h){
 
                     if(heroLoc->findNeighbor(chosenplace)){
                         Location* chosenLoc = map.get_location_by_name(chosenplace) ;
-
-                        // بعدا پاک شود !!
-                        Item item1("Garlic", ItemColor::RED, 2, "Camp") ; //فرضی
-                        Item item2("Stake", ItemColor::BLUE, 1, "Barn") ; //فرضی
-                        chosenLoc->add_item(item1) ; chosenLoc->add_item(item2) ; //اشتباهه
-                        //map.get_location_by_name("Camp")->add_item(item1) ; 
-                        // بعدا پاک شود !!
-                    
+    
                         h->SpecialPickup(chosenLoc) ;
                         h->DisplayItem() ; 
 
@@ -229,23 +224,19 @@ void Game::playAction(Hero *h){
                 }
                 else if(chosenAction == "Advance"){ //for the monster missions
                     //for dracula
-                    if( h->GetCurrentLocation() == map.get_location_by_name("Docks") || //درستش کن به Graveyard
+                    if( h->GetCurrentLocation() == map.get_location_by_name("Graveyard") || //درستش کن به Graveyard
                         h->GetCurrentLocation() == map.get_location_by_name("Crypt") ||
                         h->GetCurrentLocation() == map.get_location_by_name("Dungeon") ||
                         h->GetCurrentLocation() == map.get_location_by_name("Cave") ){// اگر قهرمان در محل قرار گیری تابوتهای دراکولا بود
-                        //چک شود تابوتی در آن مکان هست یا نه
+                        // ابتداچک شود تابوتی در آن مکان هست یا نه
                         cout << "for using advance action you need to have items with red color and strength >= 6.\n" ;
                         h->AdvanceActionForDracula() ;
                     }
                     //for invisible man
-                    else if(h->GetCurrentLocation() == map.get_location_by_name("Docks") || // درستش کن به Inn
-                        h->GetCurrentLocation() == map.get_location_by_name("Barn") ||
-                        h->GetCurrentLocation() == map.get_location_by_name("Institute") ||
-                        h->GetCurrentLocation() == map.get_location_by_name("Laboratory") ||
-                        h->GetCurrentLocation() == map.get_location_by_name("Mansion") ) {}
-
-
-                    else cerr << "you can not do advance action unless you are in coffin places\n" ; 
+                    else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
+                        h->AdvanceActionForInvisibleMan() ;
+                    }
+                    else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
                 
                 }
                 else if(chosenAction == "Defeat"){
@@ -253,13 +244,11 @@ void Game::playAction(Hero *h){
                     //امکان شکست هیولا 
                     //از تابع can be defeated دراکولا استفاده شود
                     //1-اگر قهرمان در لوکیشنی که دراکولا قرار دارد قرار داشت
-                    //2- استفاده از آیتم های زرد برای نابودی
-
+                    //2- استفاده از آیتم های زرد برای نابودی دراکولا
+                    //3- استفاده از آیتم های قرمز با مجموع 9 یا بالاتر برای نابودی نامرئی
 
                 }
             } // end if can play an action 
-
-
     }    
 }
 
@@ -370,4 +359,4 @@ void Game::distribute_initial_items() {
 //     }
 // }
 
-*/ //delete here
+*/ //to here

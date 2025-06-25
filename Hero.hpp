@@ -54,6 +54,7 @@ class Hero{
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() ; 
+        void resetMaxActions() ; 
 
 
         void DisplayItem() ;
@@ -62,7 +63,9 @@ class Hero{
         void SpecialPickup(Location*) ; 
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
+
         void AdvanceActionForDracula() ; 
+        void AdvanceActionForInvisibleMan() ;
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
