@@ -4,6 +4,7 @@
 #include "monster.hpp"
 #include "Hero.hpp"
 
+class location;
 
 class Dracula : public Monster {
     private:

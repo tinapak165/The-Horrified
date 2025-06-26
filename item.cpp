@@ -7,5 +7,9 @@ Item::Item(const std::string& name, ItemColor color, int strength, const std::st
  ItemColor Item::getColor() const{ return color;}
  int Item::getStrength() const{ return strength;}
 
+ std::string Item::getLocationName() const {
+    return locationName;  
+}
+
 
 

@@ -15,10 +15,10 @@ private:
 public:
     Item(const std::string& name, ItemColor color, int strength, const std::string& locationName);
 
-    const std::string& getName() const { return name; }
-    ItemColor getColor() const { return color; }
-    int getStrength() const { return strength; }
-    const std::string& getLocationName() const { return locationName; }
+    const std::string& getName() const;
+    ItemColor getColor() const;
+    int getStrength() const;
+     std::string getLocationName() const;
 };
 
 

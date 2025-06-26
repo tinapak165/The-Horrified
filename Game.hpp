@@ -15,6 +15,10 @@ private:
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
+
+    Hero* mayor = nullptr;
+    Hero* archaeologist = nullptr;
+    
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
     int terrorLevel = 0;
@@ -22,16 +26,16 @@ private:
     
 public:
     Game();
-
+    ~Game();
+    void test();
     void start() ;
+    void choose_character();
     void hero_phase(Hero* hero);
+    void play_hero_Action(Hero*);
+    void playPerkCard(Hero*);
     void monster_phase();
 
     bool both_monsters_defeated();
-
-
-
-    void start() ;
 
     void distribute_initial_items();
 };

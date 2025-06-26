@@ -3,7 +3,9 @@
 
 #include <string>
 #include "Location.hpp"
+#include "Hero.hpp"
 
+class Hero;
 class Location; // forward declaration
 
 class Monster {
@@ -25,7 +27,7 @@ public:
     void move_towards(int steps);
 
     virtual void attack() = 0;
-    virtual void special_power(Hero*) =0 ;
+    virtual void special_power(Hero* h) =0 ;
     virtual bool is_defeated()=0;
 
 };

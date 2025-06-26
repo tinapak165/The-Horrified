@@ -1,6 +1,9 @@
 #include "monster.hpp"
 #include "Dracula.hpp"
 
+Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation) {}
+
+
 bool Dracula::can_be_defeated() const{ return false;}
 
 bool Dracula:: is_defeated()  { return false;}

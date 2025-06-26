@@ -1,14 +1,25 @@
 #include "location.hpp"
 #include <iostream>
 
-    Location::Location(const std::string& name ) : name(name){}
+Location::Location(const std::string& name ) : name(name){}
+
+void Location::connect(Location * other){
+    neighbors.push_back(other);
+    other->neighbors.push_back(this);
+    
+}
 
     void Location::add_item(const Item& item) {
     items.push_back(item);
 }
 
+
     void Location::add_hero(Hero* hero){
     heroes.push_back(hero);
+}
+
+void Location::add_villager(villager* villager){
+    villagers.push_back(villager) ;
 }
 
     void Location::add_monster(Monster* monster) {
@@ -20,20 +31,23 @@
     const std::string& Location::get_name() const { return name;
 }
 
+
      std::vector<Item>& Location::get_items()  {
     return items;
 }
 
-    void Location::remove_item_by_index(int index) {
-    if (index >= 0 && index < items.size()) {
-        items.erase(items.begin() + index); }
+Location* Location::findNeighbor(const std::string& name) const{
+    for(auto *n : get_neighbors()){
+        if(n->get_name() == name)
+            return n ; 
     }
-    
-    void Location::connect(Location * other){
-        neighbors.push_back(other);
-        other->neighbors.push_back(this);
-        
-    }
+    return nullptr ; 
+}
+
+ 
+std::vector<villager *> &Location::get_villagers(){
+    return villagers ;
+}
 
      std::vector<Monster*>& Location::get_monsters(){
         return monsters;
@@ -66,21 +80,12 @@ void Location::remove_coffin(){
 
 
 
-
- std::ostream operator <<( std::ostream & out , Location& loc){
-
-    out<<loc.get_name();
-
-
-
-}
-
 void Location::remove_hero(Hero* hero) {
-   
+    
     for ( auto it = heroes.begin() ; it != heroes.end();){
         if (*it == hero){
             it= heroes.erase(it);
-
+            
         }else{
             ++it;
         }
@@ -97,4 +102,24 @@ void Location::remove_monster(Monster* monster) {
     }
 }
 
+void Location::remove_villager(villager * villager){
+    for (auto it = villagers.begin(); it != villagers.end(); ) {
+        if (*it == villager) {
+            it = villagers.erase(it);  
+        } else {
+            ++it;  
+        }
+    }
+    
+}
 
+
+std::ostream operator <<( std::ostream &op , std::vector<Monster*> & monsters){
+    op<<monsters;
+}
+
+ std::ostream operator <<( std::ostream & out , Location& loc){
+
+    out<<loc.get_name();
+
+}

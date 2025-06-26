@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # همه فایل‌های سورس را تعریف می‌کنیم
 set(SOURCES
-
+    
     GameMap.cpp
     Location.cpp
     Monster.cpp
@@ -18,7 +18,16 @@ set(SOURCES
     Dice.cpp 
     Dracula.cpp 
     item.cpp 
-    playcard.cpp
+    Game.cpp 
+    itembag.cpp 
+    TurnManager.cpp 
+    Villager.cpp 
+    Mayor.cpp 
+    Archaeologist.cpp
+    main.cpp
+    perkcards.cpp 
+    perkcardsDeck.cpp
+    
 )
 # هدف اصلی برنامه
 add_executable(Horrified ${SOURCES})

@@ -8,10 +8,15 @@
 Monstercard::Monstercard(){}
 
 Monstercard ::Monstercard (std::string card_name, int itemCount, std::string event, std::vector<Strike> s) : 
-card_name(card_name),type(CardType::MonsterAffecting),Item_count(std::move(itemCount)), Event((event)),striks((s)) {}
+card_name(card_name),type(CardType::MonsterAffecting),Item_count(std::move(itemCount)), Event((event)),strikes((s)) {}
 
 Monstercard ::Monstercard (std::string card_name, int itemCount, std::string event, std::vector<Strike> s, std::string character , std::string location) :
-card_name(card_name),type(CardType::MonsterAffecting),Item_count(std::move(itemCount)), Event((event)),striks((s)) , character_name(std::move(character)), destination_location(std::move(location)) {}
+card_name(card_name),type(CardType::MonsterAffecting),Item_count(std::move(itemCount)), Event((event)),strikes((s)) , character_name(std::move(character)), destination_location(std::move(location)) {}
+
+
+
+std::vector<Strike> Monstercard::get_strikes() const { return strikes;}
+
 
 std::string Monstercard::get_card_name ()const{ return card_name;}
 int Monstercard::get_item_count() const {return Item_count; }

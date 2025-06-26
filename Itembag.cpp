@@ -14,12 +14,13 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Lantern", ItemColor::BLUE, 3, "Camp");
 
     // اینجا همه ۶۰ آیتم را کامل می‌کنیم بعداً...
-}
-
-std::vector<Item> ItemPool::draw_random_items(int count) {
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(allItems.begin(), allItems.end(), g);
+}
+
+std::vector<Item> ItemPool::draw_random_items(int count) {
+ 
 
     std::vector<Item> drawn;
     for (int i = 0; i < count && !allItems.empty(); ++i) {

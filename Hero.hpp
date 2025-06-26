@@ -4,6 +4,8 @@
 #include <vector>
 #include "villager.hpp"
 #include "location.hpp"
+#include "item.hpp"
+#include "perkcardsDeck.hpp"
 
 class Location ; 
 class villager ; 
@@ -25,13 +27,15 @@ struct Action{
 
 class Hero{ 
     private: 
+        std::vector<Item> ListOfitems ; 
         std::string name ; 
         int MaxActions ; 
         int RemainingActions ; 
         std::string specialAction ; 
         Location* StartingLocation ;
         Location* currentLocation;
-        std::vector<Action> ListOfActions ; 
+        std::vector<Action> ListOfActions ;
+        std::vector<Perkcards> playedCards ;  
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
@@ -43,12 +47,30 @@ class Hero{
         void showvillagersHere()const ; 
 
         std::string GetName()const ; 
+        virtual void DisplayInfo() const = 0 ;
+
+        int getMaxActions() const ; 
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
         Location* GetCurrentLocation() const ;         
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() ; 
+        void resetMaxActions() ; 
+
+        void playedPerk(Perkcards) ;
+        void displaycards() ;
+
+
+        void DisplayItem() ;
+        std::string colorItems(const ItemColor&) ; //show items colors 
+        void PickupItems() ; 
+        void SpecialPickup(Location*) ; 
+        std::vector<Item> GetItems() ; 
+        void removeItems(const Item&) ; 
+
+        void AdvanceActionForDracula() ; 
+        void AdvanceActionForInvisibleMan() ;
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
