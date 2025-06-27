@@ -14,6 +14,7 @@ void TurnManager:: next_turn() {
 
 
 void TurnManager::add_hero(Hero* hero) {
+    current_index = 0;
     heroes.push_back(hero);
 }
 

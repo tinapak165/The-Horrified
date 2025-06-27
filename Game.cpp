@@ -14,7 +14,7 @@ Game::Game() {
     
     // ۱۲ ایتم اولیه ی بازی قرار گرفتند
     distribute_initial_items();
-
+    
     
     
     choose_character(); // اینجا قهرمان ها ساخته شدند
@@ -40,12 +40,12 @@ Game::~Game() {
 }    
 
 // درست کار میکند
-void Game::choose_character() {
+ void Game::choose_character() {
     std::cout << "Player 1: What is the last time you eat Garlic? (in hours ago): ";
     int time1;
     std::cin >> time1;
 
-    std::cout << "Player 2: what is the last time you eat Garlic? (in hours ago): ";
+    std::cout << "Player 2: What is the last time you eat Garlic? (in hours ago): ";
     int time2;
     std::cin >> time2;
 
@@ -59,28 +59,34 @@ void Game::choose_character() {
     }    
 
     std::cout << firstPlayer << ", you eat garlic more recently!\n";
-    std::cout << "Choose your hero (Mayor or Archaeologist): ";
-    std::string choice;
-    std::cin >> choice;
 
     mayor = new Mayor(map);
     archaeologist = new Archaeologist(map);
 
-    // Hero* mayor = new Mayor(map);
-    // Hero* archaeologist = new Archaeologist(map);
+    while (true) {
+        std::cout << "Choose your hero (Mayor or Archaeologist): ";
+        std::string choice;
+        std::cin >> choice;
 
-    if (choice == "Mayor" || choice == "mayor") {
-        turnManager.add_hero(mayor);
-        turnManager.add_hero(archaeologist);
-        std::cout << firstPlayer << " is the Mayor.\n";
-        std::cout << secondPlayer << " is the Archaeologist.\n";
-    } else {
-        turnManager.add_hero(archaeologist);
-        turnManager.add_hero(mayor);
-        std::cout << firstPlayer << " is the Archaeologist.\n";
-        std::cout << secondPlayer << " is the Mayor.\n";
-    }    
-}    
+        if (choice == "Mayor" || choice == "mayor") {
+            turnManager.add_hero(mayor);
+            turnManager.add_hero(archaeologist);
+            std::cout << firstPlayer << " is the Mayor.\n";
+            std::cout << secondPlayer << " is the Archaeologist.\n";
+            break;
+        } else if (choice == "Archaeologist" || choice == "archaeologist") {
+            turnManager.add_hero(archaeologist);
+            turnManager.add_hero(mayor);
+            std::cout << firstPlayer << " is the Archaeologist.\n";
+            std::cout << secondPlayer << " is the Mayor.\n";
+            break;
+        } else {
+            std::cout << "Invalid choice. Please try again.\n";
+        }
+    }
+}
+
+
 
 void Game::play_hero_Action(Hero *h){
     while(true){
@@ -457,15 +463,15 @@ void Game::monster_phase() {
 
 }
 void Game::distribute_initial_items() {
-    std::cout<<"placing 12 initial items";
+    std::cout<<"placing 12 initial items \n";
    
-    auto items = pool.draw_random_items(12);
+    auto items = pool.draw_random_items(10);
     
     for (const auto& item : items) {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << "\n";
+            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << std::endl ;
         }
     }
 }

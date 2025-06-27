@@ -23,8 +23,8 @@ void GameMap::build_map() {
     auto hospital = std::make_unique<Location>("Hospital");
     auto graveyard = std::make_unique<Location>("Graveyard");
     auto empty4 = std::make_unique<Location>("empty4");
-    auto labratory = std::make_unique<Location>("Labratory");
-    auto enstitute = std::make_unique<Location>("Enstitute");
+    auto laboratory = std::make_unique<Location>("Laboratory");
+    auto institute = std::make_unique<Location>("Institute");
 
 
     // وصل شدن
@@ -46,8 +46,8 @@ void GameMap::build_map() {
     empty3->connect(musuem.get());
     empty4->connect(theater.get());
     empty4->connect(shop.get());
-    shop->connect(labratory.get());
-    labratory->connect(enstitute.get());
+    shop->connect(laboratory.get());
+    laboratory->connect(institute.get());
     church->connect(graveyard.get());
     church->connect(hospital.get());
 
@@ -75,10 +75,10 @@ void GameMap::build_map() {
     locations.push_back(std::move(crypt));
     locations.push_back(std::move(hospital));
     locations.push_back(std::move(graveyard));
-    locations.push_back(std::move(enstitute));
-    locations.push_back(std::move(labratory));
+    locations.push_back(std::move(institute));
+    locations.push_back(std::move(laboratory));
 
-    
+
 }
 // در یسری از کانستراکتو ها استفاده شد برای مکان اولیه
 Location* GameMap::get_location_by_name(const std::string& name) {
