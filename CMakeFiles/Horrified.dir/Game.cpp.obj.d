@@ -91,16 +91,14 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\Game.hpp \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ios \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iomanip \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
@@ -119,28 +117,46 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/system_error \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/streambuf \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/locale \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cwctype \
  C:/w64devkit/include/wctype.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/streambuf \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.tcc \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.tcc \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets_nonio.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/time_members.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/messages_members.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/codecvt.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets_nonio.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_conv.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/quoted_string.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/sstream \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ios \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/sstream.tcc \
+ C:\Users\Tina\Desktop\Horrified\The-Horrified\Game.hpp \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\GameMap.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Location.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
@@ -174,7 +190,6 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\MonsterCardDeck.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\monstercards.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/optional \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\TurnManager.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Monster.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Dracula.hpp \

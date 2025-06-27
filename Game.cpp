@@ -1,5 +1,6 @@
 #include <string>
-
+#include <map>
+#include <iomanip>
 #include "Game.hpp"
 #include "Mayor.hpp"
 #include "Archaeologist.hpp"
@@ -13,6 +14,7 @@ Game::Game() {
     
     // ۱۲ ایتم اولیه ی بازی قرار گرفتند
     distribute_initial_items();
+
     
     
     choose_character(); // اینجا قهرمان ها ساخته شدند
@@ -37,7 +39,7 @@ Game::~Game() {
     delete h;
 }    
 
-
+// درست کار میکند
 void Game::choose_character() {
     std::cout << "Player 1: What is the last time you eat Garlic? (in hours ago): ";
     int time1;
@@ -258,7 +260,8 @@ void Game::hero_phase(Hero* hero) {
 }
 
 
-void  Game::start() {
+void  Game::start() { 
+std::cout<<"start before while";
 while (true) {
         // ۱. فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
@@ -454,7 +457,8 @@ void Game::monster_phase() {
 
 }
 void Game::distribute_initial_items() {
-    ItemPool pool;
+    std::cout<<"placing 12 initial items";
+   
     auto items = pool.draw_random_items(12);
     
     for (const auto& item : items) {
@@ -466,6 +470,54 @@ void Game::distribute_initial_items() {
     }
 }
 
+
+void Game::locationOverview(){
+    cout << "-----------------------Location Overview-----------------------------------\n"; 
+    cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;
+    cout << right <<"----------------------------------------------------------------------------\n" ; 
+ 
+    for(const auto& locPtr : map.get_locations()){
+        Location* loc = locPtr.get() ; 
+
+        string itemStr ; 
+        const auto items = loc->get_items() ;
+        if(items.empty())
+            itemStr = "-" ; 
+        else{
+            std::map< std::string , int> itemcount ;
+            for(const auto & item : items)
+                itemcount[item.getName()]++ ;
+            for(const auto& pair : itemcount)
+                itemStr+= pair.first + "(" + to_string(pair.second) +"), " ;
+            if(!itemStr.empty())
+                itemStr.pop_back() , itemStr.pop_back() ;   
+        }
+        string monStr ;
+        const auto monsters = loc->get_monsters() ;
+        if(monsters.empty())
+            monStr = "-" ; 
+        else{
+            for(const auto& m : monsters)
+                monStr+= m->get_name() + ", " ;
+            
+            monStr.pop_back() ; monStr.pop_back() ;
+        }
+
+        string villagerStr;
+        const auto& villagers = loc->get_villagers();
+        if (villagers.empty()) 
+            villagerStr = "-";
+        else {
+            for (const auto& v : villagers)
+                villagerStr += v->get_name() + ", ";
+            villagerStr.pop_back(); villagerStr.pop_back();
+        }
+        cout << left << "| " << setw(13) << loc->get_name()
+             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << "|\n";
+    }
+    // نمایش تعداد تابوت های خراب شده +  آیتم های مرد نامرئی
+  cout << "---------------------------------------------------------------------------\n" ;  
+}
 
 
 void Game::test() {

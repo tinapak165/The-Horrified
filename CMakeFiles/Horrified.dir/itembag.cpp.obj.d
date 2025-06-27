@@ -131,4 +131,45 @@ CMakeFiles/Horrified.dir/itembag.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ios \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
+ C:/w64devkit/include/pthread.h C:/w64devkit/include/sys/types.h \
+ C:/w64devkit/include/process.h C:/w64devkit/include/corecrt_startup.h \
+ C:/w64devkit/include/signal.h C:/w64devkit/include/pthread_signal.h \
+ C:/w64devkit/include/time.h C:/w64devkit/include/sys/timeb.h \
+ C:/w64devkit/include/sec_api/sys/timeb_s.h \
+ C:/w64devkit/include/_timeval.h C:/w64devkit/include/pthread_time.h \
+ C:/w64devkit/include/pthread_compat.h \
+ C:/w64devkit/include/pthread_unistd.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_classes.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_classes.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/system_error \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/streambuf \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cwctype \
+ C:/w64devkit/include/wctype.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc

@@ -2,6 +2,6 @@
 
 int main(){
 
-    Game g;
-    g.test();
+    Game horrified;
+    horrified.start();
 }
