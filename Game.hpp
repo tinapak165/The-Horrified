@@ -20,6 +20,8 @@ private:
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
+    Monster* dracula = nullptr;
+    Monster* invisibleMan= nullptr;
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;

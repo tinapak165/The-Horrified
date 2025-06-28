@@ -77,7 +77,7 @@ void Hero::removeItems(const Item & i){
     }
 }
 
-void Hero::AdvanceActionForDracula(){
+int Hero::AdvanceActionForDracula(){
     int chosenNumber = -1 ; 
     int totalStrength = 0 ;
     vector<Item> selected ;
@@ -93,7 +93,7 @@ void Hero::AdvanceActionForDracula(){
         for(size_t i = 0 ; i < items.size() ; i++)
             cout << (i + 1) << "-" << items[i].getName() << "(color: " << (*this).colorItems(items[i].getColor()) << ", strength: " << items[i].getStrength() << ")\n" ;
         
-        cout << "please select any item by number(0 to end): " ;
+        cout << "please select any item by number(0 is for quiting): " ;
         cin >> chosenNumber ; 
         if(chosenNumber == 0) break;
         if(chosenNumber < 1 && chosenNumber > static_cast<int>(items.size())){
@@ -110,9 +110,7 @@ void Hero::AdvanceActionForDracula(){
         totalStrength += chosenItem.getStrength() ;
 
         if(totalStrength >= 6){
-            cout << "total strength has reached to " << totalStrength << ". do you want to choose more items?(yes/no) " ;
-            string ans ; cin >> ans ; 
-            if(ans == "no") break;
+            cout << "total strength has reached to " << totalStrength << '\n';
         }
         else if(totalStrength < 6 && items.empty()){
             cout << "no more items left and strength did not reach 6\n" ;
@@ -126,6 +124,7 @@ void Hero::AdvanceActionForDracula(){
         }
     }
     else cout << "no item was selected for advance action!\n" ;
+    return totalStrength ; 
 }
 
 void Hero::AdvanceActionForInvisibleMan(){
@@ -372,7 +371,55 @@ vector<villager*> Hero::villagerHere() const
     return vill ;
 }
 
-void Hero::SetRemainingActions(int newRemaining)
-{
+void Hero::SetRemainingActions(int newRemaining){
     RemainingActions = newRemaining ;
+}
+
+int Hero::select_items_to_defeat(ItemColor requiredColor) {
+    int totalStrength = 0;
+    vector<Item> selected;
+    int choice = -1;
+
+    while (true) {
+        auto items = GetItems();
+        if (items.empty()) {
+            std::cerr << "No items left!\n";
+            break;
+        }
+
+        std::cout << "Total selected power: " << totalStrength << "\n";
+        std::cout << "Available items:\n";
+        for (size_t i = 0; i < items.size(); ++i) {
+            std::cout << (i + 1) << ") " << items[i].getName()
+                      << " (" << colorItems(items[i].getColor())
+                      << ", strength " << items[i].getStrength() << ")\n";
+        }
+
+        std::cout << "Choose item number to use (0 to stop): ";
+        std::cin >> choice;
+        if (choice == 0) break;
+
+        if (choice < 1 || choice > static_cast<int>(items.size())) {
+            std::cerr << "Invalid selection.\n";
+            continue;
+        }
+
+        Item chosen = items[choice - 1];
+        if (chosen.getColor() != requiredColor) {
+            std::cerr << "Item is not of required color.\n";
+            continue;
+        }
+
+        removeItems(chosen);
+        totalStrength += chosen.getStrength();
+        selected.push_back(chosen);
+    }
+
+    if (!selected.empty()) {
+        std::cout << "Used items:\n";
+        for (auto& item : selected)
+            std::cout << "- " << item.getName() << " (" << colorItems(item.getColor()) << ", " << item.getStrength() << ")\n";
+    }
+
+    return totalStrength;
 }

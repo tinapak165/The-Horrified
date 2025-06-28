@@ -1,5 +1,4 @@
 #include "Itembag.hpp"
-#include <ctime>
 #include "iostream"
 
 ItemPool::ItemPool() {
@@ -85,6 +84,7 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Monocane Mixture", ItemColor::BLUE, 3, "Inn");
     allItems.emplace_back("Fossil", ItemColor::BLUE, 3, "Camp");
 
+
     // اینجا همه ۶۰ آیتم را کامل می‌کنیم بعداً...
     std::random_device rd;
     std::mt19937 g(rd());
@@ -92,14 +92,12 @@ ItemPool::ItemPool() {
 }
 
 std::vector<Item> ItemPool::draw_random_items(int count) {
-
-
  
     if ((int)allItems.size() < count)
     std::cerr << "Warning: not enough items in pool! Requested: " << count << ", Available: " << allItems.size() << '\n';
-
+    std::cout<<allItems.size();
     std::vector<Item> drawn;
-    for (int i = 0; i < count; ++i) {
+    for (int i = 0; i < count && !allItems.empty(); ++i) {
         drawn.push_back(allItems.back());
         allItems.pop_back();
     }
