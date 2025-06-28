@@ -15,6 +15,8 @@ private:
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
+    PerkDeck p ; 
+    Perkcards p2 ;
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
@@ -32,7 +34,9 @@ public:
     void choose_character();
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
-    void playPerkCard(Hero*);
+    void playPerkCard(Hero* , std::string);
+    void ChoosePerkCard(Hero*) ;
+    void getNewCard(Hero*) ;
     void locationOverview() ;
 
     void monster_phase();

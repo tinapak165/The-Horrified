@@ -51,19 +51,19 @@ Perkcards PerkDeck::get_random_card(){
 void PerkDeck::display_the_card(const Perkcards& card){
     string event = card.get_Event() ; 
 
-    if(event == "Hurry.")
+    if(event == "Hurry")
         cout << "[Playing Hurry - perk card] - > Move each hero by two spaces.\n" ;
         
-    else if(event == "Repel.")
+    else if(event == "Repel")
         cout << "[Playing Repel - perk card] -> Move each monster by two spaces.\n";
 
-    else if(event == "Late into the Night.")
+    else if(event == "Late into the Night")
         cout << "[Playing Late into the Night - perk card] - > You can have 2 more actions.\n" ;
     
-    else if(event == "Overstock.")
+    else if(event == "Overstock")
         cout << "[Playing Overstock - perk card] -> Each player should take one item out of the item bag and place it in their location.\n" ;
     
-    else if(event == "Break of Dawn.")
+    else if(event == "Break of Dawn")
         cout << "[Playing Break of Dawn - perk card] -> The next monster phase is skipped. Take 2 items out of the bag and place them in their location.\n";
 
     else if(event == "Visit from the Detective."){

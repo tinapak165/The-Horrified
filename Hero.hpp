@@ -35,7 +35,8 @@ class Hero{
         Location* StartingLocation ;
         Location* currentLocation;
         std::vector<Action> ListOfActions ;
-        std::vector<Perkcards> playedCards ;  
+        std::vector<Perkcards> playedCards ; 
+        std::vector<Perkcards> availableCards ;  
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
@@ -58,9 +59,11 @@ class Hero{
         void DisplayActions() ; 
         void resetMaxActions() ; 
 
-        void playedPerk(Perkcards) ;
-        void displaycards() ;
-
+        void AddAvailablePerk(Perkcards) ;
+        void displayavailblecards() ;
+        void displayPlayedCrds() ; 
+        std::vector<Perkcards> GetAvailablePerkCards() ; 
+        void addPlayedCards(Perkcards) ;
 
         void DisplayItem() ;
         std::string colorItems(const ItemColor&) ; //show items colors 

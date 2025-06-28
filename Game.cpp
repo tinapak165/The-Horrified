@@ -6,14 +6,15 @@
 #include "Archaeologist.hpp"
 #include "villager.hpp"
 #include "perkcards.hpp"
-using namespace std;
 
+using namespace std;
 Game::Game() {
     // ساخت نقشه ثابت
     map.build_map(); // نقشه ی بازی
     
     // ۱۲ ایتم اولیه ی بازی قرار گرفتند
     distribute_initial_items();
+    
     
     
     choose_character(); // اینجا قهرمان ها ساخته شدند
@@ -38,13 +39,13 @@ Game::~Game() {
     delete h;
 }    
 
-
-void Game::choose_character() {
+// درست کار میکند
+ void Game::choose_character() {
     std::cout << "Player 1: What is the last time you eat Garlic? (in hours ago): ";
     int time1;
     std::cin >> time1;
 
-    std::cout << "Player 2: what is the last time you eat Garlic? (in hours ago): ";
+    std::cout << "Player 2: What is the last time you eat Garlic? (in hours ago): ";
     int time2;
     std::cin >> time2;
 
@@ -58,28 +59,34 @@ void Game::choose_character() {
     }    
 
     std::cout << firstPlayer << ", you eat garlic more recently!\n";
-    std::cout << "Choose your hero (Mayor or Archaeologist): ";
-    std::string choice;
-    std::cin >> choice;
 
     mayor = new Mayor(map);
     archaeologist = new Archaeologist(map);
 
-    // Hero* mayor = new Mayor(map);
-    // Hero* archaeologist = new Archaeologist(map);
+    while (true) {
+        std::cout << "Choose your hero (Mayor or Archaeologist): ";
+        std::string choice;
+        std::cin >> choice;
 
-    if (choice == "Mayor" || choice == "mayor") {
-        turnManager.add_hero(mayor);
-        turnManager.add_hero(archaeologist);
-        std::cout << firstPlayer << " is the Mayor.\n";
-        std::cout << secondPlayer << " is the Archaeologist.\n";
-    } else {
-        turnManager.add_hero(archaeologist);
-        turnManager.add_hero(mayor);
-        std::cout << firstPlayer << " is the Archaeologist.\n";
-        std::cout << secondPlayer << " is the Mayor.\n";
-    }    
-}    
+        if (choice == "Mayor" || choice == "mayor") {
+            turnManager.add_hero(mayor);
+            turnManager.add_hero(archaeologist);
+            std::cout << firstPlayer << " is the Mayor.\n";
+            std::cout << secondPlayer << " is the Archaeologist.\n";
+            break;
+        } else if (choice == "Archaeologist" || choice == "archaeologist") {
+            turnManager.add_hero(archaeologist);
+            turnManager.add_hero(mayor);
+            std::cout << firstPlayer << " is the Archaeologist.\n";
+            std::cout << secondPlayer << " is the Mayor.\n";
+            break;
+        } else {
+            std::cout << "Invalid choice. Please try again.\n";
+        }
+    }
+}
+
+
 
 void Game::play_hero_Action(Hero *h){
     while(true){
@@ -91,7 +98,7 @@ void Game::play_hero_Action(Hero *h){
     if(chosenAction == "Quit")
         break ;
     if(chosenAction == "Perk")
-        playPerkCard(h) ;
+        ChoosePerkCard(h) ;
         
     if(h->PerformTheAction(chosenAction)){
         cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
@@ -114,9 +121,12 @@ void Game::play_hero_Action(Hero *h){
                         if(ans == "yes")
                             h->MoveTo(chosenLocation , here) ; 
                         else if(ans == "no")
-                            h->MoveTo(chosenLocation) ; 
-                    }else
-                        cerr << "wrong answer!\n" ;    
+                            h->MoveTo(chosenLocation) ;
+                        else cerr << "wrong answer\n" ; 
+                    }
+                    else { 
+                        h->MoveTo(chosenLocation); 
+                    }    
                 }
                 else
                     cerr << "what you have chosen is not a neighboring place!\n";
@@ -252,22 +262,33 @@ void Game::play_hero_Action(Hero *h){
 
 void Game::hero_phase(Hero* hero) {
 
+    getNewCard(hero) ; //در ابتدای هر فاز به قهرمان یک پرک تعلق میگیرد
     hero->DisplayInfo() ;
     play_hero_Action(hero) ;
-    hero->resetMaxActions() ;
 
+    if(villager::AnyVillagerInSafePlace()){
+        villager::removeVillager() ;
+        getNewCard(hero) ; 
+        cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+    }
+
+    hero->resetMaxActions() ;
 }
 
 
-void  Game::start() {
-while (true) {
+void  Game::start() { 
+    locationOverview() ;
+    while (true) {
         // ۱. فاز قهرمان
+        cout <<"-HERO PHASE-\n" ; 
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
 
+
+
         // ۲. فاز هیولا
-        
+        cout << "-MONSTER PHASE-\n" ; 
         monster_phase();
 
         // ۳. بررسی پایان بازی
@@ -279,24 +300,20 @@ while (true) {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
         }    
-        if (both_monsters_defeated()) {
-            std::cout << "You win! Both monsters defeated!\n";
-            break;
-        }    
+        // if (both_monsters_defeated()) {
+        //     std::cout << "You win! Both monsters defeated!\n";
+        //     break;
+        // }
 
-        // ۴. رفتن به نوبت قهرمان بعدی
         turnManager.next_turn();
     }    
 }    
-
-void Game::playPerkCard(Hero * hero){
-    PerkDeck p ; 
-    Perkcards p2 ;
+void Game::getNewCard(Hero* hero){
     p2 = p.get_random_card() ;
-    hero->playedPerk(p2) ; 
-    hero->displaycards() ;
-    cout << p2 << endl;
-    if(p2.get_Event() == "Hurry"){
+    hero->AddAvailablePerk(p2) ; 
+}
+void Game::playPerkCard(Hero* hero, string card){
+    if(card == "Hurry"){
             string firstMove , secondMove ; 
             p.display_the_card(p2) ; 
             cout << "Mayor..where do you want to move first? " ;
@@ -331,19 +348,20 @@ void Game::playPerkCard(Hero * hero){
                 archaeologist->MoveTo(AsecondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;     
         }
-        else if (p2.get_Event() == "Repel"){
+        else if (card == "Repel"){
             p.display_the_card(p2) ;
             //dracula->move_towards(2) ;
            //invisibleMan->move_towards(2) ; 
         }
 
-        else if(p2.get_Event() == "Late into the Night"){
+        else if(card == "Late into the Night"){
 
             p.display_the_card(p2) ;
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
+            cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
             hero->DisplayInfo() ; 
         }
-        else if(p2.get_Event() == "Break of Dawn."){
+        else if( card == "Break of Dawn"){
             //آیتم بصورت رندوم نمیاد!!!!
             //فاز هیولا بعدی رد میشود !؟
             p.display_the_card(p2);
@@ -357,7 +375,7 @@ void Game::playPerkCard(Hero * hero){
                 }
             }
         }
-        else if(p2.get_Event() == "Overstock"){
+        else if(card == "Overstock"){
             //آیتم بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
@@ -369,69 +387,43 @@ void Game::playPerkCard(Hero * hero){
                 LocFirst->add_item(PoolItems[0]) ; 
                 cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
             }
-            
+         
             Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
              if(LocSecond){
                 LocSecond->add_item(PoolItems[1]) ; 
                 cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
             }           
-
         }
 }
-void Game::locationOverview(){
-    cout << "-----------------------Location Overview-----------------------------------\n"; 
-    cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;
-    cout << right <<"----------------------------------------------------------------------------\n" ; 
- 
-    for(const auto& locPtr : map.get_locations()){
-        Location* loc = locPtr.get() ; 
+void Game::ChoosePerkCard(Hero * hero){
+    if(hero->GetAvailablePerkCards().empty()) 
+        cout << "you do not have any perk cards!\n" ;
+    else{
+        hero->displayavailblecards() ;
+        string chooseCard ; 
+        cout << "what card you want to play? " ; 
+        cin.ignore() ;
+        getline(cin , chooseCard)  ;
 
-        string itemStr ; 
-        const auto items = loc->get_items() ;
-        if(items.empty())
-            itemStr = "-" ; 
-        else{
-            std::map<string , int> itemcount ;
-            for(const auto & item : items)
-                itemcount[item.getName()]++ ;
-            for(const auto& pair : itemcount)
-                itemStr+= pair.first + "(" + to_string(pair.second) +"), " ;
-            if(!itemStr.empty())
-                itemStr.pop_back() , itemStr.pop_back() ;   
-        }
-        string monStr ;
-        const auto monsters = loc->get_monsters() ;
-        if(monsters.empty())
-            monStr = "-" ; 
-        else{
-            for(const auto& m : monsters)
-                monStr+= m->get_name() + ", " ;
-            
-            monStr.pop_back() ; monStr.pop_back() ;
+        vector<Perkcards> selected = hero->GetAvailablePerkCards() ; 
+        
+        for(size_t i = 0 ; i < hero->GetAvailablePerkCards().size() ; i++){
+            if(selected[i].get_Event() == chooseCard){
+                playPerkCard(hero , chooseCard) ;
+                hero->addPlayedCards(selected[i]) ;
+                hero->displayPlayedCrds() ;
+                break;
+            }
+            else cerr << "card not available\n" ; 
         }
 
-        string villagerStr;
-        const auto& villagers = loc->get_villagers();
-        if (villagers.empty()) 
-            villagerStr = "-";
-        else {
-            for (const auto& v : villagers)
-                villagerStr += v->get_name() + ", ";
-            villagerStr.pop_back(); villagerStr.pop_back();
-        }
-        cout << left << "| " << setw(13) << loc->get_name()
-             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << "|\n";
-    }
-    // نمایش تعداد تابوت های خراب شده +  آیتم های مرد نامرئی
-  cout << "---------------------------------------------------------------------------\n" ;  
+    } 
 }
 
 bool Game::both_monsters_defeated() {
      return monstersMap[MonsterType::Dracula]->is_defeated() &&
             monstersMap[MonsterType::InvisibleMan]->is_defeated();
 }
-
-
 
 void Game::monster_phase() {
 
@@ -502,18 +494,67 @@ void Game::monster_phase() {
 
 }
 void Game::distribute_initial_items() {
-    ItemPool pool;
-    auto items = pool.draw_random_items(12);
+    std::cout<<"placing 12 initial items \n";
+   
+    auto items = pool.draw_random_items(10);
     
     for (const auto& item : items) {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << "\n";
+            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << std::endl ;
         }
     }
 }
 
+
+void Game::locationOverview(){
+    cout << "-----------------------Location Overview-----------------------------------\n"; 
+    cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;
+    cout << right <<"----------------------------------------------------------------------------\n" ; 
+ 
+    for(const auto& locPtr : map.get_locations()){
+        Location* loc = locPtr.get() ; 
+
+        string itemStr ; 
+        const auto items = loc->get_items() ;
+        if(items.empty())
+            itemStr = "-" ; 
+        else{
+            std::map< std::string , int> itemcount ;
+            for(const auto & item : items)
+                itemcount[item.getName()]++ ;
+            for(const auto& pair : itemcount)
+                itemStr+= pair.first + "(" + to_string(pair.second) +"), " ;
+            if(!itemStr.empty())
+                itemStr.pop_back() , itemStr.pop_back() ;   
+        }
+        string monStr ;
+        const auto monsters = loc->get_monsters() ;
+        if(monsters.empty())
+            monStr = "-" ; 
+        else{
+            for(const auto& m : monsters)
+                monStr+= m->get_name() + ", " ;
+            
+            monStr.pop_back() ; monStr.pop_back() ;
+        }
+
+        string villagerStr;
+        const auto& villagers = loc->get_villagers();
+        if (villagers.empty()) 
+            villagerStr = "-";
+        else {
+            for (const auto& v : villagers)
+                villagerStr += v->get_name() + ", ";
+            villagerStr.pop_back(); villagerStr.pop_back();
+        }
+        cout << left << "| " << setw(13) << loc->get_name()
+             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << "|\n";
+    }
+    // نمایش تعداد تابوت های خراب شده +  آیتم های مرد نامرئی
+  cout << "---------------------------------------------------------------------------\n" ;  
+}
 
 
 void Game::test() {
