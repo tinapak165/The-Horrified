@@ -14,7 +14,7 @@ auto theater = std::make_unique<Location>("Theater");
     auto mansion = std::make_unique<Location>("Mansion");
     auto abbey = std::make_unique<Location>("Abbey");
     auto empty3 = std::make_unique<Location>("empty3");
-    auto precinet = std::make_unique<Location>("Precinet");
+    auto precinct = std::make_unique<Location>("Precinct");
     auto inn = std::make_unique<Location>("Inn");
     auto crypt = std::make_unique<Location>("Crypt");
     auto shop = std::make_unique<Location>("Shop");
@@ -23,8 +23,8 @@ auto theater = std::make_unique<Location>("Theater");
     auto hospital = std::make_unique<Location>("Hospital");
     auto graveyard = std::make_unique<Location>("Graveyard");
     auto empty4 = std::make_unique<Location>("empty4");
-    auto labratory = std::make_unique<Location>("Labratory");
-    auto enstitute = std::make_unique<Location>("Enstitute");
+    auto laboratory = std::make_unique<Location>("Laboratory");
+    auto institute = std::make_unique<Location>("Institute");
 
 
     // وصل شدن
@@ -34,7 +34,7 @@ auto theater = std::make_unique<Location>("Theater");
     theater->connect(tower.get());
     tower->connect(docks.get());
     empty1->connect(empty2.get());
-    empty2->connect(precinet.get());
+    empty2->connect(precinct.get());
     empty2->connect(inn.get());
     empty2->connect(theater.get());
     empty1->connect(mansion.get());
@@ -46,8 +46,8 @@ auto theater = std::make_unique<Location>("Theater");
     empty3->connect(musuem.get());
     empty4->connect(theater.get());
     empty4->connect(shop.get());
-    shop->connect(labratory.get());
-    labratory->connect(enstitute.get());
+    shop->connect(laboratory.get());
+    laboratory->connect(institute.get());
     church->connect(graveyard.get());
     church->connect(hospital.get());
 
@@ -62,7 +62,7 @@ auto theater = std::make_unique<Location>("Theater");
     locations.push_back(std::move(docks));
     locations.push_back(std::move(barn));
     locations.push_back(std::move(inn));
-    locations.push_back(std::move(precinet));
+    locations.push_back(std::move(precinct));
     locations.push_back(std::move(empty1));
     locations.push_back(std::move(empty2));
     locations.push_back(std::move(empty3));
@@ -75,8 +75,8 @@ auto theater = std::make_unique<Location>("Theater");
     locations.push_back(std::move(crypt));
     locations.push_back(std::move(hospital));
     locations.push_back(std::move(graveyard));
-    locations.push_back(std::move(enstitute));
-    locations.push_back(std::move(labratory));
+    locations.push_back(std::move(institute));
+    locations.push_back(std::move(laboratory));
 
     
 
