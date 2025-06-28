@@ -68,8 +68,9 @@ class Hero{
         void SpecialPickup(Location*) ; 
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
+        int select_items_to_defeat(ItemColor requiredColor) ;
 
-        void AdvanceActionForDracula() ; 
+        int AdvanceActionForDracula() ; 
         void AdvanceActionForInvisibleMan() ;
 
         void SetRemainingActions(int newRemaining) ;

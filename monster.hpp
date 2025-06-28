@@ -28,7 +28,9 @@ public:
 
     virtual void attack() = 0;
     virtual void special_power(Hero* h) =0 ;
-    virtual bool is_defeated()=0;
+    virtual bool is_defeated()const =0 ;
+    virtual bool can_be_defeated() = 0;
+    virtual void destroy_coffin_at(std::string locationName)=0;
 
 };
  #endif

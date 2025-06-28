@@ -17,15 +17,17 @@ Game::Game() {
     
     
     
-    choose_character(); // اینجا قهرمان ها ساخته شدند
+    // اینجا قهرمان ها ساخته شدند
+    choose_character(); 
     
     
     
     // اضافه کردن هیولاها
-    Monster* dracula = new Dracula(map.get_location_by_name("Cave")); 
+    
+    dracula = new Dracula(map.get_location_by_name("Cave"));
+    
+    // invisibleMan = new InvisibleMan(map.("Barn"));
 
-
-    // InvisibleMan* invisibleMan = new InvisibleMan(map.get_lo("Barn"));
     monstersMap[MonsterType::Dracula] = dracula;
     // monstersMap[MonsterType::InvisibleMan] = invisibleMan;
 
@@ -63,20 +65,22 @@ Game::~Game() {
     mayor = new Mayor(map);
     archaeologist = new Archaeologist(map);
 
+    std::vector<Hero*> heroes;
+
     while (true) {
         std::cout << "Choose your hero (Mayor or Archaeologist): ";
         std::string choice;
         std::cin >> choice;
-
+    
         if (choice == "Mayor" || choice == "mayor") {
-            turnManager.add_hero(mayor);
-            turnManager.add_hero(archaeologist);
+            heroes.push_back(mayor);
+            heroes.push_back(archaeologist);
             std::cout << firstPlayer << " is the Mayor.\n";
             std::cout << secondPlayer << " is the Archaeologist.\n";
             break;
         } else if (choice == "Archaeologist" || choice == "archaeologist") {
-            turnManager.add_hero(archaeologist);
-            turnManager.add_hero(mayor);
+            heroes.push_back(archaeologist);
+            heroes.push_back(mayor);
             std::cout << firstPlayer << " is the Archaeologist.\n";
             std::cout << secondPlayer << " is the Mayor.\n";
             break;
@@ -84,8 +88,9 @@ Game::~Game() {
             std::cout << "Invalid choice. Please try again.\n";
         }
     }
-}
-
+    
+    turnManager = TurnManager(heroes);
+ }    
 
 
 void Game::play_hero_Action(Hero *h){
@@ -225,13 +230,21 @@ void Game::play_hero_Action(Hero *h){
                 }
                 else if(chosenAction == "Advance"){ //for the monster missions
                     //for dracula
-                    if( h->GetCurrentLocation() == map.get_location_by_name("Graveyard") || //درستش کن به Graveyard
-                        h->GetCurrentLocation() == map.get_location_by_name("Crypt") ||
-                        h->GetCurrentLocation() == map.get_location_by_name("Dungeon") ||
-                        h->GetCurrentLocation() == map.get_location_by_name("Cave") ){// اگر قهرمان در محل قرار گیری تابوتهای دراکولا بود
-                        // ابتداچک شود تابوتی در آن مکان هست یا نه
-                        cout << "for using advance action you need to have items with red color and strength >= 6.\n" ;
-                        h->AdvanceActionForDracula() ;
+                    Location* current = h->GetCurrentLocation();
+                    std::string locName = current->get_name();
+                
+                    // آیا هیرو در یکی از مکان‌های تابوت هست؟
+                    if (locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard") {
+                        std::cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n";
+                        int totalStrength = h->AdvanceActionForDracula(); 
+                        
+                        if (totalStrength >= 6) {
+                            dracula->destroy_coffin_at(locName); // توابع Dracula همین‌طور باقی می‌مونن
+                        } else {
+                            std::cout << "Advance action failed Not enough red item strength.\n";
+                        }
+
+
                     }
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
@@ -247,6 +260,27 @@ void Game::play_hero_Action(Hero *h){
                     //1-اگر قهرمان در لوکیشنی که دراکولا قرار دارد قرار داشت
                     //2- استفاده از آیتم های زرد برای نابودی دراکولا
                     //3- استفاده از آیتم های قرمز با مجموع 9 یا بالاتر برای نابودی نامرئی
+
+                    Location* heroLoc = h->GetCurrentLocation();
+
+                    // چک کنیم آیا دراکولا همین‌جاست
+                    if (dracula && dracula->get_location() == heroLoc) {
+                        if (dracula->can_be_defeated()) {
+                            std::cout << "You are ready to defeat Dracula! Select yellow items to attack.\n";
+                            int yellowPower = h->select_items_to_defeat(ItemColor::YELLOW);
+                
+                            if (yellowPower >= 6) {
+                                std::cout << "Dracula has been defeated!\n";
+                                // امتحان کن بعدا ببین حذف میشه یا نه اررور داره فعلا
+                                dracula->set_location(nullptr); 
+                            } else {
+                                std::cout << "Not enough yellow item power. dracula did not die.\n";
+                            }
+                        } else {
+                            std::cout << "You must destroy all coffins first to defeat Dracula.\n";
+                        }
+                    }
+                
 
                 }
             } // end if can play an action 
@@ -267,7 +301,8 @@ void Game::hero_phase(Hero* hero) {
 
 
 void  Game::start() { 
-std::cout<<"start before while";
+    std::cout << "Number of heroes: " << turnManager.get_heroes().size() << "\n";
+
 while (true) {
         // ۱. فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
@@ -465,7 +500,7 @@ void Game::monster_phase() {
 void Game::distribute_initial_items() {
     std::cout<<"placing 12 initial items \n";
    
-    auto items = pool.draw_random_items(10);
+    auto items = pool.draw_random_items(12);
     
     for (const auto& item : items) {
         Location* loc = map.get_location_by_name(item.getLocationName());

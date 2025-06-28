@@ -7,22 +7,31 @@
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 #include "Hero.hpp"
+#include "monster.hpp"
 #include "Dice.hpp"
 #include "Itembag.hpp"
 
 class Game {
 private:
+
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
     ItemPool pool;
 
+    
+
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
+    Monster* dracula = nullptr;
+    Monster* invisibleMan= nullptr;
     
     
     std::unordered_map<MonsterType, Monster*> monstersMap;
+   
+   
     int terrorLevel = 0;
+   
     bool game_over = false;
     
 public:

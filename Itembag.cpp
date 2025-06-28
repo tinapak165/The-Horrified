@@ -95,9 +95,9 @@ std::vector<Item> ItemPool::draw_random_items(int count) {
  
     if ((int)allItems.size() < count)
     std::cerr << "Warning: not enough items in pool! Requested: " << count << ", Available: " << allItems.size() << '\n';
-
+    std::cout<<allItems.size();
     std::vector<Item> drawn;
-    for (int i = 0; i < count && !allItems.empty(); ++i) {
+    for (int i = 0; i < (count+1) && !allItems.empty(); ++i) {
         drawn.push_back(allItems.back());
         allItems.pop_back();
     }

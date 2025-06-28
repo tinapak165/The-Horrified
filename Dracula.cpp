@@ -1,12 +1,62 @@
 #include "monster.hpp"
 #include "Dracula.hpp"
 
-Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation) {}
+Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation)
+ { // key value
+    coffinsDestroyed["Cave"] = false;
+    coffinsDestroyed["Dungeon"] = false;
+    coffinsDestroyed["Crypt"] = false;
+    coffinsDestroyed["Graveyard"] = false;
+}
+
+// remmember first word is capital 
+void Dracula::destroy_coffin_at(std::string locationName) {
+    if (coffinsDestroyed.count(locationName) && !coffinsDestroyed[locationName]) {
+        coffinsDestroyed[locationName] = true;
+        std::cout << "Coffin at " << locationName << " destroyed!\n";
+    } else {
+        std::cout << "No coffin to destroy at " << locationName << " or already destroyed.\n";
+    }
+}
 
 
-bool Dracula::can_be_defeated() const{ return false;}
+Dracula::Dracula(Location* startLocation)
+    : Monster("Dracula", startLocation) {
+    coffinsDestroyed["Cave"] = false;
+    coffinsDestroyed["Dungeon"] = false;
+    coffinsDestroyed["Crypt"] = false;
+    coffinsDestroyed["Graveyard"] = false;
+}
 
-bool Dracula:: is_defeated()  { return false;}
+void Dracula::destroy_coffin_at(std::string locationName) {
+    if (coffinsDestroyed.count(locationName) && !coffinsDestroyed[locationName]) {
+        coffinsDestroyed[locationName] = true;
+        std::cout << "Coffin at " << locationName << " destroyed!\n";
+    } else {
+        std::cout << "No coffin to destroy at " << locationName << " or already destroyed.\n";
+    }
+}
+
+bool Dracula::is_defeated() const {
+   
+}
+
+void Dracula::print_remaining_coffins() const {
+    std::cout << "Remaining coffins:\n";
+    for (const auto& [loc, destroyed] : coffinsDestroyed) {
+        if (!destroyed)
+            std::cout << "- " << loc << '\n';
+    }
+}
+
+bool Dracula::can_be_defeated(){
+    for (const auto& [loc, destroyed] : coffinsDestroyed) {
+        if (!destroyed) return false;
+    }
+    return true;
+}
+
+
 
  void Dracula::special_power(Hero* active_hero) {
     

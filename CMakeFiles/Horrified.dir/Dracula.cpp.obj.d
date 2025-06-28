@@ -146,4 +146,11 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\perkcardsDeck.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\perkcards.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Hero.hpp \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\Dracula.hpp
+ C:\Users\Tina\Desktop\Horrified\The-Horrified\Dracula.hpp \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h

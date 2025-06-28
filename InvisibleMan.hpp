@@ -4,8 +4,13 @@
 #include "monster.hpp"
 
 class InvisibleMan : public Monster {
+    private:
 
 
+
+    public:
+
+    InvisibleMan(Location* start);
 
 
 };
