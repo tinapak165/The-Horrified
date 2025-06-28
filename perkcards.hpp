@@ -3,7 +3,6 @@
 #include <vector>
 #include <iostream>
 class Perkcards{
-    friend std::ostream& operator << (std::ostream &out , const Perkcards &cards) ; 
     private:
         std::string Event ; 
 
