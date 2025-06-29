@@ -39,10 +39,14 @@ public:
     ~Game();
     void test();
     void start() ;
+
     void choose_character();
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
     void playPerkCard(Hero*);
+
+    void send_hero_to_hospital(Hero* );// for hero attack
+    void remove_villager(villager* );
     void monster_phase();
     void locationOverview();
 

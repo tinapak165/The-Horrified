@@ -481,7 +481,16 @@ void Game::monster_phase() {
                         if (face == DiceFace::Power) {
                             m->special_power(turnManager.get_active_hero()); 
                         } else if (face == DiceFace::Attack) {
-                            m->attack();
+                            auto [hero, villager] = dracula->attack();
+                            if (hero) {
+                                std::cout << "Dracula attacks " << hero->GetName() << "!\n";
+                                send_hero_to_hospital(hero);
+                            }
+                            
+                            if (villager) {
+                                std::cout << "Dracula destroys " << villager->get_name() << "!\n";
+                                remove_villager(villager);
+                            }
                         }
                     }
                     // مرد نامرئی
@@ -583,4 +592,13 @@ void Game::test() {
         }
         turnManager.next_turn();
    
+}
+
+void Game::send_hero_to_hospital(Hero* h) {
+    Location* hospital = map.get_location_by_name("Hospital");
+    h->MoveTo(hospital);
+}
+
+void Game::remove_villager(villager* v) {
+    v->set_currentLocation(nullptr); // فرض بر اینکه set_location(nullptr) یعنی حذف
 }

@@ -28,7 +28,7 @@ public:
     // برای حرکت از روی استرایک
     void move_towards(int steps);
 
-    virtual void attack() = 0;
+    virtual std::pair<Hero*, villager*> attack() = 0;
     virtual void special_power(Hero* h) =0 ;
     virtual bool is_defeated()const =0 ;
     virtual bool can_be_defeated() = 0;

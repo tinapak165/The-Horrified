@@ -71,29 +71,40 @@ bool Dracula::can_be_defeated(){
     }
     
 
-
-void Dracula::attack() {
-    Location* currentLoc = get_location();
-   const std::vector<Hero*>& heroes = currentLoc->get_heroes();
-    const std::vector<Monster*>& monsters = currentLoc->get_monsters();
-
-    // بررسی وجود قهرمان یا محلی در مکان فعلی
-    if (!heroes.empty() || !monsters.empty()) {
-        //  تابع قهرمان رو بنویسسس
+    std::pair<Hero*, villager*> Dracula::attack() {
+        Location* currentLoc = get_location();
+        const auto& heroes = currentLoc->get_heroes();
+        const auto& villagers = currentLoc->get_villagers();
+    
+        Hero* chosenHero = nullptr;
+        villager* chosenVillager = nullptr;
+    
         if (!heroes.empty()) {
-            Hero* hero = heroes[0]; // فرض می‌کنیم فقط یک قهرمان وجود دارد
-            std::cout << get_name() << " attacks " << hero->GetName() << "!\n";
-            // قهرمان زخمی می‌شود و به بیمارستان می‌رود
-            // اینجا باید تابعی برای انتقال قهرمان به بیمارستان بنویسید
-            // hero->move_to_hospital();
+            if (heroes.size() == 1)
+                chosenHero = heroes[0];
+            else {
+                std::cout << "Choose a hero to attack:\n";
+                for (size_t i = 0; i < heroes.size(); ++i)
+                    std::cout << i << ": " << heroes[i]->GetName() << '\n';
+                int index;
+                std::cin >> index;
+                chosenHero = heroes[index];
+            }
         }
-
-        // اگر محلی وجود دارد رو بعدااااا بنویس
-        if (!monsters.empty()) {
-            // Monster* local = monsters[0]; // فرض می‌کنیم فقط یک محلی وجود دارد
-            std::cout << get_name() << " destroys the local!\n";
-            
-            // currentLoc->remove_local(local);
+    
+        if (!villagers.empty()) {
+            if (villagers.size() == 1)
+                chosenVillager = villagers[0];
+            else {
+                std::cout << "Choose a villager to destroy:\n";
+                for (size_t i = 0; i < villagers.size(); ++i)
+                    std::cout << i << ": " << villagers[i]->get_name() << '\n';
+                int index;
+                std::cin >> index;
+                chosenVillager = villagers[index];
+            }
         }
+    
+        return {chosenHero, chosenVillager};
     }
-}
+    
