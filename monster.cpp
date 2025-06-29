@@ -15,6 +15,7 @@ Monster::Monster (const string& name, Location* start_location) : name(name), cu
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
+void Monster::set_location(Location* L){ current_location = L;}
 
 
 

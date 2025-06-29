@@ -20,13 +20,7 @@ void Dracula::destroy_coffin_at(std::string locationName) {
 }
 
 
-Dracula::Dracula(Location* startLocation)
-    : Monster("Dracula", startLocation) {
-    coffinsDestroyed["Cave"] = false;
-    coffinsDestroyed["Dungeon"] = false;
-    coffinsDestroyed["Crypt"] = false;
-    coffinsDestroyed["Graveyard"] = false;
-}
+
 
 void Dracula::destroy_coffin_at(std::string locationName) {
     if (coffinsDestroyed.count(locationName) && !coffinsDestroyed[locationName]) {
@@ -41,12 +35,11 @@ bool Dracula::is_defeated() const {
    
 }
 
-void Dracula::print_remaining_coffins() const {
-    std::cout << "Remaining coffins:\n";
-    for (const auto& [loc, destroyed] : coffinsDestroyed) {
-        if (!destroyed)
-            std::cout << "- " << loc << '\n';
+bool Dracula::can_be_defeated(){
+    for (const auto& keyvalue : coffinsDestroyed) {
+        if (!keyvalue.second) return false;
     }
+    return true;
 }
 
 bool Dracula::can_be_defeated(){

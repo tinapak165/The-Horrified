@@ -263,6 +263,7 @@ void Game::play_hero_Action(Hero *h){
 
                     Location* heroLoc = h->GetCurrentLocation();
 
+                    
                     // چک کنیم آیا دراکولا همین‌جاست
                     if (dracula && dracula->get_location() == heroLoc) {
                         if (dracula->can_be_defeated()) {

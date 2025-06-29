@@ -5,13 +5,17 @@
 
 class InvisibleMan : public Monster {
     private:
-
+        
 
 
     public:
 
-    InvisibleMan(Location* start);
+        InvisibleMan(Location* start);
 
+        void special_power(Hero*) override ; 
+        void attack() override ;
+        bool is_defeated()const override ;
+        bool can_be_defeated()override;
 
 };
 

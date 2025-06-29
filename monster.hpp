@@ -18,6 +18,7 @@ public:
 
     const std::string& get_name() const;
     Location* get_location() const ;
+    void set_location(Location* );
 
     Location* find_nearest_target(Location* start);
     Location* find_next_step(Location* target);
