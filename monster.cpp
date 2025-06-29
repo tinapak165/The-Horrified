@@ -19,7 +19,7 @@ void Monster::set_location(Location* L){ current_location = L;}
 
 
 
-Location* Monster::find_nearest_target(Location* start) {
+Location* Monster::find_nearest_hero(Location* start) {
     std::cout<<"in fine nearest target ";
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
@@ -33,6 +33,35 @@ Location* Monster::find_nearest_target(Location* start) {
 
         // شرط هدف
         if (!current->get_heroes().empty() ) {
+            return current;
+        }
+
+        // بررسی همسایه‌ها
+        for (Location* neighbor : current->get_neighbors()) {
+            if (visited.count(neighbor) == 0) {
+                visited.insert(neighbor);
+                q.push(neighbor);
+            }
+        }
+        // if {} //اگه تارگتی پیدا نشد
+    }
+
+    return nullptr; // هیچ هدفی
+}
+Location* Monster::find_nearest_villager(Location* start) {
+    std::cout<<"in fine nearest target ";
+    std::queue<Location*> q;
+    std::unordered_set<Location*> visited;
+
+    q.push(start);
+    visited.insert(start);
+
+    while (!q.empty()) {
+        Location* current = q.front();
+        q.pop();
+
+        // شرط هدف
+        if (!current->get_villagers().empty() ) {
             return current;
         }
 

@@ -490,6 +490,14 @@ void Game::monster_phase() {
                             m->attack();
                         }
                     }
+                    if (monstersMap.count(MonsterType::InvisibleMan)) {
+                                            Monster* invisibleMan = monstersMap[MonsterType::InvisibleMan];
+                                            Location* target = invisibleMan->find_nearest_target(invisibleMan->get_location());
+                                            if (target) {
+                                                invisibleMan->move_towards(2);
+                                                std::cout << "Invisible Man sneaks closer to target!\n";
+                                            }
+                                        }
                 }
             }
         }
