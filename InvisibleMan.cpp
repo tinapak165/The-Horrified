@@ -1,18 +1,17 @@
 #include "InvisibleMan.hpp"
-
+#include "item.hpp"
+#include "location.hpp"
+#include "monster.hpp"
 
 InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation){
     
-    std::unordered_set<std::string> required_locations = {
+    required_locations = {
         "Inn", "Barn", "Institute", "Laboratory", "Mansion"
     };
 
-    std::unordered_set<std::string> evidence_locations;
-   
-
 
 }
-
+ void InvisibleMan::special_power(Hero* h) {}
 
 std::pair<Hero*, villager*> InvisibleMan::attack() {
     Location* loc = get_location();
@@ -80,9 +79,9 @@ bool InvisibleMan::try_place_evidence(Item item) {
 }
 
 bool InvisibleMan::add_evidence(const std::string& location) {
-    if (std::find(evidence_locations.begin(), evidence_locations.end(), location) != evidence_locations.end())
-        return false; // قبلاً این مکان ثبت شده
+    if (evidence_locations.count(location))
+    return false;
 
-    evidence_locations.insert(location);
-    return true;
+evidence_locations.insert(location);
+return true;
 }

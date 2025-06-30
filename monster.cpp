@@ -1,12 +1,15 @@
-#include <iostream>
+#include "monster.hpp"
 #include <algorithm>
 #include <queue>
 #include <unordered_set>
 #include <unordered_map>
-#include <string>
-#include "monster.hpp"
+
 #include "location.hpp"
 #include "GameMap.hpp"
+
+
+
+#include "Hero.hpp"
 
 using namespace std;
 

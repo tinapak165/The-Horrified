@@ -1,12 +1,14 @@
 #ifndef MONSTER_HPP
 #define MONSTER_HPP
 
+
 #include <string>
-#include "Location.hpp"
-#include "Hero.hpp"
+#include <iostream>
+#include <utility>
 
 class Hero;
-class Location; // forward declaration
+class villager;
+class Location;
 
 class Monster {
 private:
@@ -17,7 +19,7 @@ private:
 
 protected:
 
-    bool defeated;
+    bool defeated = false;
  
 
 public:
@@ -30,6 +32,7 @@ public:
     Location* find_nearest_target(Location* start);
     Location* find_nearest_hero(Location* start);
     Location* find_nearest_villager(Location* start);
+
     Location* find_next_step(Location* target);
     // برای ایونت ها
     void Monster_move_event(Location* new_location); 

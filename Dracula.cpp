@@ -22,14 +22,6 @@ void Dracula::destroy_coffin_at(std::string locationName) {
 
 
 
-void Dracula::destroy_coffin_at(std::string locationName) {
-    if (coffinsDestroyed.count(locationName) && !coffinsDestroyed[locationName]) {
-        coffinsDestroyed[locationName] = true;
-        std::cout << "Coffin at " << locationName << " destroyed!\n";
-    } else {
-        std::cout << "No coffin to destroy at " << locationName << " or already destroyed.\n";
-    }
-}
 
 bool Dracula::is_defeated() const {
     return defeated;
@@ -43,12 +35,7 @@ bool Dracula::can_be_defeated(){
     return true;
 }
 
-bool Dracula::can_be_defeated(){
-    for (const auto& [loc, destroyed] : coffinsDestroyed) {
-        if (!destroyed) return false;
-    }
-    return true;
-}
+
 
 
 

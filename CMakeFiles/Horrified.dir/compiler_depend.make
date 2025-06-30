@@ -40,9 +40,11 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
@@ -59,12 +61,16 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -78,6 +84,7 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -91,15 +98,18 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_atomic.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -107,7 +117,9 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -141,6 +153,7 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
@@ -152,6 +165,8 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -171,6 +186,7 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: Archaeologist.cpp \
   Archaeologist.hpp \
   GameMap.hpp \
   Hero.hpp \
+  InvisibleMan.hpp \
   Location.hpp \
   hero.hpp \
   item.hpp \
@@ -383,8 +399,10 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
@@ -397,12 +415,16 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -416,6 +438,7 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -426,20 +449,29 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/refwrap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -457,6 +489,7 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/assertions.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/debug.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/numeric_traits.h \
@@ -467,8 +500,11 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iosfwd \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
@@ -479,6 +515,8 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -497,7 +535,7 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: Dracula.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   Dracula.hpp \
   Hero.hpp \
-  Location.hpp \
+  InvisibleMan.hpp \
   hero.hpp \
   item.hpp \
   location.hpp \
@@ -629,6 +667,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: Game.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_numeric.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
@@ -640,6 +679,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: Game.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -711,6 +751,8 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: Game.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -793,9 +835,11 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
@@ -812,12 +856,16 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -831,6 +879,7 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -844,15 +893,18 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_atomic.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -860,7 +912,9 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -894,6 +948,7 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
@@ -905,6 +960,8 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -922,7 +979,7 @@ CMakeFiles/Horrified.dir/GameMap.cpp.obj: GameMap.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   GameMap.hpp \
-  Hero.hpp \
+  InvisibleMan.hpp \
   Location.hpp \
   hero.hpp \
   item.hpp \
@@ -987,12 +1044,16 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -1006,6 +1067,7 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -1026,6 +1088,7 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -1034,6 +1097,7 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -1051,6 +1115,7 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/assertions.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/debug.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/numeric_traits.h \
@@ -1075,6 +1140,8 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -1092,7 +1159,185 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: Hero.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   Hero.hpp \
-  Location.hpp \
+  InvisibleMan.hpp \
+  hero.hpp \
+  item.hpp \
+  location.hpp \
+  monster.hpp \
+  perkcards.hpp \
+  perkcardsDeck.hpp \
+  villager.hpp
+
+CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj: InvisibleMan.cpp \
+  C:/w64devkit/include/_mingw.h \
+  C:/w64devkit/include/_mingw_mac.h \
+  C:/w64devkit/include/_mingw_off_t.h \
+  C:/w64devkit/include/_mingw_secapi.h \
+  C:/w64devkit/include/_mingw_stat64.h \
+  C:/w64devkit/include/_timeval.h \
+  C:/w64devkit/include/corecrt.h \
+  C:/w64devkit/include/corecrt_startup.h \
+  C:/w64devkit/include/corecrt_stdio_config.h \
+  C:/w64devkit/include/corecrt_wstdlib.h \
+  C:/w64devkit/include/crtdefs.h \
+  C:/w64devkit/include/ctype.h \
+  C:/w64devkit/include/errno.h \
+  C:/w64devkit/include/limits.h \
+  C:/w64devkit/include/locale.h \
+  C:/w64devkit/include/malloc.h \
+  C:/w64devkit/include/process.h \
+  C:/w64devkit/include/pthread.h \
+  C:/w64devkit/include/pthread_compat.h \
+  C:/w64devkit/include/pthread_signal.h \
+  C:/w64devkit/include/pthread_time.h \
+  C:/w64devkit/include/pthread_unistd.h \
+  C:/w64devkit/include/sdks/_mingw_ddk.h \
+  C:/w64devkit/include/sec_api/stdio_s.h \
+  C:/w64devkit/include/sec_api/stdlib_s.h \
+  C:/w64devkit/include/sec_api/sys/timeb_s.h \
+  C:/w64devkit/include/sec_api/wchar_s.h \
+  C:/w64devkit/include/signal.h \
+  C:/w64devkit/include/stddef.h \
+  C:/w64devkit/include/stdio.h \
+  C:/w64devkit/include/stdlib.h \
+  C:/w64devkit/include/swprintf.inl \
+  C:/w64devkit/include/sys/timeb.h \
+  C:/w64devkit/include/sys/types.h \
+  C:/w64devkit/include/time.h \
+  C:/w64devkit/include/vadefs.h \
+  C:/w64devkit/include/wchar.h \
+  C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_string.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_string.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/char_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/charconv.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/concept_check.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_classes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_classes.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/localefwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/memory_resource.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/memoryfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/postypes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/predefined_ops.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ptr_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/range_access.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/refwrap.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/vector.tcc \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/version.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cctype \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cerrno \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/clocale \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/concepts \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstddef \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdio \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdlib \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cwchar \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cwctype \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/assertions.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/debug.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/alloc_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/numeric_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/string_conversions.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/type_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/initializer_list \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ios \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iosfwd \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/streambuf \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/string \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/string_view \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/system_error \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/error_constants.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/limits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/mm_malloc.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
+  InvisibleMan.hpp \
   hero.hpp \
   item.hpp \
   location.hpp \
@@ -1140,8 +1385,10 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
@@ -1154,12 +1401,16 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -1173,6 +1424,7 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -1183,20 +1435,26 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/refwrap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -1214,6 +1472,7 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/assertions.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/debug.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/numeric_traits.h \
@@ -1226,6 +1485,8 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
@@ -1236,6 +1497,8 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -1252,8 +1515,7 @@ CMakeFiles/Horrified.dir/Location.cpp.obj: Location.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/mm_malloc.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
-  Hero.hpp \
-  Location.hpp \
+  InvisibleMan.hpp \
   hero.hpp \
   item.hpp \
   location.hpp \
@@ -1301,9 +1563,11 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
@@ -1320,12 +1584,16 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -1339,6 +1607,7 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -1352,15 +1621,18 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_atomic.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -1368,7 +1640,9 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -1402,6 +1676,7 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
@@ -1413,6 +1688,8 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -1431,6 +1708,7 @@ CMakeFiles/Horrified.dir/Mayor.cpp.obj: Mayor.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   GameMap.hpp \
   Hero.hpp \
+  InvisibleMan.hpp \
   Location.hpp \
   Mayor.hpp \
   hero.hpp \
@@ -1552,6 +1830,7 @@ CMakeFiles/Horrified.dir/Monster.cpp.obj: Monster.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_queue.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -1612,6 +1891,7 @@ CMakeFiles/Horrified.dir/Monster.cpp.obj: Monster.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -1630,6 +1910,7 @@ CMakeFiles/Horrified.dir/Monster.cpp.obj: Monster.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   GameMap.hpp \
   Hero.hpp \
+  InvisibleMan.hpp \
   Location.hpp \
   hero.hpp \
   item.hpp \
@@ -1678,9 +1959,11 @@ CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj: MonsterCardDeck.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
@@ -1734,15 +2017,18 @@ CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj: MonsterCardDeck.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_atomic.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -1750,8 +2036,10 @@ CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj: MonsterCardDeck.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -1787,6 +2075,7 @@ CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj: MonsterCardDeck.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/optional \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
@@ -1799,6 +2088,8 @@ CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj: MonsterCardDeck.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -1816,7 +2107,7 @@ CMakeFiles/Horrified.dir/MonsterCardDeck.cpp.obj: MonsterCardDeck.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   GameMap.hpp \
-  Hero.hpp \
+  InvisibleMan.hpp \
   Location.hpp \
   MonstercardDeck.hpp \
   hero.hpp \
@@ -1867,10 +2158,12 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: Monstercards.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
@@ -1924,15 +2217,18 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: Monstercards.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_atomic.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -1940,8 +2236,10 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: Monstercards.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -1977,6 +2275,7 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: Monstercards.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/optional \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
@@ -1989,6 +2288,8 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: Monstercards.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -2007,7 +2308,7 @@ CMakeFiles/Horrified.dir/Monstercards.cpp.obj: Monstercards.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   Dice.hpp \
   GameMap.hpp \
-  Hero.hpp \
+  InvisibleMan.hpp \
   Location.hpp \
   hero.hpp \
   item.hpp \
@@ -2057,8 +2358,10 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
@@ -2071,12 +2374,16 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -2090,6 +2397,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -2100,20 +2408,26 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/refwrap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -2131,6 +2445,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/assertions.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/debug/debug.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/numeric_traits.h \
@@ -2143,6 +2458,8 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
@@ -2153,6 +2470,8 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -2170,7 +2489,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
   Hero.hpp \
-  Location.hpp \
+  InvisibleMan.hpp \
   TurnManager.hpp \
   hero.hpp \
   item.hpp \
@@ -2219,8 +2538,10 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/include/vadefs.h \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocator.h \
@@ -2234,12 +2555,16 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cpp_type_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_forced.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
@@ -2254,6 +2579,7 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/move.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h \
@@ -2264,21 +2590,27 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/refwrap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_list.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -2310,6 +2642,8 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/list \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
@@ -2320,6 +2654,8 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -2336,8 +2672,7 @@ CMakeFiles/Horrified.dir/Villager.cpp.obj: Villager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/mm_malloc.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
-  Hero.hpp \
-  Location.hpp \
+  InvisibleMan.hpp \
   hero.hpp \
   item.hpp \
   location.hpp \
@@ -2748,10 +3083,14 @@ CMakeFiles/Horrified.dir/main.cpp.obj: main.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_numeric.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf.tcc \
@@ -2761,6 +3100,7 @@ CMakeFiles/Horrified.dir/main.cpp.obj: main.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h \
@@ -2795,6 +3135,7 @@ CMakeFiles/Horrified.dir/main.cpp.obj: main.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/limits \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/memory \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/numeric \
@@ -2828,6 +3169,8 @@ CMakeFiles/Horrified.dir/main.cpp.obj: main.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/typeinfo \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++allocator.h \
@@ -3180,11 +3523,11 @@ C:/w64devkit/include/corecrt.h:
 
 Archaeologist.cpp:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm:
-
 C:/w64devkit/include/_mingw_mac.h:
 
 C:/w64devkit/include/sec_api/stdlib_s.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm:
 
 C:/w64devkit/include/_mingw.h:
 
@@ -3258,6 +3601,10 @@ C:/w64devkit/include/pthread.h:
 
 C:/w64devkit/include/pthread_signal.h:
 
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/random.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h:
+
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream_insert.h:
 
 C:/w64devkit/include/pthread_time.h:
@@ -3280,17 +3627,11 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h:
 
 C:/w64devkit/include/stddef.h:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/concepts:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h:
-
 C:/w64devkit/include/stdio.h:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h:
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdio:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable_policy.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdio:
 
 C:/w64devkit/include/swprintf.inl:
 
@@ -3309,6 +3650,8 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.tcc:
 
@@ -3334,13 +3677,21 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/charconv.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h:
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h:
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_defines.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functexcept.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/functional_hash.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/concepts:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hash_bytes.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/invoke.h:
 
@@ -3367,6 +3718,8 @@ C:/w64devkit/include/math.h:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/nested_exception.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/new_allocator.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h:
 
@@ -3396,6 +3749,8 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h:
 
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h:
+
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h:
@@ -3404,6 +3759,8 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_construct.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_function.h:
 
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h:
+
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h:
@@ -3411,6 +3768,10 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cctype:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h:
 
@@ -3425,6 +3786,12 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterat
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/special_function_util.h:
 
@@ -3441,8 +3808,6 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_a
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/utility.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/version.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cctype:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/hypergeometric.tcc:
 
@@ -3504,11 +3869,11 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h:
 
+itembag.cpp:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h:
+
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept:
 
 Location.cpp:
 
@@ -3531,6 +3896,12 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/system_error:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/type_traits:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/exp_integral.tcc:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector:
 
@@ -3572,6 +3943,8 @@ GameMap.hpp:
 
 Hero.hpp:
 
+InvisibleMan.hpp:
+
 Location.hpp:
 
 location.hpp:
@@ -3588,23 +3961,19 @@ Dice.cpp:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h:
-
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/compare:
-
-itembag.cpp:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h:
 
 Dice.hpp:
 
 Dracula.cpp:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdint:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h:
+
+C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map:
 
 Dracula.hpp:
 
@@ -3612,29 +3981,15 @@ Game.cpp:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/codecvt.h:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/random.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h:
-
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/deque:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets_nonio.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets_nonio.tcc:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h:
-
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/random.tcc:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/specfun.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdint:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h:
 
@@ -3648,8 +4003,6 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/limits:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/locale:
 
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map:
-
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/numeric:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/optional:
@@ -3657,8 +4010,6 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/optional:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/beta_function.tcc:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/ell_integral.tcc:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/exp_integral.tcc:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/gamma.tcc:
 
@@ -3682,8 +4033,6 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bi
 
 Game.hpp:
 
-InvisibleMan.hpp:
-
 Itembag.hpp:
 
 Mayor.hpp:
@@ -3696,6 +4045,8 @@ GameMap.cpp:
 
 Hero.cpp:
 
+InvisibleMan.cpp:
+
 Monster.cpp:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_deque.h:
@@ -3703,8 +4054,6 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_deque.h:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_queue.h:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/queue:
-
-C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set:
 
 MonsterCardDeck.cpp:
 

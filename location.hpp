@@ -52,6 +52,7 @@ class Location {
             std::vector<Hero*>& get_heroes();
             std::vector<villager *>& get_villagers();
             const std::vector<Location*>& get_neighbors() const;
+            
             Location* findNeighbor(const std::string& name) const  ; 
 
             

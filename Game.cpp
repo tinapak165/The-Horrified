@@ -271,9 +271,9 @@ void Game::play_hero_Action(Hero *h){
                             int yellowPower = h->select_items_to_defeat(ItemColor::YELLOW);
                 
                             if (yellowPower >= 6) {
+                                dracula->set_location(nullptr); 
                                 std::cout << "Dracula has been defeated!\n";
                                 // امتحان کن بعدا ببین حذف میشه یا نه اررور داره فعلا
-                                dracula->set_location(nullptr); 
                             } else {
                                 std::cout << "Not enough yellow item power. dracula did not die.\n";
                             }
@@ -294,8 +294,10 @@ void Game::play_hero_Action(Hero *h){
 
 void Game::hero_phase(Hero* hero) {
 
-    hero->DisplayInfo() ;
+    // hero->DisplayInfo() ;
+    
     play_hero_Action(hero) ;
+    cout<<"after play her action";
     hero->resetMaxActions() ;
 
 }
@@ -305,16 +307,16 @@ void  Game::start() {
     std::cout << "Number of heroes: " << turnManager.get_heroes().size() << "\n";
 
 while (true) {
-        // ۱. فاز قهرمان
+        //  فاز قهرمان
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
-
-        // ۲. فاز هیولا
+        cout<<" after hero phase";
+        //  فاز هیولا
         
         monster_phase();
 
-        // ۳. بررسی پایان بازی
+        //  بررسی پایان بازی
         if (terrorLevel >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
@@ -430,7 +432,8 @@ bool Game::both_monsters_defeated() {
 
 
 
-void Game::monster_phase() {
+void Game::
+monster_phase() {
 
     if (deck.is_empty()) {
         std::cout << "\n Monster deck is empty. Players lose!\n";
@@ -464,14 +467,14 @@ void Game::monster_phase() {
             if (monstersMap.count(type)) {
                 Monster* m = monstersMap[type];
 
-                // حرکت هیولا
+                //  از رو استرایک حرکت هیولا
                 for (int i = 0; i < moves; ++i) {
                     Location* target = m->find_nearest_target(m->get_location());
                     if (target)
                         m->move_towards(1); // هر بار یک قدم
                 }
 
-                // تاس انداختن
+                // سه بار تاس 
                 Dice d(3);  
                 std::vector<DiceFace> results = d.roll(dice);
 

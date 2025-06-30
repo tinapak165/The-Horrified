@@ -272,6 +272,30 @@ Hero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/Hero.cpp.s
 .PHONY : Hero.cpp.s
 
+InvisibleMan.obj: InvisibleMan.cpp.obj
+.PHONY : InvisibleMan.obj
+
+# target to build an object file
+InvisibleMan.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj
+.PHONY : InvisibleMan.cpp.obj
+
+InvisibleMan.i: InvisibleMan.cpp.i
+.PHONY : InvisibleMan.i
+
+# target to preprocess a source file
+InvisibleMan.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/InvisibleMan.cpp.i
+.PHONY : InvisibleMan.cpp.i
+
+InvisibleMan.s: InvisibleMan.cpp.s
+.PHONY : InvisibleMan.s
+
+# target to generate assembly for a file
+InvisibleMan.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/InvisibleMan.cpp.s
+.PHONY : InvisibleMan.cpp.s
+
 Location.obj: Location.cpp.obj
 .PHONY : Location.obj
 
@@ -587,6 +611,9 @@ help:
 	@echo ... Hero.obj
 	@echo ... Hero.i
 	@echo ... Hero.s
+	@echo ... InvisibleMan.obj
+	@echo ... InvisibleMan.i
+	@echo ... InvisibleMan.s
 	@echo ... Location.obj
 	@echo ... Location.i
 	@echo ... Location.s

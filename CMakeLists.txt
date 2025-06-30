@@ -17,6 +17,7 @@ set(SOURCES
     Hero.cpp 
     Dice.cpp 
     Dracula.cpp 
+    InvisibleMan.cpp
     item.cpp 
     Game.cpp 
     itembag.cpp 

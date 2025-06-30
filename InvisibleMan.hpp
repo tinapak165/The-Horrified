@@ -2,9 +2,18 @@
 #define INVISIBLEMAN_HPP
 
 #include "monster.hpp"
+
 #include <unordered_set>
-#include <vector>
+#include <string>
+#include <utility>
 #include <algorithm>
+#include "item.hpp"
+
+class Hero;
+class Location;
+
+class villager;
+
 
 
 class InvisibleMan : public Monster {
@@ -31,7 +40,7 @@ class InvisibleMan : public Monster {
         bool add_evidence(const std::string& location);
 
 
-        
+
 };
 
 #endif
