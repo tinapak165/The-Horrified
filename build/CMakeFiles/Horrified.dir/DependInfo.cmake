@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/Game.cpp" "CMakeFiles/Horrified.dir/Game.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/Game.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.cpp" "CMakeFiles/Horrified.dir/GameMap.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/GameMap.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.cpp" "CMakeFiles/Horrified.dir/Hero.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/Hero.cpp.obj.d"
+  "C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.cpp" "CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.cpp" "CMakeFiles/Horrified.dir/Itembag.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/Itembag.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/Location.cpp" "CMakeFiles/Horrified.dir/Location.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/Location.cpp.obj.d"
   "C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.cpp" "CMakeFiles/Horrified.dir/Mayor.cpp.obj" "gcc" "CMakeFiles/Horrified.dir/Mayor.cpp.obj.d"

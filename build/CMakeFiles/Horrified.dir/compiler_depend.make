@@ -5,6 +5,7 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Archaeologist.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
@@ -32,9 +33,11 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/include/w32api.h \
   C:/MinGW/include/wchar.h \
   C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
@@ -53,6 +56,8 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
@@ -72,10 +77,12 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
@@ -88,7 +95,9 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
@@ -116,6 +125,7 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
@@ -137,6 +147,7 @@ CMakeFiles/Horrified.dir/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
@@ -270,7 +281,7 @@ CMakeFiles/Horrified.dir/Dice.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
 CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Dracula.cpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Dracula.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
@@ -298,6 +309,7 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/MinGW/include/wchar.h \
   C:/MinGW/include/wctype.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
@@ -316,6 +328,8 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
@@ -341,15 +355,20 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
@@ -362,6 +381,7 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
@@ -374,6 +394,7 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
@@ -391,7 +412,9 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
@@ -410,7 +433,6 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/MonstercardDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
@@ -518,6 +540,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
@@ -579,6 +602,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_map \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
@@ -587,146 +611,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
 
 CMakeFiles/Horrified.dir/GameMap.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.cpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
-  C:/MinGW/include/_mingw.h \
-  C:/MinGW/include/ctype.h \
-  C:/MinGW/include/direct.h \
-  C:/MinGW/include/errno.h \
-  C:/MinGW/include/io.h \
-  C:/MinGW/include/locale.h \
-  C:/MinGW/include/msvcrtver.h \
-  C:/MinGW/include/process.h \
-  C:/MinGW/include/sdkddkver.h \
-  C:/MinGW/include/stdint.h \
-  C:/MinGW/include/stdio.h \
-  C:/MinGW/include/stdlib.h \
-  C:/MinGW/include/sys/stat.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/time.h \
-  C:/MinGW/include/w32api.h \
-  C:/MinGW/include/wchar.h \
-  C:/MinGW/include/wctype.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_raw_storage_iter.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/concurrence.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/functional \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
-
-CMakeFiles/Horrified.dir/Hero.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
@@ -755,520 +640,10 @@ CMakeFiles/Horrified.dir/Hero.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/include/wchar.h \
   C:/MinGW/include/wctype.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
-
-CMakeFiles/Horrified.dir/Itembag.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.hpp \
-  C:/MinGW/include/_mingw.h \
-  C:/MinGW/include/ctype.h \
-  C:/MinGW/include/direct.h \
-  C:/MinGW/include/errno.h \
-  C:/MinGW/include/io.h \
-  C:/MinGW/include/locale.h \
-  C:/MinGW/include/math.h \
-  C:/MinGW/include/msvcrtver.h \
-  C:/MinGW/include/process.h \
-  C:/MinGW/include/sdkddkver.h \
-  C:/MinGW/include/stdint.h \
-  C:/MinGW/include/stdio.h \
-  C:/MinGW/include/stdlib.h \
-  C:/MinGW/include/sys/stat.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/time.h \
-  C:/MinGW/include/w32api.h \
-  C:/MinGW/include/wchar.h \
-  C:/MinGW/include/wctype.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/numeric \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
-
-CMakeFiles/Horrified.dir/Location.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Location.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
-  C:/MinGW/include/_mingw.h \
-  C:/MinGW/include/ctype.h \
-  C:/MinGW/include/direct.h \
-  C:/MinGW/include/errno.h \
-  C:/MinGW/include/io.h \
-  C:/MinGW/include/locale.h \
-  C:/MinGW/include/msvcrtver.h \
-  C:/MinGW/include/process.h \
-  C:/MinGW/include/sdkddkver.h \
-  C:/MinGW/include/stdint.h \
-  C:/MinGW/include/stdio.h \
-  C:/MinGW/include/stdlib.h \
-  C:/MinGW/include/sys/stat.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/time.h \
-  C:/MinGW/include/w32api.h \
-  C:/MinGW/include/wchar.h \
-  C:/MinGW/include/wctype.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
-
-CMakeFiles/Horrified.dir/Mayor.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
-  C:/MinGW/include/_mingw.h \
-  C:/MinGW/include/ctype.h \
-  C:/MinGW/include/direct.h \
-  C:/MinGW/include/errno.h \
-  C:/MinGW/include/io.h \
-  C:/MinGW/include/locale.h \
-  C:/MinGW/include/msvcrtver.h \
-  C:/MinGW/include/process.h \
-  C:/MinGW/include/sdkddkver.h \
-  C:/MinGW/include/stdint.h \
-  C:/MinGW/include/stdio.h \
-  C:/MinGW/include/stdlib.h \
-  C:/MinGW/include/sys/stat.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/time.h \
-  C:/MinGW/include/w32api.h \
-  C:/MinGW/include/wchar.h \
-  C:/MinGW/include/wctype.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_raw_storage_iter.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/concurrence.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/functional \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
-
-CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/MonstercardDeck.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/MonstercardDeck.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
-  C:/MinGW/include/_mingw.h \
-  C:/MinGW/include/ctype.h \
-  C:/MinGW/include/direct.h \
-  C:/MinGW/include/errno.h \
-  C:/MinGW/include/io.h \
-  C:/MinGW/include/locale.h \
-  C:/MinGW/include/msvcrtver.h \
-  C:/MinGW/include/process.h \
-  C:/MinGW/include/sdkddkver.h \
-  C:/MinGW/include/stdint.h \
-  C:/MinGW/include/stdio.h \
-  C:/MinGW/include/stdlib.h \
-  C:/MinGW/include/sys/stat.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/sys/types.h \
-  C:/MinGW/include/time.h \
-  C:/MinGW/include/w32api.h \
-  C:/MinGW/include/wchar.h \
-  C:/MinGW/include/wctype.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
@@ -1308,10 +683,12 @@ CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Fin
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
@@ -1324,8 +701,9 @@ CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Fin
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
@@ -1334,7 +712,6 @@ CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Fin
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ctime \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
@@ -1354,6 +731,7 @@ CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Fin
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
@@ -1375,17 +753,16 @@ CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Fin
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_map \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
 
-CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.cpp \
+CMakeFiles/Horrified.dir/Hero.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.cpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
@@ -1412,13 +789,280 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/T
   C:/MinGW/include/w32api.h \
   C:/MinGW/include/wchar.h \
   C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
+
+CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.cpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
+  C:/MinGW/include/_mingw.h \
+  C:/MinGW/include/ctype.h \
+  C:/MinGW/include/direct.h \
+  C:/MinGW/include/errno.h \
+  C:/MinGW/include/io.h \
+  C:/MinGW/include/locale.h \
+  C:/MinGW/include/msvcrtver.h \
+  C:/MinGW/include/process.h \
+  C:/MinGW/include/sdkddkver.h \
+  C:/MinGW/include/stdint.h \
+  C:/MinGW/include/stdio.h \
+  C:/MinGW/include/stdlib.h \
+  C:/MinGW/include/sys/stat.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/time.h \
+  C:/MinGW/include/w32api.h \
+  C:/MinGW/include/wchar.h \
+  C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
+
+CMakeFiles/Horrified.dir/Itembag.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.cpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.hpp \
+  C:/MinGW/include/_mingw.h \
+  C:/MinGW/include/ctype.h \
+  C:/MinGW/include/direct.h \
+  C:/MinGW/include/errno.h \
+  C:/MinGW/include/io.h \
+  C:/MinGW/include/locale.h \
+  C:/MinGW/include/math.h \
+  C:/MinGW/include/msvcrtver.h \
+  C:/MinGW/include/process.h \
+  C:/MinGW/include/sdkddkver.h \
+  C:/MinGW/include/stdint.h \
+  C:/MinGW/include/stdio.h \
+  C:/MinGW/include/stdlib.h \
+  C:/MinGW/include/sys/stat.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/time.h \
+  C:/MinGW/include/w32api.h \
+  C:/MinGW/include/wchar.h \
+  C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
@@ -1448,14 +1092,300 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/T
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ctime \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/numeric \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
+
+CMakeFiles/Horrified.dir/Location.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Location.cpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
+  C:/MinGW/include/_mingw.h \
+  C:/MinGW/include/ctype.h \
+  C:/MinGW/include/direct.h \
+  C:/MinGW/include/errno.h \
+  C:/MinGW/include/io.h \
+  C:/MinGW/include/locale.h \
+  C:/MinGW/include/msvcrtver.h \
+  C:/MinGW/include/process.h \
+  C:/MinGW/include/sdkddkver.h \
+  C:/MinGW/include/stdint.h \
+  C:/MinGW/include/stdio.h \
+  C:/MinGW/include/stdlib.h \
+  C:/MinGW/include/sys/stat.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/time.h \
+  C:/MinGW/include/w32api.h \
+  C:/MinGW/include/wchar.h \
+  C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
+
+CMakeFiles/Horrified.dir/Mayor.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.cpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
+  C:/MinGW/include/_mingw.h \
+  C:/MinGW/include/ctype.h \
+  C:/MinGW/include/direct.h \
+  C:/MinGW/include/errno.h \
+  C:/MinGW/include/io.h \
+  C:/MinGW/include/locale.h \
+  C:/MinGW/include/msvcrtver.h \
+  C:/MinGW/include/process.h \
+  C:/MinGW/include/sdkddkver.h \
+  C:/MinGW/include/stdint.h \
+  C:/MinGW/include/stdio.h \
+  C:/MinGW/include/stdlib.h \
+  C:/MinGW/include/sys/stat.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/time.h \
+  C:/MinGW/include/w32api.h \
+  C:/MinGW/include/wchar.h \
+  C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
@@ -1468,7 +1398,9 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/T
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
@@ -1496,6 +1428,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/T
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
@@ -1517,6 +1450,302 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/T
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
+
+CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/MonstercardDeck.cpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/MonstercardDeck.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
+  C:/MinGW/include/_mingw.h \
+  C:/MinGW/include/ctype.h \
+  C:/MinGW/include/direct.h \
+  C:/MinGW/include/errno.h \
+  C:/MinGW/include/io.h \
+  C:/MinGW/include/locale.h \
+  C:/MinGW/include/msvcrtver.h \
+  C:/MinGW/include/process.h \
+  C:/MinGW/include/sdkddkver.h \
+  C:/MinGW/include/stdint.h \
+  C:/MinGW/include/stdio.h \
+  C:/MinGW/include/stdlib.h \
+  C:/MinGW/include/sys/stat.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/time.h \
+  C:/MinGW/include/w32api.h \
+  C:/MinGW/include/wchar.h \
+  C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_raw_storage_iter.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ctime \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/concurrence.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/functional \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_map \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
+
+CMakeFiles/Horrified.dir/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.cpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp \
+  C:/MinGW/include/_mingw.h \
+  C:/MinGW/include/ctype.h \
+  C:/MinGW/include/direct.h \
+  C:/MinGW/include/errno.h \
+  C:/MinGW/include/io.h \
+  C:/MinGW/include/locale.h \
+  C:/MinGW/include/msvcrtver.h \
+  C:/MinGW/include/process.h \
+  C:/MinGW/include/sdkddkver.h \
+  C:/MinGW/include/stdint.h \
+  C:/MinGW/include/stdio.h \
+  C:/MinGW/include/stdlib.h \
+  C:/MinGW/include/sys/stat.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/sys/types.h \
+  C:/MinGW/include/time.h \
+  C:/MinGW/include/w32api.h \
+  C:/MinGW/include/wchar.h \
+  C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
@@ -1610,6 +1839,8 @@ CMakeFiles/Horrified.dir/item.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
 
 CMakeFiles/Horrified.dir/monster.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.cpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
@@ -1768,6 +1999,7 @@ CMakeFiles/Horrified.dir/monster.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-H
 CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.cpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Dice.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
@@ -1796,9 +2028,11 @@ CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/
   C:/MinGW/include/w32api.h \
   C:/MinGW/include/wchar.h \
   C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/auto_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
@@ -1838,10 +2072,12 @@ CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_atomic.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
@@ -1854,8 +2090,10 @@ CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
@@ -1883,6 +2121,7 @@ CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
@@ -1905,6 +2144,7 @@ CMakeFiles/Horrified.dir/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_map \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
@@ -2140,7 +2380,6 @@ CMakeFiles/Horrified.dir/perkcardsDeck.cpp.obj: C:/Users/sibegilan/Desktop/Final
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
 
 CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/realmain.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Archaeologist.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Dice.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Dracula.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Game.hpp \
@@ -2150,8 +2389,6 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.hpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/MonstercardDeck.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
@@ -2237,11 +2474,14 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_raw_storage_iter.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
@@ -2250,6 +2490,7 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
@@ -2280,6 +2521,7 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
@@ -2305,6 +2547,7 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_map \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
@@ -2312,7 +2555,7 @@ CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdint.h
 
 CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.cpp \
-  C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
+  C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/item.hpp \
   C:/Users/sibegilan/Desktop/Final/The-Horrified/location.hpp \
@@ -2339,9 +2582,11 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/include/w32api.h \
   C:/MinGW/include/wchar.h \
   C:/MinGW/include/wctype.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocated_ptr.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
@@ -2357,9 +2602,10 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/list.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
@@ -2374,20 +2620,26 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_list.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_set.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uses_allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
@@ -2412,7 +2664,7 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/istream \
-  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/list \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
@@ -2430,7 +2682,10 @@ CMakeFiles/Horrified.dir/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/tuple \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h \
@@ -2441,13 +2696,15 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.hpp:
 
-C:/MinGW/include/_mingw.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Archaeologist.cpp:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/algorithm:
+
+C:/MinGW/include/_mingw.h:
+
+C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h:
 
@@ -2477,8 +2734,6 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/villager.hpp:
 
 C:/MinGW/include/ctype.h:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h:
 
 C:/MinGW/include/direct.h:
@@ -2496,8 +2751,6 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h:
 C:/MinGW/include/io.h:
 
 C:/MinGW/include/locale.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Mayor.cpp:
 
@@ -2519,6 +2772,8 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/Game.hpp:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h:
+
 C:/MinGW/include/stdio.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h:
@@ -2526,8 +2781,6 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h:
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.h:
 
 C:/MinGW/include/stdlib.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h:
 
 C:/MinGW/include/sys/stat.h:
 
@@ -2546,6 +2799,10 @@ C:/MinGW/include/w32api.h:
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/array:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h:
 
@@ -2581,11 +2838,11 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/stdarg.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc:
 
@@ -2599,17 +2856,25 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/shared_ptr_base.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h:
 
@@ -2620,6 +2885,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h:
 C:/Users/sibegilan/Desktop/Final/The-Horrified/realmain.cpp:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h:
 
@@ -2650,6 +2917,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h:
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_map:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unique_ptr.h:
 
@@ -2703,6 +2972,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iosfwd:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iostream:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/memory:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h:
@@ -2737,6 +3008,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/type_traits:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/typeinfo:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector:
@@ -2747,25 +3020,21 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Dice.hpp:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/algorithmfwd.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_heap.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/uniform_int_dist.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ctime:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/limits:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Dracula.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Dracula.hpp:
 
-C:/Users/sibegilan/Desktop/Final/The-Horrified/Game.cpp:
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h:
 
-C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.hpp:
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map:
+
+C:/Users/sibegilan/Desktop/Final/The-Horrified/Game.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.hpp:
 
@@ -2779,10 +3048,6 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp:
 
 C:/MinGW/include/math.h:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/hashtable_policy.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_conv.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.h:
@@ -2795,21 +3060,13 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/sstream.tcc:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iomanip:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/map:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/messages_members.h:
 
@@ -2822,6 +3079,8 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/sstream:
 C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Hero.cpp:
+
+C:/Users/sibegilan/Desktop/Final/The-Horrified/InvisibleMan.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Itembag.cpp:
 
@@ -2841,14 +3100,6 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/deque:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/queue:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/unordered_set:
-
 C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.cpp:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/list.tcc:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_list.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/list:

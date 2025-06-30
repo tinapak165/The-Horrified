@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Horrified.dir/GameMap.cpp.obj.d"
   "CMakeFiles/Horrified.dir/Hero.cpp.obj"
   "CMakeFiles/Horrified.dir/Hero.cpp.obj.d"
+  "CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj"
+  "CMakeFiles/Horrified.dir/InvisibleMan.cpp.obj.d"
   "CMakeFiles/Horrified.dir/Itembag.cpp.obj"
   "CMakeFiles/Horrified.dir/Itembag.cpp.obj.d"
   "CMakeFiles/Horrified.dir/Location.cpp.obj"
