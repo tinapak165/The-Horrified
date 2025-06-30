@@ -4,13 +4,13 @@
 #include <vector>
 #include "villager.hpp"
 #include "location.hpp"
-#include "InvisibleMan.hpp"
 #include "item.hpp"
 #include "perkcardsDeck.hpp"
+#include "InvisibleMan.hpp"
 
 class Location ; 
 class villager ; 
-class InvisibleMan;
+class InvisibleMan ; 
 
 enum class ActionType{
     Move ,
@@ -37,7 +37,8 @@ class Hero{
         Location* StartingLocation ;
         Location* currentLocation;
         std::vector<Action> ListOfActions ;
-        std::vector<Perkcards> playedCards ;  
+        std::vector<Perkcards> playedCards ; 
+        std::vector<Perkcards> availableCards ;  
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
@@ -57,12 +58,14 @@ class Hero{
         Location* GetCurrentLocation() const ;         
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
-        void DisplayActions() ; 
+        void DisplayActions() const ; 
         void resetMaxActions() ; 
 
-        void playedPerk(Perkcards) ;
-        void displaycards() ;
-
+        void AddAvailablePerk(Perkcards) ;
+        void displayavailblecards() const;
+        void displayPlayedCards() const; 
+        std::vector<Perkcards> GetAvailablePerkCards() ; 
+        void addPlayedCards(Perkcards) ;
 
         void DisplayItem() ;
         std::string colorItems(const ItemColor&) ; //show items colors 

@@ -18,7 +18,8 @@ private:
     MonsterCardDeck deck;
     TurnManager turnManager;
     ItemPool pool;
-
+    PerkDeck p ; 
+    Perkcards p2 ;
     
 
     Hero* mayor = nullptr;
@@ -43,7 +44,10 @@ public:
     void choose_character();
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
-    void playPerkCard(Hero*);
+    
+    void playPerkCard(Hero* hero, std::string );
+    void ChoosePerkCard(Hero * hero);
+    void getNewCard(Hero*) ;
 
     void send_hero_to_hospital(Hero* );// for hero attack
     void remove_villager(villager* );

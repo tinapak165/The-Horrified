@@ -92,8 +92,33 @@ Game::~Game() {
     turnManager = TurnManager(heroes);
  }    
 
+ void Game::ChoosePerkCard(Hero * hero){
+    if(hero->GetAvailablePerkCards().empty()) 
+        cout << "you do not have any perk cards!\n" ;
+    else{
+        hero->displayavailblecards() ;
+        string chooseCard ; 
+        cout << "what card you want to play? " ; 
+        cin.ignore() ;
+        getline(cin , chooseCard)  ;
 
-void Game::play_hero_Action(Hero *h){
+        vector<Perkcards> selected = hero->GetAvailablePerkCards() ; 
+        
+        for(size_t i = 0 ; i < hero->GetAvailablePerkCards().size() ; i++){
+            if(selected[i].get_Event() == chooseCard){
+                playPerkCard(hero , chooseCard) ;
+                hero->addPlayedCards(selected[i]) ;
+                hero->displayPlayedCards() ;
+                break;
+            }
+            else cerr << "card not available\n" ; 
+        }
+
+    } 
+}
+
+
+ void Game::play_hero_Action(Hero *h){
     while(true){
     string chosenAction ; 
     cout << "what action do you want to play this turn(Move, Guide , Pickup , Advance ,Defeat , Perk , Help , Quit) ? " ;
@@ -103,8 +128,11 @@ void Game::play_hero_Action(Hero *h){
     if(chosenAction == "Quit")
         break ;
     if(chosenAction == "Perk")
-        playPerkCard(h) ;
-        
+        ChoosePerkCard(h) ;
+        if (h->GetRemainingActions() == 0) {
+            std::cout << "No more actions left this turn.\n";
+            break;
+        }
     if(h->PerformTheAction(chosenAction)){
         cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
 
@@ -126,12 +154,15 @@ void Game::play_hero_Action(Hero *h){
                         if(ans == "yes")
                             h->MoveTo(chosenLocation , here) ; 
                         else if(ans == "no")
-                            h->MoveTo(chosenLocation) ; 
-                    }else
-                        cerr << "wrong answer!\n" ;    
+                            h->MoveTo(chosenLocation) ;
+                        else cerr << "wrong answer\n" ; 
+                    }
+                    else { 
+                        h->MoveTo(chosenLocation); 
+                    }    
                 }
                 else
-                    cerr << "what you have chosen is not a neighboring place!\n";
+                    h->MoveTo(chosenLocation) ; 
                     
                 }
                 else if(chosenAction == "Guide"){
@@ -196,10 +227,16 @@ void Game::play_hero_Action(Hero *h){
                                     break ;  
                                     } 
                                 }
-                                if(!found) throw invalid_argument("villager not found!") ;
+                                if(!found){
+                                   // throw invalid_argument("villager not found!") ;
+                                    cerr << "villager not found!\n" ; 
+                                } 
                             }
 
-                    }else throw invalid_argument("wrong answer!\n");        
+                    }else{
+                      //throw invalid_argument("wrong answer!\n");   
+                      cerr << "wrong answer!\n" ;
+                    }      
                 }
                 else if(chosenAction == "Pickup"){
  
@@ -225,26 +262,25 @@ void Game::play_hero_Action(Hero *h){
                         h->SpecialPickup(chosenLoc) ;
                         h->DisplayItem() ; 
 
-                    }else throw invalid_argument("what you have chosen is not a neighboring place!\n") ;
+                    }else{
+                       //throw invalid_argument("what you have chosen is not a neighboring place!\n") ; 
+                       cout << "what you have chosen is not a neighboring place!\n" ; 
+                    } 
   
                 }
                 else if(chosenAction == "Advance"){ //for the monster missions
                     //for dracula
                     Location* current = h->GetCurrentLocation();
-                    std::string locName = current->get_name();
-                
-                    // آیا هیرو در یکی از مکان‌های تابوت هست؟
-                    if (locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard") {
-                        std::cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n";
-                        int totalStrength = h->AdvanceActionForDracula(); 
-                        
+                    string locName = current->get_name();
+
+                    if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){// اگر قهرمان در محل قرار گیری تابوتهای دراکولا بود
+                        cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n" ;
+                        int totalStrength = h->AdvanceActionForDracula() ;
                         if (totalStrength >= 6) {
                             dracula->destroy_coffin_at(locName); // توابع Dracula همین‌طور باقی می‌مونن
                         } else {
                             std::cout << "Advance action failed Not enough red item strength.\n";
                         }
-
-
                     }
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
@@ -262,8 +298,24 @@ void Game::play_hero_Action(Hero *h){
                     //3- استفاده از آیتم های قرمز با مجموع 9 یا بالاتر برای نابودی نامرئی
 
                     Location* heroLoc = h->GetCurrentLocation();
+                                            
+                        if (invisibleMan && invisibleMan->get_location() == heroLoc) {
+                            if (invisibleMan->can_be_defeated()) {
+                                std::cout << "You are ready to defeat the Invisible Man! Use RED items (total strength >= 9).\n";
 
-                    
+                                int redPower = h->select_items_to_defeat(ItemColor::RED);
+
+                                if (redPower >= 9) {
+                                    invisibleMan->set_location(nullptr); // شکست خورد
+                                    std::cout << "Invisible Man has been defeated!\n";
+                                } else {
+                                    std::cout << "Not enough RED item power. Invisible Man survived.\n";
+                                }
+                            } else {
+                                std::cout << "You must collect and submit evidence from all 5 required locations first.\n";
+                            }
+                        }
+
                     // چک کنیم آیا دراکولا همین‌جاست
                     if (dracula && dracula->get_location() == heroLoc) {
                         if (dracula->can_be_defeated()) {
@@ -271,22 +323,27 @@ void Game::play_hero_Action(Hero *h){
                             int yellowPower = h->select_items_to_defeat(ItemColor::YELLOW);
                 
                             if (yellowPower >= 6) {
-                                dracula->set_location(nullptr); 
                                 std::cout << "Dracula has been defeated!\n";
                                 // امتحان کن بعدا ببین حذف میشه یا نه اررور داره فعلا
+                                dracula->set_location(nullptr); 
                             } else {
                                 std::cout << "Not enough yellow item power. dracula did not die.\n";
                             }
                         } else {
                             std::cout << "You must destroy all coffins first to defeat Dracula.\n";
                         }
+                    }else{
+                        cerr << "you can not use defeat action unless you are in monster place\n" ;
                     }
-                
-
+    
                 }
+
             } // end if can play an action 
     }    
 }
+
+
+
 
 
 
@@ -334,15 +391,8 @@ while (true) {
         turnManager.next_turn();
     }    
 }    
-
-void Game::playPerkCard(Hero * hero){
-    PerkDeck p ; 
-    Perkcards p2 ;
-    p2 = p.get_random_card() ;
-    hero->playedPerk(p2) ; 
-    hero->displaycards() ;
-    cout << p2 << endl;
-    if(p2.get_Event() == "Hurry"){
+void Game::playPerkCard(Hero* hero, std::string card){
+    if(card == "Hurry"){
             string firstMove , secondMove ; 
             p.display_the_card(p2) ; 
             cout << "Mayor..where do you want to move first? " ;
@@ -377,19 +427,20 @@ void Game::playPerkCard(Hero * hero){
                 archaeologist->MoveTo(AsecondMoveLoc) ;        
             else cerr << "what you have chosen is not a neighboring place!!\n" ;     
         }
-        else if (p2.get_Event() == "Repel"){
+        else if (card == "Repel"){
             p.display_the_card(p2) ;
             //dracula->move_towards(2) ;
            //invisibleMan->move_towards(2) ; 
         }
 
-        else if(p2.get_Event() == "Late into the Night"){
+        else if(card == "Late into the Night"){
 
             p.display_the_card(p2) ;
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
+            cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
             hero->DisplayInfo() ; 
         }
-        else if(p2.get_Event() == "Break of Dawn."){
+        else if( card == "Break of Dawn"){
             //آیتم بصورت رندوم نمیاد!!!!
             //فاز هیولا بعدی رد میشود !؟
             p.display_the_card(p2);
@@ -403,7 +454,7 @@ void Game::playPerkCard(Hero * hero){
                 }
             }
         }
-        else if(p2.get_Event() == "Overstock"){
+        else if(card == "Overstock"){
             //آیتم بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
@@ -415,15 +466,15 @@ void Game::playPerkCard(Hero * hero){
                 LocFirst->add_item(PoolItems[0]) ; 
                 cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
             }
-            
+         
             Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
              if(LocSecond){
                 LocSecond->add_item(PoolItems[1]) ; 
                 cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
             }           
-
         }
 }
+
 
 bool Game::both_monsters_defeated() {
      return monstersMap[MonsterType::Dracula]->is_defeated() &&

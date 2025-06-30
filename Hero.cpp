@@ -18,7 +18,7 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
     };
 }
 
-void Hero::DisplayActions(){
+void Hero::DisplayActions() const{
 
     cout << "----ACTIONS----\n" ; 
     for(const auto a : ListOfActions)
@@ -30,15 +30,40 @@ void Hero::resetMaxActions(){
     (this)->SetRemainingActions((this)->getMaxActions()) ; 
 }
 
-void Hero::playedPerk(Perkcards card){
-    playedCards.push_back(card) ;   
+void Hero::AddAvailablePerk(Perkcards card){
+    availableCards.push_back(card) ;   
 }
 
-void Hero::displaycards(){
-    cout << "perk cards: " ; 
-    for(size_t i = 0 ; i < playedCards.size() ; i++)
-        cout << playedCards[i].get_Event() << ", " ;
+void Hero::displayavailblecards() const{
+    cout << "available perk cards: " ; 
+    for(size_t i = 0 ; i < availableCards.size() ; i++)
+        cout << availableCards[i].get_Event() << ", " ;
     cout << endl ; 
+}
+
+void Hero::displayPlayedCards() const{
+    cout << "played perk cards: " ; 
+    if(playedCards.empty()){
+        cout << "-\n" ;
+    }else{
+        for(size_t i = 0 ; i < playedCards.size() ; i++)
+            cout << playedCards[i].get_Event() << ", " ;
+        cout << endl ;        
+    }
+}
+
+vector<Perkcards> Hero::GetAvailablePerkCards(){
+    return availableCards;
+}
+
+void Hero::addPlayedCards(Perkcards p){
+    playedCards.push_back(p) ;
+    for(size_t i = 0 ; i < this->GetAvailablePerkCards().size() ; i++){
+        if(p.get_Event() == availableCards[i].get_Event()){
+            availableCards.erase(availableCards.begin() + i);
+            break;
+        }
+    }
 }
 
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
@@ -51,7 +76,6 @@ void Hero::removeItems(const Item & i){
         }
     }
 }
-
 
 int Hero::AdvanceActionForDracula(){
     int chosenNumber = -1 ; 
@@ -86,8 +110,7 @@ int Hero::AdvanceActionForDracula(){
         totalStrength += chosenItem.getStrength() ;
 
         if(totalStrength >= 6){
-            cout << "total strength has reached to " << totalStrength ;
-          
+            cout << "total strength has reached to " << totalStrength << '\n';
         }
         else if(totalStrength < 6 && items.empty()){
             cout << "no more items left and strength did not reach 6\n" ;
@@ -101,31 +124,28 @@ int Hero::AdvanceActionForDracula(){
         }
     }
     else cout << "no item was selected for advance action!\n" ;
-    return totalStrength;
+    return totalStrength ; 
 }
-void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster) {
-    vector<Item> items = GetItems();
 
-    //   آیتم‌هایی مکان‌های معتبر 
-    vector<Item> evidenceItems;
-    for (const Item& item : items) {
-        std::string loc = item.getLocationName();
+void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
+    vector<Item> items = this->GetItems() ; 
+    vector<Item> evidenceItems ; 
+    for(const Item& item : items){
+        std::string loc = item.getLocationName() ; 
         if (loc == "Inn" || loc == "Barn" || loc == "Institute" || loc == "Laboratory" || loc == "Mansion") {
-            evidenceItems.push_back(item);
-        }
+            evidenceItems.push_back(item);  
+        }  
     }
-
-    if (evidenceItems.empty()) {
+    if(evidenceItems.empty()){
         std::cout << "You have no valid items for evidence.\n";
-        return;
+        return;        
     }
-
     std::cout << "Choose one item to place as evidence against Invisible Man:\n";
+
     for (size_t i = 0; i < evidenceItems.size(); ++i) {
         std::cout << i + 1 << ". " << evidenceItems[i].getName()
                   << " (from " << evidenceItems[i].getLocationName() << ")\n";
     }
-
     int choice;
     std::cout << "Enter number (or 0 to cancel): ";
     std::cin >> choice;
@@ -134,15 +154,15 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster) {
         std::cout << "Cancelled.\n";
         return;
     }
+    Item selected = evidenceItems[choice - 1];  
 
-    Item selected = evidenceItems[choice - 1];
-
-    if (monster->add_evidence(selected.getLocationName())) {
+    if(monster->add_evidence(selected.getLocationName())) {
         removeItems(selected);
         std::cout << "Evidence placed successfully.\n";
-    } else {
+    }else{
         std::cout << "Evidence from that location already exists. Choose another.\n";
-    }
+    } 
+
 }
 
 void Hero::PickupItems(){ //pick up item from current location
@@ -256,18 +276,25 @@ bool Hero::PerformTheAction(string act)  {
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
             if(act == "Special" && !HasSpecialAction()){
-                throw runtime_error("This hero does not have special action") ; 
+                //throw runtime_error("This hero does not have special action") ;
+                cerr << "This hero does not have special action\n" ;
+                return false ;  
             }
 
-            if(GetRemainingActions() > 0 && act != "end" && act != "help"){
+            if((*this).GetRemainingActions() > 0){
                 cout << "[playing " << act << "]\n" ;
-                SetRemainingActions(GetRemainingActions()-1) ; 
+                (*this).SetRemainingActions((*this).GetRemainingActions()-1) ; 
                 return true; 
-            }else
-                throw runtime_error("not enough action remaining!") ; 
+            }else{
+               // throw runtime_error("not enough action remaining!") ; 
+                cerr << "not enough action remaining!(Quit to end the phase)\n" ;
+                return false ; 
+            }
         }
     }
-    throw runtime_error("action not available!") ; 
+    //throw runtime_error("action not available!") ;
+    cerr << "action not available!\n" ;
+    return false ;  
 
 }
 
@@ -347,8 +374,7 @@ vector<villager*> Hero::villagerHere() const
     return vill ;
 }
 
-void Hero::SetRemainingActions(int newRemaining)
-{
+void Hero::SetRemainingActions(int newRemaining){
     RemainingActions = newRemaining ;
 }
 

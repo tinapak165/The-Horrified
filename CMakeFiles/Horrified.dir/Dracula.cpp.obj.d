@@ -153,6 +153,8 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\location.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\item.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\hero.hpp \
+ C:\Users\Tina\Desktop\Horrified\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\Tina\Desktop\Horrified\The-Horrified\perkcards.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\InvisibleMan.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
@@ -166,6 +168,4 @@ CMakeFiles/Horrified.dir/Dracula.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\perkcardsDeck.hpp \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\perkcards.hpp
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h
