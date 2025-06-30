@@ -42,6 +42,8 @@ public:
     void locationOverview() ;
 
     void monster_phase();
+    void send_hero_to_hospital(Hero* );
+    void remove_villager(villager* );
 
     bool both_monsters_defeated();
 

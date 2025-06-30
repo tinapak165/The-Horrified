@@ -22,7 +22,7 @@ Game::Game() {
     
     
     // اضافه کردن هیولاها
-    Monster* dracula = new Dracula(map.get_location_by_name("Cave")); 
+    dracula = new Dracula(map.get_location_by_name("Cave")); 
 
 
     // InvisibleMan* invisibleMan = new InvisibleMan(map.get_lo("Barn"));
@@ -267,7 +267,7 @@ void Game::play_hero_Action(Hero *h){
                             if (yellowPower >= 6) {
                                 std::cout << "Dracula has been defeated!\n";
                                 // امتحان کن بعدا ببین حذف میشه یا نه اررور داره فعلا
-                               // dracula->set_location(nullptr); 
+                                dracula->set_location(nullptr); 
                             } else {
                                 std::cout << "Not enough yellow item power. dracula did not die.\n";
                             }
@@ -310,6 +310,7 @@ void  Game::start() {
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
+    locationOverview() ;
 
 
 
@@ -515,13 +516,30 @@ void Game::monster_phase() {
                         if (face == DiceFace::Power) {
                             m->special_power(turnManager.get_active_hero()); 
                         } else if (face == DiceFace::Attack) {
-                            m->attack();
+                            auto keyvalue = dracula->attack();
+                            if (keyvalue.first) { //hero
+                                std::cout << "Dracula attacks " << keyvalue.first->GetName() << "!\n";
+                                send_hero_to_hospital(keyvalue.first);
+                            }
+                            
+                            if (keyvalue.second) { //villager
+                                std::cout << "Dracula destroys " << keyvalue.second->get_name() << "!\n";
+                                remove_villager(keyvalue.second);
+                            }
                         }
                     }
                     // مرد نامرئی
                     else if (type == MonsterType::InvisibleMan) {
                         if (face == DiceFace::Attack) {
                             m->attack();
+                        }
+                    }
+                    if (monstersMap.count(MonsterType::InvisibleMan)) {
+                        Monster* invisibleMan = monstersMap[MonsterType::InvisibleMan];
+                        Location* target = invisibleMan->find_nearest_villager(invisibleMan->get_location());
+                        if (target) {
+                            invisibleMan->move_towards(2);
+                            std::cout << "Invisible Man sneaks closer to target!\n";
                         }
                     }
                 }
@@ -532,7 +550,15 @@ void Game::monster_phase() {
  }
 
 }
+void Game::send_hero_to_hospital(Hero* h) {
+    Location* hospital = map.get_location_by_name("Hospital");
+    h->MoveTo(hospital);
+}
 
+void Game::remove_villager(villager* v) {
+    v->removevillager(v) ;
+    v->set_currentLocation(nullptr); // فرض بر اینکه set_location(nullptr) یعنی حذف
+}
 void Game::locationOverview(){
     cout << "-----------------------Location Overview-----------------------------------\n"; 
     cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;

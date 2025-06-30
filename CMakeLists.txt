@@ -27,6 +27,8 @@ Monster.hpp
 Monster.cpp
 Dracula.hpp
 Dracula.cpp 
+InvisibleMan.cpp
+InvisibleMan.hpp
 Dice.hpp
 Dice.cpp
 item.hpp

@@ -4,7 +4,6 @@
 #include <map>
 #include "monster.hpp"
 #include "Hero.hpp"
-#include "location.hpp"
 
 class Location;
 
@@ -27,7 +26,7 @@ class Dracula : public Monster {
         void defeat(Hero* hero, std::vector<Item>& yellow_items);
         
         void special_power(Hero*) override ; 
-        void attack() override ;
+        std::pair<Hero*, villager*> attack() override ;
         bool is_defeated()const override ;
         bool can_be_defeated()override;
         void destroy_coffin_at(std::string locationName)override;
