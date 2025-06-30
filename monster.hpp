@@ -2,18 +2,19 @@
 #define MONSTER_HPP
 
 #include <string>
-#include "Location.hpp"
-#include "Hero.hpp"
+#include <iostream>
 
 class Hero;
-class Location; // forward declaration
+class Location; 
 class villager ; 
 
 class Monster {
 private:
     std::string name;
     Location* current_location;
-//    friend std::ostream operator<<(std::ostream &output, Monster);
+  //  friend std::ostream operator<<(std::ostream &output, Monster);
+protected:
+    bool defeated = false ; 
 public:
     Monster(const std::string& name, Location* start_location);
 
@@ -29,11 +30,11 @@ public:
     // برای حرکت از روی استرایک
     void move_towards(int steps);
 
-    virtual std::pair<Hero*, villager*> attack() = 0;
-    virtual void special_power(Hero* h) =0 ;
-    virtual bool is_defeated()const =0 ;
-    virtual bool can_be_defeated() = 0;
-    virtual void destroy_coffin_at(std::string locationName)=0;
+    virtual std::pair<Hero*, villager*> attack() = 0 ;
+    virtual void special_power(Hero*)  = 0 ;
+    virtual bool is_defeated()const = 0 ;
+    virtual bool can_be_defeated() = 0 ;
+  //  virtual void destroy_coffin_at(std::string locationName);
 
 };
  #endif

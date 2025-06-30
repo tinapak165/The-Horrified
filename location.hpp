@@ -9,6 +9,8 @@
 
 class villager ; 
 class Monster ; 
+class Item ; 
+class Hero ;
 
 class Location {
     friend std::ostream& operator<< (std::ostream & os , const Location & loc) ; //برای نمایش اسم لوکیشن
@@ -51,7 +53,6 @@ class Location {
         void connect(Location * other);
         
         
-        void remove_item_by_index(int index); // برای PickUp
     
     };
     

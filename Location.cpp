@@ -35,12 +35,7 @@ const std::string& Location::get_name() const { return name; }
 std::vector<Item>& Location::get_items() {
     return items;
 }
-
-void Location::remove_item_by_index(int index) {
-    if (index >= 0 && index < items.size()) {
-        items.erase(items.begin() + index); }
-}
-    
+   
 void Location::connect(Location * other){
     neighbors.push_back(other);
     other->neighbors.push_back(this);      

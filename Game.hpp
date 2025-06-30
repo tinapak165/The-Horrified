@@ -3,7 +3,7 @@
 #include "GameMap.hpp"
 #include "MonsterCardDeck.hpp"
 #include "TurnManager.hpp"
-#include "Monster.hpp"
+#include "monster.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 #include "Hero.hpp"
@@ -20,8 +20,8 @@ private:
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
-    Monster* dracula = nullptr;
-    Monster* invisibleMan= nullptr;
+    Dracula* dracula = nullptr;
+    InvisibleMan* invisibleMan = nullptr;
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;

@@ -29,7 +29,7 @@ class Dracula : public Monster {
         std::pair<Hero*, villager*> attack() override ;
         bool is_defeated()const override ;
         bool can_be_defeated()override;
-        void destroy_coffin_at(std::string locationName)override;
+        void destroy_coffin_at(std::string locationName);
         
     };
     

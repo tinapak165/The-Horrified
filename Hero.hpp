@@ -6,9 +6,11 @@
 #include "location.hpp"
 #include "item.hpp"
 #include "perkcardsDeck.hpp"
+#include "InvisibleMan.hpp"
 
 class Location ; 
 class villager ; 
+class InvisibleMan ; 
 
 enum class ActionType{
     Move ,
@@ -56,12 +58,12 @@ class Hero{
         Location* GetCurrentLocation() const ;         
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
-        void DisplayActions() ; 
+        void DisplayActions() const ; 
         void resetMaxActions() ; 
 
         void AddAvailablePerk(Perkcards) ;
-        void displayavailblecards() ;
-        void displayPlayedCrds() ; 
+        void displayavailblecards() const;
+        void displayPlayedCards() const; 
         std::vector<Perkcards> GetAvailablePerkCards() ; 
         void addPlayedCards(Perkcards) ;
 
@@ -74,7 +76,7 @@ class Hero{
         int select_items_to_defeat(ItemColor requiredColor) ;
 
         int AdvanceActionForDracula() ; 
-        void AdvanceActionForInvisibleMan() ;
+        void AdvanceActionForInvisibleMan(InvisibleMan*) ;
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;

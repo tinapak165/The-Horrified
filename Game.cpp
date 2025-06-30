@@ -25,12 +25,11 @@ Game::Game() {
     dracula = new Dracula(map.get_location_by_name("Cave")); 
 
 
-    // InvisibleMan* invisibleMan = new InvisibleMan(map.get_lo("Barn"));
-    monstersMap[MonsterType::Dracula] = dracula;
-    // monstersMap[MonsterType::InvisibleMan] = invisibleMan;
+    invisibleMan = new InvisibleMan(map.get_location_by_name("Barn"));
 
-    
-    
+    monstersMap[MonsterType::Dracula] = dracula;
+    monstersMap[MonsterType::InvisibleMan] = invisibleMan;
+
     
 }    
 
@@ -129,7 +128,7 @@ void Game::play_hero_Action(Hero *h){
                     }    
                 }
                 else
-                    cerr << "what you have chosen is not a neighboring place!\n";
+                    h->MoveTo(chosenLocation) ; 
                     
                 }
                 else if(chosenAction == "Guide"){
@@ -194,10 +193,16 @@ void Game::play_hero_Action(Hero *h){
                                     break ;  
                                     } 
                                 }
-                                if(!found) throw invalid_argument("villager not found!") ;
+                                if(!found){
+                                   // throw invalid_argument("villager not found!") ;
+                                    cerr << "villager not found!\n" ; 
+                                } 
                             }
 
-                    }else throw invalid_argument("wrong answer!\n");        
+                    }else{
+                      //throw invalid_argument("wrong answer!\n");   
+                      cerr << "wrong answer!\n" ;
+                    }      
                 }
                 else if(chosenAction == "Pickup"){
  
@@ -223,7 +228,10 @@ void Game::play_hero_Action(Hero *h){
                         h->SpecialPickup(chosenLoc) ;
                         h->DisplayItem() ; 
 
-                    }else throw invalid_argument("what you have chosen is not a neighboring place!\n") ;
+                    }else{
+                       //throw invalid_argument("what you have chosen is not a neighboring place!\n") ; 
+                       cout << "what you have chosen is not a neighboring place!\n" ; 
+                    } 
   
                 }
                 else if(chosenAction == "Advance"){ //for the monster missions
@@ -232,7 +240,6 @@ void Game::play_hero_Action(Hero *h){
                     string locName = current->get_name();
 
                     if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){// اگر قهرمان در محل قرار گیری تابوتهای دراکولا بود
-                        // ابتداچک شود تابوتی در آن مکان هست یا نه
                         cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n" ;
                         int totalStrength = h->AdvanceActionForDracula() ;
                         if (totalStrength >= 6) {
@@ -243,7 +250,7 @@ void Game::play_hero_Action(Hero *h){
                     }
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
-                        h->AdvanceActionForInvisibleMan() ;
+                        h->AdvanceActionForInvisibleMan(invisibleMan) ;
                     }
                     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
                 
@@ -274,6 +281,8 @@ void Game::play_hero_Action(Hero *h){
                         } else {
                             std::cout << "You must destroy all coffins first to defeat Dracula.\n";
                         }
+                    }else{
+                        cerr << "you can not use defeat action unless you are in monster place\n" ;
                     }
     
                 }
@@ -310,7 +319,8 @@ void  Game::start() {
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
-    locationOverview() ;
+
+        locationOverview() ;
 
 
 
@@ -327,10 +337,10 @@ void  Game::start() {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
         }    
-        // if (both_monsters_defeated()) {
-        //     std::cout << "You win! Both monsters defeated!\n";
-        //     break;
-        // }
+        if (both_monsters_defeated()) {
+            std::cout << "You win! Both monsters defeated!\n";
+            break;
+        }
 
         turnManager.next_turn();
     }    
@@ -438,7 +448,7 @@ void Game::ChoosePerkCard(Hero * hero){
             if(selected[i].get_Event() == chooseCard){
                 playPerkCard(hero , chooseCard) ;
                 hero->addPlayedCards(selected[i]) ;
-                hero->displayPlayedCrds() ;
+                hero->displayPlayedCards() ;
                 break;
             }
             else cerr << "card not available\n" ; 

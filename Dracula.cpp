@@ -20,10 +20,13 @@ void Dracula::destroy_coffin_at(std::string locationName) {
 }
 
 
+
+
+
 bool Dracula::is_defeated() const {
+    return defeated;
    
 }
-
 
 bool Dracula::can_be_defeated(){
     for (const auto& keyvalue : coffinsDestroyed) {
@@ -31,6 +34,8 @@ bool Dracula::can_be_defeated(){
     }
     return true;
 }
+
+
 
 
 
@@ -54,7 +59,7 @@ bool Dracula::can_be_defeated(){
     }
     
 
-std::pair<Hero*, villager*> Dracula::attack() {
+    std::pair<Hero*, villager*> Dracula::attack() {
         Location* currentLoc = get_location();
         const auto& heroes = currentLoc->get_heroes();
         const auto& villagers = currentLoc->get_villagers();
@@ -90,3 +95,4 @@ std::pair<Hero*, villager*> Dracula::attack() {
     
         return {chosenHero, chosenVillager};
     }
+    

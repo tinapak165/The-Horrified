@@ -7,7 +7,7 @@
 #include "monster.hpp"
 #include "location.hpp"
 #include "GameMap.hpp"
-
+#include "Hero.hpp"
 using namespace std;
 
 
@@ -218,6 +218,6 @@ void Monster::move_towards(int max_steps) {
     }
 }
 
- std::ostream operator<<(std::ostream &output, Monster &m){
+std::ostream operator<<(std::ostream &output, Monster &m){
     output<<m.get_name();
- }
+}
