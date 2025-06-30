@@ -25,6 +25,7 @@ class villager{
         void MoveTo(Location*, std::string) ; 
         bool static AnyVillagerInSafePlace() ;
         void static removeVillager();
+        void removevillager(villager*) ; 
 };
 
 #endif

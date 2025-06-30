@@ -1,6 +1,6 @@
 #include "villager.hpp"
 #include <iostream>
-#include <list>
+#include <algorithm>
 using namespace std ;
 
 vector<villager*> villager:: vil  ;
@@ -59,6 +59,11 @@ void villager::removeVillager(){
         else ++it ; 
     }  
 }
+
+void villager::removevillager(villager * v){ //killed by attack of monster
+    vil.erase(remove(vil.begin() , vil.end() , v) , vil.end()) ; 
+}
+
 bool villager::AnyVillagerInSafePlace(){
     for(auto *e : all()){
         if(e->in_the_safePlace()){
