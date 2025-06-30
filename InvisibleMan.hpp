@@ -2,10 +2,19 @@
 #define INVISIBLEMAN_HPP
 
 #include "monster.hpp"
+#include <unordered_set>
+
 
 class InvisibleMan : public Monster {
     private:
-        
+
+    std::unordered_set<std::string> required_locations = {
+        "Inn", "Barn", "Institute", "Laboratory", "Mansion"
+    };
+
+    std::unordered_set<std::string> evidence_locations;
+   
+
 
 
     public:
@@ -13,9 +22,14 @@ class InvisibleMan : public Monster {
         InvisibleMan(Location* start);
 
         void special_power(Hero*) override ; 
-        void attack() override ;
+        std::pair<Hero*, villager*> attack() override ;
+
         bool is_defeated()const override ;
         bool can_be_defeated()override;
+
+        
+        bool try_place_evidence(Item ); 
+        int get_evidence_count() const;
 
 };
 
