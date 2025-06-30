@@ -32,6 +32,7 @@ void Dracula::destroy_coffin_at(std::string locationName) {
 }
 
 bool Dracula::is_defeated() const {
+    return defeated;
    
 }
 

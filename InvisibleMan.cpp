@@ -2,6 +2,14 @@
 
 
 InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation){
+    
+    std::unordered_set<std::string> required_locations = {
+        "Inn", "Barn", "Institute", "Laboratory", "Mansion"
+    };
+
+    std::unordered_set<std::string> evidence_locations;
+   
+
 
 }
 
@@ -46,7 +54,7 @@ bool InvisibleMan::can_be_defeated() {
 }
 
 bool InvisibleMan::is_defeated() const {
-    // return defeated;
+    return defeated;
 }
 
 bool InvisibleMan::try_place_evidence(Item item) {
@@ -69,4 +77,12 @@ bool InvisibleMan::try_place_evidence(Item item) {
 
     std::cout << loc << " is not a valid evidence location.\n";
     return false;
+}
+
+bool InvisibleMan::add_evidence(const std::string& location) {
+    if (std::find(evidence_locations.begin(), evidence_locations.end(), location) != evidence_locations.end())
+        return false; // قبلاً این مکان ثبت شده
+
+    evidence_locations.insert(location);
+    return true;
 }

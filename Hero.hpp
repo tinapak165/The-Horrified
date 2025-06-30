@@ -4,11 +4,13 @@
 #include <vector>
 #include "villager.hpp"
 #include "location.hpp"
+#include "InvisibleMan.hpp"
 #include "item.hpp"
 #include "perkcardsDeck.hpp"
 
 class Location ; 
 class villager ; 
+class InvisibleMan;
 
 enum class ActionType{
     Move ,
@@ -71,7 +73,7 @@ class Hero{
         int select_items_to_defeat(ItemColor requiredColor) ;
 
         int AdvanceActionForDracula() ; 
-        void AdvanceActionForInvisibleMan() ;
+        void AdvanceActionForInvisibleMan(InvisibleMan*) ;
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;

@@ -26,10 +26,10 @@ Game::Game() {
     
     dracula = new Dracula(map.get_location_by_name("Cave"));
     
-    // invisibleMan = new InvisibleMan(map.("Barn"));
+    invisibleMan = new InvisibleMan(map.get_location_by_name("Barn"));
 
     monstersMap[MonsterType::Dracula] = dracula;
-    // monstersMap[MonsterType::InvisibleMan] = invisibleMan;
+    monstersMap[MonsterType::InvisibleMan] = invisibleMan;
 
     
     
@@ -248,7 +248,7 @@ void Game::play_hero_Action(Hero *h){
                     }
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
-                        h->AdvanceActionForInvisibleMan() ;
+                        h->AdvanceActionForInvisibleMan(invisibleMan) ;
                     }
                     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
                 

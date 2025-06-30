@@ -3,18 +3,16 @@
 
 #include "monster.hpp"
 #include <unordered_set>
+#include <vector>
+#include <algorithm>
 
 
 class InvisibleMan : public Monster {
+ 
     private:
 
-    std::unordered_set<std::string> required_locations = {
-        "Inn", "Barn", "Institute", "Laboratory", "Mansion"
-    };
-
     std::unordered_set<std::string> evidence_locations;
-   
-
+    std::unordered_set<std::string> required_locations;
 
 
     public:
@@ -30,7 +28,10 @@ class InvisibleMan : public Monster {
         
         bool try_place_evidence(Item ); 
         int get_evidence_count() const;
+        bool add_evidence(const std::string& location);
 
+
+        
 };
 
 #endif

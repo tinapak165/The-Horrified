@@ -23,8 +23,8 @@ private:
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
-    Monster* dracula = nullptr;
-    Monster* invisibleMan= nullptr;
+    Dracula* dracula = nullptr;
+    InvisibleMan* invisibleMan= nullptr;
     
     
     std::unordered_map<MonsterType, Monster*> monstersMap;

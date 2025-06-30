@@ -103,47 +103,46 @@ int Hero::AdvanceActionForDracula(){
     else cout << "no item was selected for advance action!\n" ;
     return totalStrength;
 }
+void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster) {
+    vector<Item> items = GetItems();
 
-void Hero::AdvanceActionForInvisibleMan(){
-    int chosenNumber = -1 ; 
-    vector<Item> selected ;
-
-    while(true){
-        vector<Item> items = (*this).GetItems() ;
-        vector<Item> ItemsToChoose ; 
-        if(items.empty()){
-            cerr << (*this).GetName() << " has no more items!\n" ; 
-            break; 
-        }
-        cout << "items to choose:\n" ;
-        for(size_t i = 0 ; i < items.size() ; i++){
-            if(items[i].getLocationName() == "Inn" || items[i].getLocationName() == "Barn" || items[i].getLocationName() == "Institute" || items[i].getLocationName() == "Laboratory" || items[i].getLocationName() == "Mansion")
-                ItemsToChoose.push_back(items[i]) ;
-        }
-        for(size_t i = 0 ; i < ItemsToChoose.size() ; i++)
-                cout << (i + 1) << "-" << ItemsToChoose[i].getName() << "(location: " << ItemsToChoose[i].getLocationName() << ")\n" ;
-        
-        cout << "please select any item by number(0 to end): " ;
-        cin >> chosenNumber ; 
-        if(chosenNumber == 0) break;
-        if(chosenNumber < 1 && chosenNumber > static_cast<int>(ItemsToChoose.size())){
-            cerr << "invalid. please try again!\n" ;
-            continue;
-        }
-        Item chosenItem = items[chosenNumber - 1] ;
-
-        (*this).removeItems(chosenItem) ;
-        selected.push_back(chosenItem) ; 
-
-    }
-    if(!selected.empty()){
-        cout << "items chosen for advance action:\n " ;
-        for(size_t i = 0 ; i < selected.size() ; i++){
-            cout << (i + 1) << "-" << selected[i].getName() << "(color: " << (*this).colorItems(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ")\n" ;
-            (*this).GetCurrentLocation()->add_item(selected[i]) ; 
+    //   آیتم‌هایی مکان‌های معتبر 
+    vector<Item> evidenceItems;
+    for (const Item& item : items) {
+        std::string loc = item.getLocationName();
+        if (loc == "Inn" || loc == "Barn" || loc == "Institute" || loc == "Laboratory" || loc == "Mansion") {
+            evidenceItems.push_back(item);
         }
     }
-    else cout << "no item was selected for advance action!\n" ;
+
+    if (evidenceItems.empty()) {
+        std::cout << "You have no valid items for evidence.\n";
+        return;
+    }
+
+    std::cout << "Choose one item to place as evidence against Invisible Man:\n";
+    for (size_t i = 0; i < evidenceItems.size(); ++i) {
+        std::cout << i + 1 << ". " << evidenceItems[i].getName()
+                  << " (from " << evidenceItems[i].getLocationName() << ")\n";
+    }
+
+    int choice;
+    std::cout << "Enter number (or 0 to cancel): ";
+    std::cin >> choice;
+
+    if (choice <= 0 || choice > static_cast<int>(evidenceItems.size())) {
+        std::cout << "Cancelled.\n";
+        return;
+    }
+
+    Item selected = evidenceItems[choice - 1];
+
+    if (monster->add_evidence(selected.getLocationName())) {
+        removeItems(selected);
+        std::cout << "Evidence placed successfully.\n";
+    } else {
+        std::cout << "Evidence from that location already exists. Choose another.\n";
+    }
 }
 
 void Hero::PickupItems(){ //pick up item from current location
