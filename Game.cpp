@@ -128,7 +128,7 @@ void Game::play_hero_Action(Hero *h){
                     }    
                 }
                 else
-                    h->MoveTo(chosenLocation) ; 
+                    cerr << "what you have chosen is not a neighboirng place!\n" ;  
                     
                 }
                 else if(chosenAction == "Guide"){
@@ -264,6 +264,24 @@ void Game::play_hero_Action(Hero *h){
                     //3- استفاده از آیتم های قرمز با مجموع 9 یا بالاتر برای نابودی نامرئی
 
                     Location* heroLoc = h->GetCurrentLocation();
+                
+
+                    if (invisibleMan && invisibleMan->get_location() == heroLoc) {
+                        if (invisibleMan->can_be_defeated()) {
+                            std::cout << "You are ready to defeat the Invisible Man! Use RED items (total strength >= 9).\n";
+
+                            int redPower = h->select_items_to_defeat(ItemColor::RED);
+
+                            if (redPower >= 9) {
+                                invisibleMan->set_location(nullptr); // شکست خورد
+                                std::cout << "Invisible Man has been defeated!\n";
+                            } else {
+                                std::cout << "Not enough RED item power. Invisible Man survived.\n";
+                                }
+                            } else {
+                                std::cout << "You must collect and submit evidence from all 5 required locations first.\n";
+                            }
+                        }
 
                     // چک کنیم آیا دراکولا همین‌جاست
                     if (dracula && dracula->get_location() == heroLoc) {
@@ -387,8 +405,8 @@ void Game::playPerkCard(Hero* hero, string card){
         }
         else if (card == "Repel"){
             p.display_the_card(p2) ;
-            //dracula->move_towards(2) ;
-           //invisibleMan->move_towards(2) ; 
+            dracula->move_towards(2) ; //چک شود
+            invisibleMan->move_towards(2) ; 
         }
 
         else if(card == "Late into the Night"){
@@ -399,7 +417,6 @@ void Game::playPerkCard(Hero* hero, string card){
             hero->DisplayInfo() ; 
         }
         else if( card == "Break of Dawn"){
-            //آیتم بصورت رندوم نمیاد!!!!
             //فاز هیولا بعدی رد میشود !؟
             p.display_the_card(p2);
             ItemPool pool ;
@@ -413,7 +430,6 @@ void Game::playPerkCard(Hero* hero, string card){
             }
         }
         else if(card == "Overstock"){
-            //آیتم بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
             vector<Item> PoolItems = pool.draw_random_items(2) ;
@@ -475,7 +491,8 @@ void Game::distribute_initial_items() {
         }
     }
 }
-void Game::monster_phase() {
+void Game::
+monster_phase() {
 
     if (deck.is_empty()) {
         std::cout << "\n Monster deck is empty. Players lose!\n";
@@ -509,14 +526,14 @@ void Game::monster_phase() {
             if (monstersMap.count(type)) {
                 Monster* m = monstersMap[type];
 
-                // حرکت هیولا
+                //  از رو استرایک حرکت هیولا
                 for (int i = 0; i < moves; ++i) {
                     Location* target = m->find_nearest_target(m->get_location());
                     if (target)
                         m->move_towards(1); // هر بار یک قدم
                 }
 
-                // تاس انداختن
+                // سه بار تاس 
                 Dice d(3);  
                 std::vector<DiceFace> results = d.roll(dice);
 
@@ -532,7 +549,7 @@ void Game::monster_phase() {
                                 send_hero_to_hospital(keyvalue.first);
                             }
                             
-                            if (keyvalue.second) { //villager
+                            if (keyvalue.second) {
                                 std::cout << "Dracula destroys " << keyvalue.second->get_name() << "!\n";
                                 remove_villager(keyvalue.second);
                             }
@@ -545,13 +562,13 @@ void Game::monster_phase() {
                         }
                     }
                     if (monstersMap.count(MonsterType::InvisibleMan)) {
-                        Monster* invisibleMan = monstersMap[MonsterType::InvisibleMan];
-                        Location* target = invisibleMan->find_nearest_villager(invisibleMan->get_location());
-                        if (target) {
-                            invisibleMan->move_towards(2);
-                            std::cout << "Invisible Man sneaks closer to target!\n";
-                        }
-                    }
+                                            Monster* invisibleMan = monstersMap[MonsterType::InvisibleMan];
+                                            Location* target = invisibleMan->find_nearest_villager(invisibleMan->get_location());
+                                            if (target) {
+                                                invisibleMan->move_towards(2);
+                                                std::cout << "Invisible Man sneaks closer to target!\n";
+                                            }
+                                        }
                 }
             }
         }
@@ -560,6 +577,9 @@ void Game::monster_phase() {
  }
 
 }
+
+
+
 void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
     h->MoveTo(hospital);
