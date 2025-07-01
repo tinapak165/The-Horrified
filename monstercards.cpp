@@ -97,9 +97,29 @@ void Monstercard::place_item(int Item){
 // } 
 // }
 
+std::ostream& operator<<(std::ostream& os, const MonsterType& m) {
+    switch (m) {
+        case MonsterType::InvisibleMan: os << "Invisible Man"; break;
+        case MonsterType::Dracula: os << "Dracula"; break;
+        case MonsterType::Frenzied: os << "Frenzied"; break;
+        default: os << "Unknown Monster"; break;
+    }
+    return os;
+}
+std::ostream& operator<<(std::ostream& os, const Strike& strike) {
+    os << "Strike: [Monsters: ";
+    for (size_t i = 0; i < strike.get_monsters().size(); ++i) {
+        os << strike.get_monsters()[i];
+        if (i != strike.get_monsters().size() - 1)
+            os << ", ";
+    }
+    os << " | Move: " << strike.get_move_count();
+    os << " | Dice: " << strike.get_dice_count() << "]\n";
+    return os;
+}
 
-std::ostream&  operator<<(std::ostream& os, const Monstercard& card) {
-    os << "Card name: " << card.card_name << "\n";
+std::ostream& operator<<(std::ostream& os, const Monstercard& card) {
+    os << "MonsterCard name: " << card.card_name << "\n";
     os << "Item count: " << card.Item_count << "\n";
     os << "Event: " << card.Event << "\n";
     if (!card.character_name.empty())
@@ -107,9 +127,12 @@ std::ostream&  operator<<(std::ostream& os, const Monstercard& card) {
     if (!card.destination_location.empty())
         os << "Location: " << card.destination_location << "\n";
 
-
+    for (const auto& strike : card.get_strikes()) {
+        os << strike;
+    }
 
     return os;
 }
+
 
 //Monstercard::operator = (){}

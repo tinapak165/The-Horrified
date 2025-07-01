@@ -8,7 +8,7 @@ Archaeologist:: Archaeologist(GameMap& Map): Hero("Archaeologist" , 4 , Map.get_
 
 void Archaeologist:: DisplayInfo() const{
     cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n'  ; 
+    GetRemainingActions() << "/" << 4 << '\n' << "special action: " << GetSpecialActionInfo() << '\n'  ; 
 } 
 
 

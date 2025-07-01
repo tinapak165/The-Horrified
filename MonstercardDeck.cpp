@@ -10,9 +10,9 @@ MonsterCardDeck::MonsterCardDeck() {
     cards.push_back(Monstercard("form the bat",2, "Dracula moves where your hero is.", { {{MonsterType::Dracula}, 1, 2} }));
     cards.push_back(Monstercard("form the bat",2, "Dracula moves where your hero is.", { {{MonsterType::Dracula}, 1, 2} }));
 
-    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }));
-    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }));
-    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }));
+    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }, "Dracula", "Crypt"));
+    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }, "Dracula", "Crypt"));
+    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} } , "Dracula", "Crypt"));
 
     cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
     cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
@@ -24,7 +24,7 @@ MonsterCardDeck::MonsterCardDeck() {
     cards.push_back(Monstercard("The delivary",3, "Place Wilbur & Chick at Docks.", { {{MonsterType::Frenzied}, 1, 3} }, "Wilbur & Chick", "Docks"));
     cards.push_back(Monstercard("Former employer",3, "Place Dr. Cranly at Laboratory.", { {{MonsterType::InvisibleMan}, 1, 2} }, "Dr. Cranly", "Laboratory"));
     cards.push_back(Monstercard("Hurried Assistant",3, "Place Fritz at Tower.", { {{MonsterType::Dracula}, 2, 3} }, "Fritz", "Tower"));
-    cards.push_back(Monstercard("Egyptian Expert",3, "Place Prof. Pearson at Cave.", { {{MonsterType::Dracula, MonsterType::Frenzied}, 2, 2} }, "Prof. Pearson", "Cave"));
+    cards.push_back(Monstercard("Egyptian Expert",3, "Place Prof. Pearson at Cave.", { {{MonsterType::Dracula /*, MonsterType::Frenzied */}, 2, 2} }, "Prof. Pearson", "Cave"));
     cards.push_back(Monstercard("Fortune teller",3, "Place Maleva at Camp.", { {{MonsterType::Frenzied}, 1, 2} }, "Maleva", "Camp"));
 
     std::srand(std::time(0)); 

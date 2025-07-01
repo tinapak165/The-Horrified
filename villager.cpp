@@ -11,6 +11,10 @@ villager::villager(const string name, Location* safeplace , Location* current) :
     
     if(current)
         current->add_villager(this) ; 
+        // ترفند: اگه در safePlace ساخته شده، نذار بلافاصله حذف شه
+    if (in_the_safePlace()) {
+        safePlace = nullptr; 
+    }
 }
 
 bool villager::in_the_safePlace() const{
@@ -40,20 +44,24 @@ void villager::MoveTo(Location* newPlace , string charc){ // only villager move
         if(v->get_name() == charc){
             if(newPlace == v->get_currentLocation())
                 throw runtime_error("you are in the current location") ;
+            v->get_currentLocation()->remove_villager(v) ; 
             v->set_currentLocation(newPlace) ; 
+            newPlace->add_villager(v) ; 
             cout << v->get_name() << " " << "moved to " << *(v->get_currentLocation()) << '\n' ;
             return ;  
         }
     }
-    throw invalid_argument("villager not found!") ; 
+    throw invalid_argument("villager not found! in move") ; 
 
 }
 void villager::removeVillager(){
 
     for(auto it = vil.begin() ; it != vil.end() ; ){
         if((*it)->in_the_safePlace()){
+            if((*it)->get_currentLocation()){
+                (*it)->get_currentLocation()->remove_villager(*it) ; 
+            }
             delete *it ; 
-            //cout << (*it)->get_name() << " is deleted\n"; checking if the villager actually been deleted
             it  = vil.erase(it) ;
         }
         else ++it ; 
@@ -62,6 +70,7 @@ void villager::removeVillager(){
 
 void villager::removevillager(villager * v){ //killed by attack of monster
     vil.erase(remove(vil.begin() , vil.end() , v) , vil.end()) ; 
+    std::cout << "Removed villager: " << (this)->get_name() << "\n";
 }
 
 bool villager::AnyVillagerInSafePlace(){

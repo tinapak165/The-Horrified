@@ -162,6 +162,7 @@ CMakeFiles/Horrified.dir/Dice.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/include/errno.h \
   C:/MinGW/include/io.h \
   C:/MinGW/include/locale.h \
+  C:/MinGW/include/math.h \
   C:/MinGW/include/msvcrtver.h \
   C:/MinGW/include/process.h \
   C:/MinGW/include/sdkddkver.h \
@@ -210,6 +211,8 @@ CMakeFiles/Horrified.dir/Dice.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algo.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
@@ -220,6 +223,7 @@ CMakeFiles/Horrified.dir/Dice.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
@@ -233,6 +237,7 @@ CMakeFiles/Horrified.dir/Dice.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cctype \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
@@ -264,9 +269,12 @@ CMakeFiles/Horrified.dir/Dice.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/new \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/numeric \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/string \
@@ -526,10 +534,12 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_map.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multiset.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_raw_storage_iter.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_set.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tempbuf.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
@@ -593,6 +603,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horr
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/numeric \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ostream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random \
+  C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/set \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/sstream \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
   C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
@@ -2726,6 +2737,8 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/Dice.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.hpp:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multiset.h:
+
 C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcards.hpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/perkcardsDeck.hpp:
@@ -3014,13 +3027,27 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/utility:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/vector:
 
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/set:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/stddef.h:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/monster.cpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Dice.hpp:
 
+C:/MinGW/include/math.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath:
+
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/ctime:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h:
+
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/Dracula.cpp:
 
@@ -3046,8 +3073,6 @@ C:/Users/sibegilan/Desktop/Final/The-Horrified/TurnManager.hpp:
 
 C:/Users/sibegilan/Desktop/Final/The-Horrified/monstercards.hpp:
 
-C:/MinGW/include/math.h:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_conv.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.h:
@@ -3056,23 +3081,15 @@ C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets_nonio.tcc:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/quoted_string.h:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/random.tcc:
-
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/sstream.tcc:
 
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_numeric.h:
+C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_set.h:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/bits/unordered_map.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/cmath:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/iomanip:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/messages_members.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/opt_random.h:
-
-C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/random:
 
 C:/MinGW/lib/gcc/mingw32/6.3.0/include/c++/sstream:
 

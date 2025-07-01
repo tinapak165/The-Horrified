@@ -48,4 +48,5 @@ public:
     bool both_monsters_defeated();
 
     void distribute_initial_items();
+    villager* create_villager(const std::string& name, const std::string& locName);
 };

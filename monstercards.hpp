@@ -48,6 +48,9 @@ class Monstercard{
     friend std::ostream& operator<<(std::ostream& os, const Monstercard& card);
         // باید بصورت دستی همه ی کارت هارو با کانستارکتور توی یک 
     public:
+    friend std::ostream& operator<<(std::ostream& os, const MonsterType& m);
+    friend std::ostream& operator<<(std::ostream& os, const Strike& strike) ;
+
     Monstercard();
     Monstercard (std::string card_name , int itemCount, std::string event, std::vector<Strike> s );
     Monstercard( std:: string card_name ,int itemCount, std::string event, std::vector<Strike> s, std::string character , std::string location);
@@ -69,4 +72,3 @@ class Monstercard{
 };
 
 #endif
-

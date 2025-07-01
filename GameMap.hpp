@@ -3,8 +3,11 @@
 #define GAMEMAP_HPP
 
 #include "Location.hpp"
+#include "villager.hpp"
 #include <vector>
 #include <memory>
+
+class villager ; 
 
 class GameMap {
 private:
@@ -15,7 +18,7 @@ public:
     Location* get_location_by_name(const std::string& name);
     const std::vector<std::unique_ptr<Location>>& get_locations() const;  
     void print_map()const;
-
+    villager* find_villager_by_name(const std::string& name) ;
     
 };
 

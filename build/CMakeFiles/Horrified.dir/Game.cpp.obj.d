@@ -184,4 +184,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\numeric \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_numeric.h \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Mayor.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\Archaeologist.hpp
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\Archaeologist.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\set \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_set.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_multiset.h
