@@ -495,6 +495,19 @@ bool Game::both_monsters_defeated() {
 }
 void Game::monster_phase() {
     std::cout << "-MONSTER PHASE-\n";
+    Location* loc = dracula->get_location();
+    Location* loc2 = invisibleMan->get_location();
+    
+    if (loc)
+        std::cout << "Dracula's location: " << loc->get_name() << "\n";  // چاپ نام مکان
+    else
+        std::cout << "Dracula has no location.\n";
+    
+    if (loc2)
+        std::cout << "Invisible Man's location: " << loc2->get_name() << "\n";
+    else
+        std::cout << "Invisible Man has no location.\n";
+    
 
     if (deck.is_empty()) {
         std::cout << "\nMonster deck is empty. Players lose!\n";
@@ -536,6 +549,42 @@ void Game::monster_phase() {
         }
     }
     
+    // اجرای event کارت‌های خاص
+std::string cardName = card.get_card_name();
+
+if (cardName == "form the bat") {
+    // دراکولا بره به موقعیت hero فعال
+    Monster* dracula = monstersMap[MonsterType::Dracula];
+    Hero* hero = turnManager.get_active_hero();
+    if (dracula && hero) {
+        Location* heroLoc = hero->GetCurrentLocation();
+        if (heroLoc) {
+            dracula->set_location(heroLoc);
+            std::cout << "Event: Dracula moved to " << heroLoc->get_name() << " (hero location)\n";
+        }
+    }
+}
+else if (cardName == "Thief") {
+    // مرد نامرئی بره جایی که بیشترین آیتم هست
+    Monster* inv = monstersMap[MonsterType::InvisibleMan];
+    if (inv) {
+        Location* maxLoc = nullptr;
+        int maxItems = -1;
+        for (const auto& locPtr : map.get_locations()) {
+            Location* loc = locPtr.get();
+            if ((int)loc->get_items().size() > maxItems) {
+                maxItems = (int)loc->get_items().size();
+                maxLoc = loc;
+            }
+        }
+
+        if (maxLoc) {
+            inv->set_location(maxLoc);
+            std::cout << "Event: Invisible Man moved to " << maxLoc->get_name() << " (most items)\n";
+        }
+    }
+}
+
 
     // قرار دادن آیتم‌ها
     int itemCount = card.get_item_count();
