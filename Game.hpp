@@ -3,36 +3,29 @@
 #include "GameMap.hpp"
 #include "MonsterCardDeck.hpp"
 #include "TurnManager.hpp"
-#include "Monster.hpp"
+#include "monster.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 #include "Hero.hpp"
-#include "monster.hpp"
 #include "Dice.hpp"
 #include "Itembag.hpp"
 
 class Game {
 private:
-
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
-    ItemPool pool;
     PerkDeck p ; 
     Perkcards p2 ;
-    
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
     Dracula* dracula = nullptr;
-    InvisibleMan* invisibleMan= nullptr;
+    InvisibleMan* invisibleMan = nullptr;
     
-    
+    ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
-   
-   
     int terrorLevel = 0;
-   
     bool game_over = false;
     
 public:
@@ -40,19 +33,18 @@ public:
     ~Game();
     void test();
     void start() ;
-
     void choose_character();
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
-    
-    void playPerkCard(Hero* hero, std::string );
-    void ChoosePerkCard(Hero * hero);
+    void playPerkCard(Hero* , std::string);
+    void ChoosePerkCard(Hero*) ;
     void getNewCard(Hero*) ;
+    void locationOverview() ;
 
-    void send_hero_to_hospital(Hero* );// for hero attack
-    void remove_villager(villager* );
     void monster_phase();
-    void locationOverview();
+    void send_hero_to_hospital(Hero* );
+    void remove_villager(villager* );
+    villager* create_villager(const std::string& name, const std::string& locName);
 
     bool both_monsters_defeated();
 

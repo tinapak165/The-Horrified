@@ -187,7 +187,6 @@ CMakeFiles/Horrified.dir/main.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\TurnManager.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Hero.hpp \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\Monster.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Dracula.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \

@@ -89,6 +89,16 @@ Location* GameMap::get_location_by_name(const std::string& name) {
     return nullptr;
 }
 
+villager* GameMap::find_villager_by_name(const std::string& name) {
+    for (const auto& loc : locations) { // loc: std::unique_ptr<Location>
+        for (villager* v : loc->get_villagers()) {
+            if (v->get_name() == name) return v;
+        }
+    }
+    return nullptr;
+}
+
+
 const std::vector<std::unique_ptr<Location>>& GameMap::get_locations() const {
     return locations;
 }

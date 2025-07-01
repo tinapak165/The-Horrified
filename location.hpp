@@ -27,7 +27,7 @@ class Location {
         
     public:
             
-            friend std::ostream operator <<( std::ostream &output , Location&);
+            friend std::ostream& operator <<( std::ostream &output ,const Location&);
             friend std::ostream operator <<( std::ostream &output , std::vector<Monster*> &);
 
             Location(const std::string & name);

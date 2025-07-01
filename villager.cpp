@@ -1,13 +1,22 @@
 #include "villager.hpp"
 #include <iostream>
-#include <list>
+#include <algorithm>
 using namespace std ;
 
 vector<villager*> villager:: vil  ;
 
-villager::villager(const string name, Location* place) : name(name), safePlace(place) 
-{
-    vil.push_back(this) ;
+villager::villager(const string name, Location* safeplace, Location* current)
+    : name(name), currentLocation(current), safePlace(safeplace) {
+    
+    vil.push_back(this);
+    
+    if (current)
+        current->add_villager(this);
+    
+    // ترفند: اگه در safePlace ساخته شده، نذار بلافاصله حذف شه
+    if (in_the_safePlace()) {
+        safePlace = nullptr; 
+    }
 }
 
 
@@ -46,21 +55,32 @@ void villager::MoveTo(Location* newPlace , string charc){ // only villager move
     throw invalid_argument("villager not found!") ; 
 
 }
-void villager::removeVillager(){
-
-    for(auto it = vil.begin() ; it != vil.end() ; ){
-        if((*it)->in_the_safePlace()){
-            delete *it ; 
-            //cout << (*it)->get_name() << " is deleted\n"; checking if the villager actually been deleted
-            it  = vil.erase(it) ;
+void villager::removeVillager() {
+    for (auto it = vil.begin(); it != vil.end(); ) {
+        if ((*it)->in_the_safePlace()) {
+            if ((*it)->get_currentLocation()) {
+                (*it)->get_currentLocation()->remove_villager(*it); // ✅ remove from location
+            }
+            delete *it;
+            it = vil.erase(it);
+        } else {
+            ++it;
         }
-        else ++it ; 
-    }  
+    }
 }
+
+
+
+
+void villager::removevillager(villager * v){ //killed by attack of monster
+    vil.erase(remove(vil.begin() , vil.end() , v) , vil.end()) ; 
+    std::cout << "Removed villager: " << (this)->get_name() << "\n";
+
+}
+
 bool villager::AnyVillagerInSafePlace(){
     for(auto *e : all()){
         if(e->in_the_safePlace()){
-            removeVillager() ;
             return true ; 
         }
     }
@@ -68,3 +88,4 @@ bool villager::AnyVillagerInSafePlace(){
 }
 
 vector<villager*> &villager::all(){ return vil ;}
+

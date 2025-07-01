@@ -81,4 +81,4 @@ class Hero{
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
 };
-#endif 
+#endif  

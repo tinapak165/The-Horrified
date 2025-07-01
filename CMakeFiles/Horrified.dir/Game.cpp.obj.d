@@ -202,7 +202,6 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/optional \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\TurnManager.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Hero.hpp \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\Monster.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Dracula.hpp \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Dice.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array \
@@ -236,4 +235,7 @@ CMakeFiles/Horrified.dir/Game.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_numeric.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_numeric_defs.h \
  C:\Users\Tina\Desktop\Horrified\The-Horrified\Mayor.hpp \
- C:\Users\Tina\Desktop\Horrified\The-Horrified\Archaeologist.hpp
+ C:\Users\Tina\Desktop\Horrified\The-Horrified\Archaeologist.hpp \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/set \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_set.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multiset.h

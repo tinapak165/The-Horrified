@@ -22,7 +22,7 @@ void Monster::set_location(Location* L){ current_location = L;}
 
 
 Location* Monster::find_nearest_target(Location* start) {
-    std::cout<<"in fine nearest target ";
+    std::cout<<"in find nearest target ";
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
@@ -46,8 +46,9 @@ Location* Monster::find_nearest_target(Location* start) {
             }
         }
         // if {} //اگه تارگتی پیدا نشد
-    }
 
+    }
+    cout<<"end of find nearest target \n";
     return nullptr; // هیچ هدفی
 }
 
@@ -65,6 +66,7 @@ Location* Monster::find_nearest_hero(Location* start) {
 
         // شرط هدف
         if (!current->get_heroes().empty() ) {
+            cout<<"Monster won't move from strike because hero is at"<<current <<"too !";
             return current;
         }
 
@@ -219,6 +221,7 @@ void Monster::move_towards(int max_steps) {
 
         std::cout << name << " moved to " << current_location->get_name() << "\n";
     }
+    cout<<" end of move to folan \n";
 }
 
  std::ostream operator<<(std::ostream &output, Monster &m){
