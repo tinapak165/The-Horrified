@@ -90,7 +90,7 @@ Game::~Game() {
 void Game::play_hero_Action(Hero *h){
     while(true){
     string chosenAction ; 
-    cout << "what action do you want to play this turn(Move, Guide , Pickup , Advance ,Defeat , Perk , Help , Quit) ? " ;
+    cout << "what action do you want to play this turn(Move, Special , Guide , Pickup , Advance ,Defeat , Perk , Help , Quit)? " ;
     cin >> chosenAction ; 
     if(chosenAction == "Help")
         h->DisplayActions() ;
@@ -590,50 +590,9 @@ void Game::remove_villager(villager* v) {
     v->set_currentLocation(nullptr); // فرض بر اینکه set_location(nullptr) یعنی حذف
 }
 void Game::locationOverview(){
-    cout << "----location Overview----\n" ; 
-
-    for(const auto& locPtr : map.get_locations()){
-        Location* loc = locPtr.get() ; 
-        string itemStr ; 
-        const auto items = loc->get_items() ;
-        if(items.empty())
-            itemStr = "-" ; 
-        else{
-            std::map< std::string , int> itemcount ;
-            for(const auto & item : items)
-                itemcount[item.getName()]++ ;
-            for(const auto& pair : itemcount)
-                itemStr+= pair.first + "(" + to_string(pair.second) +"), " ;
-            if(!itemStr.empty())
-                itemStr.pop_back() , itemStr.pop_back() ;   
-        }
-        string monStr ;
-        const auto monsters = loc->get_monsters() ;
-        if(monsters.empty())
-            monStr = "-" ; 
-        else{
-            for(const auto& m : monsters)
-                monStr+= m->get_name() + ", " ;
-            
-            monStr.pop_back() ; monStr.pop_back() ;
-        }
-        string villagerStr;
-        const auto& villagers = loc->get_villagers();
-        if (villagers.empty()) 
-            villagerStr = "-";
-        else {
-            for (const auto& v : villagers)
-                villagerStr += v->get_name() + ", ";
-            villagerStr.pop_back(); villagerStr.pop_back();
-        }
-
-
-        cout << "location: " << loc->get_name() << "-> items: " << itemStr << ",monsters: " << monStr << ", villagers: " << villagerStr << '\n' ; 
-    }
-    /*
-    cout << "-----------------------Location Overview-----------------------------------\n"; 
-    cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;
-    cout << right <<"----------------------------------------------------------------------------\n" ; 
+    cout << "-----------------------------Location Overview--------------------------------------\n"; 
+    cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
+    cout << right <<"--------------------------------------------------------------------------------------\n" ; 
  
     for(const auto& locPtr : map.get_locations()){
         Location* loc = locPtr.get() ; 
@@ -671,12 +630,25 @@ void Game::locationOverview(){
                 villagerStr += v->get_name() + ", ";
             villagerStr.pop_back(); villagerStr.pop_back();
         }
-        cout << left << "| " << setw(13) << loc->get_name()
-             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << "|\n";
+
+        string HeroStr ; 
+        const auto& heroes = loc->get_heroes() ; 
+        if(heroes.empty())
+            HeroStr = "-" ; 
+        else{
+            for(const auto& h : heroes)
+                HeroStr+= h->GetName() ; 
+            
+        }
+        cout << left << setw(13) << loc->get_name()
+             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << setw(20) << HeroStr << "\n";
     }
-    // نمایش تعداد تابوت های خراب شده +  آیتم های مرد نامرئی
-  cout << "---------------------------------------------------------------------------\n" ;  
-    */
+  cout << "-------------------------------------------------------------------------------------\n" ; 
+  //collected evidences:
+  //smashed coffins: 
+  //terror level:
+  //dice rolled each turn 
+    
 }
 
 
