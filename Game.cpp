@@ -590,6 +590,47 @@ void Game::remove_villager(villager* v) {
     v->set_currentLocation(nullptr); // فرض بر اینکه set_location(nullptr) یعنی حذف
 }
 void Game::locationOverview(){
+    cout << "----location Overview----\n" ; 
+
+    for(const auto& locPtr : map.get_locations()){
+        Location* loc = locPtr.get() ; 
+        string itemStr ; 
+        const auto items = loc->get_items() ;
+        if(items.empty())
+            itemStr = "-" ; 
+        else{
+            std::map< std::string , int> itemcount ;
+            for(const auto & item : items)
+                itemcount[item.getName()]++ ;
+            for(const auto& pair : itemcount)
+                itemStr+= pair.first + "(" + to_string(pair.second) +"), " ;
+            if(!itemStr.empty())
+                itemStr.pop_back() , itemStr.pop_back() ;   
+        }
+        string monStr ;
+        const auto monsters = loc->get_monsters() ;
+        if(monsters.empty())
+            monStr = "-" ; 
+        else{
+            for(const auto& m : monsters)
+                monStr+= m->get_name() + ", " ;
+            
+            monStr.pop_back() ; monStr.pop_back() ;
+        }
+        string villagerStr;
+        const auto& villagers = loc->get_villagers();
+        if (villagers.empty()) 
+            villagerStr = "-";
+        else {
+            for (const auto& v : villagers)
+                villagerStr += v->get_name() + ", ";
+            villagerStr.pop_back(); villagerStr.pop_back();
+        }
+
+
+        cout << "location: " << loc->get_name() << "-> items: " << itemStr << ",monsters: " << monStr << ", villagers: " << villagerStr << '\n' ; 
+    }
+    /*
     cout << "-----------------------Location Overview-----------------------------------\n"; 
     cout << left << "| " << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << "|\n" ;
     cout << right <<"----------------------------------------------------------------------------\n" ; 
@@ -635,6 +676,7 @@ void Game::locationOverview(){
     }
     // نمایش تعداد تابوت های خراب شده +  آیتم های مرد نامرئی
   cout << "---------------------------------------------------------------------------\n" ;  
+    */
 }
 
 
