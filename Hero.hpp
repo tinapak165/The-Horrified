@@ -74,6 +74,8 @@ class Hero{
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
         int select_items_to_defeat(ItemColor requiredColor) ;
+        bool has_items() const;
+        void use_one_item();
 
         int AdvanceActionForDracula() ; 
         void AdvanceActionForInvisibleMan(InvisibleMan*) ;

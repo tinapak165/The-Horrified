@@ -25,7 +25,7 @@ private:
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
-    int terrorLevel = 0;
+    int terror_Level = 0;
     bool game_over = false;
     
 public:
@@ -40,6 +40,7 @@ public:
     void ChoosePerkCard(Hero*) ;
     void getNewCard(Hero*) ;
     void locationOverview() ;
+    void graph_map();
 
     void monster_phase();
     void send_hero_to_hospital(Hero* );
@@ -47,6 +48,7 @@ public:
     villager* create_villager(const std::string& name, const std::string& locName);
 
     bool both_monsters_defeated();
+    void increase_terror_level();
 
     void distribute_initial_items();
 };

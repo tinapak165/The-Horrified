@@ -434,3 +434,13 @@ int Hero::select_items_to_defeat(ItemColor requiredColor) {
     return totalStrength;
 }
 
+
+bool Hero::has_items() const {
+    return !ListOfitems.empty();
+}
+
+void Hero::use_one_item() {
+    if (!ListOfitems.empty()) {
+        ListOfitems.pop_back();
+    }
+}
