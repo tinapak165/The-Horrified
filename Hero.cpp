@@ -76,7 +76,6 @@ void Hero::removeItems(const Item & i){
         }
     }
 }
-
 int Hero::AdvanceActionForDracula(){
     int chosenNumber = -1 ; 
     int totalStrength = 0 ;
@@ -164,7 +163,6 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     } 
 
 }
-
 void Hero::PickupItems(){ //pick up item from current location
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
     if(ItemsAtLocation.empty()){
@@ -431,4 +429,15 @@ int Hero::select_items_to_defeat(ItemColor requiredColor) {
     }
 
     return totalStrength;
+}
+
+
+bool Hero::has_items() const {
+    return !ListOfitems.empty();
+}
+
+void Hero::use_one_item() {
+    if (!ListOfitems.empty()) {
+        ListOfitems.pop_back();
+    }
 }

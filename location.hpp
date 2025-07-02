@@ -22,6 +22,7 @@ class Location {
         std::vector<Monster*> monsters;
         std::vector<Location*> neighbors;
         bool hascoffin = false; // فقط واسio دراکولاس
+        int x = -1, y = -1; 
         
         public:
         friend std::ostream operator <<( std::ostream &output , std::vector<Monster*> &);
@@ -51,6 +52,9 @@ class Location {
         const std::vector<Location*>& get_neighbors() const;
         Location* findNeighbor(const std::string& name) const  ;  
         void connect(Location * other);
+        void set_coords(int x_, int y_);
+        int get_x() const;
+        int get_y() const;
         
         
     

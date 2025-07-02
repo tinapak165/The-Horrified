@@ -12,8 +12,8 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Dart", ItemColor::RED, 2, "Inn");
     allItems.emplace_back("Fire Poker", ItemColor::RED, 3, "Mansion");
     allItems.emplace_back("Fire Poker", ItemColor::RED, 3, "Mansion");
-    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theater");
-    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theater");
+    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theatre");
+    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theatre");
     allItems.emplace_back("Shovel", ItemColor::RED, 2, "Graveyard");
     allItems.emplace_back("Torch", ItemColor::RED, 5, "Barn");
     allItems.emplace_back("Pistol", ItemColor::RED, 6, "Precinct");
