@@ -64,7 +64,7 @@ class Hero{
         void AddAvailablePerk(Perkcards) ;
         void displayavailblecards() const;
         void displayPlayedCards() const; 
-        std::vector<Perkcards> GetAvailablePerkCards() ; 
+        std::vector<Perkcards>& GetAvailablePerkCards() ; 
         void addPlayedCards(Perkcards) ;
 
         void DisplayItem() ;

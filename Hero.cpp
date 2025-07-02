@@ -52,7 +52,7 @@ void Hero::displayPlayedCards() const{
     }
 }
 
-vector<Perkcards> Hero::GetAvailablePerkCards(){
+vector<Perkcards>& Hero::GetAvailablePerkCards(){
     return availableCards;
 }
 
@@ -60,7 +60,7 @@ void Hero::addPlayedCards(Perkcards p){
     playedCards.push_back(p) ;
     for(size_t i = 0 ; i < this->GetAvailablePerkCards().size() ; i++){
         if(p.get_Event() == availableCards[i].get_Event()){
-            availableCards.erase(availableCards.begin() + i);
+            this->GetAvailablePerkCards().erase(this->GetAvailablePerkCards().begin() + i);
             break;
         }
     }

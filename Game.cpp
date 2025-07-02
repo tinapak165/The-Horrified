@@ -151,7 +151,7 @@ void Game::play_hero_Action(Hero *h){
                             h->showvillagersHere() ;
                             cout << "\nwho do you want to move? " ; 
                             string chosenvillager ;
-                            cin.clear() ; 
+                            cin.ignore() ; 
                             getline(cin , chosenvillager) ; 
                             bool found = false ; 
                             for(auto *v : h->villagerHere()){
@@ -172,7 +172,7 @@ void Game::play_hero_Action(Hero *h){
                                 }
                             } 
                             if(!found){
-                                throw invalid_argument("villager not found!") ;
+                              //  throw invalid_argument("villager not found!") ;
                                 cerr << "villager not found!\n" ;
                             }  
 
@@ -196,8 +196,8 @@ void Game::play_hero_Action(Hero *h){
                             string chosenvillager ; 
                             cout << "Which villager do you want to move to your location? " ;
                             cin >> chosenvillager ; 
-                            //cin.clear() ; !!!!
-                            //getline(cin , chosenvillager) ; !!! 
+                            cin.ignore() ; 
+                            getline(cin , chosenvillager) ;  
                             bool found = false ; 
                             for(auto *v : availableVillager){
                                 if(chosenvillager == v->get_name()){
@@ -368,6 +368,7 @@ void Game::getNewCard(Hero* hero){
     hero->AddAvailablePerk(p2) ; 
 }
 void Game::playPerkCard(Hero* hero, string card){
+    while(true) {
     if(card == "Hurry"){
             string firstMove , secondMove ; 
             p.display_the_card(p2) ; 
@@ -377,14 +378,20 @@ void Game::playPerkCard(Hero* hero, string card){
             Location* firstMoveLoc = map.get_location_by_name(firstMove);
             if(currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
                 mayor->MoveTo(firstMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ;
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;
+            } 
 
             cout << "Mayor..what is your second place to move? " ;
             cin >> secondMove ;
             Location* secondMoveLoc = map.get_location_by_name(secondMove);
             if(currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
                 mayor->MoveTo(secondMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ; 
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;
+            }  
 
             cout << "--------------\n" ;
             string AfirstMove , AsecondMove ; 
@@ -394,14 +401,20 @@ void Game::playPerkCard(Hero* hero, string card){
             Location* AfirstMoveLoc = map.get_location_by_name(AfirstMove);
             if(AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
                 archaeologist->MoveTo(AfirstMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ;
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;  
+            } 
 
             cout << "Archaeologist..what is your second place to move? " ;
             cin >> AsecondMove ;
             Location* AsecondMoveLoc = map.get_location_by_name(AsecondMove);
             if(AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
                 archaeologist->MoveTo(AsecondMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ;     
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;
+            }      
         }
         else if (card == "Repel"){
             p.display_the_card(p2) ;
@@ -410,11 +423,9 @@ void Game::playPerkCard(Hero* hero, string card){
         }
 
         else if(card == "Late into the Night"){
-
             p.display_the_card(p2) ;
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
             cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
-            hero->DisplayInfo() ; 
         }
         else if( card == "Break of Dawn"){
             //فاز هیولا بعدی رد میشود !؟
@@ -447,33 +458,51 @@ void Game::playPerkCard(Hero* hero, string card){
                 cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
             }           
         }
-}
-void Game::ChoosePerkCard(Hero * hero){
-    if(hero->GetAvailablePerkCards().empty()) 
-        cout << "you do not have any perk cards!\n" ;
-    else{
-        hero->displayavailblecards() ;
-        string chooseCard ; 
-        cout << "which card you want to play? " ; 
-        cin.ignore() ;
-        getline(cin , chooseCard)  ;
-
-        vector<Perkcards> selected = hero->GetAvailablePerkCards() ; 
-        
-        for(size_t i = 0 ; i < hero->GetAvailablePerkCards().size() ; i++){
-            if(selected[i].get_Event() == chooseCard){
-                playPerkCard(hero , chooseCard) ;
-                hero->addPlayedCards(selected[i]) ;
-                hero->displayPlayedCards() ;
-                break;
+        else if(card == "Visit from the Detective"){
+            p.display_the_card(p2) ; 
+            cout << "where do you want to move the invisible man? " ; 
+            string place ; cin >> place ;
+            Location* newLoc = map.get_location_by_name(place) ;  
+            if(newLoc){
+                invisibleMan->set_location(newLoc) ; 
+                cout << "invisible man moved to " << place << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; ;
             }
         }
-
-    cerr << "card not available\n" ; 
-
-    } 
+    break ;
+    }
 }
+void Game::ChoosePerkCard(Hero * hero){
+    vector<Perkcards>& availablePerks = hero->GetAvailablePerkCards() ;
+    if(availablePerks.empty()){
+        cout << "you do not have any perk cards!\n" ;
+        return ;  
+    }
+    while(true){
+        int selected = -1 ; 
+        hero->displayavailblecards() ; 
+        for(size_t i = 0 ; i < availablePerks.size() ; i++)
+            cout << i + 1 << "." << availablePerks[i].get_Event() << '\n' ; 
+            
+        cout << "enter the card number to play(0 to end): ";
+        cin >> selected ; 
+        if(selected == 0) return ; 
+        if(selected < 1 || selected > availablePerks.size()){
+            cerr << "invalid selection! try again\n" ; 
+            continue;
+        }
+        int index = selected - 1 ;
+        Perkcards chosencard = availablePerks[index] ;
+        playPerkCard(hero , chosencard.get_Event()) ;
+        hero->addPlayedCards(chosencard) ; 
+        hero->displayPlayedCards() ; 
+        break ; 
+    }
 
+}
 bool Game::both_monsters_defeated() {
      return monstersMap[MonsterType::Dracula]->is_defeated() &&
             monstersMap[MonsterType::InvisibleMan]->is_defeated();
