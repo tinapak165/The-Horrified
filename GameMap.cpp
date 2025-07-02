@@ -16,7 +16,7 @@ void GameMap::build_map() {
      auto inn = std::make_unique<Location>("Inn");
     auto crypt = std::make_unique<Location>("Crypt");
     auto shop = std::make_unique<Location>("Shop");
-    auto musuem = std::make_unique<Location>("Museum");
+    auto museum = std::make_unique<Location>("Museum");
     auto church = std::make_unique<Location>("Church");
     auto hospital = std::make_unique<Location>("Hospital");
     auto graveyard = std::make_unique<Location>("Graveyard");
@@ -38,7 +38,7 @@ void GameMap::build_map() {
      mansion->connect(abbey.get());
      abbey->connect(crypt.get());
      shop->connect(laboratory.get());
-     shop->connect(musuem.get()) ; 
+     shop->connect(museum.get()) ; 
      mansion->connect(church.get()) ;
      laboratory->connect(institute.get());
      church->connect(graveyard.get());
@@ -48,7 +48,7 @@ void GameMap::build_map() {
      camp->connect(precinct.get()) ; 
       
      mansion->connect(shop.get());
-     mansion->connect(musuem.get()) ; 
+     mansion->connect(museum.get()) ; 
       
 
 
@@ -59,7 +59,7 @@ void GameMap::build_map() {
     docks->set_coords(5, 1);
     dungeon->set_coords(4, 2);
     shop->set_coords(3, 2);
-    musuem->set_coords(2, 2);
+    museum->set_coords(2, 2);
     laboratory->set_coords(3, 3);
     institute->set_coords(3, 4);
 
@@ -91,7 +91,7 @@ void GameMap::build_map() {
      locations.push_back(std::move(shop));
      locations.push_back(std::move(abbey));
      locations.push_back(std::move(church));
-     locations.push_back(std::move(musuem));
+     locations.push_back(std::move(museum));
      locations.push_back(std::move(crypt));
      locations.push_back(std::move(hospital));
      locations.push_back(std::move(graveyard));

@@ -51,4 +51,5 @@ public:
     void increase_terror_level();
 
     void distribute_initial_items();
+    const std::string reset_color = "\033[0m";
 };
