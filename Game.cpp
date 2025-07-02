@@ -7,8 +7,8 @@
 #include "villager.hpp"
 #include "perkcards.hpp"
 #include <set>
-
 using namespace std;
+
 Game::Game() {
     // ساخت نقشه ثابت
     map.build_map(); // نقشه ی بازی
@@ -33,7 +33,9 @@ Game::Game() {
 
     
 }    
-
+std::ostream& operator<<(std::ostream& os, ConsoleColor color) {
+    return os << "\033[" << static_cast<int>(color) << "m";
+}
 Game::~Game() {
     for (Hero* h : turnManager.get_heroes())
     delete h;
@@ -337,13 +339,13 @@ void  Game::start() {
 
         locationOverview() ;
         // ۱. فاز قهرمان
-        cout <<"-HERO PHASE-\n" ; 
+        cout << ConsoleColor::Blue <<"-HERO PHASE-\n" << ConsoleColor::Reset; 
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
 
         // ۲. فاز هیولا
-        cout << "-MONSTER PHASE-\n" ; 
+        cout << ConsoleColor::Red << "-MONSTER PHASE-\n" <<  ConsoleColor::Reset  ; 
         monster_phase();
 
         // ۳. بررسی پایان بازی
