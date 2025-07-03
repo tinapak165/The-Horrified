@@ -75,7 +75,7 @@ class Hero{
         void removeItems(const Item&) ; 
         int select_items_to_defeat(ItemColor requiredColor) ;
         bool has_items() const;
-        void use_one_item();
+        void remove_item_by_index(int index); 
 
         int AdvanceActionForDracula() ; 
         void AdvanceActionForInvisibleMan(InvisibleMan*) ;

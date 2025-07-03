@@ -436,8 +436,10 @@ bool Hero::has_items() const {
     return !ListOfitems.empty();
 }
 
-void Hero::use_one_item() {
-    if (!ListOfitems.empty()) {
-        ListOfitems.pop_back();
+void Hero::remove_item_by_index(int index) {
+    if (index >= 0 && index < static_cast<int>(ListOfitems.size())) {
+        ListOfitems.erase(ListOfitems.begin() + index);
+    } else {
+        std::cerr << "Invalid item index. No item removed.\n";
     }
 }

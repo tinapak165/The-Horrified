@@ -3,10 +3,10 @@
 
 Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation)
  { // key value
-    coffinsDestroyed["Cave"] = false;
+    // coffinsDestroyed["Cave"] = false;
     coffinsDestroyed["Dungeon"] = false;
-    coffinsDestroyed["Crypt"] = false;
-    coffinsDestroyed["Graveyard"] = false;
+    // coffinsDestroyed["Crypt"] = false;
+    // coffinsDestroyed["Graveyard"] = false;
 }
 
 // remmember first word is capital 
@@ -43,19 +43,19 @@ bool Dracula::can_be_defeated(){
     
         Location* dracula_location = get_location();
     
-        std::cout << "Dracula uses Dark Charm! Pulling " << active_hero->GetName() 
-                  << " to " << dracula_location->get_name() << "!" << std::endl;
     
-        // برداشتن هیرو از لوکیشن فعلی
-        // Location* current_hero_location = active_hero->get_location();
-        // if (current_hero_location) {
-        //     auto& heroes_here = current_hero_location->get_heroes();
-        //     heroes_here.erase(std::remove(heroes_here.begin(), heroes_here.end(), active_hero), heroes_here.end());
-        // }
+       // برداشتن هیرو از لوکیشن فعلی
+        Location* current_hero_location = active_hero->GetCurrentLocation();
+        if (current_hero_location) {
+            auto& heroes_here = current_hero_location->get_heroes();
+            heroes_here.erase(std::remove(heroes_here.begin(), heroes_here.end(), active_hero), heroes_here.end());
+        }
     
         // انتقال به لوکیشن دراکولا
         dracula_location->add_hero(active_hero);
-        // active_hero->set_location(dracula_location);
+        active_hero->SetCurrentLocation(dracula_location);
+        std::cout << "Dracula uses Dark Charm! Pulling " << active_hero->GetName() 
+        << " to " << dracula_location->get_name() << "!" << std::endl;
     }
     
 

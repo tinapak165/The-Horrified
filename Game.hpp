@@ -10,17 +10,8 @@
 #include "Dice.hpp"
 #include "Itembag.hpp"
 
-enum class ConsoleColor {
-  Reset  = 0,
-  Red    = 31,
-  Green  = 32,
-  Yellow = 33,
-  Blue   = 34,
-
-};
-
 class Game {
-    friend std::ostream& operator<<(std::ostream& os, ConsoleColor color) ; 
+    friend std::ostream& operator<<(std::ostream& os, ItemColor color) ; 
 private:
     GameMap map;
     MonsterCardDeck deck;
