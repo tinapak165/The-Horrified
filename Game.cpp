@@ -114,8 +114,10 @@ void Game::play_hero_Action(Hero *h){
         h->DisplayActions() ;
     if(chosenAction == "Quit")
         break ;
-    if(chosenAction == "Perk")
+    if(chosenAction == "Perk"){
         ChoosePerkCard(h) ;
+        continue;
+    }
         
     if(h->PerformTheAction(chosenAction)){
         cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
@@ -145,8 +147,9 @@ void Game::play_hero_Action(Hero *h){
                         h->MoveTo(chosenLocation); 
                     }    
                 }
-                else
+                else{
                     cerr << "what you have chosen is not a neighboirng place!\n" ;  
+                }
                     
                 }
                 else if(chosenAction == "Guide"){
@@ -321,7 +324,7 @@ void Game::play_hero_Action(Hero *h){
                     }
                 }
 
-            } // end if can play an action 
+            } // end if can play an action
     }    
 }
 
@@ -429,7 +432,7 @@ void Game::playPerkCard(Hero* hero, string card){
         }
         else if (card == "Repel"){
             p.display_the_card(p2) ;
-            dracula->move_towards(2) ; //چک شود
+            dracula->move_towards(2) ; 
             invisibleMan->move_towards(2) ; 
         }
 
@@ -480,7 +483,7 @@ void Game::playPerkCard(Hero* hero, string card){
             }
             else{
                 cerr << "could not find the place!\n" ;
-                continue; ;
+                continue; 
             }
         }
     break ;
@@ -510,7 +513,6 @@ void Game::ChoosePerkCard(Hero * hero){
         playPerkCard(hero , chosencard.get_Event()) ;
         hero->addPlayedCards(chosencard) ; 
         hero->displayPlayedCards() ; 
-        break ; 
     }
 
 }
