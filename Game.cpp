@@ -103,9 +103,7 @@ Game::~Game() {
     }
     
     turnManager = TurnManager(heroes);
- } 
-
-
+} 
 
 void Game::play_hero_Action(Hero *h){
     while(true){
@@ -222,7 +220,6 @@ void Game::play_hero_Action(Hero *h){
                                     } 
                                 }
                                 if(!found){
-                                    
                                    // throw invalid_argument("villager not found!") ;
                                     cerr << "villager not found!\n" ; 
                                 } 
@@ -327,6 +324,7 @@ void Game::play_hero_Action(Hero *h){
             } // end if can play an action 
     }    
 }
+
 
 
 void Game::hero_phase(Hero* hero) {
@@ -875,10 +873,9 @@ void Game::locationOverview(){
              << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << setw(20) << HeroStr << "\n";
     }
   cout << "-------------------------------------------------------------------------------------\n" ; 
+  cout << "terror level: " << terror_Level << '\n' ; 
   //collected evidences:
   //smashed coffins: 
-  //terror level:
-  //dice rolled each turn 
     
 }
 
@@ -894,7 +891,7 @@ villager* Game::create_villager(const std::string& name, const std::string& locN
         return nullptr;
     }
 
-    villager* v = new villager(name, loc, loc);
+    villager* v = new villager(map , name, nullptr, loc) ; //safeplace = null 
     std::cout << "Created new villager: " << name << " at " << locName << "\n";
     return v;
 }
