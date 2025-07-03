@@ -10,9 +10,9 @@ MonsterCardDeck::MonsterCardDeck() {
     cards.push_back(Monstercard("form the bat",2, "Dracula moves where your hero is.", { {{MonsterType::Dracula}, 1, 2} }));
     cards.push_back(Monstercard("form the bat",2, "Dracula moves where your hero is.", { {{MonsterType::Dracula}, 1, 2} }));
 
-    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }, "Dracula", "Crypt"));
-    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }, "Dracula", "Crypt"));
-    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} } , "Dracula", "Crypt"));
+    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }));
+    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }));
+    cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} } ));
 
     cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
     cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));

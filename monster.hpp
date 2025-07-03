@@ -39,10 +39,13 @@ public:
     // برای حرکت از روی استرایک
     void move_towards(int steps);
 
+    bool is_alive() const; 
+
     virtual std::pair<Hero*, villager*> attack() = 0;
     virtual void special_power(Hero* h) =0 ;
     virtual bool is_defeated()const =0 ;
     virtual bool can_be_defeated() = 0;
+
     // virtual void destroy_coffin_at(std::string locationName)=0;
 
 };
