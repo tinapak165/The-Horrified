@@ -454,3 +454,11 @@ void Hero::remove_item_by_index(int index) {
         std::cerr << "Invalid item index. No item removed.\n";
     }
 }
+std::vector<Item> Hero::getUsedItemsForDracula() {
+    return usedItemsForDracula;
+}
+
+
+std::vector<Item> Hero::getUsedItemsForInvisibleMan() {
+    return usedItemsForInvisibleMan;
+}

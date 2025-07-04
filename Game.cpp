@@ -275,7 +275,7 @@ void Game::play_hero_Action(Hero *h){
                         int totalStrength = h->AdvanceActionForDracula() ;
                         if (totalStrength >= 6) {
                             dracula->destroy_coffin_at(locName); 
-                            pool.add_item(h.getUsedItemsForDracula()) ; 
+                            pool.add_items(h->getUsedItemsForDracula()) ; 
                         } else {
                             std::cout << "Advance action failed Not enough red item strength.\n";
                         }
@@ -283,7 +283,7 @@ void Game::play_hero_Action(Hero *h){
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
                         h->AdvanceActionForInvisibleMan(invisibleMan) ;
-                        pool.add_item(h.getUsedItemsForDracula()) ; 
+                        pool.add_items(h->getUsedItemsForDracula()) ; 
                     }
                     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
                 
@@ -623,8 +623,8 @@ void Game::monster_phase() {
                 std::cout << "Destination location '" << dest << "' not found!\n";
             } else {
                 // جستجو در ویلیجرها
-                villager* v = nullptr;
-                for (auto* vill : villager::all()) {
+                Villager* v = nullptr;
+                for (auto* vill : Villager::all()) {
                     if (vill->get_name() == name) {
                         v = vill;
                         break;
