@@ -14,6 +14,8 @@
 using namespace std;
 
 Game::Game() {
+    std::cout<<"                                     THE HORRIFIED                                          "<<endl;
+    std::cout<<"                                WELCOME TO THE HORROR WORLD                                  "<<endl;
     // ساخت نقشه ثابت
     map.build_map(); // نقشه ی بازی
     
@@ -589,12 +591,10 @@ void Game::distribute_initial_items() {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << std::endl ;
+            std::cout << "Placed " << get_color_code(item.getColor()) << " " << item.getName() << get_color_code(ItemColor::Reset) << " at " << item.getLocationName() << std::endl;
         }
     }
 }
-
-
 void Game::monster_phase() {
     
     Location* loc = dracula->get_location();
@@ -731,18 +731,41 @@ void Game::monster_phase() {
             }
 
             std::cout << "---MONSTER MOVE FROM STRIKE---"<<endl;
-            // حرکت دادن هیولا
+
             for (int i = 0; i < moves; ++i) {
-                Location* target = m->find_nearest_target(m->get_location());
+                Location* target = nullptr;
+            
+                if (type == MonsterType::Dracula) {
+                    target = m->find_nearest_target(m->get_location());
+                } else if (type == MonsterType::InvisibleMan) {
+                    target = m->find_nearest_villager(m->get_location());
+                } else {
+                    std::cout << "Unknown monster type. Skipping movement.\n";
+                    break;
+                }
+            
                 if (target) {
-                    m->move_towards(1);
+                    m->move_towards(1); 
                 } else {
                     std::cout << m->get_name() << " found no target to move toward.\n";
+                    break; 
                 }
             }
             
+            bool terrorAlreadyIncreased = false;
             
-            
+            Location* currentLoc = m->get_location();
+            bool nearHero = !currentLoc->get_heroes().empty();
+            bool nearVillager = !currentLoc->get_villagers().empty();
+
+            if (type == MonsterType::Dracula && (nearHero || nearVillager)) {
+                std::cout << "Dracula's presence increased terror level !\n";
+                increase_terror_level();
+                terrorAlreadyIncreased = true;
+
+            }
+           
+            cout<<" Terror Level Reached : "<< terror_Level<<endl;
             // تاس انداختن
             std::cout<<"---PLAYING DICE---";
             Dice d(3);
@@ -753,6 +776,7 @@ void Game::monster_phase() {
             
             std::vector<DiceFace> results = d.roll(dice);
             bool invisiblePowerTriggered = false;
+           
 
         for (DiceFace face : results) {
             std::cout << "Dice result: ";
@@ -769,10 +793,11 @@ void Game::monster_phase() {
                 case DiceFace::Attack:
                     std::cout << "Attack\n";
                     if (type == MonsterType::Dracula) {
-                        auto kv = m->attack(); //[heroTarget, villagerTarget]
+                        auto  kv  = m->attack(); //[heroTarget, villagerTarget]
 
                         if (kv.first && !kv.second) {
                             std::cout << "Dracula attacks " << kv.first->GetName() << "!\n";
+                           
                         
                             if (kv.first->has_items()) {
                                 std::cout << kv.first->GetName() << " has the following items:\n";
@@ -796,33 +821,51 @@ void Game::monster_phase() {
                                         std::cout << "Item used to block the attack!\n";
                                     } else {
                                         std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                        // send_hero_to_hospital(heroTarget);
-                                        increase_terror_level();
+                                        send_hero_to_hospital(kv.first);
+                                        if (!terrorAlreadyIncreased) {
+                                            increase_terror_level();
+                                            terrorAlreadyIncreased = true;
+                                        }
+                                        
                                         break;
                                     }
                                 } else {
                                     std::cout << "No item used. Dracula's attack succeeds.\n";
-                                    // send_hero_to_hospital(heroTarget);
-                                    increase_terror_level();
+                                    send_hero_to_hospital(kv.first);
+                                    if (!terrorAlreadyIncreased) {
+                                        increase_terror_level();
+                                        terrorAlreadyIncreased = true;
+                                    }
+                                    
                                     break;
                                 }
                             } else {
                                 std::cout << kv.first->GetName() << " has no items. Dracula's attack succeeds.\n";
                                 send_hero_to_hospital(kv.first);
-                                increase_terror_level();
+                                if (!terrorAlreadyIncreased) {
+                                    increase_terror_level();
+                                    terrorAlreadyIncreased = true;
+                                }
+                                
                                 break;
                             }
                         
-                        } else if (kv.second) {
+                        } else if (kv.second) { //targetVillager
                             std::cout << "Dracula attacks " << kv.second->get_name() << "!\n";
                             remove_villager(kv.second);
-                            increase_terror_level();
+                            
+
+                            if (!terrorAlreadyIncreased) {
+                                increase_terror_level();
+                                terrorAlreadyIncreased = true;
+                            }
+                            
                             break;
                         }
                         
                     } else if (type == MonsterType::InvisibleMan) {
                         // فقط اگه قبلاً اونجا بوده باشه و حمله ممکن باشه
-                        auto  kv = m->attack();//[heroTarget, villagerTarget]
+                        auto kv = m->attack(); //[heroTarget, villagerTarget]
 
                         if (kv.second) {
                             std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
@@ -834,12 +877,15 @@ void Game::monster_phase() {
                     }
                     break;
 
+                
                 case DiceFace::empty:
-                    std::cout << "Empty\n";
-                    break;
+                std::cout << "Empty\n";
+            
+              
             }
         }
-
+        
+        
 
             if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
                 Location* target = m->find_nearest_villager(m->get_location());
@@ -857,6 +903,7 @@ void Game::monster_phase() {
 
     
 }
+
 
 void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
@@ -962,8 +1009,8 @@ void Game::graph_map_text() {
 
 --------------------------------GAME MAP------------------------------------- 
        
-                [Precinct]-----[Inn]                                                 
-                  /               \                                                   
+                [Precinct]-----[Inn]   [Barn]                                              
+                  /               \   /                                                
   [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
                 |     /       /
                 |    /       /                                      \
@@ -973,7 +1020,8 @@ void Game::graph_map_text() {
  [Crypt]            /    \               \
              [Graveyard][Hospital]        [Institute]
               
-    
+          
     )" << '\n';
-std::cout<<"--------------------------------------------------------------------------------";    
+std::cout<<"--------------------------------------------------------------------------------"<<endl;  
 }
+
