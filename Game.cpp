@@ -400,8 +400,8 @@ void Game::getNewCard(Hero* hero){
 void Game::playPerkCard(Hero* hero, string card){
     while(true) {
     if(card == "Hurry"){
+            cout << "[Playing Hurry - perk card] -> Move each hero by two spaces.\n" ;
             string firstMove , secondMove ; 
-            p.display_the_card(p2) ; 
             cout << "Mayor..where do you want to move first? " ;
             cin >> firstMove ; 
             Location* currentLoc = mayor->GetCurrentLocation() ; 
@@ -447,7 +447,7 @@ void Game::playPerkCard(Hero* hero, string card){
             }      
         }
         else if (card == "Repel"){
-            p.display_the_card(p2) ;
+            cout << "[Playing Repel - perk card] -> Move each monster by two spaces.\n";
             cout << "where do you want to move the invisible man for the first move? " ; 
             string firstplace ; cin >> firstplace ;
             Location* IfirstnewLoc = map.get_location_by_name(firstplace) ;  
@@ -492,19 +492,16 @@ void Game::playPerkCard(Hero* hero, string card){
                 cerr << "could not find the place!\n" ;
                 continue; 
             }
-
-
         }
 
         else if(card == "Late into the Night"){
-            p.display_the_card(p2) ;
-
+            cout << "[Playing Late into the Night - perk card] -> You can have 2 more actions.\n" ;
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
             cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
         }
         else if( card == "Break of Dawn"){
+            cout << "[Playing Break of Dawn - perk card] -> The next monster phase is skipped. Take 2 items out of the bag and place them in their location.\n";
             skipMonsterPhase = true ; //فاز هیولا بعدی رد میشود 
-            p.display_the_card(p2);
             ItemPool pool ;
             vector<Item> PoolItems = pool.draw_random_items(2) ;
             for(const auto i : PoolItems){
@@ -516,7 +513,7 @@ void Game::playPerkCard(Hero* hero, string card){
             }
         }
         else if(card == "Overstock"){
-            p.display_the_card(p2) ;
+            cout << "[Playing Overstock - perk card] -> Each player should take one item out of the item bag and place it in their location.\n" ;
             ItemPool pool ; 
             vector<Item> PoolItems = pool.draw_random_items(2) ;
             if(PoolItems.size() < 2) cerr << "not enough items drawn from the pool !\n" ;
@@ -534,7 +531,7 @@ void Game::playPerkCard(Hero* hero, string card){
             }           
         }
         else if(card == "Visit from the Detective"){
-            p.display_the_card(p2) ; 
+            cout << "[Playing Visit from the Detective - perk card] -> Place the invisible man at a location of the player's choice on the game screen.\n" ; 
             cout << "where do you want to move the invisible man? " ; 
             string place ; cin >> place ;
             Location* newLoc = map.get_location_by_name(place) ;  
