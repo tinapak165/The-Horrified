@@ -11,7 +11,9 @@
 #include "Itembag.hpp"
 
 class Game {
+    friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
+    bool skipMonsterPhase = false ;
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
@@ -52,5 +54,5 @@ public:
     void increase_terror_level();
 
     void distribute_initial_items();
-    const std::string reset_color = "\033[0m";
+    
 };

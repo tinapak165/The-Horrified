@@ -3,7 +3,8 @@
 #include <string>
 
 
-enum class ItemColor { RED, YELLOW, BLUE, Reset  };
+enum class ItemColor { RED, YELLOW, BLUE , Reset };
+
 
 class Item {
 private:

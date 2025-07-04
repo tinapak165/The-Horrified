@@ -371,34 +371,42 @@ void Game::getNewCard(Hero* hero){
     p2 = p.get_random_card() ;
     hero->AddAvailablePerk(p2) ; 
 }
+
 void  Game::start() { 
-   locationOverview();
-//    graph_map();
-   
+
+    locationOverview() ;
+    for(Hero* hero : turnManager.get_heroes()){
+        getNewCard(hero) ; 
+    }
+
     while (true) {
+
         // ۱. فاز قهرمان
-        cout <<"<-----------HERO PHASE----------->\n" ; 
+        std::cout << ItemColor::BLUE << "<-----------HERO PHASE----------->\n" << ItemColor::Reset; 
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
 
-       graph_map_text();
+        graph_map_text();
 
-
-
-
-        
-        cout << "<-----------MONSTER PHASE---------->\n" ; 
+        if(!skipMonsterPhase){
+        // ۲. فاز هیولا
+        cout << ItemColor::RED  <<  "\n<-----------MONSTER PHASE---------->\n" <<  ItemColor::Reset  ; 
         monster_phase();
-         locationOverview() ;
-         std::cout<<"monster card :"<<deck.remaining_cards();
+        }
+        else{
+            cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
+            skipMonsterPhase = false;     
+        }
+
+        locationOverview() ;
 
         // ۳. بررسی پایان بازی
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        if (deck.is_empty() && !both_monsters_defeated()) {
+        if (deck.is_empty() && +!both_monsters_defeated()) {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
         }    
@@ -409,9 +417,9 @@ void  Game::start() {
 
         turnManager.next_turn();
     }    
-}    
-     
-void Game::playPerkCard(Hero* hero, std::string card){
+}
+void Game::playPerkCard(Hero* hero, string card){
+    while(true) {
     if(card == "Hurry"){
             string firstMove , secondMove ; 
             p.display_the_card(p2) ; 
@@ -421,14 +429,20 @@ void Game::playPerkCard(Hero* hero, std::string card){
             Location* firstMoveLoc = map.get_location_by_name(firstMove);
             if(currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
                 mayor->MoveTo(firstMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ;
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;
+            } 
 
             cout << "Mayor..what is your second place to move? " ;
             cin >> secondMove ;
             Location* secondMoveLoc = map.get_location_by_name(secondMove);
             if(currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
                 mayor->MoveTo(secondMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ; 
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;
+            }  
 
             cout << "--------------\n" ;
             string AfirstMove , AsecondMove ; 
@@ -438,31 +452,79 @@ void Game::playPerkCard(Hero* hero, std::string card){
             Location* AfirstMoveLoc = map.get_location_by_name(AfirstMove);
             if(AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
                 archaeologist->MoveTo(AfirstMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ;
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;  
+            } 
 
             cout << "Archaeologist..what is your second place to move? " ;
             cin >> AsecondMove ;
             Location* AsecondMoveLoc = map.get_location_by_name(AsecondMove);
             if(AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
                 archaeologist->MoveTo(AsecondMoveLoc) ;        
-            else cerr << "what you have chosen is not a neighboring place!!\n" ;     
+            else{
+                cerr << "what you have chosen is not a neighboring place!!\n" ;
+                continue;
+            }      
         }
         else if (card == "Repel"){
             p.display_the_card(p2) ;
-            //dracula->move_towards(2) ;
-           //invisibleMan->move_towards(2) ; 
+            cout << "where do you want to move the invisible man for the first move? " ; 
+            string firstplace ; cin >> firstplace ;
+            Location* IfirstnewLoc = map.get_location_by_name(firstplace) ;  
+            if(IfirstnewLoc){
+                invisibleMan->set_location(IfirstnewLoc) ; 
+                cout << "invisible man moved to " << firstplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+            cout << "where do you want to move the invisible man for the second move? " ;
+            string secondplace ; cin >> secondplace ;
+            Location* IsecondnewLoc = map.get_location_by_name(secondplace) ;  
+            if(IsecondnewLoc){
+                invisibleMan->set_location(IsecondnewLoc) ; 
+                cout << "invisible man moved to " << secondplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+            cout << "where do you want to move the dracula for the first move? " ; 
+            string Dfirstplace ; cin >> Dfirstplace ;
+            Location* DfirstLec = map.get_location_by_name(Dfirstplace) ;  
+            if(DfirstLec){
+                dracula->set_location(DfirstLec) ; 
+                cout << "dracula moved to " << Dfirstplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+            cout << "where do you want to move the dracula for the second move? " ;
+            string Dsecondplace ; cin >> Dsecondplace ;
+            Location* DsecondLoc = map.get_location_by_name(Dsecondplace) ;  
+            if(DsecondLoc){
+                dracula->set_location(DsecondLoc) ; 
+                cout << "dracula moved to " << Dsecondplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+
+
         }
 
         else if(card == "Late into the Night"){
-
             p.display_the_card(p2) ;
+
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
             cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
-            hero->DisplayInfo() ; 
         }
         else if( card == "Break of Dawn"){
-            //آیتم بصورت رندوم نمیاد!!!!
-            //فاز هیولا بعدی رد میشود !؟
+            skipMonsterPhase = true ; //فاز هیولا بعدی رد میشود 
             p.display_the_card(p2);
             ItemPool pool ;
             vector<Item> PoolItems = pool.draw_random_items(2) ;
@@ -475,7 +537,6 @@ void Game::playPerkCard(Hero* hero, std::string card){
             }
         }
         else if(card == "Overstock"){
-            //آیتم بصورت رندوم نمیاد!!!!
             p.display_the_card(p2) ;
             ItemPool pool ; 
             vector<Item> PoolItems = pool.draw_random_items(2) ;
@@ -493,8 +554,23 @@ void Game::playPerkCard(Hero* hero, std::string card){
                 cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
             }           
         }
+        else if(card == "Visit from the Detective"){
+            p.display_the_card(p2) ; 
+            cout << "where do you want to move the invisible man? " ; 
+            string place ; cin >> place ;
+            Location* newLoc = map.get_location_by_name(place) ;  
+            if(newLoc){
+                invisibleMan->set_location(newLoc) ; 
+                cout << "invisible man moved to " << place << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+        }
+    break ;
+    }
 }
-
 
 bool Game::both_monsters_defeated() {
     return monstersMap[MonsterType::Dracula]->is_defeated() &&
@@ -516,12 +592,7 @@ void Game::monster_phase() {
         std::cout << "Invisible Man has no location.\n";
         
         
-        // if (deck.is_empty() || !both_monsters_defeated() ){
-        //     std::cout << "\nMonster deck is empty. Players lose!\n";
-
-        //     game_over = true;
-        //     return;
-        // }
+  
         
         Monstercard card = deck.get_random_card();
         std::cout << card;
@@ -851,6 +922,8 @@ void Game::distribute_initial_items() {
         }
     }
 }
+
+
 string get_color_code(ItemColor color) {
     switch (color) {
         case ItemColor::RED:    return "\033[31m";
@@ -859,6 +932,10 @@ string get_color_code(ItemColor color) {
         case ItemColor::Reset : return "\033[39m"; 
         default:                return "\033[0m";
     }
+}
+
+ostream& operator<<(ostream& os, ItemColor color) {
+    return os << get_color_code(color) ;
 }
 
 void Game::locationOverview() {

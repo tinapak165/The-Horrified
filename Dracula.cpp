@@ -3,10 +3,10 @@
 
 Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation)
  { // key value
-    // coffinsDestroyed["Cave"] = false;
+     coffinsDestroyed["Cave"] = false;
     coffinsDestroyed["Dungeon"] = false;
-    // coffinsDestroyed["Crypt"] = false;
-    // coffinsDestroyed["Graveyard"] = false;
+     coffinsDestroyed["Crypt"] = false;
+     coffinsDestroyed["Graveyard"] = false;
 }
 
 // remmember first word is capital 

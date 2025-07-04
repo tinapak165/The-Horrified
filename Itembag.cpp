@@ -8,8 +8,8 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Dart", ItemColor::RED, 2, "Inn");
     allItems.emplace_back("Fire Poker", ItemColor::RED, 3, "Mansion");
     allItems.emplace_back("Fire Poker", ItemColor::RED, 3, "Mansion");
-    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theater");
-    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theater");
+    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theatre");
+    allItems.emplace_back("Rapier", ItemColor::RED, 5, "Theatre");
     allItems.emplace_back("Shovel", ItemColor::RED, 2, "Graveyard");
     allItems.emplace_back("Torch", ItemColor::RED, 5, "Barn");
     allItems.emplace_back("Pistol", ItemColor::RED, 6, "Precinct");
@@ -46,7 +46,7 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Tarot Card", ItemColor::YELLOW, 3, "Camp");
     allItems.emplace_back("Garlic", ItemColor::YELLOW, 2, "Inn");
     allItems.emplace_back("Mirrored Box", ItemColor::YELLOW, 3, "Mansion");
-    allItems.emplace_back("Stake", ItemColor::YELLOW, 3, "Abbay");
+    allItems.emplace_back("Stake", ItemColor::YELLOW, 3, "Abbey");
     allItems.emplace_back("Charm", ItemColor::YELLOW, 4, "Camp");
     allItems.emplace_back("Wolfsbane", ItemColor::YELLOW, 4, "Camp");
     allItems.emplace_back("Tablet", ItemColor::YELLOW, 3, "Museum");
