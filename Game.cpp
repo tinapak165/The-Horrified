@@ -702,7 +702,7 @@ void Game::monster_phase() {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << "\n";
+            std::cout << "Placed " << get_color_code(item.getColor()) << item.getName() <<  get_color_code(ItemColor::Reset)  << " at " << item.getLocationName() << "\n";
         }
     }
     
