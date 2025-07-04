@@ -35,7 +35,7 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Tarot Card", ItemColor::YELLOW, 3, "Camp");
     allItems.emplace_back("Garlic", ItemColor::YELLOW, 2, "Inn");
     allItems.emplace_back("Mirrored Box", ItemColor::YELLOW, 3, "Mansion");
-    allItems.emplace_back("Stake", ItemColor::YELLOW, 3, "Abbay");
+    allItems.emplace_back("Stake", ItemColor::YELLOW, 3, "Abbey");
     allItems.emplace_back("Charm", ItemColor::YELLOW, 4, "Camp");
     allItems.emplace_back("Wolfsbane", ItemColor::YELLOW, 4, "Camp");
     allItems.emplace_back("Tablet", ItemColor::YELLOW, 3, "Museum");
@@ -85,24 +85,10 @@ ItemPool::ItemPool() {
     allItems.emplace_back("Fossil", ItemColor::BLUE, 3, "Camp");
 
 
-    // اینجا همه ۶۰ آیتم را کامل می‌کنیم بعداً...
-    std::random_device rd;
-    std::mt19937 g(rd());
-    std::shuffle(allItems.begin(), allItems.end(), g);
+   
 }
 
-// std::vector<Item> ItemPool::draw_random_items(int count) {
- 
-//     if ((int)allItems.size() < count)
-//     std::cerr << "Warning: not enough items in pool! Requested: " << count << ", Available: " << allItems.size() << '\n';
-//     std::cout<<allItems.size();
-//     std::vector<Item> drawn;
-//     for (int i = 0; i <= count && !allItems.empty(); ++i) {
-//         drawn.push_back(allItems.back());
-//         allItems.pop_back();
-//     }
-//     return drawn;
-// }
+
 
 
 

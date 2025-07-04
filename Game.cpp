@@ -987,12 +987,12 @@ void Game::graph_map_text() {
 
 --------------------------------GAME MAP------------------------------------- 
        
-                [Precinct]-----[Inn]   [Barn]                                              
-                  /               \   /                                                
+                  [Precinct]----[Inn]   [Barn]                                              
+                  /         \      \   /                                                
   [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
-                |     /       /
-                |    /       /                                      \
-[Abbey] ----[Mansion]----[Shop]                                      [Docks]
+                |     /       /                       \
+                |    /       /                         \
+[Abbey] ----[Mansion]----[Shop]                       [Docks]
     |          /   |           \
     |    [Museum] [Church]    [Laboratory]
  [Crypt]            /    \               \
