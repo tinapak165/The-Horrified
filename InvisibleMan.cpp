@@ -10,7 +10,8 @@ InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", sta
     };
 
 
-}
+} 
+// in game
  void InvisibleMan::special_power(Hero* h) {}
 
 std::pair<Hero*, villager*> InvisibleMan::attack() {

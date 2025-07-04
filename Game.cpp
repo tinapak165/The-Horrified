@@ -11,9 +11,11 @@
 
 using namespace std;
 Game::Game() {
+    std::cout<<"                                     THE HORRIFIED                                          "<<endl;
+    std::cout<<"                                WELCOME TO THE HORROR WORLD                                  "<<endl;
     // ساخت نقشه ثابت
     map.build_map(); // نقشه ی بازی
-    
+    graph_map_text();
     // ۱۲ ایتم اولیه ی بازی قرار گرفتند
     distribute_initial_items();
     
@@ -402,13 +404,14 @@ void  Game::start() {
         cout << "<-----------MONSTER PHASE---------->\n" ; 
         monster_phase();
          locationOverview() ;
+         std::cout<<"monster card :"<<deck.remaining_cards();
 
         // ۳. بررسی پایان بازی
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        if (deck.is_empty() || !both_monsters_defeated()) {
+        if (deck.is_empty() && !both_monsters_defeated()) {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
         }    
@@ -655,9 +658,20 @@ void Game::monster_phase() {
                     std::cout << m->get_name() << " found no target to move toward.\n";
                 }
             }
+            bool terrorAlreadyIncreased = false;
             
-            
-            
+            Location* currentLoc = m->get_location();
+            bool nearHero = !currentLoc->get_heroes().empty();
+            bool nearVillager = !currentLoc->get_villagers().empty();
+
+            if (type == MonsterType::Dracula && (nearHero || nearVillager)) {
+                std::cout << "Dracula's presence increased terror level !\n";
+                increase_terror_level();
+                terrorAlreadyIncreased = true;
+
+            }
+           
+            cout<<" Terror Level Reached : "<< terror_Level<<endl;
             // تاس انداختن
             std::cout<<"---PLAYING DICE---";
             Dice d(3);
@@ -668,6 +682,7 @@ void Game::monster_phase() {
             
             std::vector<DiceFace> results = d.roll(dice);
             bool invisiblePowerTriggered = false;
+           
 
         for (DiceFace face : results) {
             std::cout << "Dice result: ";
@@ -688,6 +703,7 @@ void Game::monster_phase() {
 
                         if (heroTarget && !villagerTarget) {
                             std::cout << "Dracula attacks " << heroTarget->GetName() << "!\n";
+                           
                         
                             if (heroTarget->has_items()) {
                                 std::cout << heroTarget->GetName() << " has the following items:\n";
@@ -711,27 +727,45 @@ void Game::monster_phase() {
                                         std::cout << "Item used to block the attack!\n";
                                     } else {
                                         std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                        // send_hero_to_hospital(heroTarget);
-                                        increase_terror_level();
+                                        send_hero_to_hospital(heroTarget);
+                                        if (!terrorAlreadyIncreased) {
+                                            increase_terror_level();
+                                            terrorAlreadyIncreased = true;
+                                        }
+                                        
                                         break;
                                     }
                                 } else {
                                     std::cout << "No item used. Dracula's attack succeeds.\n";
-                                    // send_hero_to_hospital(heroTarget);
-                                    increase_terror_level();
+                                    send_hero_to_hospital(heroTarget);
+                                    if (!terrorAlreadyIncreased) {
+                                        increase_terror_level();
+                                        terrorAlreadyIncreased = true;
+                                    }
+                                    
                                     break;
                                 }
                             } else {
                                 std::cout << heroTarget->GetName() << " has no items. Dracula's attack succeeds.\n";
                                 send_hero_to_hospital(heroTarget);
-                                increase_terror_level();
+                                if (!terrorAlreadyIncreased) {
+                                    increase_terror_level();
+                                    terrorAlreadyIncreased = true;
+                                }
+                                
                                 break;
                             }
                         
                         } else if (villagerTarget) {
                             std::cout << "Dracula attacks " << villagerTarget->get_name() << "!\n";
                             remove_villager(villagerTarget);
-                            increase_terror_level();
+                            
+
+                            if (!terrorAlreadyIncreased) {
+                                increase_terror_level();
+                                terrorAlreadyIncreased = true;
+                            }
+                            
                             break;
                         }
                         
@@ -749,12 +783,15 @@ void Game::monster_phase() {
                     }
                     break;
 
+                
                 case DiceFace::empty:
-                    std::cout << "Empty\n";
-                    break;
+                std::cout << "Empty\n";
+            
+              
             }
         }
-
+        
+        
 
             if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
                 Location* target = m->find_nearest_villager(m->get_location());
@@ -776,19 +813,13 @@ void Game::monster_phase() {
 villager* Game::create_villager(const std::string& name, const std::string& locName) {
     Location* loc = map.get_location_by_name(locName);
     if (!loc) {
-        std::cerr << "Invalid location name for villager: " << locName << "\n";
+        std::cout << "Can't move the villager '" << name << "': location '" << locName << "' not found.\n";
         return nullptr;
     }
 
-    Location* safe = map.get_location_by_name("Hospital"); // فرض کردیم Hospital جای امنه
-    std::unique_ptr<villager> newVillager = std::make_unique<villager>(map, name, safe, loc);
-    villager* rawPtr = newVillager.get();
-
-    loc->add_villager(rawPtr);
-    
-
-    std::cout << "Placed " << name << " at " << locName << ".\n";
-    return rawPtr;
+    villager* v = new villager(map , name, nullptr, loc) ; //safeplace = null 
+    std::cout << "Created new villager: " << name << " at " << locName << "\n";
+    return v;
 }
 
 
@@ -831,78 +862,84 @@ string get_color_code(ItemColor color) {
     }
 }
 
-
-void Game::locationOverview(){
+void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
     cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
-    cout << right <<"--------------------------------------------------------------------------------------\n" ; 
- 
-    for(const auto& locPtr : map.get_locations()){
-        Location* loc = locPtr.get() ;
+    cout << right <<"--------------------------------------------------------------------------------------\n"; 
 
-        //item
-        string itemStr ; 
-        const auto items = loc->get_items() ;
-        if(items.empty())
-            itemStr = "-" ; 
-        else{
-            std::map<string , pair<int , ItemColor>> itemcount ;
-            for(const auto & item : items){
-                auto& entry = itemcount[item.getName()] ;
-                entry.first++ ; entry.second = item.getColor() ; 
+    for (const auto& locPtr : map.get_locations()) {
+        Location* loc = locPtr.get();
+
+        // ----- Items -----
+        string itemStr;
+        const auto items = loc->get_items();
+        if (items.empty()) {
+            itemStr = "-";
+        } else {
+            std::map<string, pair<int, ItemColor>> itemcount;
+            for (const auto& item : items) {
+                auto& entry = itemcount[item.getName()];
+                entry.first++;
+                entry.second = item.getColor();
             }
-            for(const auto& kv : itemcount){
-                const auto& name = kv.first ; 
-                int cnt = kv.second.first ; 
-                ItemColor color = kv.second.second ; 
+            for (const auto& kv : itemcount) {
+                const auto& name = kv.first;
+                int cnt = kv.second.first;
+                ItemColor color = kv.second.second;
 
-                itemStr +=  get_color_code(color) + name +  get_color_code(ItemColor::Reset) + "(" + to_string(cnt) + "),"  ;
+                itemStr += get_color_code(color) + name + get_color_code(ItemColor::Reset) + "(" + to_string(cnt) + "),";
             }
-
+            if (!itemStr.empty()) itemStr.pop_back();  // remove last comma
         }
 
-        //monsters
-        string monStr ;
-        const auto monsters = loc->get_monsters() ;
-        if(monsters.empty())
-            monStr = "-" ; 
-        else{
-            for(const auto& m : monsters)
-                monStr+= m->get_name() + "," ;
-            
-            monStr.pop_back() ;
+        // ----- Monsters -----
+        string monStr;
+        const auto monsters = loc->get_monsters();
+        if (monsters.empty()) {
+            monStr = "-";
+        } else {
+            for (const auto& m : monsters) {
+                if (m) monStr += m->get_name() + ",";
+            }
+            if (!monStr.empty()) monStr.pop_back();
+            else monStr = "-";
         }
 
-        //villagers
+        // ----- Villagers -----
         string villagerStr;
         const auto& villagers = loc->get_villagers();
-        if (villagers.empty()) 
+        if (villagers.empty()) {
             villagerStr = "-";
-        else {
-            for (const auto& v : villagers)
-                villagerStr += v->get_name() + ",";
-            villagerStr.pop_back();
-        }   
-
-        //heroes
-        string HeroStr ; 
-        const auto& heroes = loc->get_heroes() ; 
-        if(heroes.empty())
-            HeroStr = "-" ; 
-        else{
-            for(const auto& h : heroes)
-                HeroStr+= h->GetName() + "," ; 
-            HeroStr.pop_back() ;
-            
+        } else {
+            for (const auto& v : villagers) {
+                if (v) villagerStr += v->get_name() + ",";
+            }
+            if (!villagerStr.empty()) villagerStr.pop_back();
+            else villagerStr = "-";
         }
+
+        // ----- Heroes -----
+        string heroStr;
+        const auto& heroes = loc->get_heroes();
+        if (heroes.empty()) {
+            heroStr = "-";
+        } else {
+            for (const auto& h : heroes) {
+                if (h) heroStr += h->GetName() + ",";
+            }
+            if (!heroStr.empty()) heroStr.pop_back();
+            else heroStr = "-";
+        }
+
         cout << left << setw(13) << loc->get_name()
-             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << setw(20) << HeroStr << "\n";
+             << setw(20) << itemStr
+             << setw(20) << monStr
+             << setw(20) << villagerStr
+             << setw(20) << heroStr << "\n";
     }
-  cout << "-------------------------------------------------------------------------------------\n" ; 
-  cout << "terror level: " << terror_Level << '\n' ; 
-  //collected evidences:
-  //smashed coffins: 
-    
+
+    cout << "-------------------------------------------------------------------------------------\n";
+    cout << "terror level: " << terror_Level << '\n';
 }
 void Game::graph_map_text() {
     std::cout << R"(
@@ -910,8 +947,8 @@ void Game::graph_map_text() {
 
 --------------------------------GAME MAP------------------------------------- 
        
-                [Precinct]-----[Inn]                                                 
-                  /               \                                                   
+                [Precinct]-----[Inn]   [Barn]                                              
+                  /               \   /                                                
   [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
                 |     /       /
                 |    /       /                                      \
@@ -923,7 +960,7 @@ void Game::graph_map_text() {
               
           
     )" << '\n';
-std::cout<<"--------------------------------------------------------------------------------";    
+std::cout<<"--------------------------------------------------------------------------------"<<endl;  
 }
 
 void Game::increase_terror_level() {
