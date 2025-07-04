@@ -86,3 +86,6 @@ bool InvisibleMan::add_evidence(const std::string& location) {
 evidence_locations.insert(location);
 return true;
 }
+int InvisibleMan::get_evidence_count() const {
+    return static_cast<int>(evidence_locations.size());
+}

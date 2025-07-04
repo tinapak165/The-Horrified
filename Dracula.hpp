@@ -32,6 +32,7 @@ class Dracula : public Monster {
         bool is_defeated()const override ;
         bool can_be_defeated()override;
         void destroy_coffin_at(std::string locationName);
+        const std::map<std::string, bool>& get_coffins_map() const;
         
     };
     

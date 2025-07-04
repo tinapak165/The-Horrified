@@ -21,6 +21,9 @@ void Dracula::destroy_coffin_at(std::string locationName) {
 
 
 
+const std::map<std::string, bool>& Dracula::get_coffins_map() const {
+    return coffinsDestroyed;
+}
 
 
 bool Dracula::is_defeated() const {

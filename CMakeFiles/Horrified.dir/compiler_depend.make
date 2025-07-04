@@ -2447,11 +2447,16 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/include/wchar.h \
   C:/w64devkit/include/wctype.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/auto_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/backward/binders.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bit \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/alloc_traits.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocated_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/allocator.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/atomic_base.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/atomic_lockfree_defines.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_string.h \
@@ -2495,6 +2500,9 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/range_access.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/refwrap.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_atomic.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/shared_ptr_base.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algobase.h \
@@ -2506,6 +2514,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_funcs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_iterator_base_types.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_pair.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tempbuf.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
@@ -2515,6 +2524,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unique_ptr.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
@@ -2536,6 +2546,7 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/aligned_buffer.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/alloc_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/concurrence.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/numeric_traits.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/string_conversions.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/type_traits.h \
@@ -2544,10 +2555,12 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iosfwd \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/memory \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/new \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/execution_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
+  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_memory_defs.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/pstl_config.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdexcept \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
@@ -2576,8 +2589,10 @@ CMakeFiles/Horrified.dir/TurnManager.cpp.obj: TurnManager.cpp \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/mm_malloc.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
   C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
+  GameMap.hpp \
   Hero.hpp \
   InvisibleMan.hpp \
+  Location.hpp \
   TurnManager.hpp \
   hero.hpp \
   item.hpp \

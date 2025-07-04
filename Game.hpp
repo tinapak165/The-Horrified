@@ -43,6 +43,9 @@ public:
     void getNewCard(Hero*) ;
     void locationOverview() ;
     void graph_map_text();
+    void monster_objectes() const;
+    void return_item(const Item& item);
+
    
 
     void monster_phase();

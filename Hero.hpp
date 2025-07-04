@@ -55,8 +55,7 @@ class Hero{
         int getMaxActions() const ; 
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
-        Location* GetCurrentLocation() const ; 
-           
+        Location* GetCurrentLocation() const ;         
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() const ; 
@@ -65,7 +64,7 @@ class Hero{
         void AddAvailablePerk(Perkcards) ;
         void displayavailblecards() const;
         void displayPlayedCards() const; 
-        std::vector<Perkcards> GetAvailablePerkCards() ; 
+        std::vector<Perkcards>& GetAvailablePerkCards() ; 
         void addPlayedCards(Perkcards) ;
 
         void DisplayItem() ;
@@ -76,7 +75,7 @@ class Hero{
         void removeItems(const Item&) ; 
         int select_items_to_defeat(ItemColor requiredColor) ;
         bool has_items() const;
-        void remove_item_by_index(int index);
+        void remove_item_by_index(int index); 
 
         int AdvanceActionForDracula() ; 
         void AdvanceActionForInvisibleMan(InvisibleMan*) ;
@@ -84,4 +83,4 @@ class Hero{
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
 };
-#endif  
+#endif 

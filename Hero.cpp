@@ -52,7 +52,7 @@ void Hero::displayPlayedCards() const{
     }
 }
 
-vector<Perkcards> Hero::GetAvailablePerkCards(){
+vector<Perkcards>& Hero::GetAvailablePerkCards(){
     return availableCards;
 }
 
@@ -60,7 +60,7 @@ void Hero::addPlayedCards(Perkcards p){
     playedCards.push_back(p) ;
     for(size_t i = 0 ; i < this->GetAvailablePerkCards().size() ; i++){
         if(p.get_Event() == availableCards[i].get_Event()){
-            availableCards.erase(availableCards.begin() + i);
+            this->GetAvailablePerkCards().erase(this->GetAvailablePerkCards().begin() + i);
             break;
         }
     }
@@ -76,7 +76,6 @@ void Hero::removeItems(const Item & i){
         }
     }
 }
-
 int Hero::AdvanceActionForDracula(){
     int chosenNumber = -1 ; 
     int totalStrength = 0 ;
@@ -164,7 +163,6 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     } 
 
 }
-
 void Hero::PickupItems(){ //pick up item from current location
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
     if(ItemsAtLocation.empty()){
@@ -319,10 +317,14 @@ void Hero::SetCurrentLocation(Location* location){
 void Hero::MoveTo(Location* new_location , vector<villager*> vill){ // move with villagers
     if (!new_location) return;
     
-    if(new_location == (*this).GetCurrentLocation())
-        throw runtime_error("already in the location!") ; 
-    
-    (*this).SetCurrentLocation(new_location) ; 
+    if(new_location == (*this).GetCurrentLocation()){
+       // throw runtime_error("already in the location!") ; 
+        cerr << "already in the location!\n" ; 
+    }
+    (*this).GetCurrentLocation()->remove_hero(this) ; 
+    (*this).SetCurrentLocation(new_location) ;
+    new_location->add_hero(this) ;  
+
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 
     if (currentLocation)
@@ -331,26 +333,32 @@ void Hero::MoveTo(Location* new_location , vector<villager*> vill){ // move with
     new_location->add_hero(this);
 
     for(auto *v : vill){
+        v->get_currentLocation()->remove_villager(v) ; 
         v->set_currentLocation(new_location) ;
+        new_location->add_villager(v) ; 
         cout << v->get_name() << " moved with hero to " << *(v->get_currentLocation()) << '\n';
     }  
 }
 
 void Hero::MoveTo(Location* new_location){ //without villager
-    if(new_location == (*this).GetCurrentLocation())
-        throw runtime_error("already in the location!") ;
+    if (!new_location) return;
+    
+    if(new_location == (*this).GetCurrentLocation()){
+       // throw runtime_error("already in the location!") ; 
+        cerr << "already in the location!\n" ; 
+    }
+    (*this).GetCurrentLocation()->remove_hero(this) ; 
+    (*this).SetCurrentLocation(new_location) ;
+    new_location->add_hero(this) ;  
+
+    cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 
     if (currentLocation)
         currentLocation->remove_hero(this);
     
     new_location->add_hero(this);
 
-
-    (*this).SetCurrentLocation(new_location) ; 
-    cout << (*this).GetName() << " moved to " << *((*this).GetCurrentLocation()) << '\n' ;
-    
 }
-
 bool Hero::hasvillagerHere() const{
 
     for(auto *v : villager::all() ){ //باید استاتیک باشد تا اینگونه ازش استفاده کنیم
@@ -446,4 +454,3 @@ void Hero::remove_item_by_index(int index) {
         std::cerr << "Invalid item index. No item removed.\n";
     }
 }
-
