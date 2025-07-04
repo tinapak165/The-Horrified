@@ -10,16 +10,17 @@ InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", sta
     };
 
 
-}
+} 
+// in game
  void InvisibleMan::special_power(Hero* h) {}
 
-std::pair<Hero*, villager*> InvisibleMan::attack() {
+std::pair<Hero*, Villager*> InvisibleMan::attack() {
     Location* loc = get_location();
     const auto& heroes = loc->get_heroes();
     const auto& villagers = loc->get_villagers();
 
     Hero* targetHero = nullptr;
-    villager* targetVillager = nullptr;
+    Villager* targetVillager = nullptr;
 
     if (!heroes.empty()) {
         if (heroes.size() == 1)
@@ -84,4 +85,7 @@ bool InvisibleMan::add_evidence(const std::string& location) {
 
 evidence_locations.insert(location);
 return true;
+}
+int InvisibleMan::get_evidence_count() const {
+    return static_cast<int>(evidence_locations.size());
 }

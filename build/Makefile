@@ -447,6 +447,30 @@ item.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/item.cpp.s
 .PHONY : item.cpp.s
 
+main.obj: main.cpp.obj
+.PHONY : main.obj
+
+# target to build an object file
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/main.cpp.obj
+.PHONY : main.cpp.obj
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 monster.obj: monster.cpp.obj
 .PHONY : monster.obj
 
@@ -543,30 +567,6 @@ perkcardsDeck.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/perkcardsDeck.cpp.s
 .PHONY : perkcardsDeck.cpp.s
 
-realmain.obj: realmain.cpp.obj
-.PHONY : realmain.obj
-
-# target to build an object file
-realmain.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/realmain.cpp.obj
-.PHONY : realmain.cpp.obj
-
-realmain.i: realmain.cpp.i
-.PHONY : realmain.i
-
-# target to preprocess a source file
-realmain.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/realmain.cpp.i
-.PHONY : realmain.cpp.i
-
-realmain.s: realmain.cpp.s
-.PHONY : realmain.s
-
-# target to generate assembly for a file
-realmain.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/realmain.cpp.s
-.PHONY : realmain.cpp.s
-
 villager.obj: villager.cpp.obj
 .PHONY : villager.obj
 
@@ -640,6 +640,9 @@ help:
 	@echo ... item.obj
 	@echo ... item.i
 	@echo ... item.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 	@echo ... monster.obj
 	@echo ... monster.i
 	@echo ... monster.s
@@ -652,9 +655,6 @@ help:
 	@echo ... perkcardsDeck.obj
 	@echo ... perkcardsDeck.i
 	@echo ... perkcardsDeck.s
-	@echo ... realmain.obj
-	@echo ... realmain.i
-	@echo ... realmain.s
 	@echo ... villager.obj
 	@echo ... villager.i
 	@echo ... villager.s

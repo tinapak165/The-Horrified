@@ -3,9 +3,9 @@
 #include <algorithm>
 using namespace std ;
 
-vector<villager*> villager:: vil  ;
+vector<Villager*> Villager:: vil  ;
 
-villager::villager(GameMap& map , const string& name, Location* safeplace , Location* current) : name(name), currentLocation(current){ 
+Villager::Villager(GameMap& map , const string& name, Location* safeplace , Location* current) : name(name), currentLocation(current){ 
 
     vil.push_back(this) ;
     
@@ -34,28 +34,28 @@ villager::villager(GameMap& map , const string& name, Location* safeplace , Loca
     }
 }
 
-bool villager::in_the_safePlace() const{
+bool Villager::in_the_safePlace() const{
 
     return currentLocation == safePlace;
 }
 
-void villager::set_currentLocation(Location* newLocation){
+void Villager::set_currentLocation(Location* newLocation){
     currentLocation = newLocation ; 
 }
 
-Location* villager::get_currentLocation(){
+Location* Villager::get_currentLocation(){
     return currentLocation;
 }
 
-string villager::get_name(){ return name; }
+string Villager::get_name(){ return name; }
 
-Location* villager::get_safeplace(){ return safePlace; }
+Location* Villager::get_safeplace(){ return safePlace; }
 
-void villager::set_safeplace(Location* newplace){
+void Villager::set_safeplace(Location* newplace){
     safePlace = newplace ; 
 }
 
-void villager::MoveTo(Location* newPlace , string charc){ // only villager move
+void Villager::MoveTo(Location* newPlace , string charc){ // only villager move
   
     for(auto *v :vil){
         if(v->get_name() == charc){
@@ -71,7 +71,7 @@ void villager::MoveTo(Location* newPlace , string charc){ // only villager move
     throw invalid_argument("villager not found! in move") ; 
 
 }
-void villager::removeVillager(){
+void Villager::removeVillager(){
 
     for(auto it = vil.begin() ; it != vil.end() ; ){
         if((*it)->in_the_safePlace()){
@@ -85,12 +85,12 @@ void villager::removeVillager(){
     }  
 }
 
-void villager::removevillager(villager * v){ //killed by attack of monster
+void Villager::removevillager(Villager * v){ //killed by attack of monster
     vil.erase(remove(vil.begin() , vil.end() , v) , vil.end()) ; 
     std::cout << "Removed villager: " << (this)->get_name() << "\n";
 }
 
-bool villager::AnyVillagerInSafePlace(){
+bool Villager::AnyVillagerInSafePlace(){
     for(auto *e : all()){
         if(e->in_the_safePlace()){
             return true ; 
@@ -99,4 +99,4 @@ bool villager::AnyVillagerInSafePlace(){
     return false ;
 }
 
-vector<villager*> &villager::all(){ return vil ;}
+vector<Villager*> &Villager::all(){ return vil ;}

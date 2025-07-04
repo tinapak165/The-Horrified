@@ -5,7 +5,8 @@
 #include "monster.hpp"
 #include "Hero.hpp"
 
-class Location;
+
+class location;
 
 class Dracula : public Monster {
     private:
@@ -26,11 +27,12 @@ class Dracula : public Monster {
         void defeat(Hero* hero, std::vector<Item>& yellow_items);
         
         void special_power(Hero*) override ; 
-        std::pair<Hero*, villager*> attack() override ;
-            
+        std::pair<Hero*, Villager*> attack() override ;
+        
         bool is_defeated()const override ;
         bool can_be_defeated()override;
         void destroy_coffin_at(std::string locationName);
+        const std::map<std::string, bool>& get_coffins_map() const;
         
     };
     

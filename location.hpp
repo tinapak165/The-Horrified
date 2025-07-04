@@ -19,7 +19,7 @@ class Location {
         
             std::string name;
             std::vector<Item> items;
-            std::vector<villager*> villagers ; 
+            std::vector<Villager*> villagers ; 
             std::vector<Hero*> heroes;
             std::vector<Monster*> monsters;
             std::vector<Location*> neighbors;
@@ -34,13 +34,13 @@ class Location {
             void connect(Location * other);
             
             void add_item(const Item& item);
-            void add_villager(villager*) ;
+            void add_villager(Villager*) ;
             void add_monster(Monster* monster);
             void add_hero(Hero* hero);
 
             void remove_hero(Hero*);
             void remove_monster(Monster* );
-            void remove_villager(villager *);
+            void remove_villager(Villager *);
 
             bool has_coffin();
             void place_coffin();
@@ -50,7 +50,7 @@ class Location {
             std::vector<Item>& get_items() ; 
             std::vector<Monster*>& get_monsters();
             std::vector<Hero*>& get_heroes();
-            std::vector<villager *>& get_villagers();
+            std::vector<Villager *>& get_villagers();
             const std::vector<Location*>& get_neighbors() const;
             
             Location* findNeighbor(const std::string& name) const  ; 

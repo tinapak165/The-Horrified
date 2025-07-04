@@ -9,7 +9,7 @@
 #include "InvisibleMan.hpp"
 
 class Location ; 
-class villager ; 
+class Villager ; 
 class InvisibleMan ; 
 
 enum class ActionType{
@@ -38,15 +38,18 @@ class Hero{
         Location* currentLocation;
         std::vector<Action> ListOfActions ;
         std::vector<Perkcards> playedCards ; 
-        std::vector<Perkcards> availableCards ;  
+        std::vector<Perkcards> availableCards ;
+        
+        std::vector<Item> usedItemsForDracula;
+        std::vector<Item> usedItemsForInvisibleMan;
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
-        void MoveTo(Location* new_location , std::vector<villager*>) ;
+        void MoveTo(Location* new_location , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
         
         bool hasvillagerHere() const ; 
-        std::vector<villager*> villagerHere() const ;
+        std::vector<Villager*> villagerHere() const ;
         void showvillagersHere()const ; 
 
         std::string GetName()const ; 
@@ -82,5 +85,8 @@ class Hero{
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
+
+        std::vector<Item> getUsedItemsForDracula();
+        std::vector<Item> getUsedItemsForInvisibleMan();
 };
 #endif 

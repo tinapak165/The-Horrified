@@ -200,9 +200,9 @@ void Game::play_hero_Action(Hero *h){
                     }
                     else if(mode == "neighbor"){
                         Location* currentLoc = h->GetCurrentLocation() ;
-                        vector<villager*> availableVillager ;
+                        vector<Villager*> availableVillager ;
                         for(auto *neigbor :  currentLoc->get_neighbors()){
-                            for(auto *v : villager::all()){
+                            for(auto *v : Villager::all()){
                                 if(v->get_currentLocation() == neigbor)
                                     availableVillager.push_back(v) ;                                        
                                 }
@@ -274,7 +274,8 @@ void Game::play_hero_Action(Hero *h){
                         cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n" ;
                         int totalStrength = h->AdvanceActionForDracula() ;
                         if (totalStrength >= 6) {
-                            dracula->destroy_coffin_at(locName); // توابع Dracula همین‌طور باقی می‌مونن
+                            dracula->destroy_coffin_at(locName); 
+                            pool.add_item(h.getUsedItemsForDracula()) ; 
                         } else {
                             std::cout << "Advance action failed Not enough red item strength.\n";
                         }
@@ -282,6 +283,7 @@ void Game::play_hero_Action(Hero *h){
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
                         h->AdvanceActionForInvisibleMan(invisibleMan) ;
+                        pool.add_item(h.getUsedItemsForDracula()) ; 
                     }
                     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
                 
@@ -337,8 +339,8 @@ void Game::hero_phase(Hero* hero) {
     hero->DisplayInfo() ;
     play_hero_Action(hero) ;
 
-    if(villager::AnyVillagerInSafePlace()){
-        villager::removeVillager() ;
+    if(Villager::AnyVillagerInSafePlace()){
+        Villager::removeVillager() ;
         getNewCard(hero) ; 
         cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
     }
@@ -381,7 +383,7 @@ void  Game::start() {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        if (deck.is_empty() && +!both_monsters_defeated()) {
+        if (deck.is_empty() && !both_monsters_defeated()) {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
         }    
@@ -608,12 +610,7 @@ void Game::monster_phase() {
         std::cout << "Invisible Man has no location.\n";
         
         
-        // if (deck.is_empty() || !both_monsters_defeated() ){
-        //     std::cout << "\nMonster deck is empty. Players lose!\n";
-
-        //     game_over = true;
-        //     return;
-        // }
+  
         
         Monstercard card = deck.get_random_card();
         std::cout << card;
@@ -707,31 +704,37 @@ void Game::monster_phase() {
     }
     
     
-    // اجرای strike
     for (const auto& strike : card.get_strikes()) {
         int moves = strike.get_move_count();
         int dice = strike.get_dice_count();
         const auto& monster_list = strike.get_monsters();
-        
-        for (MonsterType type : monster_list) {
-            
 
-                if (!monstersMap.count(type)) {
-                    std::cout << "Monster type not found in map, skipping.\n";
-                    continue;
-                }
-            
+        Dice d(3);
+        std::vector<DiceFace> results = d.roll(dice);
+
+        std::cout << "---PLAYING DICE---\n";
+        for (int i = 0; i < results.size(); ++i) {
+            std::cout << "Dice " << i << " rolled: " << (results[i] == DiceFace::Attack ? "Attack" :
+                                                           results[i] == DiceFace::Power ? "Power" :
+                                                           "Empty") << "\n";
+        }
+
+        for (MonsterType type : monster_list) {
+            if (!monstersMap.count(type)) {
+                std::cout << "Monster type not found in map, skipping.\n";
+                continue;
+            }
+
             Monster* m = monstersMap[type];
             if (!m->is_alive()) {
                 std::cout << m->get_name() << " is defeated and will not act.\n";
                 continue;
             }
 
-            std::cout << "---MONSTER MOVE FROM STRIKE---"<<endl;
+            std::cout << "---MONSTER MOVE FROM STRIKE---" << std::endl;
 
             for (int i = 0; i < moves; ++i) {
                 Location* target = nullptr;
-            
                 if (type == MonsterType::Dracula) {
                     target = m->find_nearest_target(m->get_location());
                 } else if (type == MonsterType::InvisibleMan) {
@@ -740,166 +743,129 @@ void Game::monster_phase() {
                     std::cout << "Unknown monster type. Skipping movement.\n";
                     break;
                 }
-            
+
                 if (target) {
-                    m->move_towards(1); 
+                    m->move_towards(1);
                 } else {
                     std::cout << m->get_name() << " found no target to move toward.\n";
-                    break; 
+                    break;
                 }
             }
-            
+
             bool terrorAlreadyIncreased = false;
-            
             Location* currentLoc = m->get_location();
             bool nearHero = !currentLoc->get_heroes().empty();
             bool nearVillager = !currentLoc->get_villagers().empty();
 
-            if (type == MonsterType::Dracula && (nearHero || nearVillager)) {
-                std::cout << "Dracula's presence increased terror level !\n";
-                increase_terror_level();
-                terrorAlreadyIncreased = true;
+            // if (type == MonsterType::Dracula && (nearHero || nearVillager)) {
+            //     std::cout << "Dracula's presence increased terror level !\n";
+            //     increase_terror_level();
+            //     terrorAlreadyIncreased = true;
+            // }
 
-            }
-           
-            cout<<" Terror Level Reached : "<< terror_Level<<endl;
-            // تاس انداختن
-            std::cout<<"---PLAYING DICE---";
-            Dice d(3);
-            if (dice <= 0 || dice > 3) {
-                std::cout << "Invalid dice count: " << dice << "\n";
-                continue; 
-            }
-            
-            std::vector<DiceFace> results = d.roll(dice);
+            // std::cout << " Terror Level Reached : " << terror_Level << std::endl;
+
             bool invisiblePowerTriggered = false;
-           
 
-        for (DiceFace face : results) {
-            std::cout << "Dice result: ";
-            switch (face) {
-                case DiceFace::Power:
-                    std::cout << "Power\n";
-                    if (type == MonsterType::Dracula) {
-                        // m->special_power(turnManager.get_active_hero()); // مثل Dark Charm
-                    } else if (type == MonsterType::InvisibleMan) {
-                        invisiblePowerTriggered = true; // ولی بعداً اجرا می‌کنیم
-                    }
-                    break;
+            for (DiceFace face : results) {
+                std::cout << "Dice result: ";
+                switch (face) {
+                    case DiceFace::Power:
+                        std::cout << "Power\n";
+                        if (type == MonsterType::InvisibleMan) {
+                            invisiblePowerTriggered = true;
+                        }
+                        break;
+                    case DiceFace::Attack:
+                        std::cout << "Attack\n";
+                        if (type == MonsterType::Dracula) {
+                            auto target = m->attack(); //[heroTarget, villagerTarget]
+                            if (target.first && !target.second) {
+                                std::cout << "Dracula attacks " << target.first->GetName() << "!\n";
+                                if (target.first->has_items()) {
+                                    const auto& items = target.first->GetItems();
+                                    for (size_t i = 0; i < items.size(); ++i) {
+                                        std::cout << i + 1 << ". " << items[i].getName() << " ("
+                                                  << items[i].color_to_string(items[i].getColor()) << ")\n";
+                                    }
+                                    std::cout << "Do you want to use one item to block the attack? (yes/no): ";
+                                    std::string choice;
+                                    std::cin >> choice;
 
-                case DiceFace::Attack:
-                    std::cout << "Attack\n";
-                    if (type == MonsterType::Dracula) {
-                        auto  kv  = m->attack(); //[heroTarget, villagerTarget]
+                                    if (choice == "yes" || choice == "y") {
+                                        std::cout << "Select the item number to use: ";
+                                        int itemIndex;
+                                        std::cin >> itemIndex;
 
-                        if (kv.first && !kv.second) {
-                            std::cout << "Dracula attacks " << kv.first->GetName() << "!\n";
-                           
-                        
-                            if (kv.first->has_items()) {
-                                std::cout << kv.first->GetName() << " has the following items:\n";
-                                const auto& items = kv.first->GetItems();
-                        
-                                for (size_t i = 0; i < items.size(); ++i) {
-                                    std::cout << i + 1 << ". " << items[i].getName() << " (" << items[i].color_to_string(items[i].getColor()) << ")\n";
-                                }
-                        
-                                std::cout << "Do you want to use one item to block the attack? (yes/no): ";
-                                std::string choice;
-                                std::cin >> choice;
-                        
-                                if (choice == "yes" || choice == "y") {
-                                    std::cout << "Select the item number to use: ";
-                                    int itemIndex;
-                                    std::cin >> itemIndex;
-                        
-                                    if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
-                                        kv.first->remove_item_by_index(itemIndex - 1);
-                                        std::cout << "Item used to block the attack!\n";
+                                        if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
+                                            target.first->remove_item_by_index(itemIndex - 1);
+                                            pool.add_item(items[itemIndex]);
+
+                                            std::cout << "Item used to block the attack!\n";
+                                        } else {
+                                            std::cout << "Invalid selection. Dracula's attack succeeds.\n";
+                                            send_hero_to_hospital(target.first);
+                                            if (!terrorAlreadyIncreased) {
+                                                increase_terror_level();
+                                                terrorAlreadyIncreased = true;
+                                            }
+                                            break;
+                                        }
                                     } else {
-                                        std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                        send_hero_to_hospital(kv.first);
+                                        std::cout << "No item used. Dracula's attack succeeds.\n";
+                                        send_hero_to_hospital(target.first);
                                         if (!terrorAlreadyIncreased) {
                                             increase_terror_level();
                                             terrorAlreadyIncreased = true;
                                         }
-                                        
                                         break;
                                     }
                                 } else {
-                                    std::cout << "No item used. Dracula's attack succeeds.\n";
-                                    send_hero_to_hospital(kv.first);
+                                    std::cout << target.first->GetName() << " has no items. Dracula's attack succeeds.\n";
+                                    send_hero_to_hospital(target.first);
                                     if (!terrorAlreadyIncreased) {
                                         increase_terror_level();
                                         terrorAlreadyIncreased = true;
                                     }
-                                    
                                     break;
                                 }
-                            } else {
-                                std::cout << kv.first->GetName() << " has no items. Dracula's attack succeeds.\n";
-                                send_hero_to_hospital(kv.first);
+                            } else if (target.second) { //villager
+                                std::cout << "Dracula attacks " << target.second->get_name() << "!\n";
+                                remove_villager(target.second);
                                 if (!terrorAlreadyIncreased) {
                                     increase_terror_level();
                                     terrorAlreadyIncreased = true;
                                 }
-                                
                                 break;
                             }
-                        
-                        } else if (kv.second) { //targetVillager
-                            std::cout << "Dracula attacks " << kv.second->get_name() << "!\n";
-                            remove_villager(kv.second);
-                            
-
-                            if (!terrorAlreadyIncreased) {
+                        } else if (type == MonsterType::InvisibleMan) {
+                            auto  kv = m->attack(); //[heroTarget, villagerTarget]
+                            if (kv.second) {
+                                std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
+                                remove_villager(kv.second);
                                 increase_terror_level();
-                                terrorAlreadyIncreased = true;
                             }
-                            
-                            break;
                         }
-                        
-                    } else if (type == MonsterType::InvisibleMan) {
-                        // فقط اگه قبلاً اونجا بوده باشه و حمله ممکن باشه
-                        auto kv = m->attack(); //[heroTarget, villagerTarget]
-
-                        if (kv.second) {
-                            std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
-                            remove_villager(kv.second);
-                            increase_terror_level();
-
-                        }
-                        // به قهرمان حمله نمیکنه حتی اگه هست
-                    }
-                    break;
-
-                
-                case DiceFace::empty:
-                std::cout << "Empty\n";
-            
-              
+                        break;
+                    case DiceFace::empty:
+                        std::cout << "Empty\n";
+                        break;
+                }
             }
-        }
-        
-        
 
             if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
                 Location* target = m->find_nearest_villager(m->get_location());
                 if (target) {
                     m->move_towards(2);
-                    std::cout << "Invisible Man Power in dice ! He is closer to villager. now he is in "<< loc2<<endl;
-                    
+                    std::cout << "Invisible Man Power in dice ! He is closer to villager. now he is in " << loc2 << std::endl;
                 } else {
                     std::cout << "Invisible Man found no villager for doing his Power in dice .\n";
                 }
             }
-
         }
     }
-
-    
 }
+
 
 
 void Game::send_hero_to_hospital(Hero* h) {
@@ -907,96 +873,104 @@ void Game::send_hero_to_hospital(Hero* h) {
     h->MoveTo(hospital);
 }
 
-void Game::remove_villager(villager* v) {
+void Game::remove_villager(Villager* v) {
     v->removevillager(v) ;
-    v->set_currentLocation(nullptr); // فرض بر اینکه set_location(nullptr) یعنی حذف
+    v->set_currentLocation(nullptr);
 }
-void Game::locationOverview(){
+void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
     cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
-    cout << right <<"--------------------------------------------------------------------------------------\n" ; 
- 
-    for(const auto& locPtr : map.get_locations()){
-        Location* loc = locPtr.get() ;
+    cout << right <<"--------------------------------------------------------------------------------------\n"; 
 
-        //item
-        string itemStr ; 
-        const auto items = loc->get_items() ;
-        if(items.empty())
-            itemStr = "-" ; 
-        else{
-            std::map<string , pair<int , ItemColor>> itemcount ;
-            for(const auto & item : items){
-                auto& entry = itemcount[item.getName()] ;
-                entry.first++ ; entry.second = item.getColor() ; 
+    for (const auto& locPtr : map.get_locations()) {
+        Location* loc = locPtr.get();
+
+        // ----- Items -----
+        string itemStr;
+        const auto items = loc->get_items();
+        if (items.empty()) {
+            itemStr = "-";
+        } else {
+            std::map<string, pair<int, ItemColor>> itemcount;
+            for (const auto& item : items) {
+                auto& entry = itemcount[item.getName()];
+                entry.first++;
+                entry.second = item.getColor();
             }
-            for(const auto& kv : itemcount){
-                const auto& name = kv.first ; 
-                int cnt = kv.second.first ; 
-                ItemColor color = kv.second.second ; 
+            for (const auto& kv : itemcount) {
+                const auto& name = kv.first;
+                int cnt = kv.second.first;
+                ItemColor color = kv.second.second;
 
-                itemStr +=  get_color_code(color) + name +  get_color_code(ItemColor::Reset) + "(" + to_string(cnt) + "),"  ;
+                itemStr += get_color_code(color) + name + get_color_code(ItemColor::Reset) + "(" + to_string(cnt) + "),";
             }
-
+            if (!itemStr.empty()) itemStr.pop_back();  // remove last comma
         }
 
-        //monsters
-        string monStr ;
-        const auto monsters = loc->get_monsters() ;
-        if(monsters.empty())
-            monStr = "-" ; 
-        else{
-            for(const auto& m : monsters)
-                monStr+= m->get_name() + "," ;
-            
-            monStr.pop_back() ;
+        // ----- Monsters -----
+        string monStr;
+        const auto monsters = loc->get_monsters();
+        if (monsters.empty()) {
+            monStr = "-";
+        } else {
+            for (const auto& m : monsters) {
+                if (m) monStr += m->get_name() + ",";
+            }
+            if (!monStr.empty()) monStr.pop_back();
+            else monStr = "-";
         }
 
-        //villagers
+        // ----- Villagers -----
         string villagerStr;
         const auto& villagers = loc->get_villagers();
-        if (villagers.empty()) 
+        if (villagers.empty()) {
             villagerStr = "-";
-        else {
-            for (const auto& v : villagers)
-                villagerStr += v->get_name() + ",";
-            villagerStr.pop_back();
-        }   
-
-        //heroes
-        string HeroStr ; 
-        const auto& heroes = loc->get_heroes() ; 
-        if(heroes.empty())
-            HeroStr = "-" ; 
-        else{
-            for(const auto& h : heroes)
-                HeroStr+= h->GetName() + "," ; 
-            HeroStr.pop_back() ;
-            
+        } else {
+            for (const auto& v : villagers) {
+                if (v) villagerStr += v->get_name() + ",";
+            }
+            if (!villagerStr.empty()) villagerStr.pop_back();
+            else villagerStr = "-";
         }
-        cout << left << setw(13) << loc->get_name()
-             << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << setw(20) << HeroStr << "\n";
-    }
-  cout << "-------------------------------------------------------------------------------------\n" ; 
-  cout << "terror level: " << terror_Level << '\n' ; 
-  //collected evidences:
-  //smashed coffins: 
-    
-}
 
+        // ----- Heroes -----
+        string heroStr;
+        const auto& heroes = loc->get_heroes();
+        if (heroes.empty()) {
+            heroStr = "-";
+        } else {
+            for (const auto& h : heroes) {
+                if (h) heroStr += h->GetName() + ",";
+            }
+            if (!heroStr.empty()) heroStr.pop_back();
+            else heroStr = "-";
+        }
+
+        cout << left << setw(13) << loc->get_name()
+             << setw(20) << itemStr
+             << setw(20) << monStr
+             << setw(20) << villagerStr
+             << setw(20) << heroStr << "\n";
+    }
+
+    cout << "-------------------------------------------------------------------------------------\n";
+    cout << "terror level: " << terror_Level << '\n';
+    monster_objectes();
+    deck.remaining_cards() ; 
+}
 void Game::increase_terror_level() {
     terror_Level++;
     std::cout << "Terror Level increased to " << terror_Level << "!\n";
 }
 
-villager* Game::create_villager(const std::string& name, const std::string& locName) {
+Villager* Game::create_villager(const std::string& name, const std::string& locName) {
     Location* loc = map.get_location_by_name(locName);
     if (!loc) {
         std::cout << "Can't move the villager '" << name << "': location '" << locName << "' not found.\n";
         return nullptr;
     }
 
-    villager* v = new villager(map , name, nullptr, loc) ; //safeplace = null 
+    Villager* v = new Villager(map , name, nullptr, loc) ; //safeplace = null 
     std::cout << "Created new villager: " << name << " at " << locName << "\n";
     return v;
 }
@@ -1006,12 +980,12 @@ void Game::graph_map_text() {
 
 --------------------------------GAME MAP------------------------------------- 
        
-                [Precinct]-----[Inn]   [Barn]                                              
-                  /               \   /                                                
+                  [Precinct]----[Inn]   [Barn]                                              
+                  /         \      \   /                                                
   [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
-                |     /       /
-                |    /       /                                      \
-[Abbey] ----[Mansion]----[Shop]                                      [Docks]
+                |     /       /                       \
+                |    /       /                         \
+[Abbey] ----[Mansion]----[Shop]                       [Docks]
     |          /   |           \
     |    [Museum] [Church]    [Laboratory]
  [Crypt]            /    \               \
@@ -1020,5 +994,22 @@ void Game::graph_map_text() {
           
     )" << '\n';
 std::cout<<"--------------------------------------------------------------------------------"<<endl;  
+}
+void Game::monster_objectes() const {
+    if (dracula) {
+        int destroyed = 0;
+        for (const auto& entry : dracula->get_coffins_map()) {
+            if (entry.second) destroyed++;
+        }
+        std::cout << "Coffins destroyed (Dracula): " << destroyed << "/4\n";
+    }
+
+    if (invisibleMan) {
+        int collected = invisibleMan->get_evidence_count();
+        std::cout << "Evidence collected (Invisible Man): " << collected << "/5\n";
+    }
+}
+void Game::return_item(const Item& item) {
+    pool.add_item(item);  // یا هر container که استفاده می‌کنی
 }
 

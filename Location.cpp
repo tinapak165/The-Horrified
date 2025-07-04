@@ -8,7 +8,7 @@ void Location::add_item(const Item& item) {
     items.push_back(item);
 }
 
-void Location::add_villager(villager* villager){
+void Location::add_villager(Villager* villager){
     villagers.push_back(villager) ;
 }
 
@@ -26,7 +26,7 @@ void Location::remove_monster(Monster* monster) {
     monsters.erase(std::remove(monsters.begin(), monsters.end(), monster), monsters.end());
 }
 
-void Location::remove_villager(villager * villager){
+void Location::remove_villager(Villager * villager){
     villagers.erase(std::remove(villagers.begin() , villagers.end() , villager) , villagers.end()) ;
 }
 
@@ -50,7 +50,7 @@ std::vector<Hero*>& Location::get_heroes() {
     return heroes;
 }
 
-std::vector<villager *> &Location::get_villagers(){
+std::vector<Villager *> &Location::get_villagers(){
     return villagers ;
 }
 

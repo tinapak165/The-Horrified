@@ -3,10 +3,10 @@
 
 Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation)
  { // key value
-    // coffinsDestroyed["Cave"] = false;
+     coffinsDestroyed["Cave"] = false;
     coffinsDestroyed["Dungeon"] = false;
-    // coffinsDestroyed["Crypt"] = false;
-    // coffinsDestroyed["Graveyard"] = false;
+     coffinsDestroyed["Crypt"] = false;
+     coffinsDestroyed["Graveyard"] = false;
 }
 
 // remmember first word is capital 
@@ -21,6 +21,9 @@ void Dracula::destroy_coffin_at(std::string locationName) {
 
 
 
+const std::map<std::string, bool>& Dracula::get_coffins_map() const {
+    return coffinsDestroyed;
+}
 
 
 bool Dracula::is_defeated() const {
@@ -59,13 +62,13 @@ bool Dracula::can_be_defeated(){
     }
     
 
-    std::pair<Hero*, villager*> Dracula::attack() {
+    std::pair<Hero*, Villager*> Dracula::attack() {
         Location* currentLoc = get_location();
         const auto& heroes = currentLoc->get_heroes();
         const auto& villagers = currentLoc->get_villagers();
     
         Hero* chosenHero = nullptr;
-        villager* chosenVillager = nullptr;
+        Villager* chosenVillager = nullptr;
     
         if (!heroes.empty()) {
             if (heroes.size() == 1)

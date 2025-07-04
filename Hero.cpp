@@ -314,7 +314,7 @@ Location* Hero::GetCurrentLocation() const{
 void Hero::SetCurrentLocation(Location* location){
     currentLocation = location ;
 }
-void Hero::MoveTo(Location* new_location , vector<villager*> vill){ // move with villagers
+void Hero::MoveTo(Location* new_location , vector<Villager*> vill){ // move with villagers
     if (!new_location) return;
     
     if(new_location == (*this).GetCurrentLocation()){
@@ -361,7 +361,7 @@ void Hero::MoveTo(Location* new_location){ //without villager
 }
 bool Hero::hasvillagerHere() const{
 
-    for(auto *v : villager::all() ){ //باید استاتیک باشد تا اینگونه ازش استفاده کنیم
+    for(auto *v : Villager::all() ){ //باید استاتیک باشد تا اینگونه ازش استفاده کنیم
         if(v->get_currentLocation() == (*this).GetCurrentLocation())
             return true ; 
     } 
@@ -369,8 +369,8 @@ bool Hero::hasvillagerHere() const{
 }
 
 void Hero::showvillagersHere() const{
-    vector<villager*> vill ; 
-    for(auto *v : villager::all() ){
+    vector<Villager*> vill ; 
+    for(auto *v : Villager::all() ){
         if(v->get_currentLocation() == (*this).GetCurrentLocation()){
             vill.push_back(v) ; 
         }
@@ -379,10 +379,10 @@ void Hero::showvillagersHere() const{
         cout << v->get_name() << " , " ; 
 }
 
-vector<villager*> Hero::villagerHere() const
+vector<Villager*> Hero::villagerHere() const
 {
-    vector<villager*> vill ; 
-    for(auto *v : villager::all() ){
+    vector<Villager*> vill ; 
+    for(auto *v : Villager::all() ){
         if(v->get_currentLocation() == GetCurrentLocation())
             vill.push_back(v) ; 
     }

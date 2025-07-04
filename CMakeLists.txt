@@ -8,7 +8,7 @@ Game.cpp
 Hero.cpp
 Dice.cpp
 Mayor.cpp
-realmain.cpp 
+main.cpp 
 GameMap.cpp 
 MonsterCardDeck.cpp
 monstercards.cpp

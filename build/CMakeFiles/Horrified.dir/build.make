@@ -127,19 +127,19 @@ CMakeFiles/Horrified.dir/Mayor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/Mayor.cpp.s"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\Mayor.cpp -o CMakeFiles\Horrified.dir\Mayor.cpp.s
 
-CMakeFiles/Horrified.dir/realmain.cpp.obj: CMakeFiles/Horrified.dir/flags.make
-CMakeFiles/Horrified.dir/realmain.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/realmain.cpp
-CMakeFiles/Horrified.dir/realmain.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Horrified.dir/realmain.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/realmain.cpp.obj -MF CMakeFiles\Horrified.dir\realmain.cpp.obj.d -o CMakeFiles\Horrified.dir\realmain.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\realmain.cpp
+CMakeFiles/Horrified.dir/main.cpp.obj: CMakeFiles/Horrified.dir/flags.make
+CMakeFiles/Horrified.dir/main.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/main.cpp
+CMakeFiles/Horrified.dir/main.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Horrified.dir/main.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/main.cpp.obj -MF CMakeFiles\Horrified.dir\main.cpp.obj.d -o CMakeFiles\Horrified.dir\main.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\main.cpp
 
-CMakeFiles/Horrified.dir/realmain.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Horrified.dir/realmain.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sibegilan\Desktop\Final\The-Horrified\realmain.cpp > CMakeFiles\Horrified.dir\realmain.cpp.i
+CMakeFiles/Horrified.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Horrified.dir/main.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sibegilan\Desktop\Final\The-Horrified\main.cpp > CMakeFiles\Horrified.dir\main.cpp.i
 
-CMakeFiles/Horrified.dir/realmain.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/realmain.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\realmain.cpp -o CMakeFiles\Horrified.dir\realmain.cpp.s
+CMakeFiles/Horrified.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/main.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\main.cpp -o CMakeFiles\Horrified.dir\main.cpp.s
 
 CMakeFiles/Horrified.dir/GameMap.cpp.obj: CMakeFiles/Horrified.dir/flags.make
 CMakeFiles/Horrified.dir/GameMap.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/GameMap.cpp
@@ -343,7 +343,7 @@ Horrified_OBJECTS = \
 "CMakeFiles/Horrified.dir/Hero.cpp.obj" \
 "CMakeFiles/Horrified.dir/Dice.cpp.obj" \
 "CMakeFiles/Horrified.dir/Mayor.cpp.obj" \
-"CMakeFiles/Horrified.dir/realmain.cpp.obj" \
+"CMakeFiles/Horrified.dir/main.cpp.obj" \
 "CMakeFiles/Horrified.dir/GameMap.cpp.obj" \
 "CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj" \
 "CMakeFiles/Horrified.dir/monstercards.cpp.obj" \
@@ -366,7 +366,7 @@ Horrified.exe: CMakeFiles/Horrified.dir/Game.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/Hero.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/Dice.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/Mayor.cpp.obj
-Horrified.exe: CMakeFiles/Horrified.dir/realmain.cpp.obj
+Horrified.exe: CMakeFiles/Horrified.dir/main.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/GameMap.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/MonstercardDeck.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/monstercards.cpp.obj
