@@ -19,13 +19,6 @@ std::string Item::color_to_string(ItemColor color) {
     }
 }
 
-std::string get_color_code(ItemColor color) {
-    switch (color) {
-        case ItemColor::RED:    return "\033[31m"; // قرمز
-        case ItemColor::BLUE:   return "\033[34m"; // آبی
-        case ItemColor::YELLOW: return "\033[33m"; // زرد
-        default:                return "\033[0m";  // بازنشانی (default)
-    }
-}
+
 
 

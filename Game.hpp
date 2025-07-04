@@ -40,7 +40,8 @@ public:
     void ChoosePerkCard(Hero*) ;
     void getNewCard(Hero*) ;
     void locationOverview() ;
-    void graph_map();
+    void graph_map_text();
+   
 
     void monster_phase();
     void send_hero_to_hospital(Hero* );

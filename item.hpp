@@ -3,7 +3,7 @@
 #include <string>
 
 
-enum class ItemColor { RED, YELLOW, BLUE };
+enum class ItemColor { RED, YELLOW, BLUE, Reset  };
 
 class Item {
 private:
@@ -21,7 +21,7 @@ public:
     int getStrength() const;
      std::string getLocationName() const;
     static std::string color_to_string(ItemColor color);
-    std::string get_color_code(ItemColor color);
+    
     
 
 };

@@ -1,21 +1,37 @@
 #include "villager.hpp"
 #include <iostream>
 #include <algorithm>
+#include "GameMap.hpp"
 using namespace std ;
 
 vector<villager*> villager:: vil  ;
 
-villager::villager(const string name, Location* safeplace, Location* current)
-    : name(name), currentLocation(current), safePlace(safeplace) {
+villager::villager(GameMap& map , const string& name, Location* safeplace , Location* current) : name(name), currentLocation(current){ 
+
+    vil.push_back(this) ;
     
-    vil.push_back(this);
-    
-    if (current)
-        current->add_villager(this);
-    
-    // ترفند: اگه در safePlace ساخته شده، نذار بلافاصله حذف شه
-    if (in_the_safePlace()) {
-        safePlace = nullptr; 
+    if(current)
+        current->add_villager(this) ; 
+    if(name == "Dr. Cranly"){
+        (*this).set_safeplace(map.get_location_by_name("Precinct")) ; 
+    }
+    else if(name == "Dr. Reed"){
+        (*this).set_safeplace(map.get_location_by_name("Camp")) ; 
+    }
+    else if(name == "Prof. Pearson"){
+    (*this).set_safeplace(map.get_location_by_name("Museum")) ; 
+    }
+    else if(name == "Maleva"){
+        (*this).set_safeplace(map.get_location_by_name("Shop")) ; 
+    }
+    else if(name == "Fritz"){
+        (*this).set_safeplace(map.get_location_by_name("Institute")) ; 
+    }
+    else if(name == "Wilbur & Chick"){
+        (*this).set_safeplace(map.get_location_by_name("Dungeon")) ; 
+    }
+    else if(name == "Maria"){
+        (*this).set_safeplace(map.get_location_by_name("Camp")) ; 
     }
 }
 

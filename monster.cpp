@@ -34,7 +34,7 @@ void Monster::set_location(Location* new_location) {
 
 
 Location* Monster::find_nearest_target(Location* start) {
-    std::cout<<"in find nearest target ";
+   
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
@@ -233,7 +233,7 @@ void Monster::move_towards(int max_steps) {
 
         std::cout << name << " moved to " << current_location->get_name() << "\n";
     }
-    cout<<" end of move to folan \n";
+   
 }
 
  std::ostream operator<<(std::ostream &output, Monster &m){

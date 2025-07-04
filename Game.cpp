@@ -235,8 +235,9 @@ Game::~Game() {
                                 cout << *(v->get_currentLocation()) << " -> " << v->get_name() << '\n';
                     
                             string chosenvillager ; 
-                            cout << "Which villager do you want to move to your location? " ; 
-                            cin >> chosenvillager ; 
+                            cout << "Which villager do you want to move to your location? " ;
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
+                            getline(cin , chosenvillager) ;  
                             bool found = false ; 
                             for(auto *v : availableVillager){
                                 if(chosenvillager == v->get_name()){
@@ -387,19 +388,20 @@ void  Game::start() {
    
     while (true) {
         // ۱. فاز قهرمان
-        cout <<"-HERO PHASE-\n" ; 
+        cout <<"<-----------HERO PHASE----------->\n" ; 
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
 
-        locationOverview() ;
+       graph_map_text();
+
 
 
 
         
-        cout << "-MONSTER PHASE-\n" ; 
+        cout << "<-----------MONSTER PHASE---------->\n" ; 
         monster_phase();
-        
+         locationOverview() ;
 
         // ۳. بررسی پایان بازی
         if (terror_Level >= 6) {
@@ -771,6 +773,24 @@ void Game::monster_phase() {
     
 }
 
+villager* Game::create_villager(const std::string& name, const std::string& locName) {
+    Location* loc = map.get_location_by_name(locName);
+    if (!loc) {
+        std::cerr << "Invalid location name for villager: " << locName << "\n";
+        return nullptr;
+    }
+
+    Location* safe = map.get_location_by_name("Hospital"); // فرض کردیم Hospital جای امنه
+    std::unique_ptr<villager> newVillager = std::make_unique<villager>(map, name, safe, loc);
+    villager* rawPtr = newVillager.get();
+
+    loc->add_villager(rawPtr);
+    
+
+    std::cout << "Placed " << name << " at " << locName << ".\n";
+    return rawPtr;
+}
+
 
 
 void Game::remove_villager(villager* v) {
@@ -778,6 +798,11 @@ void Game::remove_villager(villager* v) {
     v->set_currentLocation(nullptr); 
 }
 
+
+void Game::send_hero_to_hospital(Hero* h) {
+    Location* hospital = map.get_location_by_name("Hospital");
+    h->MoveTo(hospital);
+} 
 
 void Game::distribute_initial_items() {
     std::cout<<"placing 12 initial items \n";
@@ -788,12 +813,21 @@ void Game::distribute_initial_items() {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-           
+            
             std::string colorStr = Item::color_to_string(item.getColor());
             std::cout << "Placed " << colorStr << " " << item.getName() << " at " << item.getLocationName() << std::endl;
             
             
         }
+    }
+}
+string get_color_code(ItemColor color) {
+    switch (color) {
+        case ItemColor::RED:    return "\033[31m";
+        case ItemColor::BLUE:   return "\033[34m";
+        case ItemColor::YELLOW: return "\033[33m";
+        case ItemColor::Reset : return "\033[39m"; 
+        default:                return "\033[0m";
     }
 }
 
@@ -804,21 +838,30 @@ void Game::locationOverview(){
     cout << right <<"--------------------------------------------------------------------------------------\n" ; 
  
     for(const auto& locPtr : map.get_locations()){
-        Location* loc = locPtr.get() ; 
+        Location* loc = locPtr.get() ;
 
+        //item
         string itemStr ; 
         const auto items = loc->get_items() ;
         if(items.empty())
             itemStr = "-" ; 
         else{
-            std::map< std::string , int> itemcount ;
-            for(const auto & item : items)
-                itemcount[item.getName()]++ ;
-            for(const auto& pair : itemcount)
-                itemStr+= pair.first + "(" + to_string(pair.second) +")," ;
-            if(!itemStr.empty())
-                itemStr.pop_back() ;   
+            std::map<string , pair<int , ItemColor>> itemcount ;
+            for(const auto & item : items){
+                auto& entry = itemcount[item.getName()] ;
+                entry.first++ ; entry.second = item.getColor() ; 
+            }
+            for(const auto& kv : itemcount){
+                const auto& name = kv.first ; 
+                int cnt = kv.second.first ; 
+                ItemColor color = kv.second.second ; 
+
+                itemStr +=  get_color_code(color) + name +  get_color_code(ItemColor::Reset) + "(" + to_string(cnt) + "),"  ;
+            }
+
         }
+
+        //monsters
         string monStr ;
         const auto monsters = loc->get_monsters() ;
         if(monsters.empty())
@@ -830,6 +873,7 @@ void Game::locationOverview(){
             monStr.pop_back() ;
         }
 
+        //villagers
         string villagerStr;
         const auto& villagers = loc->get_villagers();
         if (villagers.empty()) 
@@ -838,8 +882,9 @@ void Game::locationOverview(){
             for (const auto& v : villagers)
                 villagerStr += v->get_name() + ",";
             villagerStr.pop_back();
-        }
+        }   
 
+        //heroes
         string HeroStr ; 
         const auto& heroes = loc->get_heroes() ; 
         if(heroes.empty())
@@ -854,138 +899,32 @@ void Game::locationOverview(){
              << setw(20) << itemStr << setw(20) << monStr << setw(20) << villagerStr << setw(20) << HeroStr << "\n";
     }
   cout << "-------------------------------------------------------------------------------------\n" ; 
+  cout << "terror level: " << terror_Level << '\n' ; 
   //collected evidences:
   //smashed coffins: 
-  //terror level:
-  //dice rolled each turn 
     
 }
+void Game::graph_map_text() {
+    std::cout << R"(
 
 
-void Game::send_hero_to_hospital(Hero* h) {
-    Location* hospital = map.get_location_by_name("Hospital");
-    h->MoveTo(hospital);
+--------------------------------GAME MAP------------------------------------- 
+       
+                [Precinct]-----[Inn]                                                 
+                  /               \                                                   
+  [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
+                |     /       /
+                |    /       /                                      \
+[Abbey] ----[Mansion]----[Shop]                                      [Docks]
+    |          /   |           \
+    |    [Museum] [Church]    [Laboratory]
+ [Crypt]            /    \               \
+             [Graveyard][Hospital]        [Institute]
+              
+          
+    )" << '\n';
+std::cout<<"--------------------------------------------------------------------------------";    
 }
-
-villager* Game::create_villager(const std::string& name, const std::string& locName) {
-    Location* loc = map.get_location_by_name(locName);
-    if (!loc) {
-        std::cout << "Can't move the villager '" << name << "': location '" << locName << "' not found.\n";
-        return nullptr;
-    }
-
-    villager* v = new villager(name, loc, loc);
-    std::cout << "Created new villager: " << name << " at " << locName << "\n";
-    return v;
- }
-
- 
-// void Game::graph_map() {
-//     const int rows = 15;
-//     const int cols = 60;
-// cout<<"---------------------------------------GAME MAP---------------------------------------\n";
-//     // موقعیت تقریبی هر لوکیشن (ردیف، ستون)
-//     std::map<std::string, std::pair<int,int>> pos = {
-//         {"Cave", {0, 0}},
-//         {"Camp", {2, 0}},
-//         {"Mansion", {4, 10}},
-//         {"Barn", {2, 20}},
-//         {"Theatre", {0, 20}},
-//         {"Tower", {0, 30}},
-//         {"Dungeon", {4, 30}},
-//         {"Docks", {2, 40}},
-//         {"Inn", {0, 40}},
-//         {"Precinct", {0, 50}},
-//         {"Shop", {4, 40}},
-//         {"Abbey", {6, 10}},
-//         {"Crypt", {8, 10}},
-//         {"Museum", {6, 20}},
-//         {"Laboratory", {8, 40}},
-//         {"Church", {6, 30}},
-//         {"Hospital", {10, 30}},
-//         {"Graveyard", {8, 30}},
-//         {"Institute", {10, 40}}
-//     };
-
-//     // ساخت بوم نقشه با پر کردن با فاصله
-//     std::vector<std::vector<char>> canvas(rows, std::vector<char>(cols, ' '));
-
-//     // رسم نام لوکیشن‌ها روی بوم
-//     for (const auto& [name, coord] : pos) {
-//         int r = coord.first;
-//         int c = coord.second;
-//         for (size_t i = 0; i < name.size() && c + (int)i < cols; ++i) {
-//             canvas[r][c + i] = name[i];
-//         }
-//     }
-
-//     // تابع رسم خط اتصال بین دو لوکیشن (با طول اسم مبدا)
-//     auto draw_connection = [&](const std::string& from, const std::string& to) {
-//         auto [r1, c1] = pos[from];
-//         auto [r2, c2] = pos[to];
-//         size_t from_len = from.length();
-
-//         if (r1 == r2) {
-//             int start_c = c1 + (int)from_len;
-//             int end_c = c2;
-//             if (start_c > end_c) std::swap(start_c, end_c);
-//             for (int c = start_c; c < end_c; ++c)
-//                 canvas[r1][c] = '-';
-//         } else if (c1 == c2) {
-//             int start_r = std::min(r1, r2) + 1;
-//             int end_r = std::max(r1, r2);
-//             for (int r = start_r; r < end_r; ++r)
-//                 canvas[r][c1] = '|';
-//         } else {
-//             // رسم خط L شکل: اول افقی، بعد عمودی
-//             int mid_c = c2;
-//             int mid_r = r1;
-
-//             int start_c = c1 + (int)from_len;
-//             int end_c = mid_c;
-//             if (start_c > end_c) std::swap(start_c, end_c);
-
-//             for (int c = start_c; c <= end_c; ++c)
-//                 canvas[mid_r][c] = '-';
-
-//             int start_r = std::min(mid_r, r2);
-//             int end_r = std::max(mid_r, r2);
-
-//             for (int r = start_r; r <= end_r; ++r)
-//                 canvas[r][mid_c] = '|';
-//         }
-//     };
-
-//     // تعریف اتصالات طبق نقشه شما
-//     draw_connection("Cave", "Camp");
-//     draw_connection("Camp", "Mansion");
-//     draw_connection("Theatre", "Barn");
-//     draw_connection("Theatre", "Tower");
-//     draw_connection("Theatre", "Precinct");
-//     draw_connection("Theatre", "Inn");
-//     draw_connection("Tower", "Docks");
-//     draw_connection("Inn", "Precinct");
-//     draw_connection("Theatre", "Shop");
-//     draw_connection("Mansion", "Abbey");
-//     draw_connection("Abbey", "Crypt");
-//     draw_connection("Shop", "Laboratory");
-//     draw_connection("Shop", "Museum");
-//     draw_connection("Mansion", "Church");
-//     draw_connection("Laboratory", "Institute");
-//     draw_connection("Church", "Graveyard");
-//     draw_connection("Church", "Hospital");
-//     draw_connection("Tower", "Dungeon");
-
-//     // نمایش بوم نقشه
-//     for (const auto& row : canvas) {
-//         for (char ch : row)
-//             std::cout << ch;
-//         std::cout << "\n";
-//     }
-// }
-
-
-
 
 void Game::increase_terror_level() {
     terror_Level++;

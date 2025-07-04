@@ -5,6 +5,7 @@
 #include <vector>
 
 class Location ; 
+class GameMap ; 
 
 class villager{
 
@@ -15,7 +16,7 @@ class villager{
         static std::vector<villager*> vil ; 
     public:
         static std::vector<villager*>& all() ; 
-        villager(const std::string , Location* , Location*) ; 
+        villager( GameMap& map , const std::string& , Location* , Location*) ;  
         bool in_the_safePlace() const ; 
         void set_currentLocation(Location*) ; 
         Location* get_currentLocation() ; 
