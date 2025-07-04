@@ -773,11 +773,11 @@ void Game::monster_phase() {
                     case DiceFace::Attack:
                         std::cout << "Attack\n";
                         if (type == MonsterType::Dracula) {
-                            auto [heroTarget, villagerTarget] = m->attack();
-                            if (heroTarget && !villagerTarget) {
-                                std::cout << "Dracula attacks " << heroTarget->GetName() << "!\n";
-                                if (heroTarget->has_items()) {
-                                    const auto& items = heroTarget->GetItems();
+                            auto target = m->attack(); //[heroTarget, villagerTarget]
+                            if (target.first && !target.second) {
+                                std::cout << "Dracula attacks " << target.first->GetName() << "!\n";
+                                if (target.first->has_items()) {
+                                    const auto& items = target.first->GetItems();
                                     for (size_t i = 0; i < items.size(); ++i) {
                                         std::cout << i + 1 << ". " << items[i].getName() << " ("
                                                   << items[i].color_to_string(items[i].getColor()) << ")\n";
@@ -792,13 +792,13 @@ void Game::monster_phase() {
                                         std::cin >> itemIndex;
 
                                         if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
-                                            heroTarget->remove_item_by_index(itemIndex - 1);
+                                            target.first->remove_item_by_index(itemIndex - 1);
                                             pool.add_item(items[itemIndex]);
 
                                             std::cout << "Item used to block the attack!\n";
                                         } else {
                                             std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                            send_hero_to_hospital(heroTarget);
+                                            send_hero_to_hospital(target.first);
                                             if (!terrorAlreadyIncreased) {
                                                 increase_terror_level();
                                                 terrorAlreadyIncreased = true;
@@ -807,7 +807,7 @@ void Game::monster_phase() {
                                         }
                                     } else {
                                         std::cout << "No item used. Dracula's attack succeeds.\n";
-                                        send_hero_to_hospital(heroTarget);
+                                        send_hero_to_hospital(target.first);
                                         if (!terrorAlreadyIncreased) {
                                             increase_terror_level();
                                             terrorAlreadyIncreased = true;
@@ -815,17 +815,17 @@ void Game::monster_phase() {
                                         break;
                                     }
                                 } else {
-                                    std::cout << heroTarget->GetName() << " has no items. Dracula's attack succeeds.\n";
-                                    send_hero_to_hospital(heroTarget);
+                                    std::cout << target.first->GetName() << " has no items. Dracula's attack succeeds.\n";
+                                    send_hero_to_hospital(target.first);
                                     if (!terrorAlreadyIncreased) {
                                         increase_terror_level();
                                         terrorAlreadyIncreased = true;
                                     }
                                     break;
                                 }
-                            } else if (villagerTarget) {
-                                std::cout << "Dracula attacks " << villagerTarget->get_name() << "!\n";
-                                remove_villager(villagerTarget);
+                            } else if (target.second) {
+                                std::cout << "Dracula attacks " << target.second->get_name() << "!\n";
+                                remove_villager(target.second);
                                 if (!terrorAlreadyIncreased) {
                                     increase_terror_level();
                                     terrorAlreadyIncreased = true;
@@ -833,10 +833,10 @@ void Game::monster_phase() {
                                 break;
                             }
                         } else if (type == MonsterType::InvisibleMan) {
-                            auto [heroTarget, villagerTarget] = m->attack();
-                            if (villagerTarget) {
-                                std::cout << "Invisible Man kills " << villagerTarget->get_name() << "!\n";
-                                remove_villager(villagerTarget);
+                            auto kv = m->attack();
+                            if (kv.second) {
+                                std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
+                                remove_villager(kv.second);
                                 increase_terror_level();
                             }
                         }
