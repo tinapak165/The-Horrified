@@ -53,7 +53,7 @@ bool Dracula::can_be_defeated(){
     
         // انتقال به لوکیشن دراکولا
         dracula_location->add_hero(active_hero);
-        active_hero->set_location(dracula_location);
+        active_hero->SetCurrentLocation(dracula_location);
         std::cout << "Dracula uses Dark Charm! Pulling " << active_hero->GetName() 
         << " to " << dracula_location->get_name() << "!" << std::endl;
     }

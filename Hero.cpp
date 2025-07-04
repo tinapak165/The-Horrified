@@ -447,7 +447,3 @@ void Hero::remove_item_by_index(int index) {
     }
 }
 
-void Hero::set_location(Location* new_location){
-
-    currentLocation= new_location;
-}

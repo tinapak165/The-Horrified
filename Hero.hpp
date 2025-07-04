@@ -56,7 +56,7 @@ class Hero{
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
         Location* GetCurrentLocation() const ; 
-        void set_location(Location* new_location);    
+           
         virtual bool HasSpecialAction() const {return true ; } 
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() const ; 
