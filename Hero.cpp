@@ -81,6 +81,7 @@ int Hero::AdvanceActionForDracula(){
     int totalStrength = 0 ;
     vector<Item> selected ;
 
+
     while(true){
         vector<Item> items = (*this).GetItems() ;
         if(items.empty()){
@@ -104,7 +105,8 @@ int Hero::AdvanceActionForDracula(){
             cerr << "what you chosen is not red! try again.\n" ; 
             continue;
         }
-        (*this).removeItems(chosenItem) ;
+        this->removeItems(chosenItem) ;
+        usedItemsForDracula.push_back(chosenItem);
         selected.push_back(chosenItem) ; 
         totalStrength += chosenItem.getStrength() ;
 
@@ -129,6 +131,9 @@ int Hero::AdvanceActionForDracula(){
 void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     vector<Item> items = this->GetItems() ; 
     vector<Item> evidenceItems ; 
+    usedItemsForInvisibleMan.clear();
+
+
     for(const Item& item : items){
         std::string loc = item.getLocationName() ; 
         if (loc == "Inn" || loc == "Barn" || loc == "Institute" || loc == "Laboratory" || loc == "Mansion") {
@@ -156,7 +161,8 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     Item selected = evidenceItems[choice - 1];  
 
     if(monster->add_evidence(selected.getLocationName())) {
-        removeItems(selected);
+        this->removeItems(selected);
+        usedItemsForInvisibleMan.push_back(selected); 
         std::cout << "Evidence placed successfully.\n";
     }else{
         std::cout << "Evidence from that location already exists. Choose another.\n";
@@ -454,3 +460,13 @@ void Hero::remove_item_by_index(int index) {
         std::cerr << "Invalid item index. No item removed.\n";
     }
 }
+
+std::vector<Item> Hero::getUsedItemsForDracula() {
+    return usedItemsForDracula;
+}
+
+
+std::vector<Item> Hero::getUsedItemsForInvisibleMan() {
+    return usedItemsForInvisibleMan;
+}
+

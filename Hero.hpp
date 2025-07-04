@@ -40,6 +40,11 @@ class Hero{
         std::vector<Perkcards> playedCards ; 
         std::vector<Perkcards> availableCards ;  
 
+    
+    std::vector<Item> usedItemsForDracula;
+    std::vector<Item> usedItemsForInvisibleMan;
+
+
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
         void MoveTo(Location* new_location , std::vector<villager*>) ;
@@ -82,5 +87,8 @@ class Hero{
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;
+
+        std::vector<Item> getUsedItemsForDracula();
+        std::vector<Item> getUsedItemsForInvisibleMan();
 };
 #endif 

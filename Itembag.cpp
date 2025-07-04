@@ -123,3 +123,9 @@ std::vector<Item> ItemPool::draw_random_items(int count) {
 void ItemPool::add_item(const Item& item) {
     allItems.push_back(item);
 }
+
+void ItemPool::add_items(const std::vector<Item>& items) {
+    for (const auto& item : items) {
+        allItems.push_back(item);
+    }
+}

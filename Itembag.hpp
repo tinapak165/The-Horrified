@@ -11,5 +11,6 @@ private:
 public:
     ItemPool();
     void add_item(const Item& item);
+    void add_items(const std::vector<Item>& items);
     std::vector<Item> draw_random_items(int );
 };

@@ -304,7 +304,8 @@ void Game::play_hero_Action(Hero *h){
                         cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n" ;
                         int totalStrength = h->AdvanceActionForDracula() ;
                         if (totalStrength >= 6) {
-                            dracula->destroy_coffin_at(locName); // توابع Dracula همین‌طور باقی می‌مونن
+                            dracula->destroy_coffin_at(locName);
+                            pool.add_items(h->getUsedItemsForDracula());
                         } else {
                             std::cout << "Advance action failed Not enough red item strength.\n";
                         }
@@ -312,6 +313,7 @@ void Game::play_hero_Action(Hero *h){
                     //for invisible man
                     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { // در مکانی که باید آیتم هارو بزاره بود
                         h->AdvanceActionForInvisibleMan(invisibleMan) ;
+                        pool.add_items(h->getUsedItemsForInvisibleMan());
                     }
                     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
                 
@@ -691,9 +693,10 @@ void Game::monster_phase() {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-            std::cout << "Placed " << item.getName() << " at " << item.getLocationName() << "\n";
+            std::cout << "Placed " << get_color_code(item.getColor()) << item.getName() <<  get_color_code(ItemColor::Reset)  << " at " << item.getLocationName() << "\n";
         }
     }
+    
     
     for (const auto& strike : card.get_strikes()) {
         int moves = strike.get_move_count();
@@ -790,6 +793,8 @@ void Game::monster_phase() {
 
                                         if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
                                             heroTarget->remove_item_by_index(itemIndex - 1);
+                                            pool.add_item(items[itemIndex]);
+
                                             std::cout << "Item used to block the attack!\n";
                                         } else {
                                             std::cout << "Invalid selection. Dracula's attack succeeds.\n";
@@ -974,6 +979,7 @@ void Game::locationOverview() {
     cout << "-------------------------------------------------------------------------------------\n";
     cout << "terror level: " << terror_Level << '\n';
     monster_objectes();
+    deck.remaining_cards();
 }
 void Game::graph_map_text() {
     std::cout << R"(
