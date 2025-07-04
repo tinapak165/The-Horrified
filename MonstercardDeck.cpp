@@ -14,11 +14,11 @@ MonsterCardDeck::MonsterCardDeck() {
     cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} }));
     cards.push_back(Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} } ));
 
-    // cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
-    // cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
-    // cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
-    // cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
-    // cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
+    cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
+    cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
+    cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
+    cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
+    cards.push_back(Monstercard("Thief",2, "The invisable man moves where items are the most",{ { {MonsterType ::InvisibleMan}, 1 , 3 }}));
 
     cards.push_back(Monstercard("the innocent",3, "Place Maria at the Barn.", { {{MonsterType::Dracula, MonsterType::InvisibleMan}, 1, 3} }, "Maria", "Barn"));
     cards.push_back(Monstercard("The delivary",3, "Place Wilbur & Chick at Docks.", { {{MonsterType::Frenzied}, 1, 3} }, "Wilbur & Chick", "Docks"));

@@ -732,7 +732,15 @@ void Game::monster_phase() {
                 if (type == MonsterType::Dracula) {
                     target = m->find_nearest_target(m->get_location());
                 } else if (type == MonsterType::InvisibleMan) {
-                    target = m->find_nearest_villager(m->get_location());
+                    Location* target = m->find_nearest_villager(m->get_location());
+                    if (target) {
+                        Location* nextStep = m->find_next_step(target);
+                        if (nextStep) {
+                            m->set_location(nextStep);  // دقیق به هدف villager می‌ره
+                            std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                        }
+                    }
+                    
                 } else {
                     std::cout << "Unknown monster type. Skipping movement.\n";
                     break;
@@ -850,9 +858,12 @@ void Game::monster_phase() {
             if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
                 Location* target = m->find_nearest_villager(m->get_location());
                 if (target) {
-                    m->move_towards(2);
-                    std::cout << "Invisible Man Power in dice ! He is closer to villager. now he is in " << loc2 << std::endl;
-                } else {
+                    Location* nextStep = m->find_next_step(target);
+                    if (nextStep) {
+                        m->set_location(nextStep);  // دقیق به هدف villager می‌ره
+                        std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                    }
+                 } else {
                     std::cout << "Invisible Man found no villager for doing his Power in dice .\n";
                 }
             }
@@ -876,9 +887,17 @@ villager* Game::create_villager(const std::string& name, const std::string& locN
 
 
 void Game::remove_villager(villager* v) {
-    v->removevillager(v) ;
-    v->set_currentLocation(nullptr); 
+    Location* loc = v->get_currentLocation();
+    if (loc) {
+        auto& villagers = loc->get_villagers();
+        villagers.erase(std::remove(villagers.begin(), villagers.end(), v), villagers.end());
+    }
+
+    v->removevillager(v);  // حذف از لیست سراسری
+    v->set_currentLocation(nullptr);  // مکانش رو خالی کن
+    std::cout << "Villager " << v->get_name() << " has been removed from the game.\n";
 }
+
 
 
 void Game::send_hero_to_hospital(Hero* h) {
@@ -979,7 +998,7 @@ void Game::locationOverview() {
     cout << "-------------------------------------------------------------------------------------\n";
     cout << "terror level: " << terror_Level << '\n';
     monster_objectes();
-    deck.remaining_cards();
+    cout<<deck.remaining_cards() << " Monstercard is left ."<<endl;
 }
 void Game::graph_map_text() {
     std::cout << R"(
