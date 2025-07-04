@@ -218,7 +218,7 @@ void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring
                     "( color : " << (*this).colorItems(ItemsAtLocation[i].getColor()) <<
                      " , strength: " << ItemsAtLocation[i].getStrength() << ")\n";
         
-            cout << "enter the item number to pick up: " ; 
+            cout << "enter the item number to pick up(0 to end): " ; 
             cin >> selectedItems ;
             if(selectedItems == 0) //هیچی انتخاب نکرد
                 return ;

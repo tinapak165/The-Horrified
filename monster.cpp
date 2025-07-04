@@ -123,6 +123,55 @@ Location* Monster::find_nearest_villager(Location* start) {
 
     return nullptr; // هیچ هدفی
 }
+// استفاده برای event 
+void Monster::Monster_move_event(Location* new_location){
+
+    if (current_location){
+
+        auto& monsters_here = current_location ->get_monsters();
+        monsters_here.erase(std::remove(monsters_here.begin(), monsters_here.end(), this), monsters_here.end());
+
+    }
+    new_location->add_monster(this);
+    current_location = new_location;
+    std::cout<< this->get_name() << " moved to "<< new_location->get_name()<< "\n";
+
+}
+
+Location* Monster::find_next_step(Location* target) {
+    if (current_location == target) return nullptr;
+
+    std::unordered_map<Location*, Location*> parent;
+    std::queue<Location*> q;
+
+    q.push(current_location);
+    parent[current_location] = nullptr;
+
+    while (!q.empty()) {
+        Location* curr = q.front();
+        q.pop();
+
+        if (curr == target) break;
+
+        for (Location* neighbor : curr->get_neighbors()) {
+            if (parent.find(neighbor) == parent.end()) {
+                parent[neighbor] = curr;
+                q.push(neighbor);
+            }
+        }
+    }
+
+    // اگر به هدف نرسیدیم
+    if (parent.find(target) == parent.end()) return nullptr;
+
+    // بازسازی مسیر برای پیدا کردن قدم بعدی
+    Location* step = target;
+    while (parent[step] != current_location) {
+        step = parent[step];
+    }
+    return step;
+}
+
 
 
 

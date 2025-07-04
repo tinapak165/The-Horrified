@@ -18,7 +18,7 @@ Game::Game() {
     std::cout<<"                                WELCOME TO THE HORROR WORLD                                  "<<endl;
     // ساخت نقشه ثابت
     map.build_map(); // نقشه ی بازی
-    
+    graph_map_text(); 
     // ۱۲ ایتم اولیه ی بازی قرار گرفتند
     distribute_initial_items();
     
@@ -738,7 +738,15 @@ void Game::monster_phase() {
                 if (type == MonsterType::Dracula) {
                     target = m->find_nearest_target(m->get_location());
                 } else if (type == MonsterType::InvisibleMan) {
-                    target = m->find_nearest_villager(m->get_location());
+                    Location* target = m->find_nearest_villager(m->get_location());
+                    if (target) {
+                        Location* nextStep = m->find_next_step(target);
+                        if (nextStep) {
+                            m->set_location(nextStep);  // دقیق به هدف villager می‌ره
+                            std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                        }
+                    }
+                    
                 } else {
                     std::cout << "Unknown monster type. Skipping movement.\n";
                     break;
@@ -829,7 +837,7 @@ void Game::monster_phase() {
                                     }
                                     break;
                                 }
-                            } else if (target.second) { //villager
+                            } else if (target.second) {
                                 std::cout << "Dracula attacks " << target.second->get_name() << "!\n";
                                 remove_villager(target.second);
                                 if (!terrorAlreadyIncreased) {
@@ -839,7 +847,7 @@ void Game::monster_phase() {
                                 break;
                             }
                         } else if (type == MonsterType::InvisibleMan) {
-                            auto  kv = m->attack(); //[heroTarget, villagerTarget]
+                            auto kv = m->attack();
                             if (kv.second) {
                                 std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
                                 remove_villager(kv.second);
@@ -856,9 +864,12 @@ void Game::monster_phase() {
             if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
                 Location* target = m->find_nearest_villager(m->get_location());
                 if (target) {
-                    m->move_towards(2);
-                    std::cout << "Invisible Man Power in dice ! He is closer to villager. now he is in " << loc2 << std::endl;
-                } else {
+                    Location* nextStep = m->find_next_step(target);
+                    if (nextStep) {
+                        m->set_location(nextStep);  // دقیق به هدف villager می‌ره
+                        std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                    }
+                 } else {
                     std::cout << "Invisible Man found no villager for doing his Power in dice .\n";
                 }
             }
@@ -868,14 +879,22 @@ void Game::monster_phase() {
 
 
 
+
 void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
     h->MoveTo(hospital);
 }
 
 void Game::remove_villager(Villager* v) {
-    v->removevillager(v) ;
-    v->set_currentLocation(nullptr);
+    Location* loc = v->get_currentLocation();
+    if (loc) {
+        auto& villagers = loc->get_villagers();
+        villagers.erase(std::remove(villagers.begin(), villagers.end(), v), villagers.end());
+    }
+
+    v->removevillager(v);  // حذف از لیست سراسری
+    v->set_currentLocation(nullptr);  // مکانش رو خالی کن
+    std::cout << "Villager " << v->get_name() << " has been removed from the game.\n";
 }
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
@@ -956,7 +975,7 @@ void Game::locationOverview() {
     cout << "-------------------------------------------------------------------------------------\n";
     cout << "terror level: " << terror_Level << '\n';
     monster_objectes();
-    deck.remaining_cards() ; 
+    cout<<deck.remaining_cards() << " Monstercard is left ."<<endl;
 }
 void Game::increase_terror_level() {
     terror_Level++;
