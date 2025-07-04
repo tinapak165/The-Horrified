@@ -332,7 +332,6 @@ void Game::play_hero_Action(Hero *h){
 
 void Game::hero_phase(Hero* hero) {
 
-    getNewCard(hero) ; //در ابتدای هر فاز به قهرمان یک پرک تعلق میگیرد
     hero->DisplayInfo() ;
     play_hero_Action(hero) ;
 
@@ -349,6 +348,9 @@ void Game::hero_phase(Hero* hero) {
 void  Game::start() { 
 
     locationOverview() ;
+    for(Hero* hero : turnManager.get_heroes()){
+        getNewCard(hero) ; 
+    }
 
     while (true) {
 
