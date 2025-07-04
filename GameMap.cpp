@@ -52,31 +52,7 @@ void GameMap::build_map() {
       
 
 
-        // موقعیت‌دهی گرافیکی (x, y)
-    // theatre->set_coords(3, 1);
-    // barn->set_coords(2, 1);
-    // tower->set_coords(4, 1);
-    // docks->set_coords(5, 1);
-    // dungeon->set_coords(4, 2);
-    // shop->set_coords(3, 2);
-    // museum->set_coords(2, 2);
-    // laboratory->set_coords(3, 3);
-    // institute->set_coords(3, 4);
-
-    // camp->set_coords(0, 1);
-    // cave->set_coords(0, 0);
-
-    // mansion->set_coords(1, 1);
-    // abbey->set_coords(1, 2);
-    // crypt->set_coords(1, 3);
-
-    // church->set_coords(0, 2);
-    // graveyard->set_coords(0, 3);
-    // hospital->set_coords(0, 4);
-
-    // inn->set_coords(3, 0);
-    // precinct->set_coords(4, 0);
-
+   
  
      locations.push_back(std::move(theatre));
      locations.push_back(std::move(cave));

@@ -135,9 +135,6 @@ CMakeFiles/Horrified.dir/monster.cpp.obj: \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\item.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\hero.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\villager.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\InvisibleMan.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\GameMap.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Location.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
@@ -152,4 +149,7 @@ CMakeFiles/Horrified.dir/monster.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\shared_ptr_atomic.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\atomic_base.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\backward\auto_ptr.h \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcardsDeck.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\perkcards.hpp \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\InvisibleMan.hpp \
  C:\Users\sibegilan\Desktop\Final\The-Horrified\Hero.hpp

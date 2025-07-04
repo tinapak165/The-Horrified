@@ -6,6 +6,9 @@
 
 #include "location.hpp"
 #include "GameMap.hpp"
+
+
+
 #include "Hero.hpp"
 
 using namespace std;
@@ -15,11 +18,23 @@ Monster::Monster (const string& name, Location* start_location) : name(name), cu
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
-void Monster::set_location(Location* L){ current_location = L;}
+void Monster::set_location(Location* new_location) {
+ 
+    if (current_location) {
+        auto& monsters_here = current_location->get_monsters();
+        monsters_here.erase(std::remove(monsters_here.begin(), monsters_here.end(), this), monsters_here.end());
+    }
+
+    current_location = new_location;
+    if (current_location) {
+        current_location->add_monster(this);
+    }
+}
+
 
 
 Location* Monster::find_nearest_target(Location* start) {
-    std::cout<<"in find nearest target ";
+   
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
@@ -218,11 +233,13 @@ void Monster::move_towards(int max_steps) {
 
         std::cout << name << " moved to " << current_location->get_name() << "\n";
     }
-    cout<<" end of move to folan \n";
+   
 }
 
  std::ostream operator<<(std::ostream &output, Monster &m){
     output<<m.get_name();
  }
 
-bool Monster::is_alive() const { return get_location() != nullptr; }
+
+
+ bool Monster::is_alive() const { return get_location() != nullptr; }

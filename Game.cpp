@@ -347,25 +347,37 @@ void Game::hero_phase(Hero* hero) {
 
 
 void  Game::start() { 
+
+    locationOverview() ;
+
     while (true) {
 
-        locationOverview() ;
         // ۱. فاز قهرمان
-        cout << ItemColor::BLUE <<"-HERO PHASE-\n" << ItemColor::Reset; 
+        cout << ItemColor::BLUE << "<-----------HERO PHASE----------->\n" << ItemColor::Reset; 
         Hero* activeHero = turnManager.get_active_hero();
         std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
 
+        graph_map_text();
+
+        if(!skipMonsterPhase){
         // ۲. فاز هیولا
-        cout << ItemColor::RED << "-MONSTER PHASE-\n" <<  ItemColor::Reset  ; 
+        cout << ItemColor::RED  <<  "\n<-----------MONSTER PHASE---------->\n" <<  ItemColor::Reset  ; 
         monster_phase();
+        }
+        else{
+            cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
+            skipMonsterPhase = false;     
+        }
+
+        locationOverview() ;
 
         // ۳. بررسی پایان بازی
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        if (deck.is_empty() || both_monsters_defeated()) {
+        if (deck.is_empty() && +!both_monsters_defeated()) {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
         }    
@@ -432,17 +444,62 @@ void Game::playPerkCard(Hero* hero, string card){
         }
         else if (card == "Repel"){
             p.display_the_card(p2) ;
-            dracula->move_towards(2) ; 
-            invisibleMan->move_towards(2) ; 
+            cout << "where do you want to move the invisible man for the first move? " ; 
+            string firstplace ; cin >> firstplace ;
+            Location* IfirstnewLoc = map.get_location_by_name(firstplace) ;  
+            if(IfirstnewLoc){
+                invisibleMan->set_location(IfirstnewLoc) ; 
+                cout << "invisible man moved to " << firstplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+            cout << "where do you want to move the invisible man for the second move? " ;
+            string secondplace ; cin >> secondplace ;
+            Location* IsecondnewLoc = map.get_location_by_name(secondplace) ;  
+            if(IsecondnewLoc){
+                invisibleMan->set_location(IsecondnewLoc) ; 
+                cout << "invisible man moved to " << secondplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+            cout << "where do you want to move the dracula for the first move? " ; 
+            string Dfirstplace ; cin >> Dfirstplace ;
+            Location* DfirstLec = map.get_location_by_name(Dfirstplace) ;  
+            if(DfirstLec){
+                dracula->set_location(DfirstLec) ; 
+                cout << "dracula moved to " << Dfirstplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+            cout << "where do you want to move the dracula for the second move? " ;
+            string Dsecondplace ; cin >> Dsecondplace ;
+            Location* DsecondLoc = map.get_location_by_name(Dsecondplace) ;  
+            if(DsecondLoc){
+                dracula->set_location(DsecondLoc) ; 
+                cout << "dracula moved to " << Dsecondplace << '\n' ; 
+            }
+            else{
+                cerr << "could not find the place!\n" ;
+                continue; 
+            }
+
+
         }
 
         else if(card == "Late into the Night"){
             p.display_the_card(p2) ;
+
             hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
             cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
         }
         else if( card == "Break of Dawn"){
-            //فاز هیولا بعدی رد میشود !؟
+            skipMonsterPhase = true ; //فاز هیولا بعدی رد میشود 
             p.display_the_card(p2);
             ItemPool pool ;
             vector<Item> PoolItems = pool.draw_random_items(2) ;
@@ -534,6 +591,7 @@ void Game::distribute_initial_items() {
         }
     }
 }
+
 
 void Game::monster_phase() {
     
@@ -762,7 +820,7 @@ void Game::monster_phase() {
                         
                     } else if (type == MonsterType::InvisibleMan) {
                         // فقط اگه قبلاً اونجا بوده باشه و حمله ممکن باشه
-                        auto  kv = m->attack(); //[heroTarget, villagerTarget]
+                        auto  kv = m->attack();//[heroTarget, villagerTarget]
 
                         if (kv.second) {
                             std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
@@ -797,7 +855,6 @@ void Game::monster_phase() {
 
     
 }
-
 
 void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
@@ -897,180 +954,24 @@ villager* Game::create_villager(const std::string& name, const std::string& locN
     std::cout << "Created new villager: " << name << " at " << locName << "\n";
     return v;
 }
-// void Game::graph_map() {
-//     const int rows = 15;
-//     const int cols = 60;
-// cout<<"---------------------------------------GAME MAP---------------------------------------\n";
-//     // موقعیت تقریبی هر لوکیشن (ردیف، ستون)
-//     std::map<std::string, std::pair<int,int>> pos = {
-//         {"Cave", {0, 0}},
-//         {"Camp", {2, 0}},
-//         {"Mansion", {4, 10}},
-//         {"Barn", {2, 20}},
-//         {"Theatre", {0, 20}},
-//         {"Tower", {0, 30}},
-//         {"Dungeon", {4, 30}},
-//         {"Docks", {2, 40}},
-//         {"Inn", {0, 40}},
-//         {"Precinct", {0, 50}},
-//         {"Shop", {4, 40}},
-//         {"Abbey", {6, 10}},
-//         {"Crypt", {8, 10}},
-//         {"Museum", {6, 20}},
-//         {"Laboratory", {8, 40}},
-//         {"Church", {6, 30}},
-//         {"Hospital", {10, 30}},
-//         {"Graveyard", {8, 30}},
-//         {"Institute", {10, 40}}
-//     };
-
-//     // ساخت بوم نقشه با پر کردن با فاصله
-//     std::vector<std::vector<char>> canvas(rows, std::vector<char>(cols, ' '));
-
-//     // رسم نام لوکیشن‌ها روی بوم
-//     for (const auto& kv : pos) { //[name, coord]
-//         int r = kv.second.first; //coord.fist
-//         int c = kv.second.second; //coord.second
-//         for (size_t i = 0; i < kv.first.size() && c + (int)i < cols; ++i) {
-//             canvas[r][c + i] = kv.first[i];
-//         }
-//     }
-
-//     // تابع رسم خط اتصال بین دو لوکیشن (با طول اسم مبدا)
-//     auto draw_connection = [&](const std::string& from, const std::string& to) {
-//         auto [r1, c1] = pos[from];
-//         auto [r2, c2] = pos[to];
-//         size_t from_len = from.length();
-
-//         if (r1 == r2) {
-//             int start_c = c1 + (int)from_len;
-//             int end_c = c2;
-//             if (start_c > end_c) std::swap(start_c, end_c);
-//             for (int c = start_c; c < end_c; ++c)
-//                 canvas[r1][c] = '-';
-//         } else if (c1 == c2) {
-//             int start_r = std::min(r1, r2) + 1;
-//             int end_r = std::max(r1, r2);
-//             for (int r = start_r; r < end_r; ++r)
-//                 canvas[r][c1] = '|';
-//         } else {
-//             // رسم خط L شکل: اول افقی، بعد عمودی
-//             int mid_c = c2;
-//             int mid_r = r1;
-
-//             int start_c = c1 + (int)from_len;
-//             int end_c = mid_c;
-//             if (start_c > end_c) std::swap(start_c, end_c);
-
-//             for (int c = start_c; c <= end_c; ++c)
-//                 canvas[mid_r][c] = '-';
-
-//             int start_r = std::min(mid_r, r2);
-//             int end_r = std::max(mid_r, r2);
-
-//             for (int r = start_r; r <= end_r; ++r)
-//                 canvas[r][mid_c] = '|';
-//         }
-//     };
-
-//     // تعریف اتصالات طبق نقشه شما
-//     draw_connection("Cave", "Camp");
-//     draw_connection("Camp", "Mansion");
-//     draw_connection("Theatre", "Barn");
-//     draw_connection("Theatre", "Tower");
-//     draw_connection("Theatre", "Precinct");
-//     draw_connection("Theatre", "Inn");
-//     draw_connection("Tower", "Docks");
-//     draw_connection("Inn", "Precinct");
-//     draw_connection("Theatre", "Shop");
-//     draw_connection("Mansion", "Abbey");
-//     draw_connection("Abbey", "Crypt");
-//     draw_connection("Shop", "Laboratory");
-//     draw_connection("Shop", "Museum");
-//     draw_connection("Mansion", "Church");
-//     draw_connection("Laboratory", "Institute");
-//     draw_connection("Church", "Graveyard");
-//     draw_connection("Church", "Hospital");
-//     draw_connection("Tower", "Dungeon");
-
-//     // نمایش بوم نقشه
-//     for (const auto& row : canvas) {
-//         for (char ch : row)
-//             std::cout << ch;
-//         std::cout << "\n";
-//     }
-// }
-
-// void Game::graph_map() {
-//     std::vector<std::string> canvas(20, std::string(80, ' '));
-
-//     // نام مکان‌ها و موقعیت‌هاشون روی canvas[row][col]
-//     std::map<std::string, std::pair<int, int>> pos = {
-//         {"Cave", {2, 10}}, {"Camp", {4, 10}}, {"Mansion", {4, 30}}, {"Abbey", {6, 30}},
-//         {"Crypt", {8, 30}}, {"Church", {4, 50}}, {"Graveyard", {6, 50}}, {"Hospital", {8, 50}},
-//         {"Theatre", {10, 10}}, {"Barn", {10, 30}}, {"Tower", {10, 50}}, {"Docks", {12, 50}},
-//         {"Dungeon", {14, 50}}, {"Precinct", {10, 70}}, {"Inn", {12, 70}},
-//         {"Shop", {8, 10}}, {"Museum", {6, 10}}, {"Laboratory", {6, 0}}, {"Institute", {4, 0}}
-//     };
-
-//     // نمایش نام‌ها در مختصات
-//     for (auto& [name, p] : pos) {
-//         int r = p.first, c = p.second;
-//         for (int i = 0; i < name.size(); ++i)
-//             canvas[r][c + i] = name[i];
-//     }
-
-//     // تابع رسم خط بین دو نقطه
-// // تابع رسم خط بین دو نقطه
-// auto draw_line = [&](const std::string& a, const std::string& b) {
-//     auto [r1, c1] = pos[a];
-//     auto [r2, c2] = pos[b];
-
-//     if (r1 == r2) {
-//         for (int i = std::min(c1 + (int)a.length(), c2); i < std::max(c1, c2); ++i)
-//             canvas[r1][i] = '-';
-//     } else if (c1 == c2) {
-//         for (int i = std::min(r1, r2) + 1; i < std::max(r1, r2); ++i)
-//             canvas[i][c1] = '|';
-//     } else {
-//         // L شکل: اول افقی بعد عمودی
-//         int mid = c2;
-//         for (int i = std::min(c1 + (int)a.length(), mid); i < std::max(c1, mid); ++i)
-//             canvas[r1][i] = '-';
-//         for (int i = std::min(r1, r2) + 1; i < std::max(r1, r2); ++i)
-//             canvas[i][mid] = '|';
-//     }
-// };
+void Game::graph_map_text() {
+    std::cout << R"(
 
 
-//     // اتصال‌ها مطابق خواسته شما
-//     draw_line("Cave", "Camp");
-//     draw_line("Camp", "Mansion");
-//     draw_line("Camp", "Precinct");
-//     draw_line("Theatre", "Barn");
-//     draw_line("Theatre", "Tower");
-//     draw_line("Theatre", "Precinct");
-//     draw_line("Theatre", "Inn");
-//     draw_line("Theatre", "Mansion");
-//     draw_line("Tower", "Docks");
-//     draw_line("Tower", "Dungeon");
-//     draw_line("Inn", "Precinct");
-//     draw_line("Theatre", "Shop");
-//     draw_line("Mansion", "Abbey");
-//     draw_line("Mansion", "Shop");
-//     draw_line("Mansion", "Museum");
-//     draw_line("Mansion", "Church");
-//     draw_line("Shop", "Laboratory");
-//     draw_line("Shop", "Museum");
-//     draw_line("Shop", "Church");
-//     draw_line("Abbey", "Crypt");
-//     draw_line("Laboratory", "Institute");
-//     draw_line("Church", "Graveyard");
-//     draw_line("Church", "Hospital");
-
-//     // چاپ نهایی
-//     std::cout << "---------------- Graph Map ----------------\n";
-//     for (const auto& row : canvas)
-//         std::cout << row << "\n";
-//     std::cout << "-------------------------------------------\n";
-// }
+--------------------------------GAME MAP------------------------------------- 
+       
+                [Precinct]-----[Inn]                                                 
+                  /               \                                                   
+  [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
+                |     /       /
+                |    /       /                                      \
+[Abbey] ----[Mansion]----[Shop]                                      [Docks]
+    |          /   |           \
+    |    [Museum] [Church]    [Laboratory]
+ [Crypt]            /    \               \
+             [Graveyard][Hospital]        [Institute]
+              
+    
+    )" << '\n';
+std::cout<<"--------------------------------------------------------------------------------";    
+}

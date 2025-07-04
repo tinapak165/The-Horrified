@@ -13,6 +13,7 @@
 class Game {
     friend std::ostream& operator<<(std::ostream& os, ItemColor color) ; 
 private:
+    bool skipMonsterPhase = false ; 
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
@@ -40,7 +41,6 @@ public:
     void ChoosePerkCard(Hero*) ;
     void getNewCard(Hero*) ;
     void locationOverview() ;
-    void graph_map();
 
     void monster_phase();
     void send_hero_to_hospital(Hero* );
@@ -48,6 +48,7 @@ public:
 
     bool both_monsters_defeated();
     void increase_terror_level();
+    void graph_map_text() ; 
 
     void distribute_initial_items();
     villager* create_villager(const std::string& name, const std::string& locName);
