@@ -8,8 +8,12 @@
 #include "item.hpp"
 #include "perkcards.hpp"
 #include "InvisibleMan.hpp"
+#include "Dracula.hpp"
+#include "Itembag.hpp"
 
 class Location ; 
+class Dracula ; 
+class ItemPool ; 
 class Villager ; 
 class InvisibleMan ; 
 class Perkcard ; 
@@ -53,7 +57,18 @@ class Hero{
         void MoveTo(Location*) ; 
 
         void GuideAction(Hero* , GameMap&) ; 
+
+        virtual void SpecialAction(Location*) = 0  ; //arch and curier
+        void Special(Hero *, GameMap& )  ;
+
+        void AdvanceAction(Hero* , Dracula* , ItemPool , GameMap& , InvisibleMan*) ; 
+        int select_items_to_defeat(ItemColor requiredColor) ;
         
+        int AdvanceActionForDracula() ; 
+        void AdvanceActionForInvisibleMan(InvisibleMan*) ;
+
+        void DefeatAction(Hero*, InvisibleMan* , Dracula*) ; 
+
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
         void showvillagersHere()const ; 
@@ -65,7 +80,6 @@ class Hero{
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
         Location* GetCurrentLocation() const ;         
-    //    virtual bool HasSpecialAction() const = 0 ;
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() const ; 
         void resetMaxActions() ; 
@@ -77,17 +91,11 @@ class Hero{
         void addPlayedCards(std::unique_ptr<Perkcard>) ;
 
         void DisplayItem() ;
-        std::string colorItems(const ItemColor&) ;
         void PickupItems() ; 
-        virtual void SpecialAction(Location*) = 0  ; //arch anc curier
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
-        int select_items_to_defeat(ItemColor requiredColor) ;
         bool has_items() const;
         void remove_item_by_index(int index); 
-
-        int AdvanceActionForDracula() ; 
-        void AdvanceActionForInvisibleMan(InvisibleMan*) ;
 
         void SetRemainingActions(int newRemaining) ;
         void SetCurrentLocation(Location* location) ;

@@ -116,26 +116,11 @@ CMakeFiles/Horrified.dir/src/Dice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/Dice.cpp.s"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Dice.cpp -o CMakeFiles\Horrified.dir\src\Dice.cpp.s
 
-CMakeFiles/Horrified.dir/src/Mayor.cpp.obj: CMakeFiles/Horrified.dir/flags.make
-CMakeFiles/Horrified.dir/src/Mayor.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
-CMakeFiles/Horrified.dir/src/Mayor.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/Mayor.cpp
-CMakeFiles/Horrified.dir/src/Mayor.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Horrified.dir/src/Mayor.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/Mayor.cpp.obj -MF CMakeFiles\Horrified.dir\src\Mayor.cpp.obj.d -o CMakeFiles\Horrified.dir\src\Mayor.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Mayor.cpp
-
-CMakeFiles/Horrified.dir/src/Mayor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Horrified.dir/src/Mayor.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Mayor.cpp > CMakeFiles\Horrified.dir\src\Mayor.cpp.i
-
-CMakeFiles/Horrified.dir/src/Mayor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/Mayor.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Mayor.cpp -o CMakeFiles\Horrified.dir\src\Mayor.cpp.s
-
 CMakeFiles/Horrified.dir/src/main.cpp.obj: CMakeFiles/Horrified.dir/flags.make
 CMakeFiles/Horrified.dir/src/main.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/main.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/main.cpp
 CMakeFiles/Horrified.dir/src/main.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Horrified.dir/src/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Horrified.dir/src/main.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/main.cpp.obj -MF CMakeFiles\Horrified.dir\src\main.cpp.obj.d -o CMakeFiles\Horrified.dir\src\main.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\main.cpp
 
 CMakeFiles/Horrified.dir/src/main.cpp.i: cmake_force
@@ -150,7 +135,7 @@ CMakeFiles/Horrified.dir/src/GameMap.cpp.obj: CMakeFiles/Horrified.dir/flags.mak
 CMakeFiles/Horrified.dir/src/GameMap.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/GameMap.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/GameMap.cpp
 CMakeFiles/Horrified.dir/src/GameMap.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Horrified.dir/src/GameMap.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Horrified.dir/src/GameMap.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/GameMap.cpp.obj -MF CMakeFiles\Horrified.dir\src\GameMap.cpp.obj.d -o CMakeFiles\Horrified.dir\src\GameMap.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\GameMap.cpp
 
 CMakeFiles/Horrified.dir/src/GameMap.cpp.i: cmake_force
@@ -165,7 +150,7 @@ CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj: CMakeFiles/Horrified.dir/f
 CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/MonstercardDeck.cpp
 CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj -MF CMakeFiles\Horrified.dir\src\MonstercardDeck.cpp.obj.d -o CMakeFiles\Horrified.dir\src\MonstercardDeck.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\MonstercardDeck.cpp
 
 CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.i: cmake_force
@@ -180,7 +165,7 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: CMakeFiles/Horrified.dir/flag
 CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/monstercards.cpp
 CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Horrified.dir/src/monstercards.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Horrified.dir/src/monstercards.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/monstercards.cpp.obj -MF CMakeFiles\Horrified.dir\src\monstercards.cpp.obj.d -o CMakeFiles\Horrified.dir\src\monstercards.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\monstercards.cpp
 
 CMakeFiles/Horrified.dir/src/monstercards.cpp.i: cmake_force
@@ -195,7 +180,7 @@ CMakeFiles/Horrified.dir/src/perkcards.cpp.obj: CMakeFiles/Horrified.dir/flags.m
 CMakeFiles/Horrified.dir/src/perkcards.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/perkcards.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/perkcards.cpp
 CMakeFiles/Horrified.dir/src/perkcards.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Horrified.dir/src/perkcards.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Horrified.dir/src/perkcards.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/perkcards.cpp.obj -MF CMakeFiles\Horrified.dir\src\perkcards.cpp.obj.d -o CMakeFiles\Horrified.dir\src\perkcards.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\perkcards.cpp
 
 CMakeFiles/Horrified.dir/src/perkcards.cpp.i: cmake_force
@@ -206,26 +191,11 @@ CMakeFiles/Horrified.dir/src/perkcards.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/perkcards.cpp.s"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\perkcards.cpp -o CMakeFiles\Horrified.dir\src\perkcards.cpp.s
 
-CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj: CMakeFiles/Horrified.dir/flags.make
-CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
-CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/perkcardsDeck.cpp
-CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj -MF CMakeFiles\Horrified.dir\src\perkcardsDeck.cpp.obj.d -o CMakeFiles\Horrified.dir\src\perkcardsDeck.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\perkcardsDeck.cpp
-
-CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sibegilan\Desktop\Final\The-Horrified\src\perkcardsDeck.cpp > CMakeFiles\Horrified.dir\src\perkcardsDeck.cpp.i
-
-CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\perkcardsDeck.cpp -o CMakeFiles\Horrified.dir\src\perkcardsDeck.cpp.s
-
 CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: CMakeFiles/Horrified.dir/flags.make
 CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/TurnManager.cpp
 CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj -MF CMakeFiles\Horrified.dir\src\TurnManager.cpp.obj.d -o CMakeFiles\Horrified.dir\src\TurnManager.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\TurnManager.cpp
 
 CMakeFiles/Horrified.dir/src/TurnManager.cpp.i: cmake_force
@@ -240,7 +210,7 @@ CMakeFiles/Horrified.dir/src/monster.cpp.obj: CMakeFiles/Horrified.dir/flags.mak
 CMakeFiles/Horrified.dir/src/monster.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/monster.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/monster.cpp
 CMakeFiles/Horrified.dir/src/monster.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Horrified.dir/src/monster.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Horrified.dir/src/monster.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/monster.cpp.obj -MF CMakeFiles\Horrified.dir\src\monster.cpp.obj.d -o CMakeFiles\Horrified.dir\src\monster.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\monster.cpp
 
 CMakeFiles/Horrified.dir/src/monster.cpp.i: cmake_force
@@ -255,7 +225,7 @@ CMakeFiles/Horrified.dir/src/Dracula.cpp.obj: CMakeFiles/Horrified.dir/flags.mak
 CMakeFiles/Horrified.dir/src/Dracula.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/Dracula.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/Dracula.cpp
 CMakeFiles/Horrified.dir/src/Dracula.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Horrified.dir/src/Dracula.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Horrified.dir/src/Dracula.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/Dracula.cpp.obj -MF CMakeFiles\Horrified.dir\src\Dracula.cpp.obj.d -o CMakeFiles\Horrified.dir\src\Dracula.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Dracula.cpp
 
 CMakeFiles/Horrified.dir/src/Dracula.cpp.i: cmake_force
@@ -270,7 +240,7 @@ CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: CMakeFiles/Horrified.dir/flag
 CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/InvisibleMan.cpp
 CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj -MF CMakeFiles\Horrified.dir\src\InvisibleMan.cpp.obj.d -o CMakeFiles\Horrified.dir\src\InvisibleMan.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\InvisibleMan.cpp
 
 CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.i: cmake_force
@@ -285,7 +255,7 @@ CMakeFiles/Horrified.dir/src/item.cpp.obj: CMakeFiles/Horrified.dir/flags.make
 CMakeFiles/Horrified.dir/src/item.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/item.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/item.cpp
 CMakeFiles/Horrified.dir/src/item.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Horrified.dir/src/item.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Horrified.dir/src/item.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/item.cpp.obj -MF CMakeFiles\Horrified.dir\src\item.cpp.obj.d -o CMakeFiles\Horrified.dir\src\item.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\item.cpp
 
 CMakeFiles/Horrified.dir/src/item.cpp.i: cmake_force
@@ -300,7 +270,7 @@ CMakeFiles/Horrified.dir/src/Itembag.cpp.obj: CMakeFiles/Horrified.dir/flags.mak
 CMakeFiles/Horrified.dir/src/Itembag.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/Itembag.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/Itembag.cpp
 CMakeFiles/Horrified.dir/src/Itembag.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Horrified.dir/src/Itembag.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Horrified.dir/src/Itembag.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/Itembag.cpp.obj -MF CMakeFiles\Horrified.dir\src\Itembag.cpp.obj.d -o CMakeFiles\Horrified.dir\src\Itembag.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Itembag.cpp
 
 CMakeFiles/Horrified.dir/src/Itembag.cpp.i: cmake_force
@@ -311,26 +281,11 @@ CMakeFiles/Horrified.dir/src/Itembag.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/Itembag.cpp.s"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Itembag.cpp -o CMakeFiles\Horrified.dir\src\Itembag.cpp.s
 
-CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj: CMakeFiles/Horrified.dir/flags.make
-CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
-CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/Archaeologist.cpp
-CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj -MF CMakeFiles\Horrified.dir\src\Archaeologist.cpp.obj.d -o CMakeFiles\Horrified.dir\src\Archaeologist.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Archaeologist.cpp
-
-CMakeFiles/Horrified.dir/src/Archaeologist.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Horrified.dir/src/Archaeologist.cpp.i"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Archaeologist.cpp > CMakeFiles\Horrified.dir\src\Archaeologist.cpp.i
-
-CMakeFiles/Horrified.dir/src/Archaeologist.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/Archaeologist.cpp.s"
-	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Archaeologist.cpp -o CMakeFiles\Horrified.dir\src\Archaeologist.cpp.s
-
 CMakeFiles/Horrified.dir/src/Location.cpp.obj: CMakeFiles/Horrified.dir/flags.make
 CMakeFiles/Horrified.dir/src/Location.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/Location.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/Location.cpp
 CMakeFiles/Horrified.dir/src/Location.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/Horrified.dir/src/Location.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Horrified.dir/src/Location.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/Location.cpp.obj -MF CMakeFiles\Horrified.dir\src\Location.cpp.obj.d -o CMakeFiles\Horrified.dir\src\Location.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Location.cpp
 
 CMakeFiles/Horrified.dir/src/Location.cpp.i: cmake_force
@@ -345,7 +300,7 @@ CMakeFiles/Horrified.dir/src/villager.cpp.obj: CMakeFiles/Horrified.dir/flags.ma
 CMakeFiles/Horrified.dir/src/villager.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
 CMakeFiles/Horrified.dir/src/villager.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/villager.cpp
 CMakeFiles/Horrified.dir/src/villager.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/Horrified.dir/src/villager.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Horrified.dir/src/villager.cpp.obj"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/villager.cpp.obj -MF CMakeFiles\Horrified.dir\src\villager.cpp.obj.d -o CMakeFiles\Horrified.dir\src\villager.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\villager.cpp
 
 CMakeFiles/Horrified.dir/src/villager.cpp.i: cmake_force
@@ -356,27 +311,40 @@ CMakeFiles/Horrified.dir/src/villager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/villager.cpp.s"
 	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\villager.cpp -o CMakeFiles\Horrified.dir\src\villager.cpp.s
 
+CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: CMakeFiles/Horrified.dir/flags.make
+CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: CMakeFiles/Horrified.dir/includes_CXX.rsp
+CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: C:/Users/sibegilan/Desktop/Final/The-Horrified/src/Heroes.cpp
+CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: CMakeFiles/Horrified.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Horrified.dir/src/Heroes.cpp.obj"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Horrified.dir/src/Heroes.cpp.obj -MF CMakeFiles\Horrified.dir\src\Heroes.cpp.obj.d -o CMakeFiles\Horrified.dir\src\Heroes.cpp.obj -c C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Heroes.cpp
+
+CMakeFiles/Horrified.dir/src/Heroes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Horrified.dir/src/Heroes.cpp.i"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Heroes.cpp > CMakeFiles\Horrified.dir\src\Heroes.cpp.i
+
+CMakeFiles/Horrified.dir/src/Heroes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Horrified.dir/src/Heroes.cpp.s"
+	C:\MinGW\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Heroes.cpp -o CMakeFiles\Horrified.dir\src\Heroes.cpp.s
+
 # Object files for target Horrified
 Horrified_OBJECTS = \
 "CMakeFiles/Horrified.dir/src/Game.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/Hero.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/Dice.cpp.obj" \
-"CMakeFiles/Horrified.dir/src/Mayor.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/main.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/GameMap.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/monstercards.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/perkcards.cpp.obj" \
-"CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/monster.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/Dracula.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/item.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/Itembag.cpp.obj" \
-"CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj" \
 "CMakeFiles/Horrified.dir/src/Location.cpp.obj" \
-"CMakeFiles/Horrified.dir/src/villager.cpp.obj"
+"CMakeFiles/Horrified.dir/src/villager.cpp.obj" \
+"CMakeFiles/Horrified.dir/src/Heroes.cpp.obj"
 
 # External object files for target Horrified
 Horrified_EXTERNAL_OBJECTS =
@@ -384,27 +352,25 @@ Horrified_EXTERNAL_OBJECTS =
 Horrified.exe: CMakeFiles/Horrified.dir/src/Game.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/Hero.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/Dice.cpp.obj
-Horrified.exe: CMakeFiles/Horrified.dir/src/Mayor.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/main.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/GameMap.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/monstercards.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/perkcards.cpp.obj
-Horrified.exe: CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/monster.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/Dracula.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/item.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/Itembag.cpp.obj
-Horrified.exe: CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/Location.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/src/villager.cpp.obj
+Horrified.exe: CMakeFiles/Horrified.dir/src/Heroes.cpp.obj
 Horrified.exe: CMakeFiles/Horrified.dir/build.make
 Horrified.exe: CMakeFiles/Horrified.dir/linkLibs.rsp
 Horrified.exe: CMakeFiles/Horrified.dir/objects1.rsp
 Horrified.exe: CMakeFiles/Horrified.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable Horrified.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\sibegilan\Desktop\Final\The-Horrified\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable Horrified.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Horrified.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

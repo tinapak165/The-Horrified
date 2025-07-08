@@ -135,30 +135,6 @@ Horrified/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/build
 .PHONY : Horrified/fast
 
-src/Archaeologist.obj: src/Archaeologist.cpp.obj
-.PHONY : src/Archaeologist.obj
-
-# target to build an object file
-src/Archaeologist.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Archaeologist.cpp.obj
-.PHONY : src/Archaeologist.cpp.obj
-
-src/Archaeologist.i: src/Archaeologist.cpp.i
-.PHONY : src/Archaeologist.i
-
-# target to preprocess a source file
-src/Archaeologist.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Archaeologist.cpp.i
-.PHONY : src/Archaeologist.cpp.i
-
-src/Archaeologist.s: src/Archaeologist.cpp.s
-.PHONY : src/Archaeologist.s
-
-# target to generate assembly for a file
-src/Archaeologist.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Archaeologist.cpp.s
-.PHONY : src/Archaeologist.cpp.s
-
 src/Dice.obj: src/Dice.cpp.obj
 .PHONY : src/Dice.obj
 
@@ -279,6 +255,30 @@ src/Hero.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Hero.cpp.s
 .PHONY : src/Hero.cpp.s
 
+src/Heroes.obj: src/Heroes.cpp.obj
+.PHONY : src/Heroes.obj
+
+# target to build an object file
+src/Heroes.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Heroes.cpp.obj
+.PHONY : src/Heroes.cpp.obj
+
+src/Heroes.i: src/Heroes.cpp.i
+.PHONY : src/Heroes.i
+
+# target to preprocess a source file
+src/Heroes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Heroes.cpp.i
+.PHONY : src/Heroes.cpp.i
+
+src/Heroes.s: src/Heroes.cpp.s
+.PHONY : src/Heroes.s
+
+# target to generate assembly for a file
+src/Heroes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Heroes.cpp.s
+.PHONY : src/Heroes.cpp.s
+
 src/InvisibleMan.obj: src/InvisibleMan.cpp.obj
 .PHONY : src/InvisibleMan.obj
 
@@ -350,30 +350,6 @@ src/Location.s: src/Location.cpp.s
 src/Location.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Location.cpp.s
 .PHONY : src/Location.cpp.s
-
-src/Mayor.obj: src/Mayor.cpp.obj
-.PHONY : src/Mayor.obj
-
-# target to build an object file
-src/Mayor.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Mayor.cpp.obj
-.PHONY : src/Mayor.cpp.obj
-
-src/Mayor.i: src/Mayor.cpp.i
-.PHONY : src/Mayor.i
-
-# target to preprocess a source file
-src/Mayor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Mayor.cpp.i
-.PHONY : src/Mayor.cpp.i
-
-src/Mayor.s: src/Mayor.cpp.s
-.PHONY : src/Mayor.s
-
-# target to generate assembly for a file
-src/Mayor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/Mayor.cpp.s
-.PHONY : src/Mayor.cpp.s
 
 src/MonstercardDeck.obj: src/MonstercardDeck.cpp.obj
 .PHONY : src/MonstercardDeck.obj
@@ -543,30 +519,6 @@ src/perkcards.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/perkcards.cpp.s
 .PHONY : src/perkcards.cpp.s
 
-src/perkcardsDeck.obj: src/perkcardsDeck.cpp.obj
-.PHONY : src/perkcardsDeck.obj
-
-# target to build an object file
-src/perkcardsDeck.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.obj
-.PHONY : src/perkcardsDeck.cpp.obj
-
-src/perkcardsDeck.i: src/perkcardsDeck.cpp.i
-.PHONY : src/perkcardsDeck.i
-
-# target to preprocess a source file
-src/perkcardsDeck.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.i
-.PHONY : src/perkcardsDeck.cpp.i
-
-src/perkcardsDeck.s: src/perkcardsDeck.cpp.s
-.PHONY : src/perkcardsDeck.s
-
-# target to generate assembly for a file
-src/perkcardsDeck.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Horrified.dir\build.make CMakeFiles/Horrified.dir/src/perkcardsDeck.cpp.s
-.PHONY : src/perkcardsDeck.cpp.s
-
 src/villager.obj: src/villager.cpp.obj
 .PHONY : src/villager.obj
 
@@ -601,9 +553,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Horrified
-	@echo ... src/Archaeologist.obj
-	@echo ... src/Archaeologist.i
-	@echo ... src/Archaeologist.s
 	@echo ... src/Dice.obj
 	@echo ... src/Dice.i
 	@echo ... src/Dice.s
@@ -619,6 +568,9 @@ help:
 	@echo ... src/Hero.obj
 	@echo ... src/Hero.i
 	@echo ... src/Hero.s
+	@echo ... src/Heroes.obj
+	@echo ... src/Heroes.i
+	@echo ... src/Heroes.s
 	@echo ... src/InvisibleMan.obj
 	@echo ... src/InvisibleMan.i
 	@echo ... src/InvisibleMan.s
@@ -628,9 +580,6 @@ help:
 	@echo ... src/Location.obj
 	@echo ... src/Location.i
 	@echo ... src/Location.s
-	@echo ... src/Mayor.obj
-	@echo ... src/Mayor.i
-	@echo ... src/Mayor.s
 	@echo ... src/MonstercardDeck.obj
 	@echo ... src/MonstercardDeck.i
 	@echo ... src/MonstercardDeck.s
@@ -652,9 +601,6 @@ help:
 	@echo ... src/perkcards.obj
 	@echo ... src/perkcards.i
 	@echo ... src/perkcards.s
-	@echo ... src/perkcardsDeck.obj
-	@echo ... src/perkcardsDeck.i
-	@echo ... src/perkcardsDeck.s
 	@echo ... src/villager.obj
 	@echo ... src/villager.i
 	@echo ... src/villager.s

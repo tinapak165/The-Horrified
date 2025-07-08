@@ -1,6 +1,6 @@
-CMakeFiles/Horrified.dir/src/Mayor.cpp.obj: \
- C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Mayor.cpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Mayor.hpp \
+CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: \
+ C:\Users\sibegilan\Desktop\Final\The-Horrified\src\Heroes.cpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Heroes.hpp \
  C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Hero.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iostream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\c++config.h \
@@ -159,4 +159,5 @@ CMakeFiles/Horrified.dir/src/Mayor.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\unordered_set \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hashtable.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hashtable_policy.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Hero.hpp

@@ -84,7 +84,7 @@ int Hero::AdvanceActionForDracula(){
         cout << "total strength: " << totalStrength << '\n' ; 
         cout << "items to choose:\n" ;
         for(size_t i = 0 ; i < items.size() ; i++)
-            cout << (i + 1) << "-" << items[i].getName() << "(color: " << (*this).colorItems(items[i].getColor()) << ", strength: " << items[i].getStrength() << ")\n" ;
+            cout << (i + 1) << "-" << items[i].getName() << "(color: " << items[i].color_to_string(items[i].getColor())  << ", strength: " << items[i].getStrength() << ")\n" ;
         
         cout << "please select any item by number(0 is for quiting): " ;
         cin >> chosenNumber ; 
@@ -112,7 +112,7 @@ int Hero::AdvanceActionForDracula(){
     if(!selected.empty()){
         cout << "items chosen for advance action:\n " ;
         for(size_t i = 0 ; i < selected.size() ; i++){
-            cout << (i + 1) << "-" << selected[i].getName() << "(color: " << (*this).colorItems(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
+            cout << (i + 1) << "-" << selected[i].getName() << "(color: " << selected[i].color_to_string(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
             (*this).GetCurrentLocation()->add_item(selected[i]) ; 
         }
     }
@@ -157,7 +157,41 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     } 
 
 }
-void Hero::PickupItems(){ //pick up item from current location
+void Hero::DefeatAction(Hero* h , InvisibleMan* invisibleMan , Dracula* dracula){
+                   
+    Location* heroLoc = h->GetCurrentLocation();       
+    if (invisibleMan && invisibleMan->get_location() == heroLoc) {
+        if (invisibleMan->can_be_defeated()) {
+            cout << "You are ready to defeat the Invisible Man! Use RED items (total strength >= 9).\n";
+            int redPower = h->select_items_to_defeat(ItemColor::RED);
+        if (redPower >= 6) {
+            invisibleMan->set_location(nullptr); 
+            cout << "Invisible Man has been defeated!\n";
+        } else {
+            cout << "Not enough RED item power. Invisible Man survived.\n";
+            }
+        }
+    }
+    if (dracula && dracula->get_location() == heroLoc) {
+        if (dracula->can_be_defeated()) {
+            cout << "You are ready to defeat Dracula! Select yellow items to attack.\n";
+            int yellowPower = h->select_items_to_defeat(ItemColor::YELLOW);
+                
+            if (yellowPower >= 6) {
+                cout << "Dracula has been defeated!\n";
+                dracula->set_location(nullptr); 
+                } else {
+                    cout << "Not enough yellow item power. dracula did not die.\n";
+                    }
+        } else {
+            cout << "You must destroy all coffins first to defeat Dracula.\n";
+            }
+    }else{
+        cerr << "you can not use defeat action unless you are in monster place\n" ;
+        }
+}
+void Hero::PickupItems()
+{
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
     if(ItemsAtLocation.empty()){
         cout << (*this).GetName() << " found no items to pick up in the current location(" << (*this).GetCurrentLocation()->get_name() << ")\n" ;
@@ -168,13 +202,12 @@ void Hero::PickupItems(){ //pick up item from current location
         cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
         for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++){
             cout << (i+1) << ". " << ItemsAtLocation[i].getName() << 
-                "( color: " <<  colorItems(ItemsAtLocation[i].getColor()) << ", " <<
+                "( color: " <<  ItemsAtLocation[i].color_to_string(ItemsAtLocation[i].getColor()) << ", " <<
                 "strength: " << ItemsAtLocation[i].getStrength() << ")\n";
         }
         cout << "enter the item number to pick up(0 to end): " ; 
         cin >> selectedItems ;
-        if(selectedItems == 0) //هیچی انتخاب نکرد
-            return ;
+        if(selectedItems == 0) return ;
         if(selectedItems < 1 || selectedItems > ItemsAtLocation.size()){
             cerr << "invalid selection.try again\n" ;
             continue;
@@ -195,36 +228,20 @@ void Hero::PickupItems(){ //pick up item from current location
     ItemsAtLocation.clear() ;
 }
 
-
-
 void Hero::DisplayItem(){
     cout << "items collected:\n" ;
     if(GetItems().empty()) cout << "-\n" ;
     for(const auto i : GetItems()){
         cout << i.getName() << '('  ;
-        cout << colorItems(i.getColor()) ; 
+        cout << i.color_to_string(i.getColor()) ; 
         cout << ", strength:" << i.getStrength() << ")\n" ; 
     }
     cout << '\n' ; 
 }
 
-string Hero::colorItems(const ItemColor & color){
-    switch (color){
-    case ItemColor::BLUE :
-        return "Blue" ;
-    case ItemColor::RED :
-        return "Red" ; 
-    case ItemColor::YELLOW :
-        return "Yellow" ; 
-    default:
-        break;
-    }
-}
-
 bool Hero::PerformTheAction(string act)  {
 
     if(act == "Quit" || act == "Help" || act == "Perk") return true;
-
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
             if((*this).GetRemainingActions() > 0){
@@ -241,7 +258,6 @@ bool Hero::PerformTheAction(string act)  {
     //throw runtime_error("action not available!") ;
     cerr << "action not available!\n" ;
     return false ;  
-
 }
 
 string Hero::GetName()const{
@@ -328,87 +344,132 @@ void Hero::MoveTo(Location* new_location){ //without villager
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
 void Hero::GuideAction(Hero * h , GameMap& map){
-            string chosenPlace , mode ; 
-            Location* currentLoc = h->GetCurrentLocation() ; 
-                    cout << "Guide:\n" 
-                         << "current -> move a villager from your location to a neighbor\n"
-                         << "neighbor -> move a villager from a neighbor to your location\n"
-                         << "choose: ";
-                    
-                    cin >> mode ; 
+    string chosenPlace , mode ; 
+    Location* currentLoc = h->GetCurrentLocation() ; 
+    cout << "Guide:\n" 
+         << "current -> move a villager from your location to a neighbor\n"
+         << "neighbor -> move a villager from a neighbor to your location\n"
+         << "choose: ";
+     cin >> mode ; 
 
-                    if(mode == "current"){
-                        if(h->hasvillagerHere()){
-                            cout << "some villagers are at the same place as you: " ;
-                            h->showvillagersHere() ;
-                            cout << "\nwho do you want to move? " ; 
-                            string chosenvillager ;
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
-                            getline(cin , chosenvillager) ; 
-                            bool found = false ; 
-                            for(auto *v : h->villagerHere()){
-                                if(chosenvillager == v->get_name()){
-                                    found = true ; 
-                                    cout << "Which neighboring place do you want to move them? " ;
-                                    cin >> chosenPlace ; 
-                                    if(currentLoc->findNeighbor(chosenPlace)){
+    if(mode == "current"){
+        if(h->hasvillagerHere()){
+            cout << "some villagers are at the same place as you: " ;
+            h->showvillagersHere() ;
+            cout << "\nwho do you want to move? " ; 
+            string chosenvillager ;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
+            getline(cin , chosenvillager) ; 
+            bool found = false ; 
+            for(auto *v : h->villagerHere()){
+                if(chosenvillager == v->get_name()){
+                    found = true ; 
+                    cout << "Which neighboring place do you want to move them? " ;
+                    cin >> chosenPlace ; 
+                    if(currentLoc->findNeighbor(chosenPlace)){
+                        Location* chosenLocation = map.get_location_by_name(chosenPlace) ;  
+                        v->MoveTo(chosenLocation , chosenvillager) ;
+                        //cout << chosenvillager << " has been guided to " << chosenPlace << '\n' ;
+                        found = true ; 
+                        break ;
+                        }else{
+                            //throw invalid_argument( "what you have chosen is not a neighboring place!\n");   
+                            cerr << "what you have chosen is not a neighboring place!\n" ; 
+                        }
+                }
+            } 
+            if(!found){
+                //  throw invalid_argument("villager not found!") ;
+                cerr << "villager not found!\n" ;
+            }  
 
-                                        Location* chosenLocation = map.get_location_by_name(chosenPlace) ;  
-                                        v->MoveTo(chosenLocation , chosenvillager) ;
-                                        //cout << chosenvillager << " has been guided to " << chosenPlace << '\n' ;
-                                        found = true ; 
-                                        break ;
-                                    }else{
-                                        //throw invalid_argument( "what you have chosen is not a neighboring place!\n");   
-                                        cerr << "what you have chosen is not a neighboring place!\n" ; 
-                                    }
-                                }
-                            } 
-                            if(!found){
-                              //  throw invalid_argument("villager not found!") ;
-                                cerr << "villager not found!\n" ;
-                            }  
+        }else cerr << "no villagers at your location!\n";
+    }
+    else if(mode == "neighbor"){
+        Location* currentLoc = h->GetCurrentLocation() ;
+        vector<Villager*> availableVillager ;
+        for(auto *neigbor :  currentLoc->get_neighbors()){
+            for(auto *v : Villager::all()){
+                if(v->get_currentLocation() == neigbor)
+                    availableVillager.push_back(v) ;                                        
+            }
+        }
+        if(availableVillager.empty()) cerr << "no villager nearby!\n" ;
+        else{
+            cout << "some villagers in the neigbors are: " ;
+            for(auto v : availableVillager)
+                cout << *(v->get_currentLocation()) << " -> " << v->get_name() << '\n';
+                string chosenvillager ; 
+                cout << "Which villager do you want to move to your location? " ;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
+                getline(cin , chosenvillager) ;  
+                bool found = false ; 
+                for(auto *v : availableVillager){
+                    if(chosenvillager == v->get_name()){
+                        v->MoveTo(currentLoc , chosenvillager) ;
+                        found = true ;
+                        break ;  
+                    } 
+                }
+                if(!found){
+                    // throw invalid_argument("villager not found!") ;
+                    cerr << "villager not found!\n" ; 
+                } 
+            }
+    }else{
+         //throw invalid_argument("wrong answer!\n");   
+        cerr << "wrong answer!\n" ;
+        }      
+}
+void Hero::Special(Hero * h , GameMap& map){
 
-                        }else cerr << "no villagers at your location!\n";
-                    }
-                    else if(mode == "neighbor"){
-                        Location* currentLoc = h->GetCurrentLocation() ;
-                        vector<Villager*> availableVillager ;
-                        for(auto *neigbor :  currentLoc->get_neighbors()){
-                            for(auto *v : Villager::all()){
-                                if(v->get_currentLocation() == neigbor)
-                                    availableVillager.push_back(v) ;                                        
-                                }
-                            }
-                        if(availableVillager.empty()) cerr << "no villager nearby!\n" ;
-                        else{
-                            cout << "some villagers in the neigbors are: " ;
-                            for(auto v : availableVillager)
-                                cout << *(v->get_currentLocation()) << " -> " << v->get_name() << '\n';
-                            string chosenvillager ; 
-                            cout << "Which villager do you want to move to your location? " ;
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
-                            getline(cin , chosenvillager) ;  
-                            bool found = false ; 
-                            for(auto *v : availableVillager){
-                                if(chosenvillager == v->get_name()){
-                                    v->MoveTo(currentLoc , chosenvillager) ;
-                                    found = true ;
-                                    break ;  
-                                    } 
-                                }
-                                if(!found){
-                                   // throw invalid_argument("villager not found!") ;
-                                    cerr << "villager not found!\n" ; 
-                                } 
-                            }
-
-                    }else{
-                      //throw invalid_argument("wrong answer!\n");   
-                      cerr << "wrong answer!\n" ;
-                    }      
+    if(h->GetName() == "Mayor"){
+        cout << "You dont have special action\n" ;
+        return ;
+    }
+    Location* heroLoc = h->GetCurrentLocation() ; 
+    vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
+    cout << "neighboring locations: " ;
+    for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
+        cout << heroLocNeighbor[i]->get_name() << " " ;
+    cout << endl ; 
+    cout << "Which neighboring place do you want to pick up its items? " ;
+    string chosenplace ; 
+    cin >> chosenplace ;
+    if(heroLoc->findNeighbor(chosenplace)){
+        Location* chosenLoc = map.get_location_by_name(chosenplace) ;
+        h->SpecialAction(chosenLoc) ;
+        h->DisplayItem() ; 
+    }else{
+        //throw invalid_argument("what you have chosen is not a neighboring place!\n") ; 
+        cout << "what you have chosen is not a neighboring place!\n" ; 
+    } 
 
 }
+
+void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map , InvisibleMan* invisi ){
+    //for dracula
+    Location* current = h->GetCurrentLocation();
+    string locName = current->get_name();
+    if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
+        cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n" ;
+        int totalStrength = h->AdvanceActionForDracula() ;
+        if (totalStrength >= 6) {
+            dracula->destroy_coffin_at(locName); 
+            pool.add_items(h->getUsedItemsForDracula()) ; 
+        } else {
+            std::cout << "Advance action failed Not enough red item strength.\n";
+            }
+    }
+    //for invisible man
+    else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { 
+         h->AdvanceActionForInvisibleMan(invisi) ;
+        pool.add_items(h->getUsedItemsForDracula()) ; 
+    }
+    else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
+         
+}
+
 bool Hero::hasvillagerHere() const
 {
 
@@ -460,7 +521,7 @@ int Hero::select_items_to_defeat(ItemColor requiredColor) {
         std::cout << "Available items:\n";
         for (size_t i = 0; i < items.size(); ++i) {
             std::cout << (i + 1) << ") " << items[i].getName()
-                      << " (" << colorItems(items[i].getColor())
+                      << " (" << items[i].color_to_string(items[i].getColor())
                       << ", strength " << items[i].getStrength() << ")\n";
         }
 
@@ -487,7 +548,7 @@ int Hero::select_items_to_defeat(ItemColor requiredColor) {
     if (!selected.empty()) {
         std::cout << "Used items:\n";
         for (auto& item : selected)
-            std::cout << "- " << item.getName() << " (" << colorItems(item.getColor()) << ", " << item.getStrength() << ")\n";
+            std::cout << "- " << item.getName() << " (" << item.color_to_string(item.getColor()) << ", " << item.getStrength() << ")\n";
     }
 
     return totalStrength;

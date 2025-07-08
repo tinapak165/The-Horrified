@@ -1,5 +1,6 @@
 #include "Heroes.hpp"
 #include <iostream>
+#include "Hero.hpp"
 using namespace std ; 
 
 Archaeologist:: Archaeologist(GameMap& Map): Hero("Archaeologist" , 4 , Map.get_location_by_name("Docks") , "Can take any number of items from adjacent locations.") {
@@ -25,7 +26,7 @@ void Archaeologist::SpecialAction(Location* chosenplace){
             cout << "items available in " << chosenplace->get_name() << " :\n" ;
             for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++)
                 cout << (i+1) << ". " << ItemsAtLocation[i].getName() << 
-                    "( color : " << (*this).colorItems(ItemsAtLocation[i].getColor()) <<
+                    "( color : " <<ItemsAtLocation[i].color_to_string(ItemsAtLocation[i].getColor()) <<
                      " , strength: " << ItemsAtLocation[i].getStrength() << ")\n";
         
             cout << "enter the item number to pick up(0 to end): " ; 

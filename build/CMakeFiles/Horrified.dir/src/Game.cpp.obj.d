@@ -135,31 +135,10 @@ CMakeFiles/Horrified.dir/src/Game.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hashtable.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hashtable_policy.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_map.h \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/GameMap.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Location.hpp \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_construct.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_uninitialized.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_vector.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_bvector.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\vector.tcc \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/item.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/monster.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/hero.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/villager.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/location.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/perkcardsDeck.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/perkcards.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/InvisibleMan.hpp \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\unordered_set \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\algorithm \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_algo.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\algorithmfwd.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_heap.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tempbuf.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\uniform_int_dist.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\memory \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_raw_storage_iter.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\typeinfo \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ext\concurrence.h \
@@ -171,22 +150,40 @@ CMakeFiles/Horrified.dir/src/Game.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\shared_ptr_atomic.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\atomic_base.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\backward\auto_ptr.h \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/MonsterCardDeck.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/monstercards.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/TurnManager.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/GameMap.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Location.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_vector.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_bvector.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\vector.tcc \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/item.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/monster.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/hero.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/villager.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/location.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/perkcards.hpp \
  C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Hero.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Dracula.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Dice.hpp \
  C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Itembag.hpp \
  C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Item.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\random \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cmath c:\mingw\include\math.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\random.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\uniform_int_dist.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\opt_random.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\random.tcc \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\numeric \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_numeric.h \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Mayor.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Archaeologist.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/villager.hpp \
- C:/Users/sibegilan/Desktop/Final/The-Horrified/header/perkcards.hpp
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\algorithm \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_algo.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\algorithmfwd.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_heap.h \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Dracula.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/InvisibleMan.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\unordered_set \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/MonsterCardDeck.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/monstercards.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/TurnManager.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Dice.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/Heroes.hpp \
+ C:/Users/sibegilan/Desktop/Final/The-Horrified/header/villager.hpp
