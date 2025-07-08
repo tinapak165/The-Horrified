@@ -14,6 +14,7 @@
 #include "Hero.hpp"
 #include "Dice.hpp"
 #include "Itembag.hpp"
+#include "Heroes.hpp"
 
 class Game {
     friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
@@ -41,7 +42,6 @@ public:
     void choose_character();
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
-   // void playPerkCard(Hero* , const std::string);
     void initializaDeck() ; 
     void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;

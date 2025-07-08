@@ -47,8 +47,12 @@ class Hero{
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
+        //actions
+        void MoveAction(GameMap& , Hero*) ;
         void MoveTo(Location* new_location , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
+
+        void GuideAction(Hero* , GameMap&) ; 
         
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
@@ -61,7 +65,7 @@ class Hero{
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
         Location* GetCurrentLocation() const ;         
-        virtual bool HasSpecialAction() const {return false ; } ; //changeeeeeeee it
+    //    virtual bool HasSpecialAction() const = 0 ;
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() const ; 
         void resetMaxActions() ; 
@@ -73,9 +77,9 @@ class Hero{
         void addPlayedCards(std::unique_ptr<Perkcard>) ;
 
         void DisplayItem() ;
-        std::string colorItems(const ItemColor&) ; //show items colors 
+        std::string colorItems(const ItemColor&) ;
         void PickupItems() ; 
-        void SpecialPickup(Location*) ; 
+        virtual void SpecialAction(Location*) = 0  ; //arch anc curier
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
         int select_items_to_defeat(ItemColor requiredColor) ;
@@ -90,5 +94,9 @@ class Hero{
 
         std::vector<Item> getUsedItemsForDracula();
         std::vector<Item> getUsedItemsForInvisibleMan();
+
+        virtual ~Hero() = default ; 
 };
+
+
 #endif 

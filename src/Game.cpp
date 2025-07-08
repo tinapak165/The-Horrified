@@ -6,8 +6,6 @@
 #include <utility>
 
 #include "Game.hpp"
-#include "Mayor.hpp"
-#include "Archaeologist.hpp"
 #include "villager.hpp"
 
 using namespace std;
@@ -119,138 +117,30 @@ void Game::play_hero_Action(Hero *h){
         cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
 
         if(chosenAction == "Move"){
-            string chosenPlace ; 
-            cout << "Which neighboring place do you want to move to? " ;
-            cin >> chosenPlace ;
-            Location* currentLoc = h->GetCurrentLocation() ; 
-            Location* chosenLocation = map.get_location_by_name(chosenPlace);
-
-            if(currentLoc->findNeighbor(chosenPlace)){ //اگر خونه ای که انتخاب کرده واقعا همسایه فعلی بود
-                if(h->hasvillagerHere()){//چک شود که ایا محلی در مکان قهرمان فعلی هست یا نه
-                    auto here = h->villagerHere() ; // vector of villagers in the same place
-                        string ans ;
-                        cout << "some villagers are at the same place as you. " ; 
-                        h->showvillagersHere() ; 
-                        cout << "\ndo you want to move the villagers with you?(yes = moving all villagers with you/no = moving alone) " ; 
-                        cin >> ans ; 
-                        if(ans == "yes")
-                            h->MoveTo(chosenLocation , here) ; 
-                        else if(ans == "no")
-                            h->MoveTo(chosenLocation) ;
-                        else cerr << "wrong answer\n" ; 
-                    }
-                    else { 
-                        h->MoveTo(chosenLocation); 
-                    }    
-                }
-                else{
-                    cerr << "what you have chosen is not a neighboirng place!\n" ;  
-                }
-                    
-                }
-                else if(chosenAction == "Guide"){
-                    string chosenPlace , mode ; 
-                    Location* currentLoc = h->GetCurrentLocation() ; 
-                    cout << "Guide:\n" 
-                         << "current -> move a villager from your location to a neighbor\n"
-                         << "neighbor -> move a villager from a neighbor to your location\n"
-                         << "choose: ";
-                    
-                    cin >> mode ; 
-
-                    if(mode == "current"){
-                        if(h->hasvillagerHere()){
-                            cout << "some villagers are at the same place as you: " ;
-                            h->showvillagersHere() ;
-                            cout << "\nwho do you want to move? " ; 
-                            string chosenvillager ;
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
-                            getline(cin , chosenvillager) ; 
-                            bool found = false ; 
-                            for(auto *v : h->villagerHere()){
-                                if(chosenvillager == v->get_name()){
-                                    found = true ; 
-                                    cout << "Which neighboring place do you want to move them? " ;
-                                    cin >> chosenPlace ; 
-                                    if(currentLoc->findNeighbor(chosenPlace)){
-
-                                        Location* chosenLocation = map.get_location_by_name(chosenPlace) ;  
-                                        v->MoveTo(chosenLocation , chosenvillager) ;
-                                        //cout << chosenvillager << " has been guided to " << chosenPlace << '\n' ;
-                                        found = true ; 
-                                        break ;
-                                    }else{
-                                        //throw invalid_argument( "what you have chosen is not a neighboring place!\n");   
-                                        cerr << "what you have chosen is not a neighboring place!\n" ; 
-                                    }
-                                }
-                            } 
-                            if(!found){
-                              //  throw invalid_argument("villager not found!") ;
-                                cerr << "villager not found!\n" ;
-                            }  
-
-                        }else cerr << "no villagers at your location!\n";
-                    }
-                    else if(mode == "neighbor"){
-                        Location* currentLoc = h->GetCurrentLocation() ;
-                        vector<Villager*> availableVillager ;
-                        for(auto *neigbor :  currentLoc->get_neighbors()){
-                            for(auto *v : Villager::all()){
-                                if(v->get_currentLocation() == neigbor)
-                                    availableVillager.push_back(v) ;                                        
-                                }
-                            }
-                        if(availableVillager.empty()) cerr << "no villager nearby!\n" ;
-                        else{
-                            cout << "some villagers in the neigbors are: " ;
-                            for(auto v : availableVillager)
-                                cout << *(v->get_currentLocation()) << " -> " << v->get_name() << '\n';
-                            string chosenvillager ; 
-                            cout << "Which villager do you want to move to your location? " ;
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
-                            getline(cin , chosenvillager) ;  
-                            bool found = false ; 
-                            for(auto *v : availableVillager){
-                                if(chosenvillager == v->get_name()){
-                                    v->MoveTo(currentLoc , chosenvillager) ;
-                                    found = true ;
-                                    break ;  
-                                    } 
-                                }
-                                if(!found){
-                                   // throw invalid_argument("villager not found!") ;
-                                    cerr << "villager not found!\n" ; 
-                                } 
-                            }
-
-                    }else{
-                      //throw invalid_argument("wrong answer!\n");   
-                      cerr << "wrong answer!\n" ;
-                    }      
-                }
-                else if(chosenAction == "Pickup"){
- 
-                    h->PickupItems() ;
-                    h->DisplayItem() ; 
-
-                } 
-                else if(chosenAction == "Special"){
-                    Location* heroLoc = h->GetCurrentLocation() ; 
-                    vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
-                    cout << "neighboring locations: " ;
-                    for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
-                        cout << heroLocNeighbor[i]->get_name() << " " ;
-                    cout << endl ; 
-
-                    cout << "Which neighboring place do you want to pick up its items? " ;
-                    string chosenplace ; 
+            h->MoveAction(map , h) ;                     
+        }
+        else if(chosenAction == "Guide"){
+            h->GuideAction(h , map) ; 
+        }
+        else if(chosenAction == "Pickup"){
+            h->PickupItems() ;
+            h->DisplayItem() ; 
+        } 
+        else if(chosenAction == "Special"){
+            Location* heroLoc = h->GetCurrentLocation() ; 
+            vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
+            cout << "neighboring locations: " ;
+            for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
+                cout << heroLocNeighbor[i]->get_name() << " " ;
+            cout << endl ; 
+            cout << "Which neighboring place do you want to pick up its items? " ;
+            string chosenplace ; 
                     cin >> chosenplace ;
 
                     if(heroLoc->findNeighbor(chosenplace)){
                         Location* chosenLoc = map.get_location_by_name(chosenplace) ;
     
-                        h->SpecialPickup(chosenLoc) ;
+                        h->SpecialAction(chosenLoc) ;
                         h->DisplayItem() ; 
 
                     }else{
@@ -321,12 +211,9 @@ void Game::play_hero_Action(Hero *h){
                         cerr << "you can not use defeat action unless you are in monster place\n" ;
                     }
                 }
-
-            } // end if can play an action
+            } 
     }    
 }
-
-
 
 void Game::hero_phase(Hero* hero) {
 

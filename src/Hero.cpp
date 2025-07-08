@@ -195,47 +195,7 @@ void Hero::PickupItems(){ //pick up item from current location
     ItemsAtLocation.clear() ;
 }
 
-void Hero::SpecialPickup(Location* chosenplace){ //pick up item from neighboring place(archaeologist)
 
-    vector<Item>&  ItemsAtLocation= chosenplace->get_items() ;
-
-    if(ItemsAtLocation.empty()) {
-        cerr << "no item available in " << chosenplace->get_name() << "!\n"; 
-        return ;  
-    }
-    else{
-        int selectedItems = -1 ; 
-        while(!ItemsAtLocation.empty()){
-            cout << "items available in " << chosenplace->get_name() << " :\n" ;
-            for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++)
-                cout << (i+1) << ". " << ItemsAtLocation[i].getName() << 
-                    "( color : " << (*this).colorItems(ItemsAtLocation[i].getColor()) <<
-                     " , strength: " << ItemsAtLocation[i].getStrength() << ")\n";
-        
-            cout << "enter the item number to pick up(0 to end): " ; 
-            cin >> selectedItems ;
-            if(selectedItems == 0) //هیچی انتخاب نکرد
-                return ;
-            if(selectedItems < 1 || selectedItems > ItemsAtLocation.size()){
-                cerr << "invalid selection.try again\n" ;
-                continue;
-            }
-            int index = selectedItems - 1 ;
-            ListOfitems.push_back(ItemsAtLocation[index]) ;
-            cout << (*this).GetName() << " picked up " << ItemsAtLocation[index].getName() << ".\n";
-            ItemsAtLocation.erase(ItemsAtLocation.begin() + index) ; 
-            if(ItemsAtLocation.empty()){
-            cout << "no more items available in " << chosenplace->get_name() << ".\n" ;
-            break ;
-        }
-    }
-        for(const auto& i : ItemsAtLocation){
-            ListOfitems.push_back(i) ;
-            cout << (*this).GetName() << " picked up " << i.getName() << " from location " << chosenplace->get_name() << '\n' ;
-        }
-        ItemsAtLocation.clear() ;
-    }
-}
 
 void Hero::DisplayItem(){
     cout << "items collected:\n" ;
@@ -267,12 +227,6 @@ bool Hero::PerformTheAction(string act)  {
 
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
-            if(act == "Special" && !HasSpecialAction()){
-                //throw runtime_error("This hero does not have special action") ;
-                cerr << "This hero does not have special action\n" ;
-                return false ;  
-            }
-
             if((*this).GetRemainingActions() > 0){
                 cout << "[playing " << act << "]\n" ;
                 (*this).SetRemainingActions((*this).GetRemainingActions()-1) ; 
@@ -308,7 +262,38 @@ Location* Hero::GetCurrentLocation() const{
 void Hero::SetCurrentLocation(Location* location){
     currentLocation = location ;
 }
-void Hero::MoveTo(Location* new_location , vector<Villager*> vill){ // move with villagers
+void Hero::MoveAction(GameMap& map, Hero* h){
+    string chosenPlace ; 
+    cout << "Which neighboring place do you want to move to? " ;
+    cin >> chosenPlace ;
+    Location* currentLoc = h->GetCurrentLocation() ; 
+    Location* chosenLocation = map.get_location_by_name(chosenPlace);
+
+    if(currentLoc->findNeighbor(chosenPlace)){
+        if(h->hasvillagerHere()){
+            auto here = h->villagerHere() ; 
+            string ans ;
+            cout << "some villagers are at the same place as you. " ; 
+            h->showvillagersHere() ; 
+            cout << "\ndo you want to move the villagers with you?(yes = moving all villagers with you/no = moving alone) " ; 
+            cin >> ans ; 
+            if(ans == "yes")
+                h->MoveTo(chosenLocation , here) ; 
+            else if(ans == "no")
+                h->MoveTo(chosenLocation) ;
+            else cerr << "wrong answer\n" ; 
+        }
+        else { 
+            h->MoveTo(chosenLocation); 
+        }    
+    }
+    else{
+        cerr << "what you have chosen is not a neighboirng place!\n" ;  
+    }
+
+}
+
+void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with villagers
     if (!new_location) return;
     
     if(new_location == (*this).GetCurrentLocation()){
@@ -320,18 +305,13 @@ void Hero::MoveTo(Location* new_location , vector<Villager*> vill){ // move with
     new_location->add_hero(this) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
-
-    if (currentLocation)
-        currentLocation->remove_hero(this);
     
-    new_location->add_hero(this);
-
     for(auto *v : vill){
         v->get_currentLocation()->remove_villager(v) ; 
         v->set_currentLocation(new_location) ;
         new_location->add_villager(v) ; 
         cout << v->get_name() << " moved with hero to " << *(v->get_currentLocation()) << '\n';
-    }  
+    }
 }
 
 void Hero::MoveTo(Location* new_location){ //without villager
@@ -346,16 +326,93 @@ void Hero::MoveTo(Location* new_location){ //without villager
     new_location->add_hero(this) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
+}
+void Hero::GuideAction(Hero * h , GameMap& map){
+            string chosenPlace , mode ; 
+            Location* currentLoc = h->GetCurrentLocation() ; 
+                    cout << "Guide:\n" 
+                         << "current -> move a villager from your location to a neighbor\n"
+                         << "neighbor -> move a villager from a neighbor to your location\n"
+                         << "choose: ";
+                    
+                    cin >> mode ; 
 
-    if (currentLocation)
-        currentLocation->remove_hero(this);
-    
-    new_location->add_hero(this);
+                    if(mode == "current"){
+                        if(h->hasvillagerHere()){
+                            cout << "some villagers are at the same place as you: " ;
+                            h->showvillagersHere() ;
+                            cout << "\nwho do you want to move? " ; 
+                            string chosenvillager ;
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
+                            getline(cin , chosenvillager) ; 
+                            bool found = false ; 
+                            for(auto *v : h->villagerHere()){
+                                if(chosenvillager == v->get_name()){
+                                    found = true ; 
+                                    cout << "Which neighboring place do you want to move them? " ;
+                                    cin >> chosenPlace ; 
+                                    if(currentLoc->findNeighbor(chosenPlace)){
+
+                                        Location* chosenLocation = map.get_location_by_name(chosenPlace) ;  
+                                        v->MoveTo(chosenLocation , chosenvillager) ;
+                                        //cout << chosenvillager << " has been guided to " << chosenPlace << '\n' ;
+                                        found = true ; 
+                                        break ;
+                                    }else{
+                                        //throw invalid_argument( "what you have chosen is not a neighboring place!\n");   
+                                        cerr << "what you have chosen is not a neighboring place!\n" ; 
+                                    }
+                                }
+                            } 
+                            if(!found){
+                              //  throw invalid_argument("villager not found!") ;
+                                cerr << "villager not found!\n" ;
+                            }  
+
+                        }else cerr << "no villagers at your location!\n";
+                    }
+                    else if(mode == "neighbor"){
+                        Location* currentLoc = h->GetCurrentLocation() ;
+                        vector<Villager*> availableVillager ;
+                        for(auto *neigbor :  currentLoc->get_neighbors()){
+                            for(auto *v : Villager::all()){
+                                if(v->get_currentLocation() == neigbor)
+                                    availableVillager.push_back(v) ;                                        
+                                }
+                            }
+                        if(availableVillager.empty()) cerr << "no villager nearby!\n" ;
+                        else{
+                            cout << "some villagers in the neigbors are: " ;
+                            for(auto v : availableVillager)
+                                cout << *(v->get_currentLocation()) << " -> " << v->get_name() << '\n';
+                            string chosenvillager ; 
+                            cout << "Which villager do you want to move to your location? " ;
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n') ; 
+                            getline(cin , chosenvillager) ;  
+                            bool found = false ; 
+                            for(auto *v : availableVillager){
+                                if(chosenvillager == v->get_name()){
+                                    v->MoveTo(currentLoc , chosenvillager) ;
+                                    found = true ;
+                                    break ;  
+                                    } 
+                                }
+                                if(!found){
+                                   // throw invalid_argument("villager not found!") ;
+                                    cerr << "villager not found!\n" ; 
+                                } 
+                            }
+
+                    }else{
+                      //throw invalid_argument("wrong answer!\n");   
+                      cerr << "wrong answer!\n" ;
+                    }      
 
 }
-bool Hero::hasvillagerHere() const{
+bool Hero::hasvillagerHere() const
+{
 
-    for(auto *v : Villager::all() ){ //باید استاتیک باشد تا اینگونه ازش استفاده کنیم
+    for(auto *v : Villager::all() ){ 
         if(v->get_currentLocation() == (*this).GetCurrentLocation())
             return true ; 
     } 
@@ -451,7 +508,6 @@ void Hero::remove_item_by_index(int index) {
 std::vector<Item> Hero::getUsedItemsForDracula() {
     return usedItemsForDracula;
 }
-
 
 std::vector<Item> Hero::getUsedItemsForInvisibleMan() {
     return usedItemsForInvisibleMan;

@@ -8,7 +8,6 @@ set(SOURCES
     src/Game.cpp
     src/Hero.cpp
     src/Dice.cpp
-    src/Mayor.cpp
     src/main.cpp
     src/GameMap.cpp
     src/MonsterCardDeck.cpp
@@ -20,9 +19,9 @@ set(SOURCES
     src/InvisibleMan.cpp
     src/item.cpp
     src/Itembag.cpp
-    src/Archaeologist.cpp
     src/Location.cpp
     src/villager.cpp
+    src/Heroes.cpp
 )
 
 add_executable(Horrified ${SOURCES})
