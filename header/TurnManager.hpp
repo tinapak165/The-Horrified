@@ -1,4 +1,5 @@
-
+#ifndef TURNMANAGER_H
+#define TURNMANAGER_H
 #include <vector>
 #include "Hero.hpp"
 
@@ -20,3 +21,4 @@ class TurnManager {
     std::vector<Hero*> get_heroes();
     };
     
+#endif
