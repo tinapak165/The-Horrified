@@ -2,15 +2,17 @@
 #define HERO_H
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "villager.hpp"
 #include "location.hpp"
 #include "item.hpp"
-#include "perkcardsDeck.hpp"
+#include "perkcards.hpp"
 #include "InvisibleMan.hpp"
 
 class Location ; 
 class Villager ; 
 class InvisibleMan ; 
+class Perkcard ; 
 
 enum class ActionType{
     Move ,
@@ -37,8 +39,8 @@ class Hero{
         Location* StartingLocation ;
         Location* currentLocation;
         std::vector<Action> ListOfActions ;
-        std::vector<Perkcards> playedCards ; 
-        std::vector<Perkcards> availableCards ;
+        std::vector<std::unique_ptr<Perkcard>> playedCards ; 
+        std::vector<std::unique_ptr<Perkcard>> availableCards ;
         
         std::vector<Item> usedItemsForDracula;
         std::vector<Item> usedItemsForInvisibleMan;
@@ -59,16 +61,16 @@ class Hero{
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
         Location* GetCurrentLocation() const ;         
-        virtual bool HasSpecialAction() const {return true ; } 
+        virtual bool HasSpecialAction() const {return false ; } ; //changeeeeeeee it
         bool PerformTheAction(std::string)  ; 
         void DisplayActions() const ; 
         void resetMaxActions() ; 
 
-        void AddAvailablePerk(Perkcards) ;
+        void AddAvailablePerk(std::unique_ptr<Perkcard>) ;
         void displayavailblecards() const;
         void displayPlayedCards() const; 
-        std::vector<Perkcards>& GetAvailablePerkCards() ; 
-        void addPlayedCards(Perkcards) ;
+        std::vector<std::unique_ptr<Perkcard>>& GetAvailablePerkCards() ; 
+        void addPlayedCards(std::unique_ptr<Perkcard>) ;
 
         void DisplayItem() ;
         std::string colorItems(const ItemColor&) ; //show items colors 
