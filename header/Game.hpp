@@ -1,6 +1,11 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
 #include <unordered_map>
+#include <memory>
 #include "GameMap.hpp"
+#include "perkcards.hpp"
 #include "MonsterCardDeck.hpp"
 #include "TurnManager.hpp"
 #include "monster.hpp"
@@ -17,8 +22,7 @@ private:
     GameMap map;
     MonsterCardDeck deck;
     TurnManager turnManager;
-    PerkDeck p ; 
-    Perkcards p2 ;
+    PerkDeck PerkDeck ; 
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
@@ -33,13 +37,13 @@ private:
 public:
     Game();
     ~Game();
-    void test();
     void start() ;
     void choose_character();
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
-    void playPerkCard(Hero* , std::string);
-    void ChoosePerkCard(Hero*) ;
+   // void playPerkCard(Hero* , const std::string);
+    void initializaDeck() ; 
+    void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;
     void locationOverview() ;
     void graph_map_text();
@@ -59,3 +63,5 @@ public:
     void distribute_initial_items();
     
 };
+
+#endif

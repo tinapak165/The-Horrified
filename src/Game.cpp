@@ -9,26 +9,20 @@
 #include "Mayor.hpp"
 #include "Archaeologist.hpp"
 #include "villager.hpp"
-#include "perkcards.hpp"
 
 using namespace std;
 
 Game::Game() {
     std::cout<<"                                     THE HORRIFIED                                          "<<endl;
     std::cout<<"                                WELCOME TO THE HORROR WORLD                                  "<<endl;
-    // ساخت نقشه ثابت
-    map.build_map(); // نقشه ی بازی
+    map.build_map(); 
     graph_map_text(); 
-    // ۱۲ ایتم اولیه ی بازی قرار گرفتند
     distribute_initial_items();
+    choose_character();
+
+    initializaDeck() ; 
     
     
-    
-    choose_character(); // اینجا قهرمان ها ساخته شدند
-    
-    
-    
-    // اضافه کردن هیولاها
     dracula = new Dracula(map.get_location_by_name("Cave")); 
 
 
@@ -117,7 +111,7 @@ void Game::play_hero_Action(Hero *h){
     if(chosenAction == "Quit")
         break ;
     if(chosenAction == "Perk"){
-        ChoosePerkCard(h) ;
+        ChoosePerkCardANDplay(h) ;
         continue;
     }
         
@@ -358,16 +352,14 @@ void  Game::start() {
 
     while (true) {
 
-        // ۱. فاز قهرمان
         cout << ItemColor::BLUE << "<-----------HERO PHASE----------->\n" << ItemColor::Reset; 
         Hero* activeHero = turnManager.get_active_hero();
-        std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+        cout << "It's " << activeHero->GetName() << "'s turn!\n";
         hero_phase(activeHero);
 
         graph_map_text();
 
         if(!skipMonsterPhase){
-        // ۲. فاز هیولا
         cout << ItemColor::RED  <<  "\n<-----------MONSTER PHASE---------->\n" <<  ItemColor::Reset  ; 
         monster_phase();
         }
@@ -378,7 +370,6 @@ void  Game::start() {
 
         locationOverview() ;
 
-        // ۳. بررسی پایان بازی
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
@@ -394,163 +385,28 @@ void  Game::start() {
 
         turnManager.next_turn();
     }    
-}    
-void Game::getNewCard(Hero* hero){
-    p2 = p.get_random_card() ;
-    hero->AddAvailablePerk(p2) ; 
 }
-void Game::playPerkCard(Hero* hero, string card){
-    while(true) {
-    if(card == "Hurry"){
-            cout << "[Playing Hurry - perk card] -> Move each hero by two spaces.\n" ;
-            string firstMove , secondMove ; 
-            cout << "Mayor..where do you want to move first? " ;
-            cin >> firstMove ; 
-            Location* currentLoc = mayor->GetCurrentLocation() ; 
-            Location* firstMoveLoc = map.get_location_by_name(firstMove);
-            if(currentLoc->findNeighbor(firstMove)) // اگر محلی که انتخاب شده همسایه بود
-                mayor->MoveTo(firstMoveLoc) ;        
-            else{
-                cerr << "what you have chosen is not a neighboring place!!\n" ;
-                continue;
-            } 
-
-            cout << "Mayor..what is your second place to move? " ;
-            cin >> secondMove ;
-            Location* secondMoveLoc = map.get_location_by_name(secondMove);
-            if(currentLoc->findNeighbor(secondMove)) // اگر محلی که انتخاب شده همسایه بود
-                mayor->MoveTo(secondMoveLoc) ;        
-            else{
-                cerr << "what you have chosen is not a neighboring place!!\n" ;
-                continue;
-            }  
-
-            cout << "--------------\n" ;
-            string AfirstMove , AsecondMove ; 
-            cout << "Archaeologist..where do you want to move first? " ;
-            cin >> AfirstMove ; 
-            Location* AcurrentLoc = archaeologist->GetCurrentLocation() ; 
-            Location* AfirstMoveLoc = map.get_location_by_name(AfirstMove);
-            if(AcurrentLoc->findNeighbor(AfirstMove)) // اگر محلی که انتخاب شده همسایه بود
-                archaeologist->MoveTo(AfirstMoveLoc) ;        
-            else{
-                cerr << "what you have chosen is not a neighboring place!!\n" ;
-                continue;  
-            } 
-
-            cout << "Archaeologist..what is your second place to move? " ;
-            cin >> AsecondMove ;
-            Location* AsecondMoveLoc = map.get_location_by_name(AsecondMove);
-            if(AcurrentLoc->findNeighbor(AsecondMove)) // اگر محلی که انتخاب شده همسایه بود
-                archaeologist->MoveTo(AsecondMoveLoc) ;        
-            else{
-                cerr << "what you have chosen is not a neighboring place!!\n" ;
-                continue;
-            }      
-        }
-        else if (card == "Repel"){
-            cout << "[Playing Repel - perk card] -> Move each monster by two spaces.\n";
-            cout << "where do you want to move the invisible man for the first move? " ; 
-            string firstplace ; cin >> firstplace ;
-            Location* IfirstnewLoc = map.get_location_by_name(firstplace) ;  
-            if(IfirstnewLoc){
-                invisibleMan->set_location(IfirstnewLoc) ; 
-                cout << "invisible man moved to " << firstplace << '\n' ; 
-            }
-            else{
-                cerr << "could not find the place!\n" ;
-                continue; 
-            }
-            cout << "where do you want to move the invisible man for the second move? " ;
-            string secondplace ; cin >> secondplace ;
-            Location* IsecondnewLoc = map.get_location_by_name(secondplace) ;  
-            if(IsecondnewLoc){
-                invisibleMan->set_location(IsecondnewLoc) ; 
-                cout << "invisible man moved to " << secondplace << '\n' ; 
-            }
-            else{
-                cerr << "could not find the place!\n" ;
-                continue; 
-            }
-            cout << "where do you want to move the dracula for the first move? " ; 
-            string Dfirstplace ; cin >> Dfirstplace ;
-            Location* DfirstLec = map.get_location_by_name(Dfirstplace) ;  
-            if(DfirstLec){
-                dracula->set_location(DfirstLec) ; 
-                cout << "dracula moved to " << Dfirstplace << '\n' ; 
-            }
-            else{
-                cerr << "could not find the place!\n" ;
-                continue; 
-            }
-            cout << "where do you want to move the dracula for the second move? " ;
-            string Dsecondplace ; cin >> Dsecondplace ;
-            Location* DsecondLoc = map.get_location_by_name(Dsecondplace) ;  
-            if(DsecondLoc){
-                dracula->set_location(DsecondLoc) ; 
-                cout << "dracula moved to " << Dsecondplace << '\n' ; 
-            }
-            else{
-                cerr << "could not find the place!\n" ;
-                continue; 
-            }
-        }
-
-        else if(card == "Late into the Night"){
-            cout << "[Playing Late into the Night - perk card] -> You can have 2 more actions.\n" ;
-            hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
-            cout << hero->GetName() << " actions changed to " << hero->GetRemainingActions() << '\n' ; 
-        }
-        else if( card == "Break of Dawn"){
-            cout << "[Playing Break of Dawn - perk card] -> The next monster phase is skipped. Take 2 items out of the bag and place them in their location.\n";
-            skipMonsterPhase = true ; //فاز هیولا بعدی رد میشود 
-            ItemPool pool ;
-            vector<Item> PoolItems = pool.draw_random_items(2) ;
-            for(const auto i : PoolItems){
-                Location* Loc = map.get_location_by_name(i.getLocationName());
-                if(Loc){
-                    Loc->add_item(i) ;
-                    cout << "Item " << i.getName() << " placed in location " << i.getLocationName() << "\n";
-                }
-            }
-        }
-        else if(card == "Overstock"){
-            cout << "[Playing Overstock - perk card] -> Each player should take one item out of the item bag and place it in their location.\n" ;
-            ItemPool pool ; 
-            vector<Item> PoolItems = pool.draw_random_items(2) ;
-            if(PoolItems.size() < 2) cerr << "not enough items drawn from the pool !\n" ;
-
-            Location* LocFirst = map.get_location_by_name(PoolItems[0].getLocationName());
-            if(LocFirst){
-                LocFirst->add_item(PoolItems[0]) ; 
-                cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
-            }
-         
-            Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
-             if(LocSecond){
-                LocSecond->add_item(PoolItems[1]) ; 
-                cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
-            }           
-        }
-        else if(card == "Visit from the Detective"){
-            cout << "[Playing Visit from the Detective - perk card] -> Place the invisible man at a location of the player's choice on the game screen.\n" ; 
-            cout << "where do you want to move the invisible man? " ; 
-            string place ; cin >> place ;
-            Location* newLoc = map.get_location_by_name(place) ;  
-            if(newLoc){
-                invisibleMan->set_location(newLoc) ; 
-                cout << "invisible man moved to " << place << '\n' ; 
-            }
-            else{
-                cerr << "could not find the place!\n" ;
-                continue; 
-            }
-        }
-    break ;
+void Game::initializaDeck(){
+    for(int i = 0 ; i < 3 ; i++){
+     //   PerkDeck.addCard(std::make_unique<Repelcard>(dracula, invisibleMan, map));
+        PerkDeck.addCard(std::make_unique<Hurrycard>(mayor , archaeologist , map)) ;
+        PerkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+        PerkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
+        PerkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+        PerkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+        PerkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan , map)) ;     
     }
+    PerkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+    PerkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+
 }
-void Game::ChoosePerkCard(Hero * hero){
-    vector<Perkcards>& availablePerks = hero->GetAvailablePerkCards() ;
+void Game::getNewCard(Hero* hero){
+    auto card = PerkDeck.drawcard() ; 
+    hero->AddAvailablePerk(std::move(card)) ;
+}
+
+void Game::ChoosePerkCardANDplay(Hero * hero){
+    auto& availablePerks = hero->GetAvailablePerkCards() ;
     if(availablePerks.empty()){
         cout << "you do not have any perk cards!\n" ;
         return ;  
@@ -559,7 +415,7 @@ void Game::ChoosePerkCard(Hero * hero){
         int selected = -1 ; 
         hero->displayavailblecards() ; 
         for(size_t i = 0 ; i < availablePerks.size() ; i++)
-            cout << i + 1 << "." << availablePerks[i].get_Event() << '\n' ; 
+            cout << i + 1 << "." << availablePerks[i]->get_name() << '\n' ; 
             
         cout << "enter the card number to play(0 to end): ";
         cin >> selected ; 
@@ -569,9 +425,17 @@ void Game::ChoosePerkCard(Hero * hero){
             continue;
         }
         int index = selected - 1 ;
-        Perkcards chosencard = availablePerks[index] ;
-        playPerkCard(hero , chosencard.get_Event()) ;
-        hero->addPlayedCards(chosencard) ; 
+        auto chosencard = std::move( availablePerks[index] ) ;
+
+
+        if(chosencard->get_name() == "Break of Dawn")
+            skipMonsterPhase = true ;
+        if(chosencard->get_name() == "Late into the Night")
+            chosencard->play(hero) ;
+        else chosencard->play() ; 
+
+        hero->addPlayedCards(std::move(chosencard)) ;
+        availablePerks.erase(availablePerks.begin() + index);
         hero->displayPlayedCards() ; 
     }
 

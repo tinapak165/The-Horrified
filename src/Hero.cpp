@@ -30,14 +30,14 @@ void Hero::resetMaxActions(){
     (this)->SetRemainingActions((this)->getMaxActions()) ; 
 }
 
-void Hero::AddAvailablePerk(Perkcards card){
-    availableCards.push_back(card) ;   
+void Hero::AddAvailablePerk(std::unique_ptr<Perkcard> card){
+    availableCards.push_back(std::move(card)) ;   
 }
 
 void Hero::displayavailblecards() const{
     cout << "available perk cards: " ; 
     for(size_t i = 0 ; i < availableCards.size() ; i++)
-        cout << availableCards[i].get_Event() << ", " ;
+        cout << availableCards[i]->get_name()<< ", " ;
     cout << endl ; 
 }
 
@@ -47,23 +47,17 @@ void Hero::displayPlayedCards() const{
         cout << "-\n" ;
     }else{
         for(size_t i = 0 ; i < playedCards.size() ; i++)
-            cout << playedCards[i].get_Event() << ", " ;
+            cout << playedCards[i]->get_name() << ", " ;
         cout << endl ;        
     }
 }
 
-vector<Perkcards>& Hero::GetAvailablePerkCards(){
+vector<unique_ptr<Perkcard>>& Hero::GetAvailablePerkCards(){
     return availableCards;
 }
 
-void Hero::addPlayedCards(Perkcards p){
-    playedCards.push_back(p) ;
-    for(size_t i = 0 ; i < this->GetAvailablePerkCards().size() ; i++){
-        if(p.get_Event() == availableCards[i].get_Event()){
-            this->GetAvailablePerkCards().erase(this->GetAvailablePerkCards().begin() + i);
-            break;
-        }
-    }
+void Hero::addPlayedCards(std::unique_ptr<Perkcard> p){
+    playedCards.push_back(std::move(p)) ;
 }
 
 vector<Item> Hero::GetItems(){ return ListOfitems ; }
