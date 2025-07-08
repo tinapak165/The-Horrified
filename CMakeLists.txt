@@ -14,9 +14,8 @@ set(SOURCES
     src/MonsterCardDeck.cpp
     src/monstercards.cpp
     src/perkcards.cpp
-    src/perkcardsDeck.cpp
     src/TurnManager.cpp
-    src/Monster.cpp
+    src/monster.cpp
     src/Dracula.cpp
     src/InvisibleMan.cpp
     src/item.cpp
