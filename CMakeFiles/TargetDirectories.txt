@@ -1,3 +1,0 @@
-C:/Users/Tina/Desktop/Horrified/The-Horrified/CMakeFiles/Horrified.dir
-C:/Users/Tina/Desktop/Horrified/The-Horrified/CMakeFiles/edit_cache.dir
-C:/Users/Tina/Desktop/Horrified/The-Horrified/CMakeFiles/rebuild_cache.dir

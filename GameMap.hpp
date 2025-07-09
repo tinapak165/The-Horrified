@@ -17,7 +17,7 @@ private:
 public:
     void build_map(); 
      Location* get_location_by_name(const std::string& name);
-     villager* find_villager_by_name(const std::string& name);
+     Villager* find_villager_by_name(const std::string& name);
      const std::vector<std::unique_ptr<Location>>& get_locations() const;  
      void print_map()const;
     

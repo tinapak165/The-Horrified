@@ -18,7 +18,7 @@ void Location::connect(Location * other){
     heroes.push_back(hero);
 }
 
-void Location::add_villager(villager* villager){
+void Location::add_villager(Villager* villager){
     villagers.push_back(villager) ;
 }
 
@@ -45,7 +45,7 @@ Location* Location::findNeighbor(const std::string& name) const{
 }
 
  
-std::vector<villager *> &Location::get_villagers(){
+std::vector<Villager *> &Location::get_villagers(){
     return villagers ;
 }
 
@@ -102,7 +102,7 @@ void Location::remove_monster(Monster* monster) {
     }
 }
 
-void Location::remove_villager(villager * villager){
+void Location::remove_villager(Villager * villager){
     for (auto it = villagers.begin(); it != villagers.end(); ) {
         if (*it == villager) {
             it = villagers.erase(it);  

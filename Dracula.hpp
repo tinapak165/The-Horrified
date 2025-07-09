@@ -27,7 +27,7 @@ class Dracula : public Monster {
         void defeat(Hero* hero, std::vector<Item>& yellow_items);
         
         void special_power(Hero*) override ; 
-        std::pair<Hero*, villager*> attack() override ;
+        std::pair<Hero*, Villager*> attack() override ;
         
         bool is_defeated()const override ;
         bool can_be_defeated()override;

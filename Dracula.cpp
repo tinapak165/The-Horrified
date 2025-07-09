@@ -62,13 +62,13 @@ bool Dracula::can_be_defeated(){
     }
     
 
-    std::pair<Hero*, villager*> Dracula::attack() {
+    std::pair<Hero*, Villager*> Dracula::attack() {
         Location* currentLoc = get_location();
         const auto& heroes = currentLoc->get_heroes();
         const auto& villagers = currentLoc->get_villagers();
     
         Hero* chosenHero = nullptr;
-        villager* chosenVillager = nullptr;
+        Villager* chosenVillager = nullptr;
     
         if (!heroes.empty()) {
             if (heroes.size() == 1)

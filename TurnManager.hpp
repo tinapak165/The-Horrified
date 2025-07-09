@@ -1,4 +1,5 @@
-
+#ifndef TURNMANAGER_HPP
+#define TURNMANAGER_HPP
 #include <vector>
 #include "Hero.hpp"
 
@@ -19,4 +20,4 @@ class TurnManager {
     void add_hero(Hero* hero);
     std::vector<Hero*> get_heroes();
     };
-    
+#endif

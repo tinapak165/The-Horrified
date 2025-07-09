@@ -7,16 +7,16 @@
 
 class Location ; 
 class GameMap ; 
-class villager{
+class Villager{
 
     private:
         const std::string name ; 
         Location* safePlace ;
         Location* currentLocation ; 
-        static std::vector<villager*> vil ; 
+        static std::vector<Villager*> vil ; 
     public:
-        static std::vector<villager*>& all() ; 
-        villager( GameMap& map , const std::string& , Location* , Location*) ; 
+        static std::vector<Villager*>& all() ; 
+        Villager( GameMap& map , const std::string& , Location* , Location*) ; 
         bool in_the_safePlace() const ; 
         void set_currentLocation(Location*) ; 
         Location* get_currentLocation() ; 
@@ -26,7 +26,7 @@ class villager{
         void MoveTo(Location*, std::string) ; 
         bool static AnyVillagerInSafePlace() ;
         void static removeVillager();
-        void removevillager(villager*) ; 
+        void removevillager(Villager*) ; 
 };
 
 #endif

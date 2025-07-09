@@ -7,7 +7,7 @@
 #include <utility>
 
 class Hero;
-class villager;
+class Villager;
 class Location;
 
 class Monster {
@@ -41,7 +41,7 @@ public:
 
     bool is_alive() const; 
 
-    virtual std::pair<Hero*, villager*> attack() = 0;
+    virtual std::pair<Hero*, Villager*> attack() = 0;
     virtual void special_power(Hero* h) =0 ;
     virtual bool is_defeated()const =0 ;
     virtual bool can_be_defeated() = 0;

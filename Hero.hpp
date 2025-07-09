@@ -47,11 +47,11 @@ class Hero{
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
-        void MoveTo(Location* new_location , std::vector<villager*>) ;
+        void MoveTo(Location* new_location , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
         
         bool hasvillagerHere() const ; 
-        std::vector<villager*> villagerHere() const ;
+        std::vector<Villager*> villagerHere() const ;
         void showvillagersHere()const ; 
 
         std::string GetName()const ; 

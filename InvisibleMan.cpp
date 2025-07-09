@@ -14,13 +14,13 @@ InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", sta
 // in game
  void InvisibleMan::special_power(Hero* h) {}
 
-std::pair<Hero*, villager*> InvisibleMan::attack() {
+std::pair<Hero*, Villager*> InvisibleMan::attack() {
     Location* loc = get_location();
     const auto& heroes = loc->get_heroes();
     const auto& villagers = loc->get_villagers();
 
     Hero* targetHero = nullptr;
-    villager* targetVillager = nullptr;
+    Villager* targetVillager = nullptr;
 
     if (!heroes.empty()) {
         if (heroes.size() == 1)
