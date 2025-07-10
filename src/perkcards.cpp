@@ -51,52 +51,55 @@ void Hurrycard::play(Hero*){
     }      
 }
 
-// Repelcard::Repelcard(Dracula * d ,InvisibleMan * i, GameMap & map): Perkcard("Repel") , dracula(d) , invisibleman(i) , map(map){}
+Repelcard::Repelcard(Dracula * d ,InvisibleMan * i, GameMap & map): Perkcard("Repel") , dracula(d) , invisibleman(i) , map(map){}
 
-// void Repelcard::play(Hero*){
+void Repelcard::play(Hero*){
 
-//     cout << "[Playing Repel - perk card] -> Move each monster by two spaces.\n";
-//     cout << "where do you want to move the invisible man for the first move? " ; 
-//     string firstplace ; cin >> firstplace ;
-//     Location* IfirstnewLoc = map.get_location_by_name(firstplace) ;  
-//     if(IfirstnewLoc){
-//       //  invisibleman.set_location(IfirstnewLoc) ; 
-//                 cout << "invisible man moved to " << firstplace << '\n' ; 
-//             }
-//             else{
-//                 cerr << "could not find the place!\n" ;
-//             }
-//             cout << "where do you want to move the invisible man for the second move? " ;
-//             string secondplace ; cin >> secondplace ;
-//             Location* IsecondnewLoc = map.get_location_by_name(secondplace) ;  
-//             if(IsecondnewLoc){
-//            //     invisibleman.set_location(IsecondnewLoc) ; 
-//                 cout << "invisible man moved to " << secondplace << '\n' ; 
-//             }
-//             else{
-//                 cerr << "could not find the place!\n" ;
-//             }
-//             cout << "where do you want to move the dracula for the first move? " ; 
-//             string Dfirstplace ; cin >> Dfirstplace ;
-//             Location* DfirstLec = map.get_location_by_name(Dfirstplace) ;  
-//             if(DfirstLec){
-//            //     dracula->set_location(DfirstLec) ; 
-//                 cout << "dracula moved to " << Dfirstplace << '\n' ; 
-//             }
-//             else{
-//                 cerr << "could not find the place!\n" ;
-//             }
-//             cout << "where do you want to move the dracula for the second move? " ;
-//             string Dsecondplace ; cin >> Dsecondplace ;
-//             Location* DsecondLoc = map.get_location_by_name(Dsecondplace) ;  
-//             if(DsecondLoc){
-//           //      dracula->set_location(DsecondLoc) ; 
-//                 cout << "dracula moved to " << Dsecondplace << '\n' ; 
-//             }
-//             else
-//                 cerr << "could not find the place!\n" ;
+    cout << "[Playing Repel - perk card] -> Move each monster by two spaces.\n";
+    cout << "where do you want to move the invisible man for the first move? " ; 
+    string firstplace ; cin >> firstplace ;
+    Location* IfirstnewLoc = map.get_location_by_name(firstplace) ;  
+    if(IfirstnewLoc){
+        invisibleman->set_location(IfirstnewLoc) ;
+        cout << "InvisibleMan moved to " << IfirstnewLoc->get_name() << '\n' ; 
+ 
+    }
+    else{
+        cerr << "could not find the place!\n" ;
+    }
+    cout << "where do you want to move the invisible man for the second move? " ;
+    string secondplace ; cin >> secondplace ;
+    Location* IsecondnewLoc = map.get_location_by_name(secondplace) ;  
+    if(IsecondnewLoc){
+        invisibleman->set_location(IsecondnewLoc) ;
+        cout << "InvisibleMan moved to " << IsecondnewLoc->get_name() << '\n' ; 
+
+    }
+    else{
+        cerr << "could not find the place!\n" ;
+    }
+    cout << "where do you want to move the dracula for the first move? " ; 
+    string Dfirstplace ; cin >> Dfirstplace ;
+    Location* DfirstLec = map.get_location_by_name(Dfirstplace) ;  
+    if(DfirstLec){
+        dracula->set_location(DfirstLec) ; 
+        cout << "Dracula moved to " << DfirstLec->get_name() << '\n' ; 
+
+    }
+    else{
+        cerr << "could not find the place!\n" ;
+    }
+    cout << "where do you want to move the dracula for the second move? " ;
+    string Dsecondplace ; cin >> Dsecondplace ;
+    Location* DsecondLoc = map.get_location_by_name(Dsecondplace) ;  
+    if(DsecondLoc){
+        dracula->set_location(DsecondLoc) ; 
+        cout << "dracula moved to " << Dsecondplace << '\n' ; 
+    }
+    else
+        cerr << "could not find the place!\n" ;
             
-// }
+}
 
 LateintotheNightCARD::LateintotheNightCARD(): Perkcard("Late into the Night") {}
 
@@ -139,16 +142,22 @@ void OverstockCard::play(Hero*){
         }  
 }
 
-VisitfromtheDetectiveCARD::VisitfromtheDetectiveCARD(InvisibleMan * i , GameMap & map): Perkcard("Visit from the Detective") ,invisibleman(i) , map(map){}
+VisitfromtheDetectiveCARD::VisitfromtheDetectiveCARD(InvisibleMan *& i , GameMap & map): Perkcard("Visit from the Detective") ,invisibleman(i) , map(map){}
 
 void VisitfromtheDetectiveCARD::play(Hero*){
+        if (!invisibleman) {
+        cerr << "Error: InvisibleMan is not initialized!\n";
+        return;
+    }
+    cout << "Current location: " << invisibleman->get_location()->get_name() << endl;
     cout << "[Playing Visit from the Detective - perk card] -> Place the invisible man at a location of the player's choice on the game screen.\n" ; 
     cout << "where do you want to move the invisible man? " ; 
     string place ; cin >> place ;
     Location* newLoc = map.get_location_by_name(place) ;  
     if(newLoc){
-        invisibleman->set_location(newLoc) ; 
-        cout << "invisible man moved to " << place << '\n' ; 
+        invisibleman->set_location(newLoc); 
+        cout << "InvisibleMan moved to " << newLoc->get_name() << '\n' ; 
+
     }
     else{
         cerr << "could not find the place!\n" ;
@@ -165,8 +174,8 @@ unique_ptr<Perkcard> PerkDeck::drawcard() {
     if (cards.empty()) 
         throw runtime_error("Deck is empty!");
     
-    srand(time(0)); 
-    int index = rand() % cards.size();
+   srand(time(0)); 
+    int index = rand() % cards.size() ; 
     auto chosen_card = move(cards[index]);
 
     cards.erase(cards.begin() + index);

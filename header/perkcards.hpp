@@ -6,11 +6,12 @@
 #include "Hero.hpp"
 #include "GameMap.hpp"
 #include "location.hpp"
-#include "monster.hpp"
 #include "Itembag.hpp"
 #include "item.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
+
+class Dracula ;
 
 class Perkcard{
     private:
@@ -34,11 +35,11 @@ class Hurrycard :public Perkcard{
 
 class Repelcard : public Perkcard{
     private:
-    //   Dracula* dracula ; 
+        Dracula* dracula ; 
         InvisibleMan* invisibleman ; 
         GameMap& map ;
     public:
-        Repelcard() ; 
+        Repelcard(Dracula * ,InvisibleMan * , GameMap &) ; 
         void play(Hero* = nullptr) override ; 
 };
 
@@ -50,7 +51,7 @@ class LateintotheNightCARD : public Perkcard{
         void play(Hero*)  ;
 };
 
-class BreakofDawnCARD :public Perkcard{
+class BreakofDawnCARD : public Perkcard{
     private:
         ItemPool pool ;
         GameMap& map ;
@@ -71,11 +72,10 @@ class OverstockCard : public Perkcard {
 
 class VisitfromtheDetectiveCARD : public Perkcard{
     private:
-    //Monster* invisibleman
-        InvisibleMan* invisibleman ; 
+        InvisibleMan*& invisibleman ; 
         GameMap& map ;
     public:
-        VisitfromtheDetectiveCARD(InvisibleMan* , GameMap&) ; 
+        VisitfromtheDetectiveCARD(InvisibleMan*& , GameMap&) ; 
         void play(Hero* = nullptr) override ; 
 };
 
