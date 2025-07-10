@@ -6,7 +6,7 @@
 #include <memory>
 #include "GameMap.hpp"
 #include "perkcards.hpp"
-#include "MonsterCardDeck.hpp"
+#include "Monstercards.hpp"
 #include "TurnManager.hpp"
 #include "monster.hpp"
 #include "Dracula.hpp"
@@ -17,11 +17,12 @@
 #include "Heroes.hpp"
 
 class Game {
+    friend class Monstercard;
     friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
     bool skipMonsterPhase = false ;
     GameMap map;
-    MonsterCardDeck deck;
+    MonstercardDeck deck;
     TurnManager turnManager;
     PerkDeck PerkDeck ; 
 
@@ -29,6 +30,7 @@ private:
     Hero* archaeologist = nullptr;
     Dracula* dracula = nullptr;
     InvisibleMan* invisibleMan = nullptr;
+    Monster* frenziedMonster;
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
@@ -50,17 +52,18 @@ public:
     void monster_objectes() const;
     void return_item(const Item& item);
 
+    std::string checkString(std::string) ; 
    
-
     void monster_phase();
+    void monster_dice();
     void send_hero_to_hospital(Hero* );
-    void remove_villager(Villager* );
-    Villager* create_villager(const std::string& name, const std::string& locName);
-
     bool both_monsters_defeated();
     void increase_terror_level();
 
     void distribute_initial_items();
+    void initializaMDeck();
+    void Changing_frenzy_marker();
+    void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
     
 };
 

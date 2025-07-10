@@ -15,20 +15,11 @@ class Dracula : public Monster {
     public:
 
 
-        Dracula(Location* start_location);
-
-        
-        
-       // چههار تابوت همه شان نابود باشن
-        
-
-        void print_remaining_coffins() const;
-        
-        void defeat(Hero* hero, std::vector<Item>& yellow_items);
+        Dracula(Location* start_location);                
         
         void special_power(Hero*) override ; 
         std::pair<Hero*, Villager*> attack() override ;
-        
+         
         bool is_defeated()const override ;
         bool can_be_defeated()override;
         void destroy_coffin_at(std::string locationName);

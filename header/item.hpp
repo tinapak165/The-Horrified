@@ -10,10 +10,9 @@ private:
     std::string name;
     ItemColor color;
     int strength;
-    std::string locationName; // اسمی از مکان که در آن ظاهر می‌شود
+    std::string locationName; 
 
 public:
-    friend std::ostream& operator<<(std::ostream & os , ItemColor color);
     Item(const std::string& name, ItemColor color, int strength, const std::string& locationName);
 
     const std::string& getName() const;

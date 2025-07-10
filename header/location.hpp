@@ -23,12 +23,11 @@ class Location {
             std::vector<Hero*> heroes;
             std::vector<Monster*> monsters;
             std::vector<Location*> neighbors;
-            bool hascoffin = false; // فقط واسio دراکولاس
+            bool hascoffin = false;
         
     public:
             
             friend std::ostream& operator <<( std::ostream &output ,const Location&);
-            friend std::ostream operator <<( std::ostream &output , std::vector<Monster*> &);
 
             Location(const std::string & name);
             void connect(Location * other);

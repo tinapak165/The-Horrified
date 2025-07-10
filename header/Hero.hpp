@@ -53,7 +53,7 @@ class Hero{
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
         //actions
         void MoveAction(GameMap& , Hero*) ;
-        void MoveTo(Location* new_location , std::vector<Villager*>) ;
+        void MoveTo(Location*  , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
 
         void GuideAction(Hero* , GameMap&) ; 
@@ -62,7 +62,7 @@ class Hero{
         void Special(Hero *, GameMap& )  ;
 
         void AdvanceAction(Hero* , Dracula* , ItemPool , GameMap& , InvisibleMan*) ; 
-        int select_items_to_defeat(ItemColor requiredColor) ;
+        int select_items_to_defeat(ItemColor) ;
         
         int AdvanceActionForDracula() ; 
         void AdvanceActionForInvisibleMan(InvisibleMan*) ;
@@ -95,10 +95,10 @@ class Hero{
         std::vector<Item> GetItems() ; 
         void removeItems(const Item&) ; 
         bool has_items() const;
-        void remove_item_by_index(int index); 
+        void remove_item_by_index(int); 
 
-        void SetRemainingActions(int newRemaining) ;
-        void SetCurrentLocation(Location* location) ;
+        void SetRemainingActions(int ) ;
+        void SetCurrentLocation(Location*) ;
 
         std::vector<Item> getUsedItemsForDracula();
         std::vector<Item> getUsedItemsForInvisibleMan();

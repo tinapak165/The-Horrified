@@ -241,7 +241,7 @@ void Hero::DisplayItem(){
 
 bool Hero::PerformTheAction(string act)  {
 
-    if(act == "Quit" || act == "Help" || act == "Perk") return true;
+    if(act == "quit" || act == "help" || act == "perk") return true;
     for(const auto& ac : ListOfActions){
         if(ac.name == act){
             if((*this).GetRemainingActions() > 0){

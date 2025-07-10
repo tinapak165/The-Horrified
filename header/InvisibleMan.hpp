@@ -2,7 +2,6 @@
 #define INVISIBLEMAN_HPP
 
 #include "monster.hpp"
-
 #include <unordered_set>
 #include <string>
 #include <utility>
@@ -11,10 +10,7 @@
 
 class Hero;
 class Location;
-
-class villager;
-
-
+class Villager;
 
 class InvisibleMan : public Monster {
  
