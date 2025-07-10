@@ -10,7 +10,6 @@ set(SOURCES
     src/Dice.cpp
     src/main.cpp
     src/GameMap.cpp
-    src/MonsterCardDeck.cpp
     src/monstercards.cpp
     src/perkcards.cpp
     src/TurnManager.cpp
