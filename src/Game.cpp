@@ -286,10 +286,10 @@ void Game::monster_phase() {
         
 }
 
-void Game::send_hero_to_hospital(Hero* h) {
-    Location* hospital = map.get_location_by_name("Hospital");
-    h->MoveTo(hospital);
-}
+// void Game::send_hero_to_hospital(Hero* h) {
+//     Location* hospital = map.get_location_by_name("Hospital");
+//     h->MoveTo(hospital);
+// }
 
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 

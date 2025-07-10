@@ -28,57 +28,43 @@ map(map)
 
 FormTheBat::FormTheBat(ItemPool& p, GameMap& g, TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m)
-: Monstercard("form the bat", 2, "Dracula moves where your hero is.",
-{ {{MonsterType::Dracula}, 1, 2} }, g),
-pool(p), map(g), turnManager(t), monstersMap(m) {}
-
-
+    : Monstercard("form the bat", 2, "Dracula moves where your hero is.",
+        { {{MonsterType::Dracula}, 1, 2} }, g),
+        pool(p), map(g), turnManager(t), monstersMap(m) {}
+        
 Sunrise::Sunrise(ItemPool& p, GameMap& g, TurnManager& t,
-    std::unordered_map<MonsterType, Monster*>& m)
-: Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} },g),
-pool(p), map(g), turnManager(t), monstersMap(m) {}
-
-void Sunrise::play_monster_card(){
-    std::cout<<this;
-    Monster* dracula = monstersMap[MonsterType::Dracula];
-    if (dracula && dracula->is_alive()) {
-        Location* crypt = map.get_location_by_name("Crypt");
-        if (crypt) {
-            dracula->set_location(crypt);
-            std::cout << "Event: Dracula moved to Crypt.\n";
-        }
-    }  
-    play_strike(map, turnManager, pool, monstersMap);
-    place_items(pool);
-}
+            std::unordered_map<MonsterType, Monster*>& m)
+        : Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan}, 1, 2} },g),
+        pool(p), map(g), turnManager(t), monstersMap(m) {}
+        
 
 TheInnocent::TheInnocent(ItemPool& p,
-GameMap& g ,
-TurnManager& t,
-std::unordered_map<MonsterType, Monster*>& m) : Monstercard("the innocent", 3, "Place Maria at the Barn.",
-    { {{MonsterType::Dracula, MonsterType::InvisibleMan}, 1, 3} }, "Maria", "Barn", g),
-map(g), turnManager(t), monstersMap(m) ,pool(p) {}
-
-
-TheDelivary::TheDelivary(ItemPool& p,
+    GameMap& g ,
+    TurnManager& t,
+    std::unordered_map<MonsterType, Monster*>& m) : Monstercard("the innocent", 3, "Place Maria at the Barn.",
+        { {{MonsterType::Dracula, MonsterType::InvisibleMan}, 1, 3} }, "Maria", "Barn", g),
+        map(g), turnManager(t), monstersMap(m) ,pool(p) {}
+        
+        
+        TheDelivary::TheDelivary(ItemPool& p,
     GameMap& g ,
     TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m) : Monstercard("The delivary", 3, "Place Wilbur & Chick at Docks.",
         { {{MonsterType::Frenzied}, 1, 3} }, "Wilbur & Chick", "Docks", g),
     map(g), turnManager(t), monstersMap(m) ,pool(p) {}
     
-
- 
-FormerEmoloyer::FormerEmoloyer(ItemPool& p,
-    GameMap& g ,
-    TurnManager& t,
-    std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
-        { {{MonsterType::InvisibleMan}, 1, 2} }, "Dr. Cranly", "Laboratory", g),
-    map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
-
     
     
-Thief::Thief(ItemPool& p,
+    FormerEmoloyer::FormerEmoloyer(ItemPool& p,
+        GameMap& g ,
+        TurnManager& t,
+        std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
+            { {{MonsterType::InvisibleMan}, 1, 2} }, "Dr. Cranly", "Laboratory", g),
+            map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
+            
+            
+            
+            Thief::Thief(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
         std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("Thief", 2, "The Invisible Man moves where items are the most.",
@@ -86,9 +72,9 @@ Thief::Thief(ItemPool& p,
         map(g), turnManager(t), monstersMap(m) ,pool(p) {}
         
         
-
         
-FortuneTeller::FortuneTeller(ItemPool& p,
+        
+        FortuneTeller::FortuneTeller(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
         std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("Fortune teller", 3, "Place Maleva at Camp.",
@@ -122,98 +108,103 @@ std::string Monstercard::get_destination_location() const { return destination_l
 CardType Monstercard::get_type() const { return type;}
                         
                         
-  void FormTheBat::play_monster_card() {
+void FormTheBat::play_monster_card() {
         std::cout<<this;
                     
-                        if (!monstersMap.count(MonsterType::Dracula)) {
-                            std::cout << "Error: Dracula not found in monstersMap!\n";
-                            return;
-                        }
-                    
-                        Monster* dracula = monstersMap[MonsterType::Dracula];
-                        if (!dracula) {
-                            std::cout << "Error: Dracula pointer is null!\n";
-                            return;
-                        }
-                        
-                        Hero* hero = turnManager.get_active_hero();
-                        if (!hero) {
-                            std::cout << "Error: active hero is null!\n";
-                            return;
-                        }
-                        
-                        if (!dracula->is_alive()) {
-                            std::cout << "Dracula is dead, skipping move.\n";
-                            return;
-                        }
-                        
-                        dracula->set_location(hero->GetCurrentLocation());
-                        std::cout << "Form the bat executed successfully!\n";
-                        
-                    }
-                    
-                    
-                    
+        if (!monstersMap.count(MonsterType::Dracula)) {
+            std::cout << "Error: Dracula not found in monstersMap!\n";
+            return;
+        }
+        
+        Monster* dracula = monstersMap[MonsterType::Dracula];
+        if (!dracula) {
+            std::cout << "Error: Dracula pointer is null!\n";
+            return;
+        }
+        
+        Hero* hero = turnManager.get_active_hero();
+        if (!hero) {
+            std::cout << "Error: active hero is null!\n";
+            return;
+        }
+        
+        if (!dracula->is_alive()) {
+            std::cout << "Dracula is dead, skipping move.\n";
+            return;
+        }
+        
+        dracula->set_location(hero->GetCurrentLocation());
+        std::cout << "Dracula moved to Heros location : "<< turnManager.get_active_hero()->GetCurrentLocation()<<std::endl;
+        
+        
+        play_strike(map, turnManager, pool, monstersMap);
+        place_items(pool);              
+        
+    }
+    
+    
+    void Sunrise::play_monster_card(){
+        std::cout<<this;
+        Monster* dracula = monstersMap[MonsterType::Dracula];
+        if (dracula && dracula->is_alive()) {
+            Location* crypt = map.get_location_by_name("Crypt");
+            if (crypt) {
+                dracula->set_location(crypt);
+                std::cout << "Event: Dracula moved to Crypt.\n";
+            }
+        }  
+        play_strike(map, turnManager, pool, monstersMap);
+        place_items(pool);
+    }
+    
+    
+void Thief::play_monster_card() {
+   
+}
                     
 void TheInnocent::play_monster_card() {
       
-        place_or_move_villager();   
-    // if (!get_character_name().empty() && !get_destination_location().empty()) {
-    //                             std::string name = get_character_name();
-    //                             std::string dest = get_destination_location();
-                        
-    //                             Location* targetLoc = map.get_location_by_name(dest);
-    //                             if (!targetLoc) {
-    //                                 std::cout << "Destination location '" << dest << "' not found!\n";
-    //                                 return;
-    //                             }
-                        
-    //                             Villager* v = nullptr;
-    //                             for (Villager* vill : Villager::all()) {
-    //                                 if (vill->get_name() == name) {
-    //                                     v = vill;
-    //                                     break;
-    //                                 }
-    //                             }
-                        
-    //                             if (v) {
-    //                                 v->set_currentLocation(targetLoc);
-    //                                 std::cout << "Event: Villager " << name << " was moved to " << dest << ".\n";
-    //                             } else {
-    //                                 v = create_villager(name, dest);
-    //                                 if (v) {
-    //                                     std::cout << "Event: Villager " << name << " was created and placed at " << dest << ".\n";
-    //                                 }
-    //                             }
-    //                         }
-                        
+        place_or_move_villager();                  
                     
-                            play_strike(map, turnManager, pool, monstersMap);
-                            place_items(pool);
-                    }
+        play_strike(map, turnManager, pool, monstersMap);
+        place_items(pool);
+
+            }
  
 void HurriedAssistant::play_monster_card() {
-    // در صورت نیاز بعداً پیاده‌سازی کن
+    place_or_move_villager();                  
+                    
+    play_strike(map, turnManager, pool, monstersMap);
+    place_items(pool);
 }
 
 void EgyptianExpert::play_monster_card() {
-    // در صورت نیاز بعداً پیاده‌سازی کن
+    place_or_move_villager();                  
+                    
+    play_strike(map, turnManager, pool, monstersMap);
+    place_items(pool);
 }
 
 void FortuneTeller::play_monster_card() {
-    // در صورت نیاز بعداً پیاده‌سازی کن
+    place_or_move_villager();                  
+                    
+    play_strike(map, turnManager, pool, monstersMap);
+    place_items(pool);
 }
 
-void Thief::play_monster_card() {
-    // در صورت نیاز بعداً پیاده‌سازی کن
-}
 
 void FormerEmoloyer::play_monster_card() {
-    // در صورت نیاز بعداً پیاده‌سازی کن
+    place_or_move_villager();                  
+                    
+    play_strike(map, turnManager, pool, monstersMap);
+    place_items(pool);
 }
 
 void TheDelivary::play_monster_card() {
-    // در صورت نیاز بعداً پیاده‌سازی کن
+    place_or_move_villager();                  
+                    
+        play_strike(map, turnManager, pool, monstersMap);
+        place_items(pool);
 }                       
                     
 void Monstercard::play_strike(GameMap& map,
