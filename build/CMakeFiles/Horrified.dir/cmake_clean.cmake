@@ -17,8 +17,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Horrified.dir/src/Itembag.cpp.obj.d"
   "CMakeFiles/Horrified.dir/src/Location.cpp.obj"
   "CMakeFiles/Horrified.dir/src/Location.cpp.obj.d"
-  "CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj"
-  "CMakeFiles/Horrified.dir/src/MonstercardDeck.cpp.obj.d"
   "CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj"
   "CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj.d"
   "CMakeFiles/Horrified.dir/src/item.cpp.obj"

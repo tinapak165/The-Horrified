@@ -246,6 +246,22 @@ class FortuneTeller : public Monstercard {
             void play_monster_card() override;
             
  };
+ class TheIchthyologist : public Monstercard {
+    private:
+        ItemPool& pool;
+        GameMap& map ;
+        TurnManager& turnManager;
+        std::unordered_map<MonsterType, Monster*>& monstersMap;
+
+    public:
+         TheIchthyologist(ItemPool& pool, GameMap& map, TurnManager& turnManager,
+            std::unordered_map<MonsterType, Monster*>& monstersMap);
+
+
+
+        void play_monster_card() override;
+                        
+};
  
  class MonstercardDeck{
      private:

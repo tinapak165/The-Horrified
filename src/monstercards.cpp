@@ -90,15 +90,20 @@ EgyptianExpert ::EgyptianExpert (ItemPool& p,
                 { {{MonsterType::Dracula, MonsterType::Frenzied}, 2, 2} }, "Prof. Pearson", "Cave", g),
                 map(g), turnManager(t), monstersMap(m) ,pool(p) {}
                 
-                
-                HurriedAssistant::HurriedAssistant (ItemPool& p,
+ HurriedAssistant::HurriedAssistant (ItemPool& p,
                     GameMap& g ,
                     TurnManager& t,
                     std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("Hurried Assistant", 3, "Place Fritz at Tower.",
                         { {{MonsterType::Dracula}, 2, 3} }, "Fritz", "Tower", g),
                         map(g), turnManager(t), monstersMap(m) ,pool(p) {}
                         
-                        
+ TheIchthyologist::TheIchthyologist(ItemPool& p,
+                            GameMap& g ,
+                            TurnManager& t,
+                            std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
+                                { {{MonsterType::InvisibleMan}, 1, 2} }, "Dr. Cranly", "Laboratory", g),
+                                map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
+
 std::string Monstercard::get_card_name() const{return card_name;}
 int Monstercard::get_item_count() const{ return item_count;}
 std::string Monstercard::get_Event() const { return event_text;}
@@ -205,7 +210,14 @@ void TheDelivary::play_monster_card() {
                     
         play_strike(map, turnManager, pool, monstersMap);
         place_items(pool);
-}                       
+}      
+
+void TheIchthyologist::play_monster_card() {
+    place_or_move_villager();                  
+                    
+        play_strike(map, turnManager, pool, monstersMap);
+        place_items(pool);
+}  
                     
 void Monstercard::play_strike(GameMap& map,
                                TurnManager& turnManager,

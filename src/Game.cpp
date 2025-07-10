@@ -286,10 +286,10 @@ void Game::monster_phase() {
         
 }
 
-// void Game::send_hero_to_hospital(Hero* h) {
-//     Location* hospital = map.get_location_by_name("Hospital");
-//     h->MoveTo(hospital);
-// }
+void Game::send_hero_to_hospital(Hero* h) {
+    Location* hospital = map.get_location_by_name("Hospital");
+    h->MoveTo(hospital);
+}
 
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
@@ -535,10 +535,19 @@ void Game::frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& 
 }
 
 void Game::initializaMDeck(){
-       
+    for (int i =0 ; i <3 ; i++){       
     deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap)) ;     
-    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap)) ;
     deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap)) ;
+    }
+
+    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap));
+    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap)) ;
 }
 
 Game::~Game() {
