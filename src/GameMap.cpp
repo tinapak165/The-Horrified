@@ -36,7 +36,8 @@ void GameMap::build_map() {
     theatre->connect(shop.get()) ; 
     mansion->connect(abbey.get());
     abbey->connect(crypt.get());
-    shop->connect(museum.get()) ; 
+    // shop->connect(museum.get()) ; توی نقشه نبود
+    shop->connect(laboratory.get()) ; //اضافه شد بخاطر نقشه
     mansion->connect(church.get()) ;
     laboratory->connect(institute.get());
     church->connect(graveyard.get());
