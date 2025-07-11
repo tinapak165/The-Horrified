@@ -28,6 +28,8 @@ private:
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
+    Hero* courier = nullptr ;
+    Hero* scientist = nullptr ; 
     Dracula* dracula = nullptr;
     InvisibleMan* invisibleMan = nullptr;
     Monster* frenziedMonster;

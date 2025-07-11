@@ -9,12 +9,12 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
 : name(name) , RemainingActions(MaxActions) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
 
     ListOfActions = {
-        {ActionType::Move , "Move" , "You can move to any places near by. you can also move the villagers with you."} ,
-        {ActionType::Guide , "Guide" , "You can move the villagers (that are in your place) to the closest place or move the villagers(that are in your neigbor place) to your place."} , 
-        {ActionType::Pickup , "Pickup" , "You can take any number of item you want from the place you are."},
-        {ActionType::Advance , "Advance" , "You can speed up a monster-related mission and complete it to get closer to defeating that monster."} ,
-        {ActionType::Defeat , "Defeat" , "Once you have completed all the missions related to catching a monster, you can defeat it, but keep in mind that you must be present in the area where the monster is located."} ,
-        {ActionType::SpecialAction , "Special" , specialAction} , 
+        {ActionType::Move , "move" , "You can move to any places near by. you can also move the villagers with you."} ,
+        {ActionType::Guide , "guide" , "You can move the villagers (that are in your place) to the closest place or move the villagers(that are in your neigbor place) to your place."} , 
+        {ActionType::Pickup , "pickup" , "You can take any number of item you want from the place you are."},
+        {ActionType::Advance , "advance" , "You can speed up a monster-related mission and complete it to get closer to defeating that monster."} ,
+        {ActionType::Defeat , "defeat" , "Once you have completed all the missions related to catching a monster, you can defeat it, but keep in mind that you must be present in the area where the monster is located."} ,
+        {ActionType::SpecialAction , "special" , specialAction} , 
     };
 }
 
@@ -249,13 +249,11 @@ bool Hero::PerformTheAction(string act)  {
                 (*this).SetRemainingActions((*this).GetRemainingActions()-1) ; 
                 return true; 
             }else{
-               // throw runtime_error("not enough action remaining!") ; 
                 cerr << "not enough action remaining!(Quit to end the phase)\n" ;
                 return false ; 
             }
         }
     }
-    //throw runtime_error("action not available!") ;
     cerr << "action not available!\n" ;
     return false ;  
 }
@@ -373,13 +371,11 @@ void Hero::GuideAction(Hero * h , GameMap& map){
                         found = true ; 
                         break ;
                         }else{
-                            //throw invalid_argument( "what you have chosen is not a neighboring place!\n");   
                             cerr << "what you have chosen is not a neighboring place!\n" ; 
                         }
                 }
             } 
             if(!found){
-                //  throw invalid_argument("villager not found!") ;
                 cerr << "villager not found!\n" ;
             }  
 
@@ -412,38 +408,36 @@ void Hero::GuideAction(Hero * h , GameMap& map){
                     } 
                 }
                 if(!found){
-                    // throw invalid_argument("villager not found!") ;
                     cerr << "villager not found!\n" ; 
                 } 
             }
     }else{
-         //throw invalid_argument("wrong answer!\n");   
         cerr << "wrong answer!\n" ;
         }      
 }
-void Hero::Special(Hero * h , GameMap& map){
+void Hero::Special(Hero* h , GameMap& map){
 
-    if(h->GetName() == "Mayor"){
-        cout << "You dont have special action\n" ;
-        return ;
+    Location* heroLoc = h->GetCurrentLocation() ;
+
+    if(h->GetName() == "Archaeologist"){
+        vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
+        cout << "neighboring locations: " ;
+        for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
+            cout << heroLocNeighbor[i]->get_name() << " " ;
+        cout << endl ; 
+        cout << "Which neighboring place do you want to pick up its items? " ;
+        string chosenplace ; 
+        cin >> chosenplace ;
+        if(heroLoc->findNeighbor(chosenplace)){
+            Location* chosenLoc = map.get_location_by_name(chosenplace) ;
+            h->SpecialAction(chosenLoc) ;
+            h->DisplayItem() ; 
+        }else{
+            cout << "what you have chosen is not a neighboring place!\n" ; 
+        }  
     }
-    Location* heroLoc = h->GetCurrentLocation() ; 
-    vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
-    cout << "neighboring locations: " ;
-    for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
-        cout << heroLocNeighbor[i]->get_name() << " " ;
-    cout << endl ; 
-    cout << "Which neighboring place do you want to pick up its items? " ;
-    string chosenplace ; 
-    cin >> chosenplace ;
-    if(heroLoc->findNeighbor(chosenplace)){
-        Location* chosenLoc = map.get_location_by_name(chosenplace) ;
-        h->SpecialAction(chosenLoc) ;
-        h->DisplayItem() ; 
-    }else{
-        //throw invalid_argument("what you have chosen is not a neighboring place!\n") ; 
-        cout << "what you have chosen is not a neighboring place!\n" ; 
-    } 
+    else
+        h->SpecialAction(heroLoc); 
 
 }
 

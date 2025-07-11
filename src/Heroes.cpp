@@ -3,7 +3,7 @@
 #include "Hero.hpp"
 using namespace std ; 
 
-Archaeologist:: Archaeologist(GameMap& Map): Hero("Archaeologist" , 4 , Map.get_location_by_name("Docks") , "Can take any number of items from adjacent locations.") {
+Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_location_by_name("Docks") , "can take any number of items from adjacent locations.") {
     Map.get_location_by_name("Docks")->add_hero(this) ; 
 }
 
@@ -54,7 +54,7 @@ void Archaeologist::SpecialAction(Location* chosenplace){
     }
 }
 
-Mayor::Mayor(GameMap& Map) : Hero("Mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action.") {
+Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action.") {
     Map.get_location_by_name("Theatre")->add_hero(this) ; 
 }
 
@@ -64,5 +64,43 @@ void Mayor::DisplayInfo()const {
 }
 
 void Mayor::SpecialAction(Location*) {
+    cout << "this hero does not have any special action\n" ; 
+}
+
+Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_location_by_name("Shop") , "can be moved to a location where one of the other heroes is.") , turn(m) {
+    Map.get_location_by_name("Shop")->add_hero(this) ; 
+} 
+
+void Courier::DisplayInfo() const {
+    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
+    GetRemainingActions() << "/" << 4 << '\n'  ;    
+}
+
+void Courier::SpecialAction(Location *){
+    auto heroes = turn.get_heroes() ; 
+    
+    for(size_t i = 0 ; i < heroes.size() ; i++){
+        if(heroes[i]->GetName() != "courier") 
+            cout << heroes[i]->GetName() << " (current location: " << *(heroes[i]->GetCurrentLocation() )<< ")\n"; 
+    }
+    cout << "choose a hero: " ; 
+    string chosenName ; cin >> chosenName ; 
+    for(Hero* h : heroes)
+    if(h->GetName() == chosenName && h->GetName() != "courier"){
+        MoveTo(h->GetCurrentLocation()) ; 
+        return ; 
+    }
+    cout << "invalid choice\n" ; 
+}
+Scientist::Scientist(GameMap& Map) : Hero("scientist" , 4 , Map.get_location_by_name("Institute") , "No special action.") {
+    Map.get_location_by_name("Institute")->add_hero(this) ; 
+}
+
+void Scientist::DisplayInfo() const {
+    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
+    GetRemainingActions() << "/" << 4 << '\n'  ;    
+}
+
+void Scientist::SpecialAction(Location *){
     cout << "this hero does not have any special action\n" ; 
 }

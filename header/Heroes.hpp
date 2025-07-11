@@ -1,25 +1,36 @@
 #ifndef HEROES_H
 #define HEROES_H
 #include "Hero.hpp"
-
+#include "TurnManager.hpp"
 class Archaeologist : public Hero{
     public:
-        Archaeologist(GameMap& Map) ;
+        Archaeologist(GameMap&) ;
         void DisplayInfo() const ;
-        void SpecialAction(Location*) override ; 
-         
+        void SpecialAction(Location*) override ;        
 };
 
 class Mayor : public Hero{
-
     public:
-        Mayor(GameMap& Map) ; 
+        Mayor(GameMap&) ; 
         void DisplayInfo() const  ; 
         void SpecialAction(Location*) override ; 
-
 };
 
+class Courier : public Hero{
+    private:
+        TurnManager& turn ; 
+    public:
+        Courier(GameMap& , TurnManager&) ; 
+        void DisplayInfo() const  ; 
+        void SpecialAction(Location*) override ;
+};
 
+class Scientist : public Hero{
+    public:
+        Scientist(GameMap&) ; 
+        void DisplayInfo() const  ; 
+        void SpecialAction(Location*) override ;
+};
 
 
 #endif
