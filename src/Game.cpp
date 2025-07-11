@@ -22,6 +22,8 @@ Game::Game() {
 
     monstersMap[MonsterType::Dracula] = dracula;
     monstersMap[MonsterType::InvisibleMan] = invisibleMan;
+    frenziedMonster = dracula;
+    monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
     initializaMDeck();
     initializaDeck() ; 
@@ -417,121 +419,21 @@ void Game::Changing_frenzy_marker() {
     else if (frenziedMonster == invisibleMan)
         frenziedMonster = dracula;
 }
+Monster* Game::get_frenzied_monster() {
+    return frenziedMonster;
+}
+
 void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
         std::cout<<*drawnCard;
-        drawnCard->play_monster_card();
-  
+        drawnCard->play_monster_card(*this,frenziedMonster);
+        if (drawnCard->has_frenzied_strike()) {
+            Changing_frenzy_marker();
+        }
     } catch (const std::exception& e) {
     std::cerr << "Exception occurred: " << e.what() << std::endl;
   }
-}
-
-void Game::frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) {
-    std::cout<<"Frenzied : "<<endl;
-    bool invisiblePowerTriggered = false;
-    for (DiceFace face : results) {
-        std::cout << "Dice result: ";
-        switch (face) {
-            case DiceFace::Power:
-            std::cout << "Power\n";
-                if (type == MonsterType::InvisibleMan) {
-                    invisiblePowerTriggered = true;
-                }
-                if (type == MonsterType::Dracula) {
-                    m->special_power(turnManager.get_active_hero());
-                }
-                break;
-            case DiceFace::Attack:
-                std::cout << "Attack\n";
-                if (type == MonsterType::Dracula) {
-                    auto target = m->attack(); //[heroTarget, villagerTarget]
-                    if (target.first && !target.second) {
-                        std::cout << "Dracula attacks " << target.first->GetName() << "!\n";
-                        if (target.first->has_items()) {
-                            const auto& items = target.first->GetItems();
-                            for (size_t i = 0; i < items.size(); ++i) {
-                                std::cout << i + 1 << ". " << items[i].getName() << " ("
-                                          << items[i].color_to_string(items[i].getColor()) << ")\n";
-                            }
-                            std::cout << "Do you want to use one item to block the attack? (yes/no): ";
-                            std::string choice;
-                            std::cin >> choice;
-
-                            if (choice == "yes" || choice == "y") {
-                                std::cout << "Select the item number to use: ";
-                                int itemIndex;
-                                std::cin >> itemIndex;
-
-                                if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
-                                    target.first->remove_item_by_index(itemIndex - 1);
-                                    pool.add_item(items[itemIndex]);
-
-                                    std::cout << "Item used to block the attack!\n";
-                                } else {
-                                    std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                    send_hero_to_hospital(target.first);
-                                    if (!terrorAlreadyIncreased) {
-                                        increase_terror_level();
-                                        terrorAlreadyIncreased = true;
-                                    }
-                                    break;
-                                }
-                            } else {
-                                std::cout << "No item used. Dracula's attack succeeds.\n";
-                                send_hero_to_hospital(target.first);
-                                if (!terrorAlreadyIncreased) {
-                                    increase_terror_level();
-                                    terrorAlreadyIncreased = true;
-                                }
-                                break;
-                            }
-                        } else {
-                            std::cout << target.first->GetName() << " has no items. Dracula's attack succeeds.\n";
-                            send_hero_to_hospital(target.first);
-                            if (!terrorAlreadyIncreased) {
-                                increase_terror_level();
-                                terrorAlreadyIncreased = true;
-                            }
-                            break;
-                        }
-                    } else if (target.second) {
-                        std::cout << "Dracula attacks " << target.second->get_name() << "!\n";
-                        target.second->removevillager(target.second)  ;
-                        if (!terrorAlreadyIncreased) {
-                            increase_terror_level();
-                            terrorAlreadyIncreased = true;
-                        }
-                        break;
-                    }
-                } else if (type == MonsterType::InvisibleMan) {
-                    auto kv = m->attack();
-                    if (kv.second) {
-                        std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
-                        kv.second->removevillager(kv.second) ;
-                        increase_terror_level();
-                    }
-                }
-                break;
-            case DiceFace::empty:
-                std::cout << "Empty\n";
-                break;
-        }
-    }
-
-    if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
-        Location* target = m->find_nearest_villager(m->get_location());
-        if (target) {
-            Location* nextStep = m->find_next_step(target);
-            if (nextStep) {
-                m->set_location(nextStep); 
-                std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
-            }
-         } else {
-            std::cout << "Invisible Man found no villager for doing his Power in dice .\n";
-        }
-    }
 }
 
 void Game::initializaMDeck(){

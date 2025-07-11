@@ -13,9 +13,11 @@
 #include "TurnManager.hpp"
 #include "Itembag.hpp"
 #include "item.hpp"
+#include "Dice.hpp"
+class Game;
 
 enum class CardType { VillagersAffecting, MonsterAffecting };
-enum class MonsterType { InvisibleMan, Dracula, Frenzied };
+
 
 // Strike برای اجرای حرکت و تاس هیولا
 struct Strike {
@@ -72,15 +74,26 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 void remove_villager(Villager* v);
                 Villager* create_villager(const std::string& ,const std::string&);
                 void place_or_move_villager();
-                
+                virtual void play_monster_card(Game& game ,Monster* frenziedMonster) = 0;
+                bool has_frenzied_strike() const;
                 
                 void place_items(ItemPool& pool) const;
-        
-                virtual void play_monster_card() = 0;
-                void play_strike(GameMap& map,
+                
+                void frenzied_strike(int , Monster* m,
+                    MonsterType type,
+                    std::vector<DiceFace>& results,
+                    bool& terrorAlreadyIncreased,
+                    GameMap& map,
+                    TurnManager& turnManager,
+                    ItemPool& pool);
+
+                void play_strike(Game& game,
+                    GameMap& map,
                     TurnManager& turnManager,
                     ItemPool& pool,
-                    std::unordered_map<MonsterType, Monster*>& monstersMap);
+                    std::unordered_map<MonsterType, Monster*>& monstersMap,
+                    Monster* frenziedMonster);
+
                     
                 
 
@@ -100,7 +113,7 @@ class FormTheBat : public Monstercard {
 
 
 
-        void play_monster_card()override;
+        void play_monster_card(Game& game, Monster* frenziedMonster)override;
                         
 };
 class Sunrise : public Monstercard {
@@ -116,7 +129,7 @@ class Sunrise : public Monstercard {
 
 
 
-        void play_monster_card() override;
+        void play_monster_card( Game& game ,Monster* frenziedMonster) override;
                         
 };
 
@@ -133,7 +146,7 @@ class TheInnocent : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
              
     
-        void play_monster_card() override;
+        void play_monster_card(Game& game,Monster* frenziedMonster) override;
     };
     
 
@@ -158,7 +171,7 @@ class TheInnocent : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
              
     
-        void play_monster_card() override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
 };
 
 //   Former Employer (Dr. Cranly at Lab + Invisible Man)
@@ -175,7 +188,7 @@ class FormerEmoloyer : public Monstercard {
         std::unordered_map<MonsterType, Monster*>& monstersMap);
         
         
-        void play_monster_card() override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
     };
     
     //  Thief (InvisibleMan moves to most items)
@@ -192,7 +205,7 @@ class FormerEmoloyer : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
             
             
-            void play_monster_card() override;
+            void play_monster_card(Game& game ,Monster* frenziedMonster) override;
 };
 
 class HurriedAssistant : public Monstercard {
@@ -208,7 +221,7 @@ class HurriedAssistant : public Monstercard {
         std::unordered_map<MonsterType, Monster*>& monstersMap);
         
         
-        void play_monster_card() override;
+        void play_monster_card(Game& game, Monster* frenziedMonster) override;
     };
     
 class EgyptianExpert : public Monstercard {
@@ -224,7 +237,7 @@ class EgyptianExpert : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
             
             
-            void play_monster_card() override;
+            void play_monster_card(Game& game ,Monster* frenziedMonster) override;
             
             
         };
@@ -243,7 +256,7 @@ class FortuneTeller : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
             
 
-            void play_monster_card() override;
+            void play_monster_card(Game& game ,Monster* frenziedMonster) override;
             
  };
  class TheIchthyologist : public Monstercard {
@@ -259,7 +272,7 @@ class FortuneTeller : public Monstercard {
 
 
 
-        void play_monster_card() override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
                         
 };
  

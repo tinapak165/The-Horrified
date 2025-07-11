@@ -3,7 +3,7 @@
 #include "location.hpp"
 #include "monster.hpp"
 
-InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation){
+InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation , MonsterType::InvisibleMan){
     
     required_locations = {
         "Inn", "Barn", "Institute", "Laboratory", "Mansion"

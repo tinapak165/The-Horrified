@@ -1,7 +1,7 @@
 #include "monster.hpp"
 #include "Dracula.hpp"
 
-Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation)
+Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation , MonsterType::Dracula)
  {
      coffinsDestroyed["Cave"] = false;
     coffinsDestroyed["Dungeon"] = false;

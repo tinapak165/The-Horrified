@@ -21,6 +21,8 @@ class Game {
     friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
     bool skipMonsterPhase = false ;
+    bool terrorAlreadyIncreased = false;
+
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
@@ -30,7 +32,7 @@ private:
     Hero* archaeologist = nullptr;
     Dracula* dracula = nullptr;
     InvisibleMan* invisibleMan = nullptr;
-    Monster* frenziedMonster;
+    Monster* frenziedMonster = nullptr;
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
@@ -64,6 +66,7 @@ public:
     void initializaMDeck();
     void Changing_frenzy_marker();
     void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
+    Monster* get_frenzied_monster();
     
 };
 

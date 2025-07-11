@@ -10,10 +10,11 @@
 using namespace std;
 
 
-Monster::Monster (const string& name, Location* start_location) : name(name), current_location(start_location) {}
+Monster::Monster (const string& name, Location* start_location , MonsterType t) : name(name), current_location(start_location) , type (t) {}
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
+MonsterType Monster::get_type() const { return type; }
 
 void Monster::set_location(Location* new_location) {
  
@@ -27,6 +28,7 @@ void Monster::set_location(Location* new_location) {
         current_location->add_monster(this);
     }
 }
+
 
 Location* Monster::find_nearest_target(Location* start) {
    
@@ -57,7 +59,7 @@ Location* Monster::find_nearest_target(Location* start) {
 }
 
 Location* Monster::find_nearest_hero(Location* start) {
-    std::cout<<"in fine nearest target ";
+    
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
@@ -84,7 +86,7 @@ Location* Monster::find_nearest_hero(Location* start) {
     return nullptr;
 }
 Location* Monster::find_nearest_villager(Location* start) {
-    std::cout<<"in fine nearest target ";
+    
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
