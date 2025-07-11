@@ -219,4 +219,8 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/Users/Tina/Desktop/The-Horrified/header/Dice.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/compare \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime
+ C:/Users/Tina/Desktop/The-Horrified/header/Dice.hpp \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime \
+ C:/Users/Tina/Desktop/The-Horrified/header/Game.hpp \
+ C:/Users/Tina/Desktop/The-Horrified/header/Monstercards.hpp \
+ C:/Users/Tina/Desktop/The-Horrified/header/Heroes.hpp
