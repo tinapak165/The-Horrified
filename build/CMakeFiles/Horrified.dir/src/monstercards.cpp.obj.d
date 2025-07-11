@@ -177,6 +177,12 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/Users/Tina/Desktop/The-Horrified/header/hero.hpp \
  C:/Users/Tina/Desktop/The-Horrified/header/GameMap.hpp \
  C:/Users/Tina/Desktop/The-Horrified/header/Location.hpp \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/queue \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/deque \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_deque.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/deque.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_queue.h \
  C:/Users/Tina/Desktop/The-Horrified/header/perkcards.hpp \
  C:/Users/Tina/Desktop/The-Horrified/header/Itembag.hpp \
  C:/Users/Tina/Desktop/The-Horrified/header/Item.hpp \
@@ -210,7 +216,6 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/algorithm \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
  C:/Users/Tina/Desktop/The-Horrified/header/InvisibleMan.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \

@@ -105,6 +105,14 @@ EgyptianExpert ::EgyptianExpert (ItemPool& p,
                                 { {{MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g),
                                 map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
 
+ OnTheMove::OnTheMove(ItemPool& p,
+                    GameMap& g ,
+                    TurnManager& t,
+                    std::unordered_map<MonsterType, Monster*>& m) : Monstercard ("On The Move", 3, "Frenzy Marker on the next Monster , Every Villager Moves closer to their Safe place .",
+                     { {{MonsterType::Frenzied}, 3, 2} },  g),
+                     map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
+
+
 std::string Monstercard::get_card_name() const{return card_name;}
 int Monstercard::get_item_count() const{ return item_count;}
 std::string Monstercard::get_Event() const { return event_text;}
@@ -238,7 +246,39 @@ void TheIchthyologist::play_monster_card( Game& game, Monster* frenziedMonster) 
         play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
         place_items(pool);
 }  
+  
+void OnTheMove::move_all_villagers_toward_safety() {
+    const std::vector<std::unique_ptr<Location>>& allLocations = map.get_locations();
+
+    for (const auto& locPtr : allLocations) {
+        Location* loc = locPtr.get();  // استخراج خام از unique_ptr
+    
+        const std::vector<Villager*>& villagers = loc->get_villagers();
+    
+        for (Villager* v : villagers) {
+            Location* current = v->get_currentLocation();
+            Location* safe = v->get_safeplace();
+    
+            if (current == safe) continue;
+    
+            Location* nextStep = map.find_next_step(current, safe);  // باید اینو داشته باشی
+            if (nextStep) {
+                v->set_currentLocation(nextStep);
+                std::cout << v->get_name() << " moved toward safety at " << safe->get_name() << "\n";
+            }
+        }
+    }
+    
+}
+
+void OnTheMove::play_monster_card( Game& game, Monster* frenziedMonster) {
+    game.Changing_frenzy_marker();
+
                     
+        play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
+        place_items(pool);
+} 
+
 void Monstercard::play_strike(Game& game,
                                GameMap& map,
                                TurnManager& turnManager,
@@ -430,6 +470,12 @@ MonstercardDeck::MonstercardDeck(){}
 
 void MonstercardDeck::addCard(std::unique_ptr<Monstercard> card) {
     cards.push_back(std::move(card));
+}
+
+int MonstercardDeck::remaining_cards(){   return static_cast<int>(cards.size());}
+
+bool MonstercardDeck::is_empty() const {
+    return cards.empty();
 }
 
 std::unique_ptr<Monstercard> MonstercardDeck::drawcard() {

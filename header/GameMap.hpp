@@ -6,6 +6,8 @@
 #include "villager.hpp"
 #include <vector>
 #include <memory>
+#include <unordered_map>
+#include <queue>
 
 class Villager;
 
@@ -17,6 +19,7 @@ public:
      Location* get_location_by_name(const std::string& name);
      Villager* find_villager_by_name(const std::string& name);
      const std::vector<std::unique_ptr<Location>>& get_locations() const;  
+     Location* find_next_step(Location* start, Location* goal);
     
 };
 

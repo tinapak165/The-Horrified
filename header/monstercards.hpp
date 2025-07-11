@@ -275,12 +275,35 @@ class FortuneTeller : public Monstercard {
         void play_monster_card(Game& game ,Monster* frenziedMonster) override;
                         
 };
+
+class OnTheMove : public Monstercard {
+    private:
+        ItemPool& pool;
+        GameMap& map ;
+        TurnManager& turnManager;
+        std::unordered_map<MonsterType, Monster*>& monstersMap;
+
+    public:
+         OnTheMove(ItemPool& pool, GameMap& map, TurnManager& turnManager,
+            std::unordered_map<MonsterType, Monster*>& monstersMap);
+
+
+
+        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+        void move_all_villagers_toward_safety();
+                        
+};
+
+
+
  
  class MonstercardDeck{
      private:
          std::vector<std::unique_ptr<Monstercard>> cards;
      public:
          MonstercardDeck() ; 
+         bool is_empty() const;
+         int remaining_cards();
          void addCard(std::unique_ptr<Monstercard> card) ; 
          std::unique_ptr<Monstercard> drawcard();
  };

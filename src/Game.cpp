@@ -183,10 +183,10 @@ void  Game::start() {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        // if (deck.is_empty() && !both_monsters_defeated()) {
-        //     std::cout << "Game Over! No more Monster Cards.\n";
-        //     break;
-        // }    
+        if (deck.is_empty() && !both_monsters_defeated()) {
+            std::cout << "Game Over! No more Monster Cards.\n";
+            break;
+        }    
         if (both_monsters_defeated()) {
             std::cout << "You win! Both monsters defeated!\n";
             break;
@@ -441,6 +441,7 @@ void Game::initializaMDeck(){
     deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap)) ;     
     deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap)) ;
     deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
     }
 
     deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
@@ -450,6 +451,7 @@ void Game::initializaMDeck(){
     deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap)) ;
     deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap)) ;
     deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
 }
 
 Game::~Game() {

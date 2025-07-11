@@ -64,6 +64,7 @@ public:
 
     void distribute_initial_items();
     void initializaMDeck();
+   
     void Changing_frenzy_marker();
     void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
     Monster* get_frenzied_monster();

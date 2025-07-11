@@ -229,6 +229,11 @@ CMakeFiles/Horrified.dir/src/Game.cpp.obj: \
  C:/Users/Tina/Desktop/The-Horrified/header/InvisibleMan.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/queue \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/deque \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_deque.h \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/deque.tcc \
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_queue.h \
  C:/Users/Tina/Desktop/The-Horrified/header/Monstercards.hpp \
  C:/Users/Tina/Desktop/The-Horrified/header/TurnManager.hpp \
  C:/Users/Tina/Desktop/The-Horrified/header/Dice.hpp \

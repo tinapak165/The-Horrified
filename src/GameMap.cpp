@@ -93,3 +93,42 @@ Villager* GameMap::find_villager_by_name(const std::string& name) {
 const std::vector<std::unique_ptr<Location>>& GameMap::get_locations() const {
     return locations;
 }
+
+
+
+Location* GameMap::find_next_step(Location* start, Location* goal) {
+    if (!start || !goal || start == goal)
+        return nullptr;
+
+    std::unordered_map<Location*, Location*> came_from;
+    std::queue<Location*> q;
+    q.push(start);
+    came_from[start] = nullptr;
+
+    while (!q.empty()) {
+        Location* current = q.front();
+        q.pop();
+
+        for (Location* neighbor : current->get_neighbors()) {
+            if (came_from.count(neighbor)) continue;
+
+            came_from[neighbor] = current;
+            q.push(neighbor);
+
+            if (neighbor == goal) {
+                // مسیر کامل ساخته شد، حالا مسیر رو از goal به عقب دنبال می‌کنیم
+                Location* step = neighbor;
+                Location* prev = came_from[step];
+
+                while (prev != start && prev != nullptr) {
+                    step = prev;
+                    prev = came_from[step];
+                }
+
+                return step;  // این همون همسایهٔ مستقیم start هست که به سمت goal می‌ره
+            }
+        }
+    }
+
+    return nullptr;  // مسیر پیدا نشد
+}
