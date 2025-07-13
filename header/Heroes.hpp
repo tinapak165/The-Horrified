@@ -30,6 +30,7 @@ class Scientist : public Hero{
         Scientist(GameMap&) ; 
         void DisplayInfo() const  ; 
         void SpecialAction(Location*) override ;
+        int Ability(Item& item) override ; 
 };
 
 

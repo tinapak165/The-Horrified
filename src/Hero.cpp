@@ -93,11 +93,15 @@ int Hero::AdvanceActionForDracula(){
             cerr << "invalid. please try again!\n" ;
             continue;
         }
-        Item chosenItem = items[chosenNumber - 1] ;
+
+        Item& chosenItem = items[chosenNumber - 1] ;
+
         if(chosenItem.getColor() != ItemColor::RED){
             cerr << "what you chosen is not red! try again.\n" ; 
             continue;
         }
+        chosenItem.setStrength(this->Ability(chosenItem)) ; 
+        
         (*this).removeItems(chosenItem) ;
         selected.push_back(chosenItem) ; 
         totalStrength += chosenItem.getStrength() ;
@@ -311,7 +315,6 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
     if (!new_location) return;
     
     if(new_location == (*this).GetCurrentLocation()){
-       // throw runtime_error("already in the location!") ; 
         cerr << "already in the location!\n" ; 
     }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
@@ -332,7 +335,6 @@ void Hero::MoveTo(Location* new_location){ //without villager
     if (!new_location) return;
     
     if(new_location == (*this).GetCurrentLocation()){
-       // throw runtime_error("already in the location!") ; 
         cerr << "already in the location!\n" ; 
     }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
@@ -548,7 +550,6 @@ int Hero::select_items_to_defeat(ItemColor requiredColor) {
     return totalStrength;
 }
 
-
 bool Hero::has_items() const {
     return !ListOfitems.empty();
 }
@@ -560,10 +561,14 @@ void Hero::remove_item_by_index(int index) {
         std::cerr << "Invalid item index. No item removed.\n";
     }
 }
-std::vector<Item> Hero::getUsedItemsForDracula() {
+vector<Item> Hero::getUsedItemsForDracula() {
     return usedItemsForDracula;
 }
 
-std::vector<Item> Hero::getUsedItemsForInvisibleMan() {
+vector<Item> Hero::getUsedItemsForInvisibleMan() {
     return usedItemsForInvisibleMan;
+}
+
+int Hero::Ability(Item& item){
+    return item.getStrength() ; 
 }

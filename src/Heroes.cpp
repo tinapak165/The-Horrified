@@ -104,3 +104,11 @@ void Scientist::DisplayInfo() const {
 void Scientist::SpecialAction(Location *){
     cout << "this hero does not have any special action\n" ; 
 }
+
+int Scientist::Ability(Item &item){
+    cout << "do you want to boost " << item.getName() << "(yes/no)? " ;
+    string ans ; cin >> ans ; 
+    if(ans == "yes")
+        item.setStrength(item.getStrength() + 1) ; 
+    return item.getStrength() ; 
+}

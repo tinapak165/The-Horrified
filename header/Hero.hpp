@@ -51,15 +51,16 @@ class Hero{
 
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
-        //actions
+
         void MoveAction(GameMap& , Hero*) ;
         void MoveTo(Location*  , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
 
         void GuideAction(Hero* , GameMap&) ; 
 
-        virtual void SpecialAction(Location*) = 0  ; //arch and curier
+        virtual void SpecialAction(Location*) = 0  ; 
         void Special(Hero *, GameMap& )  ;
+        virtual int Ability(Item& item) ; 
 
         void AdvanceAction(Hero* , Dracula* , ItemPool , GameMap& , InvisibleMan*) ; 
         int select_items_to_defeat(ItemColor) ;
