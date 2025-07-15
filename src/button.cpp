@@ -27,7 +27,6 @@ void Button::Draw(Vector2 mousePos)
         DrawRectangleLines(bounds.x, bounds.y, bounds.width, bounds.height, RED);
     }
 }
-
 bool Button::isPressed(Vector2 mousePos, bool click) {
     return click && CheckCollisionPointRec(mousePos, bounds);
 }
