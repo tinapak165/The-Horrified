@@ -52,7 +52,6 @@ void ExitState::displayState(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
 
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.6f));
-
     DrawText("Are you sure you want to exit?", 200, 200, 30, WHITE);
 
     Vector2 mouse = GetMousePosition();
