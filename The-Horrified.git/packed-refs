@@ -1,0 +1,11 @@
+# pack-refs with: peeled fully-peeled sorted 
+8aa99ac58d7a37e4be2126684bc93cad62f85fe9 refs/heads/Dice
+0fbb8ce2fe550d95fef0d96d5676fbcd5f688c35 refs/heads/Hero
+5028206a17b7e1bef186d3268cecf47455db2b22 refs/heads/Map
+e9b5094474e3e83f18e039502df2d6f95a324d91 refs/heads/Perkcard
+5b81cd312d70cb3b54e5d83a1a9c6165476df740 refs/heads/Phase2N
+39b415f4b5194831b3a02def4101cf20d12c624f refs/heads/Villager
+2d1c07de3daa6b613842fe673014aea02a0aee6e refs/heads/item
+fbdc67b9faa8bcad1f188cb293f4af78eecdef99 refs/heads/main
+daed3b1c14087fe9f4c5a1423bae342ac0d70f55 refs/heads/monstercard
+158005c60876b28ef76ad60df721e3b77be8cc92 refs/heads/tina-branch
