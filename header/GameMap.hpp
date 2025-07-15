@@ -1,23 +1,26 @@
 
 #ifndef GAMEMAP_HPP
 #define GAMEMAP_HPP
-
-#include "Location.hpp"
+#include "location.hpp"
 #include "villager.hpp"
 #include <vector>
 #include <memory>
+#include <raylib.h>
 
 class Villager;
 
 class GameMap {
-private:
-    std::vector<std::unique_ptr<Location>> locations;
-public:
-    void build_map(); 
-     Location* get_location_by_name(const std::string& name);
-     Villager* find_villager_by_name(const std::string& name);
-     const std::vector<std::unique_ptr<Location>>& get_locations() const;  
-    
+    private:
+        std::vector<std::unique_ptr<Location>> locations;
+        Texture2D mapTexture;
+    public:
+        void build_map(); 
+        void add_location(const std::string& name, Rectangle area, const std::string& iconPath) ;
+        Location* get_location_by_name(const std::string& name);
+        Villager* find_villager_by_name(const std::string& name);
+        const std::vector<std::unique_ptr<Location>>& get_locations() const; 
+        void draw_map();
+        Location* check_click(Vector2 mousePos); 
 };
 
 #endif

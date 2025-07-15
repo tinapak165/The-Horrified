@@ -6,16 +6,17 @@
 #include <utility>
 #include "Game.hpp"
 #include "villager.hpp"
+#include <raylib.h>
 
 using namespace std;
 
 Game::Game() {
-    std::cout<<"                                     THE HORRIFIED                                          "<<endl;
-    std::cout<<"                                WELCOME TO THE HORROR WORLD                                  "<<endl;
+    InitWindow(1000, 1000, "The Horrified");
+    SetTargetFPS(60);
     map.build_map(); 
-    graph_map_text(); 
-    distribute_initial_items();
-    choose_character();
+   // graph_map_text(); 
+   // distribute_initial_items();
+   // choose_character();
     
     dracula = new Dracula(map.get_location_by_name("Cave")); 
     invisibleMan = new InvisibleMan(map.get_location_by_name("Barn"));
@@ -27,21 +28,63 @@ Game::Game() {
     initializaDeck() ; 
 
 }
-string get_color_code(ItemColor color) {
-    switch (color) {
-        case ItemColor::RED:    return "\033[31m";
-        case ItemColor::BLUE:   return "\033[34m";
-        case ItemColor::YELLOW: return "\033[33m";
-        case ItemColor::Reset : return "\033[39m"; 
-        default:                return "\033[0m";
+ 
+void Game::start() { 
+
+    // بارگذاری تکسچرها
+    background = LoadTexture("../Assets/map.png"); 
+    Texture2D hero1Tex = LoadTexture("../Assets/Heros/Mayor.png");
+    Texture2D item1Tex = LoadTexture("../Assets/Items/Blue/Analysis.png");
+    map.build_map(); 
+
+    // ساخت کاراکتر Mayor
+    mayor = new Mayor(map);
+
+    // افزودن Mayor و آیتم به مکان Inn
+    Location* inn = map.get_location_by_name("Inn");
+    if (inn) {
+        inn->add_hero(mayor, hero1Tex);
+        inn->add_item(Item("Sword", ItemColor::blue, 12, "Inn"), item1Tex);
+    } else {
+        std::cerr << "[ERROR] Inn location not found!" << std::endl;
     }
+
+    // نواحی نقشه
+    Rectangle source = {0, 0, background.width, background.height};
+    Rectangle dest = {0, 0, 1000, 1000};
+    Vector2 origin = {0, 0};
+    Location* selectedLocation = nullptr;
+
+    while (!WindowShouldClose()) {
+
+        menu.SetState(new StartState());
+
+        // Vector2 mousePos = GetMousePosition();
+        // if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        //     selectedLocation = map.check_click(mousePos);
+        // }
+
+        BeginDrawing();
+        ClearBackground(BLACK);
+        
+        menu.renderCurrentState();
+
+
+        // DrawTexturePro(background, source, dest, origin, 0, WHITE);
+        // map.draw_map();
+
+        // if (selectedLocation) {
+        //     selectedLocation->draw_info_panel();
+        // }
+
+        EndDrawing();
+    }
+    UnloadTexture(hero1Tex);
+    UnloadTexture(item1Tex); 
+    CloseWindow();
 }
 
-ostream& operator<<(ostream& os, ItemColor color) {
-    return os << get_color_code(color) ;
-}  
-
-std::string Game::checkString(std::string str) {
+string Game::checkString(std::string str) {
     for (char &c : str) {
         c = tolower(c);
     }
@@ -198,65 +241,63 @@ void Game::hero_phase(Hero* hero) {
     hero->resetMaxActions() ;
 }
 
-void  Game::start() { 
+// void Game::start() { 
+//     locationOverview() ;
+//     for(Hero* hero : turnManager.get_heroes()){
+//         getNewCard(hero) ; 
+//     }
 
-    locationOverview() ;
-    for(Hero* hero : turnManager.get_heroes()){
-        getNewCard(hero) ; 
-    }
+//     while (true) {
 
-    while (true) {
+//         cout << "<-----------HERO PHASE----------->\n"; 
+//         Hero* activeHero = turnManager.get_active_hero();
+//         cout << "It's " << activeHero->GetName() << "'s turn!\n";
+//         hero_phase(activeHero);
 
-        cout << ItemColor::BLUE << "<-----------HERO PHASE----------->\n" << ItemColor::Reset; 
-        Hero* activeHero = turnManager.get_active_hero();
-        cout << "It's " << activeHero->GetName() << "'s turn!\n";
-        hero_phase(activeHero);
+//         graph_map_text();
 
-        graph_map_text();
+//         if(!skipMonsterPhase){
+//         cout << "\n<-----------MONSTER PHASE---------->\n"; 
+//         monster_phase();
+//         }
+//         else{
+//             cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
+//             skipMonsterPhase = false;     
+//         }
 
-        if(!skipMonsterPhase){
-        cout << ItemColor::RED  <<  "\n<-----------MONSTER PHASE---------->\n" <<  ItemColor::Reset  ; 
-        monster_phase();
-        }
-        else{
-            cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
-            skipMonsterPhase = false;     
-        }
+//         locationOverview() ;
 
-        locationOverview() ;
-
-        if (terror_Level >= 6) {
-            std::cout << "Game Over! Terror level reached 6.\n";
-            break;
-        }    
-        // if (deck.is_empty() && !both_monsters_defeated()) {
-        //     std::cout << "Game Over! No more Monster Cards.\n";
-        //     break;
-        // }    
-        if (both_monsters_defeated()) {
-            std::cout << "You win! Both monsters defeated!\n";
-            break;
-        }
-
-        turnManager.next_turn();
-    }    
-}
+//         if (terror_Level >= 6) {
+//             std::cout << "Game Over! Terror level reached 6.\n";
+//             break;
+//         }    
+//         // if (deck.is_empty() && !both_monsters_defeated()) {
+//         //     std::cout << "Game Over! No more Monster Cards.\n";
+//         //     break;
+//         // }    
+//         if (both_monsters_defeated()) {
+//             std::cout << "You win! Both monsters defeated!\n";
+//             break;
+//         }
+//         turnManager.next_turn();
+//     }    
+// }
 void Game::initializaDeck(){
     for(int i = 0 ; i < 3 ; i++){
-        PerkDeck.addCard(std::make_unique<Repelcard>(dracula, invisibleMan, map));
-        PerkDeck.addCard(std::make_unique<Hurrycard>(mayor , archaeologist , map)) ;
-        PerkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        PerkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
-        PerkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
-        PerkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        PerkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan , map)) ;     
+        perkDeck.addCard(std::make_unique<Repelcard>(dracula, invisibleMan, map));
+        perkDeck.addCard(std::make_unique<Hurrycard>(mayor , archaeologist , map)) ;
+        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+        perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
+        perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan , map)) ;     
     }
-    PerkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-    PerkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+    perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+    perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
 
 }
 void Game::getNewCard(Hero* hero){
-    auto card = PerkDeck.drawcard() ; 
+    auto card = perkDeck.drawcard() ; 
     hero->AddAvailablePerk(std::move(card)) ;
 }
 
@@ -310,8 +351,8 @@ void Game::distribute_initial_items() {
     for (const auto& item : items) {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
-            loc->add_item(item);
-            std::cout << "Placed " << get_color_code(item.getColor()) << " " << item.getName() << get_color_code(ItemColor::Reset) << " at " << item.getLocationName() << std::endl;
+         //   loc->add_item(item);
+            std::cout << "Placed " << item.getName() <<" at " << item.getLocationName() << std::endl;
         }
     }
 }
@@ -364,7 +405,7 @@ void Game::locationOverview() {
                 int cnt = kv.second.first;
                 ItemColor color = kv.second.second;
 
-                itemStr += get_color_code(color) + name + get_color_code(ItemColor::Reset) + "(" + to_string(cnt) + "),";
+                itemStr +=  name + "(" + to_string(cnt) + "),";
             }
             if (!itemStr.empty()) itemStr.pop_back();  
         }
@@ -594,4 +635,5 @@ Game::~Game() {
         delete h;
     for(auto& pair : monstersMap)
         delete pair.second ; 
+    UnloadTexture(background) ; 
 }  

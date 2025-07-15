@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31.5)
+cmake_minimum_required(VERSION 3.28.3)
 
 project(Horrified)
 
@@ -21,6 +21,9 @@ set(SOURCES
     src/Location.cpp
     src/villager.cpp
     src/Heroes.cpp
+    src/State.cpp
+    src/menu.cpp
+    src/button.cpp
 )
-
 add_executable(Horrified ${SOURCES})
+target_link_libraries(Horrified PRIVATE raylib GL m pthread dl X11)

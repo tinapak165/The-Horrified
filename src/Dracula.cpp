@@ -47,7 +47,7 @@ void Dracula::special_power(Hero* active_hero) {
             heroes_here.erase(std::remove(heroes_here.begin(), heroes_here.end(), active_hero), heroes_here.end());
         }
     
-        dracula_location->add_hero(active_hero);
+   //     dracula_location->add_hero(active_hero);
         active_hero->SetCurrentLocation(dracula_location);
         std::cout << "Dracula uses Dark Charm! Pulling " << active_hero->GetName() 
         << " to " << dracula_location->get_name() << "!" << std::endl;

@@ -472,7 +472,7 @@ void Monstercard::place_items(ItemPool& pool) const {
     for (const auto& item : newItems) {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
-            loc->add_item(item);
+          //  loc->add_item(item);
             std::cout << "Placed "
                       <<  item.getName()
                       << " at " << item.getLocationName() << "\n";

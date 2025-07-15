@@ -117,7 +117,7 @@ void BreakofDawnCARD::play(Hero*){
     for(const auto i : PoolItems){
         Location* Loc = map.get_location_by_name(i.getLocationName());
         if(Loc){
-            Loc->add_item(i) ;
+         //   Loc->add_item(i) ;
             cout << "Item " << i.getName() << " placed in location " << i.getLocationName() << "\n";
         }
     }
@@ -132,12 +132,12 @@ void OverstockCard::play(Hero*){
     if(PoolItems.size() < 2) cerr << "not enough items drawn from the pool !\n" ;
         Location* LocFirst = map.get_location_by_name(PoolItems[0].getLocationName());
         if(LocFirst){
-            LocFirst->add_item(PoolItems[0]) ; 
+     //       LocFirst->add_item(PoolItems[0]) ; 
             cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
         }
         Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
         if(LocSecond){
-            LocSecond->add_item(PoolItems[1]) ; 
+     //       LocSecond->add_item(PoolItems[1]) ; 
             cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
         }  
 }

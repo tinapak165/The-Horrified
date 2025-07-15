@@ -7,14 +7,18 @@ Item::Item(const std::string& name, ItemColor color, int strength, const std::st
  ItemColor Item::getColor() const{ return color;}
  int Item::getStrength() const{ return strength;}
 
+void Item::setStrength(int new_Strength){
+    strength = new_Strength ; 
+ }
+
  std::string Item::getLocationName() const {
     return locationName;  
 }
 std::string Item::color_to_string(ItemColor color) {
     switch (color) {
-        case ItemColor::RED:    return "Red";
-        case ItemColor::BLUE:   return "Blue";
-        case ItemColor::YELLOW: return "Yellow";
+        case ItemColor::red:    return "Red";
+        case ItemColor::blue:   return "Blue";
+        case ItemColor::yellow: return "Yellow";
         default:                return "Unknown";
     }
 }

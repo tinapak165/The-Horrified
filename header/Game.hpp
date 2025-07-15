@@ -4,9 +4,10 @@
 #include <iostream>
 #include <unordered_map>
 #include <memory>
+#include <raylib.h>
 #include "GameMap.hpp"
 #include "perkcards.hpp"
-#include "Monstercards.hpp"
+#include "monstercards.hpp"
 #include "TurnManager.hpp"
 #include "monster.hpp"
 #include "Dracula.hpp"
@@ -15,16 +16,18 @@
 #include "Dice.hpp"
 #include "Itembag.hpp"
 #include "Heroes.hpp"
+#include "menu.hpp"
 
 class Game {
     friend class Monstercard;
-    friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
+    Menu menu;
+    Texture2D background ;  
     bool skipMonsterPhase = false ;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
-    PerkDeck PerkDeck ; 
+    PerkDeck perkDeck ; 
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
