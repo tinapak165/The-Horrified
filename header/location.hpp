@@ -27,7 +27,6 @@ class Location {
         std::vector<Monster*> monsters;
         std::vector<Location*> neighbors;
         bool hascoffin = false;
-        
     public:   
         friend std::ostream& operator <<( std::ostream &output ,const Location&);
 
