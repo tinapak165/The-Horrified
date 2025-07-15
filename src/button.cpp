@@ -10,7 +10,6 @@ ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Colo
     int width = MeasureText(text.c_str(), fontSize);
     bounds = { pos.x, pos.y, (float)width, (float)fontSize };
 }
-
 void ClickableText::Draw(Vector2 mousePos) {
     DrawText(text.c_str(), position.x, position.y, fontSize, color);
     if (CheckCollisionPointRec(mousePos, bounds)) {
