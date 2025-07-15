@@ -4,7 +4,6 @@ Button::Button(const std::string& path, Vector2 position) {
     texture = LoadTexture(path.c_str());
     bounds = { position.x, position.y, (float)texture.width, (float)texture.height };
 }
-
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
     int width = MeasureText(text.c_str(), fontSize);
