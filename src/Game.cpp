@@ -14,6 +14,7 @@ Game::Game() {
     InitWindow(1000, 1000, "The Horrified");
     SetTargetFPS(60);
     map.build_map(); 
+    menu = new Menu() ; 
    // graph_map_text(); 
    // distribute_initial_items();
    // choose_character();
@@ -55,7 +56,7 @@ void Game::start() {
     // Vector2 origin = {0, 0};
     // Location* selectedLocation = nullptr;
 
-    menu.SetState(new MenuState());
+    menu->SetState(new MenuState());
 
 
     while (!WindowShouldClose()) {
@@ -69,7 +70,7 @@ void Game::start() {
 
         ClearBackground(RAYWHITE);
         
-                menu.renderCurrentState();
+        menu->renderCurrentState();
 
 
         // DrawTexturePro(background, source, dest, origin, 0, WHITE);

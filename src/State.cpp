@@ -15,10 +15,9 @@ Texture2D State::get_background() const{
     return background;
 }
 
-MenuState::MenuState() 
-    : State("../Assets/Menu/Background.png"), 
-      startButton("../Assets/Menu/Startgame.png", {170, 300}),
-      exitButton("../Assets/Menu/Exit.png", {170, 500}){}
+MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
+      startButton("../Assets/Menu/Startgame.png", {170, 300} , 1.0f),
+      exitButton("../Assets/Menu/Exit.png", {170, 500} , 1.0f){}
 
 void MenuState::playState(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
@@ -30,11 +29,11 @@ void MenuState::playState(Menu& menu)  {
         exitButton.Draw(mouse);
 
         if (startButton.isPressed(mouse, click)) {
-            std::cout << "Start clicked\n";
+            //std::cout << "Start clicked\n";
             menu.SetState(new NameInputState()); 
         }
         if (exitButton.isPressed(mouse, click)) {
-            std::cout << "Exit clicked\n";
+          //  std::cout << "Exit clicked\n";
             menu.SetState(new ExitState()) ; 
         }
     }
@@ -150,10 +149,10 @@ void NameInputState::playState(Menu& menu) {
     }
 }
     const char* labels[] = {
-        "Player 1 Name:",          // باکس اول
-        "Last garlic time (MM):",  // باکس دوم
-        "Player 2 Name:",          // باکس سوم
-        "Last garlic time (MM):"   // باکس چهارم
+        "Player 1 Name:",    
+        "Last garlic time (MM):", 
+        "Player 2 Name:",         
+        "Last garlic time (MM):"  
     };
 
     // 7. رسم باکس‌ها و متن
@@ -185,11 +184,53 @@ void NameInputState::playState(Menu& menu) {
     DrawText("Continue", continueButton.x + 50, continueButton.y + 15, 20, WHITE);
     
     if (mouseClicked && CheckCollisionPointRec(mousePos, continueButton)) {
-        if (allFilled) {
+        if (allFilled)
+            menu.SetState(new ChooseCharacterState(nameBox1.text , timeBox1.text , nameBox2.text , timeBox2.text)) ;
+        else 
+            DrawText("Please fill all fields!", 300, 550, 20, RED);  
+    }
+}
 
-            //change state
-        } else 
-            DrawText("Please fill all fields!", 300, 550, 20, RED);
-        
+ChooseCharacterState::ChooseCharacterState(const std::string& p1Name, const std::string& p1Time,const std::string& p2Name, const std::string& p2Time)
+    : player1Name(p1Name), player1GarlicTime(p1Time),
+      player2Name(p2Name), player2GarlicTime(p2Time) , State("../Assets/Menu/Background.png") , instructionText("",{100, 50},30,BLACK) {
+
+    player1First = std::stoi(player1GarlicTime) < std::stoi(player2GarlicTime);
+    currentPlayer = player1First ? &player1Name : &player2Name;
+    
+    instructionText = ClickableText(*currentPlayer + ", choose your hero:", {100, 50} ,30 , RED); //draw text!!
+
+    heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Mayor.png", Vector2{150, 150})) ;
+    heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Archaeologist.png", Vector2{150, 550}) );
+    heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Courier.png", Vector2{600, 150} , 0.31f)) ;
+    heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Scientist.png", Vector2{600, 550})) ;
+
+}
+
+void ChooseCharacterState::playState(Menu& menu){
+    DrawTexture(get_background() , 0 , 0 , WHITE) ;
+    Vector2 mousePos = GetMousePosition() ; 
+    bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON) ; 
+
+    instructionText.Draw(mousePos) ; 
+    for(int i = 0 ; i < heroButtons.size() ; i++){
+        if(availableHeroes[i])
+            heroButtons[i]->Draw(mousePos) ;
+    }
+    if(mouseClicked){
+        for(int i = 0 ; i < heroButtons.size() ; i++){
+            if(availableHeroes[i] && heroButtons[i]->isPressed(mousePos , mouseClicked)){
+                if(currentPlayer == &player1Name){
+                    player1Hero = heroNames[i] ; 
+                    availableHeroes[i] = false ; 
+                    currentPlayer = &player2Name ; 
+                    instructionText = ClickableText(*currentPlayer + ", choose you hero: " , {100,50} , 30 , RED) ;
+                }else{
+                    player2Hero = heroNames[i] ;
+               //     menu.startGame(player1Name, player1Hero, player2Name, player2Hero) ;
+                        return;                
+                }
+            }
+        }
     }
 }

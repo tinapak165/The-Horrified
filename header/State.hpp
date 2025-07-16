@@ -2,6 +2,8 @@
 #define STATE_H
 #include <raylib.h>
 #include <iostream>
+#include <vector>
+#include <memory>
 #include "button.hpp"
 #include "menu.hpp"
 
@@ -51,6 +53,29 @@ class NameInputState : public State {
 
     public:
         NameInputState();
+        void playState(Menu&) override;
+};
+
+class ChooseCharacterState : public State{
+    private:
+        std::string player1Name;
+        std::string player1GarlicTime;
+        std::string player2Name;
+        std::string player2GarlicTime;
+
+        std::string player1Hero;
+        std::string player2Hero;
+
+        bool player1First;
+        std::string* currentPlayer;
+        
+        std::vector<std::unique_ptr<Button>> heroButtons;
+        std::vector<bool> availableHeroes = {true, true, true, true};
+        const std::vector<std::string> heroNames = {"mayor", "archaeologist", "courier", "scientist"};
+        
+        ClickableText instructionText; 
+    public:
+        ChooseCharacterState(const std::string& p1Name, const std::string& p1GarlicTime, const std::string& p2Name, const std::string& p2GarlicTime);
         void playState(Menu&) override;
 };
 

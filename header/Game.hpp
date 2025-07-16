@@ -21,7 +21,7 @@
 class Game {
     friend class Monstercard;
 private:
-    Menu menu;
+    Menu* menu;
     Texture2D background ;  
     bool skipMonsterPhase = false ;
     GameMap map;
