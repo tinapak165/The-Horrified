@@ -1,6 +1,6 @@
 CMakeFiles/Horrified.dir/src/Dice.cpp.obj: \
- C:\Users\Tina\Desktop\The-Horrified\src\Dice.cpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Dice.hpp \
+ C:\Users\Tina\Desktop\clone\src\Dice.cpp \
+ C:/Users/Tina/Desktop/clone/header/Dice.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/compare \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/version.h \

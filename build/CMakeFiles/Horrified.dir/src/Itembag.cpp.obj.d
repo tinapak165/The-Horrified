@@ -1,7 +1,7 @@
 CMakeFiles/Horrified.dir/src/Itembag.cpp.obj: \
- C:\Users\Tina\Desktop\The-Horrified\src\Itembag.cpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Itembag.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Item.hpp \
+ C:\Users\Tina\Desktop\clone\src\Itembag.cpp \
+ C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
+ C:/Users/Tina/Desktop/clone/header/Item.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/string \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \

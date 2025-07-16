@@ -1,6 +1,6 @@
 CMakeFiles/Horrified.dir/src/item.cpp.obj: \
- C:\Users\Tina\Desktop\The-Horrified\src\item.cpp \
- C:/Users/Tina/Desktop/The-Horrified/header/item.hpp \
+ C:\Users\Tina\Desktop\clone\src\item.cpp \
+ C:/Users/Tina/Desktop/clone/header/item.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/string \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \

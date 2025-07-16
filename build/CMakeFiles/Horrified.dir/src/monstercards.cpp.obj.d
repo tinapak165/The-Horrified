@@ -1,6 +1,6 @@
 CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
- C:\Users\Tina\Desktop\The-Horrified\src\monstercards.cpp \
- C:/Users/Tina/Desktop/The-Horrified/header/item.hpp \
+ C:\Users\Tina\Desktop\clone\src\monstercards.cpp \
+ C:/Users/Tina/Desktop/clone/header/item.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/string \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/requires_hosted.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -133,7 +133,7 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/istream \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
- C:/Users/Tina/Desktop/The-Horrified/header/monstercards.hpp \
+ C:/Users/Tina/Desktop/clone/header/monstercards.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_uninitialized.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
@@ -162,30 +162,30 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/enable_special_members.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/node_handle.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/erase_if.h \
- C:/Users/Tina/Desktop/The-Horrified/header/monster.hpp \
+ C:/Users/Tina/Desktop/clone/header/monster.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
- C:/Users/Tina/Desktop/The-Horrified/header/Dracula.hpp \
+ C:/Users/Tina/Desktop/clone/header/Dracula.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/map \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_tree.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_map.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_multimap.h \
- C:/Users/Tina/Desktop/The-Horrified/header/Hero.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/villager.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/location.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/item.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/hero.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/GameMap.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Location.hpp \
+ C:/Users/Tina/Desktop/clone/header/Hero.hpp \
+ C:/Users/Tina/Desktop/clone/header/villager.hpp \
+ C:/Users/Tina/Desktop/clone/header/location.hpp \
+ C:/Users/Tina/Desktop/clone/header/item.hpp \
+ C:/Users/Tina/Desktop/clone/header/hero.hpp \
+ C:/Users/Tina/Desktop/clone/header/GameMap.hpp \
+ C:/Users/Tina/Desktop/clone/header/Location.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/queue \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/deque \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_deque.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/deque.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_heap.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_queue.h \
- C:/Users/Tina/Desktop/The-Horrified/header/perkcards.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Itembag.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Item.hpp \
+ C:/Users/Tina/Desktop/clone/header/perkcards.hpp \
+ C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
+ C:/Users/Tina/Desktop/clone/header/Item.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/random \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cmath \
  C:/w64devkit/include/math.h \
@@ -217,18 +217,18 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_algo.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/algorithmfwd.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/pstl/glue_algorithm_defs.h \
- C:/Users/Tina/Desktop/The-Horrified/header/InvisibleMan.hpp \
+ C:/Users/Tina/Desktop/clone/header/InvisibleMan.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
- C:/Users/Tina/Desktop/The-Horrified/header/TurnManager.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Dice.hpp \
+ C:/Users/Tina/Desktop/clone/header/TurnManager.hpp \
+ C:/Users/Tina/Desktop/clone/header/Dice.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/array \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/compare \
- C:/Users/Tina/Desktop/The-Horrified/header/Dice.hpp \
+ C:/Users/Tina/Desktop/clone/header/Dice.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime \
- C:/Users/Tina/Desktop/The-Horrified/header/Game.hpp \
+ C:/Users/Tina/Desktop/clone/header/Game.hpp \
  C:/w64devkit/include/raylib.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stdarg.h \
  C:/w64devkit/include/stdarg.h C:/w64devkit/include/_mingw_stdarg.h \
- C:/Users/Tina/Desktop/The-Horrified/header/Monstercards.hpp \
- C:/Users/Tina/Desktop/The-Horrified/header/Heroes.hpp
+ C:/Users/Tina/Desktop/clone/header/Monstercards.hpp \
+ C:/Users/Tina/Desktop/clone/header/Heroes.hpp
