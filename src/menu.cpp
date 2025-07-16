@@ -14,7 +14,7 @@ void Menu::SetState(State* s) {
 
 void Menu::renderCurrentState() {
     if (current_state) {
-        current_state->displayState(*this);
+        current_state->playState(*this);
     } else {
         DrawText("No State Selected!", 100, 100, 20, RED);
     }

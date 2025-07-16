@@ -31,33 +31,34 @@ Game::Game() {
  
 void Game::start() { 
 
-    // بارگذاری تکسچرها
-    background = LoadTexture("../Assets/map.png"); 
-    Texture2D hero1Tex = LoadTexture("../Assets/Heros/Mayor.png");
-    Texture2D item1Tex = LoadTexture("../Assets/Items/Blue/Analysis.png");
-    map.build_map(); 
+    // // بارگذاری تکسچرها
+    // background = LoadTexture("../Assets/map.png"); 
+    // Texture2D hero1Tex = LoadTexture("../Assets/Heros/Mayor.png");
+    // Texture2D item1Tex = LoadTexture("../Assets/Items/Blue/Analysis.png");
+    // map.build_map(); 
 
-    // ساخت کاراکتر Mayor
-    mayor = new Mayor(map);
+    // // ساخت کاراکتر Mayor
+    // mayor = new Mayor(map);
 
-    // افزودن Mayor و آیتم به مکان Inn
-    Location* inn = map.get_location_by_name("Inn");
-    if (inn) {
-        inn->add_hero(mayor, hero1Tex);
-        inn->add_item(Item("Sword", ItemColor::blue, 12, "Inn"), item1Tex);
-    } else {
-        std::cerr << "[ERROR] Inn location not found!" << std::endl;
-    }
+    // // افزودن Mayor و آیتم به مکان Inn
+    // Location* inn = map.get_location_by_name("Inn");
+    // if (inn) {
+    //     inn->add_hero(mayor, hero1Tex);
+    //     inn->add_item(Item("Sword", ItemColor::blue, 12, "Inn"), item1Tex);
+    // } else {
+    //     std::cerr << "[ERROR] Inn location not found!" << std::endl;
+    // }
 
-    // نواحی نقشه
-    Rectangle source = {0, 0, background.width, background.height};
-    Rectangle dest = {0, 0, 1000, 1000};
-    Vector2 origin = {0, 0};
-    Location* selectedLocation = nullptr;
+    // // نواحی نقشه
+    // Rectangle source = {0, 0, (float) background.width, (float)background.height};
+    // Rectangle dest = {0, 0, 1000, 1000};
+    // Vector2 origin = {0, 0};
+    // Location* selectedLocation = nullptr;
+
+    menu.SetState(new MenuState());
+
 
     while (!WindowShouldClose()) {
-
-        menu.SetState(new StartState());
 
         // Vector2 mousePos = GetMousePosition();
         // if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -65,9 +66,10 @@ void Game::start() {
         // }
 
         BeginDrawing();
-        ClearBackground(BLACK);
+
+        ClearBackground(RAYWHITE);
         
-        menu.renderCurrentState();
+                menu.renderCurrentState();
 
 
         // DrawTexturePro(background, source, dest, origin, 0, WHITE);
@@ -79,8 +81,8 @@ void Game::start() {
 
         EndDrawing();
     }
-    UnloadTexture(hero1Tex);
-    UnloadTexture(item1Tex); 
+    // UnloadTexture(hero1Tex);
+    // UnloadTexture(item1Tex); 
     CloseWindow();
 }
 

@@ -30,4 +30,19 @@ class Button {
         bool isPressed(Vector2 mousePos, bool click);
         ~Button();
 };
+
+struct TextBox {
+    Rectangle rect;
+    std::string text;
+    bool active;
+    enum InputType { 
+        ANY,           // هر نوع کاراکتری
+        NUMBERS_ONLY,  // فقط اعداد
+        LETTERS_ONLY   // فقط حروف
+    } inputType;
+    TextBox(): rect({0,0,0,0}), text(""), active(false), inputType(ANY) {} ;
+
+    TextBox(Rectangle r, InputType type = ANY) : 
+        rect(r), text(""), active(false), inputType(type) {}
+};
 #endif

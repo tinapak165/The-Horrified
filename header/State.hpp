@@ -14,17 +14,17 @@ class State{
     public :
         State(const std::string&) ; 
         Texture2D get_background() const ; 
-        virtual void displayState(Menu&) = 0 ; 
+        virtual void playState(Menu&) = 0 ; 
         virtual ~State() ; 
 };
 
-class StartState : public State {
+class MenuState : public State {
     private:
         Button startButton ; 
         Button exitButton ; 
     public:
-        StartState() ; 
-        void displayState(Menu&) override ;  
+        MenuState() ; 
+        void playState(Menu&) override ;  
 };
 
 class ExitState : public State{
@@ -36,9 +36,22 @@ class ExitState : public State{
 
     public:
         ExitState();
-        void displayState(Menu&) override;
+        void playState(Menu&) override;
         ~ExitState();
-} ; 
+}; 
 
+class NameInputState : public State {
+    private:
+        TextBox nameBox1, nameBox2;
+        TextBox timeBox1, timeBox2;
+        Rectangle continueButton;
+
+        std::string name1, name2;
+        std::string garlicTime1, garlicTime2;
+
+    public:
+        NameInputState();
+        void playState(Menu&) override;
+};
 
 #endif
