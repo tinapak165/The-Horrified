@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(Horrified)
 
-include_directories(header)
-
+# فایل‌های پروژه
 set(SOURCES
     src/Game.cpp
     src/Hero.cpp
@@ -22,13 +21,17 @@ set(SOURCES
     src/Heroes.cpp
 )
 
+# فولدر هدرهای خودت
+include_directories(header)
+
+# ساختن executable
 add_executable(Horrified ${SOURCES})
 
 # مسیر به raylib
-target_include_directories(Horrified PRIVATE "C:/w64devkit/include")
-target_link_directories(Horrified PRIVATE "C:/w64devkit/lib")
+target_include_directories(Horrified PRIVATE "C:/Users/Tina/Downloads/w64devkit/bin/include")
+target_link_directories(Horrified PRIVATE "C:/Users/Tina/Downloads/w64devkit/bin")
 
-# لینک کتابخانه‌ها
+# لینک به raylib و کتابخونه‌های لازم ویندوز
 target_link_libraries(Horrified
     raylib
     opengl32

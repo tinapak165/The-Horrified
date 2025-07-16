@@ -52,6 +52,12 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
             std::string destination_location;
             GameMap& map ;
 
+
+
+            std::vector<std::pair<Item, Location*>> placed_items; // آیتم‌ها و مکانشون
+            Villager* affected_villager = nullptr;
+            bool has_villager_event;
+            bool has_items_placed;
         public:
             Monstercard() = default;
             Monstercard(std::string card_name, int itemCount, std::string event, std::vector<Strike> s, GameMap& map);
@@ -77,7 +83,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 virtual void play_monster_card(Game& game ,Monster* frenziedMonster) = 0;
                 bool has_frenzied_strike() const;
                 
-                void place_items(ItemPool& pool) const;
+                void place_items(ItemPool& pool) ;
                 
                 void frenzied_strike(int , Monster* m,
                     MonsterType type,
@@ -93,6 +99,10 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                     ItemPool& pool,
                     std::unordered_map<MonsterType, Monster*>& monstersMap,
                     Monster* frenziedMonster);
+
+
+
+                    void render();
 
                     
                 

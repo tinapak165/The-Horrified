@@ -10,8 +10,7 @@
 using namespace std;
 
 Game::Game() {
-    std::cout<<"                                     THE HORRIFIED                                          "<<endl;
-    std::cout<<"                                WELCOME TO THE HORROR WORLD                                  "<<endl;
+
     map.build_map(); 
     graph_map_text(); 
     distribute_initial_items();
@@ -161,50 +160,55 @@ void Game::hero_phase(Hero* hero) {
     }
     hero->resetMaxActions() ;
 }
+void Game::start() {
+    cout<<"before initi window raylib ************************";
+    InitWindow(800, 600, "Horrified");
+    SetTargetFPS(60);
 
-void  Game::start() { 
-
-    locationOverview() ;
     for(Hero* hero : turnManager.get_heroes()){
-        getNewCard(hero) ; 
+        getNewCard(hero);
     }
 
-    while (true) {
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
 
-        cout <<  "<-----------HERO PHASE----------->\n"; 
         Hero* activeHero = turnManager.get_active_hero();
-        cout << "It's " << activeHero->GetName() << "'s turn!\n";
-        hero_phase(activeHero);
+        hero_phase(activeHero);   // هنوز گرافیکی نیست ولی اجرا میشه
 
-        graph_map_text();
-
-        if(!skipMonsterPhase){
-        cout <<   "\n<-----------MONSTER PHASE---------->\n"; 
-        monster_phase();
-        }
-        else{
-            cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
-            skipMonsterPhase = false;     
+        if (!skipMonsterPhase) {
+            monster_phase();  
+        } else {
+            std::cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";
+            skipMonsterPhase = false;
         }
 
-        locationOverview() ;
+        if (current_card)
+            current_card->render();  // اینجا رندر میشه
 
+        EndDrawing();
+
+        // پایان بازی
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
-        }    
+        }
         if (deck.is_empty() && !both_monsters_defeated()) {
             std::cout << "Game Over! No more Monster Cards.\n";
             break;
-        }    
+        }
         if (both_monsters_defeated()) {
             std::cout << "You win! Both monsters defeated!\n";
             break;
         }
 
+        locationOverview();
         turnManager.next_turn();
-    }    
+    }
+
+    CloseWindow();  
 }
+
           
  
 
@@ -323,6 +327,8 @@ void Game::distribute_initial_items() {
         }
     }
 }
+
+
 void Game::monster_phase() {
     
     Location* loc = dracula->get_location();
@@ -485,6 +491,7 @@ void Game::monster_dice() {
         if (drawnCard->has_frenzied_strike()) {
             Changing_frenzy_marker();
         }
+        current_card = std::move(drawnCard); 
     } catch (const std::exception& e) {
     std::cerr << "Exception occurred: " << e.what() << std::endl;
   }

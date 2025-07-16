@@ -123,6 +123,7 @@ CardType Monstercard::get_type() const { return type;}
                         
                         
 void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster) {
+    render();
         std::cout<<this;
                     
         if (!monstersMap.count(MonsterType::Dracula)) {
@@ -158,6 +159,7 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster) {
     
     
     void Sunrise::play_monster_card(Game& game ,Monster* frenziedMonster){
+        render();
         std::cout<<this;
         Monster* dracula = monstersMap[MonsterType::Dracula];
         if (dracula && dracula->is_alive()) {
@@ -173,6 +175,7 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster) {
     
     
 void Thief::play_monster_card(Game& game ,Monster* frenziedMonster) {
+    render();
     Monster* inv = monstersMap[MonsterType::InvisibleMan];
     if (inv && inv->is_alive()) {
         Location* maxLoc = nullptr;
@@ -195,6 +198,7 @@ void Thief::play_monster_card(Game& game ,Monster* frenziedMonster) {
 }
                     
 void TheInnocent::play_monster_card(Game& game ,Monster* frenziedMonster) {
+    render();
       
         place_or_move_villager();                  
                     
@@ -212,6 +216,7 @@ void HurriedAssistant::play_monster_card(Game& game ,Monster* frenziedMonster) {
 }
 
 void EgyptianExpert::play_monster_card(Game& game ,Monster* frenziedMonster) {
+    render();
     place_or_move_villager();                  
                     
     play_strike(game , map, turnManager, pool, monstersMap , frenziedMonster);
@@ -227,6 +232,7 @@ void FortuneTeller::play_monster_card(Game& game ,Monster* frenziedMonster) {
 
 
 void FormerEmoloyer::play_monster_card(Game& game ,Monster* frenziedMonster) {
+    render();
     place_or_move_villager();                  
                     
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
@@ -234,6 +240,7 @@ void FormerEmoloyer::play_monster_card(Game& game ,Monster* frenziedMonster) {
 }
 
 void TheDelivary::play_monster_card(Game& game,Monster* frenziedMonster) {
+    render();
     place_or_move_villager();                  
                     
         play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
@@ -559,8 +566,8 @@ void Monstercard::remove_villager(Villager* v) {
 
 }
 
-void Monstercard::place_items(ItemPool& pool) const {
-    std::cout << "---PLACING THE ITEMS---" << std::endl;
+void Monstercard::place_items(ItemPool& pool)  {
+    placed_items.clear(); // پاک‌سازی آیتم‌های قبلی
 
     int itemCount = get_item_count();
     auto newItems = pool.draw_random_items(itemCount);
@@ -569,14 +576,13 @@ void Monstercard::place_items(ItemPool& pool) const {
         Location* loc = map.get_location_by_name(item.getLocationName());
         if (loc) {
             loc->add_item(item);
-            std::cout << "Placed "
-                      <<  item.getName()
-                      << " at " << item.getLocationName() << "\n";
-        } else {
-            std::cout << "Location " << item.getLocationName() << " not found! Skipping item.\n";
+            placed_items.push_back({item, loc});  // ذخیره برای رندر
         }
     }
+
+    has_items_placed = true;
 }
+
 
 void Monstercard::place_or_move_villager() {
     if (character_name.empty() || destination_location.empty())
@@ -607,6 +613,12 @@ void Monstercard::place_or_move_villager() {
         if (v) {
             std::cout << "Event: Villager " << name << " was created and placed at " << dest << ".\n";
         }
+    }
+
+
+    if (v) {
+        affected_villager = v; // ذخیره برای نمایش
+        has_villager_event = true;
     }
 }
 
@@ -749,3 +761,31 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
 }
 
 
+void Monstercard::render() {
+    int y = 20;
+
+    DrawText(card_name.c_str(), 20, y, 30, YELLOW);
+    y += 40;
+
+    if (has_villager_event && affected_villager) {
+        DrawText(("Villager: " + affected_villager->get_name() + " → " +
+                  affected_villager->get_currentLocation()->get_name()).c_str(), 
+                  20, y, 20, LIGHTGRAY);
+        y += 30;
+    }
+
+    if (has_items_placed && !placed_items.empty()) {
+        DrawText("Items Placed:", 20, y, 20, GREEN);
+        y += 25;
+
+        for (auto& [item, loc] : placed_items) {
+            std::string text = item.getName() + " at " + loc->get_name();
+            DrawText(text.c_str(), 40, y, 20, GREEN);
+            y += 20;
+        }
+    }
+
+   
+        DrawText("Strike! Monsters Attack!", 20, y, 20, RED);
+    
+}

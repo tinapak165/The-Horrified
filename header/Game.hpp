@@ -18,13 +18,6 @@
 #include "Heroes.hpp"
 
 
-enum class GameState {
-    MENU,
-    PLAYING,
-    PAUSED,
-    GAME_OVER,
-    QUIT
-};
 
 
 
@@ -69,6 +62,8 @@ public:
     void return_item(const Item& item);
 
     std::string checkString(std::string) ; 
+    std::unique_ptr<Monstercard> current_card = nullptr;
+
    
     void monster_phase();
     void monster_dice();
