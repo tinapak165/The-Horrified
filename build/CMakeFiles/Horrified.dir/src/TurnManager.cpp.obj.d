@@ -51,11 +51,14 @@ CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/vector.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/memory_resource.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstddef \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stddef.h \
- C:/w64devkit/include/stddef.h C:/w64devkit/include/crtdefs.h \
- C:/w64devkit/include/corecrt.h C:/w64devkit/include/_mingw.h \
- C:/w64devkit/include/_mingw_mac.h C:/w64devkit/include/_mingw_secapi.h \
- C:/w64devkit/include/vadefs.h C:/w64devkit/include/sdks/_mingw_ddk.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stddef.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/crtdefs.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_mac.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_secapi.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/vadefs.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sdks/_mingw_ddk.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
@@ -68,10 +71,13 @@ CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stringfwd.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/postypes.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cwchar \
- C:/w64devkit/include/wchar.h C:/w64devkit/include/corecrt_stdio_config.h \
- C:/w64devkit/include/corecrt_wstdlib.h \
- C:/w64devkit/include/_mingw_off_t.h C:/w64devkit/include/_mingw_stat64.h \
- C:/w64devkit/include/swprintf.inl C:/w64devkit/include/sec_api/wchar_s.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/wchar.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt_stdio_config.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt_wstdlib.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_off_t.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stat64.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/swprintf.inl \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/wchar_s.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/exception \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/exception_ptr.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h \
@@ -81,26 +87,30 @@ CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/localefwd.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/c++locale.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/clocale \
- C:/w64devkit/include/locale.h C:/w64devkit/include/stdio.h \
- C:/w64devkit/include/sec_api/stdio_s.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/locale.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stdio.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdio_s.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cctype \
- C:/w64devkit/include/ctype.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/ctype.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ios_base.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/atomicity.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/gthr-default.h \
- C:/w64devkit/include/pthread.h C:/w64devkit/include/errno.h \
- C:/w64devkit/include/sys/types.h C:/w64devkit/include/process.h \
- C:/w64devkit/include/corecrt_startup.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/limits.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/syslimits.h \
- C:/w64devkit/include/limits.h C:/w64devkit/include/signal.h \
- C:/w64devkit/include/pthread_signal.h C:/w64devkit/include/time.h \
- C:/w64devkit/include/sys/timeb.h \
- C:/w64devkit/include/sec_api/sys/timeb_s.h \
- C:/w64devkit/include/_timeval.h C:/w64devkit/include/pthread_time.h \
- C:/w64devkit/include/pthread_compat.h \
- C:/w64devkit/include/pthread_unistd.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/pthread.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/errno.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sys/types.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/process.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt_startup.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/limits.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/signal.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_signal.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/time.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sys/timeb.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/sys/timeb_s.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_timeval.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_time.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_compat.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_unistd.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/atomic_word.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_classes.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/string \
@@ -111,9 +121,10 @@ CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/string_view.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ext/string_conversions.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdlib \
- C:/w64devkit/include/stdlib.h C:/w64devkit/include/sec_api/stdlib_s.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/stdlib.h \
- C:/w64devkit/include/malloc.h \
+ C:/w64devkit/include/stdlib.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdlib_s.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stdlib.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/malloc.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/mm_malloc.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/std_abs.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdio \
@@ -129,7 +140,7 @@ CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/basic_ios.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_facets.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cwctype \
- C:/w64devkit/include/wctype.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/wctype.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/streambuf_iterator.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h \
@@ -197,8 +208,7 @@ CMakeFiles/Horrified.dir/src/TurnManager.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/poly_laguerre.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/riemann_zeta.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/cstdint \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/stdint.h \
- C:/w64devkit/include/stdint.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stdint.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/random.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uniform_int_dist.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h \
