@@ -49,8 +49,10 @@ class Hero{
         std::vector<Item> usedItemsForDracula;
         std::vector<Item> usedItemsForInvisibleMan;
 
+        Texture2D HeroTex;
+        std::string HeroTex_path;
     public:
-        Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction) ;
+        Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction , std::string HeroTex_path) ;
 
         void MoveAction(GameMap& , Hero*) ;
         void MoveTo(Location*  , std::vector<Villager*>) ;
@@ -103,8 +105,14 @@ class Hero{
 
         std::vector<Item> getUsedItemsForDracula();
         std::vector<Item> getUsedItemsForInvisibleMan();
-
         virtual ~Hero() = default ; 
+        Texture2D getTexture();
+        
+        
+        
+        void loadTexture();
+      
+
 };
 
 

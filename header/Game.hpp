@@ -43,6 +43,8 @@ private:
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
+    std::vector<Villager*> all_villagers;
+    
     int terror_Level = 0;
     bool game_over = false;
     
@@ -51,6 +53,11 @@ public:
     ~Game();
     void start() ;
     void choose_character();
+    GameMap& get_map();
+    std::unordered_map<MonsterType, Monster*>& get_monsters() ;
+    Monstercard* get_current_card() const ;
+    TurnManager& get_turnManager();
+
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
     void initializaDeck() ; 
@@ -79,9 +86,11 @@ public:
     Monster* get_frenzied_monster();
     
 
+    std::vector<Villager*>& get_all_villagers();
 
+    void add_villager(Villager* v);
 
-
+    void cleanup();
 };
 
 #endif

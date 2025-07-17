@@ -161,53 +161,9 @@ void Game::hero_phase(Hero* hero) {
     hero->resetMaxActions() ;
 }
 void Game::start() {
-    cout<<"before initi window raylib ************************";
-    InitWindow(800, 600, "Horrified");
-    SetTargetFPS(60);
-
-    for(Hero* hero : turnManager.get_heroes()){
-        getNewCard(hero);
-    }
-
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-
-        Hero* activeHero = turnManager.get_active_hero();
-        hero_phase(activeHero);   // هنوز گرافیکی نیست ولی اجرا میشه
-
-        if (!skipMonsterPhase) {
-            monster_phase();  
-        } else {
-            std::cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";
-            skipMonsterPhase = false;
-        }
-
-        if (current_card)
-            current_card->render();  // اینجا رندر میشه
-
-        EndDrawing();
-
-        // پایان بازی
-        if (terror_Level >= 6) {
-            std::cout << "Game Over! Terror level reached 6.\n";
-            break;
-        }
-        if (deck.is_empty() && !both_monsters_defeated()) {
-            std::cout << "Game Over! No more Monster Cards.\n";
-            break;
-        }
-        if (both_monsters_defeated()) {
-            std::cout << "You win! Both monsters defeated!\n";
-            break;
-        }
-
-        locationOverview();
-        turnManager.next_turn();
-    }
-
-    CloseWindow();  
+    
 }
+
 
           
  
@@ -321,8 +277,9 @@ void Game::distribute_initial_items() {
     
     for (const auto& item : items) {
         Location* loc = map.get_location_by_name(item.getLocationName());
+        Texture2D itemTex = item.getTexture();
         if (loc) {
-            loc->add_item(item);
+            loc->add_item(item , itemTex);
             std::cout << "Placed " <<" " << item.getName() <<  " at " << item.getLocationName() << std::endl;
         }
     }
@@ -352,6 +309,26 @@ void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
     h->MoveTo(hospital);
 }
+// دسترسی به map
+GameMap& Game::get_map() {
+    return map;
+}
+
+// دسترسی به monster map
+std::unordered_map<MonsterType, Monster*>& Game::get_monsters() {
+    return monstersMap;
+}
+
+// دسترسی به کارت فعلی
+Monstercard* Game::get_current_card() const {
+    return current_card.get();
+}
+
+// turn manager
+TurnManager& Game::get_turnManager() {
+    return turnManager;
+}
+
 
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
@@ -487,7 +464,7 @@ void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
         std::cout<<*drawnCard;
-        drawnCard->play_monster_card(*this,frenziedMonster);
+        drawnCard->play_monster_card(*this,frenziedMonster , all_villagers);
         if (drawnCard->has_frenzied_strike()) {
             Changing_frenzy_marker();
         }
@@ -496,6 +473,7 @@ void Game::monster_dice() {
     std::cerr << "Exception occurred: " << e.what() << std::endl;
   }
 }
+
 
 void Game::initializaMDeck(){
     for (int i =0 ; i <3 ; i++){       
@@ -525,3 +503,11 @@ Game::~Game() {
 
 
 
+std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
+void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
+
+void Game::cleanup() {
+   pool.unload_item_textures();
+    
+    // بقیه منابع مثل هیروها، مانسترها، آیکون‌ها، موسیقی...
+}

@@ -4,6 +4,8 @@
 #include <map>
 #include "monster.hpp"
 #include "Hero.hpp"
+#include <raylib.h>
+
 
 
 class location;
@@ -11,6 +13,8 @@ class location;
 class Dracula : public Monster {
     private:
     std::map<std::string, bool> coffinsDestroyed;
+    std::string MonsterTex_path;
+    Texture2D MonsterTex;
     
     public:
 
@@ -24,7 +28,9 @@ class Dracula : public Monster {
         bool can_be_defeated()override;
         void destroy_coffin_at(std::string locationName);
         const std::map<std::string, bool>& get_coffins_map() const;
-        
+         
+        Texture2D getTexture();
+        void loadTexture();
     };
     
 

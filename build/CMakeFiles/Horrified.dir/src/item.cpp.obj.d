@@ -96,4 +96,7 @@ CMakeFiles/Horrified.dir/src/item.cpp.obj: \
  C:/Users/Tina/Downloads/w64devkit/bin/include/stddef.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
- C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple
+ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h

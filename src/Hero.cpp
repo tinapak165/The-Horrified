@@ -5,8 +5,8 @@
 
 using namespace std ; 
 
-Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction)
-: name(name) , RemainingActions(MaxActions) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction){
+Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction , std::string t)
+: name(name) , RemainingActions(MaxActions) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction) , HeroTex_path(t){
 
     ListOfActions = {
         {ActionType::Move , "move" , "You can move to any places near by. you can also move the villagers with you."} ,
@@ -117,7 +117,7 @@ int Hero::AdvanceActionForDracula(){
         cout << "items chosen for advance action:\n " ;
         for(size_t i = 0 ; i < selected.size() ; i++){
             cout << (i + 1) << "-" << selected[i].getName() << "(color: " << selected[i].color_to_string(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
-            (*this).GetCurrentLocation()->add_item(selected[i]) ; 
+            (*this).GetCurrentLocation()->add_item(selected[i] , selected[i] .getTexture()) ; 
         }
     }
     else cout << "no item was selected for advance action!\n" ;
@@ -319,7 +319,7 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
     }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
-    new_location->add_hero(this) ;  
+    new_location->add_hero(this , this->getTexture()) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
     
@@ -339,7 +339,7 @@ void Hero::MoveTo(Location* new_location){ //without villager
     }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
-    new_location->add_hero(this) ;  
+    new_location->add_hero(this , this->getTexture()) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
@@ -571,4 +571,15 @@ vector<Item> Hero::getUsedItemsForInvisibleMan() {
 
 int Hero::Ability(Item& item){
     return item.getStrength() ; 
+}
+
+
+Texture2D Hero::getTexture(){ 
+    return HeroTex;}
+
+
+
+
+void Hero::loadTexture(){
+    HeroTex = LoadTexture(HeroTex_path.c_str());
 }

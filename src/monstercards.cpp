@@ -122,8 +122,8 @@ std::string Monstercard::get_destination_location() const { return destination_l
 CardType Monstercard::get_type() const { return type;}
                         
                         
-void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    render();
+void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster  ,std::vector<Villager*>& all_villagers ) {
+    
         std::cout<<this;
                     
         if (!monstersMap.count(MonsterType::Dracula)) {
@@ -153,13 +153,13 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster) {
         
         
         play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster );
-        place_items(pool);              
+        place_items(pool);     
+                 
         
     }
     
     
-    void Sunrise::play_monster_card(Game& game ,Monster* frenziedMonster){
-        render();
+    void Sunrise::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers){
         std::cout<<this;
         Monster* dracula = monstersMap[MonsterType::Dracula];
         if (dracula && dracula->is_alive()) {
@@ -171,11 +171,12 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster) {
         }  
         play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
         place_items(pool);
+        
     }
     
     
-void Thief::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    render();
+void Thief::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
+
     Monster* inv = monstersMap[MonsterType::InvisibleMan];
     if (inv && inv->is_alive()) {
         Location* maxLoc = nullptr;
@@ -195,63 +196,69 @@ void Thief::play_monster_card(Game& game ,Monster* frenziedMonster) {
     }
     play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster);
     place_items(pool);
+    
 }
                     
-void TheInnocent::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    render();
-      
-        place_or_move_villager();                  
-                    
-        play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster);
-        place_items(pool);
+void TheInnocent::play_monster_card(Game& game ,Monster* frenziedMonster ,std::vector<Villager*>& all_villagers) {
+ 
+
+    place_or_move_villager( all_villagers);                  
+    
+    play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster);
+    place_items(pool);
+   
+    
 
 
             }
  
-void HurriedAssistant::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    place_or_move_villager();                  
+void HurriedAssistant::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
+    place_or_move_villager(all_villagers);                  
                     
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
+    
 }
 
-void EgyptianExpert::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    render();
-    place_or_move_villager();                  
+void EgyptianExpert::play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) {
+    
+    place_or_move_villager(all_villagers);                  
                     
-    play_strike(game , map, turnManager, pool, monstersMap , frenziedMonster);
+    play_strike(game , map, turnManager, pool, monstersMap , frenziedMonster );
     place_items(pool);
 }
 
-void FortuneTeller::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    place_or_move_villager();                  
+void FortuneTeller::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
+    place_or_move_villager(all_villagers);                  
                     
     play_strike(game , map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
+    
 }
 
 
-void FormerEmoloyer::play_monster_card(Game& game ,Monster* frenziedMonster) {
-    render();
-    place_or_move_villager();                  
-                    
+void FormerEmoloyer::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
+    place_or_move_villager(all_villagers);                  
+    
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
+    
 }
 
-void TheDelivary::play_monster_card(Game& game,Monster* frenziedMonster) {
-    render();
-    place_or_move_villager();                  
-                    
-        play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
-        place_items(pool);
+void TheDelivary::play_monster_card(Game& game,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
+    place_or_move_villager(all_villagers);                  
+    
+    play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
+    place_items(pool);
+    
 }      
 
-void TheIchthyologist::play_monster_card( Game& game, Monster* frenziedMonster) {
-    place_or_move_villager();                  
+void TheIchthyologist::play_monster_card( Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
+    place_or_move_villager(all_villagers);                  
                     
         play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
         place_items(pool);
+        
 }  
   
 void OnTheMove::move_all_villagers_toward_safety() {
@@ -278,7 +285,7 @@ void OnTheMove::move_all_villagers_toward_safety() {
     
 }
 
-void OnTheMove::play_monster_card( Game& game, Monster* frenziedMonster) {
+void OnTheMove::play_monster_card( Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
     game.Changing_frenzy_marker();
 
                     
@@ -542,7 +549,7 @@ std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monstercard>& c
 }
 
 
-Villager* Monstercard::create_villager(const std::string& name, const std::string& locName) {
+Villager* Monstercard::create_villager(const std::string& name, const std::string& locName , std::vector<Villager*>& all_villagers) {
     Location* loc = map.get_location_by_name(locName);
     if (!loc) {
         std::cout << "Can't move the villager '" << name << "': location '" << locName << "' not found.\n";
@@ -551,6 +558,7 @@ Villager* Monstercard::create_villager(const std::string& name, const std::strin
 
     Villager* v = new Villager(map , name, nullptr, loc) ; //safeplace = null 
     std::cout << "Created new villager: " << name << " at " << locName << "\n";
+    all_villagers.push_back(v); 
     return v;
 }
 void Monstercard::remove_villager(Villager* v) {
@@ -566,7 +574,7 @@ void Monstercard::remove_villager(Villager* v) {
 
 }
 
-void Monstercard::place_items(ItemPool& pool)  {
+void Monstercard::place_items(ItemPool& pool )  {
     placed_items.clear(); // پاک‌سازی آیتم‌های قبلی
 
     int itemCount = get_item_count();
@@ -574,8 +582,10 @@ void Monstercard::place_items(ItemPool& pool)  {
 
     for (const auto& item : newItems) {
         Location* loc = map.get_location_by_name(item.getLocationName());
+        Texture2D itemTex = item.getTexture();
         if (loc) {
-            loc->add_item(item);
+            
+            loc->add_item(item , itemTex);
             placed_items.push_back({item, loc});  // ذخیره برای رندر
         }
     }
@@ -584,7 +594,7 @@ void Monstercard::place_items(ItemPool& pool)  {
 }
 
 
-void Monstercard::place_or_move_villager() {
+void Monstercard::place_or_move_villager(std::vector<Villager*>& all_villagers) {
     if (character_name.empty() || destination_location.empty())
         return;
 
@@ -598,9 +608,10 @@ void Monstercard::place_or_move_villager() {
     }
 
     Villager* v = nullptr;
-    for (Villager* vill : Villager::all()) {
+    for (Villager* vill : all_villagers) {
         if (vill->get_name() == name) {
             v = vill;
+
             break;
         }
     }
@@ -609,7 +620,7 @@ void Monstercard::place_or_move_villager() {
         v->set_currentLocation(targetLoc);
         std::cout << "Event: Villager " << name << " was moved to " << dest << ".\n";
     } else {
-        v = create_villager(name, dest);
+        v = create_villager(name, dest,  all_villagers );
         if (v) {
             std::cout << "Event: Villager " << name << " was created and placed at " << dest << ".\n";
         }
@@ -761,31 +772,4 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
 }
 
 
-void Monstercard::render() {
-    int y = 20;
-
-    DrawText(card_name.c_str(), 20, y, 30, YELLOW);
-    y += 40;
-
-    if (has_villager_event && affected_villager) {
-        DrawText(("Villager: " + affected_villager->get_name() + " → " +
-                  affected_villager->get_currentLocation()->get_name()).c_str(), 
-                  20, y, 20, LIGHTGRAY);
-        y += 30;
-    }
-
-    if (has_items_placed && !placed_items.empty()) {
-        DrawText("Items Placed:", 20, y, 20, GREEN);
-        y += 25;
-
-        for (auto& [item, loc] : placed_items) {
-            std::string text = item.getName() + " at " + loc->get_name();
-            DrawText(text.c_str(), 40, y, 20, GREEN);
-            y += 20;
-        }
-    }
-
-   
-        DrawText("Strike! Monsters Attack!", 20, y, 20, RED);
-    
-}
+Texture2D Monstercard::get_texture() const { return texture; }

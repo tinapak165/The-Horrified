@@ -1,27 +1,31 @@
 #include "location.hpp"
 #include <iostream>
 
-Location::Location(const std::string& name ) : name(name){}
+Location::Location(const std::string& name , Rectangle area, Texture2D icon) : name(name) , clickableArea(area), iconTexture(icon){}
 
 void Location::connect(Location * other){
     neighbors.push_back(other);
     other->neighbors.push_back(this);
-    
 }
 
-void Location::add_item(const Item& item) {
+const Rectangle& Location::get_clickable_area() const { return clickableArea; }
+const Texture2D& Location::get_icon_texture() const { return iconTexture; }
+
+void Location::add_item(const Item& item, Texture2D itemTex) {
     items.push_back(item);
+    itemTextures.push_back(itemTex);
 }
 
-void Location::add_hero(Hero* hero){
+void Location::add_hero(Hero* hero, Texture2D heroTex) {
     heroes.push_back(hero);
+    heroTextures.push_back(heroTex);
 }
-
 void Location::add_villager(Villager* villager){
     villagers.push_back(villager) ;
 }
 
-void Location::add_monster(Monster* monster) {
+void Location::add_monster(Monster* monster , Texture2D monsterTex) {
+    monsterTextures.push_back(monsterTex);
     monsters.push_back(monster);
 }
 
@@ -103,4 +107,39 @@ void Location::remove_villager(Villager * villager){
 std::ostream& operator<< (std::ostream & os , const Location & loc) {
     os<< loc.get_name() ;
     return os ;  
+}
+void Location::draw_icon() {
+    DrawTexture(iconTexture, clickableArea.x, clickableArea.y, WHITE);
+}
+void Location::draw_info_panel() {
+    DrawRectangle(600, 50, 350, 900, Fade(BLACK, 0.8f));  // بکگراند پنل
+
+    DrawText(name.c_str(), 620, 70, 30, WHITE);
+
+    DrawText("Items:", 620, 120, 25, YELLOW);
+    for (int i = 0; i < items.size(); i++) {
+        DrawTexture(itemTextures[i], 620, 160 + i*100, WHITE);
+        DrawText(items[i].getName().c_str(), 700, 190 + i*100, 20, WHITE);
+    }
+
+    DrawText("Heroes:", 620, 160 + items.size()*100, 25, GREEN);
+    for (int i = 0; i < heroes.size(); i++) {
+        DrawTexture(heroTextures[i], 620, 200 + items.size() + i, WHITE);
+        DrawText(heroes[i]->GetName().c_str(), 700, 230 + items.size()*100 + i*100, 20, WHITE);
+    }
+}
+
+void Location::draw_map_icons() {
+    float x = clickableArea.x + 10;
+    float y = clickableArea.y + 10;
+
+    for (const auto& tex : heroTextures) {
+        DrawTexture(tex, x, y, WHITE);
+        y += 30;
+    }
+
+    for (const auto& tex : monsterTextures) {
+        DrawTexture(tex, x, y, WHITE);
+        y += 30;
+    }
 }

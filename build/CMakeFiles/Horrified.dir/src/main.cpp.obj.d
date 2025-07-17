@@ -171,7 +171,7 @@ CMakeFiles/Horrified.dir/src/main.cpp.obj: \
  C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
  C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
  C:/Users/Tina/Desktop/clone/header/GameMap.hpp \
- C:/Users/Tina/Desktop/clone/header/Location.hpp \
+ C:/Users/Tina/Desktop/clone/header/location.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/vector \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
@@ -180,11 +180,9 @@ CMakeFiles/Horrified.dir/src/main.cpp.obj: \
  C:/Users/Tina/Desktop/clone/header/monster.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
- C:/Users/Tina/Desktop/clone/header/hero.hpp \
- C:/Users/Tina/Desktop/clone/header/villager.hpp \
- C:/Users/Tina/Desktop/clone/header/location.hpp \
- C:/Users/Tina/Desktop/clone/header/perkcards.hpp \
  C:/Users/Tina/Desktop/clone/header/Hero.hpp \
+ C:/Users/Tina/Desktop/clone/header/villager.hpp \
+ C:/Users/Tina/Desktop/clone/header/perkcards.hpp \
  C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
  C:/Users/Tina/Desktop/clone/header/Item.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/random \

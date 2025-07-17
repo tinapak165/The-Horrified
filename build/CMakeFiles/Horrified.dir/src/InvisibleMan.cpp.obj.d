@@ -146,6 +146,9 @@ CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/istream.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/utility \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_relops.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_set \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_set.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/hashtable.h \
@@ -170,7 +173,7 @@ CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_vector.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_bvector.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/vector.tcc \
- C:/Users/Tina/Desktop/clone/header/hero.hpp \
+ C:/Users/Tina/Desktop/clone/header/Hero.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/memory \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_raw_storage_iter.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/align.h \
@@ -187,7 +190,6 @@ CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: \
  C:/Users/Tina/Desktop/clone/header/villager.hpp \
  C:/Users/Tina/Desktop/clone/header/location.hpp \
  C:/Users/Tina/Desktop/clone/header/GameMap.hpp \
- C:/Users/Tina/Desktop/clone/header/Location.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/unordered_map.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/queue \
@@ -196,7 +198,6 @@ CMakeFiles/Horrified.dir/src/InvisibleMan.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/deque.tcc \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_queue.h \
  C:/Users/Tina/Desktop/clone/header/perkcards.hpp \
- C:/Users/Tina/Desktop/clone/header/Hero.hpp \
  C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
  C:/Users/Tina/Desktop/clone/header/Item.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/random \

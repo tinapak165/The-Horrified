@@ -97,6 +97,9 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/uses_allocator_args.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tuple \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
+ C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/iostream \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ostream \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/ostream.h \
@@ -184,9 +187,7 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/Users/Tina/Desktop/clone/header/villager.hpp \
  C:/Users/Tina/Desktop/clone/header/location.hpp \
  C:/Users/Tina/Desktop/clone/header/item.hpp \
- C:/Users/Tina/Desktop/clone/header/hero.hpp \
  C:/Users/Tina/Desktop/clone/header/GameMap.hpp \
- C:/Users/Tina/Desktop/clone/header/Location.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/queue \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/deque \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/stl_deque.h \
@@ -236,8 +237,5 @@ CMakeFiles/Horrified.dir/src/monstercards.cpp.obj: \
  C:/Users/Tina/Desktop/clone/header/Dice.hpp \
  C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/ctime \
  C:/Users/Tina/Desktop/clone/header/Game.hpp \
- C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
- C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
- C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
  C:/Users/Tina/Desktop/clone/header/Monstercards.hpp \
  C:/Users/Tina/Desktop/clone/header/Heroes.hpp

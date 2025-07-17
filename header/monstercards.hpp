@@ -57,7 +57,12 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
             std::vector<std::pair<Item, Location*>> placed_items; // آیتم‌ها و مکانشون
             Villager* affected_villager = nullptr;
             bool has_villager_event;
+           
             bool has_items_placed;
+
+     protected:
+            Texture2D texture;
+
         public:
             Monstercard() = default;
             Monstercard(std::string card_name, int itemCount, std::string event, std::vector<Strike> s, GameMap& map);
@@ -75,12 +80,15 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 std::string get_character_name() const ;
                 std::string get_destination_location() const ;
                 CardType get_type() const ;
+                
+               Texture2D get_texture() const; 
 
                 void send_hero_to_hospital(Hero* h,GameMap& map);
                 void remove_villager(Villager* v);
-                Villager* create_villager(const std::string& ,const std::string&);
-                void place_or_move_villager();
-                virtual void play_monster_card(Game& game ,Monster* frenziedMonster) = 0;
+                Villager* create_villager(const std::string& ,const std::string& ,  std::vector<Villager*>& all_villagers);
+                void place_or_move_villager( std::vector<Villager*>& all_villagers);
+                void set_affected_villager(Villager* v);
+                virtual void play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) = 0;
                 bool has_frenzied_strike() const;
                 
                 void place_items(ItemPool& pool) ;
@@ -102,8 +110,8 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
 
 
 
-                    void render();
-
+                    
+                    Texture2D load_texture_for_item(const Item& item);
                     
                 
 
@@ -123,7 +131,7 @@ class FormTheBat : public Monstercard {
 
 
 
-        void play_monster_card(Game& game, Monster* frenziedMonster)override;
+        void play_monster_card(Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers)override;
                         
 };
 class Sunrise : public Monstercard {
@@ -139,7 +147,7 @@ class Sunrise : public Monstercard {
 
 
 
-        void play_monster_card( Game& game ,Monster* frenziedMonster) override;
+        void play_monster_card( Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) override;
                         
 };
 
@@ -156,7 +164,7 @@ class TheInnocent : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
              
     
-        void play_monster_card(Game& game,Monster* frenziedMonster) override;
+        void play_monster_card(Game& game,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) override;
     };
     
 
@@ -181,7 +189,7 @@ class TheInnocent : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
              
     
-        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
 };
 
 //   Former Employer (Dr. Cranly at Lab + Invisible Man)
@@ -198,7 +206,7 @@ class FormerEmoloyer : public Monstercard {
         std::unordered_map<MonsterType, Monster*>& monstersMap);
         
         
-        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
     };
     
     //  Thief (InvisibleMan moves to most items)
@@ -215,7 +223,7 @@ class FormerEmoloyer : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
             
             
-            void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+            void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
 };
 
 class HurriedAssistant : public Monstercard {
@@ -231,7 +239,7 @@ class HurriedAssistant : public Monstercard {
         std::unordered_map<MonsterType, Monster*>& monstersMap);
         
         
-        void play_monster_card(Game& game, Monster* frenziedMonster) override;
+        void play_monster_card(Game& game, Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
     };
     
 class EgyptianExpert : public Monstercard {
@@ -247,7 +255,7 @@ class EgyptianExpert : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
             
             
-            void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+            void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
             
             
         };
@@ -266,7 +274,7 @@ class FortuneTeller : public Monstercard {
             std::unordered_map<MonsterType, Monster*>& monstersMap);
             
 
-            void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+            void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
             
  };
  class TheIchthyologist : public Monstercard {
@@ -282,7 +290,7 @@ class FortuneTeller : public Monstercard {
 
 
 
-        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
                         
 };
 
@@ -299,7 +307,7 @@ class OnTheMove : public Monstercard {
 
 
 
-        void play_monster_card(Game& game ,Monster* frenziedMonster) override;
+        void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
         void move_all_villagers_toward_safety();
                         
 };

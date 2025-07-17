@@ -3,7 +3,7 @@
 #include "location.hpp"
 #include "monster.hpp"
 
-InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation , MonsterType::InvisibleMan){
+InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation , MonsterType::InvisibleMan , "../Assest/Monsters/InvisibleMan.png"){
     
     required_locations = {
         "Inn", "Barn", "Institute", "Laboratory", "Mansion"

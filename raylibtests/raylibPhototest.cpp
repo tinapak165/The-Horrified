@@ -45,23 +45,23 @@ void phase2(Texture2D img) {
 
 
 
-// int main() {
-//     InitWindow(1000 , 1000 , "test chand draw");
+int main() {
+    InitWindow(1000 , 1000 , "test chand draw");
 
-//     Texture2D img = LoadTexture("map.png") ;
-//     Texture2D img1 = LoadTexture("Scientist.png") ;
+    Texture2D img = LoadTexture("../Assest/Heros/Mayor.png") ;
+    Texture2D img1 = LoadTexture("../Assest/Heros/Scientist.png") ;
 
-//     while(!IsKeyPressed(KEY_ESCAPE)) {
-//         phase1(img) ;
+    while(!IsKeyPressed(KEY_ESCAPE)) {
+        phase1(img) ;
         
-//         phase2(img1) ;
-//     }
+        phase2(img1) ;
+    }
 
-//     // cout<< img.height << "     " << img.width << '\n' ;
+    // cout<< img.height << "     " << img.width << '\n' ;
 
-//     CloseWindow();
-//     return 0;
+    CloseWindow();
+    return 0;
 
-//     UnloadTexture(img) ;
-//     UnloadTexture(img1) ;
-// }
+    UnloadTexture(img) ;
+    UnloadTexture(img1) ;
+}
