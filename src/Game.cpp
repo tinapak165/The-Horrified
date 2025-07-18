@@ -56,7 +56,7 @@ void Game::start() {
     // Vector2 origin = {0, 0};
     // Location* selectedLocation = nullptr;
 
-    menu->SetState(new MenuState());
+    menu->SetState(std::make_unique<MenuState>());
 
 
     while (!WindowShouldClose()) {

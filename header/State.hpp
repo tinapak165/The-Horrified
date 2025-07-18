@@ -33,13 +33,12 @@ class ExitState : public State{
     private:
         ClickableText YesText;
         ClickableText NoText;
-        Sound goodbyeSound;
-        bool soundPlayed = false;
+        // Sound goodbyeSound;
+        // bool soundPlayed = false;
 
     public:
         ExitState();
         void playState(Menu&) override;
-        ~ExitState();
 }; 
 
 class NameInputState : public State {

@@ -2,13 +2,8 @@
 
 Menu::Menu() : current_state(nullptr) {}
 
-Menu::~Menu() {
-    if (current_state) delete current_state;
-}
-
-void Menu::SetState(State* s) {
-    if (current_state) delete current_state;
-    current_state = s;
+void Menu::SetState(std::unique_ptr<State> s) {
+    current_state = std::move(s);
 }
 
 void Menu::renderCurrentState() {
