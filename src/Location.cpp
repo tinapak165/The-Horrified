@@ -129,17 +129,28 @@ void Location::draw_info_panel() {
     }
 }
 
-void Location::draw_map_icons() {
-    float x = clickableArea.x + 10;
-    float y = clickableArea.y + 10;
 
-    for (const auto& tex : heroTextures) {
-        DrawTexture(tex, x, y, WHITE);
-        y += 30;
-    }
 
-    for (const auto& tex : monsterTextures) {
-        DrawTexture(tex, x, y, WHITE);
-        y += 30;
-    }
-}
+// void Location::draw_map_icons() {
+//     float x = clickableArea.x + 10;
+//     float y = clickableArea.y + 10;
+
+//     // monsters
+//     for (const auto& tex : monsterTextures) {
+//         DrawTexture(tex, x, y, WHITE);
+//         y += 20;  // فاصله برای بعدی
+//     }
+
+//     // Heroes
+//     for (const auto& tex : heroTextures) {
+//         DrawTexture(tex, x + 30, y, WHITE);
+//         y += 20;
+//     }
+
+//     // not cmplete textues for villagers
+//     Texture2D villagerTex = LoadTexture("Assets/Characters/villager.png");
+//     for (size_t i = 0; i < villagers.size(); ++i) {
+//         DrawTexture(villagerTex, x + 60, y + i * 20, WHITE);
+//     }
+// }
+

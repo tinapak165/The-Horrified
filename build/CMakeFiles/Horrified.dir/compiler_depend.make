@@ -1137,9 +1137,7 @@ CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: C:/Users/Tina/Desktop/clone/src/Her
   C:/Users/Tina/Desktop/clone/header/InvisibleMan.hpp \
   C:/Users/Tina/Desktop/clone/header/Item.hpp \
   C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
-  C:/Users/Tina/Desktop/clone/header/Location.hpp \
   C:/Users/Tina/Desktop/clone/header/TurnManager.hpp \
-  C:/Users/Tina/Desktop/clone/header/hero.hpp \
   C:/Users/Tina/Desktop/clone/header/item.hpp \
   C:/Users/Tina/Desktop/clone/header/location.hpp \
   C:/Users/Tina/Desktop/clone/header/monster.hpp \
@@ -1150,6 +1148,7 @@ CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: C:/Users/Tina/Desktop/clone/src/Her
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_off_t.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_secapi.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stat64.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_timeval.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt_startup.h \
@@ -1167,12 +1166,14 @@ CMakeFiles/Horrified.dir/src/Heroes.cpp.obj: C:/Users/Tina/Desktop/clone/src/Her
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_signal.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_time.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_unistd.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sdks/_mingw_ddk.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdio_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdlib_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/sys/timeb_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/wchar_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/signal.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stddef.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stdint.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stdio.h \
@@ -1785,8 +1786,6 @@ CMakeFiles/Horrified.dir/src/Location.cpp.obj: C:/Users/Tina/Desktop/clone/src/L
   C:/Users/Tina/Desktop/clone/header/InvisibleMan.hpp \
   C:/Users/Tina/Desktop/clone/header/Item.hpp \
   C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
-  C:/Users/Tina/Desktop/clone/header/Location.hpp \
-  C:/Users/Tina/Desktop/clone/header/hero.hpp \
   C:/Users/Tina/Desktop/clone/header/item.hpp \
   C:/Users/Tina/Desktop/clone/header/location.hpp \
   C:/Users/Tina/Desktop/clone/header/monster.hpp \
@@ -1797,6 +1796,7 @@ CMakeFiles/Horrified.dir/src/Location.cpp.obj: C:/Users/Tina/Desktop/clone/src/L
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_off_t.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_secapi.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stat64.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_timeval.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt_startup.h \
@@ -1814,12 +1814,14 @@ CMakeFiles/Horrified.dir/src/Location.cpp.obj: C:/Users/Tina/Desktop/clone/src/L
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_signal.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_time.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_unistd.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sdks/_mingw_ddk.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdio_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdlib_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/sys/timeb_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/wchar_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/signal.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stddef.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stdint.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stdio.h \
@@ -3284,8 +3286,6 @@ CMakeFiles/Horrified.dir/src/villager.cpp.obj: C:/Users/Tina/Desktop/clone/src/v
   C:/Users/Tina/Desktop/clone/header/InvisibleMan.hpp \
   C:/Users/Tina/Desktop/clone/header/Item.hpp \
   C:/Users/Tina/Desktop/clone/header/Itembag.hpp \
-  C:/Users/Tina/Desktop/clone/header/Location.hpp \
-  C:/Users/Tina/Desktop/clone/header/hero.hpp \
   C:/Users/Tina/Desktop/clone/header/item.hpp \
   C:/Users/Tina/Desktop/clone/header/location.hpp \
   C:/Users/Tina/Desktop/clone/header/monster.hpp \
@@ -3296,6 +3296,7 @@ CMakeFiles/Horrified.dir/src/villager.cpp.obj: C:/Users/Tina/Desktop/clone/src/v
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_off_t.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_secapi.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stat64.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/_mingw_stdarg.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/_timeval.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/corecrt_startup.h \
@@ -3313,12 +3314,14 @@ CMakeFiles/Horrified.dir/src/villager.cpp.obj: C:/Users/Tina/Desktop/clone/src/v
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_signal.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_time.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/pthread_unistd.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/raylib.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sdks/_mingw_ddk.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdio_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/stdlib_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/sys/timeb_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/sec_api/wchar_s.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/signal.h \
+  C:/Users/Tina/Downloads/w64devkit/bin/include/stdarg.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stddef.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stdint.h \
   C:/Users/Tina/Downloads/w64devkit/bin/include/stdio.h \
@@ -3622,8 +3625,6 @@ C:/Users/Tina/Desktop/clone/header/Heroes.hpp:
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/cxxabi_init_exception.h:
 
 C:/Users/Tina/Downloads/w64devkit/bin/include/wchar.h:
-
-C:/Users/Tina/Desktop/clone/header/hero.hpp:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/tr1/bessel_function.tcc:
 
@@ -4014,8 +4015,6 @@ C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/unordered_map:
 C:/Users/Tina/Desktop/clone/header/TurnManager.hpp:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/codecvt.h:
-
-C:/Users/Tina/Desktop/clone/header/Location.hpp:
 
 C:/w64devkit/lib/gcc/x86_64-w64-mingw32/15.1.0/include/c++/bits/locale_conv.h:
 

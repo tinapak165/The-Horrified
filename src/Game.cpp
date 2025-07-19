@@ -28,19 +28,7 @@ Game::Game() {
     initializaDeck() ; 
 
 }
-// string get_color_code(ItemColor color) {
-//     switch (color) {
-//         case ItemColor::RED:    return "\033[31m";
-//         case ItemColor::BLUE:   return "\033[34m";
-//         case ItemColor::YELLOW: return "\033[33m";
-//         case ItemColor::Reset : return "\033[39m"; 
-//         default:                return "\033[0m";
-//     }
-// }
 
-// ostream& operator<<(ostream& os, ItemColor color) {
-//     return os << get_color_code(color) ;
-// }  
 
 std::string Game::checkString(std::string str) {
     for (char &c : str) {
@@ -318,6 +306,7 @@ GameMap& Game::get_map() {
 std::unordered_map<MonsterType, Monster*>& Game::get_monsters() {
     return monstersMap;
 }
+
 
 // دسترسی به کارت فعلی
 Monstercard* Game::get_current_card() const {

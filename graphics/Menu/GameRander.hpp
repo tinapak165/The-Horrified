@@ -14,7 +14,8 @@ public:
     void draw_items();
     void draw_map();          // فقط نقشه و آیکون‌ها
     void draw_monster_card(); // اگر کارت فعاله، نشونش بده
-
+    void draw_What_Happend_In_Text();
+    void draw_heroes();
 private:
     Game& game;
 };

@@ -220,11 +220,11 @@ std::ostream operator<<(std::ostream &output, Monster &m){
 
 bool Monster::is_alive() const { return get_location() != nullptr; }
 
-Texture2D Dracula::getTexture(){
+Texture2D Monster::getTexture(){
     return MonsterTex;
 }
 
 
-void Dracula::loadTexture(){
+void Monster::loadTexture(){
     MonsterTex = LoadTexture(MonsterTex_path.c_str());
 }

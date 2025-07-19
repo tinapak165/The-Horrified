@@ -44,6 +44,7 @@ private:
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
+    std::vector<Hero*> heroes;
     
     int terror_Level = 0;
     bool game_over = false;

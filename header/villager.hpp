@@ -14,9 +14,12 @@ class Villager{
         Location* safePlace ;
         Location* currentLocation ; 
         static std::vector<Villager*> vil ; 
+        Texture2D VillagerTex;
+        std::string VillagerTex_path;
+
     public:
         static std::vector<Villager*>& all() ; 
-        Villager( GameMap& map , const std::string& , Location* , Location*) ; 
+        Villager( GameMap& map , const std::string& , Location* , Location* ) ; 
         bool in_the_safePlace() const ; 
         void set_currentLocation(Location*) ; 
         Location* get_currentLocation() ; 
@@ -27,6 +30,9 @@ class Villager{
         bool static AnyVillagerInSafePlace() ;
         void static removeVillager();
         void removevillager(Villager*) ; 
+        void loadTexture();
+        Texture2D getTexture();
+
 };
 
 #endif
