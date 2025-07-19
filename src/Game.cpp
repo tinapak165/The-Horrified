@@ -1,12 +1,7 @@
-#include <string>
 #include <map>
 #include <iomanip>
-#include <set>
 #include <limits>
-#include <utility>
 #include "Game.hpp"
-#include "villager.hpp"
-#include <raylib.h>
 
 using namespace std;
 
@@ -14,7 +9,7 @@ Game::Game() {
     InitWindow(1000, 1000, "The Horrified");
     SetTargetFPS(60);
     map.build_map(); 
-    menu = new Menu() ; 
+    menu = make_unique<Menu>(*this) ; 
    // graph_map_text(); 
    // distribute_initial_items();
    // choose_character();
@@ -86,6 +81,7 @@ void Game::start() {
     }
     // UnloadTexture(hero1Tex);
     // UnloadTexture(item1Tex); 
+
     CloseWindow();
 }
 
@@ -96,106 +92,46 @@ string Game::checkString(std::string str) {
     return str;
 }
 
-void Game::choose_character() {
-    // std::cout << "Player 1: What is the last time you eat Garlic? (in hours ago): ";
-    // int time1;
-    // std::cin >> time1;
+void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
-    // std::cout << "Player 2: What is the last time you eat Garlic? (in hours ago): ";
-    // int time2;
-    // std::cin >> time2;
+    vector<Hero*> heroes;
 
-    // std::string firstPlayer, secondPlayer;
-    // if (time1 < time2) {
-    //     firstPlayer = "Player 1";
-    //     secondPlayer = "Player 2";
-    // } else {
-    //     firstPlayer = "Player 2";
-    //     secondPlayer = "Player 1";
-    // }    
-
-    // cout << firstPlayer << ", you eat garlic more recently!\n";
-
-    // vector<Hero*> heroes;
-
-    // vector<string> availableHeroes = {"mayor", "archaeologist", "courier", "scientist"};
-    // string choice1, choice2;
-
-    // while (true) {
-    //     std::cout << firstPlayer << ", choose your hero (Mayor, Archaeologist, Courier or Scientist): ";
-    //     std::cin >> choice1;
-    //     std::string lowerChoice1 = checkString(choice1); 
-
-    //     auto it = find(availableHeroes.begin(), availableHeroes.end(), lowerChoice1);
-    //     if (it != availableHeroes.end()) {
-    //         choice1 = lowerChoice1;
-    //         break;
-    //     } else {
-    //         cerr << "Invalid choice. Please try again.\n";
-    //     }
-    // }
-
-    // availableHeroes.erase(remove(availableHeroes.begin(), availableHeroes.end(), choice1), availableHeroes.end());
-
-    // while (true) {
-    //     cout << secondPlayer << ", choose your hero (";
-    //     for (size_t i = 0; i < availableHeroes.size(); i++) {
-    //         cout << availableHeroes[i];
-    //         if (i != availableHeroes.size() - 1) {
-    //             cout << ", ";
-    //         }
-    //     }
-    //     cout << "): ";
-    //     cin >> choice2;
-    //     string lowerChoice2 = checkString(choice2); 
-
-    //     auto it = find(availableHeroes.begin(), availableHeroes.end(), lowerChoice2);
-    //     if (it != availableHeroes.end()) {
-    //         choice2 = lowerChoice2;
-    //         break;
-    //     } else {
-    //         cerr << "Invalid choice. Please try again.\n";
-    //     }
-    // }
-/*
-    if (choice1 == "mayor") {
+    if (p1.heroType == "mayor") {
         mayor = new Mayor(map);
         heroes.push_back(mayor);
     }
-    else if (choice1 == "archaeologist") {
+    else if (p1.heroType == "archaeologist") {
         archaeologist = new Archaeologist(map);
         heroes.push_back(archaeologist);
     }
-    else if (choice1 == "courier") {
+    else if (p1.heroType == "courier") {
         courier = new Courier(map , turnManager);
         heroes.push_back(courier);
     }
-    else if (choice1 == "scientist") {
+    else if (p1.heroType == "scientist") {
         scientist = new Scientist(map);
         heroes.push_back(scientist);
     }
-
-    if (choice2 == "mayor") {
+    if (p2.heroType == "mayor") {
         mayor = new Mayor(map);
         heroes.push_back(mayor);
-    } else if (choice2 == "archaeologist") {
+    } 
+    else if (p2.heroType == "archaeologist") {
         archaeologist = new Archaeologist(map);
         heroes.push_back(archaeologist);
-    } else if (choice2 == "courier") {
+    } 
+    else if (p2.heroType == "courier") {
         courier = new Courier(map , turnManager);
         heroes.push_back(courier);
-    } else if (choice2 == "scientist") {
+    } 
+    else if (p2.heroType == "scientist") {
         scientist = new Scientist(map);
         heroes.push_back(scientist);
-    }
-
-    std::cout << firstPlayer << " is the " << choice1 << ".\n";
-    std::cout << secondPlayer << " is the " << choice2 << ".\n";
-
+    } 
     turnManager = TurnManager(heroes);
-    */
 }
-void Game::play_hero_Action(Hero *h){
+void Game::play_hero_Action(Hero *h)
+{
     while(true){
         string chosenAction ; 
         cout << "what action do you want to play this turn(Move, Special , Guide , Pickup , Advance ,Defeat , Perk , Help , Quit)? " ;
@@ -231,7 +167,7 @@ void Game::play_hero_Action(Hero *h){
                 h->DefeatAction(h , invisibleMan , dracula) ; 
             }
         } 
-    }    
+    }
 }
 
 void Game::hero_phase(Hero* hero) {

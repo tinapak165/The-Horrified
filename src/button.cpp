@@ -38,7 +38,25 @@ bool Button::isPressed(Vector2 mousePos, bool click)const {
     return click && CheckCollisionPointRec(mousePos, bounds);
 }
 
-Button::~Button() {
+Vector2 Button::GetPosition() const{
+return {bounds.x, bounds.y} ; 
+}
+
+Vector2 Button::GetSize() const{
+return {bounds.width, bounds.height}; 
+}
+
+Rectangle Button::GetBounds() const{
+ return bounds;
+}
+
+void Button::DrawWithFade(Vector2 mousepos, float alpha){
+    Color fadeColor = WHITE ; 
+    fadeColor.a = static_cast<unsigned char> (alpha) ;
+    DrawTextureEx(texture , {bounds.x , bounds.y} , 0.0f , scale , fadeColor) ;
+}
+
+Button::~Button(){
     if (textureLoaded) 
         UnloadTexture(texture);
 }

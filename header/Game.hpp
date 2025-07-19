@@ -17,17 +17,23 @@
 #include "Itembag.hpp"
 #include "Heroes.hpp"
 #include "menu.hpp"
+#include "villager.hpp"
+#include "State.hpp"
+class Menu ; 
 
 class Game {
     friend class Monstercard;
 private:
-    Menu* menu;
+    std::unique_ptr<Menu> menu;
     Texture2D background ;  
     bool skipMonsterPhase = false ;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
     PerkDeck perkDeck ; 
+
+    PlayerSelection player1;
+    PlayerSelection player2;
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
@@ -47,7 +53,7 @@ public:
     Game();
     ~Game();
     void start() ;
-    void choose_character();
+    void initialize(const PlayerSelection&, const PlayerSelection&) ; 
 
     GameMap& get_map();
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
