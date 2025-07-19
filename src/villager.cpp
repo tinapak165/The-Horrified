@@ -100,3 +100,10 @@ bool Villager::AnyVillagerInSafePlace(){
 }
 
 vector<Villager*> &Villager::all(){ return vil ;}
+
+Texture2D Villager::getTexture(){ return VillagerTex;}
+
+
+void Villager::loadTexture(){
+    VillagerTex = LoadTexture(VillagerTex_path.c_str());
+}

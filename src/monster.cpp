@@ -225,6 +225,6 @@ Texture2D Monster::getTexture(){
 }
 
 
-void Dracula::loadTexture(){
+void Monster::loadTexture(){
     MonsterTex = LoadTexture(MonsterTex_path.c_str());
 }
