@@ -13,4 +13,6 @@ public:
     void add_item(const Item& item);
     void add_items(const std::vector<Item>& items);
     std::vector<Item> draw_random_items(int );
+    void load_item_textures();
+    void unload_item_textures();
 };

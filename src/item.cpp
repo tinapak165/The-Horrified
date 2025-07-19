@@ -1,24 +1,34 @@
 #include "item.hpp"
 
-Item::Item(const std::string& name, ItemColor color, int strength, const std::string& locationName)
-: name(name), color(color), strength(strength), locationName(locationName) {}
+Item::Item(std::string name,ItemColor c, int strength , std::string locationName , std::string texturepath)
+    : name(name),color(c),strength(strength) ,locationName(locationName), texturepath(texturepath) {
+    }
+
+void Item::loadTexture() {
+        texture = LoadTexture(texturepath.c_str());
+    }
+
+void Item::unloadTexture() {
+        UnloadTexture(texture);
+}   
+Texture2D Item::getTexture() const {
+    return texture;
+}
 
  const std::string& Item::getName() const{ return name;}
  ItemColor Item::getColor() const{ return color;}
  int Item::getStrength() const{ return strength;}
 
-void Item::setStrength(int new_Strength){
-    strength = new_Strength ; 
- }
-
+void Item::setStrength(int new_Strength){ strength = new_Strength ; }
  std::string Item::getLocationName() const {
     return locationName;  
 }
+
 std::string Item::color_to_string(ItemColor color) {
     switch (color) {
-        case ItemColor::red:    return "Red";
-        case ItemColor::blue:   return "Blue";
-        case ItemColor::yellow: return "Yellow";
+        case ItemColor::Red:    return "Red";
+        case ItemColor::Blue:   return "Blue";
+        case ItemColor::Yellow: return "Yellow";
         default:                return "Unknown";
     }
 }

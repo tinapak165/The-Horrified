@@ -1,9 +1,15 @@
 #ifndef ITEM_HPP
 #define ITEM_HPP
 #include <string>
+#include "raylib.h"
 
+enum class ItemColor {
+    Red,
+    Yellow,
+    Blue,
+    Reset
+};
 
-enum class ItemColor { red, yellow, blue , reset };
 
 class Item {
 private:
@@ -11,14 +17,19 @@ private:
     ItemColor color;
     int strength;
     std::string locationName; 
-
+    std::string texturepath;
+    Texture2D texture;
 public:
-    Item(const std::string& name, ItemColor color, int strength, const std::string& locationName);
+    Item(std::string name,ItemColor color, int strength, std::string locationName, std::string texturepath);
 
     const std::string& getName() const;
     ItemColor getColor() const;
     int getStrength() const;
     void setStrength(int) ; 
+    Texture2D getTexture() const;
+    void loadTexture() ;
+    void unloadTexture(); 
+   
     std::string getLocationName() const;
     static std::string color_to_string(ItemColor color);    
 

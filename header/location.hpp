@@ -21,6 +21,7 @@ class Location {
         std::string name;
         std::vector<Texture2D> itemTextures;
         std::vector<Texture2D> heroTextures;
+        std::vector<Texture2D> monsterTextures;
         std::vector<Item> items;
         std::vector<Villager*> villagers ; 
         std::vector<Hero*> heroes;
@@ -37,7 +38,7 @@ class Location {
 
         void add_item(const Item& item , Texture2D itemTex);
         void add_villager(Villager*) ;
-        void add_monster(Monster* monster);
+        void add_monster(Monster* monster , Texture2D monstertex);
         void add_hero(Hero* hero, Texture2D heroTex);
 
         void remove_hero(Hero*);
@@ -58,7 +59,7 @@ class Location {
         Location* findNeighbor(const std::string& name) const  ; 
         const Rectangle& get_clickable_area() const;
         const Texture2D& get_icon_texture() const;
-        
+        void draw_map_icons();
     };
     
 #endif

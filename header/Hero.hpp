@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include <raylib.h>
 #include "villager.hpp"
 #include "location.hpp"
 #include "item.hpp"
@@ -36,8 +35,6 @@ struct Action{
 
 class Hero{ 
     private: 
-        Texture2D texture;
-        std::string imagePath;
         std::vector<Item> ListOfitems ; 
         std::string name ; 
         int MaxActions ; 
@@ -52,8 +49,10 @@ class Hero{
         std::vector<Item> usedItemsForDracula;
         std::vector<Item> usedItemsForInvisibleMan;
 
+        Texture2D HeroTex;
+        std::string HeroTex_path;
     public:
-    Hero(std::string name, int MaxActions, Location* StartingLocation, std::string specialAction, std::string imagePath);
+        Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction , std::string HeroTex_path) ;
 
         void MoveAction(GameMap& , Hero*) ;
         void MoveTo(Location*  , std::vector<Villager*>) ;
@@ -106,10 +105,11 @@ class Hero{
 
         std::vector<Item> getUsedItemsForDracula();
         std::vector<Item> getUsedItemsForInvisibleMan();
-
-        Texture2D get_texture() const ;
-
-        virtual ~Hero(); 
+        virtual ~Hero() = default ; 
+        
+        Texture2D getTexture();
+        void loadTexture();
+      
 };
 
 

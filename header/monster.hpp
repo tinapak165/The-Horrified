@@ -4,16 +4,24 @@
 #include <string>
 #include <iostream>
 #include <utility>
-
+#include <raylib.h>
 class Hero;
 class Villager;
 class Location;
 
+
+
+enum class MonsterType { InvisibleMan, Dracula, Frenzied };
 class Monster {
 private:
 
     std::string name;
     Location* current_location;
+    MonsterType type;
+
+    std::string MonsterTex_path;
+    Texture2D MonsterTex;
+ 
 
 protected:
 
@@ -21,11 +29,13 @@ protected:
  
 
 public:
-    Monster(const std::string& name, Location* start_location);
+    Monster(const std::string& name, Location* start_location , MonsterType , std::string MonsterTex_path );
 
     const std::string& get_name() const;
     Location* get_location() const ;
     void set_location(Location* );
+    MonsterType get_type() const;
+
 
     Location* find_nearest_target(Location* start);
     Location* find_nearest_hero(Location* start);
@@ -43,6 +53,9 @@ public:
     virtual void special_power(Hero* h) =0 ;
     virtual bool is_defeated()const =0 ;
     virtual bool can_be_defeated() = 0;
+
+    Texture2D getTexture();
+    void loadTexture();
 
 
 };

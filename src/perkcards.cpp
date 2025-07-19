@@ -114,10 +114,10 @@ BreakofDawnCARD::BreakofDawnCARD(ItemPool p , GameMap& m) : Perkcard("Break of D
 void BreakofDawnCARD::play(Hero*){
     cout << "[Playing Break of Dawn - perk card] -> The next monster phase is skipped. Take 2 items out of the bag and place them in their location.\n";
     vector<Item> PoolItems = pool.draw_random_items(2) ;
-    for(const auto i : PoolItems){
+    for( auto i : PoolItems){
         Location* Loc = map.get_location_by_name(i.getLocationName());
         if(Loc){
-         //   Loc->add_item(i) ;
+            Loc->add_item(i , i.getTexture()) ;
             cout << "Item " << i.getName() << " placed in location " << i.getLocationName() << "\n";
         }
     }
@@ -132,12 +132,12 @@ void OverstockCard::play(Hero*){
     if(PoolItems.size() < 2) cerr << "not enough items drawn from the pool !\n" ;
         Location* LocFirst = map.get_location_by_name(PoolItems[0].getLocationName());
         if(LocFirst){
-     //       LocFirst->add_item(PoolItems[0]) ; 
+            LocFirst->add_item(PoolItems[0] , PoolItems[0].getTexture()) ; 
             cout << "Mayor placed " << PoolItems[0].getName() << " in the location " << PoolItems[0].getLocationName() << '\n' ;
         }
         Location* LocSecond = map.get_location_by_name(PoolItems[1].getLocationName());
         if(LocSecond){
-     //       LocSecond->add_item(PoolItems[1]) ; 
+            LocSecond->add_item(PoolItems[1] , PoolItems[0].getTexture()) ; 
             cout << "Archaeologist placed " << PoolItems[1].getName() << " in the location " << PoolItems[1].getLocationName() << '\n' ;
         }  
 }
@@ -182,4 +182,3 @@ unique_ptr<Perkcard> PerkDeck::drawcard() {
 
     return chosen_card;
 }
-

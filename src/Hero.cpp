@@ -5,12 +5,9 @@
 
 using namespace std ; 
 
-Hero::Hero(std::string name, int MaxActions, Location* StartingLocation, std::string specialAction, std::string imagePath)
-    : name(name), MaxActions(MaxActions), RemainingActions(MaxActions), 
-      StartingLocation(StartingLocation), currentLocation(StartingLocation), 
-      specialAction(specialAction), imagePath(imagePath){
+Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std::string specialAction , std::string t)
+: name(name) , RemainingActions(MaxActions) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction) , HeroTex_path(t){
 
-    texture = LoadTexture(imagePath.c_str());
     ListOfActions = {
         {ActionType::Move , "move" , "You can move to any places near by. you can also move the villagers with you."} ,
         {ActionType::Guide , "guide" , "You can move the villagers (that are in your place) to the closest place or move the villagers(that are in your neigbor place) to your place."} , 
@@ -99,11 +96,11 @@ int Hero::AdvanceActionForDracula(){
 
         Item& chosenItem = items[chosenNumber - 1] ;
 
-        if(chosenItem.getColor() != ItemColor::red){
-            cerr << "what you chosen is not red! try again.\n" ; 
+        if(chosenItem.getColor() != ItemColor::Red){
+            cerr << "what you chosen is not Red! try again.\n" ; 
             continue;
         }
-        chosenItem.setStrength(this->Ability(chosenItem)) ; 
+         chosenItem.setStrength(this->Ability(chosenItem)) ; 
         
         (*this).removeItems(chosenItem) ;
         selected.push_back(chosenItem) ; 
@@ -120,7 +117,7 @@ int Hero::AdvanceActionForDracula(){
         cout << "items chosen for advance action:\n " ;
         for(size_t i = 0 ; i < selected.size() ; i++){
             cout << (i + 1) << "-" << selected[i].getName() << "(color: " << selected[i].color_to_string(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
-        //    (*this).GetCurrentLocation()->add_item(selected[i]) ; 
+            (*this).GetCurrentLocation()->add_item(selected[i] , selected[i] .getTexture()) ; 
         }
     }
     else cout << "no item was selected for advance action!\n" ;
@@ -169,26 +166,26 @@ void Hero::DefeatAction(Hero* h , InvisibleMan* invisibleMan , Dracula* dracula)
     Location* heroLoc = h->GetCurrentLocation();       
     if (invisibleMan && invisibleMan->get_location() == heroLoc) {
         if (invisibleMan->can_be_defeated()) {
-            cout << "You are ready to defeat the Invisible Man! Use red items (total strength >= 9).\n";
-            int redPower = h->select_items_to_defeat(ItemColor::red);
-        if (redPower >= 6) {
+            cout << "You are ready to defeat the Invisible Man! Use Red items (total strength >= 9).\n";
+            int RedPower = h->select_items_to_defeat(ItemColor::Red);
+        if (RedPower >= 6) {
             invisibleMan->set_location(nullptr); 
             cout << "Invisible Man has been defeated!\n";
         } else {
-            cout << "Not enough red item power. Invisible Man survived.\n";
+            cout << "Not enough Red item power. Invisible Man survived.\n";
             }
         }
     }
     if (dracula && dracula->get_location() == heroLoc) {
         if (dracula->can_be_defeated()) {
-            cout << "You are ready to defeat Dracula! Select yellow items to attack.\n";
-            int yellowPower = h->select_items_to_defeat(ItemColor::yellow);
+            cout << "You are ready to defeat Dracula! Select Yellow items to attack.\n";
+            int YellowPower = h->select_items_to_defeat(ItemColor::Yellow);
                 
-            if (yellowPower >= 6) {
+            if (YellowPower >= 6) {
                 cout << "Dracula has been defeated!\n";
                 dracula->set_location(nullptr); 
                 } else {
-                    cout << "Not enough yellow item power. dracula did not die.\n";
+                    cout << "Not enough Yellow item power. dracula did not die.\n";
                     }
         } else {
             cout << "You must destroy all coffins first to defeat Dracula.\n";
@@ -197,7 +194,6 @@ void Hero::DefeatAction(Hero* h , InvisibleMan* invisibleMan , Dracula* dracula)
         cerr << "you can not use defeat action unless you are in monster place\n" ;
         }
 }
-
 void Hero::PickupItems()
 {
     vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
@@ -323,7 +319,7 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
     }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
- //   new_location->add_hero(this) ;  
+    new_location->add_hero(this , this->getTexture()) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
     
@@ -343,7 +339,7 @@ void Hero::MoveTo(Location* new_location){ //without villager
     }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
- //   new_location->add_hero(this) ;  
+    new_location->add_hero(this , this->getTexture()) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
@@ -452,13 +448,13 @@ void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& m
     Location* current = h->GetCurrentLocation();
     string locName = current->get_name();
     if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
-        cout << "To destroy Dracula's coffin, use red items with total strength >= 6.\n" ;
+        cout << "To destroy Dracula's coffin, use Red items with total strength >= 6.\n" ;
         int totalStrength = h->AdvanceActionForDracula() ;
         if (totalStrength >= 6) {
             dracula->destroy_coffin_at(locName); 
             pool.add_items(h->getUsedItemsForDracula()) ; 
         } else {
-            std::cout << "Advance action failed Not enough red item strength.\n";
+            std::cout << "Advance action failed Not enough Red item strength.\n";
             }
     }
     //for invisible man
@@ -505,7 +501,7 @@ void Hero::SetRemainingActions(int newRemaining){
     RemainingActions = newRemaining ;
 }
 
-int Hero::select_items_to_defeat(ItemColor requiredColor) {
+int Hero::select_items_to_defeat(ItemColor requiRedColor) {
     int totalStrength = 0;
     vector<Item> selected;
     int choice = -1;
@@ -535,8 +531,8 @@ int Hero::select_items_to_defeat(ItemColor requiredColor) {
         }
 
         Item chosen = items[choice - 1];
-        if (chosen.getColor() != requiredColor) {
-            std::cerr << "Item is not of required color.\n";
+        if (chosen.getColor() != requiRedColor) {
+            std::cerr << "Item is not of requiRed color.\n";
             continue;
         }
 
@@ -577,9 +573,13 @@ int Hero::Ability(Item& item){
     return item.getStrength() ; 
 }
 
-Hero::~Hero() {
-    UnloadTexture(texture);
-}
-Texture2D Hero::get_texture() const {
-    return texture;
+
+Texture2D Hero::getTexture(){ 
+    return HeroTex;}
+
+
+
+
+void Hero::loadTexture(){
+    HeroTex = LoadTexture(HeroTex_path.c_str());
 }

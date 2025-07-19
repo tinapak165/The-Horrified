@@ -24,6 +24,8 @@ Game::Game() {
 
     monstersMap[MonsterType::Dracula] = dracula;
     monstersMap[MonsterType::InvisibleMan] = invisibleMan;
+    frenziedMonster = dracula;
+    monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
     initializaMDeck();
     initializaDeck() ; 
@@ -95,67 +97,67 @@ string Game::checkString(std::string str) {
 }
 
 void Game::choose_character() {
-    std::cout << "Player 1: What is the last time you eat Garlic? (in hours ago): ";
-    int time1;
-    std::cin >> time1;
+    // std::cout << "Player 1: What is the last time you eat Garlic? (in hours ago): ";
+    // int time1;
+    // std::cin >> time1;
 
-    std::cout << "Player 2: What is the last time you eat Garlic? (in hours ago): ";
-    int time2;
-    std::cin >> time2;
+    // std::cout << "Player 2: What is the last time you eat Garlic? (in hours ago): ";
+    // int time2;
+    // std::cin >> time2;
 
-    std::string firstPlayer, secondPlayer;
-    if (time1 < time2) {
-        firstPlayer = "Player 1";
-        secondPlayer = "Player 2";
-    } else {
-        firstPlayer = "Player 2";
-        secondPlayer = "Player 1";
-    }    
+    // std::string firstPlayer, secondPlayer;
+    // if (time1 < time2) {
+    //     firstPlayer = "Player 1";
+    //     secondPlayer = "Player 2";
+    // } else {
+    //     firstPlayer = "Player 2";
+    //     secondPlayer = "Player 1";
+    // }    
 
-    cout << firstPlayer << ", you eat garlic more recently!\n";
+    // cout << firstPlayer << ", you eat garlic more recently!\n";
 
-    vector<Hero*> heroes;
+    // vector<Hero*> heroes;
 
-    vector<string> availableHeroes = {"mayor", "archaeologist", "courier", "scientist"};
-    string choice1, choice2;
+    // vector<string> availableHeroes = {"mayor", "archaeologist", "courier", "scientist"};
+    // string choice1, choice2;
 
-    while (true) {
-        std::cout << firstPlayer << ", choose your hero (Mayor, Archaeologist, Courier or Scientist): ";
-        std::cin >> choice1;
-        std::string lowerChoice1 = checkString(choice1); 
+    // while (true) {
+    //     std::cout << firstPlayer << ", choose your hero (Mayor, Archaeologist, Courier or Scientist): ";
+    //     std::cin >> choice1;
+    //     std::string lowerChoice1 = checkString(choice1); 
 
-        auto it = find(availableHeroes.begin(), availableHeroes.end(), lowerChoice1);
-        if (it != availableHeroes.end()) {
-            choice1 = lowerChoice1;
-            break;
-        } else {
-            cerr << "Invalid choice. Please try again.\n";
-        }
-    }
+    //     auto it = find(availableHeroes.begin(), availableHeroes.end(), lowerChoice1);
+    //     if (it != availableHeroes.end()) {
+    //         choice1 = lowerChoice1;
+    //         break;
+    //     } else {
+    //         cerr << "Invalid choice. Please try again.\n";
+    //     }
+    // }
 
-    availableHeroes.erase(remove(availableHeroes.begin(), availableHeroes.end(), choice1), availableHeroes.end());
+    // availableHeroes.erase(remove(availableHeroes.begin(), availableHeroes.end(), choice1), availableHeroes.end());
 
-    while (true) {
-        cout << secondPlayer << ", choose your hero (";
-        for (size_t i = 0; i < availableHeroes.size(); i++) {
-            cout << availableHeroes[i];
-            if (i != availableHeroes.size() - 1) {
-                cout << ", ";
-            }
-        }
-        cout << "): ";
-        cin >> choice2;
-        string lowerChoice2 = checkString(choice2); 
+    // while (true) {
+    //     cout << secondPlayer << ", choose your hero (";
+    //     for (size_t i = 0; i < availableHeroes.size(); i++) {
+    //         cout << availableHeroes[i];
+    //         if (i != availableHeroes.size() - 1) {
+    //             cout << ", ";
+    //         }
+    //     }
+    //     cout << "): ";
+    //     cin >> choice2;
+    //     string lowerChoice2 = checkString(choice2); 
 
-        auto it = find(availableHeroes.begin(), availableHeroes.end(), lowerChoice2);
-        if (it != availableHeroes.end()) {
-            choice2 = lowerChoice2;
-            break;
-        } else {
-            cerr << "Invalid choice. Please try again.\n";
-        }
-    }
-
+    //     auto it = find(availableHeroes.begin(), availableHeroes.end(), lowerChoice2);
+    //     if (it != availableHeroes.end()) {
+    //         choice2 = lowerChoice2;
+    //         break;
+    //     } else {
+    //         cerr << "Invalid choice. Please try again.\n";
+    //     }
+    // }
+/*
     if (choice1 == "mayor") {
         mayor = new Mayor(map);
         heroes.push_back(mayor);
@@ -191,6 +193,7 @@ void Game::choose_character() {
     std::cout << secondPlayer << " is the " << choice2 << ".\n";
 
     turnManager = TurnManager(heroes);
+    */
 }
 void Game::play_hero_Action(Hero *h){
     while(true){
@@ -353,12 +356,14 @@ void Game::distribute_initial_items() {
     
     for (const auto& item : items) {
         Location* loc = map.get_location_by_name(item.getLocationName());
+        Texture2D itemTex = item.getTexture();
         if (loc) {
-         //   loc->add_item(item);
-            std::cout << "Placed " << item.getName() <<" at " << item.getLocationName() << std::endl;
+            loc->add_item(item , itemTex);
+            std::cout << "Placed " <<" " << item.getName() <<  " at " << item.getLocationName() << std::endl;
         }
     }
 }
+
 void Game::monster_phase() {
     
     Location* loc = dracula->get_location();
@@ -382,7 +387,24 @@ void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
     h->MoveTo(hospital);
 }
+// دسترسی به map
+GameMap& Game::get_map() {
+    return map;
+}
+// دسترسی به monster map
+std::unordered_map<MonsterType, Monster*>& Game::get_monsters() {
+    return monstersMap;
+}
 
+// دسترسی به کارت فعلی
+Monstercard* Game::get_current_card() const {
+    return current_card.get();
+}
+
+// turn manager
+TurnManager& Game::get_turnManager() {
+    return turnManager;
+}
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
     cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
@@ -502,141 +524,59 @@ void Game::monster_objectes() const {
 void Game::return_item(const Item& item) {
     pool.add_item(item);  
 }
-
 void Game::Changing_frenzy_marker() {
     if (frenziedMonster == dracula)
         frenziedMonster = invisibleMan;
     else if (frenziedMonster == invisibleMan)
         frenziedMonster = dracula;
 }
+Monster* Game::get_frenzied_monster() {
+    return frenziedMonster;
+}
 void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
         std::cout<<*drawnCard;
-        drawnCard->play_monster_card();
-  
+        drawnCard->play_monster_card(*this,frenziedMonster , all_villagers);
+        if (drawnCard->has_frenzied_strike()) {
+            Changing_frenzy_marker();
+        }
+        current_card = std::move(drawnCard); 
     } catch (const std::exception& e) {
     std::cerr << "Exception occurred: " << e.what() << std::endl;
   }
 }
 
-void Game::frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) {
-    std::cout<<"Frenzied : "<<endl;
-    bool invisiblePowerTriggered = false;
-    for (DiceFace face : results) {
-        std::cout << "Dice result: ";
-        switch (face) {
-            case DiceFace::Power:
-            std::cout << "Power\n";
-                if (type == MonsterType::InvisibleMan) {
-                    invisiblePowerTriggered = true;
-                }
-                if (type == MonsterType::Dracula) {
-                    m->special_power(turnManager.get_active_hero());
-                }
-                break;
-            case DiceFace::Attack:
-                std::cout << "Attack\n";
-                if (type == MonsterType::Dracula) {
-                    auto target = m->attack(); //[heroTarget, villagerTarget]
-                    if (target.first && !target.second) {
-                        std::cout << "Dracula attacks " << target.first->GetName() << "!\n";
-                        if (target.first->has_items()) {
-                            const auto& items = target.first->GetItems();
-                            for (size_t i = 0; i < items.size(); ++i) {
-                                std::cout << i + 1 << ". " << items[i].getName() << " ("
-                                          << items[i].color_to_string(items[i].getColor()) << ")\n";
-                            }
-                            std::cout << "Do you want to use one item to block the attack? (yes/no): ";
-                            std::string choice;
-                            std::cin >> choice;
-
-                            if (choice == "yes" || choice == "y") {
-                                std::cout << "Select the item number to use: ";
-                                int itemIndex;
-                                std::cin >> itemIndex;
-
-                                if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
-                                    target.first->remove_item_by_index(itemIndex - 1);
-                                    pool.add_item(items[itemIndex]);
-
-                                    std::cout << "Item used to block the attack!\n";
-                                } else {
-                                    std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                    send_hero_to_hospital(target.first);
-                                    if (!terrorAlreadyIncreased) {
-                                        increase_terror_level();
-                                        terrorAlreadyIncreased = true;
-                                    }
-                                    break;
-                                }
-                            } else {
-                                std::cout << "No item used. Dracula's attack succeeds.\n";
-                                send_hero_to_hospital(target.first);
-                                if (!terrorAlreadyIncreased) {
-                                    increase_terror_level();
-                                    terrorAlreadyIncreased = true;
-                                }
-                                break;
-                            }
-                        } else {
-                            std::cout << target.first->GetName() << " has no items. Dracula's attack succeeds.\n";
-                            send_hero_to_hospital(target.first);
-                            if (!terrorAlreadyIncreased) {
-                                increase_terror_level();
-                                terrorAlreadyIncreased = true;
-                            }
-                            break;
-                        }
-                    } else if (target.second) {
-                        std::cout << "Dracula attacks " << target.second->get_name() << "!\n";
-                        target.second->removevillager(target.second)  ;
-                        if (!terrorAlreadyIncreased) {
-                            increase_terror_level();
-                            terrorAlreadyIncreased = true;
-                        }
-                        break;
-                    }
-                } else if (type == MonsterType::InvisibleMan) {
-                    auto kv = m->attack();
-                    if (kv.second) {
-                        std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
-                        kv.second->removevillager(kv.second) ;
-                        increase_terror_level();
-                    }
-                }
-                break;
-            case DiceFace::empty:
-                std::cout << "Empty\n";
-                break;
-        }
-    }
-
-    if (type == MonsterType::InvisibleMan && invisiblePowerTriggered) {
-        Location* target = m->find_nearest_villager(m->get_location());
-        if (target) {
-            Location* nextStep = m->find_next_step(target);
-            if (nextStep) {
-                m->set_location(nextStep); 
-                std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
-            }
-         } else {
-            std::cout << "Invisible Man found no villager for doing his Power in dice .\n";
-        }
-    }
-}
 
 void Game::initializaMDeck(){
-       
+    for (int i =0 ; i <3 ; i++){       
     deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap)) ;     
-    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap)) ;
     deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap)) ;
-}
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
+    }
 
+    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap));
+    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
+}
 Game::~Game() {
     for (Hero* h : turnManager.get_heroes())
         delete h;
     for(auto& pair : monstersMap)
         delete pair.second ; 
-    UnloadTexture(background) ; 
 }  
+
+std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
+void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
+
+void Game::cleanup() {
+   pool.unload_item_textures();
+    
+    // بقیه منابع مثل هیروها، مانسترها، آیکون‌ها، موسیقی...
+}

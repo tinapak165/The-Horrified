@@ -39,6 +39,7 @@ private:
     
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
+    std::vector<Villager*> all_villagers;
     int terror_Level = 0;
     bool game_over = false;
     
@@ -47,6 +48,12 @@ public:
     ~Game();
     void start() ;
     void choose_character();
+
+    GameMap& get_map();
+    std::unordered_map<MonsterType, Monster*>& get_monsters() ;
+    Monstercard* get_current_card() const ;
+    TurnManager& get_turnManager();
+
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
     void initializaDeck() ; 
@@ -58,6 +65,8 @@ public:
     void return_item(const Item& item);
 
     std::string checkString(std::string) ; 
+
+        std::unique_ptr<Monstercard> current_card = nullptr;
    
     void monster_phase();
     void monster_dice();
@@ -67,9 +76,14 @@ public:
 
     void distribute_initial_items();
     void initializaMDeck();
+
     void Changing_frenzy_marker();
     void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
-    
+    Monster* get_frenzied_monster();
+
+    std::vector<Villager*>& get_all_villagers();
+    void add_villager(Villager* v);
+    void cleanup();
 };
 
 #endif

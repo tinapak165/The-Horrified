@@ -24,7 +24,8 @@ void Location::add_villager(Villager* villager){
     villagers.push_back(villager) ;
 }
 
-void Location::add_monster(Monster* monster) {
+void Location::add_monster(Monster* monster , Texture2D monsterTex) {
+    monsterTextures.push_back(monsterTex);
     monsters.push_back(monster);
 }
 
@@ -125,5 +126,20 @@ void Location::draw_info_panel() {
     for (int i = 0; i < heroes.size(); i++) {
         DrawTexture(heroTextures[i], 620, 200 + items.size() + i, WHITE);
         DrawText(heroes[i]->GetName().c_str(), 700, 230 + items.size()*100 + i*100, 20, WHITE);
+    }
+}
+
+void Location::draw_map_icons() {
+    float x = clickableArea.x + 10;
+    float y = clickableArea.y + 10;
+
+    for (const auto& tex : heroTextures) {
+        DrawTexture(tex, x, y, WHITE);
+        y += 30;
+    }
+
+    for (const auto& tex : monsterTextures) {
+        DrawTexture(tex, x, y, WHITE);
+        y += 30;
     }
 }

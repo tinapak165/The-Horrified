@@ -10,10 +10,11 @@
 using namespace std;
 
 
-Monster::Monster (const string& name, Location* start_location) : name(name), current_location(start_location) {}
+Monster::Monster (const string& name, Location* start_location , MonsterType t,std::string path) : name(name), current_location(start_location) , type (t) , MonsterTex_path(path) {}
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
+MonsterType Monster::get_type() const { return type; }
 
 void Monster::set_location(Location* new_location) {
  
@@ -24,9 +25,10 @@ void Monster::set_location(Location* new_location) {
 
     current_location = new_location;
     if (current_location) {
-        current_location->add_monster(this);
+        current_location->add_monster(this , this->getTexture());
     }
 }
+
 
 Location* Monster::find_nearest_target(Location* start) {
    
@@ -57,7 +59,7 @@ Location* Monster::find_nearest_target(Location* start) {
 }
 
 Location* Monster::find_nearest_hero(Location* start) {
-    std::cout<<"in fine nearest target ";
+    
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
@@ -84,7 +86,7 @@ Location* Monster::find_nearest_hero(Location* start) {
     return nullptr;
 }
 Location* Monster::find_nearest_villager(Location* start) {
-    std::cout<<"in fine nearest target ";
+    
     std::queue<Location*> q;
     std::unordered_set<Location*> visited;
 
@@ -117,7 +119,7 @@ void Monster::Monster_move_event(Location* new_location){
         monsters_here.erase(std::remove(monsters_here.begin(), monsters_here.end(), this), monsters_here.end());
 
     }
-    new_location->add_monster(this);
+    new_location->add_monster(this , this->getTexture());
     current_location = new_location;
     std::cout<< this->get_name() << " moved to "<< new_location->get_name()<< "\n";
 
@@ -205,7 +207,7 @@ void Monster::move_towards(int max_steps) {
         monsters_here.erase(std::remove(monsters_here.begin(), monsters_here.end(), this), monsters_here.end());
 
         current_location = path[i];
-        current_location->add_monster(this);
+        current_location->add_monster(this , this->getTexture());
 
         std::cout << name << " moved to " << current_location->get_name() << "\n";
     }
@@ -217,3 +219,12 @@ std::ostream operator<<(std::ostream &output, Monster &m){
  }
 
 bool Monster::is_alive() const { return get_location() != nullptr; }
+
+Texture2D Monster::getTexture(){
+    return MonsterTex;
+}
+
+
+void Dracula::loadTexture(){
+    MonsterTex = LoadTexture(MonsterTex_path.c_str());
+}

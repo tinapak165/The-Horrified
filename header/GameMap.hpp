@@ -6,6 +6,9 @@
 #include <vector>
 #include <memory>
 #include <raylib.h>
+#include <unordered_map>
+#include <queue>
+
 
 class Villager;
 
@@ -21,6 +24,7 @@ class GameMap {
         const std::vector<std::unique_ptr<Location>>& get_locations() const; 
         void draw_map();
         Location* check_click(Vector2 mousePos); 
+        Location* find_next_step(Location* start, Location* goal);
 };
 
 #endif
