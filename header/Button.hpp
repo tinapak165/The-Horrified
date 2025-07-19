@@ -1,6 +1,5 @@
 #ifndef BUTTON_H
 #define BUTTON_H
-
 #include <raylib.h>
 #include <string>
 
@@ -23,11 +22,24 @@ class Button {
     private:
         Texture2D texture ; 
         Rectangle bounds;
+        bool textureLoaded;
+        float scale ; 
 
     public:
-        Button(const std::string& path, Vector2 position);
+        Button(const std::string& path, Vector2 position, float scale = 0.15f);
         void Draw(Vector2 mousePos);
-        bool isPressed(Vector2 mousePos, bool click);
+        bool isPressed(Vector2 mousePos, bool click)const;
         ~Button();
+};
+
+struct TextBox {
+    Rectangle rect;
+    std::string text;
+    bool active;
+    enum InputType {ANY, NUMBERS_ONLY, LETTERS_ONLY } inputType;
+    TextBox(): rect({0,0,0,0}), text(""), active(false), inputType(ANY) {} ;
+
+    TextBox(Rectangle r, InputType type = ANY) : 
+        rect(r), text(""), active(false), inputType(type) {}
 };
 #endif

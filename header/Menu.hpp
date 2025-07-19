@@ -6,12 +6,11 @@ class State ;
 
 class Menu{
     private : 
-        State* current_state ; 
+        std::unique_ptr<State> current_state ; 
     public:
         Menu() ; 
-        void SetState(State*) ; 
+        void SetState(std::unique_ptr<State>) ; 
         void renderCurrentState(); 
-        ~Menu();
 };
 
 

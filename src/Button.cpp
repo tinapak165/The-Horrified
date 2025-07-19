@@ -1,16 +1,10 @@
 #include "button.hpp"
 
-Button::Button(const std::string& path, Vector2 position) {
-    texture = LoadTexture(path.c_str());
-    bounds = { position.x, position.y, (float)texture.width, (float)texture.height };
-}
-
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
     int width = MeasureText(text.c_str(), fontSize);
     bounds = { pos.x, pos.y, (float)width, (float)fontSize };
 }
-
 void ClickableText::Draw(Vector2 mousePos) {
     DrawText(text.c_str(), position.x, position.y, fontSize, color);
     if (CheckCollisionPointRec(mousePos, bounds)) {
@@ -22,18 +16,29 @@ bool ClickableText::isClicked(Vector2 mousePos, bool click) const {
     return click && CheckCollisionPointRec(mousePos, bounds);
 }
 
-void Button::Draw(Vector2 mousePos)
-{
-    DrawTexture(texture, bounds.x, bounds.y, WHITE);
-    if (CheckCollisionPointRec(mousePos, bounds)) {
-        DrawRectangleLines(bounds.x, bounds.y, bounds.width, bounds.height, RED);
-    }
+Button::Button(const std::string& path, Vector2 position , float scale) : textureLoaded(false) , scale(scale) {
+    texture = LoadTexture(path.c_str());
+
+    textureLoaded = true;
+    bounds = {position.x, position.y, 
+            (float)texture.width*scale, (float)texture.height*scale};
 }
 
-bool Button::isPressed(Vector2 mousePos, bool click) {
+void Button::Draw(Vector2 mousePos) {
+    if (!textureLoaded) return;
+       
+      //  DrawTexture(texture, static_cast<int>(bounds.x),static_cast<int>(bounds.y), WHITE);
+    DrawTextureEx(texture, (Vector2){bounds.x, bounds.y}, 0.0f, scale, WHITE); //with scale
+    if (CheckCollisionPointRec(mousePos, bounds)) {
+        DrawRectangleLinesEx(bounds, 2.0f, RED);
+    }
+}    
+
+bool Button::isPressed(Vector2 mousePos, bool click)const {
     return click && CheckCollisionPointRec(mousePos, bounds);
 }
 
 Button::~Button() {
-    UnloadTexture(texture);
+    if (textureLoaded) 
+        UnloadTexture(texture);
 }
