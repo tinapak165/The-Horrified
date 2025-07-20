@@ -11,8 +11,7 @@ void GameRender::draw() {
 }
 
 void GameRender::draw_map() {
-    game.get_map().draw_map();
-   
+    game.get_map().draw_map();   
 }
 
 void GameRender::draw_monsters() {

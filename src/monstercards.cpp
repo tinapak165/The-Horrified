@@ -213,7 +213,7 @@ void TheInnocent::play_monster_card(Game& game ,Monster* frenziedMonster ,std::v
             }
  
 void HurriedAssistant::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
-    place_or_move_villager(all_villagers);                  
+    place_or_move_villager(all_villagers);                   
                     
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);

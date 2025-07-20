@@ -16,25 +16,24 @@
 #include "Dice.hpp"
 #include "Itembag.hpp"
 #include "Heroes.hpp"
-#include "menu.hpp"
-#include "villager.hpp"
 #include "State.hpp"
 #include "GameRander.hpp"
-class Menu ; 
+
+class Menu;
 
 class Game {
     friend class Monstercard;
+    friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
-    std::unique_ptr<Menu> menu;
-    Texture2D background ;  
     bool skipMonsterPhase = false ;
+    bool terrorAlreadyIncreased = false;
+
+    std::unique_ptr<Menu> menu;
+    Texture2D background ;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
     PerkDeck perkDeck ; 
-
-    PlayerSelection player1;
-    PlayerSelection player2;
 
     Hero* mayor = nullptr;
     Hero* archaeologist = nullptr;
@@ -47,6 +46,8 @@ private:
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
+    std::vector<Hero*> heroes;
+    
     int terror_Level = 0;
     bool game_over = false;
     
@@ -72,9 +73,9 @@ public:
     void return_item(const Item& item);
 
     std::string checkString(std::string) ; 
-
     std::unique_ptr<Monstercard> current_card = nullptr;
-   
+
+
     void monster_phase();
     void monster_dice();
     void send_hero_to_hospital(Hero* );
@@ -83,13 +84,16 @@ public:
 
     void distribute_initial_items();
     void initializaMDeck();
-
+   
     void Changing_frenzy_marker();
     void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
     Monster* get_frenzied_monster();
+    
 
     std::vector<Villager*>& get_all_villagers();
+
     void add_villager(Villager* v);
+
     void cleanup();
 };
 

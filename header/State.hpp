@@ -67,7 +67,8 @@ class ChooseCharacterState : public State{
         PlayerSelection player2 ; 
 
         bool player1First;
-        std::string* currentPlayer;
+        enum class PlayerTurn {PLAYER1 , PLAYER2} ;
+        PlayerTurn currentTurn ; 
         std::vector<bool> selectedHeroes; 
 
         std::vector<std::unique_ptr<Button>> heroButtons;
@@ -75,9 +76,12 @@ class ChooseCharacterState : public State{
         
         ClickableText instructionText; 
         std::string selectedMessage; 
+        bool readyToStart = false;
+        double selectionTime = 0;
+
     public:
 
-        ChooseCharacterState(const PlayerSelection& p1, const PlayerSelection& p2);
+        ChooseCharacterState(const PlayerSelection&, const PlayerSelection&);
         void playState(Menu&) override;
 };
 

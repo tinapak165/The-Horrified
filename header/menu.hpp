@@ -13,7 +13,7 @@ class Menu{
         void SetState(std::unique_ptr<State>) ; 
         void renderCurrentState(); 
         State* getState(); 
-        void startGame(const PlayerSelection&, const PlayerSelection&) ; 
+        void startGame(const PlayerSelection&, const PlayerSelection&) ;
 };
 
 #endif

@@ -1,5 +1,5 @@
 #include "button.hpp"
-
+#include <iostream>
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
     int width = MeasureText(text.c_str(), fontSize);
@@ -57,6 +57,7 @@ void Button::DrawWithFade(Vector2 mousepos, float alpha){
 }
 
 Button::~Button(){
-    if (textureLoaded) 
+    if (textureLoaded) {
         UnloadTexture(texture);
+    }
 }

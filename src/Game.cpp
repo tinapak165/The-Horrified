@@ -1,18 +1,26 @@
+#include <string>
 #include <map>
 #include <iomanip>
+#include <set>
 #include <limits>
+#include <utility>
 #include "Game.hpp"
+#include "villager.hpp"
+#include "menu.hpp"
 
 using namespace std;
 
 Game::Game() {
     InitWindow(1000, 1000, "The Horrified");
+
+    // SetWorkingDirectory(GetApplicationDirectory());
+
     SetTargetFPS(60);
+    
+
     map.build_map(); 
-    menu = make_unique<Menu>(*this) ; 
-   // graph_map_text(); 
-   // distribute_initial_items();
-   // choose_character();
+    menu = make_unique<Menu>(*this) ;
+
     
     dracula = new Dracula(map.get_location_by_name("Cave")); 
     invisibleMan = new InvisibleMan(map.get_location_by_name("Barn"));
@@ -25,67 +33,6 @@ Game::Game() {
     initializaMDeck();
     initializaDeck() ; 
 
-}
- 
-void Game::start() { 
-
-    // // ساخت کاراکتر Mayor
-    // mayor = new Mayor(map);
-
-    // // افزودن Mayor و آیتم به مکان Inn
-    // Location* inn = map.get_location_by_name("Inn");
-    // if (inn) {
-    //     inn->add_hero(mayor, hero1Tex);
-    //     inn->add_item(Item("Sword", ItemColor::blue, 12, "Inn"), item1Tex);
-    // } else {
-    //     std::cerr << "[ERROR] Inn location not found!" << std::endl;
-    // }
-
-    // // نواحی نقشه
-    // Rectangle source = {0, 0, (float) background.width, (float)background.height};
-    // Rectangle dest = {0, 0, 1000, 1000};
-    // Vector2 origin = {0, 0};
-    // Location* selectedLocation = nullptr;
-
-    menu->SetState(std::make_unique<MenuState>());
-    GameRender game(*this) ; 
-
-    while (!WindowShouldClose()) {
-
-        // Vector2 mousePos = GetMousePosition();
-        // if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        //     selectedLocation = map.check_click(mousePos);
-        // }
-
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-        
-        menu->renderCurrentState();
-        if(menu->getState() == nullptr)
-            game.draw() ; 
-
-
-        // DrawTexturePro(background, source, dest, origin, 0, WHITE);
-        // map.draw_map();
-
-        // if (selectedLocation) {
-        //     selectedLocation->draw_info_panel();
-        // }
-
-        EndDrawing();
-    }
-    // UnloadTexture(hero1Tex);
-    // UnloadTexture(item1Tex); 
-
-    CloseWindow();
-}
-
-string Game::checkString(std::string str) {
-    for (char &c : str) {
-        c = tolower(c);
-    }
-    return str;
 }
 
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
@@ -126,8 +73,53 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
     } 
     turnManager = TurnManager(heroes);
 }
-void Game::play_hero_Action(Hero *h)
-{
+std::string Game::checkString(std::string str) {
+    for (char &c : str) {
+        c = tolower(c);
+    }
+    return str;
+}
+void Game::start() {
+    
+    menu->SetState(std::make_unique<MenuState>());
+    GameRender gamerender(*this);
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+         
+        menu->renderCurrentState();
+
+        if (menu->getState() == nullptr)
+            gamerender.draw();
+
+        EndDrawing();
+    }
+    CloseWindow();
+}
+
+void Game::initializaDeck(){
+    for(int i = 0 ; i < 3 ; i++){
+        perkDeck.addCard(std::make_unique<Repelcard>(dracula, invisibleMan, map));
+        perkDeck.addCard(std::make_unique<Hurrycard>(mayor , archaeologist , map)) ;
+        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+        perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
+        perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan , map)) ;     
+    }
+    perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+    perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+
+}
+void Game::getNewCard(Hero* hero){
+    auto card = perkDeck.drawcard() ; 
+    hero->AddAvailablePerk(std::move(card)) ;
+}
+
+
+
+void Game::play_hero_Action(Hero *h){
     while(true){
         string chosenAction ; 
         cout << "what action do you want to play this turn(Move, Special , Guide , Pickup , Advance ,Defeat , Perk , Help , Quit)? " ;
@@ -163,81 +155,9 @@ void Game::play_hero_Action(Hero *h)
                 h->DefeatAction(h , invisibleMan , dracula) ; 
             }
         } 
-    }
+    }    
 }
 
-void Game::hero_phase(Hero* hero) {
-
-    hero->DisplayInfo() ;
-    play_hero_Action(hero) ;
-
-    if(Villager::AnyVillagerInSafePlace()){
-        Villager::removeVillager() ;
-        getNewCard(hero) ; 
-        cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
-    }
-    hero->resetMaxActions() ;
-}
-
-// void Game::start() { 
-//     locationOverview() ;
-//     for(Hero* hero : turnManager.get_heroes()){
-//         getNewCard(hero) ; 
-//     }
-
-//     while (true) {
-
-//         cout << "<-----------HERO PHASE----------->\n"; 
-//         Hero* activeHero = turnManager.get_active_hero();
-//         cout << "It's " << activeHero->GetName() << "'s turn!\n";
-//         hero_phase(activeHero);
-
-//         graph_map_text();
-
-//         if(!skipMonsterPhase){
-//         cout << "\n<-----------MONSTER PHASE---------->\n"; 
-//         monster_phase();
-//         }
-//         else{
-//             cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
-//             skipMonsterPhase = false;     
-//         }
-
-//         locationOverview() ;
-
-//         if (terror_Level >= 6) {
-//             std::cout << "Game Over! Terror level reached 6.\n";
-//             break;
-//         }    
-//         // if (deck.is_empty() && !both_monsters_defeated()) {
-//         //     std::cout << "Game Over! No more Monster Cards.\n";
-//         //     break;
-//         // }    
-//         if (both_monsters_defeated()) {
-//             std::cout << "You win! Both monsters defeated!\n";
-//             break;
-//         }
-//         turnManager.next_turn();
-//     }    
-// }
-void Game::initializaDeck(){
-    for(int i = 0 ; i < 3 ; i++){
-        perkDeck.addCard(std::make_unique<Repelcard>(dracula, invisibleMan, map));
-        perkDeck.addCard(std::make_unique<Hurrycard>(mayor , archaeologist , map)) ;
-        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
-        perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
-        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan , map)) ;     
-    }
-    perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-    perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
-
-}
-void Game::getNewCard(Hero* hero){
-    auto card = perkDeck.drawcard() ; 
-    hero->AddAvailablePerk(std::move(card)) ;
-}
 
 void Game::ChoosePerkCardANDplay(Hero * hero){
     auto& availablePerks = hero->GetAvailablePerkCards() ;
@@ -296,6 +216,7 @@ void Game::distribute_initial_items() {
     }
 }
 
+
 void Game::monster_phase() {
     
     Location* loc = dracula->get_location();
@@ -323,10 +244,12 @@ void Game::send_hero_to_hospital(Hero* h) {
 GameMap& Game::get_map() {
     return map;
 }
+
 // دسترسی به monster map
 std::unordered_map<MonsterType, Monster*>& Game::get_monsters() {
     return monstersMap;
 }
+
 
 // دسترسی به کارت فعلی
 Monstercard* Game::get_current_card() const {
@@ -337,6 +260,8 @@ Monstercard* Game::get_current_card() const {
 TurnManager& Game::get_turnManager() {
     return turnManager;
 }
+
+
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
     cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
@@ -362,7 +287,7 @@ void Game::locationOverview() {
                 int cnt = kv.second.first;
                 ItemColor color = kv.second.second;
 
-                itemStr +=  name + "(" + to_string(cnt) + "),";
+                itemStr +=   name  + "(" + to_string(cnt) + "),";
             }
             if (!itemStr.empty()) itemStr.pop_back();  
         }
@@ -456,6 +381,7 @@ void Game::monster_objectes() const {
 void Game::return_item(const Item& item) {
     pool.add_item(item);  
 }
+
 void Game::Changing_frenzy_marker() {
     if (frenziedMonster == dracula)
         frenziedMonster = invisibleMan;
@@ -465,6 +391,7 @@ void Game::Changing_frenzy_marker() {
 Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
 }
+
 void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
@@ -497,12 +424,21 @@ void Game::initializaMDeck(){
     deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap)) ;
     deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
 }
+
 Game::~Game() {
     for (Hero* h : turnManager.get_heroes())
         delete h;
     for(auto& pair : monstersMap)
         delete pair.second ; 
-}  
+
+    pool.unload_item_textures();
+    
+    map.unload(); 
+ 
+}
+
+
+
 
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
 void Game::add_villager(Villager* v) { all_villagers.push_back(v); }

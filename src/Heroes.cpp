@@ -3,7 +3,7 @@
 #include "Hero.hpp"
 using namespace std ; 
 
-Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_location_by_name("Docks") , "can take any number of items from adjacent locations." , "../Assest/Heros/Archaeologist.png") {
+Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_location_by_name("Docks") , "can take any number of items from adjacent locations." , "../Assets/Heros/Archaeologist.png") {
     Map.get_location_by_name("Docks")->add_hero(this , this->getTexture()) ; 
 }
 
@@ -54,7 +54,7 @@ void Archaeologist::SpecialAction(Location* chosenplace){
     }
 }
 
-Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action." , "../Assest/Heros/Mayor.png") {
+Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action." , "../Assets/Heros/Mayor.png") {
     Map.get_location_by_name("Theatre")->add_hero(this , this->getTexture()) ; 
 }
 
@@ -67,7 +67,7 @@ void Mayor::SpecialAction(Location*) {
     cout << "this hero does not have any special action\n" ; 
 }
 
-Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_location_by_name("Shop") , "can be moved to a location where one of the other heroes is." , "../Assest/Heros/Courier.png") , turn(m) {
+Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_location_by_name("Shop") , "can be moved to a location where one of the other heroes is." , "../Assets/Heros/Courier.png") , turn(m) {
     Map.get_location_by_name("Shop")->add_hero(this , this->getTexture()) ; 
 } 
 
@@ -92,7 +92,7 @@ void Courier::SpecialAction(Location *){
     }
     cout << "invalid choice\n" ; 
 }
-Scientist::Scientist(GameMap& Map) : Hero("scientist" , 4 , Map.get_location_by_name("Institute") , "No special action.", "../Assest/Heros/Scientist.png") {
+Scientist::Scientist(GameMap& Map) : Hero("scientist" , 4 , Map.get_location_by_name("Institute") , "No special action.", "../Assets/Heros/Scientist.png") {
     Map.get_location_by_name("Institute")->add_hero(this , this->getTexture()) ; 
 }
 

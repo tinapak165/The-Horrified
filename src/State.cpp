@@ -188,9 +188,10 @@ void NameInputState::playState(Menu& menu) {
 
 ChooseCharacterState::ChooseCharacterState(const PlayerSelection& p1, const PlayerSelection& p2)
     : player1(p1) , player2(p2), State("../Assets/Menu/Background.png") , instructionText("",{100, 50},30,BLACK) {
-    player1First = std::stoi(player1.garlicTime) < std::stoi(player2.garlicTime);
-    currentPlayer = player1First ? &player1.name : &player2.name;
 
+    player1First = std::stoi(player1.garlicTime) < std::stoi(player2.garlicTime);
+    currentTurn = player1First ? PlayerTurn::PLAYER1 : PlayerTurn::PLAYER2;
+    
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Mayor.png", Vector2{150, 150})) ;
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Archaeologist.png", Vector2{150, 550}) );
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Courier.png", Vector2{600, 150} , 0.31f)) ;
@@ -198,67 +199,64 @@ ChooseCharacterState::ChooseCharacterState(const PlayerSelection& p1, const Play
     
     selectedHeroes = std::vector<bool>(heroButtons.size() , false) ; 
     selectedMessage = ""; 
-
 }
 
 void ChooseCharacterState::playState(Menu& menu) {
-        DrawTexture(get_background(), 0, 0, WHITE);
+    DrawTexture(get_background(), 0, 0, WHITE);
 
-        Vector2 mousePos = GetMousePosition();
-        bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
+    Vector2 mousePos = GetMousePosition();
+    bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-        ClickableText backButton("back to NameInput", {100, 900}, 30, RED);
-        backButton.Draw(mousePos);
+    ClickableText backButton("back to NameInput", {100, 900}, 30, RED);
+    backButton.Draw(mousePos);
+    if (backButton.isClicked(mousePos, mouseClicked)) {
+        menu.SetState(std::make_unique<NameInputState>());
+        return;
+    }
 
-        if (backButton.isClicked(mousePos, mouseClicked)) {
-            menu.SetState(std::make_unique<NameInputState>());
-            return;
-        }
-        instructionText = ClickableText(*currentPlayer + ", choose your hero:", {100 , 50}, 30, RED);
+    std::string currentName = (currentTurn == PlayerTurn::PLAYER1) ? player1.name : player2.name;
+    std::string instruction = currentName + ", choose your hero:";
+    DrawText(instruction.c_str(), 100, 50, 30, RED);
+ 
+    if (!selectedMessage.empty()) 
+        DrawText(selectedMessage.c_str(), 100, 100, 25, YELLOW);
 
-        instructionText.Draw(mousePos);
+    for (int i = 0; i < heroButtons.size(); i++) {
+        if (selectedHeroes[i]) 
+            heroButtons[i]->DrawWithFade(mousePos, 100);
+        else
+            heroButtons[i]->Draw(mousePos);      
+    }
 
-        if (!selectedMessage.empty()) {
-            DrawText(selectedMessage.c_str(), 100, 100, 25, YELLOW);
-        }
-
+    if (mouseClicked) {
         for (int i = 0; i < heroButtons.size(); i++) {
-            if(selectedHeroes[i]){
-                heroButtons[i]->DrawWithFade(mousePos , 100) ;
-            }
-            else{
-                heroButtons[i]->Draw(mousePos);
-            }
+            if (!selectedHeroes[i] && heroButtons[i]->isPressed(mousePos, mouseClicked)) {
+                selectedHeroes[i] = true;
 
-            const char* name = heroNames[i].c_str();
-            int textWidth = MeasureText(name, 20);
-            Vector2 pos = heroButtons[i]->GetPosition();
-            Vector2 size = heroButtons[i]->GetSize();
-
-        }
-        if (mouseClicked) {
-            for (int i = 0; i < heroButtons.size(); i++) {
-                if (!selectedHeroes[i] && heroButtons[i]->isPressed(mousePos, mouseClicked)) {
-                    if (currentPlayer == &player1.name) {
-                        player1.heroType = heroNames[i];
-                        selectedHeroes[i] = true;
-
-                        currentPlayer = &player2.name;
-                        instructionText = ClickableText(*currentPlayer + ", choose your hero: ", {100, 50}, 30, RED);
-
-                        selectedMessage = "Player1's hero: " + player1.heroType;
-                    } else {
-                        player2.heroType = heroNames[i];
-                        selectedHeroes[i] = true;
-                        return;
-                    }
+                if (currentTurn == PlayerTurn::PLAYER1) {
+                    player1.heroType = heroNames[i];
+                    currentTurn = PlayerTurn::PLAYER2;
+                    selectedMessage = "Player 1 chose: " + player1.heroType;
+                } else {
+                    player2.heroType = heroNames[i];
+                    selectedMessage += "\nPlayer 2 chose: " + player2.heroType;
                 }
-          
+                break;
             }
         }
+        // بررسی آیا هر دو بازیکن انتخاب کرده‌اند
         if (!player1.heroType.empty() && !player2.heroType.empty()) {
-            menu.SetState(nullptr) ;
+            // اضافه کردن تاخیر برای نمایش پیام نهایی
+            double selectionTime = GetTime();
+            while (GetTime() - selectionTime < 2.0) { // 2 ثانیه تاخیر
+                BeginDrawing();
+                ClearBackground(BLACK);
+                DrawText("Starting game...", 400, 500, 30, WHITE);
+                EndDrawing();
+            }
             menu.startGame(player1, player2);
+            menu.SetState(nullptr); // یا به GameState بروید
             return;
         }
+    }
 }
