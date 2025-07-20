@@ -12,6 +12,7 @@ void GameRender::draw() {
 
 void GameRender::draw_map() {
     game.get_map().draw_map();
+    
    
 }
 

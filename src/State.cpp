@@ -1,9 +1,6 @@
 #include "State.hpp"
 #include "menu.hpp"
 #include <iostream>
-#include "State.hpp"
-#include "menu.hpp"
-#include <iostream>
 #include <cstring>
 
 State::State(const std::string& bgPath) {
@@ -117,36 +114,36 @@ void NameInputState::playState(Menu& menu) {
     }
 
     for (auto box : boxes) {
-    if (box->active) {
-        int key = GetCharPressed();
-        while (key > 0) {
-            bool isValid = false;
-            
-            switch(box->inputType) {
-                case TextBox::NUMBERS_ONLY:
-                    isValid = isdigit(key);
-                    break;
-                    
-                case TextBox::LETTERS_ONLY:
-                    isValid = isalpha(key) || key == ' '; 
-                    break;
-                    
-                case TextBox::ANY:
-                    isValid = true; 
-                    break;
+        if (box->active) {
+            int key = GetCharPressed();
+            while (key > 0) {
+                bool isValid = false;
+                
+                switch(box->inputType) {
+                    case TextBox::NUMBERS_ONLY:
+                        isValid = isdigit(key);
+                        break;
+                        
+                    case TextBox::LETTERS_ONLY:
+                        isValid = isalpha(key) || key == ' '; 
+                        break;
+                        
+                    case TextBox::ANY:
+                        isValid = true; 
+                        break;
+                }
+                
+                if (isValid && box->text.length() < 30) {
+                    box->text += (char)key;
+                }
+                key = GetCharPressed();
             }
-            
-            if (isValid && box->text.length() < 30) {
-                box->text += (char)key;
-            }
-            key = GetCharPressed();
-        }
 
-        if (IsKeyPressed(KEY_BACKSPACE) && !box->text.empty()) {
-            box->text.pop_back();
+            if (IsKeyPressed(KEY_BACKSPACE) && !box->text.empty()) {
+                box->text.pop_back();
+            }
         }
     }
-}
     const char* labels[] = {
         "Player 1 Name:",    
         "Last garlic time: ", 
@@ -175,64 +172,88 @@ void NameInputState::playState(Menu& menu) {
     
     DrawRectangleRec(continueButton, allFilled ? GREEN : GRAY);
     DrawText("Continue", continueButton.x + 50, continueButton.y + 15, 20, WHITE);
-    
+
+    PlayerSelection p1 , p2 ; 
+    p1.name = nameBox1.text ; p2.name = nameBox2.text ; 
+    p1.garlicTime = timeBox1.text ; p2.garlicTime = timeBox2.text ; 
+
     if (mouseClicked && CheckCollisionPointRec(mousePos, continueButton)) {
-        if (allFilled)
-            menu.SetState(std::make_unique<ChooseCharacterState>(nameBox1.text , timeBox1.text , nameBox2.text , timeBox2.text)) ;
+        if (allFilled){
+            menu.SetState(std::make_unique<ChooseCharacterState>(p1 , p2)) ;
+        }
         else 
             DrawText("Please fill all fields!", 300, 550, 20, RED);  
     }
 }
 
-ChooseCharacterState::ChooseCharacterState(const std::string& p1Name, const std::string& p1Time,const std::string& p2Name, const std::string& p2Time)
-    : player1Name(p1Name), player1GarlicTime(p1Time),
-      player2Name(p2Name), player2GarlicTime(p2Time) , State("../Assets/Menu/Background.png") , instructionText("",{100, 50},30,BLACK) {
-
-    player1First = std::stoi(player1GarlicTime) < std::stoi(player2GarlicTime);
-    currentPlayer = player1First ? &player1Name : &player2Name;
-    
-    instructionText = ClickableText(*currentPlayer + ", choose your hero:", {100, 50} ,30 , RED); //draw text!!
+ChooseCharacterState::ChooseCharacterState(const PlayerSelection& p1, const PlayerSelection& p2)
+    : player1(p1) , player2(p2), State("../Assets/Menu/Background.png") , instructionText("",{100, 50},30,BLACK) {
+    player1First = std::stoi(player1.garlicTime) < std::stoi(player2.garlicTime);
+    currentPlayer = player1First ? &player1.name : &player2.name;
 
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Mayor.png", Vector2{150, 150})) ;
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Archaeologist.png", Vector2{150, 550}) );
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Courier.png", Vector2{600, 150} , 0.31f)) ;
     heroButtons.push_back(std::make_unique<Button>("../Assets/Heros/Scientist.png", Vector2{600, 550})) ;
+    
+    selectedHeroes = std::vector<bool>(heroButtons.size() , false) ; 
+    selectedMessage = ""; 
 
 }
 
-void ChooseCharacterState::playState(Menu& menu){
-    DrawTexture(get_background() , 0 , 0 , WHITE) ;
-    Vector2 mousePos = GetMousePosition() ; 
-    bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON) ; 
+void ChooseCharacterState::playState(Menu& menu) {
+    DrawTexture(get_background(), 0, 0, WHITE);
 
-    ClickableText BackToNameInput = {"Back to NameInput" , {100,900} , 30 , RED} ; 
-    BackToNameInput.Draw(mousePos) ; 
+    Vector2 mousePos = GetMousePosition();
+    bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    if(BackToNameInput.isClicked(mousePos , mouseClicked)){
-        menu.SetState(std::make_unique<NameInputState>()) ; 
-        return ; 
+    ClickableText backButton("back to NameInput", {100, 900}, 30, RED);
+    backButton.Draw(mousePos);
 
+    if (backButton.isClicked(mousePos, mouseClicked)) {
+        menu.SetState(std::make_unique<NameInputState>());
+        return;
     }
 
-    instructionText.Draw(mousePos) ; 
-    for(int i = 0 ; i < heroButtons.size() ; i++){
-        if(availableHeroes[i])
-            heroButtons[i]->Draw(mousePos) ;
+    DrawText(((*currentPlayer) + ", choose your hero:").c_str(), 100, 50, 30, RED);
+    // instructionText.Draw(mousePos);
+
+    if (!selectedMessage.empty()) {
+        DrawText(selectedMessage.c_str(), 100, 100, 25, YELLOW);
     }
-    if(mouseClicked){
-        for(int i = 0 ; i < heroButtons.size() ; i++){
-            if(availableHeroes[i] && heroButtons[i]->isPressed(mousePos , mouseClicked)){
-                if(currentPlayer == &player1Name){
-                    player1Hero = heroNames[i] ; 
-                    availableHeroes[i] = false ; 
-                    currentPlayer = &player2Name ; 
-                    instructionText = ClickableText(*currentPlayer + ", choose you hero: " , {100,50} , 30 , RED) ;
-                }else{
-                    player2Hero = heroNames[i] ;
-               //     menu.startGame(player1Name, player1Hero, player2Name, player2Hero) ;
-                        return;                
+
+    for (int i = 0; i < heroButtons.size(); i++) {
+        if (selectedHeroes[i]) {
+            heroButtons[i]->DrawWithFade(mousePos , 100);
+        } else {
+            heroButtons[i]->Draw(mousePos);
+        }
+    }
+
+    // انتخاب هیروها
+    if (mouseClicked) {
+        for (int i = 0; i < heroButtons.size(); i++) {
+            if (!selectedHeroes[i] && heroButtons[i]->isPressed(mousePos, mouseClicked)) {
+                selectedHeroes[i] = true;
+
+                if (currentPlayer == &player1.name) {
+                    player1.heroType = heroNames[i];
+                    currentPlayer = &player2.name;
+                    selectedMessage = "Player 1's hero: " + player1.heroType;
+                } else {
+                    player2.heroType = heroNames[i];
+                    selectedMessage = "Player 2's hero: " + player2.heroType;
                 }
+
+                break; // فقط یک هیرو در هر کلیک انتخاب بشه
             }
         }
+    }
+
+    // اگه هر دو بازیکن هیرو انتخاب کردن، وارد بازی شو
+    if (!player1.heroType.empty() && !player2.heroType.empty()) {
+        menu.SetState(nullptr);
+        menu.startGame(player1, player2);
+        return;
     }
 }

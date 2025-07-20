@@ -17,7 +17,6 @@ public:
     bool isClicked(Vector2 mousePos, bool click) const;
 };
 
-
 class Button {
     private:
         Texture2D texture ; 
@@ -29,6 +28,10 @@ class Button {
         Button(const std::string& path, Vector2 position, float scale = 0.15f);
         void Draw(Vector2 mousePos);
         bool isPressed(Vector2 mousePos, bool click)const;
+        Vector2 GetPosition() const ;
+        Vector2 GetSize() const ;
+        Rectangle GetBounds() const ;
+        void DrawWithFade(Vector2 mousepos , float) ; 
         ~Button();
 };
 

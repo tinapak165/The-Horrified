@@ -16,6 +16,10 @@
 #include "Dice.hpp"
 #include "Itembag.hpp"
 #include "Heroes.hpp"
+#include "State.hpp"
+#include "GameRander.hpp"
+
+class Menu;
 
 
 
@@ -28,6 +32,8 @@ private:
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
 
+    std::unique_ptr<Menu> menu;
+    Texture2D background ;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
@@ -53,7 +59,10 @@ public:
     Game();
     ~Game();
     void start() ;
-    void choose_character();
+    void initialize(const PlayerSelection&, const PlayerSelection&) ; 
+
+
+    // void choose_character();
     GameMap& get_map();
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
     Monstercard* get_current_card() const ;

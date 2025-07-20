@@ -60,6 +60,7 @@ class Location {
         const Rectangle& get_clickable_area() const;
         const Texture2D& get_icon_texture() const;
         void draw_map_icons();
+        void unload();
     };
     
 #endif

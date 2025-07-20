@@ -128,7 +128,12 @@ void Location::draw_info_panel() {
         DrawText(heroes[i]->GetName().c_str(), 700, 230 + items.size()*100 + i*100, 20, WHITE);
     }
 }
-
+void Location::unload() {
+    if (iconTexture.id != 0) {
+        UnloadTexture(iconTexture);
+        iconTexture.id = 0;
+    }
+}
 
 
 // void Location::draw_map_icons() {

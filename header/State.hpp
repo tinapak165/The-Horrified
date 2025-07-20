@@ -1,13 +1,21 @@
 #ifndef STATE_H
 #define STATE_H
+
 #include <raylib.h>
 #include <iostream>
 #include <vector>
 #include <memory>
+
+struct PlayerSelection {
+    std::string name;
+    std::string heroType;
+    std::string garlicTime;
+};
+
 #include "button.hpp"
 #include "menu.hpp"
-
 class Menu ;
+
 
 class State{
     private:
@@ -16,8 +24,9 @@ class State{
     public :
         State(const std::string&) ; 
         Texture2D get_background() const ; 
-        virtual void playState(Menu&) = 0 ; 
-        virtual ~State() ; 
+        virtual void playState(Menu&) = 0 ;
+        virtual ~State(); 
+  
 };
 
 class MenuState : public State {
@@ -47,9 +56,6 @@ class NameInputState : public State {
         TextBox timeBox1, timeBox2;
         Rectangle continueButton;
 
-        std::string name1, name2;
-        std::string garlicTime1, garlicTime2;
-
     public:
         NameInputState();
         void playState(Menu&) override;
@@ -57,24 +63,21 @@ class NameInputState : public State {
 
 class ChooseCharacterState : public State{
     private:
-        std::string player1Name;
-        std::string player1GarlicTime;
-        std::string player2Name;
-        std::string player2GarlicTime;
-
-        std::string player1Hero;
-        std::string player2Hero;
+        PlayerSelection player1 ; 
+        PlayerSelection player2 ; 
 
         bool player1First;
         std::string* currentPlayer;
-        
+        std::vector<bool> selectedHeroes; 
+
         std::vector<std::unique_ptr<Button>> heroButtons;
-        std::vector<bool> availableHeroes = {true, true, true, true};
         const std::vector<std::string> heroNames = {"mayor", "archaeologist", "courier", "scientist"};
         
         ClickableText instructionText; 
+        std::string selectedMessage; 
     public:
-        ChooseCharacterState(const std::string& p1Name, const std::string& p1GarlicTime, const std::string& p2Name, const std::string& p2GarlicTime);
+
+        ChooseCharacterState(const PlayerSelection& p1, const PlayerSelection& p2);
         void playState(Menu&) override;
 };
 

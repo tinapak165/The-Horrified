@@ -19,6 +19,10 @@ set(SOURCES
     src/Location.cpp
     src/villager.cpp
     src/Heroes.cpp
+    src/Menu.cpp
+    src/State.cpp
+    src/Button.cpp
+    src/Gamerender.cpp
 )
 
 # فولدر هدرهای خودت

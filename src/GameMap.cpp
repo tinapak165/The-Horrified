@@ -1,6 +1,22 @@
 #include "GameMap.hpp"
+void GameMap::unload() {
+    if (mapTexture.id != 0) {
+        UnloadTexture(mapTexture);
+        mapTexture.id = 0;
+    }
+
+    for (auto& loc : locations) {
+        loc->unload(); // آیکون هر لوکیشن
+    }
+}
 
 void GameMap::build_map() {
+
+    mapTexture = LoadTexture("../Assets/Menu/map.png");
+if (mapTexture.id == 0) {
+    std::cerr << "[ERROR] map.png not loaded!\n";
+}
+
     add_location("Inn", {500, 170, 50, 50}, "../Assets/Icons/InnIcon.png");
     add_location("Cave" , {10,240,50,50} , "../Assets/Icons/CaveIcon.png") ; 
     add_location("Camp" , {150,240,50,50} , "../Assets/Icons/CampIcon.png") ; 
@@ -66,6 +82,8 @@ void GameMap::build_map() {
     camp->connect(precinct ) ;   
     mansion->connect(shop );
     mansion->connect(museum ) ; 
+
+
  
  
 }
@@ -83,13 +101,24 @@ Location* GameMap::get_location_by_name(const std::string& name) {
 }
 
 void GameMap::draw_map() {
-    DrawTexture(mapTexture, 0, 0, WHITE);
-    for (const auto& loc : locations) {
-        Rectangle source = { 0, 0, (float)loc->get_icon_texture().width, (float)loc->get_icon_texture().height };
-        Rectangle dest = loc->get_clickable_area();  // همون جایی که موقع add_location دادی
-        Vector2 origin = { 0, 0 };
-        DrawTexturePro(loc->get_icon_texture(), source, dest, origin, 0.0f, WHITE);
+   
+    if (mapTexture.id == 0) {
+        std::cerr << "[ERROR] map.png not loaded properly!\n";
+        return;
     }
+
+    // محاسبه scale مناسب برای حفظ نسبت تصویر و وسط‌چین کردن
+    float scale = std::min(
+        (float)GetScreenWidth() / mapTexture.width,
+        (float)GetScreenHeight() / mapTexture.height
+    );
+
+    // محاسبه موقعیت برای رسم وسط‌چین
+    float drawX = (GetScreenWidth() - mapTexture.width * scale) / 2.0f;
+    float drawY = (GetScreenHeight() - mapTexture.height * scale) / 2.0f;
+
+    // رسم نقشه با scale
+    DrawTextureEx(mapTexture, {drawX, drawY}, 0.0f, scale, WHITE);
 }
 Location* GameMap::check_click(Vector2 mousePos) {
     for (const auto& loc : locations) {

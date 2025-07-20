@@ -15,7 +15,7 @@ class Villager;
 class GameMap {
     private:
         std::vector<std::unique_ptr<Location>> locations;
-        Texture2D mapTexture;
+        Texture2D mapTexture = {0};
     public:
         void build_map(); 
         void add_location(const std::string& name, Rectangle area, const std::string& iconPath) ;
@@ -25,6 +25,7 @@ class GameMap {
         void draw_map();
         Location* check_click(Vector2 mousePos); 
         Location* find_next_step(Location* start, Location* goal);
+        void unload();
 };
 
 #endif
