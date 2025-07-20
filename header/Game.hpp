@@ -19,6 +19,7 @@
 #include "menu.hpp"
 #include "villager.hpp"
 #include "State.hpp"
+#include "GameRander.hpp"
 class Menu ; 
 
 class Game {
@@ -72,7 +73,7 @@ public:
 
     std::string checkString(std::string) ; 
 
-        std::unique_ptr<Monstercard> current_card = nullptr;
+    std::unique_ptr<Monstercard> current_card = nullptr;
    
     void monster_phase();
     void monster_dice();

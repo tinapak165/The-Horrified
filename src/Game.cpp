@@ -29,12 +29,6 @@ Game::Game() {
  
 void Game::start() { 
 
-    // // بارگذاری تکسچرها
-    // background = LoadTexture("../Assets/map.png"); 
-    // Texture2D hero1Tex = LoadTexture("../Assets/Heros/Mayor.png");
-    // Texture2D item1Tex = LoadTexture("../Assets/Items/Blue/Analysis.png");
-    // map.build_map(); 
-
     // // ساخت کاراکتر Mayor
     // mayor = new Mayor(map);
 
@@ -54,7 +48,7 @@ void Game::start() {
     // Location* selectedLocation = nullptr;
 
     menu->SetState(std::make_unique<MenuState>());
-
+    GameRender game(*this) ; 
 
     while (!WindowShouldClose()) {
 
@@ -68,6 +62,8 @@ void Game::start() {
         ClearBackground(RAYWHITE);
         
         menu->renderCurrentState();
+        if(menu->getState() == nullptr)
+            game.draw() ; 
 
 
         // DrawTexturePro(background, source, dest, origin, 0, WHITE);

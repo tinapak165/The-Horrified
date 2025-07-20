@@ -236,7 +236,6 @@ void ChooseCharacterState::playState(Menu& menu) {
             Vector2 size = heroButtons[i]->GetSize();
 
         }
-
         if (mouseClicked) {
             for (int i = 0; i < heroButtons.size(); i++) {
                 if (!selectedHeroes[i] && heroButtons[i]->isPressed(mousePos, mouseClicked)) {
@@ -258,7 +257,8 @@ void ChooseCharacterState::playState(Menu& menu) {
             }
         }
         if (!player1.heroType.empty() && !player2.heroType.empty()) {
+            menu.SetState(nullptr) ;
             menu.startGame(player1, player2);
             return;
         }
-    }
+}
