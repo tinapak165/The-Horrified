@@ -31,8 +31,8 @@ class State{
 
 class MenuState : public State {
     private:
-        Button startButton ; 
-        Button exitButton ; 
+        std::unique_ptr<Button> startButton ; 
+        std::unique_ptr<Button> exitButton ;
     public:
         MenuState() ; 
         void playState(Menu&) override ;  
@@ -40,8 +40,8 @@ class MenuState : public State {
 
 class ExitState : public State{
     private:
-        ClickableText YesText;
-        ClickableText NoText;
+        std::unique_ptr<ClickableText> YesText ;
+        std::unique_ptr<ClickableText> NoText ;
         // Sound goodbyeSound;
         // bool soundPlayed = false;
 
@@ -52,8 +52,9 @@ class ExitState : public State{
 
 class NameInputState : public State {
     private:
-        TextBox nameBox1, nameBox2;
-        TextBox timeBox1, timeBox2;
+        
+        std::unique_ptr<TextBox>nameBox1 ;std::unique_ptr<TextBox> nameBox2;
+        std::unique_ptr<TextBox>timeBox1 ; std::unique_ptr<TextBox>timeBox2 ; 
         Rectangle continueButton;
 
     public:
@@ -65,6 +66,9 @@ class ChooseCharacterState : public State{
     private:
         PlayerSelection player1 ; 
         PlayerSelection player2 ; 
+        bool readyToStart = false;
+        double selectionTime = 0.0;
+
 
         bool player1First;
         enum class PlayerTurn {PLAYER1 , PLAYER2} ;
@@ -76,8 +80,6 @@ class ChooseCharacterState : public State{
         
         ClickableText instructionText; 
         std::string selectedMessage; 
-        bool readyToStart = false;
-        double selectionTime = 0;
 
     public:
 

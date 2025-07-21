@@ -124,7 +124,7 @@ int Hero::AdvanceActionForDracula(){
     return totalStrength ; 
 }
 
-void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
+void Hero::AdvanceActionForInvisibleMan(unique_ptr<InvisibleMan>  monster){
     vector<Item> items = this->GetItems() ; 
     vector<Item> evidenceItems ; 
     for(const Item& item : items){
@@ -161,7 +161,7 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     } 
 
 }
-void Hero::DefeatAction(Hero* h , InvisibleMan* invisibleMan , Dracula* dracula){
+void Hero::DefeatAction(Hero* h , std::unique_ptr<InvisibleMan> invisibleMan , std::unique_ptr<Dracula>  dracula){
                    
     Location* heroLoc = h->GetCurrentLocation();       
     if (invisibleMan && invisibleMan->get_location() == heroLoc) {
@@ -443,7 +443,7 @@ void Hero::Special(Hero* h , GameMap& map){
 
 }
 
-void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map , InvisibleMan* invisi ){
+void Hero::AdvanceAction(Hero* h , unique_ptr<Dracula> dracula , ItemPool pool , GameMap& map ,unique_ptr<InvisibleMan> invisi ){
     //for dracula
     Location* current = h->GetCurrentLocation();
     string locName = current->get_name();
@@ -459,7 +459,7 @@ void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& m
     }
     //for invisible man
     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { 
-         h->AdvanceActionForInvisibleMan(invisi) ;
+         h->AdvanceActionForInvisibleMan(move(invisi)) ;
         pool.add_items(h->getUsedItemsForDracula()) ; 
     }
     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 

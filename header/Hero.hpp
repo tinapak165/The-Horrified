@@ -64,13 +64,13 @@ class Hero{
         void Special(Hero *, GameMap& )  ;
         virtual int Ability(Item& item) ; 
 
-        void AdvanceAction(Hero* , Dracula* , ItemPool , GameMap& , InvisibleMan*) ; 
+        void AdvanceAction(Hero* ,std::unique_ptr<Dracula> ,ItemPool , GameMap& , std::unique_ptr<InvisibleMan> ) ; 
         int select_items_to_defeat(ItemColor) ;
         
         int AdvanceActionForDracula() ; 
-        void AdvanceActionForInvisibleMan(InvisibleMan*) ;
+        void AdvanceActionForInvisibleMan(std::unique_ptr<InvisibleMan> ) ;
 
-        void DefeatAction(Hero*, InvisibleMan* , Dracula*) ; 
+        void DefeatAction(Hero*, std::unique_ptr<InvisibleMan>  , std::unique_ptr<Dracula> ) ; 
 
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;

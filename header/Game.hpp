@@ -23,7 +23,6 @@ class Menu;
 
 class Game {
     friend class Monstercard;
-    friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
@@ -35,14 +34,15 @@ private:
     TurnManager turnManager;
     PerkDeck perkDeck ; 
 
-    Hero* mayor = nullptr;
-    Hero* archaeologist = nullptr;
-    Hero* courier = nullptr ;
-    Hero* scientist = nullptr ; 
-    Dracula* dracula = nullptr;
-    InvisibleMan* invisibleMan = nullptr;
-    Monster* frenziedMonster;
-    
+    std::unique_ptr<Mayor> mayor = nullptr ; 
+    std::unique_ptr<Archaeologist>archaeologist  = nullptr ; 
+    std::unique_ptr<Courier> courier = nullptr ; 
+    std::unique_ptr<Scientist>scientist = nullptr ; 
+
+    std::unique_ptr<Dracula> dracula = nullptr ; 
+    std::unique_ptr<InvisibleMan> invisibleMan = nullptr ; 
+    Monster* frenziedMonster = nullptr; 
+ 
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;

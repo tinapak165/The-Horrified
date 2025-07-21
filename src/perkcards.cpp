@@ -142,7 +142,7 @@ void OverstockCard::play(Hero*){
         }  
 }
 
-VisitfromtheDetectiveCARD::VisitfromtheDetectiveCARD(InvisibleMan *& i , GameMap & map): Perkcard("Visit from the Detective") ,invisibleman(i) , map(map){}
+VisitfromtheDetectiveCARD::VisitfromtheDetectiveCARD(InvisibleMan * i , GameMap & map): Perkcard("Visit from the Detective") ,invisibleman(i) , map(map){}
 
 void VisitfromtheDetectiveCARD::play(Hero*){
         if (!invisibleman) {

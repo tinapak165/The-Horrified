@@ -15,62 +15,66 @@ Game::Game() {
 
     // SetWorkingDirectory(GetApplicationDirectory());
 
-    SetTargetFPS(60);
+     SetTargetFPS(60);
     
-
     map.build_map(); 
     menu = make_unique<Menu>(*this) ;
 
-    
-    dracula = new Dracula(map.get_location_by_name("Cave")); 
-    invisibleMan = new InvisibleMan(map.get_location_by_name("Barn"));
+    dracula = std::make_unique<Dracula>(map.get_location_by_name("Cave"));
+    invisibleMan = std::make_unique<InvisibleMan>(map.get_location_by_name("Barn"));
 
-    monstersMap[MonsterType::Dracula] = dracula;
-    monstersMap[MonsterType::InvisibleMan] = invisibleMan;
-    frenziedMonster = dracula;
+    monstersMap[MonsterType::Dracula] = dracula.get();
+    monstersMap[MonsterType::InvisibleMan] = invisibleMan.get();
+
+    frenziedMonster = dracula.get();   // frenziedMonster = dracula;
+
     monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
     initializaMDeck();
     initializaDeck() ; 
-
 }
 
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
-    vector<Hero*> heroes;
+    heroes.clear() ;
 
     if (p1.heroType == "mayor") {
-        mayor = new Mayor(map);
-        heroes.push_back(mayor);
+        mayor = std::make_unique<Mayor>(map) ;
+        heroes.push_back(mayor.get());
     }
     else if (p1.heroType == "archaeologist") {
-        archaeologist = new Archaeologist(map);
-        heroes.push_back(archaeologist);
+        archaeologist = std::make_unique<Archaeologist>(map);
+        heroes.push_back(archaeologist.get());
     }
     else if (p1.heroType == "courier") {
-        courier = new Courier(map , turnManager);
-        heroes.push_back(courier);
+        courier = std::make_unique<Courier>(map , turnManager) ;
+        heroes.push_back(courier.get());
     }
     else if (p1.heroType == "scientist") {
-        scientist = new Scientist(map);
-        heroes.push_back(scientist);
+        scientist = std::make_unique<Scientist>(map) ;
+        heroes.push_back(scientist.get());
     }
     if (p2.heroType == "mayor") {
-        mayor = new Mayor(map);
-        heroes.push_back(mayor);
+        mayor = std::make_unique<Mayor>(map) ;
+        heroes.push_back(mayor.get());
     } 
     else if (p2.heroType == "archaeologist") {
-        archaeologist = new Archaeologist(map);
-        heroes.push_back(archaeologist);
+        archaeologist = std::make_unique<Archaeologist>(map);
+        heroes.push_back(archaeologist.get());
     } 
     else if (p2.heroType == "courier") {
-        courier = new Courier(map , turnManager);
-        heroes.push_back(courier);
+        courier = std::make_unique<Courier>(map , turnManager) ;
+        heroes.push_back(courier.get());
     } 
     else if (p2.heroType == "scientist") {
-        scientist = new Scientist(map);
-        heroes.push_back(scientist);
+        scientist = std::make_unique<Scientist>(map) ;
+        heroes.push_back(scientist.get());
     } 
+
+    for (const auto& h : heroes) {
+        std::cout << h->GetName() << '\n';
+    }
+
     turnManager = TurnManager(heroes);
 }
 std::string Game::checkString(std::string str) {
@@ -79,8 +83,9 @@ std::string Game::checkString(std::string str) {
     }
     return str;
 }
+
 void Game::start() {
-    
+
     menu->SetState(std::make_unique<MenuState>());
     GameRender gamerender(*this);
 
@@ -95,18 +100,85 @@ void Game::start() {
 
         EndDrawing();
     }
+
     CloseWindow();
+/*
+    if(dracula) cout << "dracula is alive\n" ;
+    if(invisibleMan) cout << "invisi is alive\n" ; 
+    if(frenziedMonster) cout << "frienzid alive\n" ; 
+    if(mayor) cout << "mayor is alive\n" ;
+
+
+    locationOverview() ;
+    for(Hero* hero : turnManager.get_heroes()){
+        getNewCard(hero) ; 
+    }
+
+    while (true) {
+
+        cout << "<-----------HERO PHASE----------->\n" ; 
+        Hero* activeHero = turnManager.get_active_hero();
+        std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+        hero_phase(activeHero);
+
+        graph_map_text();
+
+        if(!skipMonsterPhase){
+        cout <<  "\n<-----------MONSTER PHASE---------->\n"  ; 
+        monster_phase();
+        }
+        else{
+            cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
+            skipMonsterPhase = false;     
+        }
+
+        locationOverview() ;
+
+        if (terror_Level >= 6) {
+            std::cout << "Game Over! Terror level reached 6.\n";
+            break;
+        }    
+        if (deck.is_empty() && !both_monsters_defeated()) {
+            std::cout << "Game Over! No more Monster Cards.\n";
+            break;
+        }    
+        if (both_monsters_defeated()) {
+            std::cout << "You win! Both monsters defeated!\n";
+            break;
+        }
+
+        turnManager.next_turn();
+
+    }
+*/
+
+
 }
+
+void Game::hero_phase(Hero* hero) {
+
+    hero->DisplayInfo() ;        
+
+    play_hero_Action(hero) ;
+
+    if(Villager::AnyVillagerInSafePlace()){
+        Villager::removeVillager() ;
+       cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+    }
+
+    hero->resetMaxActions() ;
+}
+
 
 void Game::initializaDeck(){
     for(int i = 0 ; i < 3 ; i++){
-        perkDeck.addCard(std::make_unique<Repelcard>(dracula, invisibleMan, map));
-        perkDeck.addCard(std::make_unique<Hurrycard>(mayor , archaeologist , map)) ;
+        perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map));
+        perkDeck.addCard(std::make_unique<Hurrycard>(mayor.get() , archaeologist.get() , map)) ;
         perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
         perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
         perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
         perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan , map)) ;     
+        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
     }
     perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
     perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
@@ -116,8 +188,6 @@ void Game::getNewCard(Hero* hero){
     auto card = perkDeck.drawcard() ; 
     hero->AddAvailablePerk(std::move(card)) ;
 }
-
-
 
 void Game::play_hero_Action(Hero *h){
     while(true){
@@ -149,15 +219,14 @@ void Game::play_hero_Action(Hero *h){
                     h->Special(h , map)  ;
             }
             else if(checkString(chosenAction) == "advance"){ 
-                h->AdvanceAction(h , dracula , pool , map , invisibleMan) ; 
+                h->AdvanceAction(h , move(dracula) , pool , map , move(invisibleMan)) ; 
             }
             else if(checkString(chosenAction) == "defeat"){
-                h->DefeatAction(h , invisibleMan , dracula) ; 
+                h->DefeatAction(h , move(invisibleMan) , move(dracula)) ; 
             }
         } 
     }    
 }
-
 
 void Game::ChoosePerkCardANDplay(Hero * hero){
     auto& availablePerks = hero->GetAvailablePerkCards() ;
@@ -194,7 +263,6 @@ void Game::ChoosePerkCardANDplay(Hero * hero){
         availablePerks.erase(availablePerks.begin() + index);
         hero->displayPlayedCards() ; 
     }
-
 }
 bool Game::both_monsters_defeated() {
      return monstersMap[MonsterType::Dracula]->is_defeated() &&
@@ -383,10 +451,10 @@ void Game::return_item(const Item& item) {
 }
 
 void Game::Changing_frenzy_marker() {
-    if (frenziedMonster == dracula)
-        frenziedMonster = invisibleMan;
-    else if (frenziedMonster == invisibleMan)
-        frenziedMonster = dracula;
+    if (frenziedMonster == dracula.get())
+        frenziedMonster = invisibleMan.get();
+    else if (frenziedMonster == invisibleMan.get())
+        frenziedMonster = dracula.get();
 }
 Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
@@ -397,7 +465,7 @@ void Game::monster_dice() {
         auto drawnCard = deck.drawcard();
         std::cout<<*drawnCard;
         drawnCard->play_monster_card(*this,frenziedMonster , all_villagers);
-        if (drawnCard->has_frenzied_strike()) {
+       if (drawnCard->has_frenzied_strike()) {
             Changing_frenzy_marker();
         }
         current_card = std::move(drawnCard); 
@@ -426,12 +494,12 @@ void Game::initializaMDeck(){
 }
 
 Game::~Game() {
-    for (Hero* h : turnManager.get_heroes())
-        delete h;
-    for(auto& pair : monstersMap)
-        delete pair.second ; 
+    // for (Hero* h : turnManager.get_heroes())
+    //     delete h;
+    // for(auto& pair : monstersMap)
+    //     delete pair.second ; 
 
-    pool.unload_item_textures();
+ //   pool.unload_item_textures();
     
     map.unload(); 
  
@@ -445,6 +513,7 @@ void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
 
 void Game::cleanup() {
    pool.unload_item_textures();
-    
+    heroes.clear() ; 
+    monstersMap.clear() ; 
     // بقیه منابع مثل هیروها، مانسترها، آیکون‌ها، موسیقی...
 }
