@@ -38,38 +38,46 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
     heroes.clear() ;
 
+    Hero* h1 = nullptr ; Hero* h2 = nullptr ;
+
     if (p1.heroType == "mayor") {
         mayor = std::make_unique<Mayor>(map) ;
-        heroes.push_back(mayor.get());
+        h1 = mayor.get() ; 
     }
     else if (p1.heroType == "archaeologist") {
         archaeologist = std::make_unique<Archaeologist>(map);
-        heroes.push_back(archaeologist.get());
+        h1 = archaeologist.get() ; 
     }
     else if (p1.heroType == "courier") {
         courier = std::make_unique<Courier>(map , turnManager) ;
-        heroes.push_back(courier.get());
+        h1 = courier.get() ; 
     }
     else if (p1.heroType == "scientist") {
         scientist = std::make_unique<Scientist>(map) ;
-        heroes.push_back(scientist.get());
+        h1 = scientist.get() ; 
     }
     if (p2.heroType == "mayor") {
         mayor = std::make_unique<Mayor>(map) ;
-        heroes.push_back(mayor.get());
+        h2 = mayor.get() ;
     } 
     else if (p2.heroType == "archaeologist") {
         archaeologist = std::make_unique<Archaeologist>(map);
-        heroes.push_back(archaeologist.get());
+        h2 = archaeologist.get() ; 
     } 
     else if (p2.heroType == "courier") {
         courier = std::make_unique<Courier>(map , turnManager) ;
-        heroes.push_back(courier.get());
+        h2 = courier.get() ; 
     } 
     else if (p2.heroType == "scientist") {
         scientist = std::make_unique<Scientist>(map) ;
-        heroes.push_back(scientist.get());
+        h2 = scientist.get() ;
     } 
+
+    if(h1) heroes.push_back(h1) ; 
+    if(h2) heroes.push_back(h2) ; 
+   
+    player1 = {p1.name , h1} ; 
+    player2 = {p2.name , h2} ;
 
     for (const auto& h : heroes) {
         std::cout << h->GetName() << '\n';
@@ -77,10 +85,12 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
     turnManager = TurnManager(heroes);
 }
-std::string Game::checkString(std::string str) {
-    for (char &c : str) {
-        c = tolower(c);
-    }
+PlayerInfo Game::getPlayer1() const{ return player1; }
+PlayerInfo Game::getPlayer2() const { return player2 ;}
+
+std::string Game::checkString(std::string str){
+    for (char &c : str) 
+        c = tolower(c); 
     return str;
 }
 
@@ -91,67 +101,64 @@ void Game::start() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+       // ClearBackground(RAYWHITE);
          
         menu->renderCurrentState();
 
         if (menu->getState() == nullptr)
             gamerender.draw();
 
+    // while (true) {
+
+    //     cout << "<-----------HERO PHASE----------->\n" ; 
+    //     Hero* activeHero = turnManager.get_active_hero();
+    //     std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+    //     hero_phase(activeHero);
+
+    //     graph_map_text();
+
+    //     if(!skipMonsterPhase){
+    //     cout <<  "\n<-----------MONSTER PHASE---------->\n"  ; 
+    //     monster_phase();
+    //     }
+    //     else{
+    //         cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
+    //         skipMonsterPhase = false;     
+    //     }
+
+    //     locationOverview() ;
+
+    //     if (terror_Level >= 6) {
+    //         std::cout << "Game Over! Terror level reached 6.\n";
+    //         break;
+    //     }    
+    //     if (deck.is_empty() && !both_monsters_defeated()) {
+    //         std::cout << "Game Over! No more Monster Cards.\n";
+    //         break;
+    //     }    
+    //     if (both_monsters_defeated()) {
+    //         std::cout << "You win! Both monsters defeated!\n";
+    //         break;
+    //     }
+
+    //     turnManager.next_turn();
+    // }
+
         EndDrawing();
     }
 
     CloseWindow();
-/*
-    if(dracula) cout << "dracula is alive\n" ;
-    if(invisibleMan) cout << "invisi is alive\n" ; 
-    if(frenziedMonster) cout << "frienzid alive\n" ; 
-    if(mayor) cout << "mayor is alive\n" ;
+
+    // if(dracula) cout << "dracula is alive\n" ;
+    // if(invisibleMan) cout << "invisi is alive\n" ; 
+    // if(frenziedMonster) cout << "frienzid alive\n" ; 
+    // if(mayor) cout << "mayor is alive\n" ;
 
 
-    locationOverview() ;
-    for(Hero* hero : turnManager.get_heroes()){
-        getNewCard(hero) ; 
-    }
-
-    while (true) {
-
-        cout << "<-----------HERO PHASE----------->\n" ; 
-        Hero* activeHero = turnManager.get_active_hero();
-        std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
-        hero_phase(activeHero);
-
-        graph_map_text();
-
-        if(!skipMonsterPhase){
-        cout <<  "\n<-----------MONSTER PHASE---------->\n"  ; 
-        monster_phase();
-        }
-        else{
-            cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
-            skipMonsterPhase = false;     
-        }
-
-        locationOverview() ;
-
-        if (terror_Level >= 6) {
-            std::cout << "Game Over! Terror level reached 6.\n";
-            break;
-        }    
-        if (deck.is_empty() && !both_monsters_defeated()) {
-            std::cout << "Game Over! No more Monster Cards.\n";
-            break;
-        }    
-        if (both_monsters_defeated()) {
-            std::cout << "You win! Both monsters defeated!\n";
-            break;
-        }
-
-        turnManager.next_turn();
-
-    }
-*/
-
+    // locationOverview() ;
+    // for(Hero* hero : turnManager.get_heroes()){
+    //     getNewCard(hero) ; 
+    // }
 
 }
 

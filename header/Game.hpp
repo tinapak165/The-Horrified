@@ -21,9 +21,15 @@
 
 class Menu;
 
+struct PlayerInfo{
+    std::string name ; 
+    Hero* hero ; 
+};
+
 class Game {
     friend class Monstercard;
 private:
+    PlayerInfo player1, player2;
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
 
@@ -56,7 +62,8 @@ public:
     ~Game();
     void start() ;
     void initialize(const PlayerSelection&, const PlayerSelection&) ; 
-
+    PlayerInfo getPlayer1() const ;
+    PlayerInfo getPlayer2() const ;
     GameMap& get_map();
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
     Monstercard* get_current_card() const ;

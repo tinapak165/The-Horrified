@@ -14,4 +14,5 @@ State* Menu::getState(){
 }
 void Menu::startGame(const PlayerSelection &p1, const PlayerSelection &p2){
     game.initialize(p1,p2) ;
+    SetState(nullptr);
 }

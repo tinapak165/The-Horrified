@@ -3,11 +3,22 @@
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
+
+    if (showingHeroInfo && infoHero != nullptr) {
+        infoHero->DisplayInfo();   
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            showingHeroInfo = false;
+            infoHero = nullptr;
+        }
+        return; 
+    }
+
     draw_map();
     draw_items();
     draw_villagers();
     draw_monsters();
     draw_monster_card();
+    draw_users() ; 
 }
 
 void GameRender::draw_map() {
@@ -120,6 +131,29 @@ void GameRender::draw_heroes() {
             DrawRectangleLinesEx(dest, 2.5f, BLUE);
         }
     }
+}
+
+void GameRender::draw_users(){
+    auto p1 = game.getPlayer1() ;
+    auto p2 = game.getPlayer2() ; 
+
+    ClickableText user1(p1.name,{90, 90} , 40, BLACK);
+    ClickableText user2(p2.name,{90, 150} , 40, BLACK);
+
+    Vector2 mouse = GetMousePosition();
+
+    user1.Draw(mouse);
+    user2.Draw(mouse);
+
+    if (user1.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+        showingHeroInfo = true ; 
+        infoHero = p1.hero ; 
+    }
+
+    if (user2.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+        showingHeroInfo = true ; 
+        infoHero = p2.hero ; 
+    } 
 }
 
 void GameRender::draw_What_Happend_In_Text(){

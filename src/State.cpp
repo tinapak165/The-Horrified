@@ -259,7 +259,6 @@ void ChooseCharacterState::playState(Menu& menu) {
                 EndDrawing();
             }
             menu.startGame(player1, player2);
-            menu.SetState(nullptr); // یا به GameState بروید
             return;
         }
     }

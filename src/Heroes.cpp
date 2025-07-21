@@ -7,10 +7,33 @@ Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_
     Map.get_location_by_name("Docks")->add_hero(this , this->getTexture()) ; 
 }
 
-void Archaeologist:: DisplayInfo() const{
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n' << "special action: " << GetSpecialActionInfo() << '\n'  ; 
+void Archaeologist::DisplayInfo() const {
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " / 4";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
+
 
 void Archaeologist::SpecialAction(Location* chosenplace){
 
@@ -59,8 +82,30 @@ Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatr
 }
 
 void Mayor::DisplayInfo()const {
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 5 << '\n'  ; 
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " /5";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Mayor::SpecialAction(Location*) {
@@ -72,8 +117,30 @@ Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_lo
 } 
 
 void Courier::DisplayInfo() const {
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n'  ;    
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " / 4";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Courier::SpecialAction(Location *){
@@ -97,8 +164,30 @@ Scientist::Scientist(GameMap& Map) : Hero("scientist" , 4 , Map.get_location_by_
 }
 
 void Scientist::DisplayInfo() const {
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n'  ;    
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " / 4";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Scientist::SpecialAction(Location *){
