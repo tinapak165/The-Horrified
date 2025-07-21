@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.28.3)
+cmake_minimum_required(VERSION 3.10)
 
 project(Horrified)
 
 include_directories(header)
-
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")  # فعال کردن اطلاعات دیباگ
 set(SOURCES
     src/Game.cpp
     src/Hero.cpp
