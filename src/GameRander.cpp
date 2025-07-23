@@ -3,7 +3,6 @@
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
-
     if (showingHeroInfo && infoHero != nullptr) {
         infoHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -12,13 +11,33 @@ void GameRender::draw() {
         }
         return; 
     }
+    if(showingHelpAction && infoHero != nullptr){
+        infoHero->DisplayActions() ;
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+            showingHelpAction = false ; 
+            infoHero = nullptr ;
+        }
+        return ;
+    }
+    if(selectedLocation){
+        selectedLocation->draw_info_panel() ; 
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+            selectedLocation = nullptr ; 
+        }
+        return ;
+    }
+
+
 
     draw_map();
+    draw_heroes() ;
+    draw_location_icon() ;
     draw_items();
     draw_villagers();
     draw_monsters();
     draw_monster_card();
-    draw_users() ; 
+    draw_users() ;
+    draw_action_panel() ; 
 }
 
 void GameRender::draw_map() {
@@ -26,23 +45,56 @@ void GameRender::draw_map() {
 }
 
 void GameRender::draw_monsters() {
-    for (const auto& [type, monster] : game.get_monsters()) {
-        if (!monster) continue;
+    const float monsterSize = 28.0f; 
+    const float spacing = 30.0f;  
+    const float offsetY = -monsterSize - 5.0f;
 
-        Location* loc = monster->get_location();
-        if (!loc) continue;
+    Texture2D mapTex = game.get_map().get_mapTexture();
+    float mapScale = std::min(
+        (float)GetScreenWidth() / mapTex.width,
+        (float)GetScreenHeight() / mapTex.height
+    );
+    float mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+    float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
 
-        Texture2D tex = monster->getTexture();
-        Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-        Rectangle area = loc->get_clickable_area();
-        Rectangle dest = { area.x + 25, area.y + 5, 24, 24 };
+    std::unordered_map<Location*, std::vector<Monster*>> monstersAtLocation;
 
-        // رسم هیولا
-        DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+    for (const auto& kv : game.get_monsters()) {
+        if (!kv.second || !kv.second->get_location()) continue;
+        monstersAtLocation[kv.second->get_location()].push_back(kv.second);
+    }
 
-        // اگه فرنزاید بود، یه مستطیل قرمز دورش بکش
-        if (monster == game.get_frenzied_monster()) {
-            DrawRectangleLinesEx(dest, 2.5f, RED);
+    Monster* frenzied = game.get_frenzied_monster();
+    bool frenziedDrawn = false;
+
+    for (const auto& [loc, monsters] : monstersAtLocation) {
+        Rectangle baseArea = loc->get_clickable_area();
+        Vector2 locPos = {
+            mapDrawX + baseArea.x * mapScale,
+            mapDrawY + baseArea.y * mapScale
+        };
+
+        float currentOffsetY = offsetY;
+
+        for (Monster* monster : monsters) {
+            Texture2D tex = monster->getTexture();
+            Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
+
+            Rectangle dest = {
+                locPos.x,
+                locPos.y + currentOffsetY,
+                monsterSize,
+                monsterSize
+            };
+
+            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+
+            if (monster == frenzied && !frenziedDrawn) {
+                DrawRectangleLinesEx(dest, 2.0f, RED);
+                frenziedDrawn = true; // فقط یک بار بکشه
+            }
+
+            currentOffsetY -= spacing;
         }
     }
 }
@@ -65,10 +117,6 @@ void GameRender::draw_villagers() {
         }
     }
 }
-                                                  
-
-
-
 
 void GameRender::draw_items() {
     for (const auto& loc : game.get_map().get_locations()) {
@@ -114,21 +162,34 @@ void GameRender::draw_monster_card() {
     DrawTexturePro(tex, src, dest, origin, 0.0f, WHITE);
 }
 void GameRender::draw_heroes() {
-    for (Hero* hero : game.get_turnManager().get_heroes()) {
-        if (!hero) continue;
+    const float heroSize = 100.0f; // سایز مناسب‌تر
+    const float spacing = 30.0f;  // فاصله بین چند هیرو در یک مکان
+    const float offsetY = -heroSize - 5.0f; // کمی بالاتر از لوکیشن
 
-        Location* loc = hero->GetCurrentLocation();
-        if (!loc) continue;
+    for (const auto& loc : game.get_map().get_locations()) {
+        Vector2 locPos = loc->get_screenPos();
+        float currentOffsetY = offsetY;
 
-        Texture2D tex = hero->getTexture();
-        Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-        Rectangle area = loc->get_clickable_area();
-        Rectangle dest = { area.x + 5, area.y + 5, 24, 24 };
+        for (Hero* hero : game.get_turnManager().get_heroes()) {
+            if (!hero || hero->GetCurrentLocation() != loc.get()) continue;
 
-        DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+            Texture2D tex = hero->getTexture();
+            Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
 
-        if (hero == game.get_turnManager().get_active_hero()) {
-            DrawRectangleLinesEx(dest, 2.5f, BLUE);
+            Rectangle dest = {
+                locPos.x,
+                locPos.y + currentOffsetY,
+                heroSize,
+                heroSize
+            };
+
+            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+
+            if (hero == game.get_turnManager().get_active_hero()) {
+                DrawRectangleLinesEx(dest, 2.0f, BLACK);
+            }
+
+            currentOffsetY -= spacing;
         }
     }
 }
@@ -154,6 +215,108 @@ void GameRender::draw_users(){
         showingHeroInfo = true ; 
         infoHero = p2.hero ; 
     } 
+}
+
+void GameRender::draw_action_panel(){
+
+    Hero* activeHero = game.get_turnManager().get_active_hero() ;
+
+    std::vector<ActionButton> actionButtons = {
+    {"Move", {50, 500, 120, 40}},
+    {"Special", {190, 500, 120, 40}},
+    {"Guide", {330, 500, 120, 40}},
+    {"Pickup", {50, 550, 120, 40}},
+    {"Advance", {190, 550, 120, 40}},
+    {"Defeat", {330, 550, 120, 40}},
+    {"Perk", {50, 600, 120, 40}},
+    {"Help", {190, 600, 120, 40}},
+    {"Quit", {330, 600, 120, 40}},
+};
+    DrawRectangle(40 , 480 , 420 , 180 , Fade(DARKGRAY , 0.8f)) ;     // بکگراند نیمه‌شفاف
+    DrawRectangleLines(40 , 480 , 420 , 180 , GRAY) ;
+    Vector2 mousepos = GetMousePosition() ; 
+
+    for(const auto& button : actionButtons){
+        bool hovered = CheckCollisionPointRec(mousepos , button.bounds) ;
+            DrawRectangleRec(button.bounds, hovered ? LIGHTGRAY : GRAY);
+        DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
+
+        if (hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            handle_action(button.label, activeHero);
+        }
+    }
+}
+void GameRender::handle_action(const std::string& action , Hero* h){
+    if (action == "Help") {
+        showingHelpAction = true ; 
+        infoHero = h ; 
+    } else if (action == "Quit") { //nafar baadi
+        showingHeroInfo = false;
+        infoHero = nullptr;
+    } else if (action == "Perk") {
+        game.ChoosePerkCardANDplay(h);
+    } else if (action == "Move") {
+        h->MoveAction(game.get_map(), h);
+    } else if (action == "Guide") {
+        h->GuideAction(h, game.get_map());
+    } else if (action == "Pickup") {
+        h->PickupItems();
+        h->DisplayItem();
+    } else if (action == "Special") {
+        h->Special(h, game.get_map());
+    } else if (action == "Advance") {
+        h->AdvanceAction(h, game.get_dracula(), game.get_pool(), game.get_map(), game.get_invisibleMan());
+    } else if (action == "Defeat") {
+        h->DefeatAction(h, game.get_invisibleMan(), game.get_dracula());
+    }
+}
+
+void GameRender::draw_location_icon() {
+    float mapScale = 1.0f;
+    float mapDrawX = 0.0f;
+    float mapDrawY = 0.0f;
+
+    Vector2 mousePos = GetMousePosition();
+    Texture2D mapTex = game.get_map().get_mapTexture();
+
+    mapScale = std::min(
+        (float)GetScreenWidth() / mapTex.width,
+        (float)GetScreenHeight() / mapTex.height
+    );
+    mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+    mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
+
+    for (const auto& loc : game.get_map().get_locations()) {
+        Rectangle baseArea = loc->get_clickable_area();
+
+        Vector2 screenPos = {
+            mapDrawX + baseArea.x * mapScale,
+            mapDrawY + baseArea.y * mapScale
+        };
+
+        loc->set_screenPos(screenPos);  
+
+        Rectangle transformed = {
+            screenPos.x,
+            screenPos.y,
+            baseArea.width * mapScale,
+            baseArea.height * mapScale
+        };
+
+        // آیکون لوکیشن
+        DrawTextureEx(loc->get_icon_texture(), screenPos, 0.0f, mapScale, WHITE);
+
+        // اگر کلیک شد، نمایش پنل اطلاعات
+        if (CheckCollisionPointRec(mousePos, transformed) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            selectedLocation = loc.get();
+        }
+    }
+}
+
+
+GameRender::~GameRender(){
+    if(infoHero) delete infoHero ; 
+    if(selectedLocation) delete selectedLocation ; 
 }
 
 void GameRender::draw_What_Happend_In_Text(){

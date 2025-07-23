@@ -3,6 +3,12 @@
 
 #include "button.hpp"
 #include "Game.hpp"
+#include <vector>
+
+struct ActionButton{
+    std::string label ; 
+    Rectangle bounds ; 
+};
 
 class GameRender {
 public:
@@ -16,9 +22,16 @@ public:
     void draw_What_Happend_In_Text();
     void draw_heroes();
     void draw_users() ;
+    void draw_action_panel() ; 
+    void handle_action(const std::string& , Hero*) ;
+    void draw_location_icon() ; 
+    ~GameRender() ; 
 private:
     bool showingHeroInfo = false ; 
+    Location* selectedLocation = nullptr ; 
+    bool showingHelpAction = false ; 
     Hero* infoHero = nullptr ;
+    std::vector<ActionButton> actionButtons ;
     Game& game;
 };
 
