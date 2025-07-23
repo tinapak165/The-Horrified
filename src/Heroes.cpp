@@ -5,6 +5,8 @@ using namespace std ;
 
 Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_location_by_name("Docks") , "can take any number of items from adjacent locations." , "../Assets/Heros/Archaeologist.png") {
     Map.get_location_by_name("Docks")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
+
 }
 
 void Archaeologist::DisplayInfo() const {
@@ -79,6 +81,7 @@ void Archaeologist::SpecialAction(Location* chosenplace){
 
 Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action." , "../Assets/Heros/Mayor.png") {
     Map.get_location_by_name("Theatre")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
 }
 
 void Mayor::DisplayInfo()const {
@@ -114,6 +117,7 @@ void Mayor::SpecialAction(Location*) {
 
 Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_location_by_name("Shop") , "can be moved to a location where one of the other heroes is." , "../Assets/Heros/Courier.png") , turn(m) {
     Map.get_location_by_name("Shop")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
 } 
 
 void Courier::DisplayInfo() const {
@@ -161,6 +165,7 @@ void Courier::SpecialAction(Location *){
 }
 Scientist::Scientist(GameMap& Map) : Hero("scientist" , 4 , Map.get_location_by_name("Institute") , "No special action.", "../Assets/Heros/Scientist.png") {
     Map.get_location_by_name("Institute")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
 }
 
 void Scientist::DisplayInfo() const {

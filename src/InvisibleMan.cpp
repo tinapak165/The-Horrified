@@ -4,7 +4,7 @@
 #include "monster.hpp"
 
 InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation , MonsterType::InvisibleMan , "../Assets/Monsters/InvisibleMan.png"){
-    
+    loadTexture() ;   
     required_locations = {
         "Inn", "Barn", "Institute", "Laboratory", "Mansion"
     };
