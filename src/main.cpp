@@ -3,5 +3,4 @@
 int main(){
     Game Horrified ;
     Horrified.start() ;
-    Horrified.cleanup() ; 
 }

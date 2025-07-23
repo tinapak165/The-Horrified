@@ -56,6 +56,7 @@ public:
 
     Texture2D getTexture();
     void loadTexture();
+    virtual ~Monster() ; 
 
 
 };

@@ -224,3 +224,8 @@ Texture2D Monster::getTexture(){
 void Monster::loadTexture(){
     MonsterTex = LoadTexture(MonsterTex_path.c_str());
 }
+
+Monster::~Monster()
+{
+    UnloadTexture(MonsterTex);
+}
