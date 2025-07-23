@@ -11,6 +11,13 @@ void Location::connect(Location * other){
 const Rectangle& Location::get_clickable_area() const { return clickableArea; }
 const Texture2D& Location::get_icon_texture() const { return iconTexture; }
 
+void Location::set_screenPos(Vector2 pos){
+    screenPos = pos ;
+}
+Vector2 Location::get_screenPos() const{
+    return screenPos ;
+}
+
 void Location::add_item(const Item& item, Texture2D itemTex) {
     items.push_back(item);
     itemTextures.push_back(itemTex);
@@ -108,11 +115,9 @@ std::ostream& operator<< (std::ostream & os , const Location & loc) {
     os<< loc.get_name() ;
     return os ;  
 }
-void Location::draw_icon() {
-    DrawTexture(iconTexture, clickableArea.x, clickableArea.y, WHITE);
-}
+
 void Location::draw_info_panel() {
-    DrawRectangle(600, 50, 350, 900, Fade(BLACK, 0.8f));  // بکگراند پنل
+    DrawRectangle(600, 50, 350, 900, Fade(DARKGRAY, 0.8f));  // بکگراند پنل
 
     DrawText(name.c_str(), 620, 70, 30, WHITE);
 
@@ -128,33 +133,7 @@ void Location::draw_info_panel() {
         DrawText(heroes[i]->GetName().c_str(), 700, 230 + items.size()*100 + i*100, 20, WHITE);
     }
 }
-void Location::unload() {
-    if (iconTexture.id != 0) {
-        UnloadTexture(iconTexture);
-        iconTexture.id = 0;
-    }
+
+Location::~Location(){
+    UnloadTexture(iconTexture);
 }
-
-
-// void Location::draw_map_icons() {
-//     float x = clickableArea.x + 10;
-//     float y = clickableArea.y + 10;
-
-//     // monsters
-//     for (const auto& tex : monsterTextures) {
-//         DrawTexture(tex, x, y, WHITE);
-//         y += 20;  // فاصله برای بعدی
-//     }
-
-//     // Heroes
-//     for (const auto& tex : heroTextures) {
-//         DrawTexture(tex, x + 30, y, WHITE);
-//         y += 20;
-//     }
-
-//     // not cmplete textues for villagers
-//     Texture2D villagerTex = LoadTexture("Assets/Characters/villager.png");
-//     for (size_t i = 0; i < villagers.size(); ++i) {
-//         DrawTexture(villagerTex, x + 60, y + i * 20, WHITE);
-//     }
-// }

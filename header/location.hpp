@@ -16,6 +16,7 @@ class villager ;
 class Location {
 
     private:
+        Vector2 screenPos ; 
         Rectangle clickableArea;   // منطقه قابل کلیک روی نقشه
         Texture2D iconTexture;     // آیکون تصویری برای این مکان
         std::string name;
@@ -33,7 +34,6 @@ class Location {
 
         Location(const std::string & name, Rectangle area, Texture2D icon);
         void connect(Location * other);
-        void draw_icon();  // آیکون مکان را روی نقشه می‌کشد
         void draw_info_panel() ;
 
         void add_item(const Item& item , Texture2D itemTex);
@@ -59,8 +59,9 @@ class Location {
         Location* findNeighbor(const std::string& name) const  ; 
         const Rectangle& get_clickable_area() const;
         const Texture2D& get_icon_texture() const;
-        void draw_map_icons();
-        void unload();
+        void set_screenPos(Vector2) ; 
+        Vector2 get_screenPos() const ;
+        ~Location() ; 
     };
     
 #endif
