@@ -79,10 +79,6 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
     player1 = {p1.name , h1} ; 
     player2 = {p2.name , h2} ;
 
-    for (const auto& h : heroes) {
-        std::cout << h->GetName() << '\n';
-    }
-
     turnManager = TurnManager(heroes);
 }
 PlayerInfo Game::getPlayer1() const{ return player1; }
@@ -101,7 +97,7 @@ void Game::start() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-       // ClearBackground(RAYWHITE);
+       //ClearBackground(RAYWHITE);
          
         menu->renderCurrentState();
 
@@ -226,10 +222,10 @@ void Game::play_hero_Action(Hero *h){
                     h->Special(h , map)  ;
             }
             else if(checkString(chosenAction) == "advance"){ 
-                h->AdvanceAction(h , move(dracula) , pool , map , move(invisibleMan)) ; 
+                h->AdvanceAction(h , dracula.get() , pool , map , invisibleMan.get()) ; 
             }
             else if(checkString(chosenAction) == "defeat"){
-                h->DefeatAction(h , move(invisibleMan) , move(dracula)) ; 
+                h->DefeatAction(h , invisibleMan.get() , dracula.get()) ; 
             }
         } 
     }    
@@ -335,7 +331,16 @@ Monstercard* Game::get_current_card() const {
 TurnManager& Game::get_turnManager() {
     return turnManager;
 }
+Dracula* Game::get_dracula() {
+    return dracula.get();
+}
 
+InvisibleMan* Game::get_invisibleMan() {
+    return invisibleMan.get();
+}
+ItemPool& Game::get_pool() {
+    return pool;
+}
 
 void Game::locationOverview() {
     cout << "-----------------------------Location Overview--------------------------------------\n"; 
@@ -500,27 +505,11 @@ void Game::initializaMDeck(){
     deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
 }
 
-Game::~Game() {
-    // for (Hero* h : turnManager.get_heroes())
-    //     delete h;
-    // for(auto& pair : monstersMap)
-    //     delete pair.second ; 
-
- //   pool.unload_item_textures();
-    
-    map.unload(); 
- 
-}
-
-
-
-
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
 void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
 
-void Game::cleanup() {
-   pool.unload_item_textures();
-    heroes.clear() ; 
-    monstersMap.clear() ; 
-    // بقیه منابع مثل هیروها، مانسترها، آیکون‌ها، موسیقی...
+Game::~Game(){
+    if(frenziedMonster)
+        delete frenziedMonster ;
+    
 }

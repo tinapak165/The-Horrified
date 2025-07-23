@@ -34,7 +34,6 @@ private:
     bool terrorAlreadyIncreased = false;
 
     std::unique_ptr<Menu> menu;
-    Texture2D background ;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
@@ -68,6 +67,9 @@ public:
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
     Monstercard* get_current_card() const ;
     TurnManager& get_turnManager();
+    Dracula* get_dracula() ; 
+    InvisibleMan* get_invisibleMan() ; 
+    ItemPool& get_pool() ;
 
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
@@ -93,7 +95,6 @@ public:
     void initializaMDeck();
    
     void Changing_frenzy_marker();
-    void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
     Monster* get_frenzied_monster();
     
 
@@ -101,7 +102,7 @@ public:
 
     void add_villager(Villager* v);
 
-    void cleanup();
+   // void cleanup();
 };
 
 #endif
