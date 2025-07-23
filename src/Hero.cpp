@@ -19,11 +19,22 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
 }
 
 void Hero::DisplayActions() const{
+    const float panelX = 600 ; const float panelY = 50 ; 
+    const float panelW = 400 ; const float panelH = 400 ; 
+    const int lineHeight = 30 ; 
+    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
+    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
 
-    cout << "----ACTIONS----\n" ; 
-    for(const auto a : ListOfActions)
-        cout << a.name << ": " << a.Description << '\n' ; 
-    cout << "---------------\n" ; 
+    float y = panelY + 20 ; 
+
+    DrawText("----ACTIONS----" , panelX+20 , y , 25 , YELLOW) ; 
+    y+=40 ;
+    for (const auto& action : ListOfActions) {
+        string line = action.name + ": " + action.Description;
+        
+        DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
+        y += lineHeight;
+    }
 }
 
 void Hero::resetMaxActions(){
@@ -124,7 +135,7 @@ int Hero::AdvanceActionForDracula(){
     return totalStrength ; 
 }
 
-void Hero::AdvanceActionForInvisibleMan(unique_ptr<InvisibleMan>  monster){
+void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     vector<Item> items = this->GetItems() ; 
     vector<Item> evidenceItems ; 
     for(const Item& item : items){
@@ -161,7 +172,7 @@ void Hero::AdvanceActionForInvisibleMan(unique_ptr<InvisibleMan>  monster){
     } 
 
 }
-void Hero::DefeatAction(Hero* h , std::unique_ptr<InvisibleMan> invisibleMan , std::unique_ptr<Dracula>  dracula){
+void Hero::DefeatAction(Hero* h ,InvisibleMan*  invisibleMan ,Dracula* dracula){
                    
     Location* heroLoc = h->GetCurrentLocation();       
     if (invisibleMan && invisibleMan->get_location() == heroLoc) {
@@ -443,7 +454,7 @@ void Hero::Special(Hero* h , GameMap& map){
 
 }
 
-void Hero::AdvanceAction(Hero* h , unique_ptr<Dracula> dracula , ItemPool pool , GameMap& map ,unique_ptr<InvisibleMan> invisi ){
+void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map ,InvisibleMan*  invisi ){
     //for dracula
     Location* current = h->GetCurrentLocation();
     string locName = current->get_name();
@@ -569,16 +580,20 @@ vector<Item> Hero::getUsedItemsForInvisibleMan() {
     return usedItemsForInvisibleMan;
 }
 
+Hero::~Hero(){
+    UnloadTexture(HeroTex) ;  
+    if(StartingLocation) delete StartingLocation  ;
+    if(currentLocation) delete currentLocation ;
+}
+
 int Hero::Ability(Item& item){
     return item.getStrength() ; 
 }
 
 
 Texture2D Hero::getTexture(){ 
-    return HeroTex;}
-
-
-
+    return HeroTex;
+}
 
 void Hero::loadTexture(){
     HeroTex = LoadTexture(HeroTex_path.c_str());
