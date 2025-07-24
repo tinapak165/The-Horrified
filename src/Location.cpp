@@ -18,9 +18,8 @@ Vector2 Location::get_screenPos() const{
     return screenPos ;
 }
 
-void Location::add_item(const Item& item, Texture2D itemTex) {
+void Location::add_item(const Item& item) {
     items.push_back(item);
-    itemTextures.push_back(itemTex);
 }
 
 void Location::add_hero(Hero* hero, Texture2D heroTex) {
@@ -117,23 +116,30 @@ std::ostream& operator<< (std::ostream & os , const Location & loc) {
 }
 
 void Location::draw_info_panel() {
-    DrawRectangle(600, 50, 350, 900, Fade(DARKGRAY, 0.8f));  // بکگراند پنل
+    // بکگراند پنل
+    DrawRectangle(600, 50, 350, 900, Fade(DARKGRAY, 0.8f));
 
+    // عنوان لوکیشن
     DrawText(name.c_str(), 620, 70, 30, WHITE);
 
+    // بخش آیتم‌ها
     DrawText("Items:", 620, 120, 25, YELLOW);
+    
+    float itemStartY = 150;
+    float itemSpacing = 180; // فاصله بین هر آیتم (با توجه به اندازه تصویر 150 پیکسلی)
+    
     for (int i = 0; i < items.size(); i++) {
-        DrawTexture(itemTextures[i], 620, 160 + i*100, WHITE);
-        DrawText(items[i].getName().c_str(), 700, 190 + i*100, 20, WHITE);
+        float y = itemStartY + i * itemSpacing;
+        
+        // نمایش نام آیتم
+        DrawText(items[i].getName().c_str(), 620, y, 20, WHITE);
+        
+        // نمایش تصویر آیتم (150 پیکسل)
+        float textureScale = 150.0f / items[i].getTexture().width;
+        DrawTextureEx(items[i].getTexture(), {620, y + 30}, 0.0f, textureScale, WHITE);
     }
-
-    DrawText("Heroes:", 620, 160 + items.size()*100, 25, GREEN);
-    for (int i = 0; i < heroes.size(); i++) {
-        DrawTexture(heroTextures[i], 620, 200 + items.size() + i, WHITE);
-        DrawText(heroes[i]->GetName().c_str(), 700, 230 + items.size()*100 + i*100, 20, WHITE);
-    }
+   
 }
-
 Location::~Location(){
     UnloadTexture(iconTexture);
 }
