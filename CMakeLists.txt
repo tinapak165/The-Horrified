@@ -25,6 +25,7 @@ set(SOURCES
     src/menu.cpp
     src/button.cpp
     src/GameRander.cpp
+    src/Action.cpp
 )
 add_executable(Horrified ${SOURCES})
 target_link_libraries(Horrified PRIVATE raylib GL m pthread dl X11)
