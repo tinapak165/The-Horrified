@@ -243,14 +243,13 @@ void ChooseCharacterState::playState(Menu& menu) {
                     selectedMessage = "Player 1 chose: " + player1.heroType;
                 } else {
                     player2.heroType = heroNames[i];
+                    currentTurn = PlayerTurn::PLAYER1 ;
                     selectedMessage += "\nPlayer 2 chose: " + player2.heroType;
                 }
                 break;
             }
         }
-        // بررسی آیا هر دو بازیکن انتخاب کرده‌اند
         if (!player1.heroType.empty() && !player2.heroType.empty()) {
-            // اضافه کردن تاخیر برای نمایش پیام نهایی
             double selectionTime = GetTime();
             while (GetTime() - selectionTime < 2.0) { // 2 ثانیه تاخیر
                 BeginDrawing();
