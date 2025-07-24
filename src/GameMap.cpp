@@ -7,10 +7,10 @@ void GameMap::build_map() {
         std::cerr << "[ERROR] map.png not loaded!\n";
     }
 
-    add_location("Inn", {855, 255, 50, 50}, "../Assets/Icons/InnIcon.png");
-    add_location("Cave" , {10,240,50,50} , "../Assets/Icons/CaveIcon.png") ; 
+    add_location("Inn", {855, 260, 50, 50}, "../Assets/Icons/InnIcon.png");
+    add_location("Cave" , {75,400,50,50} , "../Assets/Icons/CaveIcon.png") ; //
     add_location("Camp" , {500,200,50,50} , "../Assets/Icons/CampIcon.png") ; 
-    add_location("Precinct" , {600,146,50,50} , "../Assets/Icons/PrecinctIcon.png") ; 
+    add_location("Precinct" , {600,250,50,50} , "../Assets/Icons/PrecinctIcon.png") ; //
     add_location("Mansion" , {500,200,50,50} , "../Assets/Icons/MansionIcon.png") ; 
     add_location("Abbey" , {250,200,50,50} , "../Assets/Icons/AbbeyIcon.png") ; 
     add_location("Crypt" , {350,200,50,50} , "../Assets/Icons/CryptIcon.png") ; 
@@ -22,7 +22,7 @@ void GameMap::build_map() {
     add_location("Laboratory" , {380,200,50,50} , "../Assets/Icons/LaboratoryIcon.png") ; 
     add_location("Shop" , {660,200,50,50} , "../Assets/Icons/ShopIcon.png") ; 
     add_location("Theatre" , {650,200,50,50} , "../Assets/Icons/TheatreIcon.png") ; 
-    add_location("Docks" , {880,200,50,50} , "../Assets/Icons/DocksIcon.png") ; 
+    add_location("Docks" , {1000,900,50,50} , "../Assets/Icons/DocksIcon.png") ; //
     add_location("Tower" , {200,200,50,50} , "../Assets/Icons/TowerIcon.png") ; 
     add_location("Barn" , {200,200,50,50} , "../Assets/Icons/BarnIcon.png") ; 
     add_location("Dungeon" , {200,200,50,50} , "../Assets/Icons/DungeonIcon.png") ; 
@@ -62,6 +62,7 @@ void GameMap::build_map() {
     mansion->connect(abbey );
     abbey->connect(crypt );
     shop->connect(laboratory ) ; 
+    shop->connect(museum) ; //
     mansion->connect(church ) ;
     laboratory->connect(institute );
     church->connect(graveyard );
