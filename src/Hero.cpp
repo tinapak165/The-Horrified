@@ -128,7 +128,7 @@ int Hero::AdvanceActionForDracula(){
         cout << "items chosen for advance action:\n " ;
         for(size_t i = 0 ; i < selected.size() ; i++){
             cout << (i + 1) << "-" << selected[i].getName() << "(color: " << selected[i].color_to_string(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
-            (*this).GetCurrentLocation()->add_item(selected[i] , selected[i] .getTexture()) ; 
+            (*this).GetCurrentLocation()->add_item(selected[i]) ; 
         }
     }
     else cout << "no item was selected for advance action!\n" ;

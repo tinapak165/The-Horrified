@@ -8,12 +8,10 @@ void Item::loadTexture() {
         texture = LoadTexture(texturepath.c_str());
     }
 
-void Item::unloadTexture() {
-        UnloadTexture(texture);
-}   
 Texture2D Item::getTexture() const {
     return texture;
 }
+void Item::unloadTexture(){}
 
  const std::string& Item::getName() const{ return name;}
  ItemColor Item::getColor() const{ return color;}

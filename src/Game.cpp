@@ -91,7 +91,7 @@ std::string Game::checkString(std::string str){
 }
 
 void Game::start() {
-
+    distribute_initial_items() ;
     menu->SetState(std::make_unique<MenuState>());
     GameRender gamerender(*this);
 
@@ -266,16 +266,17 @@ bool Game::both_monsters_defeated() {
 }
 
 void Game::distribute_initial_items() {
-    std::cout<<"placing 12 initial items \n";
+   // std::cout<<"placing 12 initial items \n";
    
     auto items = pool.draw_random_items(12);
     
-    for (const auto& item : items) {
+    for (auto& item : items) {
+        item.loadTexture() ; 
         Location* loc = map.get_location_by_name(item.getLocationName());
         Texture2D itemTex = item.getTexture();
         if (loc) {
-            loc->add_item(item , itemTex);
-            std::cout << "Placed " <<" " << item.getName() <<  " at " << item.getLocationName() << std::endl;
+            loc->add_item(item);
+          //  std::cout << "Placed " <<" " << item.getName() <<  " at " << item.getLocationName() << std::endl;
         }
     }
 }

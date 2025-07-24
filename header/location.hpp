@@ -20,7 +20,6 @@ class Location {
         Rectangle clickableArea;   // منطقه قابل کلیک روی نقشه
         Texture2D iconTexture;     // آیکون تصویری برای این مکان
         std::string name;
-        std::vector<Texture2D> itemTextures;
         std::vector<Texture2D> heroTextures;
         std::vector<Texture2D> monsterTextures;
         std::vector<Item> items;
@@ -36,7 +35,7 @@ class Location {
         void connect(Location * other);
         void draw_info_panel() ;
 
-        void add_item(const Item& item , Texture2D itemTex);
+        void add_item(const Item& item);
         void add_villager(Villager*) ;
         void add_monster(Monster* monster , Texture2D monstertex);
         void add_hero(Hero* hero, Texture2D heroTex);
