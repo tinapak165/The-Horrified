@@ -34,7 +34,7 @@ void GameRender::draw() {
     draw_map();
     draw_heroes() ;
     draw_location_icon() ;
-    draw_items();
+   // draw_items();
     draw_villagers();
     draw_monsters();
     draw_monster_card();
@@ -120,36 +120,36 @@ void GameRender::draw_villagers() {
     }
 }
 
-void GameRender::draw_items() {
-    for (const auto& loc : game.get_map().get_locations()) {
-        Rectangle area = loc->get_clickable_area();
-        float offsetX = 8;
-        float offsetY = 8;
-        float spacing = 4.0f;
+// void GameRender::draw_items() {
+//     for (const auto& loc : game.get_map().get_locations()) {
+//         Rectangle area = loc->get_clickable_area();
+//         float offsetX = 8;
+//         float offsetY = 8;
+//         float spacing = 4.0f;
 
-        int iconSize = 14;
-        int iconsPerRow = 3;
+//         int iconSize = 14;
+//         int iconsPerRow = 3;
 
-        int i = 0;
-        for (const auto& item : loc->get_items()) {
-            Texture2D tex = item.getTexture();
-            Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
+//         int i = 0;
+//         for (const auto& item : loc->get_items()) {
+//             Texture2D tex = item.getTexture();
+//             Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
 
-            int row = i / iconsPerRow;
-            int col = i % iconsPerRow;
+//             int row = i / iconsPerRow;
+//             int col = i % iconsPerRow;
 
-            Rectangle dest = {
-                area.x + offsetX + col * (iconSize + spacing),
-                area.y + offsetY + row * (iconSize + spacing),
-                (float)iconSize,
-                (float)iconSize
-            };
+//             Rectangle dest = {
+//                 area.x + offsetX + col * (iconSize + spacing),
+//                 area.y + offsetY + row * (iconSize + spacing),
+//                 (float)iconSize,
+//                 (float)iconSize
+//             };
 
-            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
-            ++i;
-        }
-    }
-}
+//             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+//             ++i;
+//         }
+//     }
+// }
 
 
 void GameRender::draw_monster_card() {
@@ -285,8 +285,11 @@ void GameRender::handle_action(const std::string& action , Hero* h){
     } else if (action == "Guide") {
         h->GuideAction(h, game.get_map());
     } else if (action == "Pickup") {
-        h->PickupItems();
-        h->DisplayItem();
+
+        currentHero = h ; 
+        currentAction = std::make_unique<PickUpAction>(currentHero) ;
+              // h->DisplayItem();
+  // h->DisplayItem();
     } else if (action == "Special") {
         h->Special(h, game.get_map());
     } else if (action == "Advance") {
