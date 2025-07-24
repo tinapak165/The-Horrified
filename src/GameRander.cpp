@@ -3,22 +3,25 @@
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
-    if (showingHeroInfo && infoHero != nullptr) {
-        infoHero->DisplayInfo();   
+    if (showingHeroInfo && currentHero != nullptr) {
+        currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingHeroInfo = false;
-            infoHero = nullptr;
+            currentHero = nullptr;
         }
         return; 
     }
-    if(showingHelpAction && infoHero != nullptr){
-        infoHero->DisplayActions() ;
-        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
-            showingHelpAction = false ; 
-            infoHero = nullptr ;
+
+    if(currentAction && currentHero){
+        bool done = currentAction->update() ; 
+        currentAction->draw() ; 
+        if(done){
+            currentAction = nullptr ; 
+            currentHero = nullptr ; 
         }
-        return ;
+        return  ;
     }
+
     if(selectedLocation){
         selectedLocation->draw_info_panel() ; 
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
@@ -27,8 +30,7 @@ void GameRender::draw() {
         return ;
     }
 
-
-
+    
     draw_map();
     draw_heroes() ;
     draw_location_icon() ;
@@ -208,55 +210,78 @@ void GameRender::draw_users(){
 
     if (user1.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
         showingHeroInfo = true ; 
-        infoHero = p1.hero ; 
+        currentHero = p1.hero ; 
     }
 
     if (user2.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
         showingHeroInfo = true ; 
-        infoHero = p2.hero ; 
+        currentHero = p2.hero ; 
     } 
 }
 
-void GameRender::draw_action_panel(){
+void GameRender::draw_action_panel() {
+    Hero* activeHero = game.get_turnManager().get_active_hero();
 
-    Hero* activeHero = game.get_turnManager().get_active_hero() ;
+    std::string heroName = activeHero->GetName();
+    int remaining = activeHero->GetRemainingActions();
+    int maxActions = activeHero->getMaxActions();
+
+    std::string infoText = heroName + " | Actions left: " + std::to_string(remaining) + "/" + std::to_string(maxActions);
 
     std::vector<ActionButton> actionButtons = {
-    {"Move", {50, 500, 120, 40}},
-    {"Special", {190, 500, 120, 40}},
-    {"Guide", {330, 500, 120, 40}},
-    {"Pickup", {50, 550, 120, 40}},
-    {"Advance", {190, 550, 120, 40}},
-    {"Defeat", {330, 550, 120, 40}},
-    {"Perk", {50, 600, 120, 40}},
-    {"Help", {190, 600, 120, 40}},
-    {"Quit", {330, 600, 120, 40}},
-};
-    DrawRectangle(40 , 480 , 420 , 180 , Fade(DARKGRAY , 0.8f)) ;     // بکگراند نیمه‌شفاف
-    DrawRectangleLines(40 , 480 , 420 , 180 , GRAY) ;
-    Vector2 mousepos = GetMousePosition() ; 
+        {"Move", {50, 500, 120, 40}},
+        {"Special", {190, 500, 120, 40}},
+        {"Guide", {330, 500, 120, 40}},
+        {"Pickup", {50, 550, 120, 40}},
+        {"Advance", {190, 550, 120, 40}},
+        {"Defeat", {330, 550, 120, 40}},
+        {"Perk", {50, 600, 120, 40}},
+        {"Help", {190, 600, 120, 40}},
+        {"Quit", {330, 600, 120, 40}},
+    };
 
-    for(const auto& button : actionButtons){
-        bool hovered = CheckCollisionPointRec(mousepos , button.bounds) ;
-            DrawRectangleRec(button.bounds, hovered ? LIGHTGRAY : GRAY);
+    DrawRectangle(40, 480, 420, 180, Fade(DARKGRAY, 0.9f));
+    DrawRectangleLines(40, 480, 420, 180, GRAY);
+    Vector2 mousepos = GetMousePosition();
+
+    DrawText(infoText.c_str(), 50, 460, 20, BLACK);
+
+    bool hasActionsLeft = (remaining > 0);
+
+    for (const auto& button : actionButtons) {
+        bool hovered = CheckCollisionPointRec(mousepos, button.bounds);
+
+        Color buttonColor;
+        if (!hasActionsLeft ) {
+            buttonColor = DARKGRAY;
+        } else {
+            buttonColor = hovered ? LIGHTGRAY : GRAY;
+        }
+
+        DrawRectangleRec(button.bounds, buttonColor);
         DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
 
-        if (hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) { 
             handle_action(button.label, activeHero);
         }
     }
 }
+
 void GameRender::handle_action(const std::string& action , Hero* h){
+
     if (action == "Help") {
-        showingHelpAction = true ; 
-        infoHero = h ; 
-    } else if (action == "Quit") { //nafar baadi
-        showingHeroInfo = false;
-        infoHero = nullptr;
+        currentHero = h ; 
+        currentAction = std::make_unique<HelpAction>(currentHero) ;
+ 
+    } else if (action == "Quit") { 
+
     } else if (action == "Perk") {
         game.ChoosePerkCardANDplay(h);
     } else if (action == "Move") {
-        h->MoveAction(game.get_map(), h);
+
+        currentHero = h ; 
+        currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
+
     } else if (action == "Guide") {
         h->GuideAction(h, game.get_map());
     } else if (action == "Pickup") {
@@ -315,7 +340,7 @@ void GameRender::draw_location_icon() {
 
 
 GameRender::~GameRender(){
-    if(infoHero) delete infoHero ; 
+    if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 
 }
 

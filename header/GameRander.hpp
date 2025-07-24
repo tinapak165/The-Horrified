@@ -3,6 +3,7 @@
 
 #include "button.hpp"
 #include "Game.hpp"
+#include "Action.hpp"
 #include <vector>
 
 struct ActionButton{
@@ -27,10 +28,10 @@ public:
     void draw_location_icon() ; 
     ~GameRender() ; 
 private:
+    std::unique_ptr<HeroAction> currentAction ; 
+    Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
     Location* selectedLocation = nullptr ; 
-    bool showingHelpAction = false ; 
-    Hero* infoHero = nullptr ;
     std::vector<ActionButton> actionButtons ;
     Game& game;
 };
