@@ -54,7 +54,7 @@ void Button::DrawWithFade(Vector2 mousepos, float alpha){
     DrawTextureEx(texture , {bounds.x , bounds.y} , 0.0f , scale , fadeColor) ;
 }
 
-Button::~Button()
-{
-    UnloadTexture(texture);
-}
+// Button::~Button()
+// {
+//     UnloadTexture(texture);
+// }
