@@ -2,8 +2,8 @@
 #define ACTIONS_H
 #include "Hero.hpp"
 #include "GameMap.hpp"
-
-
+#include "item.hpp"
+#include <vector>
 class HeroAction{
     public:
         virtual ~HeroAction() = default ;
@@ -36,6 +36,20 @@ class HelpAction : public HeroAction {
         Hero* hero ; 
     public:
         HelpAction(Hero*) ;
+        bool update() override ;
+        void draw() override ;
+
+};
+
+class PickUpAction : public HeroAction{
+    private:
+        Hero* hero ;
+        bool done = false;
+        int frameCounter = 0 ; 
+        std::string message = "Click an item to pick up ( to cancel)";
+        Vector2 mousePos;
+    public:
+        PickUpAction(Hero*) ;
         bool update() override ;
         void draw() override ;
 

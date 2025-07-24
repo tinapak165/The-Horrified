@@ -5,7 +5,7 @@ MoveAction::MoveAction(GameMap &map, Hero *hero): map(map) , hero(hero){}
 bool MoveAction::update(){
     Location* currentLoc = hero->GetCurrentLocation();
 
-    std::string ans ; 
+    std::string ans ; //ezafe kon
 
     if (typing) {
 
@@ -85,3 +85,64 @@ bool HelpAction::update(){
     return false;
 }
 void HelpAction::draw() {}
+
+PickUpAction::PickUpAction(Hero* h) : hero(h) {}
+bool PickUpAction::update() {
+    mousePos = GetMousePosition();
+    std::vector<Item>& ItemsAtLocation = hero->GetCurrentLocation()->get_items();
+
+    if (!done && ItemsAtLocation.empty()) {
+        message = "No items to pick up!";
+        done = true;
+        return false;
+    }
+
+    if (!done) {
+        bool clickedOnItem = false;
+
+        for (size_t i = 0; i < ItemsAtLocation.size(); ++i) {
+            Rectangle itemRect = {120.0f, 200.0f + i * 90.0f, 300.0f, 80.0f};
+            if (CheckCollisionPointRec(mousePos, itemRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                hero->GetItems().push_back(ItemsAtLocation[i]);
+                message = hero->GetName() + " picked up " + ItemsAtLocation[i].getName();
+                ItemsAtLocation.erase(ItemsAtLocation.begin() + i);
+                return false; // ادامه بده تا بشه آیتم‌های دیگه رو هم برداشت
+            }
+        }
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            message = "Pickup canceled";
+            done = true;
+            return false;
+        }
+
+    }
+
+    if (done) {
+        frameCounter++;
+        if (frameCounter >= 60) {
+            hero->SetRemainingActions(hero->GetRemainingActions() - 1);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void PickUpAction::draw() {
+    DrawRectangle(100, 100, 750, 250, Fade(DARKGRAY, 0.85f));
+    DrawText("[ Playing Pickup Action]", 120 , 105, 28, RAYWHITE);
+    DrawText(message.c_str(), 120, 150, 22, YELLOW);
+
+    std::vector<Item>& items = hero->GetCurrentLocation()->get_items();
+
+    for (size_t i = 0; i < items.size(); ++i) {
+        Rectangle itemRect = {120.0f, 200.0f + i * 90.0f, 300.0f, 80.0f};
+        DrawRectangleRec(itemRect, GRAY);
+        DrawText(items[i].getName().c_str(), itemRect.x + 10, itemRect.y + 10, 20, WHITE);
+        
+        std::string details = "(Color: " + Item::color_to_string(items[i].getColor()) + ", Str: " + std::to_string(items[i].getStrength()) + ")";
+        DrawText(details.c_str(), itemRect.x + 10, itemRect.y + 40, 18, LIGHTGRAY);
+    }
+}
+
