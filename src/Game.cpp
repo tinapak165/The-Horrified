@@ -145,13 +145,6 @@ void Game::start() {
 
     CloseWindow();
 
-    // if(dracula) cout << "dracula is alive\n" ;
-    // if(invisibleMan) cout << "invisi is alive\n" ; 
-    // if(frenziedMonster) cout << "frienzid alive\n" ; 
-    // if(mayor) cout << "mayor is alive\n" ;
-
-
-    // locationOverview() ;
     // for(Hero* hero : turnManager.get_heroes()){
     //     getNewCard(hero) ; 
     // }
@@ -205,11 +198,11 @@ void Game::play_hero_Action(Hero *h){
             ChoosePerkCardANDplay(h) ;
             continue;
         }   
-        if(h->PerformTheAction(checkString(chosenAction))){
+        if(true){
             cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
 
             if(checkString(chosenAction) == "move"){
-                h->MoveAction(map , h) ;                     
+              //  h->MoveAction(map , h) ;                     
             }
             else if(checkString(chosenAction) == "guide"){
                 h->GuideAction(h , map) ; 

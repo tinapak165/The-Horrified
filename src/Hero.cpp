@@ -254,25 +254,6 @@ void Hero::DisplayItem(){
     cout << '\n' ; 
 }
 
-bool Hero::PerformTheAction(string act)  {
-
-    if(act == "quit" || act == "help" || act == "perk") return true;
-    for(const auto& ac : ListOfActions){
-        if(ac.name == act){
-            if((*this).GetRemainingActions() > 0){
-                cout << "[playing " << act << "]\n" ;
-                (*this).SetRemainingActions((*this).GetRemainingActions()-1) ; 
-                return true; 
-            }else{
-                cerr << "not enough action remaining!(Quit to end the phase)\n" ;
-                return false ; 
-            }
-        }
-    }
-    cerr << "action not available!\n" ;
-    return false ;  
-}
-
 string Hero::GetName()const{
     return name ; 
 }
@@ -288,46 +269,15 @@ string Hero::GetSpecialActionInfo() const{
 Location* Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
-void Hero::SetCurrentLocation(Location* location){
+
+void Hero::SetCurrentLocation(Location *location)
+{
     currentLocation = location ;
-}
-void Hero::MoveAction(GameMap& map, Hero* h){
-    string chosenPlace ; 
-    cout << "Which neighboring place do you want to move to? " ;
-    cin >> chosenPlace ;
-    Location* currentLoc = h->GetCurrentLocation() ; 
-    Location* chosenLocation = map.get_location_by_name(chosenPlace);
-
-    if(currentLoc->findNeighbor(chosenPlace)){
-        if(h->hasvillagerHere()){
-            auto here = h->villagerHere() ; 
-            string ans ;
-            cout << "some villagers are at the same place as you. " ; 
-            h->showvillagersHere() ; 
-            cout << "\ndo you want to move the villagers with you?(yes = moving all villagers with you/no = moving alone) " ; 
-            cin >> ans ; 
-            if(ans == "yes")
-                h->MoveTo(chosenLocation , here) ; 
-            else if(ans == "no")
-                h->MoveTo(chosenLocation) ;
-            else cerr << "wrong answer\n" ; 
-        }
-        else { 
-            h->MoveTo(chosenLocation); 
-        }    
-    }
-    else{
-        cerr << "what you have chosen is not a neighboirng place!\n" ;  
-    }
-
 }
 
 void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with villagers
     if (!new_location) return;
-    
-    if(new_location == (*this).GetCurrentLocation()){
-        cerr << "already in the location!\n" ; 
-    }
+
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
     new_location->add_hero(this , this->getTexture()) ;  
@@ -345,9 +295,6 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
 void Hero::MoveTo(Location* new_location){ //without villager
     if (!new_location) return;
     
-    if(new_location == (*this).GetCurrentLocation()){
-        cerr << "already in the location!\n" ; 
-    }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
     new_location->add_hero(this , this->getTexture()) ;  

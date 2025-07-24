@@ -10,7 +10,6 @@
 #include "InvisibleMan.hpp"
 #include "Dracula.hpp"
 #include "Itembag.hpp"
-
 class Location ; 
 class Dracula ; 
 class ItemPool ; 
@@ -54,7 +53,6 @@ class Hero{
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction , std::string HeroTex_path) ;
 
-        void MoveAction(GameMap& , Hero*) ;
         void MoveTo(Location*  , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
 
@@ -82,8 +80,7 @@ class Hero{
         int getMaxActions() const ; 
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
-        Location* GetCurrentLocation() const ;         
-        bool PerformTheAction(std::string)  ; 
+        Location* GetCurrentLocation() const ;     
         void DisplayActions() const ; 
         void resetMaxActions() ; 
 
