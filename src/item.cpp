@@ -1,4 +1,4 @@
-#include "item.hpp"
+#include "Item.hpp"
 
 Item::Item(std::string name,ItemColor c, int strength , std::string locationName , std::string texturepath)
     : name(name),color(c),strength(strength) ,locationName(locationName), texturepath(texturepath) {

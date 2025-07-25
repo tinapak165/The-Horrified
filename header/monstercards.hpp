@@ -6,13 +6,13 @@
 #include <memory>
 #include <unordered_map>
 #include <iostream>
-#include "monster.hpp"
+#include "Monster.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 #include "GameMap.hpp"
 #include "TurnManager.hpp"
 #include "Itembag.hpp"
-#include "item.hpp"
+#include "Item.hpp"
 #include "Dice.hpp"
 class Game;
 

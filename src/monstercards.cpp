@@ -1,6 +1,6 @@
-#include "item.hpp"
+#include "Item.hpp"
 #include <iostream>
-#include "monstercards.hpp"
+#include "Monstercards.hpp"
 #include "Dice.hpp"
 #include <ctime>
 #include "Game.hpp"

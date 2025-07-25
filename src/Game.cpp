@@ -5,13 +5,13 @@
 #include <limits>
 #include <utility>
 #include "Game.hpp"
-#include "villager.hpp"
-#include "menu.hpp"
+#include "Villager.hpp"
+#include "Menu.hpp"
 
 using namespace std;
 
 Game::Game() {
-    InitWindow(1000, 1000, "The Horrified");
+    InitWindow(1000 +400, 1000 , "The Horrified");
 
     // SetWorkingDirectory(GetApplicationDirectory());
 
@@ -500,6 +500,14 @@ void Game::initializaMDeck(){
 
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
 void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
+
+std::vector<std::string> Game::get_last_events(int count) {
+    std::vector<std::string> result;
+    int start = std::max(0, (int)event_log.size() - count);
+    for (int i = start; i < event_log.size(); ++i)
+        result.push_back(event_log[i]);
+    return result;
+}
 
 Game::~Game(){
     if(frenziedMonster)

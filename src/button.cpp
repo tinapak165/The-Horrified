@@ -1,4 +1,4 @@
-#include "button.hpp"
+#include "Button.hpp"
 #include <iostream>
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {

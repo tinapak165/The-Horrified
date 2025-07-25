@@ -1,9 +1,9 @@
-#include "monster.hpp"
+#include "Monster.hpp"
 #include <algorithm>
 #include <queue>
 #include <unordered_set>
 #include <unordered_map>
-#include "location.hpp"
+#include "Location.hpp"
 #include "GameMap.hpp"
 #include "Hero.hpp"
 

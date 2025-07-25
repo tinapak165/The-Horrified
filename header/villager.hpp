@@ -1,7 +1,7 @@
 #ifndef VILLAGER_HPP
 #define VILLAGER_HPP
 #include <iostream>
-#include "location.hpp"
+#include "Location.hpp"
 #include "GameMap.hpp"
 #include <vector>
 

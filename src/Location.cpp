@@ -1,4 +1,4 @@
-#include "location.hpp"
+#include "Location.hpp"
 #include <iostream>
 
 Location::Location(const std::string& name , Rectangle area, Texture2D icon) : name(name) , clickableArea(area), iconTexture(icon){}

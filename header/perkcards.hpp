@@ -5,9 +5,9 @@
 #include <vector>
 #include "Hero.hpp"
 #include "GameMap.hpp"
-#include "location.hpp"
+#include "Location.hpp"
 #include "Itembag.hpp"
-#include "item.hpp"
+#include "Item.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 

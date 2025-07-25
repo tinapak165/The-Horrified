@@ -6,10 +6,10 @@
 #include <memory>
 #include <raylib.h>
 #include "GameMap.hpp"
-#include "perkcards.hpp"
-#include "monstercards.hpp"
+#include "Perkcards.hpp"
+#include "Monstercards.hpp"
 #include "TurnManager.hpp"
-#include "monster.hpp"
+#include "Monster.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 #include "Hero.hpp"
@@ -17,7 +17,7 @@
 #include "Itembag.hpp"
 #include "Heroes.hpp"
 #include "State.hpp"
-#include "GameRander.hpp"
+#include "GameRender.hpp"
 
 class Menu;
 
@@ -52,6 +52,7 @@ private:
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
+    std::vector<std::string> event_log;
     
     int terror_Level = 0;
     bool game_over = false;
@@ -101,6 +102,7 @@ public:
     std::vector<Villager*>& get_all_villagers();
 
     void add_villager(Villager* v);
+    std::vector<std::string> get_last_events(int count) ;
 
    // void cleanup();
 };

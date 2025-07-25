@@ -1,5 +1,5 @@
 #include "State.hpp"
-#include "menu.hpp"
+#include "Menu.hpp"
 #include <iostream>
 #include <cstring>
 

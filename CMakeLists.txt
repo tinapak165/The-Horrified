@@ -1,44 +1,45 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.10)
+
 project(Horrified)
 
-# فایل‌های پروژه
+include_directories(header)
+
+set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")  # فعال کردن اطلاعات دیباگ
+
+# استفاده از pkg-config برای پیدا کردن Raylib
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(RAYLIB REQUIRED raylib)
+
+include_directories(${RAYLIB_INCLUDE_DIRS})
+link_directories(${RAYLIB_LIBRARY_DIRS})
+
 set(SOURCES
     src/Game.cpp
     src/Hero.cpp
     src/Dice.cpp
-    src/main.cpp
+    src/Main.cpp
     src/GameMap.cpp
-    src/monstercards.cpp
-    src/perkcards.cpp
+    src/Monstercards.cpp
+    src/Perkcards.cpp
     src/TurnManager.cpp
-    src/monster.cpp
+    src/Monster.cpp
     src/Dracula.cpp
     src/InvisibleMan.cpp
-    src/item.cpp
+    src/Item.cpp
     src/Itembag.cpp
     src/Location.cpp
-    src/villager.cpp
+    src/Villager.cpp
     src/Heroes.cpp
-    src/Menu.cpp
     src/State.cpp
+    src/Menu.cpp
     src/Button.cpp
-    src/Gamerender.cpp
+    src/GameRender.cpp
+    src/Action.cpp
 )
 
-# فولدر هدرهای خودت
-include_directories(header)
-
-# ساختن executable
 add_executable(Horrified ${SOURCES})
 
-# مسیر به raylib
-target_include_directories(Horrified PRIVATE "C:/Users/Tina/Downloads/w64devkit/bin/include")
-target_link_directories(Horrified PRIVATE "C:/Users/Tina/Downloads/w64devkit/bin")
-
-# لینک به raylib و کتابخونه‌های لازم ویندوز
-target_link_libraries(Horrified
-    raylib
-    opengl32
-    gdi32
-    winmm
-)
+# لینک کردن Raylib
+target_link_libraries(${PROJECT_NAME} ${RAYLIB_LIBRARIES})
