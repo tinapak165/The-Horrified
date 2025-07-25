@@ -30,8 +30,6 @@ Game::Game() {
 
     monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
-    initializaMDeck();
-    initializaDeck() ; 
 }
 
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
@@ -80,6 +78,15 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
     player2 = {p2.name , h2} ;
 
     turnManager = TurnManager(heroes);
+    
+    initializaDeck() ; //age to constructor bood onvaght turnmanagar null mifrestad
+    initializaMDeck();
+
+
+    for(Hero* hero : turnManager.get_heroes()){
+        getNewCard(hero) ; 
+    }
+
 }
 PlayerInfo Game::getPlayer1() const{ return player1; }
 PlayerInfo Game::getPlayer2() const { return player2 ;}
@@ -167,17 +174,18 @@ void Game::hero_phase(Hero* hero) {
 
 
 void Game::initializaDeck(){
+    
     for(int i = 0 ; i < 3 ; i++){
-        perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map));
-        perkDeck.addCard(std::make_unique<Hurrycard>(mayor.get() , archaeologist.get() , map)) ;
-        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
-        perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
-        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
+        //perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map));
+        perkDeck.addCard(std::make_unique<Hurrycard>(turnManager.get_heroes(), map)) ;
+       // perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+       // perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
+       // perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
+      //  perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+       // perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
     }
-    perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-    perkDeck.addCard(std::make_unique<OverstockCard>(pool , map)) ;
+   // perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+   // perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
 
 }
 void Game::getNewCard(Hero* hero){
@@ -195,7 +203,7 @@ void Game::play_hero_Action(Hero *h){
         if(checkString(chosenAction) == "quit")
             break ;
         if(checkString(chosenAction) == "perk"){
-            ChoosePerkCardANDplay(h) ;
+           // ChoosePerkCardANDplay(h) ;
             continue;
         }   
         if(true){
@@ -208,7 +216,7 @@ void Game::play_hero_Action(Hero *h){
                 h->GuideAction(h , map) ; 
             }
             else if(checkString(chosenAction) == "pickup"){
-                h->PickupItems() ;
+              //  h->PickupItems() ;
                 h->DisplayItem() ; 
             } 
             else if(checkString(chosenAction) == "special"){
@@ -224,42 +232,6 @@ void Game::play_hero_Action(Hero *h){
     }    
 }
 
-void Game::ChoosePerkCardANDplay(Hero * hero){
-    auto& availablePerks = hero->GetAvailablePerkCards() ;
-    if(availablePerks.empty()){
-        cout << "you do not have any perk cards!\n" ;
-        return ;  
-    }
-    while(true){
-        int selected = -1 ; 
-        hero->displayavailblecards() ; 
-        for(size_t i = 0 ; i < availablePerks.size() ; i++)
-            cout << i + 1 << "." << availablePerks[i]->get_name() << '\n' ; 
-            
-        cout << "enter the card number to play(0 to end): ";
-        cin >> selected ; 
-        if(selected == 0) return ; 
-        if(selected < 1 || selected > availablePerks.size()){
-            cerr << "invalid selection! try again\n" ; 
-            continue;
-        }
-        int index = selected - 1 ;
-        auto chosencard = std::move( availablePerks[index] ) ;
-
-        if(chosencard->get_name() == "Break of Dawn"){
-            skipMonsterPhase = true ;
-            chosencard->play() ; 
-        }
-        else if(chosencard->get_name() == "Late into the Night")
-            chosencard->play(hero) ;
-      
-        else chosencard->play() ; 
-
-        hero->addPlayedCards(std::move(chosencard)) ;
-        availablePerks.erase(availablePerks.begin() + index);
-        hero->displayPlayedCards() ; 
-    }
-}
 bool Game::both_monsters_defeated() {
      return monstersMap[MonsterType::Dracula]->is_defeated() &&
             monstersMap[MonsterType::InvisibleMan]->is_defeated();
@@ -334,6 +306,14 @@ InvisibleMan* Game::get_invisibleMan() {
 }
 ItemPool& Game::get_pool() {
     return pool;
+}
+
+void Game::set_skipMonsterPhase(bool value){
+    skipMonsterPhase = value ; 
+}
+
+bool Game::ShouldSkipMonsterPhase() const{
+    return skipMonsterPhase;
 }
 
 void Game::locationOverview() {
