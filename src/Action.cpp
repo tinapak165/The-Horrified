@@ -87,6 +87,28 @@ bool HelpAction::update(){
 void HelpAction::draw() {}
 
 PickUpAction::PickUpAction(Hero* h) : hero(h) {}
+
+
+void PickUpAction::draw() {
+    DrawRectangle(100, 100, 750, 250, Fade(DARKGRAY, 0.85f));
+    DrawText("[Playing Pickup Action]", 120 , 105, 28, RAYWHITE);
+    DrawText(message.c_str(), 120, 150, 22, YELLOW);
+
+    std::vector<Item>& items = hero->GetCurrentLocation()->get_items();
+
+    for (size_t i = 0; i < items.size(); ++i) {
+        Rectangle itemRect = {120.0f, 200.0f + i * 90.0f, 300.0f, 80.0f};
+        DrawRectangleRec(itemRect, GRAY);
+        DrawText(items[i].getName().c_str(), itemRect.x + 10, itemRect.y + 10, 20, WHITE);
+        
+        std::string details = "(Color: " + Item::color_to_string(items[i].getColor()) + ", Str: " + std::to_string(items[i].getStrength()) + ")";
+        DrawText(details.c_str(), itemRect.x + 10, itemRect.y + 40, 18, LIGHTGRAY);
+    }
+}
+
+
+ChoosePerkCardAction::ChoosePerkCardAction(Hero* h , Game& game) : hero(h) , game(game) {}
+
 bool PickUpAction::update() {
     mousePos = GetMousePosition();
     std::vector<Item>& ItemsAtLocation = hero->GetCurrentLocation()->get_items();
@@ -96,7 +118,6 @@ bool PickUpAction::update() {
         done = true;
         return false;
     }
-
     if (!done) {
         bool clickedOnItem = false;
 
@@ -117,7 +138,6 @@ bool PickUpAction::update() {
         }
 
     }
-
     if (done) {
         frameCounter++;
         if (frameCounter >= 60) {
@@ -125,24 +145,87 @@ bool PickUpAction::update() {
             return true;
         }
     }
+    return false;
+}
+bool ChoosePerkCardAction::update() {
+    mousePos = GetMousePosition(); 
+    auto& availablePerks = hero->GetAvailablePerkCards();
+
+    if (!done && availablePerks.empty()) {
+        message = "No perk cards available!";
+        done = true;
+        return false;
+    }
+        // اگر کارت انتخاب شده، باید play بشه
+    if (currentCard) {
+        currentCard->play(hero);
+
+        if (currentCard->isDone()) {
+            hero->addPlayedCards(std::move(currentCard));
+            done = true;
+        }
+
+        return false;
+    }
+    if(!done){
+        for (size_t i = 0; i < availablePerks.size(); i++) {
+            Rectangle cardRect = {100.0f + i * 220.0f, 200.0f, 200.0f, 300.0f};
+            if (CheckCollisionPointRec(mousePos, cardRect) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+
+                currentCard = std::move(availablePerks[i]);
+                availablePerks.erase(availablePerks.begin() + i);                
+                message = "playing: " + currentCard->get_name();
+                if (currentCard->get_name() == "Break of Dawn") {
+                    game.set_skipMonsterPhase(true);
+                }
+
+                return false;
+            }
+        }
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            message = "Perkcard canceled";
+            done = true;
+            return false;
+        }        
+    }
+
+    if (done) { //delay
+        frameCounter++;
+        if (frameCounter >= 60) {
+            return true;
+        }
+    }
 
     return false;
 }
 
-void PickUpAction::draw() {
-    DrawRectangle(100, 100, 750, 250, Fade(DARKGRAY, 0.85f));
-    DrawText("[ Playing Pickup Action]", 120 , 105, 28, RAYWHITE);
-    DrawText(message.c_str(), 120, 150, 22, YELLOW);
 
-    std::vector<Item>& items = hero->GetCurrentLocation()->get_items();
+void ChoosePerkCardAction::draw() {
 
-    for (size_t i = 0; i < items.size(); ++i) {
-        Rectangle itemRect = {120.0f, 200.0f + i * 90.0f, 300.0f, 80.0f};
-        DrawRectangleRec(itemRect, GRAY);
-        DrawText(items[i].getName().c_str(), itemRect.x + 10, itemRect.y + 10, 20, WHITE);
-        
-        std::string details = "(Color: " + Item::color_to_string(items[i].getColor()) + ", Str: " + std::to_string(items[i].getStrength()) + ")";
-        DrawText(details.c_str(), itemRect.x + 10, itemRect.y + 40, 18, LIGHTGRAY);
+    DrawRectangle(100, 100, 750, 500, Fade(DARKGRAY, 0.85f));
+    DrawText("[Playing Perk]", 120 , 105, 28, RAYWHITE);
+    if (currentCard) {
+        currentCard->draw(); 
+        return;
     }
-}
+    DrawText("Choose a Perk Card:", 120, 135, 28, YELLOW);
 
+    auto& availablePerks = hero->GetAvailablePerkCards();
+
+    for (size_t i = 0; i < availablePerks.size(); ++i) {
+        Rectangle cardRect = {120.0f + i * 220.0f, 200.0f, 200.0f, 300.0f};
+        DrawTexturePro(
+            availablePerks[i]->get_texture(),
+            {0, 0, (float)availablePerks[i]->get_texture().width, (float)availablePerks[i]->get_texture().height},
+            cardRect,
+            {0, 0},
+            0.0f,
+            WHITE
+        );
+    }
+
+    if (!message.empty()) {
+        DrawText(message.c_str(), 120, 155, 24, GREEN);
+    }
+
+}

@@ -3,6 +3,7 @@
 #include "Hero.hpp"
 #include "GameMap.hpp"
 #include "item.hpp"
+#include "Game.hpp"
 #include <vector>
 class HeroAction{
     public:
@@ -53,6 +54,22 @@ class PickUpAction : public HeroAction{
         bool update() override ;
         void draw() override ;
 
+};
+
+class ChoosePerkCardAction : public HeroAction{
+    private:
+        Hero* hero;
+        Vector2 mousePos;
+        std::string message;
+        bool done = false;
+        int frameCounter = 0 ; 
+        Game& game ; 
+        std::unique_ptr<Perkcard> currentCard = nullptr ;
+
+    public:
+        ChoosePerkCardAction(Hero* , Game&);
+        bool update() override;   
+        void draw()override;     
 };
 
 #endif
