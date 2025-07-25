@@ -71,7 +71,7 @@ void Hero::addPlayedCards(std::unique_ptr<Perkcard> p){
     playedCards.push_back(std::move(p)) ;
 }
 
-vector<Item> Hero::GetItems(){ return ListOfitems ; }
+vector<Item>& Hero::GetItems(){ return ListOfitems ; }
 
 void Hero::removeItems(const Item & i){
     for(size_t j = 0 ; j < (*this).GetItems().size() ; j++){
@@ -205,53 +205,31 @@ void Hero::DefeatAction(Hero* h ,InvisibleMan*  invisibleMan ,Dracula* dracula){
         cerr << "you can not use defeat action unless you are in monster place\n" ;
         }
 }
-void Hero::PickupItems()
-{
-    vector<Item>& ItemsAtLocation = (*this).GetCurrentLocation()->get_items() ;
-    if(ItemsAtLocation.empty()){
-        cout << (*this).GetName() << " found no items to pick up in the current location(" << (*this).GetCurrentLocation()->get_name() << ")\n" ;
-        return ;
-    }
-    int selectedItems = -1 ; 
-    while(!ItemsAtLocation.empty()){
-        cout << "items available in " << ((*this).GetCurrentLocation())->get_name() << " :\n" ;
-        for(size_t i = 0 ; i < ItemsAtLocation.size() ; i++){
-            cout << (i+1) << ". " << ItemsAtLocation[i].getName() << 
-                "( color: " <<  ItemsAtLocation[i].color_to_string(ItemsAtLocation[i].getColor()) << ", " <<
-                "strength: " << ItemsAtLocation[i].getStrength() << ")\n";
-        }
-        cout << "enter the item number to pick up(0 to end): " ; 
-        cin >> selectedItems ;
-        if(selectedItems == 0) return ;
-        if(selectedItems < 1 || selectedItems > ItemsAtLocation.size()){
-            cerr << "invalid selection.try again\n" ;
-            continue;
-        }
-        int index = selectedItems - 1 ;
-        ListOfitems.push_back(ItemsAtLocation[index]) ;
-        cout << (*this).GetName() << " picked up " << ItemsAtLocation[index].getName() << ".\n";
-        ItemsAtLocation.erase(ItemsAtLocation.begin() + index) ; 
-        if(ItemsAtLocation.empty()){
-            cout << "no more items available in " << (*this).GetCurrentLocation()->get_name() << ".\n" ;
-            break ;
-        }
-    }
-    for(const auto& i : ItemsAtLocation){
-        ListOfitems.push_back(i) ;
-        cout << (*this).GetName() << " picked up " << i.getName() << " from location " << (*this).GetCurrentLocation()->get_name() << '\n' ;
-    }
-    ItemsAtLocation.clear() ;
-}
+
 
 void Hero::DisplayItem(){
-    cout << "items collected:\n" ;
-    if(GetItems().empty()) cout << "-\n" ;
-    for(const auto i : GetItems()){
-        cout << i.getName() << '('  ;
-        cout << i.color_to_string(i.getColor()) ; 
-        cout << ", strength:" << i.getStrength() << ")\n" ; 
+
+    DrawRectangle(50, 50, 700, 500, Fade(DARKGRAY, 0.8f)); 
+
+    DrawText("Items Collected:", 70, 60, 28, YELLOW);
+
+    if (GetItems().empty()) {
+        DrawText("-", 80, 100, 24, RAYWHITE);
+        return;
     }
-    cout << '\n' ; 
+
+    int startY = 100;
+    int index = 1;
+
+    for (const auto& item : GetItems()) {
+        std::string itemStr = std::to_string(index) + ". " + item.getName() +
+            " (Color: " + Item::color_to_string(item.getColor()) +
+            ", Strength: " + std::to_string(item.getStrength()) + ")";
+        
+        DrawText(itemStr.c_str(), 80, startY, 22, LIGHTGRAY);
+        startY += 30;
+        index++;
+    }
 }
 
 string Hero::GetName()const{
