@@ -71,10 +71,12 @@ public:
     InvisibleMan* get_invisibleMan() ; 
     ItemPool& get_pool() ;
 
+    void set_skipMonsterPhase(bool) ;
+    bool ShouldSkipMonsterPhase() const ; 
+
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
     void initializaDeck() ; 
-    void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;
     void locationOverview() ;
     void graph_map_text();
