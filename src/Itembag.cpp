@@ -33,7 +33,7 @@ allItems.emplace_back("Speargun", ItemColor::Red, 4, "Institute", "../Assets/Ite
 allItems.emplace_back("Flower", ItemColor::Yellow, 2, "Docks", "../Assets/Items/Yellow/Flower.png");//
 allItems.emplace_back("Flower", ItemColor::Yellow, 2, "Docks", "../Assets/Items/Yellow/Flower.png");//
 allItems.emplace_back("Tarot Card", ItemColor::Yellow, 3, "Camp", "../Assets/Items/Yellow/Tarot.png");//
-allItems.emplace_back("Tarot Card", ItemColor::Yellow, 3, "Camp", "../Assets/Items/Yellow/Tarotpng");//
+allItems.emplace_back("Tarot Card", ItemColor::Yellow, 3, "Camp", "../Assets/Items/Yellow/Tarot.png");//
 allItems.emplace_back("Garlic", ItemColor::Yellow, 2, "Inn", "../Assets/Items/Yellow/Garlic.png");//
 allItems.emplace_back("Garlic", ItemColor::Yellow, 2, "Inn", "../Assets/Items/Yellow/Garlic.png");//
 allItems.emplace_back("MirroRed Box", ItemColor::Yellow, 3, "Mansion", "../Assets/Items/Yellow/Mirrored_Box.png");//
