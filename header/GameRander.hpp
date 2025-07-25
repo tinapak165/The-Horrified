@@ -6,6 +6,8 @@
 #include "Action.hpp"
 #include <vector>
 
+class HeroAction ;
+
 struct ActionButton{
     std::string label ; 
     Rectangle bounds ; 
