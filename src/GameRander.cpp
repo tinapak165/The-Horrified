@@ -251,9 +251,12 @@ void GameRender::handle_action(const std::string& action , Hero* h){
         currentAction = std::make_unique<HelpAction>(currentHero) ;
  
     } else if (action == "Quit") { 
+        game.get_turnManager().next_turn() ; //NOT SURE
 
     } else if (action == "Perk") {
-        game.ChoosePerkCardANDplay(h);
+        currentHero = h ; 
+        currentAction = std::make_unique<ChoosePerkCardAction>(currentHero , game) ;
+
     } else if (action == "Move") {
 
         currentHero = h ; 
