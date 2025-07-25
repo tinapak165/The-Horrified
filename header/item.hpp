@@ -25,6 +25,7 @@ public:
     const std::string& getName() const;
     ItemColor getColor() const;
     int getStrength() const;
+    void setStrength(int) ; 
     Texture2D getTexture() const;
     void loadTexture() ;
     void unloadTexture(); 

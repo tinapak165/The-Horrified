@@ -85,7 +85,8 @@ allItems.emplace_back("Fossil", ItemColor::Blue, 3, "Camp", ".../Assets/Items/Bl
 
 std::vector<Item> ItemPool::draw_random_items(int count) {
     srand(time(0)) ;
-    random_shuffle(allItems.begin(), allItems.end());
+
+    shuffle(allItems.begin(), allItems.end(), std::default_random_engine(std::random_device{}()));
     if ((int)allItems.size() < count)
     std::cerr << "Warning: not enough items in pool! Requested: " << count << ", Available: " << allItems.size() << '\n';
   //  std::cout<<allItems.size();

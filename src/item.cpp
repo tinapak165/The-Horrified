@@ -10,7 +10,7 @@ void Item::loadTexture() {
 
 void Item::unloadTexture() {
         UnloadTexture(texture);
-    }   
+}   
 Texture2D Item::getTexture() const {
     return texture;
 }
@@ -19,6 +19,7 @@ Texture2D Item::getTexture() const {
  ItemColor Item::getColor() const{ return color;}
  int Item::getStrength() const{ return strength;}
 
+void Item::setStrength(int new_Strength){ strength = new_Strength ; }
  std::string Item::getLocationName() const {
     return locationName;  
 }

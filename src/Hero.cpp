@@ -19,11 +19,22 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
 }
 
 void Hero::DisplayActions() const{
+    const float panelX = 600 ; const float panelY = 50 ; 
+    const float panelW = 400 ; const float panelH = 400 ; 
+    const int lineHeight = 30 ; 
+    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
+    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
 
-    cout << "----ACTIONS----\n" ; 
-    for(const auto a : ListOfActions)
-        cout << a.name << ": " << a.Description << '\n' ; 
-    cout << "---------------\n" ; 
+    float y = panelY + 20 ; 
+
+    DrawText("----ACTIONS----" , panelX+20 , y , 25 , YELLOW) ; 
+    y+=40 ;
+    for (const auto& action : ListOfActions) {
+        string line = action.name + ": " + action.Description;
+        
+        DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
+        y += lineHeight;
+    }
 }
 
 void Hero::resetMaxActions(){
@@ -100,7 +111,7 @@ int Hero::AdvanceActionForDracula(){
             cerr << "what you chosen is not Red! try again.\n" ; 
             continue;
         }
-        // chosenItem.setStrength(this->Ability(chosenItem)) ; 
+         chosenItem.setStrength(this->Ability(chosenItem)) ; 
         
         (*this).removeItems(chosenItem) ;
         selected.push_back(chosenItem) ; 
@@ -161,7 +172,7 @@ void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
     } 
 
 }
-void Hero::DefeatAction(Hero* h , InvisibleMan* invisibleMan , Dracula* dracula){
+void Hero::DefeatAction(Hero* h ,InvisibleMan*  invisibleMan ,Dracula* dracula){
                    
     Location* heroLoc = h->GetCurrentLocation();       
     if (invisibleMan && invisibleMan->get_location() == heroLoc) {
@@ -243,25 +254,6 @@ void Hero::DisplayItem(){
     cout << '\n' ; 
 }
 
-bool Hero::PerformTheAction(string act)  {
-
-    if(act == "quit" || act == "help" || act == "perk") return true;
-    for(const auto& ac : ListOfActions){
-        if(ac.name == act){
-            if((*this).GetRemainingActions() > 0){
-                cout << "[playing " << act << "]\n" ;
-                (*this).SetRemainingActions((*this).GetRemainingActions()-1) ; 
-                return true; 
-            }else{
-                cerr << "not enough action remaining!(Quit to end the phase)\n" ;
-                return false ; 
-            }
-        }
-    }
-    cerr << "action not available!\n" ;
-    return false ;  
-}
-
 string Hero::GetName()const{
     return name ; 
 }
@@ -277,46 +269,15 @@ string Hero::GetSpecialActionInfo() const{
 Location* Hero::GetCurrentLocation() const{
     return currentLocation ; 
 }
-void Hero::SetCurrentLocation(Location* location){
+
+void Hero::SetCurrentLocation(Location *location)
+{
     currentLocation = location ;
-}
-void Hero::MoveAction(GameMap& map, Hero* h){
-    string chosenPlace ; 
-    cout << "Which neighboring place do you want to move to? " ;
-    cin >> chosenPlace ;
-    Location* currentLoc = h->GetCurrentLocation() ; 
-    Location* chosenLocation = map.get_location_by_name(chosenPlace);
-
-    if(currentLoc->findNeighbor(chosenPlace)){
-        if(h->hasvillagerHere()){
-            auto here = h->villagerHere() ; 
-            string ans ;
-            cout << "some villagers are at the same place as you. " ; 
-            h->showvillagersHere() ; 
-            cout << "\ndo you want to move the villagers with you?(yes = moving all villagers with you/no = moving alone) " ; 
-            cin >> ans ; 
-            if(ans == "yes")
-                h->MoveTo(chosenLocation , here) ; 
-            else if(ans == "no")
-                h->MoveTo(chosenLocation) ;
-            else cerr << "wrong answer\n" ; 
-        }
-        else { 
-            h->MoveTo(chosenLocation); 
-        }    
-    }
-    else{
-        cerr << "what you have chosen is not a neighboirng place!\n" ;  
-    }
-
 }
 
 void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with villagers
     if (!new_location) return;
-    
-    if(new_location == (*this).GetCurrentLocation()){
-        cerr << "already in the location!\n" ; 
-    }
+
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
     new_location->add_hero(this , this->getTexture()) ;  
@@ -334,9 +295,6 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
 void Hero::MoveTo(Location* new_location){ //without villager
     if (!new_location) return;
     
-    if(new_location == (*this).GetCurrentLocation()){
-        cerr << "already in the location!\n" ; 
-    }
     (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
     new_location->add_hero(this , this->getTexture()) ;  
@@ -443,7 +401,7 @@ void Hero::Special(Hero* h , GameMap& map){
 
 }
 
-void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map , InvisibleMan* invisi ){
+void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map ,InvisibleMan*  invisi ){
     //for dracula
     Location* current = h->GetCurrentLocation();
     string locName = current->get_name();
@@ -459,7 +417,7 @@ void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& m
     }
     //for invisible man
     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { 
-         h->AdvanceActionForInvisibleMan(invisi) ;
+         h->AdvanceActionForInvisibleMan(move(invisi)) ;
         pool.add_items(h->getUsedItemsForDracula()) ; 
     }
     else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
@@ -569,16 +527,20 @@ vector<Item> Hero::getUsedItemsForInvisibleMan() {
     return usedItemsForInvisibleMan;
 }
 
+Hero::~Hero(){
+    UnloadTexture(HeroTex) ;  
+    if(StartingLocation) delete StartingLocation  ;
+    if(currentLocation) delete currentLocation ;
+}
+
 int Hero::Ability(Item& item){
     return item.getStrength() ; 
 }
 
 
 Texture2D Hero::getTexture(){ 
-    return HeroTex;}
-
-
-
+    return HeroTex;
+}
 
 void Hero::loadTexture(){
     HeroTex = LoadTexture(HeroTex_path.c_str());

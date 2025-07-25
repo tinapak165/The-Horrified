@@ -10,7 +10,6 @@
 #include "InvisibleMan.hpp"
 #include "Dracula.hpp"
 #include "Itembag.hpp"
-
 class Location ; 
 class Dracula ; 
 class ItemPool ; 
@@ -54,7 +53,6 @@ class Hero{
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction , std::string HeroTex_path) ;
 
-        void MoveAction(GameMap& , Hero*) ;
         void MoveTo(Location*  , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
 
@@ -64,13 +62,13 @@ class Hero{
         void Special(Hero *, GameMap& )  ;
         virtual int Ability(Item& item) ; 
 
-        void AdvanceAction(Hero* , Dracula* , ItemPool , GameMap& , InvisibleMan*) ; 
+        void AdvanceAction(Hero* ,Dracula* ,ItemPool , GameMap& , InvisibleMan* ) ; 
         int select_items_to_defeat(ItemColor) ;
         
         int AdvanceActionForDracula() ; 
-        void AdvanceActionForInvisibleMan(InvisibleMan*) ;
+        void AdvanceActionForInvisibleMan(InvisibleMan* ) ;
 
-        void DefeatAction(Hero*, InvisibleMan* , Dracula*) ; 
+        void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
 
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
@@ -82,8 +80,7 @@ class Hero{
         int getMaxActions() const ; 
         int GetRemainingActions()const ;
         std::string GetSpecialActionInfo() const ;
-        Location* GetCurrentLocation() const ;         
-        bool PerformTheAction(std::string)  ; 
+        Location* GetCurrentLocation() const ;     
         void DisplayActions() const ; 
         void resetMaxActions() ; 
 
@@ -105,14 +102,11 @@ class Hero{
 
         std::vector<Item> getUsedItemsForDracula();
         std::vector<Item> getUsedItemsForInvisibleMan();
-        virtual ~Hero() = default ; 
+        virtual ~Hero(); 
+        
         Texture2D getTexture();
-        
-        
-        
         void loadTexture();
       
-
 };
 
 

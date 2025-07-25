@@ -2,11 +2,12 @@
 #include "Dracula.hpp"
 
 Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation , MonsterType::Dracula ,"../Assets/Monsters/Dracula.png" )
- {
-     coffinsDestroyed["Cave"] = false;
+{
+    loadTexture() ; 
+    coffinsDestroyed["Cave"] = false;
     coffinsDestroyed["Dungeon"] = false;
-     coffinsDestroyed["Crypt"] = false;
-     coffinsDestroyed["Graveyard"] = false;
+    coffinsDestroyed["Crypt"] = false;
+    coffinsDestroyed["Graveyard"] = false;
 }
 
 void Dracula::destroy_coffin_at(std::string locationName) {
@@ -89,6 +90,3 @@ std::pair<Hero*, Villager*> Dracula::attack() {
     
         return {chosenHero, chosenVillager};
     }
-
-
-

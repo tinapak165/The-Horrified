@@ -1,4 +1,4 @@
-#include "GameRander.hpp"
+#include "GameRender.hpp"
 
 GameRender::GameRender(Game& game) : game(game) {}
 

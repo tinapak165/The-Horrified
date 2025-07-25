@@ -1,4 +1,3 @@
-
 #ifndef GAMEMAP_HPP
 #define GAMEMAP_HPP
 #include "location.hpp"
@@ -23,9 +22,10 @@ class GameMap {
         Villager* find_villager_by_name(const std::string& name);
         const std::vector<std::unique_ptr<Location>>& get_locations() const; 
         void draw_map();
+        const Texture2D& get_mapTexture() const ; 
         Location* check_click(Vector2 mousePos); 
         Location* find_next_step(Location* start, Location* goal);
-        void unload();
+        ~GameMap() ; 
 };
 
 #endif

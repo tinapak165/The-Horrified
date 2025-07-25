@@ -1,26 +1,16 @@
 #include "GameMap.hpp"
-void GameMap::unload() {
-    if (mapTexture.id != 0) {
-        UnloadTexture(mapTexture);
-        mapTexture.id = 0;
-    }
-
-    for (auto& loc : locations) {
-        loc->unload(); // آیکون هر لوکیشن
-    }
-}
 
 void GameMap::build_map() {
 
-    mapTexture = LoadTexture("../Assets/Menu/map.png");
-if (mapTexture.id == 0) {
-    std::cerr << "[ERROR] map.png not loaded!\n";
-}
+    mapTexture = LoadTexture("../Assets/map.png");
+    if (mapTexture.id == 0) {
+        std::cerr << "[ERROR] map.png not loaded!\n";
+    }
 
-    add_location("Inn", {500, 170, 50, 50}, "../Assets/Icons/InnIcon.png");
-    add_location("Cave" , {10,240,50,50} , "../Assets/Icons/CaveIcon.png") ; 
-    add_location("Camp" , {150,240,50,50} , "../Assets/Icons/CampIcon.png") ; 
-    add_location("Precinct" , {400,200,50,50} , "../Assets/Icons/PrecinctIcon.png") ; 
+    add_location("Inn", {855, 260, 50, 50}, "../Assets/Icons/InnIcon.png");
+    add_location("Cave" , {75,400,50,50} , "../Assets/Icons/CaveIcon.png") ; //
+    add_location("Camp" , {500,200,50,50} , "../Assets/Icons/CampIcon.png") ; 
+    add_location("Precinct" , {600,250,50,50} , "../Assets/Icons/PrecinctIcon.png") ; //
     add_location("Mansion" , {500,200,50,50} , "../Assets/Icons/MansionIcon.png") ; 
     add_location("Abbey" , {250,200,50,50} , "../Assets/Icons/AbbeyIcon.png") ; 
     add_location("Crypt" , {350,200,50,50} , "../Assets/Icons/CryptIcon.png") ; 
@@ -32,7 +22,7 @@ if (mapTexture.id == 0) {
     add_location("Laboratory" , {380,200,50,50} , "../Assets/Icons/LaboratoryIcon.png") ; 
     add_location("Shop" , {660,200,50,50} , "../Assets/Icons/ShopIcon.png") ; 
     add_location("Theatre" , {650,200,50,50} , "../Assets/Icons/TheatreIcon.png") ; 
-    add_location("Docks" , {880,200,50,50} , "../Assets/Icons/DocksIcon.png") ; 
+    add_location("Docks" , {1000,900,50,50} , "../Assets/Icons/DocksIcon.png") ; //
     add_location("Tower" , {200,200,50,50} , "../Assets/Icons/TowerIcon.png") ; 
     add_location("Barn" , {200,200,50,50} , "../Assets/Icons/BarnIcon.png") ; 
     add_location("Dungeon" , {200,200,50,50} , "../Assets/Icons/DungeonIcon.png") ; 
@@ -71,8 +61,8 @@ if (mapTexture.id == 0) {
     theatre->connect(shop ) ; 
     mansion->connect(abbey );
     abbey->connect(crypt );
-    // shop->connect(museum ) ; توی نقشه نبود
-    shop->connect(laboratory ) ; //اضافه شد بخاطر نقشه
+    shop->connect(laboratory ) ; 
+    shop->connect(museum) ; //
     mansion->connect(church ) ;
     laboratory->connect(institute );
     church->connect(graveyard );
@@ -120,7 +110,11 @@ void GameMap::draw_map() {
     // رسم نقشه با scale
     DrawTextureEx(mapTexture, {drawX, drawY}, 0.0f, scale, WHITE);
 }
-Location* GameMap::check_click(Vector2 mousePos) {
+const Texture2D &GameMap::get_mapTexture() const{
+    return mapTexture ;
+}
+Location *GameMap::check_click(Vector2 mousePos)
+{
     for (const auto& loc : locations) {
         if (CheckCollisionPointRec(mousePos, loc->get_clickable_area())) {
             return loc.get();
@@ -181,3 +175,6 @@ Location* GameMap::find_next_step(Location* start, Location* goal) {
     return nullptr;  // مسیر پیدا نشد
 }
 
+GameMap::~GameMap(){
+    UnloadTexture(mapTexture);
+}

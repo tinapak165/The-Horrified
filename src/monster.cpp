@@ -214,10 +214,6 @@ void Monster::move_towards(int max_steps) {
    
 }
 
-std::ostream operator<<(std::ostream &output, Monster &m){
-    output<<m.get_name();
- }
-
 bool Monster::is_alive() const { return get_location() != nullptr; }
 
 Texture2D Monster::getTexture(){
@@ -227,4 +223,9 @@ Texture2D Monster::getTexture(){
 
 void Monster::loadTexture(){
     MonsterTex = LoadTexture(MonsterTex_path.c_str());
+}
+
+Monster::~Monster()
+{
+    UnloadTexture(MonsterTex);
 }

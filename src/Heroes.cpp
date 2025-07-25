@@ -5,12 +5,37 @@ using namespace std ;
 
 Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_location_by_name("Docks") , "can take any number of items from adjacent locations." , "../Assets/Heros/Archaeologist.png") {
     Map.get_location_by_name("Docks")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
+
 }
 
-void Archaeologist:: DisplayInfo() const{
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n' << "special action: " << GetSpecialActionInfo() << '\n'  ; 
+void Archaeologist::DisplayInfo() const {
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " / 4";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
+
 
 void Archaeologist::SpecialAction(Location* chosenplace){
 
@@ -56,11 +81,34 @@ void Archaeologist::SpecialAction(Location* chosenplace){
 
 Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action." , "../Assets/Heros/Mayor.png") {
     Map.get_location_by_name("Theatre")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
 }
 
 void Mayor::DisplayInfo()const {
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 5 << '\n'  ; 
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " /5";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Mayor::SpecialAction(Location*) {
@@ -69,11 +117,34 @@ void Mayor::SpecialAction(Location*) {
 
 Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_location_by_name("Shop") , "can be moved to a location where one of the other heroes is." , "../Assets/Heros/Courier.png") , turn(m) {
     Map.get_location_by_name("Shop")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
 } 
 
 void Courier::DisplayInfo() const {
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n'  ;    
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " / 4";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Courier::SpecialAction(Location *){
@@ -94,11 +165,34 @@ void Courier::SpecialAction(Location *){
 }
 Scientist::Scientist(GameMap& Map) : Hero("scientist" , 4 , Map.get_location_by_name("Institute") , "No special action.", "../Assets/Heros/Scientist.png") {
     Map.get_location_by_name("Institute")->add_hero(this , this->getTexture()) ; 
+    loadTexture();
 }
 
 void Scientist::DisplayInfo() const {
-    cout << GetName() << ":\n" << "location: " << *GetCurrentLocation() << "\n" << "Actions: " << 
-    GetRemainingActions() << "/" << 4 << '\n'  ;    
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(GetRemainingActions()) + " / 4";
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Scientist::SpecialAction(Location *){
@@ -109,6 +203,6 @@ int Scientist::Ability(Item &item){
     cout << "do you want to boost " << item.getName() << "(yes/no)? " ;
     string ans ; cin >> ans ; 
     if(ans == "yes")
-        // item.setStrength(item.getStrength() + 1) ; 
+        item.setStrength(item.getStrength() + 1) ; 
     return item.getStrength() ; 
 }

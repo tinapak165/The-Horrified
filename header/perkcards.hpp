@@ -75,7 +75,7 @@ class VisitfromtheDetectiveCARD : public Perkcard{
         InvisibleMan*& invisibleman ; 
         GameMap& map ;
     public:
-        VisitfromtheDetectiveCARD(InvisibleMan*& , GameMap&) ; 
+        VisitfromtheDetectiveCARD(InvisibleMan*, GameMap&) ; 
         void play(Hero* = nullptr) override ; 
 };
 

@@ -7,7 +7,7 @@
 #include <raylib.h>
 #include "GameMap.hpp"
 #include "perkcards.hpp"
-#include "Monstercards.hpp"
+#include "monstercards.hpp"
 #include "TurnManager.hpp"
 #include "monster.hpp"
 #include "Dracula.hpp"
@@ -21,32 +21,33 @@
 
 class Menu;
 
-
-
-
+struct PlayerInfo{
+    std::string name ; 
+    Hero* hero ; 
+};
 
 class Game {
     friend class Monstercard;
-    friend std::ostream& operator<<(std::ostream& os, ItemColor color) ;
 private:
+    PlayerInfo player1, player2;
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
 
     std::unique_ptr<Menu> menu;
-    Texture2D background ;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
-    PerkDeck PerkDeck ; 
+    PerkDeck perkDeck ; 
 
-    Hero* mayor = nullptr;
-    Hero* archaeologist = nullptr;
-    Hero* courier = nullptr ;
-    Hero* scientist = nullptr ; 
-    Dracula* dracula = nullptr;
-    InvisibleMan* invisibleMan = nullptr;
-    Monster* frenziedMonster;
-    
+    std::unique_ptr<Mayor> mayor = nullptr ; 
+    std::unique_ptr<Archaeologist>archaeologist  = nullptr ; 
+    std::unique_ptr<Courier> courier = nullptr ; 
+    std::unique_ptr<Scientist>scientist = nullptr ; 
+
+    std::unique_ptr<Dracula> dracula = nullptr ; 
+    std::unique_ptr<InvisibleMan> invisibleMan = nullptr ; 
+    Monster* frenziedMonster = nullptr; 
+ 
     ItemPool pool;
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
@@ -60,13 +61,15 @@ public:
     ~Game();
     void start() ;
     void initialize(const PlayerSelection&, const PlayerSelection&) ; 
-
-
-    // void choose_character();
+    PlayerInfo getPlayer1() const ;
+    PlayerInfo getPlayer2() const ;
     GameMap& get_map();
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
     Monstercard* get_current_card() const ;
     TurnManager& get_turnManager();
+    Dracula* get_dracula() ; 
+    InvisibleMan* get_invisibleMan() ; 
+    ItemPool& get_pool() ;
 
     void hero_phase(Hero* hero);
     void play_hero_Action(Hero*);
@@ -81,7 +84,7 @@ public:
     std::string checkString(std::string) ; 
     std::unique_ptr<Monstercard> current_card = nullptr;
 
-   
+
     void monster_phase();
     void monster_dice();
     void send_hero_to_hospital(Hero* );
@@ -92,7 +95,6 @@ public:
     void initializaMDeck();
    
     void Changing_frenzy_marker();
-    void frenzied_strike(Monster* m, MonsterType type, std::vector<DiceFace>& results, bool& terrorAlreadyIncreased) ;
     Monster* get_frenzied_monster();
     
 
@@ -100,7 +102,7 @@ public:
 
     void add_villager(Villager* v);
 
-    void cleanup();
+   // void cleanup();
 };
 
 #endif

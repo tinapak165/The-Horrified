@@ -87,7 +87,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 void remove_villager(Villager* v);
                 Villager* create_villager(const std::string& ,const std::string& ,  std::vector<Villager*>& all_villagers);
                 void place_or_move_villager( std::vector<Villager*>& all_villagers);
-                void set_affected_villager(Villager* v);
+         //       void set_affected_villager(Villager* v);
                 virtual void play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) = 0;
                 bool has_frenzied_strike() const;
                 
@@ -111,7 +111,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
 
 
                     
-                    Texture2D load_texture_for_item(const Item& item);
+         //           Texture2D load_texture_for_item(const Item& item);
                     
                 
 

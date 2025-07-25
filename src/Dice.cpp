@@ -47,7 +47,7 @@ vector<DiceFace> Dice::roll(int numOfDice) {
     }
 
     vector<int> DiceIndices = {0, 1, 2};
-    random_shuffle(DiceIndices.begin(), DiceIndices.end());
+    std::shuffle(DiceIndices.begin(), DiceIndices.end(), std::default_random_engine(std::random_device{}()));
 
     vector<DiceFace> res;
     for (int i = 0; i < numOfDice; i++) {
