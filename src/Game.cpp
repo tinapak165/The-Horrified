@@ -70,9 +70,14 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
         scientist = std::make_unique<Scientist>(map) ;
         h2 = scientist.get() ;
     } 
+    if(p1.garlicTime > p2.garlicTime){
+        heroes.push_back(h2) ;
+        heroes.push_back(h1) ;
+    }else{
+        if(h1) heroes.push_back(h1) ; 
+        if(h2) heroes.push_back(h2) ; 
+    }
 
-    if(h1) heroes.push_back(h1) ; 
-    if(h2) heroes.push_back(h2) ; 
    
     player1 = {p1.name , h1} ; 
     player2 = {p2.name , h2} ;
@@ -212,7 +217,7 @@ void Game::play_hero_Action(Hero *h){
                 h->DisplayItem() ; 
             } 
             else if(checkString(chosenAction) == "special"){
-                    h->Special(h , map)  ;
+                   // h->Special(h , map)  ;
             }
             else if(checkString(chosenAction) == "advance"){ 
                 h->AdvanceAction(h , dracula.get() , pool , map , invisibleMan.get()) ; 
