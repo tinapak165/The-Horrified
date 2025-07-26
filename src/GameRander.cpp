@@ -270,7 +270,10 @@ void GameRender::handle_action(const std::string& action , Hero* h){
         currentAction = std::make_unique<PickUpAction>(currentHero) ;
 
     } else if (action == "Special") {
-        h->Special(h, game.get_map());
+        
+        currentHero = h ; 
+        currentAction = std::make_unique<SpecialAction>(currentHero , game.get_map()) ;
+
     } else if (action == "Advance") {
         h->AdvanceAction(h, game.get_dracula(), game.get_pool(), game.get_map(), game.get_invisibleMan());
     } else if (action == "Defeat") {
