@@ -86,7 +86,6 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
     for(Hero* hero : turnManager.get_heroes()){
         getNewCard(hero) ; 
     }
-
 }
 PlayerInfo Game::getPlayer1() const{ return player1; }
 PlayerInfo Game::getPlayer2() const { return player2 ;}
@@ -149,13 +148,7 @@ void Game::start() {
 
         EndDrawing();
     }
-
-    CloseWindow();
-
-    // for(Hero* hero : turnManager.get_heroes()){
-    //     getNewCard(hero) ; 
-    // }
-
+    CloseWindow() ;
 }
 
 void Game::hero_phase(Hero* hero) {
@@ -176,16 +169,15 @@ void Game::hero_phase(Hero* hero) {
 void Game::initializaDeck(){
     
     for(int i = 0 ; i < 3 ; i++){
-        //perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map));
-        perkDeck.addCard(std::make_unique<Hurrycard>(turnManager.get_heroes(), map)) ;
-       // perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-       // perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
-       // perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
-      //  perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-       // perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
+       perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map)); 
+       perkDeck.addCard(std::make_unique<Hurrycard>(turnManager.get_heroes(), map)) ; 
+       perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+       perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
+       perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
+       perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
     }
-   // perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-   // perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
+       perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ; 
+       perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
 
 }
 void Game::getNewCard(Hero* hero){
@@ -237,18 +229,14 @@ bool Game::both_monsters_defeated() {
             monstersMap[MonsterType::InvisibleMan]->is_defeated();
 }
 
-void Game::distribute_initial_items() {
-   // std::cout<<"placing 12 initial items \n";
-   
+void Game::distribute_initial_items() {   
     auto items = pool.draw_random_items(12);
     
     for (auto& item : items) {
-        item.loadTexture() ; 
+       item.loadTexture() ; 
         Location* loc = map.get_location_by_name(item.getLocationName());
-        Texture2D itemTex = item.getTexture();
         if (loc) {
             loc->add_item(item);
-          //  std::cout << "Placed " <<" " << item.getName() <<  " at " << item.getLocationName() << std::endl;
         }
     }
 }
@@ -485,5 +473,6 @@ void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
 Game::~Game(){
     if(frenziedMonster)
         delete frenziedMonster ;
+    pool.unload_in_use_items() ;
     
 }
