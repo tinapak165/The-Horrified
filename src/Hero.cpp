@@ -279,7 +279,14 @@ void Hero::MoveTo(Location* new_location){ //without villager
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
-void Hero::GuideAction(Hero * h , GameMap& map){
+void Hero::StartSpecial(GameMap &){}
+
+void Hero::UpdateSpecial(bool& done) {}
+
+void Hero::DrawSpecial() {}
+
+void Hero::GuideAction(Hero *h, GameMap &map)
+{
     string chosenPlace , mode ; 
     Location* currentLoc = h->GetCurrentLocation() ; 
     cout << "Guide:\n" 
@@ -351,32 +358,7 @@ void Hero::GuideAction(Hero * h , GameMap& map){
             }
     }else{
         cerr << "wrong answer!\n" ;
-        }      
-}
-void Hero::Special(Hero* h , GameMap& map){
-
-    Location* heroLoc = h->GetCurrentLocation() ;
-
-    if(h->GetName() == "Archaeologist"){
-        vector<Location*> heroLocNeighbor = heroLoc->get_neighbors() ; 
-        cout << "neighboring locations: " ;
-        for(size_t i = 0 ; i <heroLocNeighbor.size() ; i++)
-            cout << heroLocNeighbor[i]->get_name() << " " ;
-        cout << endl ; 
-        cout << "Which neighboring place do you want to pick up its items? " ;
-        string chosenplace ; 
-        cin >> chosenplace ;
-        if(heroLoc->findNeighbor(chosenplace)){
-            Location* chosenLoc = map.get_location_by_name(chosenplace) ;
-            h->SpecialAction(chosenLoc) ;
-            h->DisplayItem() ; 
-        }else{
-            cout << "what you have chosen is not a neighboring place!\n" ; 
-        }  
-    }
-    else
-        h->SpecialAction(heroLoc); 
-
+        }
 }
 
 void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map ,InvisibleMan*  invisi ){

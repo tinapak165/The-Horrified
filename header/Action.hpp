@@ -72,4 +72,26 @@ class ChoosePerkCardAction : public HeroAction{
         void draw()override;     
 };
 
+class SpecialAction : public HeroAction{
+    private:
+        Hero* hero ;
+        GameMap & map ; 
+
+        std::string message;
+        std::string chosenPlace = "";
+        bool typing = true;
+        bool validInput = false;
+        bool specialFinished = false;
+        Location* chosenLocation = nullptr;
+
+        double messageStartTime = 0.0;
+        bool showingMessage = false;
+
+    public:
+        SpecialAction(Hero* , GameMap&);
+        bool update() override;   
+        void draw()override;  
+
+};
+
 #endif

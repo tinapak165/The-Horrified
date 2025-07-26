@@ -227,5 +227,24 @@ void ChoosePerkCardAction::draw() {
     if (!message.empty()) {
         DrawText(message.c_str(), 120, 155, 24, GREEN);
     }
+}
 
+SpecialAction::SpecialAction(Hero * hero , GameMap& map): hero(hero) , map(map) {
+    hero->StartSpecial(map) ;
+}
+
+bool SpecialAction::update() {
+
+    if(specialFinished) return true ;
+
+    hero->UpdateSpecial(specialFinished) ;
+
+    return specialFinished ;
+}
+
+void SpecialAction::draw() {
+
+    if(!specialFinished)
+        hero->DrawSpecial() ;
+    
 }

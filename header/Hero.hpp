@@ -56,10 +56,13 @@ class Hero{
         void MoveTo(Location*  , std::vector<Villager*>) ;
         void MoveTo(Location*) ; 
 
+        virtual void StartSpecial(GameMap&);
+        virtual void UpdateSpecial(bool &done) ;
+        virtual void DrawSpecial() ; 
+
         void GuideAction(Hero* , GameMap&) ; 
 
-        virtual void SpecialAction(Location*) = 0  ; 
-        void Special(Hero *, GameMap& )  ;
+        virtual void Special(Location*) = 0  ; 
         virtual int Ability(Item& item) ; 
 
         void AdvanceAction(Hero* ,Dracula* ,ItemPool , GameMap& , InvisibleMan* ) ; 
