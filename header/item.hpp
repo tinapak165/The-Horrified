@@ -29,7 +29,6 @@ public:
     Texture2D getTexture() const;
     void loadTexture() ;
     void unloadTexture(); 
-   
     std::string getLocationName() const;
     static std::string color_to_string(ItemColor color);    
 

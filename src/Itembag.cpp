@@ -93,6 +93,8 @@ std::vector<Item> ItemPool::draw_random_items(int count) {
     std::vector<Item> drawn;
     for (int i = 0; i < count && !allItems.empty(); ++i) {
         drawn.push_back(allItems.back());
+        inUseItems.push_back(allItems.back()) ;
+
         allItems.pop_back();
     }
     return drawn;
@@ -107,13 +109,10 @@ void ItemPool::add_items(const std::vector<Item>& items) {
         allItems.push_back(item);
     }
 }
-void ItemPool::unload_item_textures() {
-    for (Item& item : allItems) {
-        item.unloadTexture();
-    }
-}
-void ItemPool::load_item_textures(){
-    for (Item& item : allItems) {
-        item.loadTexture();
+
+void ItemPool::unload_in_use_items() {
+    for(auto& item : inUseItems){
+        item.unloadTexture() ;
+
     }
 }

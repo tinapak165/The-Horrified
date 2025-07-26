@@ -11,7 +11,9 @@ void Item::loadTexture() {
 Texture2D Item::getTexture() const {
     return texture;
 }
-void Item::unloadTexture(){}
+void Item::unloadTexture(){
+    UnloadTexture(this->getTexture()) ;
+}
 
  const std::string& Item::getName() const{ return name;}
  ItemColor Item::getColor() const{ return color;}
