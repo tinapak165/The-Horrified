@@ -6,6 +6,8 @@
 #include "Action.hpp"
 #include <vector>
 
+class HeroAction;
+
 struct ActionButton{
     std::string label ; 
     Rectangle bounds ; 
@@ -26,10 +28,12 @@ public:
     void draw_action_panel() ; 
     void handle_action(const std::string& , Hero*) ;
     void draw_location_icon() ; 
+    void draw_collected_items() ; 
     void draw_sidebar() ;
     ~GameRender() ; 
 private:
     std::unique_ptr<HeroAction> currentAction ; 
+    bool ShowitemButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
     Location* selectedLocation = nullptr ; 

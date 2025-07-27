@@ -3,7 +3,7 @@
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
-    if (showingHeroInfo && currentHero != nullptr) {
+        if (showingHeroInfo && currentHero != nullptr) {
         currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingHeroInfo = false;
@@ -28,7 +28,15 @@ void GameRender::draw() {
             selectedLocation = nullptr ; 
         }
         return ;
-     }
+    }
+    if (ShowitemButton && currentHero) {
+        currentHero->DisplayItem(); 
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            ShowitemButton = false;
+            currentHero = nullptr;
+        }
+        return;
+    }
 
 
     draw_map();
@@ -40,7 +48,7 @@ void GameRender::draw() {
     draw_monsters();
     draw_monster_card();
     draw_users() ;
-    draw_action_panel() ; 
+    
 }
 
 void GameRender::draw_map() {
@@ -50,44 +58,59 @@ void GameRender::draw_map() {
 }
 void GameRender::draw_sidebar() {
     
-    int sidebarX = 1195; 
-    int sidebarWidth = 200;
-    DrawRectangle(sidebarX, 0, sidebarWidth, 1000, DARKGRAY);
+    
+
 
     
-    const auto& card = game.get_current_card();
+   
+
+  // اول مستطیل رسم‌شده نقشه رو می‌گیریم
+Rectangle mapRect = game.get_map().get_drawn_rect();
+
+// حالا sidebar رو دقیقاً می‌ذاریم کنار نقشه
+int sidebarX = mapRect.x + mapRect.width + 10;    // فاصله 10px از نقشه
+int sidebarWidth = 400;
+int sidebarHeight = mapRect.height;               // هم‌اندازه با ارتفاع نقشه
+
+// پس‌زمینه کلی sidebar
+DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
+
+// ========================= بخش کارت =========================
+const auto& card = game.get_current_card();
+int cardBoxY = mapRect.y + 20;          // با توجه به موقعیت نقشه
+int cardBoxHeight = 290;
+DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
+DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
+
 if (card) {
-    // باکس پس‌زمینه کارت
-    DrawRectangle(
-        float(sidebarX + 10),
-        20.f,
-        float(sidebarWidth - 20),
-        300.f,
-        Fade(BLACK, 0.2f)
-    );
-
-    // تیتر
-    DrawText("Monster Card:", sidebarX + 20, 30, 20, WHITE);
-
-    // تصویر کارت
     Texture2D tex = card->get_texture();
+    float aspect = (float)tex.width / (float)tex.height;
+    float destHeight = cardBoxHeight - 60;
+    float destWidth = destHeight * aspect;
+
+    float destX = sidebarX + (sidebarWidth - destWidth) / 2;  // وسط‌چین
+    float destY = cardBoxY + 40;
+
     Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
-    Rectangle dest = {float(sidebarX + 20), 60.f, float(sidebarWidth - 40), 240.f};
-    DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
+    Rectangle dest = {destX, destY, destWidth, destHeight};
+
+    DrawTexturePro(tex, src, dest, {0,0}, 0.0f, BLACK);
 }
-    
 
-    // box for whats happening 
-    DrawRectangle(float( sidebarX + 10 ),300,float (  sidebarWidth - 20 ), 660, Fade(BLACK, 0.2f));
-    DrawText("Events:", sidebarX + 20, 330, 20, WHITE);
+// ========================= بخش اتفاقات =========================
+int eventsBoxY = cardBoxY + cardBoxHeight + 10;
+int eventsBoxHeight = sidebarHeight - (cardBoxHeight + 40);
+DrawRectangle(sidebarX + 10, eventsBoxY, sidebarWidth - 20, eventsBoxHeight, Fade(BLACK, 0.2f));
+DrawText("Events:", sidebarX + 20, eventsBoxY + 20, 20, BLACK);
 
-    // shows five last logs
-    auto logs = game.get_last_events(5);  
-    int y = 360;
-    for (const auto& log : logs) {
-        DrawText(log.c_str(), sidebarX + 20, y, 16, WHITE);
-        y += 22;
-    }
+// نمایش ۵ لاگ آخر
+auto logs = game.get_last_events(5);
+int y = eventsBoxY + 50;
+for (const auto& log : logs) {
+    DrawText(log.c_str(), sidebarX + 20, y, 16, WHITE);
+    y += 22;
+}
+
 }
 
 void GameRender::draw_monsters() {
@@ -318,9 +341,12 @@ void GameRender::handle_action(const std::string& action , Hero* h){
         currentAction = std::make_unique<HelpAction>(currentHero) ;
  
     } else if (action == "Quit") { 
+        game.get_turnManager().next_turn() ; //NOT SURE
 
     } else if (action == "Perk") {
-        game.ChoosePerkCardANDplay(h);
+        currentHero = h ; 
+        currentAction = std::make_unique<ChoosePerkCardAction>(currentHero , game) ;
+
     } else if (action == "Move") {
 
         currentHero = h ; 
@@ -329,10 +355,15 @@ void GameRender::handle_action(const std::string& action , Hero* h){
     } else if (action == "Guide") {
         h->GuideAction(h, game.get_map());
     } else if (action == "Pickup") {
-        h->PickupItems();
-        h->DisplayItem();
+
+        currentHero = h ; 
+        currentAction = std::make_unique<PickUpAction>(currentHero) ;
+
     } else if (action == "Special") {
-        h->Special(h, game.get_map());
+        
+        currentHero = h ; 
+        currentAction = std::make_unique<SpecialAction>(currentHero , game.get_map()) ;
+
     } else if (action == "Advance") {
         h->AdvanceAction(h, game.get_dracula(), game.get_pool(), game.get_map(), game.get_invisibleMan());
     } else if (action == "Defeat") {
@@ -382,6 +413,21 @@ void GameRender::draw_location_icon() {
     }
 }
 
+void GameRender::draw_collected_items(){
+    Rectangle itemButton = { 750, 120, 170, 40 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, itemButton);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(itemButton, btnColor);
+    DrawText("Items collected", itemButton.x + 10, itemButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowitemButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
+
+}
 
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 

@@ -7,6 +7,7 @@
 class ItemPool {
 private:
     std::vector<Item> allItems;
+     std::vector<Item> inUseItems ; 
 
 public:
     ItemPool();
@@ -14,5 +15,6 @@ public:
     void add_items(const std::vector<Item>& items);
     std::vector<Item> draw_random_items(int );
     void load_item_textures();
-    void unload_item_textures();
+    
+    void unload_in_use_items();
 };

@@ -18,9 +18,9 @@ Vector2 Location::get_screenPos() const{
     return screenPos ;
 }
 
-void Location::add_item(const Item& item, Texture2D itemTex) {
+void Location::add_item(const Item& item) {
     items.push_back(item);
-    itemTextures.push_back(itemTex);
+   
 }
 
 void Location::add_hero(Hero* hero, Texture2D heroTex) {

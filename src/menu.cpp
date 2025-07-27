@@ -7,8 +7,9 @@ void Menu::SetState(std::unique_ptr<State> s) {
 }
 void Menu::renderCurrentState() {
     if (current_state) 
-        current_state->playState(*this);
+        current_state->render(*this);
 }
+
 State* Menu::getState(){
     return current_state.get();
 }
@@ -16,3 +17,4 @@ void Menu::startGame(const PlayerSelection &p1, const PlayerSelection &p2){
     game.initialize(p1,p2) ;
     SetState(nullptr);
 }
+ Game& Menu::getGame() { return game; }

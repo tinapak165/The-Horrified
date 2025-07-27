@@ -585,7 +585,7 @@ void Monstercard::place_items(ItemPool& pool )  {
         Texture2D itemTex = item.getTexture();
         if (loc) {
             
-            loc->add_item(item , itemTex);
+            loc->add_item(item );
             placed_items.push_back({item, loc});  // ذخیره برای رندر
         }
     }

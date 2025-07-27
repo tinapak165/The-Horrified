@@ -15,11 +15,51 @@ Texture2D State::get_background() const{
     return background;
 }
 
-MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
-      startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 300} , 1.0f)),
-      exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{170, 500} , 1.0f)){}
 
-void MenuState::playState(Menu& menu)  {
+MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
+startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 300} , 1.0f)),
+exitButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 500} , 1.0f)){}
+
+
+  
+
+
+// // class SetupState : public State {
+// // public:
+// //     void update(Menu& menu) override {
+// //         // پس از آماده‌سازی سریع به فاز قهرمان می‌رویم
+// //         menu.SetState(std::make_unique<HeroPhaseState>());
+// //     }
+
+// //     void playState(Menu& menu) override {
+// //         ClearBackground(DARKGRAY);
+// //         DrawText("Setup Game...", 100, 100, 30, WHITE);
+// //     }
+// // };
+// void MenuState::render(Menu& menu)  {
+//     DrawTexture(get_background(), 0, 0, WHITE);
+    
+//     Vector2 mouse = GetMousePosition();
+//     bool click = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
+    
+//     startButton->Draw(mouse);
+//     exitButton->Draw(mouse);
+    
+//     if (startButton->isPressed(mouse, click)) {
+//         auto newstate = std::make_unique<NameInputState>() ;
+//         menu.SetState(std::move(newstate)); 
+//         return ; 
+//     }
+//     if (exitButton->isPressed(mouse, click)) {
+//         auto newstate = std::make_unique<ExitState>() ;
+//         menu.SetState(std::move(newstate)) ;
+//         return ; 
+//     }
+// }
+
+
+// MenuState.cpp
+void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
 
         Vector2 mouse = GetMousePosition();
@@ -40,6 +80,10 @@ void MenuState::playState(Menu& menu)  {
         }
     }
 
+
+
+
+
 ExitState::ExitState() 
     : State("../Assets/Menu/Background.png"),
       YesText(std::make_unique<ClickableText>("Yes", Vector2{280, 400}, 30, DARKGRAY)),
@@ -48,7 +92,7 @@ ExitState::ExitState()
     // goodbyeSound = LoadSound("Assets/goodbye.wav");
 }
 
-void ExitState::playState(Menu& menu) {
+void ExitState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
 
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.6f));
@@ -76,9 +120,16 @@ void ExitState::playState(Menu& menu) {
     }
 }
 
+
 // ExitState::~ExitState() {
 //     UnloadSound(goodbyeSound);
 // }
+
+SetupState::SetupState() : State("nothing"){}
+void SetupState::render(Menu& menu){
+
+}
+
 
 NameInputState::NameInputState() : State("../Assets/Menu/Background.png") ,
     nameBox1(std::make_unique<TextBox>(Rectangle{100, 150, 300, 40}, TextBox::ANY)) ,
@@ -87,7 +138,7 @@ NameInputState::NameInputState() : State("../Assets/Menu/Background.png") ,
     timeBox2(std::make_unique<TextBox>(Rectangle{100, 450, 300, 40}, TextBox::NUMBERS_ONLY)) ,    
     continueButton{300, 500, 200, 50}  {}
 
-void NameInputState::playState(Menu& menu) {
+void NameInputState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
     std::unique_ptr<ClickableText> BackToMenu = std::make_unique<ClickableText>("Back to menu", Vector2{100, 900} ,30, RED);
 
@@ -204,7 +255,7 @@ ChooseCharacterState::ChooseCharacterState(const PlayerSelection& p1, const Play
     selectedMessage = ""; 
 }
 
-void ChooseCharacterState::playState(Menu& menu) {
+void ChooseCharacterState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
 
     Vector2 mousePos = GetMousePosition();
@@ -258,7 +309,84 @@ void ChooseCharacterState::playState(Menu& menu) {
                 EndDrawing();
             }
             menu.startGame(player1, player2);
+             menu.SetState(std::make_unique<HeroPhaseState>());
             return;
         }
     }
 }
+HeroPhaseState::HeroPhaseState() 
+    : State("../Assets/Menu/Background.png") 
+{
+    std::cout << "HeroPhaseState constructed\n";
+}
+
+
+
+
+void HeroPhaseState::render(Menu& menu) {
+   
+    DrawTexture(get_background(), 0, 0, WHITE);
+
+    
+    
+    GameRender renderer(menu.getGame());
+    renderer.draw();
+    renderer.draw_action_panel();
+
+    if (!phase_done) {
+           menu.getGame().hero_phase(menu.getGame().get_turnManager().get_active_hero());
+           phase_done = true;
+       }   
+   const char* msg = "Hero Phase - Press SPACE to go to MonsterPhase";
+    int fontSize = 30;
+    int textWidth = MeasureText(msg, fontSize);
+    int x = (GetScreenWidth() - textWidth) / 2;
+    int y = 100;
+
+
+    int padding = 20;
+    DrawRectangle(x - padding / 2, y - padding / 2, textWidth + padding, fontSize + padding, Fade(BLACK, 0.5f));
+
+   
+    DrawText(msg, x, y, fontSize, WHITE);
+
+    if (phase_done && IsKeyPressed(KEY_SPACE)) {
+            menu.SetState(std::make_unique<MonsterPhaseState>());
+        }
+
+}
+
+
+
+MonsterPhaseState::MonsterPhaseState(): State ("../Assets/Menu/Background.png"){}
+
+
+
+ void MonsterPhaseState::render(Menu& menu){
+     
+      DrawTexture(get_background(), 0, 0, WHITE);
+   
+        // اگر هنوز فاز هیولا اجرا نشده → فقط یک بار اجراش کن
+        if (!phase_done) {
+            menu.getGame().monster_phase();
+            phase_done = true;
+        }
+
+        GameRender renderer(menu.getGame());
+        renderer.draw();
+
+        // پیام راهنما
+        const char* msg = "Monster Phase complete - Press SPACE to continue";
+        int textWidth = MeasureText(msg, 30);
+        DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
+
+        // وقتی بازیکن تأیید کرد برو فاز هیرو
+        if (phase_done && IsKeyPressed(KEY_SPACE)) {
+            menu.SetState(std::make_unique<HeroPhaseState>());
+        }
+    
+}
+
+ 
+
+

@@ -2,8 +2,9 @@
 #define ACTIONS_H
 #include "Hero.hpp"
 #include "GameMap.hpp"
-
-
+#include "item.hpp"
+#include "Game.hpp"
+#include <vector>
 class HeroAction{
     public:
         virtual ~HeroAction() = default ;
@@ -38,6 +39,58 @@ class HelpAction : public HeroAction {
         HelpAction(Hero*) ;
         bool update() override ;
         void draw() override ;
+
+};
+
+class PickUpAction : public HeroAction{
+    private:
+        Hero* hero ;
+        bool done = false;
+        int frameCounter = 0 ; 
+        std::string message = "Click an item to pick up ( to cancel)";
+        Vector2 mousePos;
+    public:
+        PickUpAction(Hero*) ;
+        bool update() override ;
+        void draw() override ;
+
+};
+
+class ChoosePerkCardAction : public HeroAction{
+    private:
+        Hero* hero;
+        Vector2 mousePos;
+        std::string message;
+        bool done = false;
+        int frameCounter = 0 ; 
+        Game& game ; 
+        std::unique_ptr<Perkcard> currentCard = nullptr ;
+
+    public:
+        ChoosePerkCardAction(Hero* , Game&);
+        bool update() override;   
+        void draw()override;     
+};
+
+class SpecialAction : public HeroAction{
+    private:
+        Hero* hero ;
+        GameMap & map ; 
+
+        std::string message;
+        std::string chosenPlace = "";
+        bool typing = true;
+        bool validInput = false;
+        bool specialFinished = false;
+        Location* chosenLocation = nullptr;
+
+        double messageStartTime = 0.0;
+        bool showingMessage = false;
+
+    public:
+        SpecialAction(Hero* , GameMap&);
+        bool update() override;   
+        void draw()override;  
 
 };
 

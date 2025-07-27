@@ -8,9 +8,9 @@ void Item::loadTexture() {
         texture = LoadTexture(texturepath.c_str());
     }
 
-void Item::unloadTexture() {
-        UnloadTexture(texture);
-}   
+void Item::unloadTexture(){
+    UnloadTexture(this->getTexture()) ;
+}  
 Texture2D Item::getTexture() const {
     return texture;
 }
