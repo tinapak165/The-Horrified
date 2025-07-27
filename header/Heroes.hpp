@@ -51,10 +51,17 @@ class Mayor : public Hero{
 class Courier : public Hero{
     private:
         TurnManager& turn ; 
+        std::vector<Hero*> heroes ;
+      //  std::string message ;
+        int hoveredIndex ;
+        bool done ; 
     public:
-        Courier(GameMap& , TurnManager&) ; 
+        Courier(GameMap& , TurnManager& ) ; 
         void DisplayInfo() const  ; 
-        void Special(Location*) override ;
+        void StartSpecial(GameMap&) override ;
+        void UpdateSpecial(bool &done) override ;
+        void DrawSpecial() override ;
+        void Special(Location*) override ;  
 };
 
 class Scientist : public Hero{
