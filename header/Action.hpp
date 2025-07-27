@@ -94,4 +94,39 @@ class SpecialAction : public HeroAction{
 
 };
 
+class AdvanceAction : public HeroAction{
+    private:
+
+        Hero* hero;
+        Dracula* dracula;
+        ItemPool& pool;
+        GameMap& map;
+        InvisibleMan* invisibleman;
+        Item pendingAbilityItem;
+        float messageTimer = 0.0f;
+        bool shouldClose = false;
+        bool waitingForAbility = false ; 
+        bool waitingForAbilityInput = false ; 
+
+
+        enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
+
+        // برای حالت دراکولا
+        std::vector<Item> availableRedItems;
+        std::vector<Item> selectedItems;
+        int totalStrength = 0;
+        int hoveredIndex = -1;
+
+        // برای حالت نامرئی
+        std::vector<Item> evidenceItems;
+        int hoveredEvidenceIndex = -1;
+        bool evidencePlaced = false;
+
+        std::string message;
+    public:
+        AdvanceAction(Hero*, Dracula* , ItemPool& , GameMap& ,InvisibleMan*);
+        bool update() override;   
+        void draw()override; 
+};
+
 #endif
