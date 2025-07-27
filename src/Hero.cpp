@@ -81,97 +81,7 @@ void Hero::removeItems(const Item & i){
         }
     }
 }
-int Hero::AdvanceActionForDracula(){
-    int chosenNumber = -1 ; 
-    int totalStrength = 0 ;
-    vector<Item> selected ;
 
-    while(true){
-        vector<Item> items = (*this).GetItems() ;
-        if(items.empty()){
-            cerr << (*this).GetName() << " has no more items!\n" ; 
-            break; 
-        }
-        cout << "total strength: " << totalStrength << '\n' ; 
-        cout << "items to choose:\n" ;
-        for(size_t i = 0 ; i < items.size() ; i++)
-            cout << (i + 1) << "-" << items[i].getName() << "(color: " << items[i].color_to_string(items[i].getColor())  << ", strength: " << items[i].getStrength() << ")\n" ;
-        
-        cout << "please select any item by number(0 is for quiting): " ;
-        cin >> chosenNumber ; 
-        if(chosenNumber == 0) break;
-        if(chosenNumber < 1 && chosenNumber > static_cast<int>(items.size())){
-            cerr << "invalid. please try again!\n" ;
-            continue;
-        }
-
-        Item& chosenItem = items[chosenNumber - 1] ;
-
-        if(chosenItem.getColor() != ItemColor::Red){
-            cerr << "what you chosen is not Red! try again.\n" ; 
-            continue;
-        }
-         chosenItem.setStrength(this->Ability(chosenItem)) ; 
-        
-        (*this).removeItems(chosenItem) ;
-        selected.push_back(chosenItem) ; 
-        totalStrength += chosenItem.getStrength() ;
-
-        if(totalStrength >= 6){
-            cout << "total strength has reached to " << totalStrength << '\n';
-        }
-        else if(totalStrength < 6 && items.empty()){
-            cout << "no more items left and strength did not reach 6\n" ;
-        }
-    }
-    if(!selected.empty()){
-        cout << "items chosen for advance action:\n " ;
-        for(size_t i = 0 ; i < selected.size() ; i++){
-            cout << (i + 1) << "-" << selected[i].getName() << "(color: " << selected[i].color_to_string(selected[i].getColor()) << ", strength:" << selected[i].getStrength() << ").\n" ;
-            (*this).GetCurrentLocation()->add_item(selected[i]) ; 
-        }
-    }
-    else cout << "no item was selected for advance action!\n" ;
-    return totalStrength ; 
-}
-
-void Hero::AdvanceActionForInvisibleMan(InvisibleMan* monster){
-    vector<Item> items = this->GetItems() ; 
-    vector<Item> evidenceItems ; 
-    for(const Item& item : items){
-        std::string loc = item.getLocationName() ; 
-        if (loc == "Inn" || loc == "Barn" || loc == "Institute" || loc == "Laboratory" || loc == "Mansion") {
-            evidenceItems.push_back(item);  
-        }  
-    }
-    if(evidenceItems.empty()){
-        std::cout << "You have no valid items for evidence.\n";
-        return;        
-    }
-    std::cout << "Choose one item to place as evidence against Invisible Man:\n";
-
-    for (size_t i = 0; i < evidenceItems.size(); ++i) {
-        std::cout << i + 1 << ". " << evidenceItems[i].getName()
-                  << " (from " << evidenceItems[i].getLocationName() << ")\n";
-    }
-    int choice;
-    std::cout << "Enter number (or 0 to cancel): ";
-    std::cin >> choice;
-
-    if (choice <= 0 || choice > static_cast<int>(evidenceItems.size())) {
-        std::cout << "Cancelled.\n";
-        return;
-    }
-    Item selected = evidenceItems[choice - 1];  
-
-    if(monster->add_evidence(selected.getLocationName())) {
-        removeItems(selected);
-        std::cout << "Evidence placed successfully.\n";
-    }else{
-        std::cout << "Evidence from that location already exists. Choose another.\n";
-    } 
-
-}
 void Hero::DefeatAction(Hero* h ,InvisibleMan*  invisibleMan ,Dracula* dracula){
                    
     Location* heroLoc = h->GetCurrentLocation();       
@@ -361,28 +271,6 @@ void Hero::GuideAction(Hero *h, GameMap &map)
         }
 }
 
-void Hero::AdvanceAction(Hero* h , Dracula* dracula , ItemPool pool , GameMap& map ,InvisibleMan*  invisi ){
-    //for dracula
-    Location* current = h->GetCurrentLocation();
-    string locName = current->get_name();
-    if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
-        cout << "To destroy Dracula's coffin, use Red items with total strength >= 6.\n" ;
-        int totalStrength = h->AdvanceActionForDracula() ;
-        if (totalStrength >= 6) {
-            dracula->destroy_coffin_at(locName); 
-            pool.add_items(h->getUsedItemsForDracula()) ; 
-        } else {
-            std::cout << "Advance action failed Not enough Red item strength.\n";
-            }
-    }
-    //for invisible man
-    else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { 
-         h->AdvanceActionForInvisibleMan(move(invisi)) ;
-        pool.add_items(h->getUsedItemsForDracula()) ; 
-    }
-    else cerr << "you can not do advance action unless you are in coffin places or search locations\n" ; 
-         
-}
 
 bool Hero::hasvillagerHere() const
 {
@@ -493,9 +381,7 @@ Hero::~Hero(){
     if(currentLocation) delete currentLocation ;
 }
 
-int Hero::Ability(Item& item){
-    return item.getStrength() ; 
-}
+bool Hero::HasAbility(){ return false ; }
 
 
 Texture2D Hero::getTexture(){ 
