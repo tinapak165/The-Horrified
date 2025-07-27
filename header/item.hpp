@@ -21,7 +21,7 @@ private:
     Texture2D texture;
 public:
     Item(std::string name,ItemColor color, int strength, std::string locationName, std::string texturepath);
-
+    Item() ; 
     const std::string& getName() const;
     ItemColor getColor() const;
     int getStrength() const;
