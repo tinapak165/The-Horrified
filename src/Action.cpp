@@ -255,7 +255,7 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
     Location* current = hero->GetCurrentLocation() ;
     std::string locName = current->get_name();
 
-    if(locName == "Laboratory" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){ //cave
+    if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
         mode = Mode::ForDracula ;
         auto items = hero->GetItems() ;
         for(auto& item : items){
