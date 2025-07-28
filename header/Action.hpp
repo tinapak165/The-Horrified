@@ -111,13 +111,13 @@ class AdvanceAction : public HeroAction{
 
         enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
 
-        // برای حالت دراکولا
+        //dracula
         std::vector<Item> availableRedItems;
         std::vector<Item> selectedItems;
         int totalStrength = 0;
         int hoveredIndex = -1;
 
-        // برای حالت نامرئی
+        //invisible man
         std::vector<Item> evidenceItems;
         int hoveredEvidenceIndex = -1;
         bool evidencePlaced = false;
@@ -127,6 +127,29 @@ class AdvanceAction : public HeroAction{
         AdvanceAction(Hero*, Dracula* , ItemPool& , GameMap& ,InvisibleMan*);
         bool update() override;   
         void draw()override; 
+};
+
+class DefeatAction : public HeroAction{
+
+    private:
+        Hero* hero;
+        InvisibleMan*  invisibleMan;
+        Dracula* dracula;
+        std::vector<Item> selectedItems;
+        std::vector<Item> availableItems;
+        int totalStrength = 0;
+        int hoveredIndex = -1 ; 
+        std::string message  ; 
+        float messageTimer = 0.0f;
+        bool shouldClose = false ; 
+        enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
+
+
+    public:
+        DefeatAction(Hero* , InvisibleMan* , Dracula*) ;
+        bool update() override;   
+        void draw()override;
+
 };
 
 #endif

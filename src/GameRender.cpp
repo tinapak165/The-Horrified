@@ -301,6 +301,7 @@ void GameRender::handle_action(const std::string& action , Hero* h){
     } else if (action == "Quit") { 
         game.set_currentPhase(Phase::MonsterPhase) ; 
         game.set_HeroTurnInProgress(false) ; 
+        game.get_turnManager().next_turn() ; 
 
     } else if (action == "Perk") {
         currentHero = h ; 
@@ -329,7 +330,9 @@ void GameRender::handle_action(const std::string& action , Hero* h){
         currentAction = std::make_unique<AdvanceAction>(currentHero , game.get_dracula() , game.get_pool() , game.get_map() ,game.get_invisibleMan());
 
     } else if (action == "Defeat") {
-        h->DefeatAction(h, game.get_invisibleMan(), game.get_dracula());
+
+        currentHero = h ; 
+        currentAction = std::make_unique<DefeatAction>(currentHero, game.get_invisibleMan(), game.get_dracula());
     }
 }
 

@@ -82,40 +82,6 @@ void Hero::removeItems(const Item & i){
     }
 }
 
-void Hero::DefeatAction(Hero* h ,InvisibleMan*  invisibleMan ,Dracula* dracula){
-                   
-    Location* heroLoc = h->GetCurrentLocation();       
-    if (invisibleMan && invisibleMan->get_location() == heroLoc) {
-        if (invisibleMan->can_be_defeated()) {
-            cout << "You are ready to defeat the Invisible Man! Use Red items (total strength >= 9).\n";
-            int RedPower = h->select_items_to_defeat(ItemColor::Red);
-        if (RedPower >= 6) {
-            invisibleMan->set_location(nullptr); 
-            cout << "Invisible Man has been defeated!\n";
-        } else {
-            cout << "Not enough Red item power. Invisible Man survived.\n";
-            }
-        }
-    }
-    if (dracula && dracula->get_location() == heroLoc) {
-        if (dracula->can_be_defeated()) {
-            cout << "You are ready to defeat Dracula! Select Yellow items to attack.\n";
-            int YellowPower = h->select_items_to_defeat(ItemColor::Yellow);
-                
-            if (YellowPower >= 6) {
-                cout << "Dracula has been defeated!\n";
-                dracula->set_location(nullptr); 
-                } else {
-                    cout << "Not enough Yellow item power. dracula did not die.\n";
-                    }
-        } else {
-            cout << "You must destroy all coffins first to defeat Dracula.\n";
-            }
-    }else{
-        cerr << "you can not use defeat action unless you are in monster place\n" ;
-        }
-}
-
 
 void Hero::DisplayItem(){
 
@@ -305,55 +271,6 @@ vector<Villager*> Hero::villagerHere() const
 
 void Hero::SetRemainingActions(int newRemaining){
     RemainingActions = newRemaining ;
-}
-
-int Hero::select_items_to_defeat(ItemColor requiRedColor) {
-    int totalStrength = 0;
-    vector<Item> selected;
-    int choice = -1;
-
-    while (true) {
-        auto items = GetItems();
-        if (items.empty()) {
-            std::cerr << "No items left!\n";
-            break;
-        }
-
-        std::cout << "Total selected power: " << totalStrength << "\n";
-        std::cout << "Available items:\n";
-        for (size_t i = 0; i < items.size(); ++i) {
-            std::cout << (i + 1) << ") " << items[i].getName()
-                      << " (" << items[i].color_to_string(items[i].getColor())
-                      << ", strength " << items[i].getStrength() << ")\n";
-        }
-
-        std::cout << "Choose item number to use (0 to stop): ";
-        std::cin >> choice;
-        if (choice == 0) break;
-
-        if (choice < 1 || choice > static_cast<int>(items.size())) {
-            std::cerr << "Invalid selection.\n";
-            continue;
-        }
-
-        Item chosen = items[choice - 1];
-        if (chosen.getColor() != requiRedColor) {
-            std::cerr << "Item is not of requiRed color.\n";
-            continue;
-        }
-
-        removeItems(chosen);
-        totalStrength += chosen.getStrength();
-        selected.push_back(chosen);
-    }
-
-    if (!selected.empty()) {
-        std::cout << "Used items:\n";
-        for (auto& item : selected)
-            std::cout << "- " << item.getName() << " (" << item.color_to_string(item.getColor()) << ", " << item.getStrength() << ")\n";
-    }
-
-    return totalStrength;
 }
 
 bool Hero::has_items() const {

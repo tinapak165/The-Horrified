@@ -65,8 +65,6 @@ class Hero{
         virtual void Special(Location*) = 0  ; 
         virtual bool HasAbility() ; 
 
-        int select_items_to_defeat(ItemColor) ;
-
         void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
 
         bool hasvillagerHere() const ; 
