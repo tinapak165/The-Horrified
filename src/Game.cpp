@@ -11,11 +11,9 @@
 using namespace std;
 
 Game::Game() {
-    InitWindow(1000, 1000, "The Horrified");
+    InitWindow(1000 + 400, 1000, "The Horrified");
 
-    // SetWorkingDirectory(GetApplicationDirectory());
-
-     SetTargetFPS(60);
+    SetTargetFPS(60);
     
     map.build_map(); 
     menu = make_unique<Menu>(*this) ;
@@ -26,7 +24,7 @@ Game::Game() {
     monstersMap[MonsterType::Dracula] = dracula.get();
     monstersMap[MonsterType::InvisibleMan] = invisibleMan.get();
 
-    frenziedMonster = dracula.get();   // frenziedMonster = dracula;
+    frenziedMonster = dracula.get();
 
     monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
@@ -84,7 +82,7 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
     turnManager = TurnManager(heroes);
     
-    initializaDeck() ; //age to constructor bood onvaght turnmanagar null mifrestad
+    initializaDeck() ;
     initializaMDeck();
 
 
@@ -92,6 +90,7 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
         getNewCard(hero) ; 
     }
 }
+
 PlayerInfo Game::getPlayer1() const{ return player1; }
 PlayerInfo Game::getPlayer2() const { return player2 ;}
 
@@ -109,68 +108,104 @@ void Game::start() {
     while (!WindowShouldClose()) {
         BeginDrawing();
        //ClearBackground(RAYWHITE);
-         
-        menu->renderCurrentState();
+        if(menu->getState() != nullptr){
+            menu->renderCurrentState();
+        }
+        else{
+            if(currentPhase == Phase::HeroPhase){
+                if(!heroTurnInProgress){
+                    activeHero = turnManager.get_active_hero();
+                    std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+                    heroTurnInProgress = true ; 
+             
+                }
+                bool phaseDone = hero_phase(activeHero, &gamerender) ;
 
-        if (menu->getState() == nullptr)
+                if (phaseDone) {
+
+                    heroTurnInProgress = false;
+                    turnManager.next_turn();
+
+                    currentPhase = Phase::MonsterPhase;
+                }
+            }
+            else if(currentPhase == Phase::MonsterPhase){
+                if(!ShouldSkipMonsterPhase()){
+                    monster_phase() ;
+                }else{
+                    std::cout <<  "monster phase skipped due to perk\n" ;
+                    set_skipMonsterPhase(false) ;
+                }
+                currentPhase = Phase::HeroPhase ;
+            }
             gamerender.draw();
 
-    // while (true) {
-
-    //     cout << "<-----------HERO PHASE----------->\n" ; 
-    //     Hero* activeHero = turnManager.get_active_hero();
-    //     std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
-    //     hero_phase(activeHero);
-
-    //     graph_map_text();
-
-    //     if(!skipMonsterPhase){
-    //     cout <<  "\n<-----------MONSTER PHASE---------->\n"  ; 
-    //     monster_phase();
-    //     }
-    //     else{
-    //         cout << "\nMonster Phase skipped due to 'Break of Dawn' perk!\n";   
-    //         skipMonsterPhase = false;     
-    //     }
-
-    //     locationOverview() ;
-
-    //     if (terror_Level >= 6) {
-    //         std::cout << "Game Over! Terror level reached 6.\n";
-    //         break;
-    //     }    
-    //     if (deck.is_empty() && !both_monsters_defeated()) {
-    //         std::cout << "Game Over! No more Monster Cards.\n";
-    //         break;
-    //     }    
-    //     if (both_monsters_defeated()) {
-    //         std::cout << "You win! Both monsters defeated!\n";
-    //         break;
-    //     }
-
-    //     turnManager.next_turn();
-    // }
-
+        }
         EndDrawing();
+
+        if (terror_Level >= 6) {
+            std::cout << "Game Over! Terror level reached 6.\n";
+            break;
+        }    
+        // if (deck.is_empty() && !both_monsters_defeated()) {
+        //     std::cout << "Game Over! No more Monster Cards.\n";
+        //     break;
+        // }    
+        if (both_monsters_defeated()) {
+            std::cout << "You win! Both monsters defeated!\n";
+            break;
+        }
+
+
     }
     CloseWindow() ;
 }
 
-void Game::hero_phase(Hero* hero) {
 
-    hero->DisplayInfo() ;        
+void Game::set_currentPhase(Phase newPhase){ currentPhase = newPhase ; }
 
-    play_hero_Action(hero) ;
+void Game::set_HeroTurnInProgress(bool val){ heroTurnInProgress = val ; }
 
-    if(Villager::AnyVillagerInSafePlace()){
-        Villager::removeVillager() ;
-       cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+bool Game::hero_phase(Hero* hero , GameRender* render) {
+
+    if (hero->GetRemainingActions() > 0) {
+        return false;  
     }
 
+    // if(Villager::AnyVillagerInSafePlace()){
+    //     Villager::removeVillager() ;
+    //    cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+    // }
+    render->draw() ;
     hero->resetMaxActions() ;
+    return true ;
 }
 
+void Game::monster_dice() {
+    try {
+        auto drawnCard = deck.drawcard();
+        std::cout << *drawnCard;
+        drawnCard->play_monster_card(*this, frenziedMonster, all_villagers);
 
+        if (drawnCard->has_frenzied_strike()) {
+            Changing_frenzy_marker();
+        }
+       
+        current_card = std::move(drawnCard);
+        
+        GameRender gamerender(*this);
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        gamerender.draw_sidebar();
+        gamerender.draw();   // کارت + هیولاها بعد از حرکت
+        EndDrawing();
+        WaitTime(1.0f); // یک مکث کوتاه که دیده بشه
+        // ----------------------------------------
+
+    } catch (const std::exception& e) {
+        std::cerr << "Exception occurred: " << e.what() << std::endl;
+    }
+}
 void Game::initializaDeck(){
     
     for(int i = 0 ; i < 3 ; i++){
@@ -188,45 +223,6 @@ void Game::initializaDeck(){
 void Game::getNewCard(Hero* hero){
     auto card = perkDeck.drawcard() ; 
     hero->AddAvailablePerk(std::move(card)) ;
-}
-
-void Game::play_hero_Action(Hero *h){
-    while(true){
-        string chosenAction ; 
-        cout << "what action do you want to play this turn(Move, Special , Guide , Pickup , Advance ,Defeat , Perk , Help , Quit)? " ;
-        cin >> chosenAction ; 
-        if(checkString(chosenAction) == "help")
-            h->DisplayActions() ;
-        if(checkString(chosenAction) == "quit")
-            break ;
-        if(checkString(chosenAction) == "perk"){
-           // ChoosePerkCardANDplay(h) ;
-            continue;
-        }   
-        if(true){
-            cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
-
-            if(checkString(chosenAction) == "move"){
-              //  h->MoveAction(map , h) ;                     
-            }
-            else if(checkString(chosenAction) == "guide"){
-                h->GuideAction(h , map) ; 
-            }
-            else if(checkString(chosenAction) == "pickup"){
-              //  h->PickupItems() ;
-                h->DisplayItem() ; 
-            } 
-            else if(checkString(chosenAction) == "special"){
-                   // h->Special(h , map)  ;
-            }
-            else if(checkString(chosenAction) == "advance"){ 
-                h->AdvanceAction(h , dracula.get() , pool , map , invisibleMan.get()) ; 
-            }
-            else if(checkString(chosenAction) == "defeat"){
-                h->DefeatAction(h , invisibleMan.get() , dracula.get()) ; 
-            }
-        } 
-    }    
 }
 
 bool Game::both_monsters_defeated() {
@@ -309,107 +305,9 @@ bool Game::ShouldSkipMonsterPhase() const{
     return skipMonsterPhase;
 }
 
-void Game::locationOverview() {
-    cout << "-----------------------------Location Overview--------------------------------------\n"; 
-    cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
-    cout << right <<"--------------------------------------------------------------------------------------\n"; 
-
-    for (const auto& locPtr : map.get_locations()) {
-        Location* loc = locPtr.get();
-
-        // ----- Items -----
-        string itemStr;
-        const auto items = loc->get_items();
-        if (items.empty()) {
-            itemStr = "-";
-        } else {
-            std::map<string, pair<int, ItemColor>> itemcount;
-            for (const auto& item : items) {
-                auto& entry = itemcount[item.getName()];
-                entry.first++;
-                entry.second = item.getColor();
-            }
-            for (const auto& kv : itemcount) {
-                const auto& name = kv.first;
-                int cnt = kv.second.first;
-                ItemColor color = kv.second.second;
-
-                itemStr +=   name  + "(" + to_string(cnt) + "),";
-            }
-            if (!itemStr.empty()) itemStr.pop_back();  
-        }
-
-        // ----- Monsters -----
-        string monStr;
-        const auto monsters = loc->get_monsters();
-        if (monsters.empty()) {
-            monStr = "-";
-        } else {
-            for (const auto& m : monsters) {
-                if (m) monStr += m->get_name() + ",";
-            }
-            if (!monStr.empty()) monStr.pop_back();
-            else monStr = "-";
-        }
-
-        // ----- Villagers -----
-        string villagerStr;
-        const auto& villagers = loc->get_villagers();
-        if (villagers.empty()) {
-            villagerStr = "-";
-        } else {
-            for (const auto& v : villagers) {
-                if (v) villagerStr += v->get_name() + ",";
-            }
-            if (!villagerStr.empty()) villagerStr.pop_back();
-            else villagerStr = "-";
-        }
-
-        // ----- Heroes -----
-        string heroStr;
-        const auto& heroes = loc->get_heroes();
-        if (heroes.empty()) {
-            heroStr = "-";
-        } else {
-            for (const auto& h : heroes) {
-                if (h) heroStr += h->GetName() + ",";
-            }
-            if (!heroStr.empty()) heroStr.pop_back();
-            else heroStr = "-";
-        }
-
-        cout << left << setw(13) << loc->get_name()
-             << setw(20) << itemStr
-             << setw(20) << monStr
-             << setw(20) << villagerStr
-             << setw(20) << heroStr << "\n";
-    }
-    cout << "-------------------------------------------------------------------------------------\n";
-    cout << "terror level: " << terror_Level << '\n';
-    monster_objectes();
-}
 void Game::increase_terror_level() {
     terror_Level++;
     std::cout << "Terror Level increased to " << terror_Level << "!\n";
-}
-
-void Game::graph_map_text() {
-    std::cout << R"(
---------------------------------GAME MAP------------------------------------- 
-       
-                  [Precinct]----[Inn]   [Barn]                                              
-                  /         \      \   /                                                
-  [Cave]----[Camp]     _______[Theatre]---------[Tower]-----[Dungeon]
-                |     /       /                       \
-                |    /       /                         \
-[Abbey] ----[Mansion]----[Shop]                       [Docks]
-    |          /   |           \
-    |    [Museum] [Church]    [Laboratory]
- [Crypt]            /    \               \
-             [Graveyard][Hospital]        [Institute]
-                        
-    )" << '\n';
-std::cout<<"--------------------------------------------------------------------------------"<<endl;  
 }
 void Game::monster_objectes() const {
     if (dracula) {
@@ -439,22 +337,9 @@ Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
 }
 
-void Game::monster_dice() {
-    try {
-        auto drawnCard = deck.drawcard();
-        std::cout<<*drawnCard;
-        drawnCard->play_monster_card(*this,frenziedMonster , all_villagers);
-       if (drawnCard->has_frenzied_strike()) {
-            Changing_frenzy_marker();
-        }
-        current_card = std::move(drawnCard); 
-    } catch (const std::exception& e) {
-    std::cerr << "Exception occurred: " << e.what() << std::endl;
-  }
-}
-
 
 void Game::initializaMDeck(){
+    std::cout << " initialize\n" ;
     for (int i =0 ; i <3 ; i++){       
     deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap)) ;     
     deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap)) ;
@@ -474,6 +359,14 @@ void Game::initializaMDeck(){
 
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
 void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
+
+std::vector<std::string> Game::get_last_events(int count) {
+    std::vector<std::string> result;
+    int start = std::max(0, (int)event_log.size() - count);
+    for (int i = start; i < event_log.size(); ++i)
+        result.push_back(event_log[i]);
+    return result;
+}
 
 Game::~Game(){
     if(frenziedMonster)

@@ -17,18 +17,28 @@
 #include "Itembag.hpp"
 #include "Heroes.hpp"
 #include "State.hpp"
-#include "GameRander.hpp"
+#include "GameRender.hpp"
 
 class Menu;
+class State ;
+class GameRender ;
 
 struct PlayerInfo{
     std::string name ; 
     Hero* hero ; 
 };
 
+enum class Phase{
+    HeroPhase ,
+    MonsterPhase ,
+
+};
+
 class Game {
     friend class Monstercard;
 private:
+    Phase currentPhase = Phase::HeroPhase ;
+
     PlayerInfo player1, player2;
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
@@ -52,9 +62,13 @@ private:
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
+    std::vector<std::string> event_log ; 
+  //  std::unique_ptr<State*> currentState;
     
     int terror_Level = 0;
     bool game_over = false;
+    bool heroTurnInProgress = false ;
+    Hero* activeHero ; 
     
 public:
     Game();
@@ -72,14 +86,16 @@ public:
     ItemPool& get_pool() ;
 
     void set_skipMonsterPhase(bool) ;
-    bool ShouldSkipMonsterPhase() const ; 
+    bool ShouldSkipMonsterPhase() const ;
+    void set_currentPhase(Phase) ; 
+    void set_HeroTurnInProgress(bool) ;  
 
-    void hero_phase(Hero* hero);
-    void play_hero_Action(Hero*);
+    bool hero_phase(Hero* , GameRender* );
+   // void play_hero_Action(Hero*);
     void initializaDeck() ; 
     void getNewCard(Hero*) ;
-    void locationOverview() ;
-    void graph_map_text();
+ //   void locationOverview() ;
+   // void graph_map_text();
     void monster_objectes() const;
     void return_item(const Item& item);
 
@@ -103,7 +119,10 @@ public:
     std::vector<Villager*>& get_all_villagers();
 
     void add_villager(Villager* v);
-
+    std::vector<std::string> get_last_events(int count) ;
+    void changeState(std::unique_ptr<State> newState);
+    void updateState();
+    void renderState();
    // void cleanup();
 };
 
