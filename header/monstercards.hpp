@@ -59,12 +59,12 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
             bool has_villager_event;
            
             bool has_items_placed;
+            
+            std::string last_dice_result;
+            
+        protected:
             std::string texpath;
             Texture2D texture;
-            std::string last_dice_result;
-
-    //  protected:
-    //         Texture2D texture;
 
         public:
         
@@ -138,6 +138,7 @@ class FormTheBat : public Monstercard {
         void play_monster_card(Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers)override;
                         
 };
+
 class Sunrise : public Monstercard {
     private:
         ItemPool& pool;

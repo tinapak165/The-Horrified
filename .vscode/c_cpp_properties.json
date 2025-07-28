@@ -9,7 +9,7 @@
 
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/src",
+                "${workspaceFolder}/src", // this is where monstercard is 
                 "${workspaceFolder}/header",
                 "/opt/homebrew/Cellar/raylib/5.5/include"
             ],

@@ -78,6 +78,7 @@ DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BL
 
 DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
 std::cout<<"before monster card draaw";
+if (!card) std::cout<<"1"<<std::endl;
 if (card) {
     Texture2D tex = card->get_texture();
     float aspect = (float)tex.width / (float)tex.height;

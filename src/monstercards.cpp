@@ -32,13 +32,13 @@ FormTheBat::FormTheBat(ItemPool& p, GameMap& g, TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m , std::string path)
     : Monstercard("form the bat", 2, "Dracula moves where your hero is.",
         { {{MonsterType::Dracula}, 1, 2} }, g , path),
-        pool(p), map(g), turnManager(t), monstersMap(m) , texpath(path){}
+        pool(p), map(g), turnManager(t), monstersMap(m) {}
         
 Sunrise::Sunrise(ItemPool& p, GameMap& g, TurnManager& t,
             std::unordered_map<MonsterType, Monster*>& m , std::string path)
 
         : Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan , MonsterType::Frenzied}, 1, 2} },g , path) ,
-        pool(p), map(g), turnManager(t), monstersMap(m) , texpath(path) {}
+        pool(p), map(g), turnManager(t), monstersMap(m)  {}
         
 
 TheInnocent::TheInnocent(ItemPool& p,
@@ -46,7 +46,7 @@ TheInnocent::TheInnocent(ItemPool& p,
     TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m , std::string path) : Monstercard("the innocent", 3, "Place Maria at the Barn.",
         { {{MonsterType::Dracula, MonsterType::InvisibleMan ,MonsterType::Frenzied }, 1, 3} }, "Maria", "Barn", g , path),
-        map(g), turnManager(t), monstersMap(m) ,pool(p) , texpath(path) {}
+        map(g), turnManager(t), monstersMap(m) ,pool(p)  {}
         
         
         TheDelivary::TheDelivary(ItemPool& p,
@@ -54,27 +54,25 @@ TheInnocent::TheInnocent(ItemPool& p,
     TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m , std::string path ) : Monstercard("The delivary", 3, "Place Wilbur & Chick at Docks.",
         { {{MonsterType::Frenzied}, 1, 3} }, "Wilbur & Chick", "Docks", g , path),
-    map(g), turnManager(t), monstersMap(m) ,pool(p) , texpath(path){}
+    map(g), turnManager(t), monstersMap(m) ,pool(p) {}
     
     
   
     FormerEmoloyer::FormerEmoloyer(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
-        std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
+        std::unordered_map<MonsterType, Monster*>& m , std::string path) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
             { {{MonsterType::InvisibleMan , MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g , path),
-            map(g), turnManager(t), monstersMap(m) ,pool(p) , texpath(path){} 
+            map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
             
             
             
     Thief::Thief(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
-        std::unordered_map<MonsterType, Monster*>& m , std::string path) : Monstercard ("Thief", 2, "The Invisible Man moves where items are the most.",
+        std::unordered_map<MonsterType, Monster*>& m , std::string path ) : Monstercard ("Thief", 2, "The Invisible Man moves where items are the most.",
             { { {MonsterType::InvisibleMan, MonsterType::Frenzied}, 1 , 3 } }, g , path),
-        map(g), turnManager(t), monstersMap(m) ,pool(p) {
-    texpath = path;  // مقداردهی داخل بدنه سازنده به جای initializer list
-}
+        map(g), turnManager(t), monstersMap(m) ,pool(p){}
         
       
         
@@ -84,39 +82,37 @@ TheInnocent::TheInnocent(ItemPool& p,
         TurnManager& t,
         std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Fortune teller", 3, "Place Maleva at Camp.",
             { {{MonsterType::Frenzied}, 1, 2} }, "Maleva", "Camp", g , path),
-        map(g), turnManager(t), monstersMap(m) ,pool(p) {
-    texpath = path;  // مقداردهی داخل بدنه سازنده به جای initializer list
-}
+        map(g), turnManager(t), monstersMap(m) ,pool(p) {}
 
 
-        
+    
 EgyptianExpert ::EgyptianExpert (ItemPool& p,
             GameMap& g ,
             TurnManager& t,
             std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Egyptian Expert", 3, "Place Prof. Pearson at Cave.",
                 { {{MonsterType::Dracula, MonsterType::Frenzied}, 2, 2} }, "Prof. Pearson", "Cave", g ,path),
-                map(g), turnManager(t), monstersMap(m) ,pool(p), texpath(path) {}
+                map(g), turnManager(t), monstersMap(m) ,pool(p) {}
                 
  HurriedAssistant::HurriedAssistant (ItemPool& p,
                     GameMap& g ,
                     TurnManager& t,
                     std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Hurried Assistant", 3, "Place Fritz at Tower.",
                         { {{MonsterType::Dracula , MonsterType::Frenzied}, 2, 3} }, "Fritz", "Tower", g , path),
-                        map(g), turnManager(t), monstersMap(m) ,pool(p), texpath(path) {}
+                        map(g), turnManager(t), monstersMap(m) ,pool(p){}
                         
  TheIchthyologist::TheIchthyologist(ItemPool& p,
                             GameMap& g ,
                             TurnManager& t,
                             std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
                                 { {{MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g , path),
-                                map(g), turnManager(t), monstersMap(m) ,pool(p) , texpath(path){} 
+                                map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
 
  OnTheMove::OnTheMove(ItemPool& p,
                     GameMap& g ,
                     TurnManager& t,
                     std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("On The Move", 3, "Frenzy Marker on the next Monster , Every Villager Moves closer to their Safe place .",
                      { {{MonsterType::Frenzied}, 3, 2} },  g , path),
-                     map(g), turnManager(t), monstersMap(m) ,pool(p) , texpath(path){} 
+                     map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
 
 
 std::string Monstercard::get_card_name() const{return card_name;}
@@ -322,7 +318,6 @@ void Monstercard::play_strike(Game& game,
                 default: last_dice_result += "[?] "; break;
             }
         }
-
         bool hasFrenzied = false;
         bool terrorAlreadyIncreased = false;
         for (MonsterType type : monster_list) {
