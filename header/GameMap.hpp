@@ -16,6 +16,10 @@ class GameMap {
         std::vector<std::unique_ptr<Location>> locations;
         Texture2D mapTexture = {0};
     public:
+        float scale;
+        float drawX, drawY;
+        Rectangle get_drawn_rect() const ;
+        
         void build_map(); 
         void add_location(const std::string& name, Rectangle area, const std::string& iconPath) ;
         Location* get_location_by_name(const std::string& name);

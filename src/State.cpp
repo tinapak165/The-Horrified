@@ -19,7 +19,7 @@ MenuState::MenuState() : State("../Assets/Menu/Background.png"),
       startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 300} , 1.0f)),
       exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{170, 500} , 1.0f)){}
 
-void MenuState::playState(Menu& menu)  {
+void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
 
         Vector2 mouse = GetMousePosition();
@@ -48,7 +48,7 @@ ExitState::ExitState()
     // goodbyeSound = LoadSound("Assets/goodbye.wav");
 }
 
-void ExitState::playState(Menu& menu) {
+void ExitState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
 
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.6f));
@@ -87,7 +87,7 @@ NameInputState::NameInputState() : State("../Assets/Menu/Background.png") ,
     timeBox2(std::make_unique<TextBox>(Rectangle{100, 450, 300, 40}, TextBox::NUMBERS_ONLY)) ,    
     continueButton{300, 500, 200, 50}  {}
 
-void NameInputState::playState(Menu& menu) {
+void NameInputState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
     std::unique_ptr<ClickableText> BackToMenu = std::make_unique<ClickableText>("Back to menu", Vector2{100, 900} ,30, RED);
 
@@ -204,7 +204,7 @@ ChooseCharacterState::ChooseCharacterState(const PlayerSelection& p1, const Play
     selectedMessage = ""; 
 }
 
-void ChooseCharacterState::playState(Menu& menu) {
+void ChooseCharacterState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
 
     Vector2 mousePos = GetMousePosition();
@@ -258,7 +258,68 @@ void ChooseCharacterState::playState(Menu& menu) {
                 EndDrawing();
             }
             menu.startGame(player1, player2);
+           // menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame())) ;
             return;
         }
     }
 }
+
+// HeroPhaseState::HeroPhaseState(Game& game) : State("../Assets/Menu/Background.png")  , renderer(std::make_unique<GameRender>(game)){
+//     std::cout << "HeroPhaseState constructed\n";
+// }
+
+// void HeroPhaseState::render(Menu& menu) {
+   
+//    // DrawTexture(get_background(), 0, 0, WHITE);
+    
+//     // GameRender renderer(menu.getGame());
+//     // renderer.draw();
+//     //renderer.draw_action_panel();
+
+//     if (!phase_done) {
+//            menu.getGame().hero_phase(menu.getGame().get_turnManager().get_active_hero() , renderer.get());
+//            phase_done = true;
+//        }   
+//     const char* msg = "Hero Phase - Press SPACE to go to MonsterPhase";
+//     int fontSize = 30;
+//     int textWidth = MeasureText(msg, fontSize);
+//     int x = (GetScreenWidth() - textWidth) / 2;
+//     int y = 100;
+
+
+//     int padding = 20;
+//     DrawRectangle(x - padding / 2, y - padding / 2, textWidth + padding, fontSize + padding, Fade(BLACK, 0.5f));
+
+   
+//     DrawText(msg, x, y, fontSize, WHITE);
+
+//     if (phase_done && IsKeyPressed(KEY_SPACE)) {
+//             menu.SetState(std::make_unique<MonsterPhaseState>());
+//         }
+// }
+// MonsterPhaseState::MonsterPhaseState(): State ("../Assets/Menu/Background.png"){}
+
+// void MonsterPhaseState::render(Menu& menu){
+     
+//       DrawTexture(get_background(), 0, 0, WHITE);
+   
+//         // اگر هنوز فاز هیولا اجرا نشده → فقط یک بار اجراش کن
+//         if (!phase_done) {
+//             menu.getGame().monster_phase();
+//             phase_done = true;
+//         }
+
+//         GameRender renderer(menu.getGame());
+//         renderer.draw();
+
+//         // پیام راهنما
+//         const char* msg = "Monster Phase complete - Press SPACE to continue";
+//         int textWidth = MeasureText(msg, 30);
+//         DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
+
+//         // وقتی بازیکن تأیید کرد برو فاز هیرو
+//         if (phase_done && IsKeyPressed(KEY_SPACE)) {
+//             menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
+//         }  
+// }
+

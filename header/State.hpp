@@ -14,9 +14,9 @@ struct PlayerSelection {
 
 #include "button.hpp"
 #include "menu.hpp"
+#include "GameRender.hpp"
 class Menu ;
-
-
+class GameRender ; 
 class State{
     private:
         Texture2D background ; 
@@ -24,7 +24,7 @@ class State{
     public :
         State(const std::string&) ; 
         Texture2D get_background() const ; 
-        virtual void playState(Menu&) = 0 ;
+        virtual void render(Menu&) = 0 ;
         virtual ~State(); 
   
 };
@@ -35,7 +35,7 @@ class MenuState : public State {
         std::unique_ptr<Button> exitButton ;
     public:
         MenuState() ; 
-        void playState(Menu&) override ;  
+        void render(Menu&) override ;  
 };
 
 class ExitState : public State{
@@ -47,7 +47,7 @@ class ExitState : public State{
 
     public:
         ExitState();
-        void playState(Menu&) override;
+        void render(Menu&) override;
 }; 
 
 class NameInputState : public State {
@@ -59,7 +59,7 @@ class NameInputState : public State {
 
     public:
         NameInputState();
-        void playState(Menu&) override;
+        void render(Menu&) override;
 };
 
 class ChooseCharacterState : public State{
@@ -84,7 +84,38 @@ class ChooseCharacterState : public State{
     public:
 
         ChooseCharacterState(const PlayerSelection&, const PlayerSelection&);
-        void playState(Menu&) override;
+        void render(Menu&) override;
 };
 
+
+class SetupState : public State {
+
+    public:
+        SetupState();
+        void render(Menu& menu) override; // ClearBackground(DARKGRAY);DrawText("Setup Game...", 100, 100, 30, WHITE);
+};
+
+class HeroPhaseState : public State {
+    private: 
+        bool phase_done = false;
+        std::unique_ptr<GameRender> renderer; ; 
+    public:
+        HeroPhaseState(Game&) ;
+   //menu.SetState(std::make_unique<MonsterPhaseState>());
+
+        void render(Menu& menu) override ;
+};
+
+
+
+class MonsterPhaseState : public State {
+    private:
+        bool phase_done = false;  
+    public:
+        MonsterPhaseState();
+     // menu.SetState(std::make_unique<HeroPhaseState>());
+
+        void render(Menu& menu) override ; // ClearBackground(RED);DrawText("Monster Phase", 100, 100, 30, WHITE);
+    
+};
 #endif

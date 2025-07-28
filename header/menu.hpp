@@ -14,6 +14,7 @@ class Menu{
         void renderCurrentState(); 
         State* getState(); 
         void startGame(const PlayerSelection&, const PlayerSelection&) ;
+        Game& getGame() ;
 };
 
 #endif
