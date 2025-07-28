@@ -46,21 +46,53 @@ void Hero::AddAvailablePerk(std::unique_ptr<Perkcard> card){
 }
 
 void Hero::displayavailblecards() const{
-    cout << "available perk cards: " ; 
-    for(size_t i = 0 ; i < availableCards.size() ; i++)
-        cout << availableCards[i]->get_name()<< ", " ;
-    cout << endl ; 
+
+    const float panelX = 600 ; const float panelY = 50 ; 
+    const float panelW = 400 ; const float panelH = 400 ; 
+    const int lineHeight = 30 ; 
+    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
+    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
+
+    float y = panelY + 20 ; 
+
+    DrawText("----available Perk cards----" , panelX+20 , y , 25 , YELLOW) ; 
+    y+=40 ;
+    if(availableCards.empty())
+        DrawText("-", panelX + 20 , y , 20 , WHITE ) ;
+    else{
+        for (size_t i = 0 ; i < availableCards.size() ; i++) {
+            string line = availableCards[i]->get_name() ;
+            
+            DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
+            y += lineHeight;
+        }        
+    }
+
 }
 
 void Hero::displayPlayedCards() const{
-    cout << "played perk cards: " ; 
-    if(playedCards.empty()){
-        cout << "-\n" ;
-    }else{
-        for(size_t i = 0 ; i < playedCards.size() ; i++)
-            cout << playedCards[i]->get_name() << ", " ;
-        cout << endl ;        
+
+    const float panelX = 600 ; const float panelY = 50 ; 
+    const float panelW = 400 ; const float panelH = 400 ; 
+    const int lineHeight = 30 ; 
+    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
+    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
+
+    float y = panelY + 20 ; 
+
+    DrawText("----Played Perk cards----" , panelX+20 , y , 25 , YELLOW) ; 
+    y+=40 ;
+    if(playedCards.empty())
+        DrawText("-", panelX + 20 , y , 20 , WHITE ) ;
+    else{
+        for (size_t i = 0 ; i < playedCards.size() ; i++) {
+            string line = playedCards[i]->get_name() ;
+            
+            DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
+            y += lineHeight;
+        }        
     }
+
 }
 
 vector<unique_ptr<Perkcard>>& Hero::GetAvailablePerkCards(){

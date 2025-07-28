@@ -37,6 +37,22 @@ void GameRender::draw() {
         }
         return;
     }
+    if (ShowPLAYEDPerkButton && currentHero) {
+        currentHero->displayPlayedCards(); 
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            ShowPLAYEDPerkButton = false;
+            currentHero = nullptr;
+        }
+        return;
+    }
+    if (ShowAvailablePerkButton && currentHero) {
+        currentHero->displayavailblecards(); 
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            ShowAvailablePerkButton = false;
+            currentHero = nullptr;
+        }
+        return;
+    }
     draw_map();
     draw_heroes() ;
     draw_sidebar() ;
@@ -46,7 +62,9 @@ void GameRender::draw() {
     draw_monster_card();
     draw_users() ;
     draw_action_panel() ;
-    draw_collected_items() ;  
+    draw_collected_items() ;
+    draw_played_Perkcards() ;  
+    draw_available_Perkcards() ;
 }
 
 void GameRender::draw_map() {
@@ -392,6 +410,36 @@ void GameRender::draw_collected_items(){
         currentHero = game.get_turnManager().get_active_hero(); 
     }
 
+}
+void GameRender::draw_played_Perkcards(){
+
+    Rectangle perkButton = { 750, 180, 195, 40 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, perkButton);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(perkButton, btnColor);
+    DrawText("Perkcards played", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowPLAYEDPerkButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
+}
+
+void GameRender::draw_available_Perkcards(){
+    Rectangle perkButton = { 750, 50, 210, 45 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, perkButton);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(perkButton, btnColor);
+    DrawText("available Perkcards", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowAvailablePerkButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
 }
 
 GameRender::~GameRender(){

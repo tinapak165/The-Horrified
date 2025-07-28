@@ -28,7 +28,9 @@ public:
     void draw_location_icon() ; 
     void draw_collected_items() ;
     void draw_sidebar() ; 
- //   void Handle_heroPhase() ;
+    void draw_played_Perkcards() ; 
+    void draw_available_Perkcards() ; 
+
     ~GameRender() ; 
 
 
@@ -49,6 +51,8 @@ private:
 
     std::unique_ptr<HeroAction> currentAction ; 
     bool ShowitemButton = false ; 
+    bool ShowPLAYEDPerkButton = false ;
+    bool ShowAvailablePerkButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
     Location* selectedLocation = nullptr ; 
