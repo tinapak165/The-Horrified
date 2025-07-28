@@ -59,16 +59,20 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
             bool has_villager_event;
            
             bool has_items_placed;
-
-     protected:
+            std::string texpath;
             Texture2D texture;
+            std::string last_dice_result;
+
+    //  protected:
+    //         Texture2D texture;
 
         public:
+        
             Monstercard() = default;
-            Monstercard(std::string card_name, int itemCount, std::string event, std::vector<Strike> s, GameMap& map);
+            Monstercard(std::string card_name, int itemCount, std::string event, std::vector<Strike> s, GameMap& map , const std::string texpath);
 
             Monstercard(std::string card_name, int itemCount, std::string event, std::vector<Strike> s,
-                std::string character, std::string location, GameMap& map);
+                std::string character, std::string location, GameMap& map , const std::string texpath) ;
     
 
                 virtual ~Monstercard() = default;
@@ -113,7 +117,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                     
          //           Texture2D load_texture_for_item(const Item& item);
                     
-                
+                  const std::string& get_last_dice_result() const;
 
 };
 
@@ -127,7 +131,7 @@ class FormTheBat : public Monstercard {
 
     public:
          FormTheBat(ItemPool& pool, GameMap& map, TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap , std::string texpath);
 
 
 
@@ -143,7 +147,7 @@ class Sunrise : public Monstercard {
 
     public:
          Sunrise(ItemPool& pool, GameMap& map, TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap , std::string texpath);
 
 
 
@@ -161,7 +165,7 @@ class TheInnocent : public Monstercard {
         TheInnocent( ItemPool& pool,
             GameMap& map ,
             TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap , std::string texpath);
              
     
         void play_monster_card(Game& game,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) override;
@@ -186,7 +190,7 @@ class TheInnocent : public Monstercard {
         TheDelivary(ItemPool& pool,
             GameMap& map ,
             TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap, std::string texpath);
              
     
         void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
@@ -203,7 +207,7 @@ class FormerEmoloyer : public Monstercard {
     FormerEmoloyer( ItemPool& pool,
         GameMap& map ,
         TurnManager& turnManager,
-        std::unordered_map<MonsterType, Monster*>& monstersMap);
+        std::unordered_map<MonsterType, Monster*>& monstersMap, std::string texpath);
         
         
         void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
@@ -220,7 +224,7 @@ class FormerEmoloyer : public Monstercard {
         Thief( ItemPool& pool,
             GameMap& map ,
             TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap, std::string texpath);
             
             
             void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
@@ -236,7 +240,7 @@ class HurriedAssistant : public Monstercard {
     HurriedAssistant( ItemPool& pool,
         GameMap& map ,
         TurnManager& turnManager,
-        std::unordered_map<MonsterType, Monster*>& monstersMap);
+        std::unordered_map<MonsterType, Monster*>& monstersMap, std::string texpath);
         
         
         void play_monster_card(Game& game, Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
@@ -252,7 +256,7 @@ class EgyptianExpert : public Monstercard {
         EgyptianExpert( ItemPool& pool,
             GameMap& map ,
             TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap, std::string texpath);
             
             
             void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
@@ -271,7 +275,7 @@ class FortuneTeller : public Monstercard {
         FortuneTeller( ItemPool& pool,
             GameMap& map ,
             TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap, std::string texpath);
             
 
             void play_monster_card(Game& game ,Monster* frenziedMonster, std::vector<Villager*>& all_villagers) override;
@@ -286,7 +290,7 @@ class FortuneTeller : public Monstercard {
 
     public:
          TheIchthyologist(ItemPool& pool, GameMap& map, TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap , std::string texpath);
 
 
 
@@ -303,7 +307,7 @@ class OnTheMove : public Monstercard {
 
     public:
          OnTheMove(ItemPool& pool, GameMap& map, TurnManager& turnManager,
-            std::unordered_map<MonsterType, Monster*>& monstersMap);
+            std::unordered_map<MonsterType, Monster*>& monstersMap , std::string texpath);
 
 
 

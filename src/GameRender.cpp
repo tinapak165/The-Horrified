@@ -43,7 +43,7 @@ void GameRender::draw() {
     draw_sidebar();
     draw_heroes() ;
     draw_location_icon() ;
-    draw_items();
+    draw_collected_items();
     draw_villagers();
     draw_monsters();
     draw_monster_card();
@@ -58,11 +58,6 @@ void GameRender::draw_map() {
 }
 void GameRender::draw_sidebar() {
     
-    
-
-
-    
-   
 
   // اول مستطیل رسم‌شده نقشه رو می‌گیریم
 Rectangle mapRect = game.get_map().get_drawn_rect();
@@ -80,8 +75,9 @@ const auto& card = game.get_current_card();
 int cardBoxY = mapRect.y + 20;          // با توجه به موقعیت نقشه
 int cardBoxHeight = 290;
 DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
-DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
 
+DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
+std::cout<<"before monster card draaw";
 if (card) {
     Texture2D tex = card->get_texture();
     float aspect = (float)tex.width / (float)tex.height;
@@ -93,8 +89,8 @@ if (card) {
 
     Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
     Rectangle dest = {destX, destY, destWidth, destHeight};
-
     DrawTexturePro(tex, src, dest, {0,0}, 0.0f, BLACK);
+    std::cout<<" after monster card draaw";
 }
 
 // ========================= بخش اتفاقات =========================
@@ -110,7 +106,16 @@ for (const auto& log : logs) {
     DrawText(log.c_str(), sidebarX + 20, y, 16, WHITE);
     y += 22;
 }
+int DiceBoxY = cardBoxY + cardBoxHeight + 20;
+int DiceBoxHeight = eventsBoxHeight - 40 ;
+DrawRectangle(sidebarX + 10, DiceBoxY, sidebarWidth - 20, DiceBoxHeight, Fade(BLACK, 0.2f));
+DrawText("Dice Result:", sidebarX + 20, eventsBoxY + 40, 20, BLACK);
 
+    
+    if (card) {
+        DrawText(card->get_last_dice_result().c_str(), sidebarX + 20, 1015, 18, WHITE);
+    }
+    
 }
 
 void GameRender::draw_monsters() {
@@ -186,7 +191,21 @@ void GameRender::draw_villagers() {
         }
     }
 }
+void GameRender::draw_collected_items(){
+    Rectangle itemButton = { 750, 120, 170, 40 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, itemButton);
 
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(itemButton, btnColor);
+    DrawText("Items collected", itemButton.x + 10, itemButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowitemButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
+
+}
 void GameRender::draw_items() {
     for (const auto& loc : game.get_map().get_locations()) {
         Rectangle area = loc->get_clickable_area();
@@ -413,21 +432,7 @@ void GameRender::draw_location_icon() {
     }
 }
 
-void GameRender::draw_collected_items(){
-    Rectangle itemButton = { 750, 120, 170, 40 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, itemButton);
 
-    Color btnColor = hover ? LIGHTGRAY : GRAY;
-    DrawRectangleRec(itemButton, btnColor);
-    DrawText("Items collected", itemButton.x + 10, itemButton.y + 10, 20, BLACK);
-
-    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        ShowitemButton = true;
-        currentHero = game.get_turnManager().get_active_hero(); 
-    }
-
-}
 
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 

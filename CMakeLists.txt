@@ -7,6 +7,7 @@ include_directories(header)
 set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")  # فعال کردن اطلاعات دیباگ
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # استفاده از pkg-config برای پیدا کردن Raylib
 find_package(PkgConfig REQUIRED)

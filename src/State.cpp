@@ -333,10 +333,10 @@ void HeroPhaseState::render(Menu& menu) {
     renderer.draw();
     renderer.draw_action_panel();
 
-    if (!phase_done) {
-           menu.getGame().hero_phase(menu.getGame().get_turnManager().get_active_hero());
-           phase_done = true;
-       }   
+    // if (!phase_done) {
+    //        menu.getGame().hero_phase(menu.getGame().get_turnManager().get_active_hero());
+    //        phase_done = true;
+    //    }   
    const char* msg = "Hero Phase - Press SPACE to go to MonsterPhase";
     int fontSize = 30;
     int textWidth = MeasureText(msg, fontSize);
@@ -350,7 +350,7 @@ void HeroPhaseState::render(Menu& menu) {
    
     DrawText(msg, x, y, fontSize, WHITE);
 
-    if (phase_done && IsKeyPressed(KEY_SPACE)) {
+    if ( IsKeyPressed(KEY_SPACE)) {
             menu.SetState(std::make_unique<MonsterPhaseState>());
         }
 
@@ -384,6 +384,8 @@ MonsterPhaseState::MonsterPhaseState(): State ("../Assets/Menu/Background.png"){
         if (phase_done && IsKeyPressed(KEY_SPACE)) {
             menu.SetState(std::make_unique<HeroPhaseState>());
         }
+
+        
     
 }
 

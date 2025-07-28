@@ -128,7 +128,7 @@ void Game::start() {
 }
 
 void Game::hero_phase(Hero* hero) {
-
+    current_card.reset();
     hero->DisplayInfo() ;        
 
     play_hero_Action(hero) ;
@@ -379,6 +379,9 @@ void Game::locationOverview() {
     cout << "terror level: " << terror_Level << '\n';
     monster_objectes();
 }
+
+int Game::terror_Level = 0;
+
 void Game::increase_terror_level() {
     terror_Level++;
     std::cout << "Terror Level increased to " << terror_Level << "!\n";
@@ -435,14 +438,14 @@ Monster* Game::get_frenzied_monster() {
 void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
+        current_card = std::move(drawnCard);
         std::cout << *drawnCard;
         drawnCard->play_monster_card(*this, frenziedMonster, all_villagers);
-
+        
         if (drawnCard->has_frenzied_strike()) {
             Changing_frenzy_marker();
         }
        
-        current_card = std::move(drawnCard);
         
         GameRender gamerender(*this);
         BeginDrawing();
@@ -462,20 +465,20 @@ void Game::monster_dice() {
 
 void Game::initializaMDeck(){
     for (int i =0 ; i <3 ; i++){       
-    deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap)) ;     
-    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FormOfTheBat.png")) ;     
+    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap,  "../Assets/Monster_Cards/Thief.png"));
+    deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/Sunrise.png")) ;
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
     }
 
-    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap));
-    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheInnocent.png")) ;
+    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheDelivery.png")) ;
+    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
+    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
+    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
+    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ;
+    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheIchtyologist.png")) ;
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
 }
 
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }

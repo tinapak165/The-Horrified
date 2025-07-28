@@ -56,7 +56,7 @@ private:
     std::vector<std::string> event_log;
      std::unique_ptr<State*> currentState;
     
-    int terror_Level = 0;
+    static int terror_Level ;
     bool game_over = false;
     
 public:
@@ -95,7 +95,7 @@ public:
     void monster_dice();
     void send_hero_to_hospital(Hero* );
     bool both_monsters_defeated();
-    void increase_terror_level();
+    static void increase_terror_level();
 
     void distribute_initial_items();
     void initializaMDeck();
