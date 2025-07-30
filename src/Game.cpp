@@ -105,33 +105,30 @@ std::string Game::checkString(std::string str){
 }
 
 void Game::start() {
-
-     menu->SetState(std::make_unique<MenuState>());
+  menu->SetState(std::make_unique<MenuState>());
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
         
-        
+        menu->updateCurrentState();
         menu->renderCurrentState();
         
         EndDrawing();
     }
-  
     CloseWindow();
 
     for(Hero* hero : turnManager.get_heroes()){
         getNewCard(hero) ; 
     }
-
 }
 
 void Game::hero_phase(Hero* hero) {
     current_card.reset();
     hero->DisplayInfo() ;        
 
-    play_hero_Action(hero) ;
+   
 
     if(Villager::AnyVillagerInSafePlace()){
         Villager::removeVillager() ;
@@ -161,44 +158,11 @@ void Game::getNewCard(Hero* hero){
     hero->AddAvailablePerk(std::move(card)) ;
 }
 
-void Game::play_hero_Action(Hero *h){
-    while(true){
-        string chosenAction ; 
-        cout << "what action do you want to play this turn(Move, Special , Guide , Pickup , Advance ,Defeat , Perk , Help , Quit)? " ;
-        cin >> chosenAction ; 
-        if(checkString(chosenAction) == "help")
-            h->DisplayActions() ;
-        if(checkString(chosenAction) == "quit")
-            break ;
-        if(checkString(chosenAction) == "perk"){
-            ChoosePerkCardANDplay(h) ;
-            continue;
-        }   
-        if(true){
-            cout << "actions left: " << h->GetRemainingActions() << '/' << h->getMaxActions() << '\n' ;
 
-            if(checkString(chosenAction) == "move"){
-              //  h->MoveAction(map , h) ;                     
-            }
-            else if(checkString(chosenAction) == "guide"){
-                h->GuideAction(h , map) ; 
-            }
-            else if(checkString(chosenAction) == "pickup"){
-                // h->PickupItems() ;
-                h->DisplayItem() ; 
-            } 
-            else if(checkString(chosenAction) == "special"){
-                    // h->Special(h , map)  ;
-            }
-            else if(checkString(chosenAction) == "advance"){ 
-                h->AdvanceAction(h , dracula.get() , pool , map , invisibleMan.get()) ; 
-            }
-            else if(checkString(chosenAction) == "defeat"){
-                h->DefeatAction(h , invisibleMan.get() , dracula.get()) ; 
-            }
-        } 
-    }    
-}
+         
+
+    
+         
 
 void Game::ChoosePerkCardANDplay(Hero * hero){
     auto& availablePerks = hero->GetAvailablePerkCards() ;

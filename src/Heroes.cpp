@@ -406,13 +406,7 @@ void Scientist::DisplayInfo() const {
     DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
-int Scientist::Ability(Item &item){
-    cout << "do you want to boost " << item.getName() << "(yes/no)? " ;
-    string ans ; cin >> ans ; 
-    if(ans == "yes")
-        item.setStrength(item.getStrength() + 1) ; 
-    return item.getStrength() ; 
-}
+bool Scientist::HasAbility() { return true ; }
 
 void Scientist::StartSpecial(GameMap &){
 

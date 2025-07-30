@@ -2,37 +2,34 @@
 #define GAMERENDER_HPP
 
 #include "Button.hpp"
-#include "Game.hpp"
 #include "Action.hpp"
 #include <vector>
 
-class HeroAction;
 
-struct ActionButton{
-    std::string label ; 
-    Rectangle bounds ; 
-};
+class Game;
+class HeroAction;
+class ActionButtons;
 
 class GameRender {
 public:
+
     GameRender(Game& game);
     void draw();              // کل صفحه رو رسم می‌کنه
     void draw_monsters();
     void draw_villagers();
-    void draw_items();
     void draw_map();          // فقط نقشه و آیکون‌ها
     void draw_monster_card(); // اگر کارت فعاله، نشونش بده
-    void draw_What_Happend_In_Text();
     void draw_heroes();
     void draw_users() ;
     void draw_action_panel() ; 
-    void handle_action(const std::string& , Hero*) ;
+    void handle_action(const std::string& , Hero*) ; 
     void draw_location_icon() ; 
     void draw_collected_items() ; 
     void draw_sidebar() ;
+    std::vector<ActionButton>get_actionButtons();
     ~GameRender() ; 
 private:
-    std::unique_ptr<HeroAction> currentAction ; 
+    std::unique_ptr<HeroAction> currentAction = nullptr;
     bool ShowitemButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 

@@ -58,6 +58,7 @@ private:
     
     static int terror_Level ;
     bool game_over = false;
+  
     
 public:
     Game();
@@ -78,7 +79,7 @@ public:
     bool ShouldSkipMonsterPhase() const ; 
 
     void hero_phase(Hero* hero);
-    void play_hero_Action(Hero*);
+
     void initializaDeck() ; 
     void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;
@@ -108,9 +109,10 @@ public:
 
     void add_villager(Villager* v);
     std::vector<std::string> get_last_events(int count) ;
-    void changeState(std::unique_ptr<State> newState);
-    void updateState();
-    void renderState();
+    
+    // void changeState(std::unique_ptr<State> newState);
+    // void updateState();
+    // void renderState();
 
    // void cleanup();
 };

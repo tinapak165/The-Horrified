@@ -52,7 +52,6 @@ class Courier : public Hero{
     private:
         TurnManager& turn ; 
         std::vector<Hero*> heroes ;
-      //  std::string message ;
         int hoveredIndex ;
         bool done ; 
     public:
@@ -69,10 +68,15 @@ class Scientist : public Hero{
         bool shown = false ; 
         std::string message ; 
         double messageStartTime = 0.0;
+
+        bool waiting = false;
+        bool done = false;
+        int result = -1;
+
     public:
         Scientist(GameMap&) ; 
         void DisplayInfo() const  ; 
-        int Ability(Item& item) override ; 
+        bool HasAbility() override ; 
         void StartSpecial(GameMap&) override ;
         void Special(Location*) override ; 
         void UpdateSpecial(bool& done) override ;

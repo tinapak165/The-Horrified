@@ -63,15 +63,9 @@ class Hero{
         void GuideAction(Hero* , GameMap&) ; 
 
         virtual void Special(Location*) = 0  ; 
-        virtual int Ability(Item& item) ; 
+        virtual bool HasAbility() ; 
 
-        void AdvanceAction(Hero* ,Dracula* ,ItemPool , GameMap& , InvisibleMan* ) ; 
-        int select_items_to_defeat(ItemColor) ;
-        
-        int AdvanceActionForDracula() ; 
-        void AdvanceActionForInvisibleMan(InvisibleMan* ) ;
-
-        void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
+        // void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
 
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;

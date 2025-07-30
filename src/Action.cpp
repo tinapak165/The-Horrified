@@ -2,10 +2,12 @@
 
 MoveAction::MoveAction(GameMap &map, Hero *hero): map(map) , hero(hero){}
 
+ 
+
 bool MoveAction::update(){
     Location* currentLoc = hero->GetCurrentLocation();
 
-    std::string ans ; //ezafe kon
+    std::string ans ;    //ezafe kon
 
     if (typing) {
 

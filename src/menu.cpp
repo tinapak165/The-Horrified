@@ -9,12 +9,17 @@ void Menu::renderCurrentState() {
     if (current_state) 
         current_state->render(*this);
 }
-
+void Menu::updateCurrentState() {
+     if (current_state) current_state->update(*this); 
+    } 
 State* Menu::getState(){
     return current_state.get();
 }
+Game& Menu::getGame() 
+{ return game; }
+
+
 void Menu::startGame(const PlayerSelection &p1, const PlayerSelection &p2){
     game.initialize(p1,p2) ;
     SetState(nullptr);
 }
- Game& Menu::getGame() { return game; }

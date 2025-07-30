@@ -1,5 +1,6 @@
 #include "GameRender.hpp"
-
+#include "Game.hpp"
+#include "ActionButtons.hpp"
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
@@ -40,7 +41,7 @@ void GameRender::draw() {
 
 
     draw_map();
-    draw_sidebar();
+    // draw_sidebar();
     draw_heroes() ;
     draw_location_icon() ;
     draw_collected_items();
@@ -48,9 +49,8 @@ void GameRender::draw() {
     draw_monsters();
     draw_monster_card();
     draw_users() ;
-    
+   
 }
-
 void GameRender::draw_map() {
     game.get_map().draw_map();
     
@@ -207,36 +207,9 @@ void GameRender::draw_collected_items(){
     }
 
 }
-void GameRender::draw_items() {
-    for (const auto& loc : game.get_map().get_locations()) {
-        Rectangle area = loc->get_clickable_area();
-        float offsetX = 8;
-        float offsetY = 8;
-        float spacing = 4.0f;
 
-        int iconSize = 14;
-        int iconsPerRow = 3;
-
-        int i = 0;
-        for (const auto& item : loc->get_items()) {
-            Texture2D tex = item.getTexture();
-            Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-
-            int row = i / iconsPerRow;
-            int col = i % iconsPerRow;
-
-            Rectangle dest = {
-                area.x + offsetX + col * (iconSize + spacing),
-                area.y + offsetY + row * (iconSize + spacing),
-                (float)iconSize,
-                (float)iconSize
-            };
-
-            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
-            ++i;
-        }
-    }
-}
+     
+  
 
 
 void GameRender::draw_monster_card() {
@@ -306,16 +279,16 @@ void GameRender::draw_users(){
     } 
 }
 
+
+//  tina action panel without buttons
 void GameRender::draw_action_panel() {
     Hero* activeHero = game.get_turnManager().get_active_hero();
-
     std::string heroName = activeHero->GetName();
     int remaining = activeHero->GetRemainingActions();
     int maxActions = activeHero->getMaxActions();
 
     std::string infoText = heroName + " | Actions left: " + std::to_string(remaining) + "/" + std::to_string(maxActions);
-
-    std::vector<ActionButton> actionButtons = {
+      std::vector<ActionButton> actionButtons = {
         {"Move", {50, 500, 120, 40}},
         {"Special", {190, 500, 120, 40}},
         {"Guide", {330, 500, 120, 40}},
@@ -326,78 +299,117 @@ void GameRender::draw_action_panel() {
         {"Help", {190, 600, 120, 40}},
         {"Quit", {330, 600, 120, 40}},
     };
-
+    // پس‌زمینه پنل
     DrawRectangle(40, 480, 420, 180, Fade(DARKGRAY, 0.9f));
     DrawRectangleLines(40, 480, 420, 180, GRAY);
-    Vector2 mousepos = GetMousePosition();
-
     DrawText(infoText.c_str(), 50, 460, 20, BLACK);
 
-    bool hasActionsLeft = (remaining > 0);
+    // فقط رسم دکمه‌ها (هیچ ورودی و کلیک اینجا نیست)
+   // توی لوپ رسم دکمه‌ها:
+for (const auto& button : actionButtons) {
+    bool hovered = CheckCollisionPointRec(GetMousePosition(), button.bounds);
+    Color buttonColor = (remaining > 0) ? (hovered ? LIGHTGRAY : GRAY) : DARKGRAY;
+    DrawRectangleRec(button.bounds, buttonColor);
+    DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
 
-    for (const auto& button : actionButtons) {
-        bool hovered = CheckCollisionPointRec(mousepos, button.bounds);
-
-        Color buttonColor;
-        if (!hasActionsLeft ) {
-            buttonColor = DARKGRAY;
-        } else {
-            buttonColor = hovered ? LIGHTGRAY : GRAY;
-        }
-
-        DrawRectangleRec(button.bounds, buttonColor);
-        DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
-
-        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) { 
-            handle_action(button.label, activeHero);
+    if (hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && remaining > 0) {
+        if (!currentAction) {  // فقط وقتی اکشن قبلی تموم شده
+            if (button.label == "Pickup") {
+                currentAction = std::make_unique<PickUpAction>(activeHero);
+            } 
+            else if (button.label == "Move") {
+                currentAction = std::make_unique<MoveAction>(currentHero);
+            } 
+            else if (button.label == "Perk") {
+                currentAction = std::make_unique<ChoosePerkCardAction>(currentHero);
+            } 
+            else if (button.label == "Special") {
+                currentAction = std::make_unique<SpecialAction>(currentHero);
+            } 
+            else if (button.label == "Advance") {
+                // currentAction = std::make_unique<>(currentHero);
+            } 
+            else if (button.label == "Quit") {
+                // currentAction = std::make_unique<Quit>(currentHero);
+            }
+            
         }
     }
 }
 
-void GameRender::handle_action(const std::string& action , Hero* h){
+// توی فانکشن draw یا update بازی:
+if (currentAction) {
+    bool done = currentAction->update();
+    currentAction->draw();
+    if (done) {
+        currentAction = nullptr;
+        // مثلا ممکنه نوبت به بازیکن بعدی بره
+    }
+}
 
-    if (action == "Help") {
-        currentHero = h ; 
-        currentAction = std::make_unique<HelpAction>(currentHero) ;
+
+}
+
+   void GameRender::handle_action(const std::string& action, Hero* h) {
+       
+       std::cout << "[renderer.handle_action] Handling action for button: " << action << std::endl;
+
+       if (action == "Help") {
+           currentAction = std::make_unique<HelpAction>(h);
+           std::cout<<" [ in action = help]";
+            bool done = currentAction->update(); 
+                    currentAction->draw(); 
+        } 
+        else if (action == "Quit") { 
+            game.get_turnManager().next_turn();
+            return; // دیگه ادامه نمی‌دیم
+        } 
+        else if (action == "Perk") {
+            
+            
+            h->SetRemainingActions(h->getMaxActions() -1);
+        } 
+        else if (action == "Move") {
+            currentAction = std::make_unique<MoveAction>(game.get_map(), h);
+        } 
+        else if (action == "Guide") {
+            // noy yet
+            
+        } 
+   else if (action == "Pickup") {
+            currentAction = std::make_unique<PickUpAction>(h);
+             currentAction->update(); 
+                    currentAction->draw(); 
+        }      
+        else if (action == "Special") {
+            currentAction = std::make_unique<SpecialAction>(h, game.get_map());
  
-    } else if (action == "Quit") { 
-        game.get_turnManager().next_turn() ; //NOT SURE
-
-    } else if (action == "Perk") {
-        currentHero = h ; 
-        currentAction = std::make_unique<ChoosePerkCardAction>(currentHero , game) ;
-
-    } else if (action == "Move") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
-
-    } else if (action == "Guide") {
-        h->GuideAction(h, game.get_map());
-    } else if (action == "Pickup") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<PickUpAction>(currentHero) ;
-
-    } else if (action == "Special") {
-        
-        currentHero = h ; 
-        currentAction = std::make_unique<SpecialAction>(currentHero , game.get_map()) ;
-
-    } else if (action == "Advance") {
-        h->AdvanceAction(h, game.get_dracula(), game.get_pool(), game.get_map(), game.get_invisibleMan());
-    } else if (action == "Defeat") {
-        h->DefeatAction(h, game.get_invisibleMan(), game.get_dracula());
-    }
-}
-
+                } 
+                else if (action == "Defeat") {
+                    //not yet
+                }
+                
+                 if(currentAction && currentHero){
+                    bool done = currentAction->update(); 
+                    currentAction->draw(); 
+                    if(done){
+                        currentAction = nullptr; 
+                        if (currentHero->GetRemainingActions() <= 0) {
+                            game.get_turnManager().next_turn();
+                        }
+                        currentHero = nullptr; 
+                    }
+                 }
+ }
+            
+            
 void GameRender::draw_location_icon() {
-    float mapScale = 1.0f;
-    float mapDrawX = 0.0f;
-    float mapDrawY = 0.0f;
-
-    Vector2 mousePos = GetMousePosition();
-    Texture2D mapTex = game.get_map().get_mapTexture();
+                float mapScale = 1.0f;
+                float mapDrawX = 0.0f;
+                float mapDrawY = 0.0f;
+                
+                Vector2 mousePos = GetMousePosition();
+                Texture2D mapTex = game.get_map().get_mapTexture();
 
     mapScale = std::min(
         (float)GetScreenWidth() / mapTex.width,
@@ -434,7 +446,9 @@ void GameRender::draw_location_icon() {
 }
 
 
-
+std::vector<ActionButton> GameRender::get_actionButtons(){
+    return actionButtons;
+}
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 

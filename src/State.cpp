@@ -1,5 +1,8 @@
 #include "State.hpp"
 #include "Menu.hpp"
+#include "GameRender.hpp"
+#include "HeroPhaseState.hpp"
+
 #include <iostream>
 #include <cstring>
 
@@ -18,7 +21,19 @@ Texture2D State::get_background() const{
 
 MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
 startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 300} , 1.0f)),
-exitButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 500} , 1.0f)){}
+exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{170, 500} , 1.0f)){}
+
+
+
+ 
+
+
+
+
+
+ 
+
+
 
 
   
@@ -309,51 +324,10 @@ void ChooseCharacterState::render(Menu& menu) {
                 EndDrawing();
             }
             menu.startGame(player1, player2);
-             menu.SetState(std::make_unique<HeroPhaseState>());
+             menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
             return;
         }
     }
-}
-HeroPhaseState::HeroPhaseState() 
-    : State("../Assets/Menu/Background.png") 
-{
-    std::cout << "HeroPhaseState constructed\n";
-}
-
-
-
-
-void HeroPhaseState::render(Menu& menu) {
-   
-    DrawTexture(get_background(), 0, 0, WHITE);
-
-    
-    
-    GameRender renderer(menu.getGame());
-    renderer.draw();
-    renderer.draw_action_panel();
-
-    // if (!phase_done) {
-    //        menu.getGame().hero_phase(menu.getGame().get_turnManager().get_active_hero());
-    //        phase_done = true;
-    //    }   
-   const char* msg = "Hero Phase - Press SPACE to go to MonsterPhase";
-    int fontSize = 30;
-    int textWidth = MeasureText(msg, fontSize);
-    int x = (GetScreenWidth() - textWidth) / 2;
-    int y = 100;
-
-
-    int padding = 20;
-    DrawRectangle(x - padding / 2, y - padding / 2, textWidth + padding, fontSize + padding, Fade(BLACK, 0.5f));
-
-   
-    DrawText(msg, x, y, fontSize, WHITE);
-
-    if ( IsKeyPressed(KEY_SPACE)) {
-            menu.SetState(std::make_unique<MonsterPhaseState>());
-        }
-
 }
 
 
@@ -366,11 +340,7 @@ MonsterPhaseState::MonsterPhaseState(): State ("../Assets/Menu/Background.png"){
      
       DrawTexture(get_background(), 0, 0, WHITE);
    
-        // اگر هنوز فاز هیولا اجرا نشده → فقط یک بار اجراش کن
-        if (!phase_done) {
-            menu.getGame().monster_phase();
-            phase_done = true;
-        }
+       
 
         GameRender renderer(menu.getGame());
         renderer.draw();
@@ -382,7 +352,7 @@ MonsterPhaseState::MonsterPhaseState(): State ("../Assets/Menu/Background.png"){
 
         // وقتی بازیکن تأیید کرد برو فاز هیرو
         if (phase_done && IsKeyPressed(KEY_SPACE)) {
-            menu.SetState(std::make_unique<HeroPhaseState>());
+            menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
         }
 
         
