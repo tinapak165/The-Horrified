@@ -117,10 +117,15 @@ void GameRender::draw_monsters() {
 
     std::unordered_map<Location*, std::vector<Monster*>> monstersAtLocation;
 
-    for (const auto& kv : game.get_monsters()) {
-        if (!kv.second || !kv.second->get_location()) continue;
-        monstersAtLocation[kv.second->get_location()].push_back(kv.second);
+   for (const auto& kv : game.get_monsters()) {
+    if (!kv.second || !kv.second->get_location()) continue;
+
+    auto& vec = monstersAtLocation[kv.second->get_location()];
+    if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
+        vec.push_back(kv.second);
     }
+}
+
 
     Monster* frenzied = game.get_frenzied_monster();
     bool frenziedDrawn = false;
@@ -157,26 +162,57 @@ void GameRender::draw_monsters() {
     }
 }
 
-
 void GameRender::draw_villagers() {
+    const float villagerSize = 90.0f;  
+    const float spacing = 10.0f;
+    const float textOffsetY = 5.0f;    // فاصله کم بین عکس و اسم
+    const int fontSize = 16;           // فونت کوچیک‌تر
+
+    Texture2D mapTex = game.get_map().get_mapTexture();
+    float mapScale = std::min(
+        (float)GetScreenWidth() / mapTex.width,
+        (float)GetScreenHeight() / mapTex.height
+    );
+    float mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+    float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
+
     for (const auto& loc : game.get_map().get_locations()) {
-        Rectangle area = loc->get_clickable_area();
-        float offsetX = 8;
-        float offsetY = 30;
-        float spacing = 18.0f;
-        int i = 0;
+        Rectangle baseArea = loc->get_clickable_area();
+        Vector2 locPos = {
+            mapDrawX + baseArea.x * mapScale,
+            mapDrawY + baseArea.y * mapScale
+        };
+
+        float currentOffsetX = 0.0f;
 
         for (Villager* v : loc->get_villagers()) {
             Texture2D tex = v->getTexture();
             Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-            Rectangle dest = { area.x + offsetX + i * (18 + spacing), area.y + offsetY, 18, 18 };
-            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
-            DrawRectangle(area.x + offsetX, area.y + offsetY, 30, 30, RED);
+            Rectangle dest = {
+                locPos.x + currentOffsetX,
+                locPos.y,
+                villagerSize,
+                villagerSize
+            };
 
-            ++i;
+            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+
+            // محاسبه متن و باکس پس‌زمینه
+            int textWidth = MeasureText(v->get_name().c_str(), fontSize);
+            int textX = dest.x + (villagerSize - textWidth) / 2;  // وسط‌چین زیر عکس
+            int textY = dest.y + villagerSize + textOffsetY;
+
+            DrawRectangle(textX - 2, textY - 2, textWidth + 4, fontSize + 4, Fade(BLACK, 0.5f));
+            DrawText(v->get_name().c_str(), textX, textY, fontSize, WHITE);
+
+            currentOffsetX += villagerSize + spacing;
         }
     }
 }
+
+
+
+
 void GameRender::draw_collected_items(){
     Rectangle itemButton = { 750, 120, 170, 40 }; 
     Vector2 mouse = GetMousePosition();
