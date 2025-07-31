@@ -21,15 +21,21 @@
 
 
 class Menu;
+class GameRender;
 class State;
 struct PlayerInfo{
     std::string name ; 
     Hero* hero ; 
 };
+enum class Phase{
+    HeroPhase ,
+    MonsterPhase ,
 
+};
 class Game {
     friend class Monstercard;
 private:
+    Phase currentPhase = Phase::HeroPhase ;
     PlayerInfo player1, player2;
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
@@ -58,6 +64,11 @@ private:
     
     static int terror_Level ;
     bool game_over = false;
+    bool heroTurnInProgress = false ;
+    bool monsterPhaseDone = false;
+    bool heroPhaseDone = false;
+
+    Hero* activeHero ; 
   
     
 public:
@@ -78,12 +89,15 @@ public:
      void set_skipMonsterPhase(bool) ;
     bool ShouldSkipMonsterPhase() const ; 
 
-    void hero_phase(Hero* hero);
-
+    bool hero_phase(Hero* hero , GameRender* );
+   
+    void set_currentPhase(Phase) ; 
+    void set_HeroTurnInProgress(bool) ; 
+    
     void initializaDeck() ; 
     void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;
-    void locationOverview() ;
+    
     
     void monster_objectes() const;
     void return_item(const Item& item);

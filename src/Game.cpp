@@ -104,39 +104,151 @@ std::string Game::checkString(std::string str){
     return str;
 }
 
+
+
+
 void Game::start() {
-  menu->SetState(std::make_unique<MenuState>());
+    distribute_initial_items() ;
+    menu->SetState(std::make_unique<MenuState>());
+    GameRender gamerender(*this);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+       //ClearBackground(RAYWHITE);
+        if(menu->getState() != nullptr){
+            menu->renderCurrentState();
+        }
+        else{
+            if(currentPhase == Phase::HeroPhase){
+                if(!heroTurnInProgress){
+                    activeHero = turnManager.get_active_hero();
+                    std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+                    heroTurnInProgress = true ; 
+             
+                }
+                bool phaseDone = hero_phase(activeHero, &gamerender) ;
 
-        
-        menu->updateCurrentState();
-        menu->renderCurrentState();
-        
+                if (phaseDone) {
+
+                    heroTurnInProgress = false;
+                    turnManager.next_turn();
+
+                    currentPhase = Phase::MonsterPhase;
+                }
+            }
+            else if(currentPhase == Phase::MonsterPhase){
+                if(!ShouldSkipMonsterPhase()){
+                    monster_phase() ;
+                }else{
+                    std::cout <<  "monster phase skipped due to perk\n" ;
+                    set_skipMonsterPhase(false) ;
+                }
+                currentPhase = Phase::HeroPhase ;
+            }
+            gamerender.draw();
+
+        }
         EndDrawing();
-    }
-    CloseWindow();
 
-    for(Hero* hero : turnManager.get_heroes()){
-        getNewCard(hero) ; 
+        if (terror_Level >= 6) {
+            std::cout << "Game Over! Terror level reached 6.\n";
+            break;
+        }    
+        // if (deck.is_empty() && !both_monsters_defeated()) {
+        //     std::cout << "Game Over! No more Monster Cards.\n";
+        //     break;
+        // }    
+        if (both_monsters_defeated()) {
+            std::cout << "You win! Both monsters defeated!\n";
+            break;
+        }
+
+
     }
+    CloseWindow() ;
 }
+//  void Game::start() {
+//   distribute_initial_items();
+//   menu->SetState(std::make_unique<MenuState>());
+//     GameRender gamerender(*this);
+// bool monsterTurnInProgress = false;  // اضافه می‌کنیم
 
-void Game::hero_phase(Hero* hero) {
-    current_card.reset();
-    hero->DisplayInfo() ;        
+// while (!WindowShouldClose()) {
+//     BeginDrawing();
+//     if(menu->getState() != nullptr){
+//         menu->renderCurrentState();
+//     }
+//     else{
+//         if(currentPhase == Phase::HeroPhase){
+//             if(!heroTurnInProgress){
+//                 activeHero = turnManager.get_active_hero();
+//                 std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
+//                 heroTurnInProgress = true;
+//             }
 
-   
+//             bool phaseDone = hero_phase(activeHero, &gamerender);
 
-    if(Villager::AnyVillagerInSafePlace()){
-        Villager::removeVillager() ;
-       cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+//             if (phaseDone) {
+//                 heroTurnInProgress = false;
+//                 turnManager.next_turn();
+//                 currentPhase = Phase::MonsterPhase;
+//                 monsterTurnInProgress = false;  // ریست مانستر
+//             }
+//         }
+//         else if(currentPhase == Phase::MonsterPhase){
+//             if(!monsterTurnInProgress){
+//                 if(!ShouldSkipMonsterPhase()){
+//                     monster_phase();    // فقط یکبار اجرا می‌شه
+//                 }else{
+//                     std::cout <<  "monster phase skipped due to perk\n";
+//                     set_skipMonsterPhase(false);
+//                 }
+//                 monsterTurnInProgress = true; // می‌گه این فاز انجام شد
+//             } 
+//             else {
+//                 currentPhase = Phase::HeroPhase; // بعد از یکبار اجرا برگرد به هیرو
+//             }
+//         }
+
+//         gamerender.draw();
+//     }
+//     EndDrawing();
+
+//     if (terror_Level >= 6) {
+//         std::cout << "Game Over! Terror level reached 6.\n";
+//         break;
+//     }    
+//     if (both_monsters_defeated()) {
+//         std::cout << "You win! Both monsters defeated!\n";
+//         break;
+//     }
+// }
+// CloseWindow();
+
+// }
+
+
+void Game::set_currentPhase(Phase newPhase){ currentPhase = newPhase ; }
+
+void Game::set_HeroTurnInProgress(bool val){ heroTurnInProgress = val ; }
+
+bool Game::hero_phase(Hero* hero , GameRender* render) {
+
+    if (hero->GetRemainingActions() > 0) {
+        return false;  
     }
 
+    // if(Villager::AnyVillagerInSafePlace()){
+    //     Villager::removeVillager() ;
+    //    cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+    // }
+    render->draw() ;
     hero->resetMaxActions() ;
+    return true ;
 }
+
+
+
 
 
 void Game::initializaDeck(){
@@ -264,86 +376,6 @@ ItemPool& Game::get_pool() {
     return pool;
 }
 
-void Game::locationOverview() {
-    cout << "-----------------------------Location Overview--------------------------------------\n"; 
-    cout << left << setw(13) << "Location" << setw(20) << "Item" << setw(20) << "Monsters" << setw(20) << "Villagers" << setw(20) << "Heroes" << "\n" ;
-    cout << right <<"--------------------------------------------------------------------------------------\n"; 
-
-    for (const auto& locPtr : map.get_locations()) {
-        Location* loc = locPtr.get();
-
-        // ----- Items -----
-        string itemStr;
-        const auto items = loc->get_items();
-        if (items.empty()) {
-            itemStr = "-";
-        } else {
-            std::map<string, pair<int, ItemColor>> itemcount;
-            for (const auto& item : items) {
-                auto& entry = itemcount[item.getName()];
-                entry.first++;
-                entry.second = item.getColor();
-            }
-            for (const auto& kv : itemcount) {
-                const auto& name = kv.first;
-                int cnt = kv.second.first;
-                ItemColor color = kv.second.second;
-
-                itemStr +=   name  + "(" + to_string(cnt) + "),";
-            }
-            if (!itemStr.empty()) itemStr.pop_back();  
-        }
-
-        // ----- Monsters -----
-        string monStr;
-        const auto monsters = loc->get_monsters();
-        if (monsters.empty()) {
-            monStr = "-";
-        } else {
-            for (const auto& m : monsters) {
-                if (m) monStr += m->get_name() + ",";
-            }
-            if (!monStr.empty()) monStr.pop_back();
-            else monStr = "-";
-        }
-
-        // ----- Villagers -----
-        string villagerStr;
-        const auto& villagers = loc->get_villagers();
-        if (villagers.empty()) {
-            villagerStr = "-";
-        } else {
-            for (const auto& v : villagers) {
-                if (v) villagerStr += v->get_name() + ",";
-            }
-            if (!villagerStr.empty()) villagerStr.pop_back();
-            else villagerStr = "-";
-        }
-
-        // ----- Heroes -----
-        string heroStr;
-        const auto& heroes = loc->get_heroes();
-        if (heroes.empty()) {
-            heroStr = "-";
-        } else {
-            for (const auto& h : heroes) {
-                if (h) heroStr += h->GetName() + ",";
-            }
-            if (!heroStr.empty()) heroStr.pop_back();
-            else heroStr = "-";
-        }
-
-        cout << left << setw(13) << loc->get_name()
-             << setw(20) << itemStr
-             << setw(20) << monStr
-             << setw(20) << villagerStr
-             << setw(20) << heroStr << "\n";
-    }
-    cout << "-------------------------------------------------------------------------------------\n";
-    cout << "terror level: " << terror_Level << '\n';
-    monster_objectes();
-}
-
 int Game::terror_Level = 0;
 
 void Game::increase_terror_level() {
@@ -403,22 +435,15 @@ void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
         current_card = std::move(drawnCard);
-        std::cout << *drawnCard;
-        drawnCard->play_monster_card(*this, frenziedMonster, all_villagers);
+        std::cout << *current_card; 
+
+        current_card->play_monster_card(*this, frenziedMonster, all_villagers);
         
-        if (drawnCard->has_frenzied_strike()) {
+        if (current_card->has_frenzied_strike()) {
             Changing_frenzy_marker();
-        }
+        }  
+        WaitTime(2.0f);
        
-        
-        GameRender gamerender(*this);
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        gamerender.draw_sidebar();
-        gamerender.draw();   // کارت + هیولاها بعد از حرکت
-        EndDrawing();
-        WaitTime(1.0f); // یک مکث کوتاه که دیده بشه
-        // ----------------------------------------
 
     } catch (const std::exception& e) {
         std::cerr << "Exception occurred: " << e.what() << std::endl;

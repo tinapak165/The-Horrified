@@ -66,7 +66,7 @@ class Hero{
         virtual bool HasAbility() ; 
 
         // void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
-
+        void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
         void showvillagersHere()const ; 

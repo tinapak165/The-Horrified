@@ -324,7 +324,7 @@ void ChooseCharacterState::render(Menu& menu) {
                 EndDrawing();
             }
             menu.startGame(player1, player2);
-             menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
+            //  menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
             return;
         }
     }
@@ -332,32 +332,53 @@ void ChooseCharacterState::render(Menu& menu) {
 
 
 
-MonsterPhaseState::MonsterPhaseState(): State ("../Assets/Menu/Background.png"){}
+// MonsterPhaseState::MonsterPhaseState(): State (""){}
+
+// void MonsterPhaseState::update(Menu& menu) {
+//     menu.getGame().monster_dice();
+//     // اینجا اول دایس رول کن
+//     if (!phase_done) {
+//         phase_done = true;
+//     }
+
+//     // وقتی کاربر تأیید کرد برو فاز هیرو
+//     if (phase_done && IsKeyPressed(KEY_SPACE)) {
+//         menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
+//     }
+// }
+
+// void MonsterPhaseState::render(Menu& menu) {
+   
+
+//     GameRender renderer(menu.getGame());
+//     renderer.draw();
+
+//     const char* msg = "Monster Phase complete - Press SPACE to continue";
+//     int textWidth = MeasureText(msg, 30);
+//     DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
+// }
 
 
-
- void MonsterPhaseState::render(Menu& menu){
+//  void MonsterPhaseState::render(Menu& menu){
      
-      DrawTexture(get_background(), 0, 0, WHITE);
+//       DrawTexture(get_background(), 0, 0, WHITE);
    
        
 
-        GameRender renderer(menu.getGame());
-        renderer.draw();
+//         GameRender renderer(menu.getGame());
+//         renderer.draw();
+//         menu.getGame().monster_dice();
 
-        // پیام راهنما
-        const char* msg = "Monster Phase complete - Press SPACE to continue";
-        int textWidth = MeasureText(msg, 30);
-        DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
+//         // پیام راهنما
+//         const char* msg = "Monster Phase complete - Press SPACE to continue";
+//         int textWidth = MeasureText(msg, 30);
+//         DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
 
-        // وقتی بازیکن تأیید کرد برو فاز هیرو
-        if (phase_done && IsKeyPressed(KEY_SPACE)) {
-            menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
-        }
-
-        
-    
-}
+//         // وقتی بازیکن تأیید کرد برو فاز هیرو
+//         if (phase_done && IsKeyPressed(KEY_SPACE)) {
+//             menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
+//         }
+// }
 
  
 

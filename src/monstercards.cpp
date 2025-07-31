@@ -9,8 +9,18 @@
 
 Monstercard::Monstercard(std::string card_name, int itemCount, std::string event,
     std::vector<Strike> s, GameMap& map , std::string tp)
-: card_name(card_name), type(CardType::MonsterAffecting), item_count(itemCount),
-event_text(event), strikes(s), map(map) , texpath(tp) {}
+: card_name(card_name),
+type(CardType::MonsterAffecting),
+item_count(itemCount),
+event_text(event),
+strikes(s),
+map(map) , 
+texpath(tp) {
+     texture = LoadTexture(texpath.c_str());
+    if (texture.id == 0) {
+        std::cerr << "Failed to load card texture: " << texpath << std::endl;
+    }
+}
 
 
 Monstercard::Monstercard(std::string card_name, int itemCount, std::string event, std::vector<Strike> s,
@@ -24,20 +34,25 @@ character_name(std::move(character)),
 destination_location(std::move(location)),
 map(map),
 texpath(tp)
-{}
+{  texture = LoadTexture(texpath.c_str());
+    if (texture.id == 0) {
+        std::cerr << "Failed to load card texture: " << texpath << std::endl;
+    }
+}
 
 
 
 FormTheBat::FormTheBat(ItemPool& p, GameMap& g, TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m , std::string path)
     : Monstercard("form the bat", 2, "Dracula moves where your hero is.",
-        { {{MonsterType::Dracula}, 1, 2} }, g , path),
+        { {{MonsterType::Dracula}, 1, 2} }, g , "../Assets/Monster_Cards/FormOfTheBat.png" ),
         pool(p), map(g), turnManager(t), monstersMap(m) {}
         
 Sunrise::Sunrise(ItemPool& p, GameMap& g, TurnManager& t,
             std::unordered_map<MonsterType, Monster*>& m , std::string path)
 
-        : Monstercard("sunrise",0, "Place Dracula at Crypt.", { {{MonsterType::InvisibleMan , MonsterType::Frenzied}, 1, 2} },g , path) ,
+        : Monstercard("sunrise",0, "Place Dracula at Crypt.", 
+            { {{MonsterType::InvisibleMan , MonsterType::Frenzied}, 1, 2} },g , "../Assets/Monster_Cards/Sunrise.png") ,
         pool(p), map(g), turnManager(t), monstersMap(m)  {}
         
 
@@ -45,7 +60,7 @@ TheInnocent::TheInnocent(ItemPool& p,
     GameMap& g ,
     TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m , std::string path) : Monstercard("the innocent", 3, "Place Maria at the Barn.",
-        { {{MonsterType::Dracula, MonsterType::InvisibleMan ,MonsterType::Frenzied }, 1, 3} }, "Maria", "Barn", g , path),
+        { {{MonsterType::Dracula, MonsterType::InvisibleMan ,MonsterType::Frenzied }, 1, 3} }, "Maria", "Barn", g , "../Assets/Monster_Cards/TheInnocent.png"),
         map(g), turnManager(t), monstersMap(m) ,pool(p)  {}
         
         
@@ -53,7 +68,7 @@ TheInnocent::TheInnocent(ItemPool& p,
     GameMap& g ,
     TurnManager& t,
     std::unordered_map<MonsterType, Monster*>& m , std::string path ) : Monstercard("The delivary", 3, "Place Wilbur & Chick at Docks.",
-        { {{MonsterType::Frenzied}, 1, 3} }, "Wilbur & Chick", "Docks", g , path),
+        { {{MonsterType::Frenzied}, 1, 3} }, "Wilbur & Chick", "Docks", g , "../Assets/Monster_Cards/TheDelivery.png"),
     map(g), turnManager(t), monstersMap(m) ,pool(p) {}
     
     
@@ -62,7 +77,7 @@ TheInnocent::TheInnocent(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
         std::unordered_map<MonsterType, Monster*>& m , std::string path) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
-            { {{MonsterType::InvisibleMan , MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g , path),
+            { {{MonsterType::InvisibleMan , MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g , "../Assets/Monster_Cards/FomerEmployer.png"),
             map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
             
             
@@ -71,7 +86,7 @@ TheInnocent::TheInnocent(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
         std::unordered_map<MonsterType, Monster*>& m , std::string path ) : Monstercard ("Thief", 2, "The Invisible Man moves where items are the most.",
-            { { {MonsterType::InvisibleMan, MonsterType::Frenzied}, 1 , 3 } }, g , path),
+            { { {MonsterType::InvisibleMan, MonsterType::Frenzied}, 1 , 3 } }, g , "../Assets/Monster_Cards/Thief.png"),
         map(g), turnManager(t), monstersMap(m) ,pool(p){}
         
       
@@ -81,7 +96,7 @@ TheInnocent::TheInnocent(ItemPool& p,
         GameMap& g ,
         TurnManager& t,
         std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Fortune teller", 3, "Place Maleva at Camp.",
-            { {{MonsterType::Frenzied}, 1, 2} }, "Maleva", "Camp", g , path),
+            { {{MonsterType::Frenzied}, 1, 2} }, "Maleva", "Camp", g , "../Assets/Monster_Cards/FortuneTeller.png"),
         map(g), turnManager(t), monstersMap(m) ,pool(p) {}
 
 
@@ -90,28 +105,28 @@ EgyptianExpert ::EgyptianExpert (ItemPool& p,
             GameMap& g ,
             TurnManager& t,
             std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Egyptian Expert", 3, "Place Prof. Pearson at Cave.",
-                { {{MonsterType::Dracula, MonsterType::Frenzied}, 2, 2} }, "Prof. Pearson", "Cave", g ,path),
+                { {{MonsterType::Dracula, MonsterType::Frenzied}, 2, 2} }, "Prof. Pearson", "Cave", g ,"../Assets/Monster_Cards/EgyptianExpert.png"),
                 map(g), turnManager(t), monstersMap(m) ,pool(p) {}
                 
  HurriedAssistant::HurriedAssistant (ItemPool& p,
                     GameMap& g ,
                     TurnManager& t,
                     std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Hurried Assistant", 3, "Place Fritz at Tower.",
-                        { {{MonsterType::Dracula , MonsterType::Frenzied}, 2, 3} }, "Fritz", "Tower", g , path),
+                        { {{MonsterType::Dracula , MonsterType::Frenzied}, 2, 3} }, "Fritz", "Tower", g , "../Assets/Monster_Cards/HurriedAssistant.png"),
                         map(g), turnManager(t), monstersMap(m) ,pool(p){}
                         
  TheIchthyologist::TheIchthyologist(ItemPool& p,
                             GameMap& g ,
                             TurnManager& t,
                             std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Former employer", 3, "Place Dr. Cranly at Laboratory.",
-                                { {{MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g , path),
+                                { {{MonsterType::Frenzied}, 1, 2} }, "Dr. Cranly", "Laboratory", g , "../Assets/Monster_Cards/TheIchtyologist.png"),
                                 map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
 
  OnTheMove::OnTheMove(ItemPool& p,
                     GameMap& g ,
                     TurnManager& t,
                     std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("On The Move", 3, "Frenzy Marker on the next Monster , Every Villager Moves closer to their Safe place .",
-                     { {{MonsterType::Frenzied}, 3, 2} },  g , path),
+                     { {{MonsterType::Frenzied}, 3, 2} },  g , "../Assets/Monster_Cards/OnTheMove.png"),
                      map(g), turnManager(t), monstersMap(m) ,pool(p) {} 
 
 
@@ -566,7 +581,7 @@ Villager* Monstercard::create_villager(const std::string& name, const std::strin
         return nullptr;
     }
 
-    Villager* v = new Villager(map , name, nullptr, loc) ; //safeplace = null 
+    Villager* v = new Villager(map , name, nullptr, loc ,"") ; //safeplace = null 
     std::cout << "Created new villager: " << name << " at " << locName << "\n";
     all_villagers.push_back(v); 
     return v;

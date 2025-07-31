@@ -27,9 +27,14 @@ public:
     void draw_collected_items() ; 
     void draw_sidebar() ;
     std::vector<ActionButton>get_actionButtons();
+    void draw_available_Perkcards();
+    void draw_played_Perkcards();
+
     ~GameRender() ; 
 private:
     std::unique_ptr<HeroAction> currentAction = nullptr;
+     bool ShowPLAYEDPerkButton = false ;
+    bool ShowAvailablePerkButton = false ; 
     bool ShowitemButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 

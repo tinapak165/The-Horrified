@@ -2,12 +2,11 @@
 #define ACTIONS_H
 #include "Hero.hpp"
 #include "GameMap.hpp"
-#include "Item.hpp"
+#include "item.hpp"
 #include "Game.hpp"
 #include <vector>
 class HeroAction{
     public:
-        
         virtual ~HeroAction() = default ;
         virtual bool update() = 0 ;
         virtual void draw() = 0 ; 
@@ -15,19 +14,18 @@ class HeroAction{
 
 class MoveAction : public HeroAction{
     private:
-        GameMap& map ; 
-        Hero* hero ;
-        std::string chosenPlace = "";
-        bool typing = true;
-        bool validInput = false;
-        bool askVillager = false;
-        bool moveWithVillager = false;
-        bool moveFinished = false;
-        Location* chosenLocation = nullptr;
-        std::string message = "Which neighboring place do you want to move to?";
+    GameMap& map ; 
+    Hero* hero ;
+    std::string chosenPlace = "";
+    bool typing = true;
+    bool validInput = false;
+    bool askVillager = false;
+    bool moveWithVillager = false;
+    bool moveFinished = false;
+    Location* chosenLocation = nullptr;
+    std::string message = "Which neighboring place do you want to move to?";
 
     public:
-       
         MoveAction(GameMap& map , Hero* hero) ;
         bool update() override;
         void draw() override ; 
@@ -93,6 +91,64 @@ class SpecialAction : public HeroAction{
         SpecialAction(Hero* , GameMap&);
         bool update() override;   
         void draw()override;  
+
+};
+
+class AdvanceAction : public HeroAction{
+    private:
+
+        Hero* hero;
+        Dracula* dracula;
+        ItemPool& pool;
+        GameMap& map;
+        InvisibleMan* invisibleman;
+        Item pendingAbilityItem;
+        float messageTimer = 0.0f;
+        bool shouldClose = false;
+        bool waitingForAbility = false ; 
+        bool waitingForAbilityInput = false ; 
+
+
+        enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
+
+        //dracula
+        std::vector<Item> availableRedItems;
+        std::vector<Item> selectedItems;
+        int totalStrength = 0;
+        int hoveredIndex = -1;
+
+        //invisible man
+        std::vector<Item> evidenceItems;
+        int hoveredEvidenceIndex = -1;
+        bool evidencePlaced = false;
+
+        std::string message;
+    public:
+        AdvanceAction(Hero*, Dracula* , ItemPool& , GameMap& ,InvisibleMan*);
+        bool update() override;   
+        void draw()override; 
+};
+
+class DefeatAction : public HeroAction{
+
+    private:
+        Hero* hero;
+        InvisibleMan*  invisibleMan;
+        Dracula* dracula;
+        std::vector<Item> selectedItems;
+        std::vector<Item> availableItems;
+        int totalStrength = 0;
+        int hoveredIndex = -1 ; 
+        std::string message  ; 
+        float messageTimer = 0.0f;
+        bool shouldClose = false ; 
+        enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
+
+
+    public:
+        DefeatAction(Hero* , InvisibleMan* , Dracula*) ;
+        bool update() override;   
+        void draw()override;
 
 };
 

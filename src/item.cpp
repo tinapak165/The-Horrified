@@ -3,6 +3,7 @@
 Item::Item(std::string name,ItemColor c, int strength , std::string locationName , std::string texturepath)
     : name(name),color(c),strength(strength) ,locationName(locationName), texturepath(texturepath) {
     }
+Item::Item(){}
 
 void Item::loadTexture() {
         texture = LoadTexture(texturepath.c_str());

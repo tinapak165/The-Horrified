@@ -115,19 +115,20 @@ class SetupState : public State {
 
 
 
-class MonsterPhaseState : public State {
-    private:
-        bool phase_done = false;  
-    public:
-    MonsterPhaseState();
-     // menu.SetState(std::make_unique<HeroPhaseState>());
+// class MonsterPhaseState : public State {
+//     private:
+//         bool phase_done = false;  
+//     public:
+//     MonsterPhaseState();
+//      // menu.SetState(std::make_unique<HeroPhaseState>());
 
-    void render(Menu& menu) override ; // ClearBackground(RED);DrawText("Monster Phase", 100, 100, 30, WHITE);
-
+//     void render(Menu& menu) override ; 
+//     // ClearBackground(RED);DrawText("Monster Phase", 100, 100, 30, WHITE);
+//     void update(Menu& menu) override;
 
 
     
-};
+// };
 
 
 

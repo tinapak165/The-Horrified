@@ -4,15 +4,15 @@
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
-        if (showingHeroInfo && currentHero != nullptr) {
+    if (showingHeroInfo && currentHero != nullptr) {
         currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingHeroInfo = false;
             currentHero = nullptr;
         }
-        return; 
+        // return; 
     }
-
+    
     if(currentAction && currentHero){
         bool done = currentAction->update() ; 
         currentAction->draw() ; 
@@ -20,15 +20,15 @@ void GameRender::draw() {
             currentAction = nullptr ; 
             currentHero = nullptr ; 
         }
-        return  ;
+        // return  ;
     }
-
+    
     if(selectedLocation){
         selectedLocation->draw_info_panel() ; 
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
             selectedLocation = nullptr ; 
         }
-        return ;
+        // return ;
     }
     if (ShowitemButton && currentHero) {
         currentHero->DisplayItem(); 
@@ -36,20 +36,25 @@ void GameRender::draw() {
             ShowitemButton = false;
             currentHero = nullptr;
         }
-        return;
+        // return;
     }
-
-
-    draw_map();
-    // draw_sidebar();
+    
+    std::cout << "[DRAW] Drawing Map...\n";
+     draw_map();
     draw_heroes() ;
+    draw_sidebar() ;
     draw_location_icon() ;
-    draw_collected_items();
+    std::cout << "[DRAW] Drawing villagers...\n";
     draw_villagers();
+      std::cout << "[DRAW] Drawing monsters...\n";
     draw_monsters();
-    draw_monster_card();
+
     draw_users() ;
-   
+    draw_action_panel() ;
+    draw_collected_items() ;
+    draw_played_Perkcards() ;  
+    draw_available_Perkcards() ;
+    
 }
 void GameRender::draw_map() {
     game.get_map().draw_map();
@@ -57,67 +62,45 @@ void GameRender::draw_map() {
   
 }
 void GameRender::draw_sidebar() {
-    
+    Rectangle mapRect = game.get_map().get_drawn_rect();
 
-  // اول مستطیل رسم‌شده نقشه رو می‌گیریم
-Rectangle mapRect = game.get_map().get_drawn_rect();
+    int sidebarX = mapRect.x + mapRect.width + 10;
+    int sidebarWidth = 400;
+    int sidebarHeight = mapRect.height;
 
-// حالا sidebar رو دقیقاً می‌ذاریم کنار نقشه
-int sidebarX = mapRect.x + mapRect.width + 10;    // فاصله 10px از نقشه
-int sidebarWidth = 400;
-int sidebarHeight = mapRect.height;               // هم‌اندازه با ارتفاع نقشه
+    // پس‌زمینه ساده برای sidebar
+    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
 
-// پس‌زمینه کلی sidebar
-DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
+    const auto& card = game.get_current_card();
+    int cardBoxY = mapRect.y + 20;
+    int cardBoxHeight = 290;
 
-// ========================= بخش کارت =========================
-const auto& card = game.get_current_card();
-int cardBoxY = mapRect.y + 20;          // با توجه به موقعیت نقشه
-int cardBoxHeight = 290;
-DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
+    // پس‌زمینه کارت
+    DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
 
-DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
-std::cout<<"before monster card draaw";
-if (!card) std::cout<<"1"<<std::endl;
-if (card) {
-    Texture2D tex = card->get_texture();
-    float aspect = (float)tex.width / (float)tex.height;
-    float destHeight = cardBoxHeight - 60;
-    float destWidth = destHeight * aspect;
-
-    float destX = sidebarX + (sidebarWidth - destWidth) / 2;  // وسط‌چین
-    float destY = cardBoxY + 40;
-
-    Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
-    Rectangle dest = {destX, destY, destWidth, destHeight};
-    DrawTexturePro(tex, src, dest, {0,0}, 0.0f, BLACK);
-    std::cout<<" after monster card draaw";
-}
-
-// ========================= بخش اتفاقات =========================
-int eventsBoxY = cardBoxY + cardBoxHeight + 10;
-int eventsBoxHeight = sidebarHeight - (cardBoxHeight + 40);
-DrawRectangle(sidebarX + 10, eventsBoxY, sidebarWidth - 20, eventsBoxHeight, Fade(BLACK, 0.2f));
-DrawText("Events:", sidebarX + 20, eventsBoxY + 20, 20, BLACK);
-
-// نمایش ۵ لاگ آخر
-auto logs = game.get_last_events(5);
-int y = eventsBoxY + 50;
-for (const auto& log : logs) {
-    DrawText(log.c_str(), sidebarX + 20, y, 16, WHITE);
-    y += 22;
-}
-int DiceBoxY = cardBoxY + cardBoxHeight + 20;
-int DiceBoxHeight = eventsBoxHeight - 40 ;
-DrawRectangle(sidebarX + 10, DiceBoxY, sidebarWidth - 20, DiceBoxHeight, Fade(BLACK, 0.2f));
-DrawText("Dice Result:", sidebarX + 20, eventsBoxY + 40, 20, BLACK);
-
-    
     if (card) {
-        DrawText(card->get_last_dice_result().c_str(), sidebarX + 20, 1015, 18, WHITE);
+        DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
+
+        Texture2D tex = card->get_texture();
+        if (tex.id != 0) {
+            float aspect = (float)tex.width / (float)tex.height;
+            float destHeight = cardBoxHeight - 60;
+            float destWidth = destHeight * aspect;
+
+            float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
+            float destY = cardBoxY + 40;
+
+            Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
+            Rectangle dest = {destX, destY, destWidth, destHeight};
+            DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
+        } else {
+            DrawText("Texture not loaded!", sidebarX + 20, cardBoxY + 50, 20, RED);
+        }
+    } else {
+        DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
     }
-    
 }
+
 
 void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
@@ -188,6 +171,8 @@ void GameRender::draw_villagers() {
             Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
             Rectangle dest = { area.x + offsetX + i * (18 + spacing), area.y + offsetY, 18, 18 };
             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+            DrawRectangle(area.x + offsetX, area.y + offsetY, 30, 30, RED);
+
             ++i;
         }
     }
@@ -212,17 +197,7 @@ void GameRender::draw_collected_items(){
   
 
 
-void GameRender::draw_monster_card() {
-    const auto& card = game.get_current_card();
-    if (!card) return;
 
-    Texture2D tex = card->get_texture();
-    Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-    Rectangle dest = { 620, 20, 200, 300 }; // کنار نقشه، بالا سمت راست
-    Vector2 origin = { 0, 0 };
-
-    DrawTexturePro(tex, src, dest, origin, 0.0f, WHITE);
-}
 void GameRender::draw_heroes() {
     const float heroSize = 100.0f; // سایز مناسب‌تر
     const float spacing = 30.0f;  // فاصله بین چند هیرو در یک مکان
@@ -280,15 +255,16 @@ void GameRender::draw_users(){
 }
 
 
-//  tina action panel without buttons
 void GameRender::draw_action_panel() {
     Hero* activeHero = game.get_turnManager().get_active_hero();
+
     std::string heroName = activeHero->GetName();
     int remaining = activeHero->GetRemainingActions();
     int maxActions = activeHero->getMaxActions();
 
     std::string infoText = heroName + " | Actions left: " + std::to_string(remaining) + "/" + std::to_string(maxActions);
-      std::vector<ActionButton> actionButtons = {
+
+    std::vector<ActionButton> actionButtons = {
         {"Move", {50, 500, 120, 40}},
         {"Special", {190, 500, 120, 40}},
         {"Guide", {330, 500, 120, 40}},
@@ -299,108 +275,78 @@ void GameRender::draw_action_panel() {
         {"Help", {190, 600, 120, 40}},
         {"Quit", {330, 600, 120, 40}},
     };
-    // پس‌زمینه پنل
+
     DrawRectangle(40, 480, 420, 180, Fade(DARKGRAY, 0.9f));
     DrawRectangleLines(40, 480, 420, 180, GRAY);
+    Vector2 mousepos = GetMousePosition();
+
     DrawText(infoText.c_str(), 50, 460, 20, BLACK);
 
-    // فقط رسم دکمه‌ها (هیچ ورودی و کلیک اینجا نیست)
-   // توی لوپ رسم دکمه‌ها:
-for (const auto& button : actionButtons) {
-    bool hovered = CheckCollisionPointRec(GetMousePosition(), button.bounds);
-    Color buttonColor = (remaining > 0) ? (hovered ? LIGHTGRAY : GRAY) : DARKGRAY;
-    DrawRectangleRec(button.bounds, buttonColor);
-    DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
+    bool hasActionsLeft = (remaining > 0);
 
-    if (hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && remaining > 0) {
-        if (!currentAction) {  // فقط وقتی اکشن قبلی تموم شده
-            if (button.label == "Pickup") {
-                currentAction = std::make_unique<PickUpAction>(activeHero);
-            } 
-            else if (button.label == "Move") {
-                currentAction = std::make_unique<MoveAction>(currentHero);
-            } 
-            else if (button.label == "Perk") {
-                currentAction = std::make_unique<ChoosePerkCardAction>(currentHero);
-            } 
-            else if (button.label == "Special") {
-                currentAction = std::make_unique<SpecialAction>(currentHero);
-            } 
-            else if (button.label == "Advance") {
-                // currentAction = std::make_unique<>(currentHero);
-            } 
-            else if (button.label == "Quit") {
-                // currentAction = std::make_unique<Quit>(currentHero);
-            }
-            
+    for (const auto& button : actionButtons) {
+        bool hovered = CheckCollisionPointRec(mousepos, button.bounds);
+
+        Color buttonColor;
+        if (!hasActionsLeft ) {
+            buttonColor = DARKGRAY;
+        } else {
+            buttonColor = hovered ? LIGHTGRAY : GRAY;
+        }
+
+        DrawRectangleRec(button.bounds, buttonColor);
+        DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
+
+        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) { 
+            handle_action(button.label, activeHero);
         }
     }
 }
 
-// توی فانکشن draw یا update بازی:
-if (currentAction) {
-    bool done = currentAction->update();
-    currentAction->draw();
-    if (done) {
-        currentAction = nullptr;
-        // مثلا ممکنه نوبت به بازیکن بعدی بره
+void GameRender::handle_action(const std::string& action , Hero* h){
+
+    if (action == "Help") {
+        currentHero = h ; 
+        currentAction = std::make_unique<HelpAction>(currentHero) ;
+ 
+    } else if (action == "Quit") { 
+        game.set_currentPhase(Phase::MonsterPhase) ; 
+        game.set_HeroTurnInProgress(false) ; 
+        game.get_turnManager().next_turn() ; 
+
+    } else if (action == "Perk") {
+        currentHero = h ; 
+        currentAction = std::make_unique<ChoosePerkCardAction>(currentHero , game) ;
+
+    } else if (action == "Move") {
+
+        currentHero = h ; 
+        currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
+
+    } else if (action == "Guide") {
+        h->GuideAction(h, game.get_map());
+    } else if (action == "Pickup") {
+
+        currentHero = h ; 
+        currentAction = std::make_unique<PickUpAction>(currentHero) ;
+
+    } else if (action == "Special") {
+        
+        currentHero = h ; 
+        currentAction = std::make_unique<SpecialAction>(currentHero , game.get_map()) ;
+
+    } else if (action == "Advance") {
+
+        currentHero = h ; 
+        currentAction = std::make_unique<AdvanceAction>(currentHero , game.get_dracula() , game.get_pool() , game.get_map() ,game.get_invisibleMan());
+
+    } else if (action == "Defeat") {
+
+        currentHero = h ; 
+        currentAction = std::make_unique<DefeatAction>(currentHero, game.get_invisibleMan(), game.get_dracula());
     }
 }
 
-
-}
-
-   void GameRender::handle_action(const std::string& action, Hero* h) {
-       
-       std::cout << "[renderer.handle_action] Handling action for button: " << action << std::endl;
-
-       if (action == "Help") {
-           currentAction = std::make_unique<HelpAction>(h);
-           std::cout<<" [ in action = help]";
-            bool done = currentAction->update(); 
-                    currentAction->draw(); 
-        } 
-        else if (action == "Quit") { 
-            game.get_turnManager().next_turn();
-            return; // دیگه ادامه نمی‌دیم
-        } 
-        else if (action == "Perk") {
-            
-            
-            h->SetRemainingActions(h->getMaxActions() -1);
-        } 
-        else if (action == "Move") {
-            currentAction = std::make_unique<MoveAction>(game.get_map(), h);
-        } 
-        else if (action == "Guide") {
-            // noy yet
-            
-        } 
-   else if (action == "Pickup") {
-            currentAction = std::make_unique<PickUpAction>(h);
-             currentAction->update(); 
-                    currentAction->draw(); 
-        }      
-        else if (action == "Special") {
-            currentAction = std::make_unique<SpecialAction>(h, game.get_map());
- 
-                } 
-                else if (action == "Defeat") {
-                    //not yet
-                }
-                
-                 if(currentAction && currentHero){
-                    bool done = currentAction->update(); 
-                    currentAction->draw(); 
-                    if(done){
-                        currentAction = nullptr; 
-                        if (currentHero->GetRemainingActions() <= 0) {
-                            game.get_turnManager().next_turn();
-                        }
-                        currentHero = nullptr; 
-                    }
-                 }
- }
             
             
 void GameRender::draw_location_icon() {
@@ -448,6 +394,38 @@ void GameRender::draw_location_icon() {
 
 std::vector<ActionButton> GameRender::get_actionButtons(){
     return actionButtons;
+}
+
+
+void GameRender::draw_played_Perkcards(){
+
+    Rectangle perkButton = { 750 , 180 + 200, 195, 40 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, perkButton);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(perkButton, btnColor);
+    DrawText("Perkcards played", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowPLAYEDPerkButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
+}
+
+void GameRender::draw_available_Perkcards(){
+    Rectangle perkButton = { 750, 50, 210, 45 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, perkButton);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(perkButton, btnColor);
+    DrawText("available Perkcards", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowAvailablePerkButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
 }
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 

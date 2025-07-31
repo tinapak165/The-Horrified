@@ -410,7 +410,7 @@ bool Scientist::HasAbility() { return true ; }
 
 void Scientist::StartSpecial(GameMap &){
 
-    message = "this hero does not have any special action" ;
+    message = "Scientist hero does not have any special action" ;
     shown = false ; 
 }
 void Scientist::Special(Location *){}

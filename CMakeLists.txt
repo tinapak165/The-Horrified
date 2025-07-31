@@ -88,7 +88,6 @@ set(SOURCES
     src/Button.cpp
     src/GameRender.cpp
     src/Action.cpp
-    src/GameState.cpp
     src/HeroPhaseState.cpp
 )
 
