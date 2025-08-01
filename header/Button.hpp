@@ -21,7 +21,6 @@ class Button {
     private:
         Texture2D texture ; 
         Rectangle bounds;
-        bool textureLoaded;
         float scale ; 
 
     public:
@@ -32,7 +31,6 @@ class Button {
         Vector2 GetSize() const ;
         Rectangle GetBounds() const ;
         void DrawWithFade(Vector2 mousepos , float) ; 
-        ~Button();
 };
 
 struct TextBox {

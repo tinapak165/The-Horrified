@@ -1,5 +1,5 @@
-#include "button.hpp"
-
+#include "Button.hpp"
+#include <iostream>
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
     int width = MeasureText(text.c_str(), fontSize);
@@ -16,16 +16,14 @@ bool ClickableText::isClicked(Vector2 mousePos, bool click) const {
     return click && CheckCollisionPointRec(mousePos, bounds);
 }
 
-Button::Button(const std::string& path, Vector2 position , float scale) : textureLoaded(false) , scale(scale) {
+Button::Button(const std::string& path, Vector2 position , float scale) : scale(scale) {
     texture = LoadTexture(path.c_str());
 
-    textureLoaded = true;
     bounds = {position.x, position.y, 
             (float)texture.width*scale, (float)texture.height*scale};
 }
 
 void Button::Draw(Vector2 mousePos) {
-    if (!textureLoaded) return;
        
       //  DrawTexture(texture, static_cast<int>(bounds.x),static_cast<int>(bounds.y), WHITE);
     DrawTextureEx(texture, (Vector2){bounds.x, bounds.y}, 0.0f, scale, WHITE); //with scale
@@ -56,7 +54,7 @@ void Button::DrawWithFade(Vector2 mousepos, float alpha){
     DrawTextureEx(texture , {bounds.x , bounds.y} , 0.0f , scale , fadeColor) ;
 }
 
-Button::~Button(){
-    if (textureLoaded) 
-        UnloadTexture(texture);
-}
+// Button::~Button()
+// {
+//     UnloadTexture(texture);
+// }

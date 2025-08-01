@@ -10,10 +10,14 @@ class Menu{
         std::unique_ptr<State> current_state ; 
     public:
         Menu(Game&) ; 
-        void SetState(std::unique_ptr<State>) ; 
-        void renderCurrentState(); 
-        State* getState(); 
-        void startGame(const PlayerSelection&, const PlayerSelection&) ; 
+        void SetState(std::unique_ptr<State>) ;
+          
+        void renderCurrentState();
+        void updateCurrentState(); 
+         
+        State* getState();
+        Game& getGame() ;
+        void startGame(const PlayerSelection&, const PlayerSelection&) ;
 };
 
 #endif
