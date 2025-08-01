@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 project(Horrified)
 
 include_directories(header)
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")  # فعال کردن اطلاعات دیباگ
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g") 
 set(SOURCES
     src/Game.cpp
     src/Hero.cpp
@@ -24,7 +24,7 @@ set(SOURCES
     src/State.cpp
     src/menu.cpp
     src/button.cpp
-    src/GameRander.cpp
+    src/GameRender.cpp
     src/Action.cpp
 )
 add_executable(Horrified ${SOURCES})
