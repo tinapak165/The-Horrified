@@ -31,6 +31,7 @@ public:
     void unloadTexture(); 
     std::string getLocationName() const;
     static std::string color_to_string(ItemColor color);    
+    std::string get_TexturePath() const;
 
 };
 

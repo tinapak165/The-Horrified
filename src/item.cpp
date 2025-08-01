@@ -34,3 +34,6 @@ std::string Item::color_to_string(ItemColor color) {
         default:                return "Unknown";
     }
 }
+
+std::string Item::get_TexturePath() const { return texturepath; }
+
