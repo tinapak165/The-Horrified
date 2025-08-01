@@ -18,7 +18,7 @@
 #include "Heroes.hpp"
 #include "State.hpp"
 #include "GameRender.hpp"
-
+#include <fstream>
 class Menu;
 class State ;
 class GameRender ;
@@ -63,11 +63,11 @@ private:
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
     std::vector<std::string> event_log ; 
-  //  std::unique_ptr<State*> currentState;
     
-    int terror_Level = 0;
+    static int terror_Level;
     bool game_over = false;
     bool heroTurnInProgress = false ;
+    bool gameLoaded = false ; 
     Hero* activeHero ; 
     
 public:
@@ -77,6 +77,9 @@ public:
     void initialize(const PlayerSelection&, const PlayerSelection&) ; 
     PlayerInfo getPlayer1() const ;
     PlayerInfo getPlayer2() const ;
+    void setPlayer1(const std::string& , Hero*) ; 
+    void setPlayer2(const std::string& , Hero*) ; 
+
     GameMap& get_map();
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
     Monstercard* get_current_card() const ;
@@ -90,12 +93,9 @@ public:
     void set_currentPhase(Phase) ; 
     void set_HeroTurnInProgress(bool) ;  
 
-    bool hero_phase(Hero* , GameRender* );
-   // void play_hero_Action(Hero*);
+    bool hero_phase(Hero* , GameRender*)  ;
     void initializaDeck() ; 
     void getNewCard(Hero*) ;
- //   void locationOverview() ;
-   // void graph_map_text();
     void monster_objectes() const;
     void return_item(const Item& item);
 
@@ -107,7 +107,7 @@ public:
     void monster_dice();
     void send_hero_to_hospital(Hero* );
     bool both_monsters_defeated();
-    void increase_terror_level();
+    static void increase_terror_level();
 
     void distribute_initial_items();
     void initializaMDeck();
@@ -120,10 +120,15 @@ public:
 
     void add_villager(Villager* v);
     std::vector<std::string> get_last_events(int count) ;
-    void changeState(std::unique_ptr<State> newState);
-    void updateState();
-    void renderState();
-   // void cleanup();
+
+
+    void SaveGame();
+    void LoadGame() ; 
+    Hero* create_hero_by_name(const std::string& ) ;
+    Menu* get_menu() ;
+    ItemColor string_to_color(const std::string&);
+
+
 };
 
 #endif

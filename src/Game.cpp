@@ -9,7 +9,7 @@
 #include "menu.hpp"
 
 using namespace std;
-
+int Game::terror_Level = 0; 
 Game::Game() {
     InitWindow(1000 + 400, 1000, "The Horrified");
 
@@ -94,13 +94,17 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 PlayerInfo Game::getPlayer1() const{ return player1; }
 PlayerInfo Game::getPlayer2() const { return player2 ;}
 
+void Game::setPlayer1(const std::string& p1 , Hero* h){ player1.name = p1 ; player1.hero = h ;}
+void Game::setPlayer2(const std::string& p2 , Hero* h){ player2.name = p2 ;  player2.hero = h ;}
+
+
 std::string Game::checkString(std::string str){
     for (char &c : str) 
         c = tolower(c); 
     return str;
 }
-
 void Game::start() {
+
     distribute_initial_items() ;
     menu->SetState(std::make_unique<MenuState>());
     GameRender gamerender(*this);
@@ -160,8 +164,6 @@ void Game::start() {
     }
     CloseWindow() ;
 }
-
-
 void Game::set_currentPhase(Phase newPhase){ currentPhase = newPhase ; }
 
 void Game::set_HeroTurnInProgress(bool val){ heroTurnInProgress = val ; }
@@ -176,7 +178,6 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
     //     Villager::removeVillager() ;
     //    cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
     // }
-    render->draw() ;
     hero->resetMaxActions() ;
     return true ;
 }
@@ -184,28 +185,22 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
 void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
-        std::cout << *drawnCard;
-        drawnCard->play_monster_card(*this, frenziedMonster, all_villagers);
-
-        if (drawnCard->has_frenzied_strike()) {
-            Changing_frenzy_marker();
-        }
-       
         current_card = std::move(drawnCard);
+        std::cout << *current_card; 
+
+        current_card->play_monster_card(*this, frenziedMonster, all_villagers);
         
-        GameRender gamerender(*this);
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        gamerender.draw_sidebar();
-        gamerender.draw();   // کارت + هیولاها بعد از حرکت
-        EndDrawing();
-        WaitTime(1.0f); // یک مکث کوتاه که دیده بشه
-        // ----------------------------------------
+        if (current_card->has_frenzied_strike()) {
+            Changing_frenzy_marker();
+        }  
+        WaitTime(2.0f);
+       
 
     } catch (const std::exception& e) {
         std::cerr << "Exception occurred: " << e.what() << std::endl;
     }
 }
+
 void Game::initializaDeck(){
     
     for(int i = 0 ; i < 3 ; i++){
@@ -244,20 +239,7 @@ void Game::distribute_initial_items() {
 
 
 void Game::monster_phase() {
-    
-    Location* loc = dracula->get_location();
-    Location* loc2 = invisibleMan->get_location();
-    
-    if (loc)
-        std::cout << "Dracula's location: " << loc->get_name() << "\n";
-        else
-        std::cout << "Dracula has no location. Probably Dead yay!\n";
-    
-    if (loc2)
-        std::cout << "Invisible Man's location: " << loc2->get_name() << "\n";
-        else
-        std::cout << "Invisible Man has no location.\n";
-        
+
         monster_dice();
         
 }
@@ -297,13 +279,9 @@ ItemPool& Game::get_pool() {
     return pool;
 }
 
-void Game::set_skipMonsterPhase(bool value){
-    skipMonsterPhase = value ; 
-}
+void Game::set_skipMonsterPhase(bool value){ skipMonsterPhase = value ;  }
 
-bool Game::ShouldSkipMonsterPhase() const{
-    return skipMonsterPhase;
-}
+bool Game::ShouldSkipMonsterPhase() const{ return skipMonsterPhase; }
 
 void Game::increase_terror_level() {
     terror_Level++;
@@ -339,22 +317,21 @@ Monster* Game::get_frenzied_monster() {
 
 
 void Game::initializaMDeck(){
-    std::cout << " initialize\n" ;
     for (int i =0 ; i <3 ; i++){       
-    deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap)) ;     
-    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FormOfTheBat.png")) ;     
+    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap,  "../Assets/Monster_Cards/Thief.png"));
+    deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/Sunrise.png")) ;
+    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
+    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheIchtyologist.png")) ;
+    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheDelivery.png")) ;
     }
 
-    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap));
-    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap)) ;
-    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap)) ;
+    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheInnocent.png")) ;
+    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
+    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
+    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
+    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ;
+   
 }
 
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
@@ -368,9 +345,283 @@ std::vector<std::string> Game::get_last_events(int count) {
     return result;
 }
 
+ItemColor Game::string_to_color(const std::string& color)
+{
+    if(color == "Red") return ItemColor::Red ;
+    if(color == "Blue") return ItemColor::Blue ;
+    if(color == "Yellow") return ItemColor::Yellow ;
+
+    return ItemColor::Reset ;
+}
+
+Hero* Game::create_hero_by_name(const std::string& name) {
+    if (name == "courier") {
+        courier = std::make_unique<Courier>(map, turnManager);
+        return courier.get();
+    }
+    else if (name == "scientist") {
+        scientist = std::make_unique<Scientist>(map);
+        return scientist.get();
+    }
+    else if (name == "mayor") {
+        mayor = std::make_unique<Mayor>(map);
+        return mayor.get();
+    }
+    else if (name == "archaeologist") {
+        archaeologist = std::make_unique<Archaeologist>(map);
+        return archaeologist.get();
+    }
+    std::cerr << "Unknown hero type: " << name << "\n";
+    return nullptr;
+}
+
+void Game::SaveGame()
+{
+    ofstream file("saveGame.txt") ;
+    if(!file.is_open()) return ; 
+
+    file << "# players info\n" ; 
+    file << "player1: " << getPlayer1().name  << ',' << getPlayer1().hero->GetName() << '\n';
+    file << "player2: " << getPlayer2().name << ',' << getPlayer2().hero->GetName()  << '\n';
+
+    file << "\n# Hero\n" ;
+    for(const auto h : turnManager.get_heroes()){
+        file << "hero: " << h->GetName() << '\n' ; 
+        file << "location: " << h->GetCurrentLocation()->get_name() << '\n' ;
+        file << "actions left: " << h->GetRemainingActions() << '\n' ; 
+        for( const auto& i : h->GetItems())
+            file << i.getName() << ',' << i.color_to_string(i.getColor()) << ','
+                << i.getStrength() << ',' << i.getLocationName() << ',' << i.get_TexturePath() << '\n';
+        file << '\n' ;
+ 
+    }
+
+    file << "# turn info\n" ;
+    file << "turn: " << turnManager.get_active_hero()->GetName() << '\n' ; 
+
+
+    file << "\n# Monster\n" ; 
+    file << "monster: " << dracula->get_name() << '\n' ;
+    file << "location: " << dracula->get_location()->get_name()  << '\n' ;
+    file << "monster: " << invisibleMan->get_name() << '\n' ;
+    file << "location: " << invisibleMan->get_location()->get_name()  << '\n' ;
+
+    file << "\n# locations:\n" ;
+    for(const auto& loc : map.get_locations()){
+        file << "location: " << loc->get_name() << '\n' ;
+        file << "items: " ;
+        for( const auto i : loc->get_items())
+            file << i.getName() << ',' << i.color_to_string(i.getColor()) << ','
+                << i.getStrength() << ',' << i.getLocationName() << ',' << i.get_TexturePath() << ';';
+
+        file << '\n' ;
+        file << "villagers: " ; 
+        for( const auto vill : loc->get_villagers())
+            file << vill->get_name() << ',' ; 
+        file << '\n' ;
+    }
+    
+    DrawText("Game saved!" , 1100 , 10 , 50 , GREEN)  ;
+
+}
+
+void Game::LoadGame() {
+
+    std::ifstream file("saveGame.txt");
+    if (!file.is_open()) {
+        std::cerr << "Could not open saveGame.txt\n";
+        return;
+    }
+
+    bool hasBufferedLine = false ; 
+
+    std::string line;
+    Hero* currentHero = nullptr;
+    Location* currentLocation = nullptr;
+
+    while(hasBufferedLine || getline(file , line)){
+        if(hasBufferedLine)
+            hasBufferedLine = false ; 
+        if(line.empty() || line[0] == '#') continue;
+
+        if(line.rfind("player1:" , 0) == 0){
+            string data = line.substr(9) ; 
+            stringstream ss(data) ;
+            string playername , heroname ;
+            getline(ss, playername, ',');
+            getline(ss, heroname, ',');
+
+            Hero* h = turnManager.find_hero_by_name(heroname);
+            if(!h) {
+                h = create_hero_by_name(heroname) ;
+                turnManager.add_hero(h);
+            }
+            setPlayer1(playername , h);
+
+        }
+        else if(line.rfind("player2:" , 0) == 0){
+            string data = line.substr(9) ; 
+            stringstream ss(data) ;
+            string playername , heroname ;
+            getline(ss, playername, ',');
+            getline(ss, heroname, ',');
+
+            Hero* hero = turnManager.find_hero_by_name(heroname);
+            if(!hero) {
+                hero = create_hero_by_name(heroname) ;
+                turnManager.add_hero(hero);
+            }
+            setPlayer2(playername , hero);
+
+        }
+        else if(line.rfind("hero:" , 0) == 0){
+            string name = line.substr(6); 
+            currentHero = turnManager.find_hero_by_name(name);
+
+            if(!currentHero){
+                currentHero = create_hero_by_name(name);
+
+                if(currentHero)
+                    turnManager.add_hero(currentHero);  
+            }
+        }
+
+        else if(line.rfind("location: " , 0) == 0 && currentHero){
+            string name = line.substr(10) ; 
+            Location* loc = map.get_location_by_name(name) ;
+            if(loc){
+                currentHero->SetCurrentLocation(loc) ;
+                cout << currentHero->GetName() << " in place " << currentHero->GetCurrentLocation()->get_name() << '\n' ; 
+            }
+        }
+        else if(line.rfind("actions left:" , 0 ) == 0 && currentHero){
+            int actions = std::stoi(line.substr(14)) ; 
+            currentHero->SetRemainingActions(actions) ;
+
+                if(line.empty()) break;
+                if(line.rfind("hero:", 0) == 0 || line.rfind("location:", 0) == 0 || 
+                line.rfind("actions left:", 0) == 0 ||  line.rfind("turn:", 0) == 0) {
+                    break;
+                }
+                stringstream itemStream(line);
+                string name , colorStr , strengthStr , Locname , texture ;
+
+                if(!getline(itemStream, name, ',')) continue;
+                if(!getline(itemStream, colorStr, ',')) continue;
+                if(!getline(itemStream, strengthStr, ',')) continue;
+                if(!getline(itemStream, Locname, ',')) continue;
+                if(!getline(itemStream, texture, ',')) continue;
+
+                ItemColor color = string_to_color(colorStr);
+                int strength = stoi(strengthStr);
+                Item item(name , color , strength , Locname , texture);
+
+                cout << "✅ Loaded item: " << item.getName() << " for " << currentHero->GetName() << '\n';
+                currentHero->addItems(item);
+            
+
+            // توجه: چون داخل while بودی، باید اون خط آخری که قطع کردی رو دوباره بررسی کنی
+            // می‌تونی از یه buffer استفاده کنی یا دوباره اون `line` رو داخل حلقه بعدی بذاری
+        }
+
+
+        else if(line.rfind("turn:" , 0) == 0){
+            string active_name = line.substr(6) ;
+            turnManager.set_active_hero(active_name) ;
+        }
+
+        else if(line.rfind("monster:" , 0) == 0) {
+            string monstername = line.substr(9) ; 
+            if(monstername == "Dracula"){
+                getline(file , line) ; 
+                if(line.rfind("location: " , 0 ) == 0){
+                    string locname = line.substr(10) ; 
+                    Location* loc = map.get_location_by_name(locname) ;
+                    if(loc) 
+                        dracula->set_location(loc) ; 
+                }
+            }
+            else if(monstername == "InvisibleMan"){
+                getline(file , line) ; 
+                if(line.rfind("location: " , 0 ) == 0){
+                    string locname = line.substr(10) ; 
+                    Location* loc = map.get_location_by_name(locname) ;
+                    if(loc)
+                        invisibleMan->set_location(loc) ;  
+                }
+            }
+        }
+        else if(line.rfind("location: " , 0) == 0 && !currentHero){
+            string locname = line.substr(10) ;
+            currentLocation = map.get_location_by_name(locname) ; 
+            if(currentLocation)
+                cout << "location is alive\n" ;
+            else   cout << "location not found: " << locname << '\n' ;
+
+        }
+        else if(line.rfind("items:", 0) == 0 && currentLocation){
+            cout << "in item\n" ;
+            string itemstr = line.substr(6);
+            if(!itemstr.empty() && itemstr[0] == ' ')
+                itemstr = itemstr.substr(1);
+
+            if(itemstr.empty()){
+                cout << "no item was found for location: " << currentLocation->get_name() << '\n' ;
+                continue;
+
+            }
+            stringstream ss(itemstr);
+            string itemData;
+
+            while(getline(ss, itemData, ';')){
+                if(itemData.empty()) continue;
+
+                cout << "  ItemData: [" << itemData << "]\n";
+
+                stringstream itemStream(itemData);
+                string name , colorStr , strengthStr , Locname , texture ;
+
+                if(!getline(itemStream, name, ',')) {
+                    cout << "Failed to read name from: [" << itemData << "]\n";
+                    continue;
+                }
+                if(!getline(itemStream, colorStr, ',')) continue;
+                if(!getline(itemStream, strengthStr, ',')) continue;
+                if(!getline(itemStream, Locname, ',')) continue;
+                if(!getline(itemStream, texture, ',')) continue;
+
+                ItemColor color = string_to_color(colorStr);
+                int strength = stoi(strengthStr);
+                const Item item(name, color, strength, Locname, texture);
+                cout << "✅ " << item.getName() << " added in " << item.getLocationName() << '\n';
+                currentLocation->add_item(item);
+            }
+        }
+
+        else if(line.rfind("villagers:" , 0) == 0 && currentLocation){
+            string villagerStr = line.substr(10) ; 
+            stringstream ss(villagerStr) ; 
+            string villName ; 
+
+
+            while (getline(ss, villName, ',')) {
+                if (villName.empty()) continue;
+                Villager* vill = map.find_villager_by_name(villName);
+                if (vill)
+                    currentLocation->add_villager(vill);
+            }
+
+        }
+    }
+    gameLoaded = true ;
+
+    cout << "game loaded\n" ;
+}
+
+Menu *Game::get_menu(){ return menu.get(); }
+
 Game::~Game(){
     if(frenziedMonster)
         delete frenziedMonster ;
     pool.unload_in_use_items() ;
-    
 }
