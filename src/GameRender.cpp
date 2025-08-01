@@ -143,7 +143,43 @@ void GameRender::draw_monsters() {
         vec.push_back(kv.second);
     }
 }
+
+
+    Monster* frenzied = game.get_frenzied_monster();
+    bool frenziedDrawn = false;
+
+    for (const auto& [loc, monsters] : monstersAtLocation) {
+        Rectangle baseArea = loc->get_clickable_area();
+        Vector2 locPos = {
+            mapDrawX + baseArea.x * mapScale,
+            mapDrawY + baseArea.y * mapScale
+        };
+
+        float currentOffsetY = offsetY;
+
+        for (Monster* monster : monsters) {
+            Texture2D tex = monster->getTexture();
+            Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
+
+            Rectangle dest = {
+                locPos.x,
+                locPos.y + currentOffsetY,
+                monsterSize,
+                monsterSize
+            };
+
+            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+
+            if (monster == frenzied && !frenziedDrawn) {
+                DrawRectangleLinesEx(dest, 2.0f, RED);
+                frenziedDrawn = true; // فقط یک بار بکشه
+            }
+
+            currentOffsetY -= spacing;
+        }
+    }
 }
+
 
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
