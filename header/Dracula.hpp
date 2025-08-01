@@ -2,13 +2,13 @@
 #define DRACULA_HPP
 
 #include <map>
-#include "Monster.hpp"
+#include "monster.hpp"
 #include "Hero.hpp"
 #include <raylib.h>
 
 
 
-class location;
+class Location;
 
 class Dracula : public Monster {
     private:
