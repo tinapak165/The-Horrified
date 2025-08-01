@@ -3,6 +3,7 @@
 GameRender::GameRender(Game& game) : game(game) {}
 
 void GameRender::draw() {
+
     if(showingHeroInfo && currentHero != nullptr) {
         currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -53,74 +54,71 @@ void GameRender::draw() {
         }
         return;
     }
-    draw_map();
+    if(savegame && currentHero){
+        game.SaveGame();
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+            currentHero = nullptr ; savegame = false  ;
+        }
+    }
+     draw_map();
     draw_heroes() ;
     draw_sidebar() ;
     draw_location_icon() ;
     draw_villagers();
     draw_monsters();
-    draw_monster_card();
+
     draw_users() ;
     draw_action_panel() ;
     draw_collected_items() ;
     draw_played_Perkcards() ;  
     draw_available_Perkcards() ;
+    draw_saveGame() ;
 }
 
 void GameRender::draw_map() {
     game.get_map().draw_map();   
 }
-
 void GameRender::draw_sidebar() {
-    
-  // اول مستطیل رسم‌شده نقشه رو می‌گیریم
     Rectangle mapRect = game.get_map().get_drawn_rect();
 
-    // حالا sidebar رو دقیقاً می‌ذاریم کنار نقشه
-    int sidebarX = mapRect.x + mapRect.width + 10;    // فاصله 10px از نقشه
+    int sidebarX = mapRect.x + mapRect.width + 10;
     int sidebarWidth = 400;
-    int sidebarHeight = mapRect.height;               // هم‌اندازه با ارتفاع نقشه
+    int sidebarHeight = mapRect.height;
 
-    // پس‌زمینه کلی sidebar
+    // پس‌زمینه ساده برای sidebar
     DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
 
-    // ========================= بخش کارت =========================
     const auto& card = game.get_current_card();
-    int cardBoxY = mapRect.y + 20;          // با توجه به موقعیت نقشه
+    int cardBoxY = mapRect.y + 20;
     int cardBoxHeight = 290;
+
+    // پس‌زمینه کارت
     DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
-    DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
 
     if (card) {
+        DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
+
         Texture2D tex = card->get_texture();
-        float aspect = (float)tex.width / (float)tex.height;
-        float destHeight = cardBoxHeight - 60;
-        float destWidth = destHeight * aspect;
+        if (tex.id != 0) {
+            float aspect = (float)tex.width / (float)tex.height;
+            float destHeight = cardBoxHeight - 60;
+            float destWidth = destHeight * aspect;
 
-        float destX = sidebarX + (sidebarWidth - destWidth) / 2;  // وسط‌چین
-        float destY = cardBoxY + 40;
+            float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
+            float destY = cardBoxY + 40;
 
-        Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
-        Rectangle dest = {destX, destY, destWidth, destHeight};
-
-        DrawTexturePro(tex, src, dest, {0,0}, 0.0f, BLACK);
+            Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
+            Rectangle dest = {destX, destY, destWidth, destHeight};
+            DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
+        } else {
+            DrawText("Texture not loaded!", sidebarX + 20, cardBoxY + 50, 20, RED);
+        }
+    } else {
+        DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
     }
-
-    // ========================= بخش اتفاقات =========================
-    int eventsBoxY = cardBoxY + cardBoxHeight + 10;
-    int eventsBoxHeight = sidebarHeight - (cardBoxHeight + 40);
-    DrawRectangle(sidebarX + 10, eventsBoxY, sidebarWidth - 20, eventsBoxHeight, Fade(BLACK, 0.2f));
-    DrawText("Events:", sidebarX + 20, eventsBoxY + 20, 20, BLACK);
-
-    // نمایش ۵ لاگ آخر
-    auto logs = game.get_last_events(5);
-    int y = eventsBoxY + 50;
-    for (const auto& log : logs) {
-        DrawText(log.c_str(), sidebarX + 20, y, 16, WHITE);
-        y += 22;
 }
 
-}
+
 
 void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
@@ -137,60 +135,60 @@ void GameRender::draw_monsters() {
 
     std::unordered_map<Location*, std::vector<Monster*>> monstersAtLocation;
 
-    for (const auto& kv : game.get_monsters()) {
-        if (!kv.second || !kv.second->get_location()) continue;
-        monstersAtLocation[kv.second->get_location()].push_back(kv.second);
+   for (const auto& kv : game.get_monsters()) {
+    if (!kv.second || !kv.second->get_location()) continue;
+
+    auto& vec = monstersAtLocation[kv.second->get_location()];
+    if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
+        vec.push_back(kv.second);
     }
+}
+}
 
-    Monster* frenzied = game.get_frenzied_monster();
-    bool frenziedDrawn = false;
+void GameRender::draw_villagers() {
+    const float villagerSize = 90.0f;  
+    const float spacing = 10.0f;
+    const float textOffsetY = 5.0f;    // فاصله کم بین عکس و اسم
+    const int fontSize = 16;           // فونت کوچیک‌تر
 
-    for (const auto& [loc, monsters] : monstersAtLocation) {
+    Texture2D mapTex = game.get_map().get_mapTexture();
+    float mapScale = std::min(
+        (float)GetScreenWidth() / mapTex.width,
+        (float)GetScreenHeight() / mapTex.height
+    );
+    float mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+    float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
+
+    for (const auto& loc : game.get_map().get_locations()) {
         Rectangle baseArea = loc->get_clickable_area();
         Vector2 locPos = {
             mapDrawX + baseArea.x * mapScale,
             mapDrawY + baseArea.y * mapScale
         };
 
-        float currentOffsetY = offsetY;
-
-        for (Monster* monster : monsters) {
-            Texture2D tex = monster->getTexture();
-            Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-
-            Rectangle dest = {
-                locPos.x,
-                locPos.y + currentOffsetY,
-                monsterSize,
-                monsterSize
-            };
-
-            DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
-
-            if (monster == frenzied && !frenziedDrawn) {
-                DrawRectangleLinesEx(dest, 2.0f, RED);
-                frenziedDrawn = true; // فقط یک بار بکشه
-            }
-
-            currentOffsetY -= spacing;
-        }
-    }
-}
-
-void GameRender::draw_villagers() {
-    for (const auto& loc : game.get_map().get_locations()) {
-        Rectangle area = loc->get_clickable_area();
-        float offsetX = 8;
-        float offsetY = 30;
-        float spacing = 18.0f;
-        int i = 0;
+        float currentOffsetX = 0.0f;
 
         for (Villager* v : loc->get_villagers()) {
             Texture2D tex = v->getTexture();
             Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-            Rectangle dest = { area.x + offsetX + i * (18 + spacing), area.y + offsetY, 18, 18 };
+            Rectangle dest = {
+                locPos.x + currentOffsetX,
+                locPos.y,
+                villagerSize,
+                villagerSize
+            };
+
             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
-            ++i;
+
+            // محاسبه متن و باکس پس‌زمینه
+            int textWidth = MeasureText(v->get_name().c_str(), fontSize);
+            int textX = dest.x + (villagerSize - textWidth) / 2;  // وسط‌چین زیر عکس
+            int textY = dest.y + villagerSize + textOffsetY;
+
+            DrawRectangle(textX - 2, textY - 2, textWidth + 4, fontSize + 4, Fade(BLACK, 0.5f));
+            DrawText(v->get_name().c_str(), textX, textY, fontSize, WHITE);
+
+            currentOffsetX += villagerSize + spacing;
         }
     }
 }
@@ -262,6 +260,7 @@ void GameRender::draw_users(){
     } 
 }
 
+
 void GameRender::draw_action_panel() {
     Hero* activeHero = game.get_turnManager().get_active_hero();
 
@@ -309,6 +308,8 @@ void GameRender::draw_action_panel() {
         }
     }
 }
+
+
 
 void GameRender::handle_action(const std::string& action , Hero* h){
 
@@ -442,27 +443,23 @@ void GameRender::draw_available_Perkcards(){
     }
 }
 
+void GameRender::draw_saveGame()
+{
+    Rectangle saveGame = { 650, 60, 200, 45 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, saveGame);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(saveGame, btnColor);
+    DrawText("save game", saveGame.x + 10, saveGame.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        savegame = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }  
+}
+
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 
 }
-
-// HeroAction *GameRender::get_currentAction(){ return currentAction.get() ; }
-
-// bool GameRender::get_showItemButton(){ return ShowitemButton; }
-
-// Hero *GameRender::get_currentHero(){return currentHero;}
-
-// bool GameRender::get_showingHeroInfo() { return showingHeroInfo; }
-
-// Location *GameRender::get_selectedLocation(){ return selectedLocation; }
-
-// void GameRender::set_currentAction(std::unique_ptr<HeroAction> action){ currentAction = std::move(action) ; }
-
-// void GameRender::set_showItemButton(bool val){ ShowitemButton = val ;  }
-
-// void GameRender::set_currentHero(Hero * hero){ currentHero = hero ; }
-
-// void GameRender::set_showingHeroInfo(bool val){ showingHeroInfo = val ; }
-
-// void GameRender::set_selectedLocation(Location * loc){ selectedLocation = loc ; }

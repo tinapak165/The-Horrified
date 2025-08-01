@@ -4,14 +4,12 @@
 #include "button.hpp"
 #include "Game.hpp"
 #include "Action.hpp"
+#include "ActionButton.hpp"
 #include <vector>
 
+class Game ; 
+class ActionButtons;
 class HeroAction ;
-
-struct ActionButton{
-    std::string label ; 
-    Rectangle bounds ; 
-};
 
 class GameRender {
 public:
@@ -29,32 +27,21 @@ public:
     void draw_collected_items() ;
     void draw_sidebar() ; 
     void draw_played_Perkcards() ; 
-    void draw_available_Perkcards() ; 
+    void draw_available_Perkcards() ;
+    void draw_saveGame() ; 
 
     ~GameRender() ; 
 
 
-    // HeroAction* get_currentAction() ;
-    // bool get_showItemButton() ; 
-    // Hero* get_currentHero() ;
-    // bool get_showingHeroInfo() ;
-    // Location* get_selectedLocation() ;
-
-    // void set_currentAction(std::unique_ptr<HeroAction>) ;
-    // void set_showItemButton(bool) ; 
-    // void set_currentHero(Hero*) ;
-    // void set_showingHeroInfo(bool) ;
-    // void set_selectedLocation(Location*) ;
-
-
 private:
 
-    std::unique_ptr<HeroAction> currentAction ; 
+    std::unique_ptr<HeroAction> currentAction = nullptr; 
     bool ShowitemButton = false ; 
     bool ShowPLAYEDPerkButton = false ;
     bool ShowAvailablePerkButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
+    bool savegame = false  ;
     Location* selectedLocation = nullptr ; 
     std::vector<ActionButton> actionButtons ;
     Game& game;
