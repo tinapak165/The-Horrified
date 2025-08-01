@@ -31,6 +31,7 @@ void MenuState::render(Menu& menu)  {
         continueButton->Draw(mouse);
 
         if (startButton->isPressed(mouse, click)) {
+            menu.getGame().distribute_initial_items() ;
             auto newstate = std::make_unique<NameInputState>() ;
             menu.SetState(std::move(newstate)); 
             return ; 
