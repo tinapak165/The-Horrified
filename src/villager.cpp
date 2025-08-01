@@ -118,6 +118,15 @@ Texture2D Villager::getTexture(){ return VillagerTex;}
 
  std::string Villager::getTexturePath(){return  VillagerTex_path;}
 
+Villager* Villager::find_villager_by_name(const std::string name){
+    for(auto vi : all()){
+        cout << "vi.name: " << vi->get_name() << "!!\n" ;
+        if(vi->get_name() == name)
+            return vi; 
+    }
+    return nullptr ; 
+ }
+
 void Villager::loadTexture(){
     VillagerTex = LoadTexture(VillagerTex_path.c_str());
 }
