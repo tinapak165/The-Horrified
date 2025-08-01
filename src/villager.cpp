@@ -5,33 +5,45 @@ using namespace std ;
 
 vector<Villager*> Villager:: vil  ;
 
-Villager::Villager(GameMap& map , const string& name, Location* safeplace , Location* current) : name(name), currentLocation(current){ 
+Villager::Villager(GameMap& map , const string& name, Location* safeplace , Location* current , std::string texpath) : name(name), currentLocation(current) , VillagerTex_path(texpath){ 
 
     vil.push_back(this) ;
     
     if(current)
         current->add_villager(this) ; 
-    if(name == "Dr. Cranly"){
-        (*this).set_safeplace(map.get_location_by_name("Precinct")) ; 
+     if(name == "Dr. Cranly"){
+        set_safeplace(map.get_location_by_name("Precinct")); 
+        VillagerTex_path = "../Assets/Villager/DrCranly.png";
     }
     else if(name == "Dr. Reed"){
         (*this).set_safeplace(map.get_location_by_name("Camp")) ; 
+        VillagerTex_path = "../Assets/Villager/DrReed.png";
     }
     else if(name == "Prof. Pearson"){
     (*this).set_safeplace(map.get_location_by_name("Museum")) ; 
+    VillagerTex_path = "../Assets/Villager/ProfPearson.png";
     }
     else if(name == "Maleva"){
         (*this).set_safeplace(map.get_location_by_name("Shop")) ; 
+        VillagerTex_path = "../Assets/Villager/Maleva.png";
     }
     else if(name == "Fritz"){
         (*this).set_safeplace(map.get_location_by_name("Institute")) ; 
+        VillagerTex_path = "../Assets/Villager/Fritz.png";
     }
     else if(name == "Wilbur & Chick"){
         (*this).set_safeplace(map.get_location_by_name("Dungeon")) ; 
+        VillagerTex_path = "../Assets/Villager/WilburAndChick.png";
     }
     else if(name == "Maria"){
         (*this).set_safeplace(map.get_location_by_name("Camp")) ; 
+        VillagerTex_path = "../Assets/Villager/Maria.png";
     }
+     VillagerTex = LoadTexture(VillagerTex_path.c_str());
+
+    std::cout << "Villager created: " << name << " at " 
+              << (current ? current->get_name() : "NULL") 
+              << " with texture " << VillagerTex_path << std::endl;
 }
 
 bool Villager::in_the_safePlace() const{
@@ -90,6 +102,7 @@ void Villager::removevillager(Villager * v){ //killed by attack of monster
     std::cout << "Removed villager: " << (this)->get_name() << "\n";
 }
 
+
 bool Villager::AnyVillagerInSafePlace(){
     for(auto *e : all()){
         if(e->in_the_safePlace()){
@@ -103,7 +116,12 @@ vector<Villager*> &Villager::all(){ return vil ;}
 
 Texture2D Villager::getTexture(){ return VillagerTex;}
 
+ std::string Villager::getTexturePath(){return  VillagerTex_path;}
 
 void Villager::loadTexture(){
     VillagerTex = LoadTexture(VillagerTex_path.c_str());
+}
+
+Villager::~Villager() {
+    UnloadTexture(VillagerTex);
 }
