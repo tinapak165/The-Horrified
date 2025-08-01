@@ -28,6 +28,8 @@ Game::Game() {
 
     monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
+    initializaDeck() ;
+    initializaMDeck();
 }
 
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
@@ -81,9 +83,6 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
     player2 = {p2.name , h2} ;
 
     turnManager = TurnManager(heroes);
-    
-    initializaDeck() ;
-    initializaMDeck();
 
 
     for(Hero* hero : turnManager.get_heroes()){
@@ -105,7 +104,6 @@ std::string Game::checkString(std::string str){
 }
 void Game::start() {
 
-    distribute_initial_items() ;
     menu->SetState(std::make_unique<MenuState>());
     GameRender gamerender(*this);
 
@@ -151,10 +149,10 @@ void Game::start() {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        // if (deck.is_empty() && !both_monsters_defeated()) {
-        //     std::cout << "Game Over! No more Monster Cards.\n";
-        //     break;
-        // }    
+        if (deck.is_empty() && !both_monsters_defeated()) {
+            std::cout << "Game Over! No more Monster Cards.\n";
+            break;
+        }    
         if (both_monsters_defeated()) {
             std::cout << "You win! Both monsters defeated!\n";
             break;
@@ -178,6 +176,7 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
     //     Villager::removeVillager() ;
     //    cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
     // }
+    render->draw() ;
     hero->resetMaxActions() ;
     return true ;
 }
@@ -185,8 +184,8 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
 void Game::monster_dice() {
     try {
         auto drawnCard = deck.drawcard();
-        current_card = std::move(drawnCard);
-        std::cout << *current_card; 
+       current_card = std::move(drawnCard);
+       std::cout << *current_card; 
 
         current_card->play_monster_card(*this, frenziedMonster, all_villagers);
         
@@ -237,23 +236,18 @@ void Game::distribute_initial_items() {
     }
 }
 
-
 void Game::monster_phase() {
-
-        monster_dice();
-        
+    monster_dice();       
 }
 
 void Game::send_hero_to_hospital(Hero* h) {
     Location* hospital = map.get_location_by_name("Hospital");
     h->MoveTo(hospital);
 }
-// دسترسی به map
 GameMap& Game::get_map() {
     return map;
 }
 
-// دسترسی به monster map
 std::unordered_map<MonsterType, Monster*>& Game::get_monsters() {
     return monstersMap;
 }
@@ -264,7 +258,6 @@ Monstercard* Game::get_current_card() const {
     return current_card.get();
 }
 
-// turn manager
 TurnManager& Game::get_turnManager() {
     return turnManager;
 }
@@ -330,12 +323,8 @@ void Game::initializaMDeck(){
     deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
     deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
     deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
-    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ;
-   
+    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ; 
 }
-
-std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
-void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
 
 std::vector<std::string> Game::get_last_events(int count) {
     std::vector<std::string> result;
@@ -375,8 +364,7 @@ Hero* Game::create_hero_by_name(const std::string& name) {
     return nullptr;
 }
 
-void Game::SaveGame()
-{
+void Game::SaveGame(){
     ofstream file("saveGame.txt") ;
     if(!file.is_open()) return ; 
 
@@ -388,17 +376,16 @@ void Game::SaveGame()
     for(const auto h : turnManager.get_heroes()){
         file << "hero: " << h->GetName() << '\n' ; 
         file << "location: " << h->GetCurrentLocation()->get_name() << '\n' ;
-        file << "actions left: " << h->GetRemainingActions() << '\n' ; 
+        file << "actions left: " << h->GetRemainingActions() << '\n' ;
+        file << "items: " << '\n' ;  
         for( const auto& i : h->GetItems())
             file << i.getName() << ',' << i.color_to_string(i.getColor()) << ','
                 << i.getStrength() << ',' << i.getLocationName() << ',' << i.get_TexturePath() << '\n';
         file << '\n' ;
- 
-    }
 
+    }
     file << "# turn info\n" ;
     file << "turn: " << turnManager.get_active_hero()->GetName() << '\n' ; 
-
 
     file << "\n# Monster\n" ; 
     file << "monster: " << dracula->get_name() << '\n' ;
@@ -419,10 +406,8 @@ void Game::SaveGame()
         for( const auto vill : loc->get_villagers())
             file << vill->get_name() << ',' ; 
         file << '\n' ;
-    }
-    
+    }   
     DrawText("Game saved!" , 1100 , 10 , 50 , GREEN)  ;
-
 }
 
 void Game::LoadGame() {
@@ -432,16 +417,12 @@ void Game::LoadGame() {
         std::cerr << "Could not open saveGame.txt\n";
         return;
     }
-
-    bool hasBufferedLine = false ; 
-
     std::string line;
     Hero* currentHero = nullptr;
     Location* currentLocation = nullptr;
 
-    while(hasBufferedLine || getline(file , line)){
-        if(hasBufferedLine)
-            hasBufferedLine = false ; 
+    while(getline(file , line)){
+
         if(line.empty() || line[0] == '#') continue;
 
         if(line.rfind("player1:" , 0) == 0){
@@ -457,8 +438,8 @@ void Game::LoadGame() {
                 turnManager.add_hero(h);
             }
             setPlayer1(playername , h);
-
         }
+
         else if(line.rfind("player2:" , 0) == 0){
             string data = line.substr(9) ; 
             stringstream ss(data) ;
@@ -472,7 +453,6 @@ void Game::LoadGame() {
                 turnManager.add_hero(hero);
             }
             setPlayer2(playername , hero);
-
         }
         else if(line.rfind("hero:" , 0) == 0){
             string name = line.substr(6); 
@@ -480,32 +460,24 @@ void Game::LoadGame() {
 
             if(!currentHero){
                 currentHero = create_hero_by_name(name);
-
                 if(currentHero)
                     turnManager.add_hero(currentHero);  
             }
         }
-
         else if(line.rfind("location: " , 0) == 0 && currentHero){
             string name = line.substr(10) ; 
             Location* loc = map.get_location_by_name(name) ;
-            if(loc){
+            if(loc)
                 currentHero->SetCurrentLocation(loc) ;
-                cout << currentHero->GetName() << " in place " << currentHero->GetCurrentLocation()->get_name() << '\n' ; 
-            }
         }
         else if(line.rfind("actions left:" , 0 ) == 0 && currentHero){
             int actions = std::stoi(line.substr(14)) ; 
             currentHero->SetRemainingActions(actions) ;
-
-                if(line.empty()) break;
-                if(line.rfind("hero:", 0) == 0 || line.rfind("location:", 0) == 0 || 
-                line.rfind("actions left:", 0) == 0 ||  line.rfind("turn:", 0) == 0) {
-                    break;
-                }
+        }
+        else if(line.rfind("items:" , 0 ) == 0 && currentHero){
+            while(getline(file , line) && !line.empty()){
                 stringstream itemStream(line);
                 string name , colorStr , strengthStr , Locname , texture ;
-
                 if(!getline(itemStream, name, ',')) continue;
                 if(!getline(itemStream, colorStr, ',')) continue;
                 if(!getline(itemStream, strengthStr, ',')) continue;
@@ -515,76 +487,50 @@ void Game::LoadGame() {
                 ItemColor color = string_to_color(colorStr);
                 int strength = stoi(strengthStr);
                 Item item(name , color , strength , Locname , texture);
+                item.loadTexture() ;
 
-                cout << "✅ Loaded item: " << item.getName() << " for " << currentHero->GetName() << '\n';
                 currentHero->addItems(item);
-            
-
-            // توجه: چون داخل while بودی، باید اون خط آخری که قطع کردی رو دوباره بررسی کنی
-            // می‌تونی از یه buffer استفاده کنی یا دوباره اون `line` رو داخل حلقه بعدی بذاری
+            }
+            currentHero = nullptr ;
         }
-
-
         else if(line.rfind("turn:" , 0) == 0){
             string active_name = line.substr(6) ;
             turnManager.set_active_hero(active_name) ;
         }
-
         else if(line.rfind("monster:" , 0) == 0) {
-            string monstername = line.substr(9) ; 
-            if(monstername == "Dracula"){
-                getline(file , line) ; 
-                if(line.rfind("location: " , 0 ) == 0){
-                    string locname = line.substr(10) ; 
-                    Location* loc = map.get_location_by_name(locname) ;
-                    if(loc) 
-                        dracula->set_location(loc) ; 
-                }
-            }
-            else if(monstername == "InvisibleMan"){
-                getline(file , line) ; 
-                if(line.rfind("location: " , 0 ) == 0){
-                    string locname = line.substr(10) ; 
-                    Location* loc = map.get_location_by_name(locname) ;
-                    if(loc)
-                        invisibleMan->set_location(loc) ;  
+            string monstername = line.substr(9); 
+            getline(file , line); 
+            if(line.rfind("location: " , 0 ) == 0){
+                string locname = line.substr(10);
+                Location* loc = map.get_location_by_name(locname);
+                if(loc){
+                    if(monstername == "Dracula") dracula->set_location(loc); 
+                    else if(monstername == "InvisibleMan") invisibleMan->set_location(loc); 
                 }
             }
         }
-        else if(line.rfind("location: " , 0) == 0 && !currentHero){
+        else if(line.rfind("location: " , 0) == 0){
             string locname = line.substr(10) ;
             currentLocation = map.get_location_by_name(locname) ; 
-            if(currentLocation)
-                cout << "location is alive\n" ;
-            else   cout << "location not found: " << locname << '\n' ;
-
         }
         else if(line.rfind("items:", 0) == 0 && currentLocation){
-            cout << "in item\n" ;
             string itemstr = line.substr(6);
             if(!itemstr.empty() && itemstr[0] == ' ')
                 itemstr = itemstr.substr(1);
 
-            if(itemstr.empty()){
-                cout << "no item was found for location: " << currentLocation->get_name() << '\n' ;
+            if(itemstr.empty())
                 continue;
 
-            }
             stringstream ss(itemstr);
             string itemData;
 
             while(getline(ss, itemData, ';')){
                 if(itemData.empty()) continue;
 
-                cout << "  ItemData: [" << itemData << "]\n";
-
                 stringstream itemStream(itemData);
                 string name , colorStr , strengthStr , Locname , texture ;
 
-                if(!getline(itemStream, name, ',')) {
-                    cout << "Failed to read name from: [" << itemData << "]\n";
-                    continue;
-                }
+                if(!getline(itemStream, name, ','))  continue; 
                 if(!getline(itemStream, colorStr, ',')) continue;
                 if(!getline(itemStream, strengthStr, ',')) continue;
                 if(!getline(itemStream, Locname, ',')) continue;
@@ -593,29 +539,31 @@ void Game::LoadGame() {
                 ItemColor color = string_to_color(colorStr);
                 int strength = stoi(strengthStr);
                 const Item item(name, color, strength, Locname, texture);
-                cout << "✅ " << item.getName() << " added in " << item.getLocationName() << '\n';
                 currentLocation->add_item(item);
             }
         }
-
         else if(line.rfind("villagers:" , 0) == 0 && currentLocation){
-            string villagerStr = line.substr(10) ; 
+            string villagerStr = line.substr(11) ; 
             stringstream ss(villagerStr) ; 
             string villName ; 
-
-
             while (getline(ss, villName, ',')) {
                 if (villName.empty()) continue;
-                Villager* vill = map.find_villager_by_name(villName);
-                if (vill)
-                    currentLocation->add_villager(vill);
-            }
 
+                Villager* vill = Villager::find_villager_by_name(villName);
+                if(!vill) 
+                    create_villager(villName , currentLocation) ;
+                if(vill) 
+                    currentLocation->add_villager(vill) ;   
+            }
         }
     }
-    gameLoaded = true ;
-
     cout << "game loaded\n" ;
+}
+
+Villager* Game::create_villager(const string & name, Location * current_loc){
+    Villager* v = new Villager(map , name, nullptr, current_loc ,"") ; 
+    all_villagers.push_back(v); 
+    return v;
 }
 
 Menu *Game::get_menu(){ return menu.get(); }

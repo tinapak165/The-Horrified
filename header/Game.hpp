@@ -67,7 +67,6 @@ private:
     static int terror_Level;
     bool game_over = false;
     bool heroTurnInProgress = false ;
-    bool gameLoaded = false ; 
     Hero* activeHero ; 
     
 public:
@@ -115,19 +114,14 @@ public:
     void Changing_frenzy_marker();
     Monster* get_frenzied_monster();
     
-
-    std::vector<Villager*>& get_all_villagers();
-
-    void add_villager(Villager* v);
     std::vector<std::string> get_last_events(int count) ;
-
 
     void SaveGame();
     void LoadGame() ; 
+    Villager* create_villager(const std::string& , Location*) ;
     Hero* create_hero_by_name(const std::string& ) ;
     Menu* get_menu() ;
     ItemColor string_to_color(const std::string&);
-
 
 };
 
