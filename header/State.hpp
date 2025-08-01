@@ -15,6 +15,7 @@ struct PlayerSelection {
 #include "button.hpp"
 #include "menu.hpp"
 #include "GameRender.hpp"
+
 class Menu ;
 class GameRender ; 
 class State{
@@ -33,6 +34,7 @@ class MenuState : public State {
     private:
         std::unique_ptr<Button> startButton ; 
         std::unique_ptr<Button> exitButton ;
+        std::unique_ptr<Button> continueButton;
     public:
         MenuState() ; 
         void render(Menu&) override ;  
@@ -88,34 +90,4 @@ class ChooseCharacterState : public State{
 };
 
 
-class SetupState : public State {
-
-    public:
-        SetupState();
-        void render(Menu& menu) override; // ClearBackground(DARKGRAY);DrawText("Setup Game...", 100, 100, 30, WHITE);
-};
-
-class HeroPhaseState : public State {
-    private: 
-        bool phase_done = false;
-        std::unique_ptr<GameRender> renderer; ; 
-    public:
-        HeroPhaseState(Game&) ;
-   //menu.SetState(std::make_unique<MonsterPhaseState>());
-
-        void render(Menu& menu) override ;
-};
-
-
-
-class MonsterPhaseState : public State {
-    private:
-        bool phase_done = false;  
-    public:
-        MonsterPhaseState();
-     // menu.SetState(std::make_unique<HeroPhaseState>());
-
-        void render(Menu& menu) override ; // ClearBackground(RED);DrawText("Monster Phase", 100, 100, 30, WHITE);
-    
-};
 #endif
