@@ -11,7 +11,8 @@
 using namespace std;
 
 Game::Game() {
-    InitWindow(1000 +400 , 1000 , "The Horrified");
+    InitWindow(1400  , 1000 , "The Horrified");
+
 
     // SetWorkingDirectory(GetApplicationDirectory());
 
@@ -149,6 +150,9 @@ void Game::start() {
 
         }
         EndDrawing();
+
+
+        std::cout << GetScreenWidth() << " x " << GetScreenHeight() << "\n";
 
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";

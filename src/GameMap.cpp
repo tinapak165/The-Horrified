@@ -1,5 +1,6 @@
 #include "GameMap.hpp"
 
+
 void GameMap::build_map() {
 
     mapTexture = LoadTexture("../Assets/map.png");
@@ -89,9 +90,28 @@ Location* GameMap::get_location_by_name(const std::string& name) {
     return nullptr;
 }
 
-Rectangle GameMap::get_drawn_rect() const {
-        return { drawX, drawY, mapTexture.width * scale, mapTexture.height * scale };
-    }
+
+
+// void GameMap::draw_map() {
+   
+//     if (mapTexture.id == 0) {
+//         std::cerr << "[ERROR] map.png not loaded properly!\n";
+//         return;
+//     }
+
+//     // محاسبه scale مناسب برای حفظ نسبت تصویر و وسط‌چین کردن
+//      scale = std::min(
+//         (float)GetScreenWidth() / mapTexture.width,
+//         (float)GetScreenHeight() / mapTexture.height
+//     );
+
+//     // محاسبه موقعیت برای رسم وسط‌چین
+//      drawX = (GetScreenWidth() - mapTexture.width * scale) / 2.0f;
+//      drawY = (GetScreenHeight() - mapTexture.height * scale) / 2.0f;
+
+//     // رسم نقشه با scale
+//     DrawTextureEx(mapTexture, {drawX, drawY}, 0.0f, scale, WHITE);
+// }
 
 void GameMap::draw_map() {
    
@@ -113,6 +133,12 @@ void GameMap::draw_map() {
     // رسم نقشه با scale
     DrawTextureEx(mapTexture, {drawX, drawY}, 0.0f, scale, WHITE);
 }
+// این تابع رو برای سایدبار لازم داری
+Rectangle GameMap::get_drawn_rect() const {
+    return {drawX, drawY, mapTexture.width * scale, mapTexture.height * scale};
+}
+
+
 const Texture2D &GameMap::get_mapTexture() const{
     return mapTexture ;
 }

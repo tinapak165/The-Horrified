@@ -10,7 +10,7 @@ void GameRender::draw() {
             showingHeroInfo = false;
             currentHero = nullptr;
         }
-        // return; 
+        return; 
     }
     
     if(currentAction && currentHero){
@@ -20,7 +20,7 @@ void GameRender::draw() {
             currentAction = nullptr ; 
             currentHero = nullptr ; 
         }
-        // return  ;
+        return  ;
     }
     
     if(selectedLocation){
@@ -28,7 +28,7 @@ void GameRender::draw() {
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
             selectedLocation = nullptr ; 
         }
-        // return ;
+        return ;
     }
     if (ShowitemButton && currentHero) {
         currentHero->DisplayItem(); 
@@ -36,17 +36,17 @@ void GameRender::draw() {
             ShowitemButton = false;
             currentHero = nullptr;
         }
-        // return;
+        return;
     }
     
-    std::cout << "[DRAW] Drawing Map...\n";
-     draw_map();
+    
+    draw_map();
     draw_heroes() ;
     draw_sidebar() ;
     draw_location_icon() ;
-    std::cout << "[DRAW] Drawing villagers...\n";
+    
     draw_villagers();
-      std::cout << "[DRAW] Drawing monsters...\n";
+    
     draw_monsters();
 
     draw_users() ;
@@ -99,10 +99,7 @@ void GameRender::draw_sidebar() {
     } else {
         DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
     }
-}
-
-
-void GameRender::draw_monsters() {
+}void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
     const float offsetY = -monsterSize - 5.0f;
@@ -165,8 +162,8 @@ void GameRender::draw_monsters() {
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
     const float spacing = 10.0f;
-    const float textOffsetY = 5.0f;    // فاصله کم بین عکس و اسم
-    const int fontSize = 16;           // فونت کوچیک‌تر
+    const float textOffsetY = 5.0f;  // فاصله کم بین عکس و اسم
+    const int fontSize = 16;       // فونت کوچیک‌تر
 
     Texture2D mapTex = game.get_map().get_mapTexture();
     float mapScale = std::min(
@@ -435,7 +432,7 @@ std::vector<ActionButton> GameRender::get_actionButtons(){
 
 void GameRender::draw_played_Perkcards(){
 
-    Rectangle perkButton = { 750 , 180 + 200, 195, 40 }; 
+    Rectangle perkButton = { 750 , 180, 195, 40 }; 
     Vector2 mouse = GetMousePosition();
     bool hover = CheckCollisionPointRec(mouse, perkButton);
 
