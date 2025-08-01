@@ -105,6 +105,12 @@ void Hero::addPlayedCards(std::unique_ptr<Perkcard> p){
 
 vector<Item>& Hero::GetItems(){ return ListOfitems ; }
 
+void Hero::addItems(Item item)
+{
+    GetItems().push_back(item) ; 
+
+}
+
 void Hero::removeItems(const Item & i){
     for(size_t j = 0 ; j < (*this).GetItems().size() ; j++){
         if(ListOfitems[j].getName() == i.getName()){
@@ -158,15 +164,19 @@ Location* Hero::GetCurrentLocation() const{
 
 void Hero::SetCurrentLocation(Location *location)
 {
-    currentLocation = location ;
+    if(currentLocation)
+        currentLocation->remove_hero(this) ;
+    currentLocation = location ; 
+    if(location)
+        location->add_hero(this , this->getTexture());
 }
 
 void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with villagers
     if (!new_location) return;
 
-    (*this).GetCurrentLocation()->remove_hero(this) ; 
+   // (*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
-    new_location->add_hero(this , this->getTexture()) ;  
+   // new_location->add_hero(this , this->getTexture()) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
     
@@ -181,9 +191,9 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
 void Hero::MoveTo(Location* new_location){ //without villager
     if (!new_location) return;
     
-    (*this).GetCurrentLocation()->remove_hero(this) ; 
+    //(*this).GetCurrentLocation()->remove_hero(this) ; 
     (*this).SetCurrentLocation(new_location) ;
-    new_location->add_hero(this , this->getTexture()) ;  
+   // new_location->add_hero(this , this->getTexture()) ;  
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
@@ -272,7 +282,6 @@ void Hero::GuideAction(Hero *h, GameMap &map)
 
 bool Hero::hasvillagerHere() const
 {
-
     for(auto *v : Villager::all() ){ 
         if(v->get_currentLocation() == (*this).GetCurrentLocation())
             return true ; 

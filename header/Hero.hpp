@@ -88,7 +88,8 @@ class Hero{
         void addPlayedCards(std::unique_ptr<Perkcard>) ;
 
         void DisplayItem() ;
-        std::vector<Item>& GetItems() ; 
+        std::vector<Item>& GetItems() ;
+        void addItems(Item) ; 
         void removeItems(const Item&) ; 
         bool has_items() const;
         void remove_item_by_index(int); 
