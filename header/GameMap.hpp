@@ -1,7 +1,7 @@
 #ifndef GAMEMAP_HPP
 #define GAMEMAP_HPP
-#include "location.hpp"
-#include "villager.hpp"
+#include "Location.hpp"
+#include "Villager.hpp"
 #include <vector>
 #include <memory>
 #include <raylib.h>

@@ -1,7 +1,7 @@
 #include "InvisibleMan.hpp"
-#include "item.hpp"
-#include "location.hpp"
-#include "monster.hpp"
+#include "Item.hpp"
+#include "Location.hpp"
+#include "Monster.hpp"
 
 InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation , MonsterType::InvisibleMan , "../Assets/Monsters/InvisibleMan.png"){
     loadTexture() ;   

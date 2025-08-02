@@ -1,7 +1,7 @@
 #ifndef GAMERENDER_HPP
 #define GAMERENDER_HPP
 
-#include "button.hpp"
+#include "Button.hpp"
 #include "Game.hpp"
 #include "Action.hpp"
 #include "ActionButton.hpp"

@@ -1,10 +1,5 @@
 #include "Dice.hpp"
-#include <stdexcept>
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <ctime>
-#include <random>
+
 using namespace std ; 
 Dice::Dice(int c) : count(c) {
     faces[0] = {

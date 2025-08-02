@@ -2,7 +2,7 @@
 #define DRACULA_HPP
 
 #include <map>
-#include "monster.hpp"
+#include "Monster.hpp"
 #include "Hero.hpp"
 #include <raylib.h>
 

@@ -2,10 +2,10 @@
 #define LOCATION_HPP
 #include <string>
 #include <vector>
-#include "item.hpp"
-#include "monster.hpp"
+#include "Item.hpp"
+#include "Monster.hpp"
 #include "Hero.hpp"
-#include "villager.hpp"
+#include "Villager.hpp"
 #include <raylib.h>
 class Item;
 class Monster;

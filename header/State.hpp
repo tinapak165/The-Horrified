@@ -12,8 +12,8 @@ struct PlayerSelection {
     std::string garlicTime;
 };
 
-#include "button.hpp"
-#include "menu.hpp"
+#include "Button.hpp"
+#include "Menu.hpp"
 #include "GameRender.hpp"
 
 class Menu ;

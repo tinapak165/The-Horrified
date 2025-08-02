@@ -2,6 +2,12 @@
 #define DICE_H
 #include <array>
 #include <vector>
+#include <stdexcept>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <ctime>
+#include <random>
 
 enum class DiceFace{
     empty , 

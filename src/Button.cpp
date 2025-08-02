@@ -1,5 +1,5 @@
-#include "button.hpp"
-#include <iostream>
+#include "Button.hpp"
+
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
     int width = MeasureText(text.c_str(), fontSize);

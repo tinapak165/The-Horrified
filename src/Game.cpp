@@ -1,14 +1,6 @@
-#include <string>
-#include <map>
-#include <iomanip>
-#include <set>
-#include <limits>
-#include <utility>
 #include "Game.hpp"
-#include "villager.hpp"
-#include "menu.hpp"
-
 using namespace std;
+
 int Game::terror_Level = 0; 
 Game::Game() {
     InitWindow(1000 + 400, 1000, "The Horrified");

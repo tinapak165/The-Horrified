@@ -2,7 +2,7 @@
 #define ACTIONS_H
 #include "Hero.hpp"
 #include "GameMap.hpp"
-#include "item.hpp"
+#include "Item.hpp"
 #include "Game.hpp"
 #include <vector>
 class HeroAction{

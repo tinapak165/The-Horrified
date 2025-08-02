@@ -1,12 +1,12 @@
 #ifndef INVISIBLEMAN_HPP
 #define INVISIBLEMAN_HPP
 
-#include "monster.hpp"
+#include "Monster.hpp"
 #include <unordered_set>
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "item.hpp"
+#include "Item.hpp"
 
 class Hero;
 class Location;

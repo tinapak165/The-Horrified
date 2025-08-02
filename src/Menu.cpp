@@ -1,4 +1,4 @@
-#include "menu.hpp"
+#include "Menu.hpp"
 
 Menu::Menu(Game& gameRef) : current_state(nullptr) , game(gameRef){}
 

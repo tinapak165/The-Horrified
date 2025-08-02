@@ -5,11 +5,17 @@
 #include <unordered_map>
 #include <memory>
 #include <raylib.h>
+#include <string>
+#include <map>
+#include <iomanip>
+#include <set>
+#include <limits>
+#include <utility>
 #include "GameMap.hpp"
-#include "perkcards.hpp"
-#include "monstercards.hpp"
+#include "Perkcards.hpp"
+#include "Monstercards.hpp"
 #include "TurnManager.hpp"
-#include "monster.hpp"
+#include "Monster.hpp"
 #include "Dracula.hpp"
 #include "InvisibleMan.hpp"
 #include "Hero.hpp"
@@ -18,6 +24,8 @@
 #include "Heroes.hpp"
 #include "State.hpp"
 #include "GameRender.hpp"
+#include "Villager.hpp"
+#include "Menu.hpp"
 #include <fstream>
 class Menu;
 class State ;

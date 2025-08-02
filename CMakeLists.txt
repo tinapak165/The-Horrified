@@ -8,22 +8,22 @@ set(SOURCES
     src/Game.cpp
     src/Hero.cpp
     src/Dice.cpp
-    src/main.cpp
+    src/Main.cpp
     src/GameMap.cpp
-    src/monstercards.cpp
-    src/perkcards.cpp
+    src/Monstercards.cpp
+    src/Perkcards.cpp
     src/TurnManager.cpp
-    src/monster.cpp
+    src/Monster.cpp
     src/Dracula.cpp
     src/InvisibleMan.cpp
-    src/item.cpp
+    src/Item.cpp
     src/Itembag.cpp
     src/Location.cpp
-    src/villager.cpp
+    src/Villager.cpp
     src/Heroes.cpp
     src/State.cpp
-    src/menu.cpp
-    src/button.cpp
+    src/Menu.cpp
+    src/Button.cpp
     src/GameRender.cpp
     src/Action.cpp
 )

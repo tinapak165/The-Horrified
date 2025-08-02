@@ -3,10 +3,10 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "villager.hpp"
-#include "location.hpp"
-#include "item.hpp"
-#include "perkcards.hpp"
+#include "Villager.hpp"
+#include "Location.hpp"
+#include "Item.hpp"
+#include "Perkcards.hpp"
 #include "InvisibleMan.hpp"
 #include "Dracula.hpp"
 #include "Itembag.hpp"

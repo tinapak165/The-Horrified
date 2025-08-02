@@ -1,7 +1,7 @@
 #ifndef ITEM_HPP
 #define ITEM_HPP
 #include <string>
-#include "raylib.h"
+#include <raylib.h>
 
 enum class ItemColor {
     Red,
