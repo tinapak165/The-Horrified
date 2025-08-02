@@ -166,13 +166,12 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster  ,std::v
         }
         
         dracula->set_location(hero->GetCurrentLocation());
-        std::cout << "Dracula moved to Heros location : "<< turnManager.get_active_hero()->GetCurrentLocation()->get_name()<<std::endl;
+        GAME_LOG(game , "Dracula moved to Heros location : + turnManager.get_active_hero()->GetCurrentLocation()->get_name() + \n" );
         
         
         play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster );
         place_items(pool);     
-                 
-        
+       
     }
     
     
@@ -188,7 +187,7 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster  ,std::v
         }  
         play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
         place_items(pool);
-        
+      
     }
     
     
@@ -213,6 +212,7 @@ void Thief::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector
     }
     play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster);
     place_items(pool);
+  
     
 }
                     
@@ -224,16 +224,14 @@ void TheInnocent::play_monster_card(Game& game ,Monster* frenziedMonster ,std::v
     play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster);
     place_items(pool);
    
-    
-
-
-            }
+    }
  
 void HurriedAssistant::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
     place_or_move_villager(all_villagers);                   
                     
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
+  
     
 }
 
@@ -243,6 +241,7 @@ void EgyptianExpert::play_monster_card(Game& game ,Monster* frenziedMonster, std
                     
     play_strike(game , map, turnManager, pool, monstersMap , frenziedMonster );
     place_items(pool);
+
 }
 
 void FortuneTeller::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
@@ -250,23 +249,21 @@ void FortuneTeller::play_monster_card(Game& game ,Monster* frenziedMonster , std
                     
     play_strike(game , map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
-    
+ 
 }
-
-
 void FormerEmoloyer::play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
     place_or_move_villager(all_villagers);                  
     
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
-    
+ 
 }
-
 void TheDelivary::play_monster_card(Game& game,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
     place_or_move_villager(all_villagers);                  
     
     play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
+
     
 }      
 
@@ -275,6 +272,7 @@ void TheIchthyologist::play_monster_card( Game& game, Monster* frenziedMonster ,
                     
         play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
         place_items(pool);
+   
         
 }  
   
@@ -292,7 +290,7 @@ void OnTheMove::move_all_villagers_toward_safety() {
     
             if (current == safe) continue;
     
-            Location* nextStep = map.find_next_step(current, safe);  // باید اینو داشته باشی
+            Location* nextStep = map.find_next_step(current, safe);  
             if (nextStep) {
                 v->set_currentLocation(nextStep);
                 std::cout << v->get_name() << " moved toward safety at " << safe->get_name() << "\n";
@@ -303,11 +301,9 @@ void OnTheMove::move_all_villagers_toward_safety() {
 }
 
 void OnTheMove::play_monster_card( Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
-    game.Changing_frenzy_marker();
-
-                    
-        play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
-        place_items(pool);
+       game.Changing_frenzy_marker();
+       play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
+       place_items(pool);
 } 
 
 void Monstercard::play_strike(Game& game,
@@ -327,10 +323,10 @@ void Monstercard::play_strike(Game& game,
         last_dice_result.clear();
         for (auto face : results) {
             switch (face) {
-                case DiceFace::Attack : last_dice_result += "[*Attack*] "; break;
-                case DiceFace::empty : last_dice_result += "[ Empty ] "; break;
-                case DiceFace::Power: last_dice_result += "[ !POWER!] "; break;
-                default: last_dice_result += "[?] "; break;
+                case DiceFace::Attack : GAME_LOG(game , "[*Attack*] ");
+                case DiceFace::empty : GAME_LOG(game , "[!POWER!] ");
+                case DiceFace::Power: GAME_LOG( game , "[Empty] ");
+               
             }
         }
         bool hasFrenzied = false;
@@ -342,32 +338,34 @@ void Monstercard::play_strike(Game& game,
             }
             Monster* m = monstersMap[type];
             if ( !m || !m->is_alive()) {
-                std::cout << "Monster is dead . \n";
+                GAME_LOG(game , "Monster is dead . \n");
                 continue;
             }
 
-            std::cout << "---MONSTER MOVE FROM STRIKE---\n";
+            GAME_LOG(game ,  + "---MONSTER MOVE FROM STRIKE---\n");
 
             for (int i = 0; i < moves; ++i) {
                 Location* target = nullptr;
 
                 if (type == MonsterType::Dracula) {
                     target = m->find_nearest_target(m->get_location());
+                    
                 } else if (type == MonsterType::InvisibleMan) {
                     target = m->find_nearest_villager(m->get_location());
                     if (target) {
                         Location* nextStep = m->find_next_step(target);
                         if (nextStep) {
                             m->set_location(nextStep);
-                            std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                            GAME_LOG (game ,  m->get_name() + " moved towards villager at " + target->get_name() + "\n");
                         }
                     }
                 }
 
                 if (target) {
                     m->move_towards(1);
+                    GAME_LOG(game , m->get_name() + " moved towards target . \n");
                 } else {
-                    std::cout << m->get_name() << " found no target to move toward.\n";
+                    GAME_LOG( game , m->get_name() + " found no target to move toward.\n");
                     break;
                 }
             }
@@ -376,16 +374,16 @@ void Monstercard::play_strike(Game& game,
             bool invisiblePowerTriggered = false;
 
             for (DiceFace face : results) {
-                std::cout << "Dice result: ";
+               GAME_LOG(game , " Dice Result :");
                 switch (face) {
                     case DiceFace::Power:
-                        std::cout << "Power\n";
+                        GAME_LOG( game , "Power\n");
                         if (type == MonsterType::InvisibleMan)
                             invisiblePowerTriggered = true;
                         break;
 
                     case DiceFace::Attack:
-                    std::cout << "Attack\n";
+                    GAME_LOG( game , "Attack\n");
 
                         if (type == MonsterType::Dracula) {
                             auto target = m->attack(); // (hero, villager)
@@ -440,7 +438,7 @@ void Monstercard::play_strike(Game& game,
 
                             } else if (target.second) {
                                 Villager* v = target.second;
-                                std::cout << "Dracula attacks " << v->get_name() << "!\n";
+                               GAME_LOG(game, "Dracula attacks " + v->get_name() + "!");
                                 remove_villager(v);
                                 if (!terrorAlreadyIncreased) {
                                     Game::increase_terror_level();
@@ -450,7 +448,7 @@ void Monstercard::play_strike(Game& game,
                         } else if (type == MonsterType::InvisibleMan) {
                             auto kv = m->attack(); // (nullptr, villager)
                             if (kv.second) {
-                                std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
+                                GAME_LOG(game , "Invisible Man kills " + kv.second->get_name() + "!\n");
                                 remove_villager(kv.second);
                                 Game::increase_terror_level();
                             }
@@ -459,7 +457,7 @@ void Monstercard::play_strike(Game& game,
                         break;
 
                     case DiceFace::empty:
-                        std::cout << "Empty\n";
+                       GAME_LOG(game ,  "Empty\n");
                         break;
                 }
             }
@@ -470,10 +468,10 @@ void Monstercard::play_strike(Game& game,
                     Location* nextStep = m->find_next_step(target);
                     if (nextStep) {
                         m->set_location(nextStep);
-                        std::cout << m->get_name() << " moved toward villager at " << target->get_name() << "\n";
+                        GAME_LOG( game , m->get_name() + " moved toward villager at " + target->get_name() + "\n");
                     }
                 } else {
-                    std::cout << "Invisible Man found no villager for dice power.\n";
+                    GAME_LOG ( game ,"Invisible Man found no villager for dice power.\n");
                 }
             }
           
@@ -483,8 +481,8 @@ void Monstercard::play_strike(Game& game,
         }
        
     if (hasFrenzied && frenziedMonster && frenziedMonster->is_alive()) {
-             std::cout << "-----[Frenzied Strike]-----\n";
-             frenzied_strike(moves, frenziedMonster, frenziedMonster->get_type(), results, terrorAlreadyIncreased, map, turnManager, pool);
+          
+             frenzied_strike( game,moves, frenziedMonster, frenziedMonster->get_type(), results, terrorAlreadyIncreased, map, turnManager, pool);
             }
 
         
@@ -595,7 +593,7 @@ void Monstercard::remove_villager(Villager* v) {
 
     v->removevillager(v);  // حذف از لیست سراسری
     v->set_currentLocation(nullptr);  // مکانش رو خالی کن
-    std::cout << "Villager " << v->get_name() << " has been removed from the game.\n";
+  
 
 }
 
@@ -660,7 +658,7 @@ void Monstercard::place_or_move_villager(std::vector<Villager*>& all_villagers) 
 }
 
 
-void Monstercard::frenzied_strike(int moves, Monster* m,
+void Monstercard::frenzied_strike(Game& game ,int moves, Monster* m,
     MonsterType type,
     std::vector<DiceFace>& results,
     bool& terrorAlreadyIncreased,
@@ -668,8 +666,8 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
     TurnManager& turnManager,
     ItemPool& pool) {
     
-            std::cout << "---Frenzied MONSTER MOVE FROM STRIKE---\n";
-            std::cout<< "----Frenzied Monster is : "<<m->get_name()<<" ----"<<std::endl;
+            GAME_LOG( game ,"---FRENZIED MONSTER MOVE FROM STRIKE---\n");
+            GAME_LOG( game , "[Frenzied Monster is :" + m->get_name() + " ]" );
             for (int i = 0; i < moves; ++i) {
                 Location* target = nullptr;
 
@@ -681,7 +679,7 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
                         Location* nextStep = m->find_next_step(target);
                         if (nextStep) {
                             m->set_location(nextStep);
-                            std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                             GAME_LOG(game ,m->get_name() + " moved towards villager at " + target->get_name() + "\n");
                         }
                     }
                 }
@@ -689,16 +687,16 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
                 if (target) {
                     m->move_towards(1);
                 } else {
-                    std::cout << m->get_name() << " found no target to move toward.\n";
+                    GAME_LOG(game , m->get_name() + " found no target to move toward.\n");
                     break;
                 }
             }
     bool invisiblePowerTriggered = false;
     for (DiceFace face : results) {
-        std::cout << "Dice result for Frenzied Monster : ";
+        GAME_LOG(game , "Dice result for Frenzied Monster : ");
         switch (face) {
             case DiceFace::Power:
-            std::cout << "Power\n";
+           GAME_LOG(game ,  "Power\n");
                 if (type == MonsterType::InvisibleMan) {
                     invisiblePowerTriggered = true;
                 }
@@ -707,7 +705,7 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
                 }
                 break;
             case DiceFace::Attack:
-                std::cout << "Attack\n";
+                GAME_LOG( game ,"Attack\n");
                 if (type == MonsterType::Dracula) {
                     auto target = m->attack(); //[heroTarget, villagerTarget]
                     if (target.first && !target.second) {
@@ -778,7 +776,7 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
                 }
                 break;
             case DiceFace::empty:
-                std::cout << "Empty\n";
+                GAME_LOG(game ,  "Empty\n");
                 break;
         }
     }
@@ -789,10 +787,10 @@ void Monstercard::frenzied_strike(int moves, Monster* m,
             Location* nextStep = m->find_next_step(target);
             if (nextStep) {
                 m->set_location(nextStep); 
-                std::cout << m->get_name() << " moved towards villager at " << target->get_name() << "\n";
+                GAME_LOG(game ,  m->get_name() + " moved towards villager at " + target->get_name() + "\n");
             }
          } else {
-            std::cout << "Invisible Man found no villager for doing his Power in dice .\n";
+            GAME_LOG( game ,  "Invisible Man found no villager for doing his Power in dice .\n");
         }
     }
 }

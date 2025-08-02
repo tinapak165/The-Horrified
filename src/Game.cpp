@@ -152,16 +152,16 @@ void Game::start() {
         EndDrawing();
 
 
-        std::cout << GetScreenWidth() << " x " << GetScreenHeight() << "\n";
+        
 
         if (terror_Level >= 6) {
             std::cout << "Game Over! Terror level reached 6.\n";
             break;
         }    
-        // if (deck.is_empty() && !both_monsters_defeated()) {
-        //     std::cout << "Game Over! No more Monster Cards.\n";
-        //     break;
-        // }    
+        if (deck.is_empty() && !both_monsters_defeated()) {
+            std::cout << "Game Over! No more Monster Cards.\n";
+            break;
+        }    
         if (both_monsters_defeated()) {
             std::cout << "You win! Both monsters defeated!\n";
             break;
@@ -338,10 +338,8 @@ void Game::distribute_initial_items() {
 
 
 void Game::monster_phase() {
-    
-   
-        
-        monster_dice();
+    this->clear_logs();
+    monster_dice();
         
 }
 
@@ -483,11 +481,10 @@ void Game::log(const std::string& message) {
         logs.erase(logs.begin());
 }
 
-void Game::scroll_logs(int direction) {
-    logScroll += direction;
-    if (logScroll < 0) logScroll = 0;
-    if (logScroll > (int)logs.size() - 10) logScroll = std::max(0, (int)logs.size() - 10);
+void Game::clear_logs() {
+    logs.clear();
 }
+
 
 Game::~Game(){
     if(frenziedMonster)

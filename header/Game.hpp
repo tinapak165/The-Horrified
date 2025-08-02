@@ -133,7 +133,7 @@ public:
     void add_villager(Villager* v);
     void log(const std::string& message);
     const std::vector<std::string>& get_logs() const { return logs; }
-    void scroll_logs(int direction);
+    void clear_logs();
     
 
 };

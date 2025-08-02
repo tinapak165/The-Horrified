@@ -54,7 +54,7 @@ Location* Monster::find_nearest_target(Location* start) {
         }
 
     }
-    cout<<"end of find nearest target \n";
+    
     return nullptr; 
 }
 

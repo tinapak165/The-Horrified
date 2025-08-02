@@ -96,19 +96,33 @@ void GameRender::draw_sidebar() {
         } else {
             DrawText("Texture not loaded!", sidebarX + 20, cardBoxY + 50, 20, RED);
         }
-         std::string lastResult = card->get_last_dice_result();
-         if (!lastResult.empty())
-         DrawText(("Dice: " + lastResult).c_str(), sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
-    else
-        DrawText("Dice: No roll yet", sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+    //      std::string lastResult = card->get_last_dice_result();
+    //      if (!lastResult.empty())
+    //      DrawText(("Dice: " + lastResult).c_str(), sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+    // else
+    //     DrawText("Dice: No roll yet", sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+    
+} else {
+    DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
+  } 
+    int logBoxY = cardBoxY + cardBoxHeight + 20;
+    int logBoxHeight = sidebarHeight - (cardBoxHeight + 40);
+    DrawRectangle(sidebarX + 10, logBoxY, sidebarWidth - 20, logBoxHeight, Fade(BLACK, 0.2f));
+    DrawText("MonsterCard Effects :", sidebarX , logBoxY + 10, 20, BLACK);
 
-    } else {
-        DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
+    const auto& logs = game.get_logs();
+    int y = logBoxY + 40; 
+    int maxLines = (logBoxHeight - 40) / 25; 
+
+    int count = 0;
+    for (auto it = logs.rbegin(); it != logs.rend() && count < maxLines; ++it) {
+        DrawText(it->c_str(), sidebarX  + 20 , y, 16 , RAYWHITE);
+        y += 24; // خط‌ها رو به سمت پایین بیار
+        count++;
     }
 
-
-
-}void GameRender::draw_monsters() {
+}
+void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
     const float offsetY = -monsterSize - 5.0f;
