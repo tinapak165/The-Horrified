@@ -21,6 +21,8 @@ class TurnManager {
         
     void add_hero(Hero* hero);
     std::vector<Hero*> get_heroes();
+    void remove_dead_heroes() ; 
+    bool all_heroes_dead() const ; 
     };
     
 #endif
