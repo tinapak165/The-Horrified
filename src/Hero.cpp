@@ -341,11 +341,8 @@ Hero::~Hero(){
 
 bool Hero::HasAbility(){ return false ; }
 
+bool Hero::isDead(){ return this->GetCurrentLocation() == nullptr; }
 
-Texture2D Hero::getTexture(){ 
-    return HeroTex;
-}
+Texture2D Hero::getTexture(){ return HeroTex; }
 
-void Hero::loadTexture(){
-    HeroTex = LoadTexture(HeroTex_path.c_str());
-}
+void Hero::loadTexture(){ HeroTex = LoadTexture(HeroTex_path.c_str()); }
