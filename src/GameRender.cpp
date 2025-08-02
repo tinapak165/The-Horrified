@@ -273,27 +273,29 @@ void GameRender::draw_heroes() {
     }
 }
 
-void GameRender::draw_users(){
-    auto p1 = game.getPlayer1() ;
-    auto p2 = game.getPlayer2() ; 
-
-    ClickableText user1(p1.name,{90, 90} , 40, BLACK);
-    ClickableText user2(p2.name,{90, 150} , 40, BLACK);
+void GameRender::draw_users() {
+    auto p1 = game.getPlayer1();
+    auto p2 = game.getPlayer2();
 
     Vector2 mouse = GetMousePosition();
 
-    user1.Draw(mouse);
-    user2.Draw(mouse);
-
-    if (user1.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
-        showingHeroInfo = true ; 
-        currentHero = p1.hero ; 
+    if (p1.hero && !(p1.hero->isDead())) {
+        ClickableText user1(p1.name, {90, 90}, 40, BLACK);
+        user1.Draw(mouse);
+        if (user1.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+            showingHeroInfo = true;
+            currentHero = p1.hero;
+        }
     }
 
-    if (user2.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
-        showingHeroInfo = true ; 
-        currentHero = p2.hero ; 
-    } 
+    if (p2.hero && !(p2.hero->isDead())) {
+        ClickableText user2(p2.name, {90, 150}, 40, BLACK);
+        user2.Draw(mouse);
+        if (user2.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+            showingHeroInfo = true;
+            currentHero = p2.hero;
+        }
+    }
 }
 
 
