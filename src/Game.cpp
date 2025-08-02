@@ -477,24 +477,18 @@ void Game::initializaMDeck(){
 std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
 void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
 
-std::vector<std::string> Game::get_last_events(int count) {
-    std::vector<std::string> result;
-    int start = std::max(0, (int)event_log.size() - count);
-    for (int i = start; i < event_log.size(); ++i)
-        result.push_back(event_log[i]);
-    return result;
+void Game::log(const std::string& message) {
+    logs.push_back(message);
+    if (logs.size() > 50) // حداکثر ۵۰ خط
+        logs.erase(logs.begin());
 }
-//  void Game::changeState(std::unique_ptr<State> newState) {
-//         if (currentState) currentState->exit(*this);
-//         currentState = std::move(newState);
-//         currentState->enter(*this);
-//     }
-    // void Game::updateState() {
-    //     if (currentState) currentState->update(*menu);
-    // }
-    // void Game::renderState() {
-    //     if (currentState) currentState->render(*menu);
-    // }
+
+void Game::scroll_logs(int direction) {
+    logScroll += direction;
+    if (logScroll < 0) logScroll = 0;
+    if (logScroll > (int)logs.size() - 10) logScroll = std::max(0, (int)logs.size() - 10);
+}
+
 Game::~Game(){
     if(frenziedMonster)
         delete frenziedMonster ;

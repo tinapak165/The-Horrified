@@ -32,6 +32,13 @@ enum class Phase{
     MonsterPhase ,
 
 };
+// for log
+#define GAME_LOG(game, msg) \
+    do { \
+        std::cout << msg << std::endl; \
+        game.log(msg); \
+    } while(0)
+/// 
 class Game {
     friend class Monstercard;
 private:
@@ -69,7 +76,9 @@ private:
     bool heroPhaseDone = false;
 
     Hero* activeHero ; 
-  
+    
+    std::vector<std::string> logs;
+    int logScroll = 0; 
     
 public:
     Game();
@@ -122,13 +131,11 @@ public:
     std::vector<Villager*>& get_all_villagers();
 
     void add_villager(Villager* v);
-    std::vector<std::string> get_last_events(int count) ;
+    void log(const std::string& message);
+    const std::vector<std::string>& get_logs() const { return logs; }
+    void scroll_logs(int direction);
     
-    // void changeState(std::unique_ptr<State> newState);
-    // void updateState();
-    // void renderState();
 
-   // void cleanup();
 };
 
 #endif

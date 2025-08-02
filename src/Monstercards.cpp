@@ -327,9 +327,9 @@ void Monstercard::play_strike(Game& game,
         last_dice_result.clear();
         for (auto face : results) {
             switch (face) {
-                case DiceFace::Attack : last_dice_result += "[HIT] "; break;
-                case DiceFace::empty : last_dice_result += "[MISS] "; break;
-                case DiceFace::Power: last_dice_result += "[POWER] "; break;
+                case DiceFace::Attack : last_dice_result += "[*Attack*] "; break;
+                case DiceFace::empty : last_dice_result += "[ Empty ] "; break;
+                case DiceFace::Power: last_dice_result += "[ !POWER!] "; break;
                 default: last_dice_result += "[?] "; break;
             }
         }
@@ -391,7 +391,7 @@ void Monstercard::play_strike(Game& game,
                             auto target = m->attack(); // (hero, villager)
                             if (target.first && !target.second) {
                                 Hero* h = target.first;
-                                std::cout << "Dracula attacks " << h->GetName() << "!\n";
+                                GAME_LOG(game, "Dracula attacks " + h->GetName() + "!");
 
                                 if (h->has_items()) {
                                     const auto& items = h->GetItems();

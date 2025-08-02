@@ -96,9 +96,18 @@ void GameRender::draw_sidebar() {
         } else {
             DrawText("Texture not loaded!", sidebarX + 20, cardBoxY + 50, 20, RED);
         }
+         std::string lastResult = card->get_last_dice_result();
+         if (!lastResult.empty())
+         DrawText(("Dice: " + lastResult).c_str(), sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+    else
+        DrawText("Dice: No roll yet", sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+
     } else {
         DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
     }
+
+
+
 }void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
