@@ -121,7 +121,6 @@ public:
 
     void monster_phase();
     void monster_dice();
-    void send_hero_to_hospital(Hero* );
     bool both_monsters_defeated();
     static void increase_terror_level();
 
@@ -139,6 +138,8 @@ public:
     Hero* create_hero_by_name(const std::string& ) ;
     Menu* get_menu() ;
     ItemColor string_to_color(const std::string&);
+    std::unique_ptr<Perkcard> create_perk_by_name(const std::string&) ;
+
 
     void log(const std::string& message);
     const std::vector<std::string>& get_logs() const;

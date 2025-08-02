@@ -236,10 +236,6 @@ void Game::monster_phase() {
     monster_dice();       
 }
 
-void Game::send_hero_to_hospital(Hero* h) {
-    Location* hospital = map.get_location_by_name("Hospital");
-    h->MoveTo(hospital);
-}
 GameMap& Game::get_map() {
     return map;
 }
@@ -354,6 +350,18 @@ Hero* Game::create_hero_by_name(const std::string& name) {
     return nullptr;
 }
 
+std::unique_ptr<Perkcard> Game::create_perk_by_name(const std::string& name) {
+    if (name == "Repel") return std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map);
+    if (name == "Hurry") return std::make_unique<Hurrycard>(turnManager.get_heroes(), map);
+    if (name == "Late into the Night") return std::make_unique<LateintotheNightCARD>();
+    if (name == "Break of Dawn") return std::make_unique<BreakofDawnCARD>(pool , map);
+    if (name == "Overstock") return std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map);
+    if (name == "Visit from the Detective") return std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map);
+
+    std::cerr << "Unknown perk card: " << name << '\n';
+    return nullptr;
+}
+
 void Game::SaveGame(){
     ofstream file("saveGame.txt") ;
     if(!file.is_open()) return ; 
@@ -367,6 +375,16 @@ void Game::SaveGame(){
         file << "hero: " << h->GetName() << '\n' ; 
         file << "location: " << h->GetCurrentLocation()->get_name() << '\n' ;
         file << "actions left: " << h->GetRemainingActions() << '\n' ;
+        file << "available perk: " ;
+        for(const auto& p : h->GetAvailablePerkCards())
+            file << p->get_name() << ',' ; 
+        file << '\n';
+
+        file << "played perk: " ;
+        for(const auto& p : h->GetPlayedPerkCards())
+            file << p->get_name() << ',' ;
+        file << '\n';
+
         file << "items: " << '\n' ;  
         for( const auto& i : h->GetItems())
             file << i.getName() << ',' << i.color_to_string(i.getColor()) << ','
@@ -462,6 +480,30 @@ void Game::LoadGame() {
         else if(line.rfind("actions left:" , 0 ) == 0 && currentHero){
             int actions = std::stoi(line.substr(14)) ; 
             currentHero->SetRemainingActions(actions) ;
+        }
+        else if(line.rfind("available perk:" , 0) == 0 && currentHero){
+            string perkLine = line.substr(16) ;
+            stringstream ss(perkLine) ;
+            string perk ; 
+            while(getline(ss , perk , ',')){
+                if(!perk.empty()){
+                    auto card = create_perk_by_name(perk) ;
+                    if(card)
+                        currentHero->AddAvailablePerk(std::move(card)) ;
+                }
+            }
+        }
+        else if(line.rfind("played perk:" , 0) == 0 && currentHero){
+            string perkLine = line.substr(13) ;
+            stringstream ss(perkLine) ;
+            string perk ; 
+            while(getline(ss , perk , ',')){
+                if(!perk.empty()){
+                    auto card = create_perk_by_name(perk) ;
+                    if(card)
+                        currentHero->addPlayedCards(std::move(card)) ;
+                }
+            }
         }
         else if(line.rfind("items:" , 0 ) == 0 && currentHero){
             while(getline(file , line) && !line.empty()){
