@@ -157,8 +157,10 @@ void Game::start() {
             std::cout << "You win! Both monsters defeated!\n";
             break;
         }
-
-
+        // if(turnManager.all_heroes_dead()){
+        //     cout << "you lose! all heroes are dead\n" ;
+        //     break; //show a message instead of break
+        // }
     }
     CloseWindow() ;
 }
@@ -172,10 +174,10 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
         return false;  
     }
 
-    // if(Villager::AnyVillagerInSafePlace()){
-    //     Villager::removeVillager() ;
-    //    cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
-    // }
+    if(Villager::AnyVillagerInSafePlace()){
+        Villager::removeVillager() ;
+       cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+    }
     render->draw() ;
     hero->resetMaxActions() ;
     return true ;
@@ -467,8 +469,7 @@ void Game::LoadGame() {
         else if(line.rfind("location: " , 0) == 0 && currentHero){
             string name = line.substr(10) ; 
             Location* loc = map.get_location_by_name(name) ;
-            if(loc)
-                currentHero->SetCurrentLocation(loc) ;
+            currentHero->SetCurrentLocation(loc ? loc : nullptr) ;
         }
         else if(line.rfind("actions left:" , 0 ) == 0 && currentHero){
             int actions = std::stoi(line.substr(14)) ; 
@@ -503,10 +504,10 @@ void Game::LoadGame() {
             if(line.rfind("location: " , 0 ) == 0){
                 string locname = line.substr(10);
                 Location* loc = map.get_location_by_name(locname);
-                if(loc){
-                    if(monstername == "Dracula") dracula->set_location(loc); 
-                    else if(monstername == "InvisibleMan") invisibleMan->set_location(loc); 
-                }
+
+                if(monstername == "Dracula") dracula->set_location(loc ? loc : nullptr); 
+                else if(monstername == "InvisibleMan") invisibleMan->set_location(loc ? loc : nullptr); 
+            
             }
         }
         else if(line.rfind("location: " , 0) == 0){
