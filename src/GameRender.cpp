@@ -392,7 +392,9 @@ void GameRender::handle_action(const std::string& action , Hero* h){
         currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
 
     } else if (action == "Guide") {
-        h->GuideAction(h, game.get_map());
+        currentHero = h ; 
+        currentAction = std::make_unique<GuideAction>(game.get_map() , currentHero) ;
+
     } else if (action == "Pickup") {
 
         currentHero = h ; 
