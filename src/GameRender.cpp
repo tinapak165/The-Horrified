@@ -100,8 +100,9 @@ void GameRender::draw_sidebar() {
 
         Texture2D tex = card->get_texture();
         if (tex.id != 0) {
+           float scale = 1.3f;  // هرچی بزرگتر = تصویر بزرگ‌تر
             float aspect = (float)tex.width / (float)tex.height;
-            float destHeight = cardBoxHeight - 60;
+            float destHeight = (cardBoxHeight - 60) * scale;
             float destWidth = destHeight * aspect;
 
             float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
@@ -113,11 +114,32 @@ void GameRender::draw_sidebar() {
         } else {
             DrawText("Texture not loaded!", sidebarX + 20, cardBoxY + 50, 20, RED);
         }
-    } else {
-        DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
-    }
-}
+    //      std::string lastResult = card->get_last_dice_result();
+    //      if (!lastResult.empty())
+    //      DrawText(("Dice: " + lastResult).c_str(), sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+    // else
+    //     DrawText("Dice: No roll yet", sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
+    
+} else {
+    DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
+  } 
+    int logBoxY = cardBoxY + cardBoxHeight + 20;
+    int logBoxHeight = sidebarHeight - (cardBoxHeight + 40);
+    DrawRectangle(sidebarX + 10, logBoxY, sidebarWidth - 20, logBoxHeight, Fade(BLACK, 0.2f));
+    DrawText("MonsterCard Effects :", sidebarX , logBoxY + 10, 20, BLACK);
 
+    const auto& logs = game.get_logs();
+    int y = logBoxY + 40; 
+    int maxLines = (logBoxHeight - 40) / 25; 
+
+    int count = 0;
+    for (auto it = logs.rbegin(); it != logs.rend() && count < maxLines; ++it) {
+        DrawText(it->c_str(), sidebarX  + 20 , y, 16 , RAYWHITE);
+        y += 24; // خط‌ها رو به سمت پایین بیار
+        count++;
+    }
+
+}
 
 
 void GameRender::draw_monsters() {

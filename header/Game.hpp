@@ -42,6 +42,14 @@ enum class Phase{
 
 };
 
+// for log
+#define GAME_LOG(game, msg) \
+    do { \
+        std::cout << msg << std::endl; \
+        game.log(msg); \
+    } while(0)
+/// 
+
 class Game {
     friend class Monstercard;
 private:
@@ -70,12 +78,13 @@ private:
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
-    std::vector<std::string> event_log ; 
+   
     
     static int terror_Level;
     bool game_over = false;
     bool heroTurnInProgress = false ;
     Hero* activeHero ; 
+    std::vector<std::string> logs;
     
 public:
     Game();
@@ -131,6 +140,9 @@ public:
     Menu* get_menu() ;
     ItemColor string_to_color(const std::string&);
 
+    void log(const std::string& message);
+    const std::vector<std::string>& get_logs() const;
+    void clear_logs();
 };
 
 #endif

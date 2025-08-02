@@ -97,7 +97,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 
                 void place_items(ItemPool& pool) ;
                 
-                void frenzied_strike(int , Monster* m,
+                void frenzied_strike(Game & ,int , Monster* m,
                     MonsterType type,
                     std::vector<DiceFace>& results,
                     bool& terrorAlreadyIncreased,

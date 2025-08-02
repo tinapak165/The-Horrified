@@ -1,4 +1,6 @@
 #include "Game.hpp"
+#include <sstream>
+
 using namespace std;
 
 int Game::terror_Level = 0; 
@@ -320,13 +322,7 @@ void Game::initializaMDeck(){
     deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ; 
 }
 
-std::vector<std::string> Game::get_last_events(int count) {
-    std::vector<std::string> result;
-    int start = std::max(0, (int)event_log.size() - count);
-    for (int i = start; i < event_log.size(); ++i)
-        result.push_back(event_log[i]);
-    return result;
-}
+
 
 ItemColor Game::string_to_color(const std::string& color)
 {
@@ -560,6 +556,18 @@ Villager* Game::create_villager(const string & name, Location * current_loc){
 }
 
 Menu *Game::get_menu(){ return menu.get(); }
+
+
+void Game::log(const std::string& message) {
+    logs.push_back(message);
+    if (logs.size() > 50) // حداکثر ۵۰ خط
+        logs.erase(logs.begin());
+}
+
+void Game::clear_logs() {
+    logs.clear();
+}
+const std::vector<std::string>& Game::get_logs() const { return logs; }
 
 Game::~Game(){
     if(frenziedMonster)
