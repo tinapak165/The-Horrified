@@ -4,6 +4,8 @@
 GameRender::GameRender(Game& game) : game(game) {
     draculaMat = LoadTexture("../Assets/Monster_Mat/DraculaMat.png");
     invisibleManMat = LoadTexture("../Assets/Monster_Mat/InvisibleManMat.png");
+    coffinTex = LoadTexture("../Assets/Items/Coffins/Coffin.png"); 
+      smashedCoffinTex = LoadTexture("../Assets/Items/Coffins/SmashedCoffin.png");
 
 }
 
@@ -68,7 +70,7 @@ void GameRender::draw() {
     draw_villagers();
     
     draw_monsters();
-  
+    draw_coffins();
     draw_users() ;
     draw_action_panel() ;
     draw_collected_items() ;
@@ -605,7 +607,44 @@ void GameRender::draw_available_Perkcards(){
         currentHero = game.get_turnManager().get_active_hero(); 
     }
 }
+void GameRender::draw_coffins() {
+
+    Dracula* drac = dynamic_cast<Dracula*>(game.get_monsters()[MonsterType::Dracula]);
+
+    const auto& coffins = drac->get_coffins_map();
+
+    Texture2D mapTex = game.get_map().get_mapTexture();
+    float mapScale = std::min(
+        (float)GetScreenWidth() / mapTex.width,
+        (float)GetScreenHeight() / mapTex.height
+    );
+    float mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+    float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
+
+    for (const auto& [locName, destroyed] : coffins) {
+        if (destroyed) continue; // اگه نابود شده، نشون نده
+
+        Location* loc = game.get_map().get_location_by_name(locName);
+        if (!loc) continue;
+
+        Rectangle baseArea = loc->get_clickable_area();
+        Vector2 locPos = {
+            mapDrawX + baseArea.x * mapScale,
+            mapDrawY + baseArea.y * mapScale
+        };
+        
+        float coffinSize = 30.0f;
+        Rectangle dest = { locPos.x, locPos.y - 40, coffinSize, coffinSize };
+         Texture2D& coffin = destroyed ? smashedCoffinTex : coffinTex;
+        DrawTexturePro(coffin, {0,0,(float)coffin.width,(float)coffin.height}, dest, {0,0}, 0, WHITE);
+    }
+}
+
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 
+    UnloadTexture(draculaMat);
+    UnloadTexture(invisibleManMat);
+    UnloadTexture(coffinTex); 
+    UnloadTexture(smashedCoffinTex); 
 }
