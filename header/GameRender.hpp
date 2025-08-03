@@ -45,6 +45,8 @@ private:
     Location* selectedLocation = nullptr ; 
     std::vector<ActionButton> actionButtons ;
     Game& game;
+    bool fileSaved = false ;
+    std::string filename = "" ;
 };
 
 #endif

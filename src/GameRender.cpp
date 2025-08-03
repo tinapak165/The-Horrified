@@ -54,13 +54,29 @@ void GameRender::draw() {
         }
         return;
     }
-    if(savegame && currentHero){
-        game.SaveGame();
-        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
-            currentHero = nullptr ; savegame = false  ;
+    if (savegame && currentHero) {
+        SaveManager save(game);
+
+        if (!fileSaved) {
+            filename = save.generateNextFile();
+            save.registerSaveFiles(filename) ;
+            save.saveGame(filename);
+            fileSaved = true;
         }
+
+        std::string text = "Game saved to: " + filename;
+        DrawText(text.c_str(), 100, 100, 30, GREEN);
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            currentHero = nullptr;
+            savegame = false;
+            fileSaved = false;  
+            filename = "";
+        }
+        return;
     }
-     draw_map();
+    
+    draw_map();
     draw_heroes() ;
     draw_sidebar() ;
     draw_location_icon() ;
