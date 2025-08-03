@@ -1,6 +1,12 @@
 #include "GameRender.hpp"
 
-GameRender::GameRender(Game& game) : game(game) {}
+GameRender::GameRender(Game& game) : game(game) {
+    draculaMat = LoadTexture("../Assets/Monster_Mat/DraculaMat.png");
+    invisibleManMat = LoadTexture("../Assets/Monster_Mat/InvisibleManMat.png");
+    coffinTex = LoadTexture("../Assets/Items/Coffins/Coffin.png"); 
+    smashedCoffinTex = LoadTexture("../Assets/Items/Coffins/SmashedCoffin.png");
+
+}
 
 void GameRender::draw() {
 
@@ -75,6 +81,13 @@ void GameRender::draw() {
         }
         return;
     }
+    if(showingVillagerInfo){
+        Villager::DisplayInfo() ;
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            showingVillagerInfo = false;
+        }
+        return ;
+    }
     
     draw_map();
     draw_heroes() ;
@@ -82,13 +95,14 @@ void GameRender::draw() {
     draw_location_icon() ;
     draw_villagers();
     draw_monsters();
-
+    draw_coffins();
     draw_users() ;
     draw_action_panel() ;
     draw_collected_items() ;
     draw_played_Perkcards() ;  
     draw_available_Perkcards() ;
     draw_saveGame() ;
+    draw_villagerButton() ;
 }
 
 void GameRender::draw_map() {
@@ -116,9 +130,8 @@ void GameRender::draw_sidebar() {
 
         Texture2D tex = card->get_texture();
         if (tex.id != 0) {
-           float scale = 1.3f;  // هرچی بزرگتر = تصویر بزرگ‌تر
             float aspect = (float)tex.width / (float)tex.height;
-            float destHeight = (cardBoxHeight - 60) * scale;
+            float destHeight = cardBoxHeight - 60;
             float destWidth = destHeight * aspect;
 
             float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
@@ -173,19 +186,19 @@ void GameRender::draw_monsters() {
 
     std::unordered_map<Location*, std::vector<Monster*>> monstersAtLocation;
 
-   for (const auto& kv : game.get_monsters()) {
-    if (!kv.second || !kv.second->get_location()) continue;
+    for (const auto& kv : game.get_monsters()) {
+        if (!kv.second || !kv.second->get_location()) continue;
 
-    auto& vec = monstersAtLocation[kv.second->get_location()];
-    if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
-        vec.push_back(kv.second);
+        auto& vec = monstersAtLocation[kv.second->get_location()];
+        if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
+            vec.push_back(kv.second);
+        }
     }
-}
-
 
     Monster* frenzied = game.get_frenzied_monster();
     bool frenziedDrawn = false;
 
+   
     for (const auto& [loc, monsters] : monstersAtLocation) {
         Rectangle baseArea = loc->get_clickable_area();
         Vector2 locPos = {
@@ -208,16 +221,56 @@ void GameRender::draw_monsters() {
 
             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
 
+            // نشون دادن حالت Frenzied
             if (monster == frenzied && !frenziedDrawn) {
                 DrawRectangleLinesEx(dest, 2.0f, RED);
-                frenziedDrawn = true; // فقط یک بار بکشه
+                frenziedDrawn = true;
+            }
+
+            // کلیک روی هیولا برای نمایش تصویر
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), dest)) {
+                selectedMonsterMat = monster->get_type();  
             }
 
             currentOffsetY -= spacing;
         }
     }
-}
 
+    
+    if (selectedMonsterMat != MonsterType::None) {
+        // پس زمینه سیاه اگه هیچی نبود
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.7f));
+
+        Texture2D* matTex = nullptr;
+        if (selectedMonsterMat == MonsterType::Dracula) 
+            matTex = &draculaMat;
+        else if (selectedMonsterMat == MonsterType::InvisibleMan) 
+            matTex = &invisibleManMat;
+
+        if (matTex) {
+            float matW = 500;
+            float matH = 500 * ((float)matTex->height / matTex->width);
+            float matX = (GetScreenWidth() - matW) / 2;
+            float matY = (GetScreenHeight() - matH) / 2;
+
+            Rectangle matArea = {matX, matY, matW, matH};
+            DrawTexturePro(*matTex, {0, 0, (float)matTex->width, (float)matTex->height}, matArea, {0, 0}, 0, WHITE);
+
+            // دکمه بستن
+            Rectangle closeBtn = { matX + matW - 40, matY + 10, 30, 30 };
+            DrawRectangleRec(closeBtn, MAROON);
+            DrawText("X", closeBtn.x + 7, closeBtn.y + 2, 24, WHITE);
+
+            // بستن با کلیک روی X یا بیرون عکس
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mp = GetMousePosition();
+                if (CheckCollisionPointRec(mp, closeBtn) || !CheckCollisionPointRec(mp, matArea)) {
+                    selectedMonsterMat = MonsterType::None;
+                }
+            }
+        }
+    }
+}
 
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
@@ -537,7 +590,59 @@ void GameRender::draw_saveGame()
     }  
 }
 
+void GameRender::draw_villagerButton()
+{
+    Rectangle vill = { 650, 100, 200, 45 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, vill);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(vill, btnColor);
+    DrawText("villagers", vill.x + 10, vill.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        showingVillagerInfo = true ;
+    }  
+}
+
+void GameRender::draw_coffins() {
+
+    Dracula* drac = dynamic_cast<Dracula*>(game.get_monsters()[MonsterType::Dracula]);
+
+    const auto& coffins = drac->get_coffins_map();
+
+    Texture2D mapTex = game.get_map().get_mapTexture();
+    float mapScale = std::min(
+        (float)GetScreenWidth() / mapTex.width,
+        (float)GetScreenHeight() / mapTex.height
+    );
+    float mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+    float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
+
+    for (const auto& [locName, destroyed] : coffins) {
+        if (destroyed) continue; // اگه نابود شده، نشون نده
+
+        Location* loc = game.get_map().get_location_by_name(locName);
+        if (!loc) continue;
+
+        Rectangle baseArea = loc->get_clickable_area();
+        Vector2 locPos = {
+            mapDrawX + baseArea.x * mapScale,
+            mapDrawY + baseArea.y * mapScale
+        };
+        
+        float coffinSize = 30.0f;
+        Rectangle dest = { locPos.x, locPos.y - 40, coffinSize, coffinSize };
+         Texture2D& coffin = destroyed ? smashedCoffinTex : coffinTex;
+        DrawTexturePro(coffin, {0,0,(float)coffin.width,(float)coffin.height}, dest, {0,0}, 0, WHITE);
+    }
+}
+
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 
+    UnloadTexture(draculaMat);
+    UnloadTexture(invisibleManMat);
+    UnloadTexture(coffinTex); 
+    UnloadTexture(smashedCoffinTex); 
 }

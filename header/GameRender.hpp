@@ -16,6 +16,7 @@ public:
     GameRender(Game& game);
     void draw();              // کل صفحه رو رسم می‌کنه
     void draw_monsters();
+    void draw_coffins(); 
     void draw_villagers();
     void draw_map();          // فقط نقشه و آیکون‌ها
     void draw_monster_card(); // اگر کارت فعاله، نشونش بده
@@ -29,6 +30,7 @@ public:
     void draw_played_Perkcards() ; 
     void draw_available_Perkcards() ;
     void draw_saveGame() ; 
+    void draw_villagerButton() ; 
 
     ~GameRender() ; 
 
@@ -41,12 +43,18 @@ private:
     bool ShowAvailablePerkButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
+    bool showingVillagerInfo = false ;
     bool savegame = false  ;
     Location* selectedLocation = nullptr ; 
     std::vector<ActionButton> actionButtons ;
     Game& game;
     bool fileSaved = false ;
     std::string filename = "" ;
+    MonsterType selectedMonsterMat = MonsterType::None;
+    Texture2D draculaMat;
+    Texture2D invisibleManMat;
+    Texture2D coffinTex;
+    Texture2D smashedCoffinTex; 
 };
 
 #endif
