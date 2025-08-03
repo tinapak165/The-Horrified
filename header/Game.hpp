@@ -132,8 +132,6 @@ public:
     
     std::vector<std::string> get_last_events(int count) ;
 
-    void SaveGame();
-    void LoadGame() ; 
     Villager* create_villager(const std::string& , Location*) ;
     Hero* create_hero_by_name(const std::string& ) ;
     Menu* get_menu() ;
