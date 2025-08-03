@@ -26,6 +26,7 @@ set(SOURCES
     src/Button.cpp
     src/GameRender.cpp
     src/Action.cpp
+    src/SaveManager.cpp
 )
 add_executable(Horrified ${SOURCES})
 target_link_libraries(Horrified PRIVATE raylib GL m pthread dl X11)
