@@ -15,6 +15,7 @@ struct PlayerSelection {
 #include "Button.hpp"
 #include "Menu.hpp"
 #include "GameRender.hpp"
+#include "SaveManager.hpp"
 
 class Menu ;
 class GameRender ; 
@@ -87,6 +88,17 @@ class ChooseCharacterState : public State{
 
         ChooseCharacterState(const PlayerSelection&, const PlayerSelection&);
         void render(Menu&) override;
+};
+
+class ContinueState : public State{
+    private:
+        std::vector<ClickableText> fileButtons;
+        bool fileselected = false ;
+        std::string selectedFile ;
+    public:
+        ContinueState() ;
+        void render(Menu&) override;
+
 };
 
 

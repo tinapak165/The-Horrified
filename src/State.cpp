@@ -42,8 +42,7 @@ void MenuState::render(Menu& menu)  {
             return ; 
         }
         if(continueButton->isPressed(mouse , click)){
-            menu.getGame().LoadGame() ; 
-            menu.SetState(nullptr) ; 
+            menu.SetState(std::make_unique<ContinueState>()) ;
             return ;        
         }
         
@@ -269,5 +268,36 @@ void ChooseCharacterState::render(Menu& menu) {
             menu.startGame(player1, player2);
             return;
         }
+    }
+}
+
+ContinueState::ContinueState() : State("../Assets/Menu/Background.png"){}
+
+void ContinueState::render(Menu & menu)
+{
+    DrawTexture(get_background(), 0, 0, WHITE);
+
+    SaveManager save(menu.getGame()) ;
+    std::vector<std::string> files = save.getFiles() ;
+    if(files.empty())
+        std::cout << "files are empty\n" ;
+    int y = 150 ; 
+    for(const std::string& file : files){
+        fileButtons.emplace_back(file , Vector2{120, (float)y} , 28 , GREEN);
+        y+= 40 ; 
+    }
+
+    DrawText("select a save file: " , 100 , 80 , 30 , GREEN);
+
+    for(auto & button : fileButtons){
+        button.Draw(GetMousePosition()) ;
+        if(button.isClicked(GetMousePosition() , IsMouseButtonPressed(MOUSE_LEFT_BUTTON))){
+            selectedFile = button.get_text() ;
+            fileselected = true ;
+        }
+    }
+    if(fileselected && !selectedFile.empty()){
+        save.loadGame(selectedFile) ;
+        menu.SetState(nullptr) ;
     }
 }
