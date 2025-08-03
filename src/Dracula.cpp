@@ -25,7 +25,7 @@ const std::map<std::string, bool>& Dracula::get_coffins_map() const {
     return coffinsDestroyed;
 }
 
-
+     
 bool Dracula::is_defeated() const {
     return defeated;
    

@@ -241,7 +241,7 @@ bool SpecialAction::update() {
 
     return specialFinished ;
 }
-
+     
 void SpecialAction::draw() {
 
     if(!specialFinished)
