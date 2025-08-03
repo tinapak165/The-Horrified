@@ -80,6 +80,7 @@ allItems.emplace_back("Fossil", ItemColor::Blue, 3, "Camp", ".../Assets/Items/Bl
 allItems.emplace_back("Fossil", ItemColor::Blue, 3, "Camp", ".../Assets/Items/Blue/Fossil.png");
 
 
+
 }
 
 
@@ -112,9 +113,6 @@ void ItemPool::add_items(const std::vector<Item>& items) {
 }
 
 void ItemPool::load_item_textures(){
-    for (Item& item : allItems) {
-        item.loadTexture();
-    }
 }
 void ItemPool::unload_in_use_items() {
     for(auto& item : inUseItems){

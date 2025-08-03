@@ -1,10 +1,14 @@
 #include "GameRender.hpp"
 #include "Game.hpp"
 #include "ActionButtons.hpp"
-GameRender::GameRender(Game& game) : game(game) {}
+GameRender::GameRender(Game& game) : game(game) {
+    draculaMat = LoadTexture("../Assets/Monster_Mat/DraculaMat.png");
+    invisibleManMat = LoadTexture("../Assets/Monster_Mat/InvisibleManMat.png");
+
+}
 
 void GameRender::draw() {
-    if (showingHeroInfo && currentHero != nullptr) {
+     if(showingHeroInfo && currentHero != nullptr) {
         currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingHeroInfo = false;
@@ -12,7 +16,7 @@ void GameRender::draw() {
         }
         return; 
     }
-    
+
     if(currentAction && currentHero){
         bool done = currentAction->update() ; 
         currentAction->draw() ; 
@@ -22,7 +26,7 @@ void GameRender::draw() {
         }
         return  ;
     }
-    
+
     if(selectedLocation){
         selectedLocation->draw_info_panel() ; 
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
@@ -38,6 +42,22 @@ void GameRender::draw() {
         }
         return;
     }
+    if (ShowPLAYEDPerkButton && currentHero) {
+        currentHero->displayPlayedCards(); 
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            ShowPLAYEDPerkButton = false;
+            currentHero = nullptr;
+        }
+        return;
+    }
+    if (ShowAvailablePerkButton && currentHero) {
+        currentHero->displayavailblecards(); 
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            ShowAvailablePerkButton = false;
+            currentHero = nullptr;
+        }
+        return;
+    }
     
     
     draw_map();
@@ -48,7 +68,7 @@ void GameRender::draw() {
     draw_villagers();
     
     draw_monsters();
-
+  
     draw_users() ;
     draw_action_panel() ;
     draw_collected_items() ;
@@ -137,19 +157,19 @@ void GameRender::draw_monsters() {
 
     std::unordered_map<Location*, std::vector<Monster*>> monstersAtLocation;
 
-   for (const auto& kv : game.get_monsters()) {
-    if (!kv.second || !kv.second->get_location()) continue;
+    for (const auto& kv : game.get_monsters()) {
+        if (!kv.second || !kv.second->get_location()) continue;
 
-    auto& vec = monstersAtLocation[kv.second->get_location()];
-    if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
-        vec.push_back(kv.second);
+        auto& vec = monstersAtLocation[kv.second->get_location()];
+        if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
+            vec.push_back(kv.second);
+        }
     }
-}
-
 
     Monster* frenzied = game.get_frenzied_monster();
     bool frenziedDrawn = false;
 
+   
     for (const auto& [loc, monsters] : monstersAtLocation) {
         Rectangle baseArea = loc->get_clickable_area();
         Vector2 locPos = {
@@ -172,15 +192,117 @@ void GameRender::draw_monsters() {
 
             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
 
+            // نشون دادن حالت Frenzied
             if (monster == frenzied && !frenziedDrawn) {
                 DrawRectangleLinesEx(dest, 2.0f, RED);
-                frenziedDrawn = true; // فقط یک بار بکشه
+                frenziedDrawn = true;
+            }
+
+            // کلیک روی هیولا برای نمایش تصویر
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), dest)) {
+                selectedMonsterMat = monster->get_type();  
             }
 
             currentOffsetY -= spacing;
         }
     }
+
+    
+    if (selectedMonsterMat != MonsterType::None) {
+        // پس زمینه سیاه اگه هیچی نبود
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.7f));
+
+        Texture2D* matTex = nullptr;
+        if (selectedMonsterMat == MonsterType::Dracula) 
+            matTex = &draculaMat;
+        else if (selectedMonsterMat == MonsterType::InvisibleMan) 
+            matTex = &invisibleManMat;
+
+        if (matTex) {
+            float matW = 500;
+            float matH = 500 * ((float)matTex->height / matTex->width);
+            float matX = (GetScreenWidth() - matW) / 2;
+            float matY = (GetScreenHeight() - matH) / 2;
+
+            Rectangle matArea = {matX, matY, matW, matH};
+            DrawTexturePro(*matTex, {0, 0, (float)matTex->width, (float)matTex->height}, matArea, {0, 0}, 0, WHITE);
+
+            // دکمه بستن
+            Rectangle closeBtn = { matX + matW - 40, matY + 10, 30, 30 };
+            DrawRectangleRec(closeBtn, MAROON);
+            DrawText("X", closeBtn.x + 7, closeBtn.y + 2, 24, WHITE);
+
+            // بستن با کلیک روی X یا بیرون عکس
+            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mp = GetMousePosition();
+                if (CheckCollisionPointRec(mp, closeBtn) || !CheckCollisionPointRec(mp, matArea)) {
+                    selectedMonsterMat = MonsterType::None;
+                }
+            }
+        }
+    }
 }
+
+
+// void GameRender::draw_monsters() {
+//     const float monsterSize = 50.0f; 
+//     const float spacing = 30.0f;  
+//     const float offsetY = -monsterSize - 5.0f;
+
+//     Texture2D mapTex = game.get_map().get_mapTexture();
+//     float mapScale = std::min(
+//         (float)GetScreenWidth() / mapTex.width,
+//         (float)GetScreenHeight() / mapTex.height
+//     );
+//     float mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
+//     float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
+
+//     std::unordered_map<Location*, std::vector<Monster*>> monstersAtLocation;
+
+//    for (const auto& kv : game.get_monsters()) {
+//     if (!kv.second || !kv.second->get_location()) continue;
+
+//     auto& vec = monstersAtLocation[kv.second->get_location()];
+//     if (std::find(vec.begin(), vec.end(), kv.second) == vec.end()) {
+//         vec.push_back(kv.second);
+//     }
+// }
+
+
+//     Monster* frenzied = game.get_frenzied_monster();
+//     bool frenziedDrawn = false;
+
+//     for (const auto& [loc, monsters] : monstersAtLocation) {
+//         Rectangle baseArea = loc->get_clickable_area();
+//         Vector2 locPos = {
+//             mapDrawX + baseArea.x * mapScale,
+//             mapDrawY + baseArea.y * mapScale
+//         };
+
+//         float currentOffsetY = offsetY;
+
+//         for (Monster* monster : monsters) {
+//             Texture2D tex = monster->getTexture();
+//             Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
+
+//             Rectangle dest = {
+//                 locPos.x,
+//                 locPos.y + currentOffsetY,
+//                 monsterSize,
+//                 monsterSize
+//             };
+
+//             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
+
+//             if (monster == frenzied && !frenziedDrawn) {
+//                 DrawRectangleLinesEx(dest, 2.0f, RED);
+//                 frenziedDrawn = true; // فقط یک بار بکشه
+//             }
+
+//             currentOffsetY -= spacing;
+//         }
+//     }
+// }
 
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
@@ -406,12 +528,12 @@ void GameRender::handle_action(const std::string& action , Hero* h){
             
             
 void GameRender::draw_location_icon() {
-                float mapScale = 1.0f;
-                float mapDrawX = 0.0f;
-                float mapDrawY = 0.0f;
-                
-                Vector2 mousePos = GetMousePosition();
-                Texture2D mapTex = game.get_map().get_mapTexture();
+    float mapScale = 1.0f;
+    float mapDrawX = 0.0f;
+    float mapDrawY = 0.0f;
+
+    Vector2 mousePos = GetMousePosition();
+    Texture2D mapTex = game.get_map().get_mapTexture();
 
     mapScale = std::min(
         (float)GetScreenWidth() / mapTex.width,
@@ -420,7 +542,7 @@ void GameRender::draw_location_icon() {
     mapDrawX = (GetScreenWidth() - mapTex.width * mapScale) / 2.0f;
     mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
 
-    for (const auto& loc : game.get_map().get_locations()) {
+    for ( const auto& loc : game.get_map().get_locations()) {
         Rectangle baseArea = loc->get_clickable_area();
 
         Vector2 screenPos = {
@@ -442,7 +564,7 @@ void GameRender::draw_location_icon() {
 
         // اگر کلیک شد، نمایش پنل اطلاعات
         if (CheckCollisionPointRec(mousePos, transformed) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            selectedLocation = loc.get();
+            selectedLocation = loc.get() ;
         }
     }
 }

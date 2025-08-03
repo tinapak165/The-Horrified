@@ -41,6 +41,9 @@ private:
     Location* selectedLocation = nullptr ; 
     std::vector<ActionButton> actionButtons ;
     Game& game;
+    MonsterType selectedMonsterMat = MonsterType::None;
+    Texture2D draculaMat;
+    Texture2D invisibleManMat;
 };
 
 #endif

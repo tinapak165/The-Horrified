@@ -11,7 +11,7 @@ class Location;
 
 
 
-enum class MonsterType { InvisibleMan, Dracula, Frenzied };
+enum class MonsterType { InvisibleMan, Dracula, Frenzied , None};
 class Monster {
 private:
 

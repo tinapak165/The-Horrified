@@ -1,12 +1,11 @@
 #include "Item.hpp"
 
 Item::Item(std::string name,ItemColor c, int strength , std::string locationName , std::string texturepath)
-    : name(name),color(c),strength(strength) ,locationName(locationName), texturepath(texturepath) {
-    }
+    : name(name),color(c),strength(strength) ,locationName(locationName), texturepath(texturepath) {}
 Item::Item(){}
 
 void Item::loadTexture() {
-        texture = LoadTexture(texturepath.c_str());
+        texture = LoadTexture(this->get_TexturePath().c_str());
     }
 
 void Item::unloadTexture(){
@@ -33,3 +32,4 @@ std::string Item::color_to_string(ItemColor color) {
         default:                return "Unknown";
     }
 }
+std::string Item::get_TexturePath() const { return texturepath; }

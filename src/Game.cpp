@@ -321,17 +321,14 @@ bool Game::both_monsters_defeated() {
             monstersMap[MonsterType::InvisibleMan]->is_defeated();
 }
 
-void Game::distribute_initial_items() {
-    std::cout<<"placing 12 initial items \n";
-   
+void Game::distribute_initial_items() {   
     auto items = pool.draw_random_items(12);
     
-    for (const auto& item : items) {
+    for (auto& item : items) {
+       item.loadTexture() ; 
         Location* loc = map.get_location_by_name(item.getLocationName());
-        Texture2D itemTex = item.getTexture();
         if (loc) {
-            loc->add_item(item );
-            std::cout << "Placed " <<" " << item.getName() <<  " at " << item.getLocationName() << std::endl;
+            loc->add_item(item);
         }
     }
 }
@@ -411,10 +408,10 @@ void Game::return_item(const Item& item) {
 }
 
 void Game::Changing_frenzy_marker() {
-    if (frenziedMonster == dracula.get())
+    // if (frenziedMonster == dracula.get())
         frenziedMonster = invisibleMan.get();
-    else if (frenziedMonster == invisibleMan.get())
-        frenziedMonster = dracula.get();
+    // else if (frenziedMonster == invisibleMan.get())
+    //     frenziedMonster = dracula.get();
 }
 Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
@@ -490,4 +487,5 @@ Game::~Game(){
     if(frenziedMonster)
         delete frenziedMonster ;
      pool.unload_in_use_items() ;
+     
 }

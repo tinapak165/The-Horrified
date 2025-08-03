@@ -10,7 +10,9 @@
 using namespace std;
 
 
-Monster::Monster (const string& name, Location* start_location , MonsterType t,std::string path) : name(name), current_location(start_location) , type (t) , MonsterTex_path(path) {}
+Monster::Monster (const string& name, Location* start_location , MonsterType t,std::string path) : name(name), current_location(start_location) , type (t) , MonsterTex_path(path) {
+    
+}
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }

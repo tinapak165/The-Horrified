@@ -330,7 +330,57 @@ void ChooseCharacterState::render(Menu& menu) {
     }
 }
 
+// ItemBlockState::ItemBlockState(Hero* h) : hero(h) {
+//     panel = { (GetScreenWidth() - 560) / 2.0f, (GetScreenHeight() - 560) / 2.0f, 560, 560 };
+// }
 
+// void ItemBlockState::handleInput(Game& game) {
+//     const auto& items = hero->GetItems();
+
+//     for (size_t i = 0; i < items.size(); ++i) {
+//         Rectangle btn = { panel.x + 20, panel.y + 70 + (float)i * 50, panel.width - 40, 40 };
+//         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), btn)) {
+//             selectedIndex = (int)i;
+//             return;
+//         }
+//     }
+
+//     Rectangle noBtn = { panel.x + 20, panel.y + 70 + (float)items.size() * 50 + 30, panel.width - 40, 40 };
+//     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), noBtn)) {
+//         selectedIndex = -1;
+//         return;
+//     }
+// }
+
+// void ItemBlockState::update(Menu& menu) {
+//     if (isDone()) {
+//         // مقدار انتخابی رو توی Game برگردون
+//         menu.getGame().setItemBlockChoice(selectedIndex);
+//         // برگشت به State قبلی
+//         menu.getGame().popState();
+//     }
+// }
+
+// void ItemBlockState::render(Menu& menu) {
+//     const auto& items = hero->GetItems();
+
+//     // لایه پنجره
+//     DrawRectangleRec(panel, Fade(DARKGRAY, 0.95f));
+//     DrawRectangleLinesEx(panel, 3, BLACK);
+//     DrawText("Dracula is attacking! Use an item to block?", panel.x + 20, panel.y + 20, 22, RED);
+
+//     for (size_t i = 0; i < items.size(); ++i) {
+//         Rectangle btn = { panel.x + 20, panel.y + 70 + (float)i * 50, panel.width - 40, 40 };
+//         DrawRectangleRec(btn, LIGHTGRAY);
+//         DrawText((std::to_string(i+1) + ". " + items[i].getName() + " (" +
+//                   items[i].color_to_string(items[i].getColor()) + ")").c_str(),
+//                   btn.x + 10, btn.y + 10, 20, BLACK);
+//     }
+
+//     Rectangle noBtn = { panel.x + 20, panel.y + 70 + (float)items.size() * 50 + 30, panel.width - 40, 40 };
+//     DrawRectangleRec(noBtn, MAROON);
+//     DrawText("Don't use any item", noBtn.x + 10, noBtn.y + 10, 20, WHITE);
+// }
 
 // MonsterPhaseState::MonsterPhaseState(): State (""){}
 
