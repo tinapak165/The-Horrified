@@ -16,6 +16,8 @@ bool ClickableText::isClicked(Vector2 mousePos, bool click) const {
     return click && CheckCollisionPointRec(mousePos, bounds);
 }
 
+std::string ClickableText::get_text(){ return text;}
+
 Button::Button(const std::string& path, Vector2 position , float scale) : scale(scale) {
     texture = LoadTexture(path.c_str());
 
