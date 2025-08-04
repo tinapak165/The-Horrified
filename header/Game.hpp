@@ -134,6 +134,8 @@ public:
     void log(const std::string& message);
     const std::vector<std::string>& get_logs() const { return logs; }
     void clear_logs();
+    void Game_over_check();
+    void DrawGameOverPopup(const std::string& message);
     
 
 };
