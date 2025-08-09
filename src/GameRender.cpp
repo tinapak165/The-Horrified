@@ -620,7 +620,6 @@ void GameRender::draw_coffins() {
     float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
 
     for (const auto& [locName, destroyed] : coffins) {
-        if (destroyed) continue; // اگه نابود شده، نشون نده
 
         Location* loc = game.get_map().get_location_by_name(locName);
         if (!loc) continue;
