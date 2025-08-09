@@ -29,6 +29,7 @@ class GameMap {
         const Texture2D& get_mapTexture() const ; 
         Location* check_click(Vector2 mousePos); 
         Location* find_next_step(Location* start, Location* goal);
+        static std::string checkString(std::string) ;
         ~GameMap() ; 
 };
 
