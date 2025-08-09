@@ -117,7 +117,6 @@ class OverstockCard : public Perkcard {
     private:
         ItemPool& pool ;
         GameMap& map ;
-        std::vector<Hero*> heroes ; 
         bool done = false ;
         std::vector<std::string> message ;
         float messageTimer = 0.0f;     
@@ -125,7 +124,7 @@ class OverstockCard : public Perkcard {
         bool messageVisible = false;  
 
     public:
-        OverstockCard(std::vector<Hero*> , ItemPool& , GameMap&) ; 
+        OverstockCard(ItemPool& , GameMap&) ; 
         void play(Hero* = nullptr) override ; 
         void draw() override ; 
         bool isDone() const override ;      
@@ -162,7 +161,6 @@ class PerkDeck{
         PerkDeck() ; 
         void addCard(std::unique_ptr<Perkcard> card) ; 
         std::unique_ptr<Perkcard> drawcard();
-
 };
 
 #endif
