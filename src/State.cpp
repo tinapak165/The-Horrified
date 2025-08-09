@@ -218,10 +218,10 @@ void ChooseCharacterState::render(Menu& menu) {
     Vector2 mousePos = GetMousePosition();
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    ClickableText backButton("back to NameInput", {100, 900}, 30, RED);
+    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
     backButton.Draw(mousePos);
     if (backButton.isClicked(mousePos, mouseClicked)) {
-        auto newstate = std::make_unique<NameInputState>() ;
+        auto newstate = std::make_unique<MenuState>() ;
         menu.SetState(std::move(newstate));
         return;
     }
@@ -276,6 +276,14 @@ ContinueState::ContinueState() : State("../Assets/Menu/Background.png"){}
 void ContinueState::render(Menu & menu)
 {
     DrawTexture(get_background(), 0, 0, WHITE);
+
+    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    backButton.Draw(GetMousePosition());
+    if (backButton.isClicked(GetMousePosition(), IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+        auto newstate = std::make_unique<MenuState>() ;
+        menu.SetState(std::move(newstate));
+        return;
+    }
 
     SaveManager save(menu.getGame()) ;
     std::vector<std::string> files = save.getFiles() ;
