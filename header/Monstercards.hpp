@@ -97,7 +97,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 
                 void place_items(ItemPool& pool) ;
                 
-                void frenzied_strike(Game & ,int , Monster* m,
+                void frenzied_strike( Game&, int , Monster* m,
                     MonsterType type,
                     std::vector<DiceFace>& results,
                     bool& terrorAlreadyIncreased,
@@ -117,7 +117,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                     
          //           Texture2D load_texture_for_item(const Item& item);
                     
-                  const std::string& get_last_dice_result() const;
+                 int show_item_block_window(Hero* h) ;
 
 };
 
