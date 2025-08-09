@@ -5,7 +5,7 @@ MoveAction::MoveAction(GameMap &map, Hero *hero): map(map) , hero(hero){}
 bool MoveAction::update(){
     Location* currentLoc = hero->GetCurrentLocation();
 
-    std::string ans ; //ezafe kon
+    std::string ans ; 
 
     if (typing) {
 
@@ -59,7 +59,7 @@ bool MoveAction::update(){
         }
 
         hero->SetRemainingActions(hero->GetRemainingActions() -1) ;
-        return true; // action finished
+        return true;
     }
 
     return false; 
@@ -319,11 +319,12 @@ bool AdvanceAction::update() {
         totalStrength += pendingAbilityItem.getStrength();
         hero->removeItems(pendingAbilityItem);
 
-        if (totalStrength >= 6) { // اگر کافی بود
+        if (totalStrength >= 6) {
             dracula->destroy_coffin_at(hero->GetCurrentLocation()->get_name());
             for (auto& item : selectedItems) {
                 pool.add_item(item);
             }
+            hero->SetRemainingActions(hero->GetRemainingActions() -1); 
             message = "Coffin destroyed successfully!";
             shouldClose = true;
         }
@@ -374,6 +375,7 @@ bool AdvanceAction::update() {
                 for (auto& item : selectedItems) {
                     pool.add_item(item);
                 }
+                hero->SetRemainingActions(hero->GetRemainingActions() -1); 
                 message = "Coffin destroyed successfully!";
                 shouldClose = true;
             }
@@ -408,6 +410,7 @@ bool AdvanceAction::update() {
             if (success) {
                 hero->removeItems(selected);
                 pool.add_item(selected);
+                hero->SetRemainingActions(hero->GetRemainingActions() -1);
                 message = "Evidence placed successfully.";
                 evidencePlaced = true;
                 shouldClose = true;
@@ -557,6 +560,7 @@ bool DefeatAction::update(){
             if(totalStrength >= 9){
                 invisibleMan->set_location(nullptr) ;
                 message = "invisible Man defeated!" ; 
+                hero->SetRemainingActions(hero->GetRemainingActions() -1); ///////////
                 shouldClose = true ;                 
             }else if(availableItems.empty()){
                 message = "Defeat failed! Not enough total strength.";
@@ -570,6 +574,7 @@ bool DefeatAction::update(){
             if(totalStrength >= 6){
                 dracula->set_location(nullptr) ; 
                 message = "dracula defeated!" ; 
+                hero->SetRemainingActions(hero->GetRemainingActions() -1);
                 shouldClose = true ;                 
             }else if(availableItems.empty()){
                 message = "Defeat failed! Not enough total strength.";
