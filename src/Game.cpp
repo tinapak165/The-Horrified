@@ -90,12 +90,6 @@ PlayerInfo Game::getPlayer2() const { return player2 ;}
 void Game::setPlayer1(const std::string& p1 , Hero* h){ player1.name = p1 ; player1.hero = h ;}
 void Game::setPlayer2(const std::string& p2 , Hero* h){ player2.name = p2 ;  player2.hero = h ;}
 
-
-std::string Game::checkString(std::string str){
-    for (char &c : str) 
-        c = tolower(c); 
-    return str;
-}
 void Game::start() {
 
     menu->SetState(std::make_unique<MenuState>());
@@ -111,14 +105,13 @@ void Game::start() {
             if(currentPhase == Phase::HeroPhase){
                 if(!heroTurnInProgress){
                     activeHero = turnManager.get_active_hero();
+                    activeHero->resetMaxActions();
                     std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
                     heroTurnInProgress = true ; 
-             
                 }
                 bool phaseDone = hero_phase(activeHero, &gamerender) ;
 
                 if (phaseDone) {
-
                     heroTurnInProgress = false;
                     turnManager.next_turn();
 
@@ -139,24 +132,27 @@ void Game::start() {
         }
         EndDrawing();
 
-        if (terror_Level >= 6) {
-            std::cout << "Game Over! Terror level reached 6.\n";
-            break;
-        }    
-        if (deck.is_empty() && !both_monsters_defeated()) {
-            std::cout << "Game Over! No more Monster Cards.\n";
-            break;
-        }    
-        if (both_monsters_defeated()) {
-            std::cout << "You win! Both monsters defeated!\n";
-            break;
+        if (terror_Level >= 6 || (deck.is_empty() && !both_monsters_defeated()) || both_monsters_defeated()) {
+        std::string reason;
+        if (terror_Level >= 6) reason = "Terror level reached 6!";
+        else if (deck.is_empty() && !both_monsters_defeated()) reason = "No more Monster Cards!";
+        else reason = "You win!";
+
+        // حلقه‌ی گیم‌اور
+        bool exitRequested = false;
+        while (!WindowShouldClose() && !exitRequested) {
+            BeginDrawing();
+            gamerender.draw();  // نقشه رو همچنان نشون می‌دیم
+            DrawGameOverPopup(reason);
+            EndDrawing();
+
+            if (IsKeyPressed(KEY_ENTER)) exitRequested = true;
         }
-        // if(turnManager.all_heroes_dead()){
-        //     cout << "you lose! all heroes are dead\n" ;
-        //     break; //show a message instead of break
-        // }
-    }
-    CloseWindow() ;
+
+            CloseWindow(); // حالا دیگه پنجره رو ببند
+            return;
+        }
+   }
 }
 void Game::set_currentPhase(Phase newPhase){ currentPhase = newPhase ; }
 
@@ -164,17 +160,14 @@ void Game::set_HeroTurnInProgress(bool val){ heroTurnInProgress = val ; }
 
 bool Game::hero_phase(Hero* hero , GameRender* render) {
 
-    if (hero->GetRemainingActions() > 0) {
-        return false;  
-    }
-
+    if (hero->GetRemainingActions() <= 0) 
+        return true;  
+    
     if(Villager::AnyVillagerInSafePlace()){
         Villager::removeVillager() ;
        cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
     }
-    render->draw() ;
-    hero->resetMaxActions() ;
-    return true ;
+    return false ;
 }
 
 void Game::monster_dice() {
@@ -197,17 +190,19 @@ void Game::monster_dice() {
 }
 
 void Game::initializaDeck(){
+
+    cout << "here in initializing perk cards\n" ;
     
     for(int i = 0 ; i < 3 ; i++){
        perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map)); 
        perkDeck.addCard(std::make_unique<Hurrycard>(turnManager.get_heroes(), map)) ; 
        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
        perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
-       perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
+       perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
        perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
     }
        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ; 
-       perkDeck.addCard(std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map)) ;
+       perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
 
 }
 void Game::getNewCard(Hero* hero){
@@ -233,7 +228,8 @@ void Game::distribute_initial_items() {
 }
 
 void Game::monster_phase() {
-    monster_dice();       
+    this->clear_logs();
+    monster_dice();      
 }
 
 GameMap& Game::get_map() {
@@ -291,10 +287,10 @@ void Game::return_item(const Item& item) {
 }
 
 void Game::Changing_frenzy_marker() {
-    if (frenziedMonster == dracula.get())
+  //  if (frenziedMonster == dracula.get())
         frenziedMonster = invisibleMan.get();
-    else if (frenziedMonster == invisibleMan.get())
-        frenziedMonster = dracula.get();
+  //  else if (frenziedMonster == invisibleMan.get())
+      //  frenziedMonster = dracula.get();
 }
 Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
@@ -350,12 +346,12 @@ Hero* Game::create_hero_by_name(const std::string& name) {
     return nullptr;
 }
 
-std::unique_ptr<Perkcard> Game::create_perk_by_name(const std::string& name) {
+std::unique_ptr<Perkcard> Game::find_perk_by_name(const std::string& name) {
     if (name == "Repel") return std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map);
     if (name == "Hurry") return std::make_unique<Hurrycard>(turnManager.get_heroes(), map);
     if (name == "Late into the Night") return std::make_unique<LateintotheNightCARD>();
     if (name == "Break of Dawn") return std::make_unique<BreakofDawnCARD>(pool , map);
-    if (name == "Overstock") return std::make_unique<OverstockCard>( turnManager.get_heroes(), pool , map);
+    if (name == "Overstock") return std::make_unique<OverstockCard>( pool , map);
     if (name == "Visit from the Detective") return std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map);
 
     std::cerr << "Unknown perk card: " << name << '\n';
@@ -370,7 +366,6 @@ Villager* Game::create_villager(const string & name, Location * current_loc){
 
 Menu *Game::get_menu(){ return menu.get(); }
 
-
 void Game::log(const std::string& message) {
     logs.push_back(message);
     if (logs.size() > 50) // حداکثر ۵۰ خط
@@ -381,6 +376,25 @@ void Game::clear_logs() {
     logs.clear();
 }
 const std::vector<std::string>& Game::get_logs() const { return logs; }
+
+void Game::DrawGameOverPopup(const std::string& message) {
+    int screenW = GetScreenWidth();
+    int screenH = GetScreenHeight();
+
+    // فقط یه باکس بدون تاریک کردن زمینه
+    int boxWidth = 400;
+    int boxHeight = 200;
+    int boxX = (screenW - boxWidth) / 2;
+    int boxY = (screenH - boxHeight) / 2;
+
+    DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
+   DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 4.0f, WHITE);
+
+
+    DrawText("Game Over!", boxX + 100, boxY + 30, 30, RED);
+    DrawText(message.c_str(), boxX + 40, boxY + 80, 20, RAYWHITE);
+    DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
+}
 
 Game::~Game(){
     if(frenziedMonster)
