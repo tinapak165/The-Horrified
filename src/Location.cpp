@@ -46,7 +46,7 @@ std::vector<Item>& Location::get_items()  {
 
 Location* Location::findNeighbor(const std::string& name) const{
     for(auto *n : get_neighbors()){
-        if(n->get_name() == name)
+        if(n->get_name() == GameMap::checkString(name))
             return n ; 
     }
     return nullptr ; 
@@ -116,29 +116,45 @@ std::ostream& operator<< (std::ostream & os , const Location & loc) {
 }
 
 void Location::draw_info_panel() {
-    // بکگراند پنل
+
     DrawRectangle(600, 50, 350, 900, Fade(DARKGRAY, 0.8f));
 
-    // عنوان لوکیشن
     DrawText(name.c_str(), 620, 70, 30, WHITE);
 
-    // بخش آیتم‌ها
     DrawText("Items:", 620, 120, 25, YELLOW);
     
     float itemStartY = 150;
-    float itemSpacing = 180; // فاصله بین هر آیتم (با توجه به اندازه تصویر 150 پیکسلی)
+    float itemSpacing = 180; 
+
+    std::vector<Item> uniqueItems ; 
+    std::vector<int> counts ; 
     
-    for (int i = 0; i < items.size(); i++) {
-        float y = itemStartY + i * itemSpacing;
-        
-        // نمایش نام آیتم
-        DrawText(items[i].getName().c_str(), 620, y, 20, WHITE);
-        
-        // نمایش تصویر آیتم (150 پیکسل)
-        float textureScale = 150.0f / items[i].getTexture().width;
-        DrawTextureEx(items[i].getTexture(), {620, y + 30}, 0.0f, textureScale, WHITE);
+    for (const auto& item : items){
+        bool found = false ; 
+        for(int i = 0 ; i < uniqueItems.size() ; i++){
+            if(uniqueItems[i].getName() == item.getName()){
+                counts[i]++ ;
+                found = true ;
+                break ; 
+            }
+        }
+        if(!found){
+            uniqueItems.push_back(item) ;
+            counts.push_back(1) ;
+        }
     }
-   
+    for (int i = 0; i < uniqueItems.size(); ++i) {
+        float y = itemStartY + i * itemSpacing;
+
+        std::string displayName = uniqueItems[i].getName();
+        if (counts[i] > 1)
+            displayName += " x" + std::to_string(counts[i]);
+
+        DrawText(displayName.c_str(), 620, y, 20, WHITE);
+
+        float textureScale = 150.0f / uniqueItems[i].getTexture().width;
+        DrawTextureEx(uniqueItems[i].getTexture(), {620, y + 30}, 0.0f, textureScale, WHITE);
+    }
 }
 Location::~Location(){
     UnloadTexture(iconTexture);
