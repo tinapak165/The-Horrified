@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <memory>
 #include <raylib.h>
+#include <sstream>
+
 #include "GameMap.hpp"
 #include "Perkcards.hpp"
 #include "Monstercards.hpp"
@@ -33,11 +35,18 @@ enum class Phase{
 
 };
 // for log
-#define GAME_LOG(game, msg) \
+#define GAME_LOG_OBJ(game, msg) \
     do { \
         std::cout << msg << std::endl; \
-        game.log(msg); \
+        (game).log(msg); \
     } while(0)
+
+#define GAME_LOG_PTR(game, msg) \
+    do { \
+        std::cout << msg << std::endl; \
+        (game)->log(msg); \
+    } while(0)
+
 /// 
 class Game {
     friend class Monstercard;
@@ -78,7 +87,7 @@ private:
     Hero* activeHero ; 
     
     std::vector<std::string> logs;
-    int logScroll = 0; 
+ 
     
 public:
     Game();
@@ -94,6 +103,7 @@ public:
     Dracula* get_dracula() ; 
     InvisibleMan* get_invisibleMan() ; 
     ItemPool& get_pool() ;
+    static int get_terror_level();
 
      void set_skipMonsterPhase(bool) ;
     bool ShouldSkipMonsterPhase() const ; 
@@ -108,7 +118,7 @@ public:
     void getNewCard(Hero*) ;
     
     
-    void monster_objectes() const;
+    void monster_objectes() ;
     void return_item(const Item& item);
 
     std::string checkString(std::string) ; 

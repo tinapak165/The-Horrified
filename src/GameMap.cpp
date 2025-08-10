@@ -14,9 +14,9 @@ void GameMap::build_map() {
     add_location("Barn", {1179 - 200, 333, 150, 30}, "../Assets/Icons/BarnIcon.png");//DONE
     add_location("Dungeon", {1455 - 200, 338, 150, 30}, "../Assets/Icons/DungeonIcon.png");//DONE
     add_location("Tower", {1322 - 200, 629, 150, 30}, "../Assets/Icons/TowerIcon.png");//DONE
-    add_location("Theatre", {990 - 200, 655, 150, 30}, "../Assets/Icons/TheatreIcon.png");//DONE
-    add_location("Mansion", {300 - 200, 700, 150, 30}, "../Assets/Icons/MansionIcon.png");
-    add_location("Abbey", {50 - 200, 700, 150, 30}, "../Assets/Icons/AbbeyIcon.png");
+    add_location("Theatre", {990 - 195, 655, 150, 30}, "../Assets/Icons/TheatreIcon.png");//DONE
+    add_location("Mansion", {300 - 100, 700+210, 150, 30}, "../Assets/Icons/MansionIcon.png");
+    add_location("Abbey", {50 - 150, 700 + 320, 150, 30}, "../Assets/Icons/AbbeyIcon.png");
     add_location("Crypt", {52 -200, 1303, 150, 30}, "../Assets/Icons/CryptIcon.png");//DONE
     add_location("Museum", {302-200, 1299, 150, 30}, "../Assets/Icons/MuseumIcon.png");//DONE
     add_location("Hospital", {555-200, 1539, 150, 30}, "../Assets/Icons/HospitalIcon.png");//DONE
@@ -67,6 +67,7 @@ void GameMap::build_map() {
     laboratory->connect(institute );
     church->connect(graveyard );
     church->connect(hospital );
+    church->connect(shop);
     tower->connect(dungeon ) ; 
     camp->connect(mansion ) ; 
     camp->connect(precinct ) ;   
@@ -91,27 +92,6 @@ Location* GameMap::get_location_by_name(const std::string& name) {
 }
 
 
-
-// void GameMap::draw_map() {
-   
-//     if (mapTexture.id == 0) {
-//         std::cerr << "[ERROR] map.png not loaded properly!\n";
-//         return;
-//     }
-
-//     // محاسبه scale مناسب برای حفظ نسبت تصویر و وسط‌چین کردن
-//      scale = std::min(
-//         (float)GetScreenWidth() / mapTexture.width,
-//         (float)GetScreenHeight() / mapTexture.height
-//     );
-
-//     // محاسبه موقعیت برای رسم وسط‌چین
-//      drawX = (GetScreenWidth() - mapTexture.width * scale) / 2.0f;
-//      drawY = (GetScreenHeight() - mapTexture.height * scale) / 2.0f;
-
-//     // رسم نقشه با scale
-//     DrawTextureEx(mapTexture, {drawX, drawY}, 0.0f, scale, WHITE);
-// }
 
 void GameMap::draw_map() {
    

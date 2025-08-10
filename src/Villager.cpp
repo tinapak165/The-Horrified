@@ -118,6 +118,41 @@ Texture2D Villager::getTexture(){ return VillagerTex;}
 
  std::string Villager::getTexturePath(){return  VillagerTex_path;}
 
+Villager* Villager::find_villager_by_name(const std::string name){
+    for(auto vi : all()){
+        cout << "vi.name: " << vi->get_name() << "!!\n" ;
+        if(vi->get_name() == name)
+            return vi; 
+    }
+    return nullptr ; 
+}
+void Villager::DisplayInfo() {
+    DrawRectangle(600, 50, 350, 900, Fade(DARKGRAY, 0.8f));
+    DrawText("Villagers:", 620, 70, 25, WHITE);
+
+    float startY = 150;
+    float imageSize = 100.0f; 
+    float spacing = imageSize + 40.0f;
+    int fontSize = 20;
+
+    for (size_t i = 0; i < vil.size(); ++i) {
+        Villager* v = vil[i];
+        float y = startY + i * spacing;
+
+        Texture2D tex = v->getTexture();
+        Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
+        Rectangle dest = {620.0f, y, imageSize, imageSize};
+        Vector2 origin = {0, 0};
+        DrawTexturePro(tex, src, dest, origin, 0.0f, WHITE);
+
+        float textX = dest.x + imageSize + 10;
+        DrawText(v->get_name().c_str(), textX, y + 5, fontSize + 2, YELLOW);
+
+        std::string s = "Safe place: " + v->get_safeplace()->get_name();
+        DrawText(s.c_str(), textX, y + 30, fontSize, WHITE);
+    }
+}
+
 void Villager::loadTexture(){
     VillagerTex = LoadTexture(VillagerTex_path.c_str());
 }

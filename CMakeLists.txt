@@ -88,7 +88,7 @@ set(SOURCES
     src/Button.cpp
     src/GameRender.cpp
     src/Action.cpp
-    src/HeroPhaseState.cpp
+
 )
 
 add_executable(Horrified ${SOURCES})

@@ -113,6 +113,20 @@ class SetupState : public State {
 };
 
 
+// GameOverState.hpp
+#pragma once
+#include "State.hpp"
+#include <string>
+
+class GameOverState : public State {
+    std::string message;
+public:
+    GameOverState(const std::string& msg);
+
+    void render(Menu &) override ;
+
+    void update(Menu&) override;
+};
 
 
 // class MonsterPhaseState : public State {

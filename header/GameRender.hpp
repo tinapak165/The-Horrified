@@ -30,6 +30,7 @@ public:
     std::vector<ActionButton>get_actionButtons();
     void draw_available_Perkcards();
     void draw_played_Perkcards();
+    void renderTerrorLevel(int terrorLevel);
    
 
     ~GameRender() ; 
@@ -47,7 +48,8 @@ private:
     Texture2D draculaMat;
     Texture2D invisibleManMat;
     Texture2D coffinTex;
-     Texture2D smashedCoffinTex; 
+    Texture2D smashedCoffinTex; 
+    static const Vector2 terrorLevelPositions[8] ;
 };
 
 #endif

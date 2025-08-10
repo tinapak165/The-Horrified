@@ -112,7 +112,7 @@ EgyptianExpert ::EgyptianExpert (ItemPool& p,
                     GameMap& g ,
                     TurnManager& t,
                     std::unordered_map<MonsterType, Monster*>& m, std::string path) : Monstercard ("Hurried Assistant", 3, "Place Fritz at Tower.",
-                        { {{MonsterType::Dracula }, 2, 3} }, "Fritz", "Tower", g , "../Assets/Monster_Cards/HurriedAssistant.png"),
+                        { {{MonsterType::Dracula }, 1, 2} }, "Fritz", "Tower", g , "../Assets/Monster_Cards/HurriedAssistant.png"),
                         map(g), turnManager(t), monstersMap(m) ,pool(p){}
                         
  TheIchthyologist::TheIchthyologist(ItemPool& p,
@@ -166,7 +166,7 @@ void FormTheBat::play_monster_card(Game& game ,Monster* frenziedMonster  ,std::v
         }
         
         dracula->set_location(hero->GetCurrentLocation());
-        GAME_LOG(game , "Dracula moved to Heros location : + turnManager.get_active_hero()->GetCurrentLocation()->get_name() + \n" );
+        GAME_LOG_OBJ(game , "Dracula moved to Heros location : + turnManager.get_active_hero()->GetCurrentLocation()->get_name() + \n" );
         
         
         play_strike(game ,map, turnManager, pool, monstersMap, frenziedMonster );
@@ -261,14 +261,14 @@ void FormerEmoloyer::play_monster_card(Game& game ,Monster* frenziedMonster , st
 void TheDelivary::play_monster_card(Game& game,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
     place_or_move_villager(all_villagers);                  
     
-    play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
     place_items(pool);
-
+    play_strike(game ,map, turnManager, pool, monstersMap , frenziedMonster);
+    
     
 }      
 
 void TheIchthyologist::play_monster_card( Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
-    place_or_move_villager(all_villagers);                  
+        place_or_move_villager(all_villagers);                  
                     
         play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
         place_items(pool);
@@ -277,72 +277,128 @@ void TheIchthyologist::play_monster_card( Game& game, Monster* frenziedMonster ,
 }  
   
 void OnTheMove::move_all_villagers_toward_safety() {
-    const std::vector<std::unique_ptr<Location>>& allLocations = map.get_locations();
+    const auto& allLocations = map.get_locations();
 
+    std::vector<Villager*> villagersToMove;
     for (const auto& locPtr : allLocations) {
-        Location* loc = locPtr.get();  // استخراج خام از unique_ptr
-    
-        const std::vector<Villager*>& villagers = loc->get_villagers();
-    
-        for (Villager* v : villagers) {
+        for (Villager* v : locPtr->get_villagers()) {
             Location* current = v->get_currentLocation();
             Location* safe = v->get_safeplace();
-    
-            if (current == safe) continue;
-    
-            Location* nextStep = map.find_next_step(current, safe);  
-            if (nextStep) {
-                v->set_currentLocation(nextStep);
-                std::cout << v->get_name() << " moved toward safety at " << safe->get_name() << "\n";
+
+            if (current != safe) {
+                villagersToMove.push_back(v);
             }
         }
     }
-    
+
+ 
+    for (Villager* v : villagersToMove) {
+        Location* nextStep = map.find_next_step(v->get_currentLocation(), v->get_safeplace());
+        if (nextStep && nextStep != v->get_currentLocation()) {
+            v->MoveTo(nextStep, v->get_name());
+        }
+    }
 }
+
 
 void OnTheMove::play_monster_card( Game& game, Monster* frenziedMonster , std::vector<Villager*>& all_villagers) {
        game.Changing_frenzy_marker();
+       move_all_villagers_toward_safety();
        play_strike(game, map, turnManager, pool, monstersMap , frenziedMonster);
        place_items(pool);
+       
 } 
+// int Monstercard::show_item_block_window(Hero* h) {
+//     const auto& items = h->GetItems();
+//     int selectedIndex = -2; // -2 یعنی هنوز انتخاب نشده
+//     int screenWidth = 800, screenHeight = 600;
+
+//     while (selectedIndex == -2 && !WindowShouldClose()) {
+//         BeginDrawing();
+//         ClearBackground(RAYWHITE);
+
+//         DrawText("Dracula is attacking! Use an item to block?", 100, 50, 24, RED);
+
+//         for (size_t i = 0; i < items.size(); ++i) {
+//             Rectangle btn = {100.0f, 120.0f + (float)i * 60, 600.0f, 50.0f};
+//             DrawRectangleRec(btn, LIGHTGRAY);
+//             DrawText((std::to_string(i+1) + ". " + items[i].getName() + " (" + 
+//                       items[i].color_to_string(items[i].getColor()) + ")").c_str(), 
+//                       110, 130 + (int)i*60, 20, BLACK);
+
+//             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), btn)) {
+//                 selectedIndex = (int)i; // انتخاب آیتم
+//             }
+//         }
+
+        
+//         Rectangle noBtn = {100.0f, 120.0f + (float)items.size() * 60 + 20, 600.0f, 50.0f};
+//         DrawRectangleRec(noBtn, MAROON);
+//         DrawText("Don't use any item", 110, 130 + (int)items.size() * 60 + 20, 20, WHITE);
+
+//         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), noBtn)) {
+//             selectedIndex = -1; // یعنی آیتمی استفاده نشه
+//         }
+
+//         EndDrawing();
+//     }
+
+//     return selectedIndex; // -1 یعنی استفاده نکرده، 0..N-1 یعنی انتخاب آیتم
+// }
+
 int Monstercard::show_item_block_window(Hero* h) {
     const auto& items = h->GetItems();
     int selectedIndex = -2; // -2 یعنی هنوز انتخاب نشده
-    int screenWidth = 800, screenHeight = 600;
+
+    // اندازه و موقعیت پنجره وسط صفحه
+    int screenW = GetScreenWidth();
+    int screenH = GetScreenHeight();
+    int boxWidth = 500;
+    int boxHeight = 100 + (int)items.size() * 60 + 80;
+    int boxX = (screenW - boxWidth) / 2;
+    int boxY = (screenH - boxHeight) / 2;
 
     while (selectedIndex == -2 && !WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        // پس‌زمینه رو نمی‌پوشونیم، فقط پنجره رو روی بازی می‌کشیم
 
-        DrawText("Dracula is attacking! Use an item to block?", 100, 50, 24, RED);
+        // کشیدن کادر پنجره
+        DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
+        DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 3.0f, WHITE);
 
+        // عنوان
+        DrawText("Dracula is attacking!", boxX + 40, boxY + 20, 24, RED);
+        DrawText("Use an item to block?", boxX + 40, boxY + 50, 20, RAYWHITE);
+
+        // دکمه‌های آیتم‌ها
         for (size_t i = 0; i < items.size(); ++i) {
-            Rectangle btn = {100.0f, 120.0f + (float)i * 60, 600.0f, 50.0f};
+            Rectangle btn = {(float)boxX + 20, (float)boxY + 90 + (float)i * 60, (float)boxWidth - 40, 50};
             DrawRectangleRec(btn, LIGHTGRAY);
-            DrawText((std::to_string(i+1) + ". " + items[i].getName() + " (" + 
-                      items[i].color_to_string(items[i].getColor()) + ")").c_str(), 
-                      110, 130 + (int)i*60, 20, BLACK);
+            DrawText(
+                (std::to_string(i+1) + ". " + items[i].getName() + 
+                 " (" + items[i].color_to_string(items[i].getColor()) + ")").c_str(),
+                boxX + 30, boxY + 100 + (int)i * 60, 20, BLACK
+            );
 
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), btn)) {
-                selectedIndex = (int)i; // انتخاب آیتم
+                selectedIndex = (int)i;
             }
         }
 
-        // دکمه "عدم استفاده"
-        Rectangle noBtn = {100.0f, 120.0f + (float)items.size() * 60 + 20, 600.0f, 50.0f};
+        // دکمه عدم استفاده از آیتم
+        Rectangle noBtn = {(float)boxX + 20, (float)boxY + 90 + (float)items.size() * 60 + 20, (float)boxWidth - 40, 50};
         DrawRectangleRec(noBtn, MAROON);
-        DrawText("Don't use any item", 110, 130 + (int)items.size() * 60 + 20, 20, WHITE);
+        DrawText("Don't use any item", boxX + 30, boxY + 100 + (int)items.size() * 60 + 20, 20, WHITE);
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), noBtn)) {
-            selectedIndex = -1; // یعنی آیتمی استفاده نشه
+            selectedIndex = -1;
         }
 
         EndDrawing();
     }
 
-    return selectedIndex; // -1 یعنی استفاده نکرده، 0..N-1 یعنی انتخاب آیتم
+    return selectedIndex;
 }
-
 
 void Monstercard::play_strike(Game& game,
                                GameMap& map,
@@ -361,9 +417,9 @@ void Monstercard::play_strike(Game& game,
         last_dice_result.clear();
         for (auto face : results) {
             switch (face) {
-                case DiceFace::Attack : GAME_LOG(game , "[*Attack*] ");
-                case DiceFace::empty : GAME_LOG(game , "[!POWER!] ");
-                case DiceFace::Power: GAME_LOG( game , "[Empty] ");
+                case DiceFace::Attack :
+                case DiceFace::empty : 
+                case DiceFace::Power:
                
             }
         }
@@ -372,62 +428,69 @@ void Monstercard::play_strike(Game& game,
         for (MonsterType type : monster_list) {
             if (type == MonsterType::Frenzied) {
                 hasFrenzied = true;
-                continue; // از اجرای معمولی رد شو
+                continue; // از اجرای معمولی رد میشه
             }
             Monster* m = monstersMap[type];
             if ( !m || !m->is_alive()) {
-                GAME_LOG(game , "Monster is dead . \n");
+                GAME_LOG_OBJ(game , "Monster is dead . \n");
                 continue;
             }
 
-            GAME_LOG(game ,  + "---MONSTER MOVE FROM STRIKE---\n");
+            GAME_LOG_OBJ(game , "---MONSTER MOVES FROM STRIKE---\n");
 
             for (int i = 0; i < moves; ++i) {
                 Location* target = nullptr;
 
                 if (type == MonsterType::Dracula) {
                     target = m->find_nearest_target(m->get_location());
-                    
+                    GAME_LOG_OBJ(game , m->get_name() + "s target location : "  + target->get_name() );
+
                 } else if (type == MonsterType::InvisibleMan) {
                     target = m->find_nearest_villager(m->get_location());
                     if (target) {
                         Location* nextStep = m->find_next_step(target);
                         if (nextStep) {
                             m->set_location(nextStep);
-                            GAME_LOG (game ,  m->get_name() + " moved towards villager at " + target->get_name() + "\n");
+                            GAME_LOG_OBJ(game ,  m->get_name() + "s target(villager) location " + target->get_name() + "\n");
                         }
                     }
                 }
 
                 if (target) {
                     m->move_towards(1);
-                    GAME_LOG(game , m->get_name() + " moved towards target . \n");
+                 
                 } else {
-                    GAME_LOG( game , m->get_name() + " found no target to move toward.\n");
-                    break;
+                   
                 }
             }
 
             Location* currentLoc = m->get_location();
             bool invisiblePowerTriggered = false;
 
+            GAME_LOG_OBJ(game , " Dice Result :");
             for (DiceFace face : results) {
-               GAME_LOG(game , " Dice Result :");
                 switch (face) {
-                    case DiceFace::Power:
-                        GAME_LOG( game , "Power\n");
-                        if (type == MonsterType::InvisibleMan)
-                            invisiblePowerTriggered = true;
+                     case DiceFace::Power:
+                        GAME_LOG_OBJ( game , "[!POWER!]\n");
+                        if (type == MonsterType::InvisibleMan) invisiblePowerTriggered = true;
+                        else if (type == MonsterType::Dracula) {
+                            m->special_power(turnManager.get_active_hero());   
+                            GAME_LOG_OBJ(game , "Dracula uses Dark charm ! \n");
+                            GAME_LOG_OBJ(game , "Pulling " + turnManager.get_active_hero()->GetName() + " to " + m->get_location()->get_name() + '\n');
+
+
+                        }
+
                         break;
 
                     case DiceFace::Attack:
-                    GAME_LOG( game , "Attack\n");
+                     GAME_LOG_OBJ( game , "[*ATTACK*]\n");
 
                         if (type == MonsterType::Dracula) {
                             auto target = m->attack(); // (hero, villager)
                             if (target.first && !target.second) {
                                 Hero* h = target.first;
-                                GAME_LOG(game, "Dracula attacks " + h->GetName() + "!");
+                                GAME_LOG_OBJ(game, "Dracula attacks " + h->GetName() + "!");
 
                                 if (h->has_items()) {
                                  int chosenIndex = show_item_block_window(h); // گرافیکی از کاربر می‌پرسیم
@@ -436,9 +499,9 @@ void Monstercard::play_strike(Game& game,
                                     const auto& items = h->GetItems();
                                     h->remove_item_by_index(chosenIndex);
                                     pool.add_item(items[chosenIndex]);
-                                    std::cout << "Item used to block the attack!\n";
+                                    std::cout << "Item used to block the attack! " + '\n';
                                 } else { 
-                                    std::cout << "No item used. Dracula's attack succeeds.\n";
+                                    std::cout << "No item used. Dracula's attack succeeds." + '\n';
                                     send_hero_to_hospital(h,map);
                                     if (!terrorAlreadyIncreased) {
                                         Game::increase_terror_level();
@@ -457,7 +520,7 @@ void Monstercard::play_strike(Game& game,
 
                             } else if (target.second) {
                                 Villager* v = target.second;
-                               GAME_LOG(game, "Dracula attacks " + v->get_name() + "!");
+                               GAME_LOG_OBJ(game, "Dracula attacks " + v->get_name() + "!");
                                 remove_villager(v);
                                 if (!terrorAlreadyIncreased) {
                                     Game::increase_terror_level();
@@ -467,7 +530,7 @@ void Monstercard::play_strike(Game& game,
                         } else if (type == MonsterType::InvisibleMan) {
                             auto kv = m->attack(); // (nullptr, villager)
                             if (kv.second) {
-                                GAME_LOG(game , "Invisible Man kills " + kv.second->get_name() + "!\n");
+                                GAME_LOG_OBJ(game , "Invisible Man kills " + kv.second->get_name() + '\n');
                                 remove_villager(kv.second);
                                 Game::increase_terror_level();
                             }
@@ -476,7 +539,7 @@ void Monstercard::play_strike(Game& game,
                         break;
 
                     case DiceFace::empty:
-                       GAME_LOG(game ,  "Empty\n");
+                      GAME_LOG_OBJ (game ,  "[Empty]\n");
                         break;
                 }
             }
@@ -487,10 +550,10 @@ void Monstercard::play_strike(Game& game,
                     Location* nextStep = m->find_next_step(target);
                     if (nextStep) {
                         m->set_location(nextStep);
-                        GAME_LOG( game , m->get_name() + " moved toward villager at " + target->get_name() + "\n");
+                        GAME_LOG_OBJ( game , "Power Dice : makes invisible man \n move to :" + target->get_name() + "\n");
                     }
                 } else {
-                    GAME_LOG ( game ,"Invisible Man found no villager for dice power.\n");
+                    GAME_LOG_OBJ( game ,"Power Dice : invisible man found no villager.\n");
                 }
             }
           
@@ -498,11 +561,11 @@ void Monstercard::play_strike(Game& game,
             
             
         }
-       
-    if (hasFrenzied && frenziedMonster && frenziedMonster->is_alive()) {
-          
-             frenzied_strike( game,moves, frenziedMonster, frenziedMonster->get_type(), results, terrorAlreadyIncreased, map, turnManager, pool);
-            }
+        
+        if (hasFrenzied && frenziedMonster && frenziedMonster->is_alive()) {
+              
+                 frenzied_strike( game,moves, frenziedMonster, frenziedMonster->get_type(), results, terrorAlreadyIncreased, map, turnManager, pool);
+                }
 
         
     }
@@ -686,116 +749,108 @@ void Monstercard::frenzied_strike(Game& game ,int moves, Monster* m,
     ItemPool& pool) {
     
            
-            GAME_LOG( game , "[Frenzied Monster is :" + m->get_name() + " ]" );
+            GAME_LOG_OBJ( game , "[Frenzied Monster is :" + m->get_name() + " ]" );
             for (int i = 0; i < moves; ++i) {
                 Location* target = nullptr;
 
                 if (type == MonsterType::Dracula) {
                     target = m->find_nearest_target(m->get_location());
+                      GAME_LOG_OBJ(game ,m->get_name() + "followed targets as Frenzied  \n to " + target->get_name() + "\n");
                 } else if (type == MonsterType::InvisibleMan) {
                     target = m->find_nearest_villager(m->get_location());
                     if (target) {
                         Location* nextStep = m->find_next_step(target);
                         if (nextStep) {
                             m->set_location(nextStep);
-                             GAME_LOG(game ,m->get_name() + " moved towards villager at " + target->get_name() + "\n");
+                            GAME_LOG_OBJ(game ,m->get_name() + "followed villagers again as Frenzied to " + target->get_name() + "\n");
                         }
                     }
                 }
 
                 if (target) {
                     m->move_towards(1);
+                     GAME_LOG_OBJ(game ,m->get_name() + "s location : " + m->get_location()->get_name() + "\n");
+           
+                  
                 } else {
-                    GAME_LOG(game , m->get_name() + " found no target to move toward.\n");
+                     GAME_LOG_OBJ(game , m->get_name() + " found no target to move toward.\n");
                     break;
                 }
             }
     bool invisiblePowerTriggered = false;
+    GAME_LOG_OBJ(game , "results of Dice for Frenzied Monster : ");
     for (DiceFace face : results) {
-        GAME_LOG(game , "Dice result for Frenzied Monster : ");
         switch (face) {
             case DiceFace::Power:
         
                 if (type == MonsterType::InvisibleMan) {
                     invisiblePowerTriggered = true;
                 }
-                if (type == MonsterType::Dracula) {
-                    m->special_power(turnManager.get_active_hero());
+                else if (type == MonsterType::Dracula) {
+                            m->special_power(turnManager.get_active_hero());   
+                            GAME_LOG_OBJ(game , "Dracula uses Dark charm !" + '\n');
+                            GAME_LOG_OBJ(game , "Pulling " + turnManager.get_active_hero()->GetName() + "to" + m->get_location()->get_name() + '\n');
+
+
                 }
                 break;
             case DiceFace::Attack:
-               
-                if (type == MonsterType::Dracula) {
-                    auto target = m->attack(); //[heroTarget, villagerTarget]
-                    if (target.first && !target.second) {
-                        std::cout << "Dracula attacks " << target.first->GetName() << "!\n";
-                        if (target.first->has_items()) {
-                            const auto& items = target.first->GetItems();
-                            for (size_t i = 0; i < items.size(); ++i) {
-                                std::cout << i + 1 << ". " << items[i].getName() << " ("
-                                          << items[i].color_to_string(items[i].getColor()) << ")\n";
-                            }
-                            std::cout << "Do you want to use one item to block the attack? (yes/no): ";
-                            std::string choice;
-                            std::cin >> choice;
+                     GAME_LOG_OBJ( game , "[*ATTACK*]\n");
 
-                            if (choice == "yes" || choice == "y") {
-                                std::cout << "Select the item number to use: ";
-                                int itemIndex;
-                                std::cin >> itemIndex;
+                        if (type == MonsterType::Dracula) {
+                            auto target = m->attack(); // (hero, villager)
+                            if (target.first && !target.second) {
+                                Hero* h = target.first;
+                                GAME_LOG_OBJ(game, "Dracula attacks " + h->GetName() + "!");
 
-                                if (itemIndex >= 1 && itemIndex <= (int)items.size()) {
-                                    target.first->remove_item_by_index(itemIndex - 1);
-                                    pool.add_item(items[itemIndex]);
+                                if (h->has_items()) {
+                                 int chosenIndex = show_item_block_window(h); // گرافیکی از کاربر می‌پرسیم
 
-                                    std::cout << "Item used to block the attack!\n";
-                                } else {
-                                    std::cout << "Invalid selection. Dracula's attack succeeds.\n";
-                                    send_hero_to_hospital(target.first , map);
+                                if (chosenIndex >= 0) { // آیتم انتخاب شده
+                                    const auto& items = h->GetItems();
+                                    h->remove_item_by_index(chosenIndex);
+                                    pool.add_item(items[chosenIndex]);
+                                    std::cout << "Item used to block the attack! " + '\n';
+                                } else { 
+                                    std::cout << "No item used. Dracula's attack succeeds." + '\n';
+                                    send_hero_to_hospital(h,map);
                                     if (!terrorAlreadyIncreased) {
                                         Game::increase_terror_level();
                                         terrorAlreadyIncreased = true;
                                     }
-                                    break;
                                 }
                             } else {
-                                std::cout << "No item used. Dracula's attack succeeds.\n";
-                                send_hero_to_hospital(target.first , map);
+                                std::cout << h->GetName() << " has no items. Dracula's attack succeeds.\n";
+                                send_hero_to_hospital(h,map);
                                 if (!terrorAlreadyIncreased) {
                                     Game::increase_terror_level();
                                     terrorAlreadyIncreased = true;
                                 }
-                                break;
                             }
-                        } else {
-                            std::cout << target.first->GetName() << " has no items. Dracula's attack succeeds.\n";
-                            send_hero_to_hospital(target.first , map);
-                            if (!terrorAlreadyIncreased) {
+
+
+                            } else if (target.second) {
+                                Villager* v = target.second;
+                               GAME_LOG_OBJ(game, "Dracula attacks " + v->get_name() + "!");
+                                remove_villager(v);
+                                if (!terrorAlreadyIncreased) {
+                                    Game::increase_terror_level();
+                                    terrorAlreadyIncreased = true;
+                                }
+                            }
+                        } else if (type == MonsterType::InvisibleMan) {
+                            auto kv = m->attack(); // (nullptr, villager)
+                            if (kv.second) {
+                                GAME_LOG_OBJ(game , "Invisible Man kills " + kv.second->get_name() + '\n');
+                                remove_villager(kv.second);
                                 Game::increase_terror_level();
-                                terrorAlreadyIncreased = true;
                             }
-                            break;
                         }
-                    } else if (target.second) {
-                        std::cout << "Dracula attacks " << target.second->get_name() << "!\n";
-                        target.second->removevillager(target.second)  ;
-                        if (!terrorAlreadyIncreased) {
-                            Game::increase_terror_level();
-                            terrorAlreadyIncreased = true;
-                        }
-                        break;
-                    }
-                } else if (type == MonsterType::InvisibleMan) {
-                    auto kv = m->attack();
-                    if (kv.second) {
-                        std::cout << "Invisible Man kills " << kv.second->get_name() << "!\n";
-                        kv.second->removevillager(kv.second) ;
-                        Game::increase_terror_level();
-                    }
-                }
-                break;
+
+                 break;
+
             case DiceFace::empty:
-                GAME_LOG(game ,  "Empty\n");
+                GAME_LOG_OBJ(game ,  "Empty\n");
                 break;
         }
     }
@@ -806,10 +861,10 @@ void Monstercard::frenzied_strike(Game& game ,int moves, Monster* m,
             Location* nextStep = m->find_next_step(target);
             if (nextStep) {
                 m->set_location(nextStep); 
-                GAME_LOG(game ,  m->get_name() + " moved towards villager at " + target->get_name() + "\n");
+                GAME_LOG_OBJ(game ,  m->get_name() + "Power Dice : makes frenzied invisible man move to :" + target->get_name() + "\n");
             }
          } else {
-            GAME_LOG( game ,  "Invisible Man found no villager for doing his Power in dice .\n");
+            GAME_LOG_OBJ( game ,  "Power Dice : frenzied invisible man found no target . \n");
         }
     }
 }
@@ -817,4 +872,3 @@ void Monstercard::frenzied_strike(Game& game ,int moves, Monster* m,
 
 Texture2D Monstercard::get_texture() const { return texture; }
 
-//   const std::string& Monstercard::get_last_dice_result() const { return last_dice_result; }

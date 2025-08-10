@@ -5,7 +5,7 @@ MoveAction::MoveAction(GameMap &map, Hero *hero): map(map) , hero(hero){}
 bool MoveAction::update(){
     Location* currentLoc = hero->GetCurrentLocation();
 
-    std::string ans ; //ezafe kon
+    std::string ans ; 
 
     if (typing) {
 
@@ -59,7 +59,7 @@ bool MoveAction::update(){
         }
 
         hero->SetRemainingActions(hero->GetRemainingActions() -1) ;
-        return true; // action finished
+        return true;
     }
 
     return false; 
@@ -241,7 +241,7 @@ bool SpecialAction::update() {
 
     return specialFinished ;
 }
-     
+
 void SpecialAction::draw() {
 
     if(!specialFinished)
@@ -319,11 +319,12 @@ bool AdvanceAction::update() {
         totalStrength += pendingAbilityItem.getStrength();
         hero->removeItems(pendingAbilityItem);
 
-        if (totalStrength >= 6) { // اگر کافی بود
+        if (totalStrength >= 6) {
             dracula->destroy_coffin_at(hero->GetCurrentLocation()->get_name());
             for (auto& item : selectedItems) {
                 pool.add_item(item);
             }
+            hero->SetRemainingActions(hero->GetRemainingActions() -1); 
             message = "Coffin destroyed successfully!";
             shouldClose = true;
         }
@@ -374,6 +375,7 @@ bool AdvanceAction::update() {
                 for (auto& item : selectedItems) {
                     pool.add_item(item);
                 }
+                hero->SetRemainingActions(hero->GetRemainingActions() -1); 
                 message = "Coffin destroyed successfully!";
                 shouldClose = true;
             }
@@ -408,6 +410,7 @@ bool AdvanceAction::update() {
             if (success) {
                 hero->removeItems(selected);
                 pool.add_item(selected);
+                hero->SetRemainingActions(hero->GetRemainingActions() -1);
                 message = "Evidence placed successfully.";
                 evidencePlaced = true;
                 shouldClose = true;
@@ -557,6 +560,7 @@ bool DefeatAction::update(){
             if(totalStrength >= 9){
                 invisibleMan->set_location(nullptr) ;
                 message = "invisible Man defeated!" ; 
+                hero->SetRemainingActions(hero->GetRemainingActions() -1); ///////////
                 shouldClose = true ;                 
             }else if(availableItems.empty()){
                 message = "Defeat failed! Not enough total strength.";
@@ -570,6 +574,7 @@ bool DefeatAction::update(){
             if(totalStrength >= 6){
                 dracula->set_location(nullptr) ; 
                 message = "dracula defeated!" ; 
+                hero->SetRemainingActions(hero->GetRemainingActions() -1);
                 shouldClose = true ;                 
             }else if(availableItems.empty()){
                 message = "Defeat failed! Not enough total strength.";
@@ -625,4 +630,88 @@ void DefeatAction::draw() {
             y += lineHeight;
         }
     }
+}
+
+GuideAction::GuideAction(GameMap & map, Hero * hero): map(map) , hero(hero){}
+
+bool GuideAction::update() {
+    if (typing) {
+        int key = GetCharPressed();
+        while (key > 0) {
+            if (key >= 32 && key <= 125)
+                input += (char)key;
+            key = GetCharPressed();
+        }  
+
+        if (IsKeyPressed(KEY_BACKSPACE) && !input.empty())
+            input.pop_back();
+
+        if (IsKeyPressed(KEY_ENTER)) {
+            if (!step2) {
+                if (input == "current" || input == "neighbor") {
+                    mode = input;
+                    typing = true;
+                    step2 = true;
+                    message = (mode == "current") ? "Enter villager name to move:" : "Choose a villager from neighbors:";
+                    input = "";
+                } else {
+                    message = "Invalid mode. Try again: current / neighbor";
+                    input = "";
+                }
+            } else if (step2 && !step3) {
+                chosenVillager = input;
+                if (mode == "current") {
+                    for (auto* v : hero->villagerHere()) {
+                        if (v->get_name() == chosenVillager) {
+                            availablePlaces = hero->GetCurrentLocation()->get_neighbors();
+                            message = "Enter neighbor name to move villager to:";
+                            input = "";
+                            step3 = true;
+                            return false;
+                        }
+                    }
+                    message = "Villager not found at your location.try again.";
+                    input = "";
+                } else if (mode == "neighbor") {
+                    for (auto* neighbor : hero->GetCurrentLocation()->get_neighbors()) {
+                        for (auto* v : Villager::all()) {
+                            if (v->get_name() == chosenVillager && v->get_currentLocation() == neighbor) {
+                                v->MoveTo(hero->GetCurrentLocation(), chosenVillager);
+                                hero->SetRemainingActions(hero->GetRemainingActions() - 1);
+                                return true;
+                            }
+                        }
+                    }
+                    message = "Villager not found in neighbors.try again.";
+                    input = "";
+                }
+            } else if (step3) {
+                chosenPlace = input;
+                if (hero->GetCurrentLocation()->findNeighbor(chosenPlace)) {
+                    Location* target = map.get_location_by_name(chosenPlace);
+                    for (auto* v : hero->villagerHere()) {
+                        if (v->get_name() == chosenVillager) {
+                            v->MoveTo(target, chosenVillager);
+                            hero->SetRemainingActions(hero->GetRemainingActions() - 1);
+                            return true;
+                        }
+                    }
+                } else
+                    message = "Not a valid neighboring location.try again.";
+                
+                input = "";
+            }
+        }
+    }
+
+    return false;
+}
+
+void GuideAction::draw() {
+    DrawRectangle(100, 100, 750, 250, Fade(DARKGRAY, 0.8f));
+    DrawText("[Guide Action]", 120, 105, 24, RAYWHITE);
+    DrawText(message.c_str(), 120, 140, 24, YELLOW);
+    if(typing)
+        DrawText(input.c_str(), 120, 180, 28, SKYBLUE);
+    
 }

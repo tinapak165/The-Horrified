@@ -33,6 +33,8 @@ class Villager{
         void loadTexture();
         Texture2D getTexture();
         std::string getTexturePath();
+        static Villager* find_villager_by_name(const std::string) ;
+        static void DisplayInfo() ;
         ~Villager() ;
 
 };

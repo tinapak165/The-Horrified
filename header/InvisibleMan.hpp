@@ -33,6 +33,7 @@ class InvisibleMan : public Monster {
         
         bool try_place_evidence(Item ); 
         int get_evidence_count() const;
+        std::unordered_set<std::string> get_evidence_locations();
         bool add_evidence(const std::string& location);
 
 

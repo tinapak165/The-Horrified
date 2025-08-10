@@ -11,7 +11,7 @@
 using namespace std;
 
 Game::Game() {
-    InitWindow(1400  , 1000 , "The Horrified");
+    InitWindow(1400 , 1000 , "The Horrified");
 
 
     // SetWorkingDirectory(GetApplicationDirectory());
@@ -194,6 +194,7 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
     render->draw() ;
     hero->resetMaxActions() ;
     return true ;
+   
 }
 
 
@@ -318,6 +319,9 @@ InvisibleMan* Game::get_invisibleMan() {
 ItemPool& Game::get_pool() {
     return pool;
 }
+int Game::get_terror_level(){
+ return terror_Level;
+}
 
 int Game::terror_Level = 0;
 
@@ -333,27 +337,13 @@ void Game::set_skipMonsterPhase(bool value){
 bool Game::ShouldSkipMonsterPhase() const{
     return skipMonsterPhase;
 }
-void Game::monster_objectes() const {
-    if (dracula) {
-        int destroyed = 0;
-        for (const auto& entry : dracula->get_coffins_map()) {
-            if (entry.second) destroyed++;
-        }
-        std::cout << "Coffins destroyed (Dracula): " << destroyed << "/4\n";
-    }
-
-    if (invisibleMan) {
-        int collected = invisibleMan->get_evidence_count();
-        std::cout << "Evidence collected (Invisible Man): " << collected << "/5\n";
-    }
-}
 void Game::return_item(const Item& item) {
     pool.add_item(item);  
 }
 
 void Game::Changing_frenzy_marker() {
     // if (frenziedMonster == dracula.get())
-        frenziedMonster = invisibleMan.get();
+    frenziedMonster = invisibleMan.get();
     // else if (frenziedMonster == invisibleMan.get())
     //     frenziedMonster = dracula.get();
 }
@@ -361,93 +351,111 @@ Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
 }
 
-// void Game::monster_dice() {
-//     try {
-//         auto drawnCard = deck.drawcard();
-//         std::cout<<*drawnCard;
-//         drawnCard->play_monster_card(*this,frenziedMonster , all_villagers);
-//        if (drawnCard->has_frenzied_strike()) {
-//             Changing_frenzy_marker();
-//         }
-//         current_card = std::move(drawnCard); 
-//     } catch (const std::exception& e) {
-//     std::cerr << "Exception occurred: " << e.what() << std::endl;
-//   }
-// }
+
+                
 void Game::monster_dice() {
     try {
-        auto drawnCard = deck.drawcard();
-        current_card = std::move(drawnCard);
-        std::cout << *current_card; 
+             auto drawnCard = deck.drawcard();
+             current_card = std::move(drawnCard);
+             std::cout << *current_card; 
+                        
+             current_card->play_monster_card(*this, frenziedMonster, all_villagers);
+                        
+            if (current_card->has_frenzied_strike()) {
+                Changing_frenzy_marker();
+                 }  
+            WaitTime(2.0f); // زمانی بین فاز قهرمان و فاز هیولا 
+                        
+                        
+            } catch (const std::exception& e) {
+                        std::cerr << "Exception occurred: " << e.what() << std::endl;
+            }
+    }
+                
+                
+                
+ void Game::initializaMDeck(){
+                    for (int i =0 ; i <3 ; i++){       
+                        deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FormOfTheBat.png")) ;     
+                        deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap,  "../Assets/Monster_Cards/Thief.png"));
+                        deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/Sunrise.png")) ;
+                        deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
+                        deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheIchtyologist.png")) ;
+                        deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheDelivery.png")) ;
+                        }
+                        
+                        deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheInnocent.png")) ;
+                        deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
+                        deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
+                        deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
+                        deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ;
+                        
+        }
+                    
+std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
+void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
+                    
+void Game::monster_objectes()  {
+    static int lastDestroyed = -1;
+    static int lastCollected = -1;
+    Location* Dloc = dracula.get()->get_location();
+    Location* Iloc = invisibleMan.get()->get_location();
+    if (dracula) {
+        int destroyed = 0;
+        for (const auto& entry : dracula->get_coffins_map()) {
+            if (entry.second) destroyed++;
+        }
+        if (destroyed != lastDestroyed) { // فقط وقتی تغییر کرد
+           std::cout << "[DEBUG] Reached before GAME_LOG" << std::endl;
+           GAME_LOG_OBJ(*this , "Dracula location : " + Dloc->get_name());
+          GAME_LOG_OBJ(*this, "Coffins destroyed (Dracula): " + std::to_string(destroyed) + "/4");
+           std::cout << "[DEBUG] Passed after GAME_LOG" << std::endl;
+            lastDestroyed = destroyed;
+        }
+    } 
 
-        current_card->play_monster_card(*this, frenziedMonster, all_villagers);
-        
-        if (current_card->has_frenzied_strike()) {
-            Changing_frenzy_marker();
-        }  
-        WaitTime(2.0f);
-       
-
-    } catch (const std::exception& e) {
-        std::cerr << "Exception occurred: " << e.what() << std::endl;
+    if (invisibleMan) {
+        int collected = invisibleMan->get_evidence_count();
+        if (collected != lastCollected) { // فقط وقتی تغییر کرد
+            GAME_LOG_OBJ(*this, "Evidence collected (Invisible Man): " + std::to_string(collected) + "/5");
+            lastCollected = collected;
+        }
     }
 }
 
-
-
-void Game::initializaMDeck(){
-    // for (int i =0 ; i <3 ; i++){       
-    // deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FormOfTheBat.png")) ;     
-    // deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap,  "../Assets/Monster_Cards/Thief.png"));
-    // deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/Sunrise.png")) ;
-    // deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
-    // deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheIchtyologist.png")) ;
-    // deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheDelivery.png")) ;
-    // }
-
-    // deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheInnocent.png")) ;
-    // deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
-    // deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
-    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
-    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ;
-   
-}
-
-std::vector<Villager*>& Game::get_all_villagers() { return all_villagers; }
-void Game::add_villager(Villager* v) { all_villagers.push_back(v); }
-
-void Game::log(const std::string& message) {
-    logs.push_back(message);
-    if (logs.size() > 50) // حداکثر ۵۰ خط
-        logs.erase(logs.begin());
-}
-
-void Game::clear_logs() {
-    logs.clear();
-}
-
-void Game::DrawGameOverPopup(const std::string& message) {
+                    
+                    
+ void Game::DrawGameOverPopup(const std::string& message) {
     int screenW = GetScreenWidth();
-    int screenH = GetScreenHeight();
-
-    // فقط یه باکس بدون تاریک کردن زمینه
+     int screenH = GetScreenHeight();
+                        
+     // فقط یه باکس بدون تاریک کردن زمینه
     int boxWidth = 400;
     int boxHeight = 200;
     int boxX = (screenW - boxWidth) / 2;
-    int boxY = (screenH - boxHeight) / 2;
+     int boxY = (screenH - boxHeight) / 2;
+                        
+     DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
+     DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 4.0f, WHITE);
+                        
+                        
+     DrawText("Game Over!", boxX + 100, boxY + 30, 30, RED);
+     DrawText(message.c_str(), boxX + 40, boxY + 80, 20, RAYWHITE);
+     DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
+}
+                    
+void Game::log(const std::string& message) {
+     logs.push_back(message);
+     if (logs.size() > 50) 
+    logs.erase(logs.begin());
+}
 
-    DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
-   DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 4.0f, WHITE);
-
-
-    DrawText("Game Over!", boxX + 100, boxY + 30, 30, RED);
-    DrawText(message.c_str(), boxX + 40, boxY + 80, 20, RAYWHITE);
-    DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
+void Game::clear_logs() {
+  logs.clear();
 }
 
 Game::~Game(){
-    if(frenziedMonster)
-        delete frenziedMonster ;
-     pool.unload_in_use_items() ;
-     
+  if(frenziedMonster)
+   delete frenziedMonster ;
+   pool.unload_in_use_items() ;
 }

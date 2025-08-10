@@ -1,7 +1,7 @@
 #include "State.hpp"
 #include "Menu.hpp"
 #include "GameRender.hpp"
-#include "HeroPhaseState.hpp"
+
 
 #include <iostream>
 #include <cstring>
@@ -329,6 +329,44 @@ void ChooseCharacterState::render(Menu& menu) {
         }
     }
 }
+
+void GameOverState::render(Menu & m) {
+        int screenW = GetScreenWidth();
+        int screenH = GetScreenHeight();
+
+   
+        DrawRectangle(0, 0, screenW, screenH, Fade(GRAY, 0.7f));
+
+        int boxW = 400;
+        int boxH = 200;
+        int boxX = (screenW - boxW) / 2;
+        int boxY = (screenH - boxH) / 2;
+
+        DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxW, (float)boxH}, 0.2f, 8, DARKGRAY);
+       DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxW, (float)boxH}, 0.2f, 8, 4.0f, WHITE);
+
+
+        DrawText("Game Over", boxX + 100, boxY + 20, 30, RED);
+        DrawText(message.c_str(), boxX + 40, boxY + 70, 20, WHITE);
+
+        DrawRectangle(boxX + 150, boxY + 130, 100, 40, RED);
+        DrawText("Exit", boxX + 180, boxY + 140, 20, WHITE);
+    }
+
+void GameOverState::update(Menu & m) {
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                Vector2 mouse = GetMousePosition();
+                int boxX = (GetScreenWidth() - 400) / 2 + 150;
+                int boxY = (GetScreenHeight() - 200) / 2 + 130;
+                Rectangle exitBtn = {(float)boxX, (float)boxY, 100, 40};
+
+                if (CheckCollisionPointRec(mouse, exitBtn)) {
+                    CloseWindow(); // بستن بازی
+                }
+        }
+}
+
+
 
 // ItemBlockState::ItemBlockState(Hero* h) : hero(h) {
 //     panel = { (GetScreenWidth() - 560) / 2.0f, (GetScreenHeight() - 560) / 2.0f, 560, 560 };
