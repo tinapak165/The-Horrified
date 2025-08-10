@@ -63,8 +63,6 @@ class Hero{
         virtual void Special(Location*) = 0  ; 
         virtual bool HasAbility() ; 
 
-        bool isDead() ;
-
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
         void showvillagersHere()const ; 
