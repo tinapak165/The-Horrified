@@ -28,7 +28,6 @@ public:
     void draw_collected_items() ;
     void draw_sidebar() ; 
     void draw_played_Perkcards() ; 
-    void draw_available_Perkcards() ;
     void draw_saveGame() ; 
     void draw_villagerButton() ; 
 
@@ -40,7 +39,6 @@ private:
     std::unique_ptr<HeroAction> currentAction = nullptr; 
     bool ShowitemButton = false ; 
     bool ShowPLAYEDPerkButton = false ;
-    bool ShowAvailablePerkButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
     bool showingVillagerInfo = false ;

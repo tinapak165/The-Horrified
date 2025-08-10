@@ -52,14 +52,7 @@ void GameRender::draw() {
         }
         return;
     }
-    if (ShowAvailablePerkButton && currentHero) {
-        currentHero->displayavailblecards(); 
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            ShowAvailablePerkButton = false;
-            currentHero = nullptr;
-        }
-        return;
-    }
+
     if (savegame && currentHero) {
         SaveManager save(game);
 
@@ -100,7 +93,6 @@ void GameRender::draw() {
     draw_action_panel() ;
     draw_collected_items() ;
     draw_played_Perkcards() ;  
-    draw_available_Perkcards() ;
     draw_saveGame() ;
     draw_villagerButton() ;
 }
@@ -555,21 +547,6 @@ void GameRender::draw_played_Perkcards(){
 
     if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         ShowPLAYEDPerkButton = true;
-        currentHero = game.get_turnManager().get_active_hero(); 
-    }
-}
-
-void GameRender::draw_available_Perkcards(){
-    Rectangle perkButton = { 750, 50, 210, 45 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, perkButton);
-
-    Color btnColor = hover ? LIGHTGRAY : GRAY;
-    DrawRectangleRec(perkButton, btnColor);
-    DrawText("available Perkcards", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
-
-    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        ShowAvailablePerkButton = true;
         currentHero = game.get_turnManager().get_active_hero(); 
     }
 }
