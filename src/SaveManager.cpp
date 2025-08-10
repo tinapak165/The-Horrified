@@ -60,7 +60,12 @@ void SaveManager::saveGame(const std::string & filename)
     for(auto& pair : game.get_dracula()->get_coffins_map())
         file << (pair.second ? '1' : '0');
     file << '\n' ;
- 
+
+    file << "evidence: " ;
+    for(auto & evi : game.get_invisibleMan()->get_evidence_locations())
+        file << evi << ',' ; 
+    file << '\n' ;
+
     file.close();
 }
 
@@ -242,6 +247,15 @@ void SaveManager::loadGame(const std::string & filename)
                   game.get_dracula()->destroy_coffin_at(locs[i]);    
 
                 }
+            }
+        }
+        else if(line.rfind("evidence:" , 0) == 0){
+            std::string loc = line.substr(10) ; 
+            std::stringstream ss(loc) ;
+            std::string evi ;
+            while(getline(ss , evi , ',')){
+                if(!evi.empty())
+                    auto itemlocation = game.get_invisibleMan()->add_evidence(evi) ;
             }
         }
     }
