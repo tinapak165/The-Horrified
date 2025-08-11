@@ -77,11 +77,7 @@ std::pair<Hero*, Villager*> Dracula::attack() {
             if (villagers.size() == 1)
                 chosenVillager = villagers[0];
             else {
-                std::cout << "Choose a villager to destroy:\n";
-                for (size_t i = 0; i < villagers.size(); ++i)
-                    std::cout << i << ": " << villagers[i]->get_name() << '\n';
-                int index;
-                std::cin >> index;
+                size_t index = rand() % villagers.size();
                 chosenVillager = villagers[index];
             }
         }

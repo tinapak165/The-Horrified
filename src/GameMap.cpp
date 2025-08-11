@@ -6,16 +6,17 @@ void GameMap::build_map() {
     if (mapTexture.id == 0) {
         std::cerr << "[ERROR] map.png not loaded!\n";
     }
-    add_location("Cave", {50 - 200, 405 , 150, 30}, "../Assets/Icons/CaveIcon.png");  
+
+    add_location("Cave", {50 - 200, 405 , 150, 30}, "../Assets/Icons/CaveIcon.png");
     add_location("Camp", {310 - 200, 400 , 150, 30}, "../Assets/Icons/CampIcon.png"); 
     add_location("Precinct", {596 - 200, 350,150, 30}, "../Assets/Icons/PrecinctIcon.png"); 
     add_location("Inn", {870 - 200, 295, 150, 30}, "../Assets/Icons/InnIcon.png");  
     add_location("Barn", {1179 - 200, 333, 150, 30}, "../Assets/Icons/BarnIcon.png"); 
     add_location("Dungeon", {1455 - 200, 338, 150, 30}, "../Assets/Icons/DungeonIcon.png"); 
     add_location("Tower", {1322 - 200, 629, 150, 30}, "../Assets/Icons/TowerIcon.png"); 
-    add_location("Theatre", {990 - 200, 655, 150, 30}, "../Assets/Icons/TheatreIcon.png"); 
-    add_location("Mansion", {300 - 200, 700, 150, 30}, "../Assets/Icons/MansionIcon.png");
-    add_location("Abbey", {50 - 200, 700, 150, 30}, "../Assets/Icons/AbbeyIcon.png");
+    add_location("Theatre", {990 - 195, 655, 150, 30}, "../Assets/Icons/TheatreIcon.png"); 
+    add_location("Mansion", {300 - 100, 700+210, 150, 30}, "../Assets/Icons/MansionIcon.png");
+    add_location("Abbey", {50 - 150, 700 + 320, 150, 30}, "../Assets/Icons/AbbeyIcon.png");
     add_location("Crypt", {52 -200, 1303, 150, 30}, "../Assets/Icons/CryptIcon.png"); 
     add_location("Museum", {302-200, 1299, 150, 30}, "../Assets/Icons/MuseumIcon.png"); 
     add_location("Hospital", {555-200, 1539, 150, 30}, "../Assets/Icons/HospitalIcon.png"); 
@@ -61,16 +62,17 @@ void GameMap::build_map() {
     mansion->connect(abbey );
     abbey->connect(crypt );
     shop->connect(laboratory ) ; 
-    shop->connect(museum) ; //
+    shop->connect(museum) ; 
     mansion->connect(church ) ;
     laboratory->connect(institute );
     church->connect(graveyard );
     church->connect(hospital );
+    church->connect(shop);
     tower->connect(dungeon ) ; 
     camp->connect(mansion ) ; 
     camp->connect(precinct ) ;   
     mansion->connect(shop );
-    mansion->connect(museum ) ; 
+    mansion->connect(museum ) ;  
  
 }
 std::string GameMap::checkString(std::string str){

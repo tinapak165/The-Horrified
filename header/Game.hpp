@@ -42,18 +42,24 @@ enum class Phase{
 };
 
 // for log
-#define GAME_LOG(game, msg) \
+#define GAME_LOG_OBJ(game, msg) \
     do { \
         std::cout << msg << std::endl; \
-        game.log(msg); \
+        (game).log(msg); \
     } while(0)
-/// 
+
+#define GAME_LOG_PTR(game, msg) \
+    do { \
+        std::cout << msg << std::endl; \
+        (game)->log(msg); \
+    } while(0)
+
+///  
 
 class Game {
     friend class Monstercard;
 private:
     Phase currentPhase = Phase::HeroPhase ;
-
     PlayerInfo player1, player2;
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
@@ -77,15 +83,18 @@ private:
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
-   
-    bool monsterPhaseDone = false;
-    bool heroPhaseDone = false;
-    static int terror_Level;
+   // std::vector<std::string> event_log;
+   // std::unique_ptr<State*> currentState;
+    
+    static int terror_Level ;
     bool game_over = false;
     bool heroTurnInProgress = false ;
+    bool monsterPhaseDone = false;
+    bool heroPhaseDone = false;
+
     Hero* activeHero ; 
-    std::vector<std::string> logs;
-    int logScroll = 0; 
+    
+    std::vector<std::string> logs; 
     
 public:
     Game();
@@ -113,7 +122,7 @@ public:
     bool hero_phase(Hero* , GameRender*)  ;
     void initializaDeck() ; 
     void getNewCard(Hero*) ;
-    void monster_objectes() const;
+    void monster_objectes();
     void return_item(const Item& item);
 
     std::string checkString(std::string) ; 
@@ -145,6 +154,7 @@ public:
     void clear_logs();
     //void Game_over_check();
     void DrawGameOverPopup(const std::string& message);
+    int get_terror_level() ;
 };
 
 #endif

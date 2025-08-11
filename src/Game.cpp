@@ -5,7 +5,7 @@ using namespace std;
 
 int Game::terror_Level = 0; 
 Game::Game() {
-    InitWindow(1000 + 400, 1000, "The Horrified");
+    InitWindow(1400, 1000, "The Horrified");
 
     SetTargetFPS(60);
     
@@ -132,7 +132,7 @@ void Game::start() {
         }
         EndDrawing();
 
-        if (terror_Level >= 6 || (deck.is_empty() && !both_monsters_defeated()) || both_monsters_defeated()) {
+    if (terror_Level >= 6 || (deck.is_empty() && !both_monsters_defeated()) || both_monsters_defeated()) {
         std::string reason;
         if (terror_Level >= 6) reason = "Terror level reached 6!";
         else if (deck.is_empty() && !both_monsters_defeated()) reason = "No more Monster Cards!";
@@ -149,10 +149,11 @@ void Game::start() {
             if (IsKeyPressed(KEY_ENTER)) exitRequested = true;
         }
 
-            CloseWindow(); // حالا دیگه پنجره رو ببند
-            return;
+        CloseWindow(); // حالا دیگه پنجره رو ببند
+        return;
         }
-   }
+
+    }
 }
 void Game::set_currentPhase(Phase newPhase){ currentPhase = newPhase ; }
 
@@ -166,6 +167,7 @@ bool Game::hero_phase(Hero* hero , GameRender* render) {
     if(Villager::AnyVillagerInSafePlace()){
         Villager::removeVillager() ;
        cout << hero->GetName() << " got one perk card from moving a villager to its safeplace!\n" ; 
+        getNewCard(hero) ;
     }
     return false ;
 }
@@ -204,6 +206,23 @@ void Game::initializaDeck(){
        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ; 
        perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
 
+}
+void Game::initializaMDeck(){
+    for (int i =0 ; i <3 ; i++){       
+        deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FormOfTheBat.png")) ;     
+        deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap,  "../Assets/Monster_Cards/Thief.png"));
+        deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/Sunrise.png")) ;
+        deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
+        deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheIchtyologist.png")) ;
+        deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheDelivery.png")) ;
+    }
+    
+    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheInnocent.png")) ;
+    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
+    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
+    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
+    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ;
+        
 }
 void Game::getNewCard(Hero* hero){
     auto card = perkDeck.drawcard() ; 
@@ -259,6 +278,9 @@ InvisibleMan* Game::get_invisibleMan() {
 ItemPool& Game::get_pool() {
     return pool;
 }
+int Game::get_terror_level(){
+ return terror_Level;
+}
 
 void Game::set_skipMonsterPhase(bool value){ skipMonsterPhase = value ;  }
 
@@ -268,18 +290,32 @@ void Game::increase_terror_level() {
     terror_Level++;
     std::cout << "Terror Level increased to " << terror_Level << "!\n";
 }
-void Game::monster_objectes() const {
+
+void Game::monster_objectes()  {
+    static int lastDestroyed = -1;
+    static int lastCollected = -1;
+    Location* Dloc = dracula.get()->get_location();
+    Location* Iloc = invisibleMan.get()->get_location();
     if (dracula) {
         int destroyed = 0;
         for (const auto& entry : dracula->get_coffins_map()) {
             if (entry.second) destroyed++;
         }
-        std::cout << "Coffins destroyed (Dracula): " << destroyed << "/4\n";
-    }
+        if (destroyed != lastDestroyed) { // فقط وقتی تغییر کرد
+           std::cout << "[DEBUG] Reached before GAME_LOG" << std::endl;
+           GAME_LOG_OBJ(*this , "Dracula location : " + Dloc->get_name());
+          GAME_LOG_OBJ(*this, "Coffins destroyed (Dracula): " + std::to_string(destroyed) + "/4");
+           std::cout << "[DEBUG] Passed after GAME_LOG" << std::endl;
+            lastDestroyed = destroyed;
+        }
+    } 
 
     if (invisibleMan) {
         int collected = invisibleMan->get_evidence_count();
-        std::cout << "Evidence collected (Invisible Man): " << collected << "/5\n";
+        if (collected != lastCollected) { // فقط وقتی تغییر کرد
+            GAME_LOG_OBJ(*this, "Evidence collected (Invisible Man): " + std::to_string(collected) + "/5");
+            lastCollected = collected;
+        }
     }
 }
 void Game::return_item(const Item& item) {
@@ -295,26 +331,6 @@ void Game::Changing_frenzy_marker() {
 Monster* Game::get_frenzied_monster() {
     return frenziedMonster;
 }
-
-
-void Game::initializaMDeck(){
-    for (int i =0 ; i <3 ; i++){       
-    deck.addCard(std::make_unique<FormTheBat>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FormOfTheBat.png")) ;     
-    deck.addCard(std::make_unique<Thief>( pool, map ,  turnManager ,  monstersMap,  "../Assets/Monster_Cards/Thief.png"));
-    deck.addCard(std::make_unique<Sunrise>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/Sunrise.png")) ;
-    deck.addCard(std::make_unique<OnTheMove>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/OnTheMove.png")) ;
-    deck.addCard(std::make_unique<TheIchthyologist>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheIchtyologist.png")) ;
-    deck.addCard(std::make_unique<TheDelivary>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheDelivery.png")) ;
-    }
-
-    deck.addCard(std::make_unique<TheInnocent>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/TheInnocent.png")) ;
-    deck.addCard(std::make_unique<FormerEmoloyer>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FomerEmployer.png")) ;
-    deck.addCard(std::make_unique<FortuneTeller>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/FortuneTeller.png"));
-    deck.addCard(std::make_unique<EgyptianExpert>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/EgyptianExpert.png")) ;
-    deck.addCard(std::make_unique<HurriedAssistant>( pool, map ,  turnManager ,  monstersMap , "../Assets/Monster_Cards/HurriedAssistant.png")) ; 
-}
-
-
 
 ItemColor Game::string_to_color(const std::string& color)
 {
@@ -368,7 +384,7 @@ Menu *Game::get_menu(){ return menu.get(); }
 
 void Game::log(const std::string& message) {
     logs.push_back(message);
-    if (logs.size() > 50) // حداکثر ۵۰ خط
+    if (logs.size() > 50)
         logs.erase(logs.begin());
 }
 
@@ -377,23 +393,24 @@ void Game::clear_logs() {
 }
 const std::vector<std::string>& Game::get_logs() const { return logs; }
 
-void Game::DrawGameOverPopup(const std::string& message) {
+                    
+ void Game::DrawGameOverPopup(const std::string& message) {
     int screenW = GetScreenWidth();
-    int screenH = GetScreenHeight();
-
-    // فقط یه باکس بدون تاریک کردن زمینه
+     int screenH = GetScreenHeight();
+                        
+     // فقط یه باکس بدون تاریک کردن زمینه
     int boxWidth = 400;
     int boxHeight = 200;
     int boxX = (screenW - boxWidth) / 2;
-    int boxY = (screenH - boxHeight) / 2;
-
-    DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
-   DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 4.0f, WHITE);
-
-
-    DrawText("Game Over!", boxX + 100, boxY + 30, 30, RED);
-    DrawText(message.c_str(), boxX + 40, boxY + 80, 20, RAYWHITE);
-    DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
+     int boxY = (screenH - boxHeight) / 2;
+                        
+     DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
+     DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 4.0f, WHITE);
+                        
+                        
+     DrawText("Game Over!", boxX + 100, boxY + 30, 30, RED);
+     DrawText(message.c_str(), boxX + 40, boxY + 80, 20, RAYWHITE);
+     DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
 }
 
 Game::~Game(){

@@ -30,6 +30,7 @@ public:
     void draw_played_Perkcards() ; 
     void draw_saveGame() ; 
     void draw_villagerButton() ; 
+    void renderTerrorLevel(int terrorLevel);
 
     ~GameRender() ; 
 
@@ -53,6 +54,7 @@ private:
     Texture2D invisibleManMat;
     Texture2D coffinTex;
     Texture2D smashedCoffinTex; 
+    static const Vector2 terrorLevelPositions[8] ;
 };
 
 #endif

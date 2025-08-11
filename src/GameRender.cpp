@@ -95,6 +95,7 @@ void GameRender::draw() {
     draw_played_Perkcards() ;  
     draw_saveGame() ;
     draw_villagerButton() ;
+    renderTerrorLevel(game.get_terror_level());
 }
 
 void GameRender::draw_map() {
@@ -107,7 +108,7 @@ void GameRender::draw_sidebar() {
     int sidebarWidth = 400;
     int sidebarHeight = mapRect.height;
 
-    // پس‌زمینه ساده برای sidebar
+ // پس زمینه برای ساید بار
     DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
 
     const auto& card = game.get_current_card();
@@ -141,28 +142,28 @@ void GameRender::draw_sidebar() {
     // else
     //     DrawText("Dice: No roll yet", sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
     
-} else {
-    DrawText("No Monster Card", sidebarX + 20, cardBoxY + 10, 20, GRAY);
-  } 
+
+    
+  
     int logBoxY = cardBoxY + cardBoxHeight + 20;
     int logBoxHeight = sidebarHeight - (cardBoxHeight + 40);
-    DrawRectangle(sidebarX + 10, logBoxY, sidebarWidth - 20, logBoxHeight, Fade(BLACK, 0.2f));
-    DrawText("MonsterCard Effects :", sidebarX , logBoxY + 10, 20, BLACK);
+
+    DrawText("MonsterCard Effects :", sidebarX  , logBoxY + 10, 20, RED);
 
     const auto& logs = game.get_logs();
     int y = logBoxY + 40; 
     int maxLines = (logBoxHeight - 40) / 25; 
 
     int count = 0;
-    for (auto it = logs.rbegin(); it != logs.rend() && count < maxLines; ++it) {
-        DrawText(it->c_str(), sidebarX  + 20 , y, 16 , RAYWHITE);
-        y += 24; // خط‌ها رو به سمت پایین بیار
+    for (auto it = logs.begin(); it != logs.end() && count < maxLines; ++it) {
+        DrawText(it->c_str(), sidebarX  , y, 16 , RAYWHITE);
+        y += 24; // خط‌ها رو به سمت پایین میرن
         count++;
-    }
-
+    
+     }
+   } 
+  
 }
-
-
 void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
@@ -229,41 +230,37 @@ void GameRender::draw_monsters() {
     }
 
     
-    if (selectedMonsterMat != MonsterType::None) {
-        // پس زمینه سیاه اگه هیچی نبود
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.7f));
+   if (selectedMonsterMat != MonsterType::None) {
+    Texture2D* matTex = nullptr;
+    if (selectedMonsterMat == MonsterType::Dracula) 
+        matTex = &draculaMat;
+    else if (selectedMonsterMat == MonsterType::InvisibleMan) 
+        matTex = &invisibleManMat;
 
-        Texture2D* matTex = nullptr;
-        if (selectedMonsterMat == MonsterType::Dracula) 
-            matTex = &draculaMat;
-        else if (selectedMonsterMat == MonsterType::InvisibleMan) 
-            matTex = &invisibleManMat;
+    if (matTex) {
+        float matW = 500;
+        float matH = 500 * ((float)matTex->height / matTex->width);
+        float matX = (GetScreenWidth() - matW) / 2;
+        float matY = (GetScreenHeight() - matH) / 2;
 
-        if (matTex) {
-            float matW = 500;
-            float matH = 500 * ((float)matTex->height / matTex->width);
-            float matX = (GetScreenWidth() - matW) / 2;
-            float matY = (GetScreenHeight() - matH) / 2;
+        Rectangle matArea = {matX, matY, matW, matH};
+        DrawTexturePro(*matTex, {0, 0, (float)matTex->width, (float)matTex->height}, matArea, {0, 0}, 0, WHITE);
 
-            Rectangle matArea = {matX, matY, matW, matH};
-            DrawTexturePro(*matTex, {0, 0, (float)matTex->width, (float)matTex->height}, matArea, {0, 0}, 0, WHITE);
+        // دکمه بستن
+        Rectangle closeBtn = { matX + matW - 40, matY + 10, 30, 30 };
+        DrawRectangleRec(closeBtn, MAROON);
+        DrawText("X", closeBtn.x + 7, closeBtn.y + 2, 24, WHITE);
 
-            // دکمه بستن
-            Rectangle closeBtn = { matX + matW - 40, matY + 10, 30, 30 };
-            DrawRectangleRec(closeBtn, MAROON);
-            DrawText("X", closeBtn.x + 7, closeBtn.y + 2, 24, WHITE);
-
-            // بستن با کلیک روی X یا بیرون عکس
-            if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                Vector2 mp = GetMousePosition();
-                if (CheckCollisionPointRec(mp, closeBtn) || !CheckCollisionPointRec(mp, matArea)) {
-                    selectedMonsterMat = MonsterType::None;
-                }
+        // بستن فقط وقتی کلیک رها شد
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            Vector2 mp = GetMousePosition();
+            if (CheckCollisionPointRec(mp, closeBtn) || !CheckCollisionPointRec(mp, matArea)) {
+                selectedMonsterMat = MonsterType::None;
             }
         }
-    }
+     }
+  }
 }
-
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
     const float spacing = 10.0f;
@@ -611,6 +608,27 @@ void GameRender::draw_coffins() {
     }
 }
 
+const Vector2 GameRender::terrorLevelPositions[8] = {
+    {135, 60},  // 0
+    {195, 60},  // 1
+    {255, 60},  // 2
+    {315, 60},  // 3
+    {375, 60},  // 4
+    {435, 60},  // 5
+    {495, 60},  // 6
+    {555, 60}   // جمجمه
+};
+
+
+void GameRender::renderTerrorLevel(int terrorLevel) {
+
+    Vector2 pos = terrorLevelPositions[terrorLevel];
+
+    // رسم دایره قرمز روی عدد
+    DrawCircle(pos.x, pos.y, 7 , RED);
+
+    
+}
 GameRender::~GameRender(){
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 

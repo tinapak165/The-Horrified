@@ -7,8 +7,8 @@ Item::Item(std::string name,ItemColor c, int strength , std::string locationName
 Item::Item(){}
 
 void Item::loadTexture() {
-        texture = LoadTexture(texturepath.c_str());
-    }
+    texture = LoadTexture(this->get_TexturePath().c_str());
+}
 
 Texture2D Item::getTexture() const {
     return texture;
