@@ -308,49 +308,13 @@ void OnTheMove::play_monster_card( Game& game, Monster* frenziedMonster , std::v
        place_items(pool);
        
 } 
-// int Monstercard::show_item_block_window(Hero* h) {
-//     const auto& items = h->GetItems();
-//     int selectedIndex = -2; // -2 یعنی هنوز انتخاب نشده
-//     int screenWidth = 800, screenHeight = 600;
 
-//     while (selectedIndex == -2 && !WindowShouldClose()) {
-//         BeginDrawing();
-//         ClearBackground(RAYWHITE);
-
-//         DrawText("Dracula is attacking! Use an item to block?", 100, 50, 24, RED);
-
-//         for (size_t i = 0; i < items.size(); ++i) {
-//             Rectangle btn = {100.0f, 120.0f + (float)i * 60, 600.0f, 50.0f};
-//             DrawRectangleRec(btn, LIGHTGRAY);
-//             DrawText((std::to_string(i+1) + ". " + items[i].getName() + " (" + 
-//                       items[i].color_to_string(items[i].getColor()) + ")").c_str(), 
-//                       110, 130 + (int)i*60, 20, BLACK);
-
-//             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), btn)) {
-//                 selectedIndex = (int)i; // انتخاب آیتم
-//             }
-//         }
-
-        
-//         Rectangle noBtn = {100.0f, 120.0f + (float)items.size() * 60 + 20, 600.0f, 50.0f};
-//         DrawRectangleRec(noBtn, MAROON);
-//         DrawText("Don't use any item", 110, 130 + (int)items.size() * 60 + 20, 20, WHITE);
-
-//         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), noBtn)) {
-//             selectedIndex = -1; // یعنی آیتمی استفاده نشه
-//         }
-
-//         EndDrawing();
-//     }
-
-//     return selectedIndex; // -1 یعنی استفاده نکرده، 0..N-1 یعنی انتخاب آیتم
-// }
 
 int Monstercard::show_item_block_window(Hero* h) {
     const auto& items = h->GetItems();
-    int selectedIndex = -2; // -2 یعنی هنوز انتخاب نشده
+    int selectedIndex = -2; 
 
-    // اندازه و موقعیت پنجره وسط صفحه
+    // موقغیت پنجره جدید
     int screenW = GetScreenWidth();
     int screenH = GetScreenHeight();
     int boxWidth = 500;
@@ -360,9 +324,9 @@ int Monstercard::show_item_block_window(Hero* h) {
 
     while (selectedIndex == -2 && !WindowShouldClose()) {
         BeginDrawing();
-        // پس‌زمینه رو نمی‌پوشونیم، فقط پنجره رو روی بازی می‌کشیم
+      
 
-        // کشیدن کادر پنجره
+        // کادر پنجره
         DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
         DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 3.0f, WHITE);
 
@@ -415,14 +379,14 @@ void Monstercard::play_strike(Game& game,
         Dice d(3);
         std::vector<DiceFace> results = d.roll(dice);
         last_dice_result.clear();
-        for (auto face : results) {
-            switch (face) {
-                case DiceFace::Attack :
-                case DiceFace::empty : 
-                case DiceFace::Power:
+        // for (auto face : results) {
+        //     switch (face) {
+        //         case DiceFace::Attack : GAME_LOG_OBJ(game , "A")
+        //         case DiceFace::empty : 
+        //         case DiceFace::Power:
                
-            }
-        }
+        //     }
+        // }
         bool hasFrenzied = false;
         bool terrorAlreadyIncreased = false;
         for (MonsterType type : monster_list) {
@@ -465,6 +429,18 @@ void Monstercard::play_strike(Game& game,
             }
 
             Location* currentLoc = m->get_location();
+            bool nearHero = !currentLoc->get_heroes().empty();
+            bool nearVillager = !currentLoc->get_villagers().empty();
+
+             if (type == MonsterType::Dracula && (nearHero || nearVillager)) {
+               std::string logMsg = "Dracula presence increased \n terror level";
+               GAME_LOG_OBJ(game, logMsg);
+
+                Game::increase_terror_level();
+                terrorAlreadyIncreased = true;
+            }
+
+            std::cout << " Terror Level Reached : " << Game::terror_Level << std::endl;
             bool invisiblePowerTriggered = false;
 
             GAME_LOG_OBJ(game , " Dice Result :");
@@ -550,7 +526,9 @@ void Monstercard::play_strike(Game& game,
                     Location* nextStep = m->find_next_step(target);
                     if (nextStep) {
                         m->set_location(nextStep);
-                        GAME_LOG_OBJ( game , "Power Dice : makes invisible man \n move to :" + target->get_name() + "\n");
+                        std::string logMsg = "Power Dice : makes invisible man\n move to :" + target->get_name() + "\n";
+                        GAME_LOG_OBJ(game, logMsg);
+
                     }
                 } else {
                     GAME_LOG_OBJ( game ,"Power Dice : invisible man found no villager.\n");
@@ -679,19 +657,21 @@ void Monstercard::remove_villager(Villager* v) {
 
 }
 
-void Monstercard::place_items(ItemPool& pool )  {
+void Monstercard:: place_items(ItemPool& pool )  {
     placed_items.clear(); // پاک‌سازی آیتم‌های قبلی
 
     int itemCount = get_item_count();
     auto newItems = pool.draw_random_items(itemCount);
 
-    for (const auto& item : newItems) {
+    for ( auto& item : newItems) {
         Location* loc = map.get_location_by_name(item.getLocationName());
-        Texture2D itemTex = item.getTexture();
+ 
+        item.loadTexture();
         if (loc) {
             
             loc->add_item(item );
             placed_items.push_back({item, loc});  // ذخیره برای رندر
+            std::cout<<item.getName()<<"placed at"<<item.getLocationName();
         }
     }
 

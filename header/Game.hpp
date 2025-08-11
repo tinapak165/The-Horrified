@@ -112,12 +112,12 @@ public:
    
     void set_currentPhase(Phase) ; 
     void set_HeroTurnInProgress(bool) ; 
-    
+     Hero* create_hero_by_name(const std::string& name);
     void initializaDeck() ; 
     void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;
     
-    
+    std::unique_ptr<Perkcard> find_perk_by_name(const std::string& name);
     void monster_objectes() ;
     void return_item(const Item& item);
 

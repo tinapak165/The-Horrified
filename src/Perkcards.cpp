@@ -295,7 +295,7 @@ void BreakofDawnCARD::play(Hero*){
 
     vector<Item> PoolItems = pool.draw_random_items(2) ;
     
-    for( auto i : PoolItems){
+    for( auto &i : PoolItems){
         i.loadTexture() ;
         Location* Loc = map.get_location_by_name(i.getLocationName());
         if(Loc){
@@ -343,38 +343,31 @@ void BreakofDawnCARD::draw(){
 
 bool BreakofDawnCARD::isDone() const{ return done && !messageVisible; }
 
-OverstockCard::OverstockCard(vector<Hero *> heroes, ItemPool& p, GameMap &m) : Perkcard("Overstock", "../Assets/Perk_Cards/Overstock.png"), heroes(heroes), pool(p), map(m) {}
+OverstockCard::OverstockCard(ItemPool& p, GameMap &m) : Perkcard("Overstock", "../Assets/Perk_Cards/Overstock.png"),  pool(p), map(m) {}
 
 void OverstockCard::play(Hero*){
 
-    if(done)return ;
+    if(done) return ;
+    
+    auto PoolItems = pool.draw_random_items(2);
 
-    Hero* h1 = heroes[0];
-    Hero* h2 = heroes[1];
-
-    vector<Item> PoolItems = pool.draw_random_items(2);
-
-    for (int i = 0; i < 2; ++i) {
-        PoolItems[i].loadTexture();
-        Location* Loc = map.get_location_by_name(PoolItems[i].getLocationName());
+    for (auto &i : PoolItems) {
+        i.loadTexture();
+        Location* Loc = map.get_location_by_name(i.getLocationName());
         if (Loc) {
-            Loc->add_item(PoolItems[i]);
-            Hero* placer = (i == 0) ? h1 : h2;
-            message.push_back(placer->GetName() + " placed " + PoolItems[i].getName() + " in location " + PoolItems[i].getLocationName());
+            Loc->add_item(i);
+            message.push_back(" placed " + i.getName() + " in location " + i.getLocationName());
         }
     }  
     messageVisible = true ;
     messageTimer = GetTime() ;
     done = true ; 
- 
 }
 
 void OverstockCard::draw(){
 
-    // اگه پیام قراره نشون داده نشه، هیچی نکش
     if (!messageVisible) return;
 
-        // اگه زمانش گذشته، پیام رو پاک کن
     if ((GetTime() - messageTimer >= messageDuration)) {
         messageVisible = false;
         message.clear();

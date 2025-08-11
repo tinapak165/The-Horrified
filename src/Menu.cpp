@@ -15,6 +15,7 @@ void Menu::updateCurrentState() {
 State* Menu::getState(){
     return current_state.get();
 }
+
 Game& Menu::getGame() 
 { return game; }
 

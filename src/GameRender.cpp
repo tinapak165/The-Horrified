@@ -134,22 +134,40 @@ void GameRender::draw_sidebar() {
     int logBoxY = cardBoxY + cardBoxHeight + 20;
     int logBoxHeight = sidebarHeight - (cardBoxHeight + 40);
 
-    DrawText("MonsterCard Effects :", sidebarX  , logBoxY + 10, 20, RED);
+     DrawText("MonsterCard Effects :", sidebarX, logBoxY + 10, 20, RED);
 
-    const auto& logs = game.get_logs();
-    int y = logBoxY + 40; 
-    int maxLines = (logBoxHeight - 40) / 25; 
-
+    int y = logBoxY + 40;
+    int maxLines = (logBoxHeight - 40) / 25;
     int count = 0;
-    for (auto it = logs.begin(); it != logs.end() && count < maxLines; ++it) {
-        DrawText(it->c_str(), sidebarX  , y, 16 , RAYWHITE);
-        y += 24; // خط‌ها رو به سمت پایین میرن
-        count++;
-    
-     }
-   } 
+
+    for (const auto& log : game.get_logs()) {
+        std::istringstream iss(log);
+        std::string word, currentLine;
+
+        while (iss >> word) {
+            if (currentLine.length() + word.length() + 1 <= 36) {
+                if (!currentLine.empty()) currentLine += " ";
+                currentLine += word;
+            } else {
+                DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+                y += 24;
+                count++;
+                if (count >= maxLines) return;
+                currentLine = word;
+            }
+        }
+
+        if (!currentLine.empty()) {
+            DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+            y += 24;
+            count++;
+            if (count >= maxLines) return;
+        }
+    }
+   }
+ } 
   
-}
+
 void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
