@@ -322,13 +322,18 @@ class OnTheMove : public Monstercard {
  
  class MonstercardDeck{
      private:
-         std::vector<std::unique_ptr<Monstercard>> cards;
+        std::vector<std::unique_ptr<Monstercard>> cards;
+        std::vector<std::string> drawncards;
+
      public:
          MonstercardDeck() ; 
          bool is_empty() const;
          int remaining_cards();
          void addCard(std::unique_ptr<Monstercard> card) ; 
          std::unique_ptr<Monstercard> drawcard();
+        std::vector<std::string> get_drawncardsName();
+        void removeCardByName(const std::string&) ;
+
  };
     
  

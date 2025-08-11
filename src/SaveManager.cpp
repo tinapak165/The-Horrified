@@ -15,7 +15,6 @@ void SaveManager::saveGame(const std::string & filename)
     for(const auto h : game.get_turnManager().get_heroes()){
         file << "hero: " << h->GetName() << '\n' ; 
         file << "location: " << h->GetCurrentLocation()->get_name() << '\n' ;
-        file << "actions left: " << h->GetRemainingActions() << '\n' ;
         file << "available perk: " ;
         for(const auto& p : h->GetAvailablePerkCards())
             file << p->get_name() << ',' ; 
@@ -66,6 +65,14 @@ void SaveManager::saveGame(const std::string & filename)
         file << evi << ',' ; 
     file << '\n' ;
 
+    file << "played monstercards:" ;
+    for(auto& card : game.get_MonsterDeck().get_drawncardsName())
+        file << card << ',' ;
+    file << '\n' ;
+
+    file << "terror level:" ;
+    file << game.get_terror_level() << '\n' ;
+    
     file.close();
 }
 
@@ -126,10 +133,6 @@ void SaveManager::loadGame(const std::string & filename)
             std::string name = line.substr(10) ; 
             Location* loc = game.get_map().get_location_by_name(name) ;
             currentHero->SetCurrentLocation(loc ? loc : nullptr) ;
-        }
-        else if(line.rfind("actions left:" , 0 ) == 0 && currentHero){
-            int actions = std::stoi(line.substr(14)) ; 
-            currentHero->SetRemainingActions(actions) ;
         }
         else if(line.rfind("available perk:" , 0) == 0 && currentHero){
             std::string perkLine = line.substr(16) ;
@@ -242,11 +245,9 @@ void SaveManager::loadGame(const std::string & filename)
             std::string flags = line.substr(9);
             std::vector<std::string> locs = {"Cave", "Dungeon", "Crypt", "Graveyard"};
             for (size_t i = 0; i < flags.size() && i < locs.size(); ++i) {
-                if (flags[i] == '1') {
-                    std::cout << "in if 1\n" ;
+                if (flags[i] == '1') 
                   game.get_dracula()->destroy_coffin_at(locs[i]);    
-
-                }
+                
             }
         }
         else if(line.rfind("evidence:" , 0) == 0){
@@ -258,7 +259,23 @@ void SaveManager::loadGame(const std::string & filename)
                     auto itemlocation = game.get_invisibleMan()->add_evidence(evi) ;
             }
         }
+        else if(line.rfind("played monstercards:" , 0) == 0){
+            std::string name = line.substr(20) ; 
+            std::stringstream ss(name) ;
+            std::string card ;
+            while(getline(ss , card , ',')){
+                if(!card.empty()){
+                    game.get_MonsterDeck().removeCardByName(card) ;
+                }
+            }
+        }
+        else if(line.rfind("terror level:" , 0) == 0){
+            int level = std::stoi(line.substr(13)) ; 
+            game.set_terror_level(level) ;
+        }
+
     }
+    
     std::cout << "game loaded\n" ;
     file.close() ;
 }

@@ -605,10 +605,26 @@ std::unique_ptr<Monstercard> MonstercardDeck::drawcard() {
         int index = std::rand() % cards.size();
 
     auto chosen_card = std::move(cards[index]);
+    drawncards.push_back(chosen_card->get_card_name()); 
     cards.erase(cards.begin() + index);
     return chosen_card;
 }
-std::ostream& operator<<(std::ostream& os, const MonsterType& m) {
+std::vector<std::string> MonstercardDeck::get_drawncardsName(){ return drawncards; }
+
+void MonstercardDeck::removeCardByName(const std::string& cardName) {
+
+   for (auto it = cards.begin(); it != cards.end(); ++it) {
+        if ((*it)->get_card_name() == cardName) {
+            std::cout << "erasing " << (*it)->get_card_name() << '\n' ;
+            cards.erase(it);
+            break;
+        }
+    }
+}
+
+
+std::ostream &operator<<(std::ostream &os, const MonsterType &m)
+{
     switch (m) {
         case MonsterType::InvisibleMan: os << "Invisible Man"; break;
         case MonsterType::Dracula: os << "Dracula"; break;
