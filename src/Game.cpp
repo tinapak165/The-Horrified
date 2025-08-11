@@ -278,8 +278,17 @@ InvisibleMan* Game::get_invisibleMan() {
 ItemPool& Game::get_pool() {
     return pool;
 }
-int Game::get_terror_level(){
- return terror_Level;
+MonstercardDeck& Game::get_MonsterDeck(){
+    return deck ;
+}
+int Game::get_terror_level()
+{
+    return terror_Level;
+}
+
+void Game::set_terror_level(int value)
+{
+    terror_Level = value ; 
 }
 
 void Game::set_skipMonsterPhase(bool value){ skipMonsterPhase = value ;  }

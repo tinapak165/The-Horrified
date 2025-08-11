@@ -113,6 +113,7 @@ public:
     Dracula* get_dracula() ; 
     InvisibleMan* get_invisibleMan() ; 
     ItemPool& get_pool() ;
+    MonstercardDeck& get_MonsterDeck() ; 
 
     void set_skipMonsterPhase(bool) ;
     bool ShouldSkipMonsterPhase() const ;
@@ -155,6 +156,7 @@ public:
     //void Game_over_check();
     void DrawGameOverPopup(const std::string& message);
     int get_terror_level() ;
+    void set_terror_level(int);
 };
 
 #endif
