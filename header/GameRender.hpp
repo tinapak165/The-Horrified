@@ -5,6 +5,7 @@
 #include "Game.hpp"
 #include "Action.hpp"
 #include "ActionButton.hpp"
+#include "SaveManager.hpp"
 #include <vector>
 
 class Game ; 
@@ -31,6 +32,7 @@ public:
     void draw_saveGame() ; 
     void draw_villagerButton() ; 
     void renderTerrorLevel(int terrorLevel);
+    bool handleDisplays() ;
 
     ~GameRender() ; 
 

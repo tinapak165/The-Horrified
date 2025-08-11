@@ -10,13 +10,37 @@ GameRender::GameRender(Game& game) : game(game) {
 
 void GameRender::draw() {
 
+    if(handleDisplays())
+        return ;
+        
+    draw_map();
+    draw_heroes() ;
+    draw_sidebar() ;
+    draw_location_icon() ;
+    draw_villagers();
+    draw_monsters();
+    draw_coffins();
+    draw_users() ;
+    draw_action_panel() ;
+    draw_collected_items() ;
+    draw_played_Perkcards() ;  
+    draw_saveGame() ;
+    draw_villagerButton() ;
+    renderTerrorLevel(game.get_terror_level());
+}
+
+void GameRender::draw_map() {
+    game.get_map().draw_map();   
+}
+bool GameRender::handleDisplays()
+{
     if(showingHeroInfo && currentHero != nullptr) {
         currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingHeroInfo = false;
             currentHero = nullptr;
         }
-        return; 
+        return true; 
     }
 
     if(currentAction && currentHero){
@@ -26,7 +50,7 @@ void GameRender::draw() {
             currentAction = nullptr ; 
             currentHero = nullptr ; 
         }
-        return  ;
+        return true ;
     }
 
     if(selectedLocation){
@@ -34,7 +58,7 @@ void GameRender::draw() {
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
             selectedLocation = nullptr ; 
         }
-        return ;
+        return true;
     }
     if (ShowitemButton && currentHero) {
         currentHero->DisplayItem(); 
@@ -42,7 +66,7 @@ void GameRender::draw() {
             ShowitemButton = false;
             currentHero = nullptr;
         }
-        return;
+        return true;
     }
     if (ShowPLAYEDPerkButton && currentHero) {
         currentHero->displayPlayedCards(); 
@@ -50,7 +74,7 @@ void GameRender::draw() {
             ShowPLAYEDPerkButton = false;
             currentHero = nullptr;
         }
-        return;
+        return true;
     }
 
     if (savegame && currentHero) {
@@ -72,34 +96,16 @@ void GameRender::draw() {
             fileSaved = false;  
             filename = "";
         }
-        return;
+        return true; 
     }
     if(showingVillagerInfo){
         Villager::DisplayInfo() ;
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingVillagerInfo = false;
         }
-        return ;
+        return true;
     }
-    
-    draw_map();
-    draw_heroes() ;
-    draw_sidebar() ;
-    draw_location_icon() ;
-    draw_villagers();
-    draw_monsters();
-    draw_coffins();
-    draw_users() ;
-    draw_action_panel() ;
-    draw_collected_items() ;
-    draw_played_Perkcards() ;  
-    draw_saveGame() ;
-    draw_villagerButton() ;
-    renderTerrorLevel(game.get_terror_level());
-}
-
-void GameRender::draw_map() {
-    game.get_map().draw_map();   
+    return false ;
 }
 void GameRender::draw_sidebar() {
     Rectangle mapRect = game.get_map().get_drawn_rect();
@@ -148,23 +154,40 @@ void GameRender::draw_sidebar() {
     int logBoxY = cardBoxY + cardBoxHeight + 20;
     int logBoxHeight = sidebarHeight - (cardBoxHeight + 40);
 
-    DrawText("MonsterCard Effects :", sidebarX  , logBoxY + 10, 20, RED);
+     DrawText("MonsterCard Effects :", sidebarX, logBoxY + 10, 20, RED);
 
-    const auto& logs = game.get_logs();
-    int y = logBoxY + 40; 
-    int maxLines = (logBoxHeight - 40) / 25; 
-
+    int y = logBoxY + 40;
+    int maxLines = (logBoxHeight - 40) / 25;
     int count = 0;
-    for (auto it = logs.begin(); it != logs.end() && count < maxLines; ++it) {
-        DrawText(it->c_str(), sidebarX  , y, 16 , RAYWHITE);
-        y += 24; // خط‌ها رو به سمت پایین میرن
-        count++;
-    
-     }
-   } 
-  
-}
-void GameRender::draw_monsters() {
+
+    for (const auto& log : game.get_logs()) {
+        std::istringstream iss(log);
+        std::string word, currentLine;
+
+        while (iss >> word) {
+            if (currentLine.length() + word.length() + 1 <= 36) {
+                if (!currentLine.empty()) currentLine += " ";
+                currentLine += word;
+            } else {
+                DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+                y += 24;
+                count++;
+                if (count >= maxLines) return;
+                currentLine = word;
+            }
+        }
+
+        if (!currentLine.empty()) {
+            DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+            y += 24;
+            count++;
+            if (count >= maxLines) return;
+        }
+    }
+   }
+ } 
+
+ void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
     const float offsetY = -monsterSize - 5.0f;
@@ -629,11 +652,13 @@ void GameRender::renderTerrorLevel(int terrorLevel) {
 
     
 }
-GameRender::~GameRender(){
+
+GameRender::~GameRender()
+{
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 
     UnloadTexture(draculaMat);
     UnloadTexture(invisibleManMat);
     UnloadTexture(coffinTex); 
-    UnloadTexture(smashedCoffinTex); 
+    UnloadTexture(smashedCoffinTex);
 }
