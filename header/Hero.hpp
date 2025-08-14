@@ -50,6 +50,13 @@ class Hero{
 
         Texture2D HeroTex;
         std::string HeroTex_path;
+
+        //special use
+        bool done = false;
+        bool shown = false ; 
+        std::string message ; 
+        double messageStartTime = 0.0;
+
     public:
         Hero(std::string name , int MaxActions ,  Location* StartingLocation , std::string specialAction , std::string HeroTex_path) ;
 
@@ -60,7 +67,6 @@ class Hero{
         virtual void UpdateSpecial(bool &done) ;
         virtual void DrawSpecial() ; 
 
-        virtual void Special(Location*) = 0  ; 
         virtual bool HasAbility() ; 
 
         bool hasvillagerHere() const ; 
@@ -68,7 +74,7 @@ class Hero{
         void showvillagersHere()const ; 
 
         std::string GetName()const ; 
-        virtual void DisplayInfo() const = 0 ;
+        void DisplayInfo() const;
 
         int getMaxActions() const ; 
         int GetRemainingActions()const ;

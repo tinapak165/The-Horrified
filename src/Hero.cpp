@@ -9,32 +9,61 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
 : name(name) , RemainingActions(MaxActions) , MaxActions(MaxActions) , currentLocation(StartingLocation) , specialAction(specialAction) , HeroTex_path(t){
 
     ListOfActions = {
-        {ActionType::Move , "move" , "You can move to any places near by. you can also move the villagers with you."} ,
-        {ActionType::Guide , "guide" , "You can move the villagers (that are in your place) to the closest place or move the villagers(that are in your neigbor place) to your place."} , 
-        {ActionType::Pickup , "pickup" , "You can take any number of item you want from the place you are."},
-        {ActionType::Advance , "advance" , "You can speed up a monster-related mission and complete it to get closer to defeating that monster."} ,
-        {ActionType::Defeat , "defeat" , "Once you have completed all the missions related to catching a monster, you can defeat it, but keep in mind that you must be present in the area where the monster is located."} ,
+        {ActionType::Move , "move" , "Move to any locations near by."} ,
+        {ActionType::Guide , "guide" , "Move villagers to your location or to a neighbor"} , 
+        {ActionType::Pickup , "pickup" , "Take any number of item you want from your location."},
+        {ActionType::Advance , "advance" , "You can speed up a monster-related mission and complete it."} ,
+        {ActionType::Defeat , "defeat" , "Defeat a monster when you are in the same place as monster."} ,
         {ActionType::SpecialAction , "special" , specialAction} , 
     };
 }
 
 void Hero::DisplayActions() const{
-    const float panelX = 600 ; const float panelY = 50 ; 
-    const float panelW = 400 ; const float panelH = 400 ; 
-    const int lineHeight = 30 ; 
+    const float panelX = 80 ; const float panelY = 80 ; 
+    const float panelW = 750 ; const float panelH = 300 ; 
+
     DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
     DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
+    DrawRectangleLinesEx({panelX, panelY, panelW, panelH}, 3, RAYWHITE);
 
     float y = panelY + 20 ; 
 
-    DrawText("----ACTIONS----" , panelX+20 , y , 25 , YELLOW) ; 
+    DrawText("----ACTIONS----" , panelX+20 , y , 25 , GREEN) ; 
     y+=40 ;
     for (const auto& action : ListOfActions) {
         string line = action.name + ": " + action.Description;
         
         DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
-        y += lineHeight;
+        y += 30;
     }
+}
+
+
+void Hero::DisplayInfo() const {
+    float panelX = 210;
+    float panelY = 90;
+    float panelWidth = 750;
+    float panelHeight = 190;
+
+    DrawRectangle(panelX, panelY, panelWidth, panelHeight, Fade(DARKGRAY, 0.1f));
+    DrawRectangleLines(panelX, panelY, panelWidth, panelHeight, GRAY);
+
+    float textX = panelX + 20;
+    float textY = panelY + 20;
+
+    DrawText(this->GetName().c_str(), textX, textY, 25, YELLOW);
+    textY += 40;
+
+    string location = "Location: " + this->GetCurrentLocation()->get_name();
+    DrawText(location.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string actions = "Actions: " + std::to_string(this->GetRemainingActions()) + '/' + std::to_string(this->getMaxActions());
+    DrawText(actions.c_str(), textX, textY, 20, WHITE);
+    textY += 30;
+
+    string special = "Special: " + this->GetSpecialActionInfo();
+    DrawText(special.c_str(), textX, textY, 20, WHITE);
 }
 
 void Hero::resetMaxActions(){
@@ -193,11 +222,23 @@ void Hero::MoveTo(Location* new_location){ //without villager
 
     cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
-void Hero::StartSpecial(GameMap &){}
+void Hero::StartSpecial(GameMap &){
+    message = "This hero does not have any special action!" ;
+    shown = false ;  
+}
 
-void Hero::UpdateSpecial(bool& done) {}
+void Hero::UpdateSpecial(bool& done) {
+    if (!shown) {
+        shown = true;
+        messageStartTime = GetTime();
+    }
+    else if (GetTime() - messageStartTime >= 2.0) 
+        done = true;
+}
 
-void Hero::DrawSpecial() {}
+void Hero::DrawSpecial() {
+    DrawText(message.c_str(), 100, 140, 22, WHITE);
+}
 
 bool Hero::hasvillagerHere() const
 {
