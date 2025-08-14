@@ -2,50 +2,38 @@
 #define HEROES_H
 #include "Hero.hpp"
 #include "TurnManager.hpp"
-
+#include "Button.hpp"
 class Archaeologist : public Hero{
     private:
+        bool shouldClose = false ;
+        float messageTimer = 0.0f;
         std::string message;
         std::string chosenPlace;
         bool typing = true;
-        bool validInput = false;
-        bool showingMessage = false;
-        double messageStartTime = 0.0;
-        Location* chosenLocation = nullptr;
+        bool ChoseAnItem = false ;
+
         GameMap* map = nullptr;
         std::vector<Item>* itemList = nullptr;
-        int selectedItemIndex = 0;
+        Location* chosenLocation = nullptr ;
         Location* currentTargetLocation = nullptr;
-        bool pickingItems = false;
         std::vector<Rectangle> itemHitboxes; 
-        Rectangle doneButtonBox = { 740.0f, 460.0f, 70.0f, 30.0f }; 
-        bool autoCompleteWithoutItems = false;
-
 
     public:
         Archaeologist(GameMap&) ;
         void StartSpecial(GameMap&) override ;
         void UpdateSpecial(bool &done) override ;
         void DrawSpecial() override ;
-        void DisplayInfo() const ;
-        void Special(Location*) override ;        
+        bool handleShouldClose() ;
+        std::string type(std::string) ;
+        void DrawTypingText(const std::string &);
+        bool drawDoneButton() ;
+        bool drawCancelButton() ;
+
 };
 
 class Mayor : public Hero{
-
-    private:
-        bool shown = false ; 
-        std::string message ; 
-        double messageStartTime = 0.0;
-
     public:
-
         Mayor(GameMap&) ; 
-        void DisplayInfo() const  ; 
-        void StartSpecial(GameMap&) override ;
-        void Special(Location*) override ; 
-        void UpdateSpecial(bool& done) override ;
-        void DrawSpecial() override ;
 };
 
 class Courier : public Hero{
@@ -56,31 +44,15 @@ class Courier : public Hero{
         bool done ; 
     public:
         Courier(GameMap& , TurnManager& ) ; 
-        void DisplayInfo() const  ; 
         void StartSpecial(GameMap&) override ;
         void UpdateSpecial(bool &done) override ;
         void DrawSpecial() override ;
-        void Special(Location*) override ;  
 };
 
 class Scientist : public Hero{
-    private:
-        bool shown = false ; 
-        std::string message ; 
-        double messageStartTime = 0.0;
-
-        bool waiting = false;
-        bool done = false;
-        int result = -1;
-
     public:
         Scientist(GameMap&) ; 
-        void DisplayInfo() const  ; 
         bool HasAbility() override ; 
-        void StartSpecial(GameMap&) override ;
-        void Special(Location*) override ; 
-        void UpdateSpecial(bool& done) override ;
-        void DrawSpecial() override ;
 };
 
 
