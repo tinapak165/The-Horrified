@@ -23,25 +23,22 @@ MenuState::MenuState() : State("../Assets/Menu/Background.png"),
 void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
 
-        Vector2 mouse = GetMousePosition();
-        bool click = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
+        startButton->Draw();
+        exitButton->Draw();
+        continueButton->Draw();
 
-        startButton->Draw(mouse);
-        exitButton->Draw(mouse);
-        continueButton->Draw(mouse);
-
-        if (startButton->isPressed(mouse, click)) {
+        if (startButton->isPressed()) {
             menu.getGame().distribute_initial_items() ;
             auto newstate = std::make_unique<NameInputState>() ;
             menu.SetState(std::move(newstate)); 
             return ; 
         }
-        if (exitButton->isPressed(mouse, click)) {
+        if (exitButton->isPressed()) {
             auto newstate = std::make_unique<ExitState>() ;
             menu.SetState(std::move(newstate)) ;
             return ; 
         }
-        if(continueButton->isPressed(mouse , click)){
+        if(continueButton->isPressed()){
             menu.SetState(std::make_unique<ContinueState>()) ;
             return ;        
         }
@@ -62,13 +59,10 @@ void ExitState::render(Menu& menu) {
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.6f));
     DrawText("Are you sure you want to exit?", 200, 200, 30, WHITE);
 
-    Vector2 mouse = GetMousePosition();
-    bool click = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
+    YesText->Draw();
+    NoText->Draw();
 
-    YesText->Draw(mouse);
-    NoText->Draw(mouse);
-
-    if (YesText->isClicked(mouse, click)) {
+    if (YesText->isClicked()) {
         // if (!soundPlayed) {
         //     PlaySound(goodbyeSound);
         //     soundPlayed = true;
@@ -77,7 +71,7 @@ void ExitState::render(Menu& menu) {
         CloseWindow();
     }
 
-    if (NoText->isClicked(mouse, click)) {
+    if (NoText->isClicked()) {
         auto newstate = std::make_unique<MenuState>() ; 
         menu.SetState(std::move(newstate));
         return ; 
@@ -102,9 +96,9 @@ void NameInputState::render(Menu& menu) {
     Vector2 mousePos = GetMousePosition();
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    BackToMenu->Draw(mousePos) ;
+    BackToMenu->Draw() ;
 
-    if(BackToMenu->isClicked(mousePos , mouseClicked)){
+    if(BackToMenu->isClicked()){
         auto newstate = std::make_unique<MenuState>() ; 
         menu.SetState(std::move(newstate)) ;
         return ; 
@@ -219,8 +213,8 @@ void ChooseCharacterState::render(Menu& menu) {
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
     ClickableText backButton("back to Menu", {100, 900}, 30, RED);
-    backButton.Draw(mousePos);
-    if (backButton.isClicked(mousePos, mouseClicked)) {
+    backButton.Draw();
+    if (backButton.isClicked()) {
         auto newstate = std::make_unique<MenuState>() ;
         menu.SetState(std::move(newstate));
         return;
@@ -235,14 +229,14 @@ void ChooseCharacterState::render(Menu& menu) {
 
     for (int i = 0; i < heroButtons.size(); i++) {
         if (selectedHeroes[i]) 
-            heroButtons[i]->DrawWithFade(mousePos, 100);
+            heroButtons[i]->DrawWithFade();
         else
-            heroButtons[i]->Draw(mousePos);      
+            heroButtons[i]->Draw();      
     }
 
     if (mouseClicked) {
         for (int i = 0; i < heroButtons.size(); i++) {
-            if (!selectedHeroes[i] && heroButtons[i]->isPressed(mousePos, mouseClicked)) {
+            if (!selectedHeroes[i] && heroButtons[i]->isPressed()) {
                 selectedHeroes[i] = true;
 
                 if (currentTurn == PlayerTurn::PLAYER1) {
@@ -278,8 +272,8 @@ void ContinueState::render(Menu & menu)
     DrawTexture(get_background(), 0, 0, WHITE);
 
     ClickableText backButton("back to Menu", {100, 900}, 30, RED);
-    backButton.Draw(GetMousePosition());
-    if (backButton.isClicked(GetMousePosition(), IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+    backButton.Draw();
+    if (backButton.isClicked()) {
         auto newstate = std::make_unique<MenuState>() ;
         menu.SetState(std::move(newstate));
         return;
@@ -298,8 +292,8 @@ void ContinueState::render(Menu & menu)
     DrawText("select a save file: " , 100 , 80 , 30 , GREEN);
 
     for(auto & button : fileButtons){
-        button.Draw(GetMousePosition()) ;
-        if(button.isClicked(GetMousePosition() , IsMouseButtonPressed(MOUSE_LEFT_BUTTON))){
+        button.Draw() ;
+        if(button.isClicked()){
             selectedFile = button.get_text() ;
             fileselected = true ;
         }

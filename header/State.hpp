@@ -15,7 +15,6 @@ struct PlayerSelection {
 #include "Button.hpp"
 #include "Menu.hpp"
 #include "GameRender.hpp"
-#include "SaveManager.hpp"
 
 class Menu ;
 class GameRender ; 
