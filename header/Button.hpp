@@ -1,7 +1,6 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 #include <raylib.h>
-#include <string>
 #include <iostream>
 class ClickableText {
 private:
@@ -13,8 +12,8 @@ private:
 
 public:
     ClickableText(const std::string&, Vector2, int, Color);
-    void Draw(Vector2 mousePos);
-    bool isClicked(Vector2 mousePos, bool click) const;
+    void Draw();
+    bool isClicked() const;
     std::string get_text() ;
 };
 
@@ -26,12 +25,12 @@ class Button {
 
     public:
         Button(const std::string& path, Vector2 position, float scale = 0.15f);
-        void Draw(Vector2 mousePos);
-        bool isPressed(Vector2 mousePos, bool click)const;
+        void Draw();
+        bool isPressed()const;
         Vector2 GetPosition() const ;
         Vector2 GetSize() const ;
         Rectangle GetBounds() const ;
-        void DrawWithFade(Vector2 mousepos , float) ; 
+        void DrawWithFade() ; 
 };
 
 struct TextBox {
