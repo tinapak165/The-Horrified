@@ -384,15 +384,15 @@ void GameRender::draw_users(){
 
     Vector2 mouse = GetMousePosition();
 
-    user1.Draw(mouse);
-    user2.Draw(mouse);
+    user1.Draw();
+    user2.Draw();
 
-    if (user1.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+    if (user1.isClicked()) {
         showingHeroInfo = true ; 
         currentHero = p1.hero ; 
     }
 
-    if (user2.isClicked(mouse, IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+    if (user2.isClicked()) {
         showingHeroInfo = true ; 
         currentHero = p2.hero ; 
     } 
