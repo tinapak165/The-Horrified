@@ -144,22 +144,22 @@ class DefeatAction : public HeroAction{
 
 };
 
+
 class GuideAction : public HeroAction{
     private:
+        enum class GuideStep { ChooseMode, ChooseVillager, ChoosePlace };
+        GuideStep step  ; 
         GameMap& map ; 
         Hero* hero ;
         std::string mode; 
-        std::string input = "";
-        std::string chosenPlace = "";
-        std::string chosenVillager = "";
-        std::vector<Location*> availablePlaces ; 
+        std::string input;
+        std::string chosenPlace;
+        std::string chosenVillager;
         bool typing = true ; 
-        bool step2 , step3 = false ; 
     public: 
         GuideAction(GameMap&  ,Hero*) ;
         bool update() override;   
         void draw()override;
-
 };
 
 #endif

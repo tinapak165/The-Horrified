@@ -182,6 +182,7 @@ bool PickUpAction::update() {
 void PickUpAction::draw() {
 
     DrawPanel() ; 
+
     if(drawCancelButton()){
         set_message("PickUp canceled");
         if(ChoseAnItem)
@@ -246,12 +247,9 @@ bool ChoosePerkCardAction::update() {
 
                 currentCard = std::move(availablePerks[i]);
                 availablePerks.erase(availablePerks.begin() + i);                
-                set_message("playing: " + currentCard->get_name());
-                if (currentCard->get_name() == "Break of Dawn") {
+                if (currentCard->get_name() == "Break of Dawn") 
                     game.set_skipMonsterPhase(true);
-                }
 
-                return false;
             }
         }
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -260,12 +258,10 @@ bool ChoosePerkCardAction::update() {
             return false;
         }        
     }
-
     if (done) { 
         frameCounter++;
-        if (frameCounter >= 60) {
+        if (frameCounter >= 60) 
             return true;
-        }
     }
     return false;
 }
@@ -274,13 +270,12 @@ bool ChoosePerkCardAction::update() {
 void ChoosePerkCardAction::draw() {
 
     DrawPanel() ;
+
     DrawText("[Playing Perk]", 120 , 105, 28, RAYWHITE);
     if (currentCard) {
         currentCard->draw(); 
         return;
     }
-    DrawText("Choose a Perk Card:", 120, 135, 28, YELLOW);
-
     auto& availablePerks = hero->GetAvailablePerkCards();
 
     for (size_t i = 0; i < availablePerks.size(); ++i) {
@@ -288,11 +283,7 @@ void ChoosePerkCardAction::draw() {
         DrawTexturePro(
             availablePerks[i]->get_texture(),
             {0, 0, (float)availablePerks[i]->get_texture().width, (float)availablePerks[i]->get_texture().height},
-            cardRect,
-            {0, 0},
-            0.0f,
-            WHITE
-        );
+            cardRect, {0, 0}, 0.0f, WHITE);
     }
     DrawMessage(155 , GREEN) ;
 }
@@ -323,8 +314,7 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
 
     if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
         mode = Mode::ForDracula ;
-        auto items = hero->GetItems() ;
-        for(auto& item : items){
+        for(auto& item : hero->GetItems() ){
             if(item.getColor() == ItemColor::Red) 
                 availableRedItems.push_back(item);
         }
@@ -334,8 +324,7 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
     }
     else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { 
         mode = Mode::ForInvisibleMan ;
-        auto items = hero->GetItems();
-            for (auto& item : items) {
+            for (auto& item : hero->GetItems()) {
                 std::string loc = item.getLocationName();
                 if (loc == "Inn" || loc == "Barn" || loc == "Institute" || loc == "Laboratory" || loc == "Mansion") 
                     evidenceItems.push_back(item);
@@ -347,7 +336,6 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
         mode = Mode::None ; 
         set_message("You cannot perform advance action here.");
     }
-
 }
 bool AdvanceAction::update() {
 
@@ -367,10 +355,8 @@ bool AdvanceAction::update() {
             set_message("No boost applied.");
             waitingForAbility = false;
         }
-        else 
-            return false;
+        else  return false;
         
-
         selectedItems.push_back(pendingAbilityItem);
         totalStrength += pendingAbilityItem.getStrength();
         hero->removeItems(pendingAbilityItem);
@@ -434,7 +420,6 @@ bool AdvanceAction::update() {
             }
             else 
                 set_message("Select more red items (total strength >= 6)");
-
         }
     }
 
@@ -545,15 +530,13 @@ DefeatAction::DefeatAction(Hero * h , InvisibleMan *i, Dracula * d) : hero(h) , 
     else if (d && d->get_location() == hero->GetCurrentLocation()) {
         mode = Mode::ForDracula;
         if(dracula->can_be_defeated()){
-            auto allItems = hero->GetItems();
-            for (auto& item : allItems) {
+            for (auto& item : hero->GetItems()) {
                 if (item.getColor() == ItemColor::Yellow)
                     availableItems.push_back(item);
             }
             set_message("Defeat Dracula: select yellow items (total strength >= 6)");
-        }else{
+        }else
             set_message("You must destroy all coffins first to defeat Dracula.");
-        }
     }
     else{
         mode = Mode::None ; 
@@ -568,15 +551,7 @@ DefeatAction::DefeatAction(Hero * h , InvisibleMan *i, Dracula * d) : hero(h) , 
 
 bool DefeatAction::update(){
 
-    if (shouldClose) {
-        messageTimer += GetFrameTime();
-        if (messageTimer >= 2.5f) {
-            messageTimer = 0.0f;
-            shouldClose = false;
-            return true;
-        }
-        return false;
-    }
+    if(handleShouldClose()) return true ;
 
     hoveredIndex = -1;
     float startX = 100.0f;
@@ -668,68 +643,76 @@ void DefeatAction::draw() {
 }
 
 GuideAction::GuideAction(GameMap & map, Hero * hero): map(map) , hero(hero){
-    set_message( "Choose mode: current/ neighbor");
+    input.clear();
+    chosenPlace.clear();
+    chosenVillager.clear();
+    step = GuideStep::ChooseMode ;
+    set_message("Choose mode: current / neighbor");
 }
-
 bool GuideAction::update() {
-    if (typing) {
 
-        input = type(input) ;
+    if(handleShouldClose()) return true ;
 
-        if (IsKeyPressed(KEY_ENTER)) {
-            if (!step2) {
-                if (input == "current" || input == "neighbor") {
-                    mode = input;
-                    typing = true;
-                    step2 = true;
-                    set_message( (mode == "current") ? "Enter villager name to move:" : "Choose a villager from neighbors:");
-                    input.clear();
-                } else {
-                    set_message( "Invalid mode. Try again: current / neighbor" );
-                    input.clear();
-                }
-            } else if (step2 && !step3) {
-                chosenVillager = input;
-                if (mode == "current") {
-                    for (auto* v : hero->villagerHere()) {
-                        if (v->get_name() == chosenVillager) {
-                            availablePlaces = hero->GetCurrentLocation()->get_neighbors();
-                            set_message("Enter neighbor name to move villager to:");
-                            input.clear();
-                            step3 = true;
-                            return false;
-                        }
+    if (!typing) return false;
+
+    input = type(input);
+
+    if (IsKeyPressed(KEY_ENTER)) {
+        switch (step) {
+        case GuideStep::ChooseMode:
+            if (input == "current" || input == "neighbor") {
+                mode = input;
+                step = GuideStep::ChooseVillager;
+                set_message(mode == "current" ? "Enter villager name to move:" : "Choose a villager from neighbors:");
+            } else 
+                set_message("Invalid mode. Try again: current / neighbor");
+            
+            input.clear();
+            break;
+
+        case GuideStep::ChooseVillager:
+            chosenVillager = input;
+            if (mode == "current") {
+                bool found = false;
+                for (auto* v : hero->villagerHere()) {
+                    if (v->get_name() == chosenVillager) {
+                        step = GuideStep::ChoosePlace;
+                        set_message("Enter neighbor name to move villager to:");
+                        found = true;
+                        break;
                     }
-                    set_message("Villager not found at your location.try again.");
-                    input.clear();
-                } else if (mode == "neighbor") {
-                    for (auto* neighbor : hero->GetCurrentLocation()->get_neighbors()) {
-                        for (auto* v : Villager::all()) {
-                            if (v->get_name() == chosenVillager && v->get_currentLocation() == neighbor) {
-                                v->MoveTo(hero->GetCurrentLocation(), chosenVillager);
-                                hero->SetRemainingActions(hero->GetRemainingActions() - 1);
-                                return true;
-                            }
-                        }
-                    }
-                    set_message("Villager not found in neighbors.try again.");
-                    input.clear();
                 }
-            } else if (step3) {
-                chosenPlace = input;
-                if (hero->GetCurrentLocation()->findNeighbor(chosenPlace)) {
-                    Location* target = map.get_location_by_name(chosenPlace);
-                    for (auto* v : hero->villagerHere()) {
-                        if (v->get_name() == chosenVillager) {
-                            v->MoveTo(target, chosenVillager);
+                if (!found) set_message("Villager not found here. Try again.");
+            }
+            else if (mode == "neighbor") {
+                for (auto* neighbor : hero->GetCurrentLocation()->get_neighbors()) {
+                    for (auto* v : Villager::all()) {
+                        if (v->get_name() == chosenVillager && v->get_currentLocation() == neighbor) {
+                            v->MoveTo(hero->GetCurrentLocation(), chosenVillager);
                             hero->SetRemainingActions(hero->GetRemainingActions() - 1);
                             return true;
                         }
                     }
-                } else set_message( "Not a valid neighboring location.try again." );
-                
-                input.clear();
+                }
+                set_message("Villager not found in neighbors. Try again.");
             }
+            input.clear();
+            break;
+
+        case GuideStep::ChoosePlace:
+            chosenPlace = input;
+            if (hero->GetCurrentLocation()->findNeighbor(chosenPlace)) {
+                Location* target = map.get_location_by_name(chosenPlace);
+                for (auto* v : hero->villagerHere()) {
+                    if (v->get_name() == chosenVillager) {
+                        v->MoveTo(target, chosenVillager);
+                        hero->SetRemainingActions(hero->GetRemainingActions() - 1);
+                        return true;
+                    }
+                }
+            } else  set_message("Not a valid neighboring location. Try again.");
+            
+            input.clear();
         }
     }
     return false;
@@ -737,8 +720,12 @@ bool GuideAction::update() {
 
 void GuideAction::draw() {
     DrawPanel() ;
+    if(drawCancelButton()){
+        set_message("Guide canceled");
+        set_ShouldClose(true) ;
+    }
     DrawText("[Guide Action]", 120, 105, 24, RAYWHITE);
     DrawMessage(140 , YELLOW) ;
-    if(typing)
-        DrawText(input.c_str(), 120, 180, 28, SKYBLUE);    
+    if(typing) 
+        DrawTypingText(input) ; 
 }
