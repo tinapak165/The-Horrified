@@ -18,6 +18,14 @@ Hero::Hero( std::string name , int MaxActions , Location* StartingLocation , std
     };
 }
 
+bool Hero::drawCancelButton(){
+    ClickableText Backbutton("Cancel" , {100 , 400} , 20 , RAYWHITE) ;
+    Backbutton.Draw() ; 
+    if(Backbutton.isClicked()) 
+        return true ; 
+    return false ;
+}
+
 void Hero::DisplayActions() const{
     const float panelX = 80 ; const float panelY = 80 ; 
     const float panelW = 750 ; const float panelH = 300 ; 

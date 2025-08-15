@@ -10,6 +10,7 @@
 #include "InvisibleMan.hpp"
 #include "Dracula.hpp"
 #include "Itembag.hpp"
+#include "Button.hpp"
 class Location ; 
 class Dracula ; 
 class ItemPool ; 
@@ -66,6 +67,7 @@ class Hero{
         virtual void StartSpecial(GameMap&);
         virtual void UpdateSpecial(bool &done) ;
         virtual void DrawSpecial() ; 
+        bool drawCancelButton(); //uses for courier & arch special
 
         virtual bool HasAbility() ; 
 

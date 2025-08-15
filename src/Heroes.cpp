@@ -7,14 +7,6 @@ Archaeologist:: Archaeologist(GameMap& Map): Hero("archaeologist" , 4 , Map.get_
     loadTexture();
 }
 
-bool Archaeologist::drawCancelButton(){
-    ClickableText Backbutton("Cancel" , {100 , 400} , 20 , RAYWHITE) ;
-    Backbutton.Draw() ; 
-    if(Backbutton.isClicked()) 
-        return true ; 
-    return false ;
-}
-
 bool Archaeologist::drawDoneButton(){
     ClickableText button("Done" , {250 , 400} , 20 , RAYWHITE) ;
     button.Draw() ; 
@@ -45,19 +37,6 @@ std::string Archaeologist::type(std::string input){
     return input ;  
 }
 
-bool Archaeologist::handleShouldClose()
-{
-    if (shouldClose) {
-        messageTimer += GetFrameTime();
-        if (messageTimer >= 1.0f) {
-            WaitTime(1.5f) ;
-            return true; 
-        }
-        return false; 
-    }  
-    return false ;
-}
-
 void Archaeologist::StartSpecial(GameMap & m) {
     map = &m;
     chosenPlace.clear();
@@ -65,14 +44,23 @@ void Archaeologist::StartSpecial(GameMap & m) {
     itemHitboxes.clear();
     chosenLocation = nullptr;
     itemList = nullptr;
-    shouldClose = false;
     typing = true;            
     ChoseAnItem = false;       
 }
 
 void Archaeologist::UpdateSpecial(bool &done){
 
-    if(handleShouldClose()) done = true;
+    if(drawDoneButton()){
+        message = "Special done";
+        SetRemainingActions(GetRemainingActions() - 1);
+        done = true;
+    } 
+    if(drawCancelButton()){
+        message = "Special canceled";
+        if(ChoseAnItem)
+            SetRemainingActions(GetRemainingActions() - 1);
+        done = true ;
+    }
 
     Location* heroLoc = GetCurrentLocation();
 
@@ -86,7 +74,7 @@ void Archaeologist::UpdateSpecial(bool &done){
                 itemList = &chosenLocation->get_items() ;
                 if(itemList->empty()) {
                     message = "no item available in " + chosenLocation->get_name() ; 
-                    shouldClose = true ;
+                    done = true ;
                 }
             } else {
                 message = "Invalid neighboring location!";
@@ -104,7 +92,7 @@ void Archaeologist::UpdateSpecial(bool &done){
 
             if (itemList->empty()) {
                 message = "No more items.";
-                shouldClose = true ;
+                done = true ;
                 SetRemainingActions(GetRemainingActions() - 1);
             }
         }
@@ -113,22 +101,14 @@ void Archaeologist::UpdateSpecial(bool &done){
 
 void Archaeologist::DrawSpecial() {
 
+    drawDoneButton() ; 
+    drawCancelButton() ;
+
     int y = 120;
 
     if(typing)
         DrawTypingText(chosenPlace) ;
 
-    if(drawDoneButton()){
-        message = "Special done";
-        SetRemainingActions(GetRemainingActions() - 1);
-        shouldClose = true;
-    } 
-    if(drawCancelButton()){
-        message = "Special canceled";
-        if(ChoseAnItem)
-            SetRemainingActions(GetRemainingActions() - 1);
-        shouldClose = true ;
-    }
     DrawText("Enter neighboring location to pick up its items:", 100, y, 18, RAYWHITE);
     y += 30;
 
@@ -156,8 +136,6 @@ void Archaeologist::DrawSpecial() {
     }
 }
 
-
-
 Mayor::Mayor(GameMap& Map) : Hero("mayor" , 5 , Map.get_location_by_name("Theatre") , "No special action." , "../Assets/Heros/Mayor.png") {
     Map.get_location_by_name("Theatre")->add_hero(this , this->getTexture()) ; 
     loadTexture();
@@ -169,30 +147,26 @@ Courier::Courier(GameMap& Map , TurnManager& m): Hero("courier" , 4 , Map.get_lo
 } 
 
 void Courier::StartSpecial(GameMap &){
-
     heroes = turn.get_heroes() ;
-    // message = "choose a hero to move to:" ;
     hoveredIndex = -1 ; 
     done = false ;
 }
 void Courier::UpdateSpecial(bool &done) {
-    Vector2 mousepos = GetMousePosition();
 
-    float startX = 100.0f;  
-    float startY = 150.0f;
-    float width = 300.0f;
-    float height = 30.0f;
+   if(drawCancelButton()){
+        done = true ;
+        return ;        
+    }
+    hoveredIndex = -1;  
 
-    hoveredIndex = -1;  // reset hovered index هر بار آپدیت
-
-    int displayedIndex = 0; // شمارنده برای هیروهای غیر courier
+    int displayedIndex = 0; 
 
     for (size_t i = 0; i < heroes.size(); i++) {
         if (heroes[i]->GetName() == "courier")
             continue;
 
-        Rectangle heroBox = { startX, startY + displayedIndex * height, width, height };
-        if (CheckCollisionPointRec(mousepos, heroBox)) {
+        Rectangle heroBox = { 100, float(150 + displayedIndex * 30), 200, 30 };
+        if (CheckCollisionPointRec(GetMousePosition(), heroBox)) {
             hoveredIndex = displayedIndex;
             break;
         }
@@ -200,7 +174,7 @@ void Courier::UpdateSpecial(bool &done) {
     }
 
     if (hoveredIndex != -1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        // انتخاب هیرو بر اساس displayedIndex
+
         int selectedCount = 0;
         Hero* selectedHero = nullptr;
         for (size_t i = 0; i < heroes.size(); i++) {
@@ -217,7 +191,6 @@ void Courier::UpdateSpecial(bool &done) {
         if (selectedHero) {
             MoveTo(selectedHero->GetCurrentLocation());
             SetRemainingActions(GetRemainingActions() -1) ;
-
             done = true;
             return;
         }
@@ -225,15 +198,11 @@ void Courier::UpdateSpecial(bool &done) {
 }
 
 void Courier::DrawSpecial() {
-    Rectangle panel = {80, 80, 400, 300};
-    DrawRectangleRec(panel, Fade(DARKGRAY, 0.9f));
-    DrawRectangleLinesEx(panel, 3, RAYWHITE);
 
-    DrawText("Select a Hero to Move To:", panel.x + 20, panel.y + 10, 22, WHITE);
+    drawCancelButton() ;
+    DrawText("Select a Hero to Move To:", 100, 90, 22, WHITE);
 
-    float x = panel.x + 20;
-    float y = panel.y + 50;
-    float lineHeight = 28;
+    float y = 130;
 
     int displayedIndex = 0;
     for (size_t i = 0; i < heroes.size(); i++) {
@@ -242,9 +211,9 @@ void Courier::DrawSpecial() {
 
         Color textColor = (hoveredIndex == displayedIndex) ? YELLOW : WHITE;
         std::string text = heroes[i]->GetName() + " (Location: " + heroes[i]->GetCurrentLocation()->get_name() + ")";
-        DrawText(text.c_str(), x, y, 20, textColor);
+        DrawText(text.c_str(), 100, y, 20, textColor);
 
-        y += lineHeight;
+        y += 28;
         displayedIndex++;
     }
 }

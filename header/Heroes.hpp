@@ -2,11 +2,9 @@
 #define HEROES_H
 #include "Hero.hpp"
 #include "TurnManager.hpp"
-#include "Button.hpp"
+
 class Archaeologist : public Hero{
     private:
-        bool shouldClose = false ;
-        float messageTimer = 0.0f;
         std::string message;
         std::string chosenPlace;
         bool typing = true;
@@ -27,8 +25,6 @@ class Archaeologist : public Hero{
         std::string type(std::string) ;
         void DrawTypingText(const std::string &);
         bool drawDoneButton() ;
-        bool drawCancelButton() ;
-
 };
 
 class Mayor : public Hero{
