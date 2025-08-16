@@ -99,7 +99,6 @@ class AdvanceAction : public HeroAction{
         GameMap& map;
         InvisibleMan* invisibleman;
         Item pendingAbilityItem;
-        float messageTimer = 0.0f;
         bool waitingForAbility = false ; 
         bool waitingForAbilityInput = false ; 
 
@@ -118,6 +117,7 @@ class AdvanceAction : public HeroAction{
 
     public:
         AdvanceAction(Hero*, Dracula* , ItemPool& , GameMap& ,InvisibleMan*);
+        void checkforDestroyingCoffin() ;
         bool update() override;   
         void draw()override; 
 };

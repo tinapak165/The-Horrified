@@ -309,8 +309,7 @@ void SpecialAction::draw() {
 AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map, InvisibleMan* invisi):
     hero(h) , dracula(dra) , pool(i) , map(map) , invisibleman(invisi){
 
-    Location* current = hero->GetCurrentLocation() ;
-    std::string locName = current->get_name();
+    std::string locName = hero->GetCurrentLocation()->get_name();
 
     if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
         mode = Mode::ForDracula ;
@@ -320,9 +319,9 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
         }
         totalStrength = 0 ; 
         selectedItems.clear() ; 
-        set_message("Select Red items with total strength >= 6 to destroy coffin.");
+        set_message("Select items with total strength >= 6 to destroy coffin.\n Your red items:");
     }
-    else if(h->GetCurrentLocation() == map.get_location_by_name("Precinct")) { 
+    else if(locName == "Precinct") { 
         mode = Mode::ForInvisibleMan ;
             for (auto& item : hero->GetItems()) {
                 std::string loc = item.getLocationName();
@@ -334,12 +333,26 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
     }
     else{
         mode = Mode::None ; 
-        set_message("You cannot perform advance action here.");
+        set_message("You can not perform advance action here.");
     }
 }
-bool AdvanceAction::update() {
+void AdvanceAction::checkforDestroyingCoffin(){
+    if (totalStrength >= 6) {
+        dracula->destroy_coffin_at(hero->GetCurrentLocation()->get_name());
+        for (auto& item : selectedItems) 
+            pool.add_item(item);
+            
+        hero->SetRemainingActions(hero->GetRemainingActions() -1); 
+        set_message("Coffin destroyed successfully!");
+        set_ShouldClose(true);
+    }
+    else 
+        set_message("Select more items (total strength >= 6)");
+}
+bool AdvanceAction::update(){
 
     if(handleShouldClose()) return true ; 
+
     if (mode == Mode::None) {
         set_ShouldClose(true);
         return false;
@@ -349,40 +362,29 @@ bool AdvanceAction::update() {
         if (IsKeyPressed(KEY_Y)) {
             pendingAbilityItem.setStrength(pendingAbilityItem.getStrength() + 1);
             set_message("Item boosted.");
-            waitingForAbility = false;
         }
         else if (IsKeyPressed(KEY_N)) {
             set_message("No boost applied.");
-            waitingForAbility = false;
         }
         else  return false;
-        
+
+        waitingForAbility = false;
+
         selectedItems.push_back(pendingAbilityItem);
         totalStrength += pendingAbilityItem.getStrength();
         hero->removeItems(pendingAbilityItem);
 
-        if (totalStrength >= 6) {
-            dracula->destroy_coffin_at(hero->GetCurrentLocation()->get_name());
-            for (auto& item : selectedItems) {
-                pool.add_item(item);
-            }
-            hero->SetRemainingActions(hero->GetRemainingActions() -1); 
-            set_message("Coffin destroyed successfully!");
-            set_ShouldClose(true);
-        }
-        else 
-            set_message("Select more red items (total strength >= 6)");
+        checkforDestroyingCoffin() ;
 
         return false;
     }
 
     if (mode == Mode::ForDracula) {
-        if (availableRedItems.empty()) {
-            set_message("You have no red items!");
-            set_ShouldClose(true);
-            return false;
-        }
-
+        // if (availableRedItems.empty()) {
+        //     set_message("You have no red items!");
+        //     set_ShouldClose(true);
+        //     return false;
+        // }
         hoveredIndex = -1;
 
         for (size_t i = 0; i < availableRedItems.size(); ++i) {
@@ -409,17 +411,7 @@ bool AdvanceAction::update() {
             totalStrength += chosen.getStrength();
             hero->removeItems(chosen);
 
-            if (totalStrength >= 6) {
-                dracula->destroy_coffin_at(hero->GetCurrentLocation()->get_name());
-                for (auto& item : selectedItems) {
-                    pool.add_item(item);
-                }
-                hero->SetRemainingActions(hero->GetRemainingActions() -1); 
-                set_message("Coffin destroyed successfully!");
-                set_ShouldClose(true);
-            }
-            else 
-                set_message("Select more red items (total strength >= 6)");
+            checkforDestroyingCoffin() ;
         }
     }
 
@@ -432,10 +424,9 @@ bool AdvanceAction::update() {
         }
 
         hoveredEvidenceIndex = -1;
-        float startX = 100.0f, startY = 150.0f, height = 30.0f;
 
         for (size_t i = 0; i < evidenceItems.size(); ++i) {
-            Rectangle rect = { startX, startY + i * height, 300, height };
+            Rectangle rect = { 100.0f, 150.0f + i * 30.0f, 300, 30.0f };
             if (CheckCollisionPointRec(GetMousePosition(), rect)) {
                 hoveredEvidenceIndex = (int)i;
                 break;
@@ -452,7 +443,7 @@ bool AdvanceAction::update() {
                 evidencePlaced = true;
                 set_ShouldClose(true);
             } else 
-                set_message("Evidence from that location already exists. Choose another.");
+                set_message("Evidence from that location already exists.Choose another.");
         }
     }
     return false;
@@ -462,52 +453,39 @@ void AdvanceAction::draw() {
 
     DrawPanel() ;
 
-    if (( get_shouldClose() && get_message() == "Evidence placed successfully." || get_message() == "Coffin destroyed successfully!")) {
-        DrawMessage(95 , GREEN) ;
-        return;
+    if(drawCancelButton()){
+        set_message("Advance canceled");
+        set_ShouldClose(true) ;
     }
+    Color messageColor = get_shouldClose() ? GREEN : (mode == Mode::None ? RED : WHITE);
+    DrawMessage(120 , messageColor) ;
 
     float y = 140;
 
     if (mode == Mode::ForDracula) {
 
-        set_message("Total Strength: " + std::to_string(totalStrength));
-        DrawMessage(140 , BLACK) ;
+        std::string strengthMsg = "Total Strength: " + std::to_string(totalStrength);
+        DrawText(strengthMsg.c_str(), 300, 400, 22, BLACK);
         y += 30;
 
         for (size_t i = 0; i < availableRedItems.size(); ++i) {
             Color textColor = (hoveredIndex == static_cast<int>(i)) ? YELLOW : WHITE;
 
             const Item& item = availableRedItems[i];
-            set_message( item.getName() + " (strength: " + std::to_string(item.getStrength()) + ")");
-            DrawMessage( 140 + i * 30 , textColor) ;
-
+            std::string text = item.getName() + " (strength: " + std::to_string(item.getStrength()) + ")";
+            DrawText(text.c_str(), 120, y + i * 30, 20, textColor);
         }
-
-        y += availableRedItems.size() * 30 + 20;
-        if (!selectedItems.empty()) {
-            DrawText("Selected Items:", 100, y, 20, BLACK);
-            y += 30;
-            for (const auto& item : selectedItems) {
-                set_message( item.getName() + " (strength: " + std::to_string(item.getStrength()) + ")");
-                DrawMessage(140 , GREEN) ;
-                y += 30;
-            }
-        }
-
-    } else if (mode == Mode::ForInvisibleMan) {
+    }
+    else if(mode == Mode::ForInvisibleMan) {
 
         for (size_t i = 0; i < evidenceItems.size(); ++i) {
             Color textColor = (hoveredEvidenceIndex == static_cast<int>(i)) ? YELLOW : WHITE;
 
             const Item& item = evidenceItems[i];
-            set_message( item.getName() + " (from: " + item.getLocationName() + ")");
-            DrawMessage(y + i * 30 , textColor) ;
+            std::string text = item.getName() + " (from: " + item.getLocationName() + ")";
+            DrawText(text.c_str(), 120, y + i * 30, 20, textColor);
         }
     }
-
-    Color messageColor = get_shouldClose() ? GREEN : (mode == Mode::None ? RED : WHITE);
-    DrawMessage( 140 , messageColor) ;
 }
 
 DefeatAction::DefeatAction(Hero * h , InvisibleMan *i, Dracula * d) : hero(h) , invisibleMan(i) , dracula(d){
