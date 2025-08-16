@@ -100,7 +100,6 @@ class AdvanceAction : public HeroAction{
         InvisibleMan* invisibleman;
         Item pendingAbilityItem;
         bool waitingForAbility = false ; 
-        bool waitingForAbilityInput = false ; 
 
         enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
 
@@ -128,17 +127,16 @@ class DefeatAction : public HeroAction{
         Hero* hero;
         InvisibleMan*  invisibleMan;
         Dracula* dracula;
-        std::vector<Item> selectedItems;
         std::vector<Item> availableItems;
         int totalStrength = 0;
         int hoveredIndex = -1 ; 
-        float messageTimer = 0.0f;
-        bool shouldClose = false ; 
-        enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
-
+        enum class Mode { None, ForDracula, ForInvisibleMan } mode ;
+        Item pendingAbilityItem;
+        bool waitingForAbility = false ; 
 
     public:
         DefeatAction(Hero* , InvisibleMan* , Dracula*) ;
+        void checkForStrength(int, std::string);
         bool update() override;   
         void draw()override;
 
