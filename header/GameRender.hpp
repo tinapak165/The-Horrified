@@ -34,6 +34,7 @@ public:
     void renderTerrorLevel(int terrorLevel);
     void draw_saveGame();
     void draw_villagerButton();
+    void draw_monster_objects();
 
    
 
