@@ -19,34 +19,30 @@ std::pair<Hero*, Villager*> InvisibleMan::attack() {
     const auto& heroes = loc->get_heroes();
     const auto& villagers = loc->get_villagers();
 
-    Hero* targetHero = nullptr;
-    Villager* targetVillager = nullptr;
+   Hero* chosenHero = nullptr;
+        Villager* chosenVillager = nullptr;
 
-    if (!heroes.empty()) {
-        if (heroes.size() == 1)
-            targetHero = heroes[0];
-        else {
-            std::cout << "Choose hero to attack:\n";
-            for (size_t i = 0; i < heroes.size(); ++i)
-                std::cout << i << ": " << heroes[i]->GetName() << '\n';
-            int choice; std::cin >> choice;
-            targetHero = heroes[choice];
+      if (!heroes.empty()) {
+            if (heroes.size() == 1) {
+                chosenHero = heroes[0];
+            } else {
+                // انتخاب رندوم
+                size_t index = rand() % heroes.size();
+                chosenHero = heroes[index];
+                
+            }
         }
-    }
 
     if (!villagers.empty()) {
-        if (villagers.size() == 1)
-            targetVillager = villagers[0];
-        else {
-            std::cout << "Choose villager to destroy:\n";
-            for (size_t i = 0; i < villagers.size(); ++i)
-                std::cout << i << ": " << villagers[i]->get_name() << '\n';
-            int choice; std::cin >> choice;
-            targetVillager = villagers[choice];
+            if (villagers.size() == 1)
+                chosenVillager = villagers[0];
+            else {
+                size_t index = rand() % villagers.size();
+                chosenVillager = villagers[index];
+            }
         }
-    }
 
-    return {targetHero, targetVillager};
+    return {chosenHero, chosenVillager};
 }
 
 bool InvisibleMan::can_be_defeated() {
@@ -88,6 +84,7 @@ bool InvisibleMan::add_evidence(const std::string& location) {
 }
 std::unordered_set<std::string> InvisibleMan::get_evidence_locations(){ return evidence_locations; } 
 
-int InvisibleMan::get_evidence_count() const{
+
+int InvisibleMan::get_evidence_count() const {
     return static_cast<int>(evidence_locations.size());
 }
