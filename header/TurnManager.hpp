@@ -19,6 +19,8 @@ class TurnManager {
         
     void add_hero(Hero* hero);
     std::vector<Hero*> get_heroes();
+    void set_active_hero(const std::string& name);
+    Hero* find_hero_by_name(const std::string& name);
     };
     
 #endif

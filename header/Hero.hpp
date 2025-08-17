@@ -60,13 +60,9 @@ class Hero{
         virtual void UpdateSpecial(bool &done) ;
         virtual void DrawSpecial() ; 
 
-        void GuideAction(Hero* , GameMap&) ; 
-
         virtual void Special(Location*) = 0  ; 
         virtual bool HasAbility() ; 
 
-        // void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
-        void DefeatAction(Hero*, InvisibleMan* , Dracula*); 
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
         void showvillagersHere()const ; 
@@ -85,10 +81,13 @@ class Hero{
         void displayavailblecards() const;
         void displayPlayedCards() const; 
         std::vector<std::unique_ptr<Perkcard>>& GetAvailablePerkCards() ; 
+        std::vector<std::unique_ptr<Perkcard>>& GetPlayedPerkCards() ; 
+
         void addPlayedCards(std::unique_ptr<Perkcard>) ;
 
         void DisplayItem() ;
-        std::vector<Item>& GetItems() ; 
+        std::vector<Item>& GetItems() ;
+        void addItems(Item) ; 
         void removeItems(const Item&) ; 
         bool has_items() const;
         void remove_item_by_index(int); 

@@ -1,6 +1,7 @@
 #include "GameRender.hpp"
 #include "Game.hpp"
-#include "ActionButtons.hpp"
+#include "ActionButton.hpp"
+#include "SaveManager.hpp"
 GameRender::GameRender(Game& game) : game(game) {
     draculaMat = LoadTexture("../Assets/Monster_Mat/DraculaMat.png");
     invisibleManMat = LoadTexture("../Assets/Monster_Mat/InvisibleManMat.png");
@@ -52,13 +53,34 @@ void GameRender::draw() {
         }
         return;
     }
-    if (ShowAvailablePerkButton && currentHero) {
-        currentHero->displayavailblecards(); 
+
+    if (savegame && currentHero) {
+        SaveManager save(game);
+
+        if (!fileSaved) {
+            filename = save.generateNextFile();
+            save.registerSaveFiles(filename) ;
+            save.saveGame(filename);
+            fileSaved = true;
+        }
+
+        std::string text = "Game saved to: " + filename;
+        DrawText(text.c_str(), 100, 100, 30, GREEN);
+
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            ShowAvailablePerkButton = false;
             currentHero = nullptr;
+            savegame = false;
+            fileSaved = false;  
+            filename = "";
         }
         return;
+    }
+    if(showingVillagerInfo){
+        Villager::DisplayInfo() ;
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            showingVillagerInfo = false;
+        }
+        return ;
     }
     
     
@@ -76,15 +98,14 @@ void GameRender::draw() {
     draw_action_panel() ;
     draw_collected_items() ;
     draw_played_Perkcards() ;  
-    draw_available_Perkcards() ;
+    draw_saveGame() ;
+    draw_villagerButton() ;
     renderTerrorLevel(game.get_terror_level());
     
 }
 
 void GameRender::draw_map() {
     game.get_map().draw_map();
-    
-  
 }
 
 void GameRender::draw_sidebar() {
@@ -266,7 +287,36 @@ void GameRender::draw_monsters() {
   }
 }
 
+void GameRender::draw_saveGame()
+{
+    Rectangle saveGame = { 650, 60, 200, 45 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, saveGame);
 
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(saveGame, btnColor);
+    DrawText("save game", saveGame.x + 10, saveGame.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        savegame = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }  
+}
+
+void GameRender::draw_villagerButton()
+{
+    Rectangle vill = { 650, 100, 200, 45 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, vill);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(vill, btnColor);
+    DrawText("villagers", vill.x + 10, vill.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        showingVillagerInfo = true ;
+    }  
+}
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
     const float spacing = 10.0f;
@@ -465,7 +515,8 @@ void GameRender::handle_action(const std::string& action , Hero* h){
         currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
 
     } else if (action == "Guide") {
-        h->GuideAction(h, game.get_map());
+        currentHero = h ; 
+        currentAction = std::make_unique<GuideAction>(game.get_map() , currentHero) ;
     } else if (action == "Pickup") {
 
         currentHero = h ; 

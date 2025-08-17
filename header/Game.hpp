@@ -41,13 +41,7 @@ enum class Phase{
         (game).log(msg); \
     } while(0)
 
-#define GAME_LOG_PTR(game, msg) \
-    do { \
-        std::cout << msg << std::endl; \
-        (game)->log(msg); \
-    } while(0)
 
-/// 
 class Game {
     friend class Monstercard;
 private:
@@ -112,11 +106,16 @@ public:
    
     void set_currentPhase(Phase) ; 
     void set_HeroTurnInProgress(bool) ; 
+   
+
+    void setPlayer1(const std::string& p1 , Hero* h);
+    void setPlayer2(const std::string& p2 , Hero* h);
+
      Hero* create_hero_by_name(const std::string& name);
     void initializaDeck() ; 
     void ChoosePerkCardANDplay(Hero*) ;
     void getNewCard(Hero*) ;
-    
+    ItemColor string_to_color(const std::string& color);
     std::unique_ptr<Perkcard> find_perk_by_name(const std::string& name);
     void monster_objectes() ;
     void return_item(const Item& item);
@@ -140,6 +139,7 @@ public:
 
     std::vector<Villager*>& get_all_villagers();
 
+    Villager* create_villager(const std::string& , Location*) ;
     void add_villager(Villager* v);
     void log(const std::string& message);
     const std::vector<std::string>& get_logs() const { return logs; }

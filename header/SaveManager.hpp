@@ -12,7 +12,7 @@ class SaveManager{
     public:
         SaveManager(Game&);
         void saveGame(const std::string&);
-        bool loadGame(const std::string&);
+        void loadGame(const std::string&);
         std::string generateNextFile();
         std::vector<std::string> getFiles();
         void registerSaveFiles(const std::string&) ;

@@ -15,6 +15,7 @@ public:
     ClickableText(const std::string&, Vector2, int, Color);
     void Draw(Vector2 mousePos);
     bool isClicked(Vector2 mousePos, bool click) const;
+    std::string get_text() ;
 };
 
 class Button {

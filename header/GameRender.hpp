@@ -6,10 +6,11 @@
 #include <vector>
 
 
+
 class Game;
 class HeroAction;
-class ActionButtons;
-
+class ActionButton;
+class SaveManager;
 class GameRender {
 public:
 
@@ -31,6 +32,9 @@ public:
     void draw_available_Perkcards();
     void draw_played_Perkcards();
     void renderTerrorLevel(int terrorLevel);
+    void draw_saveGame();
+    void draw_villagerButton();
+
    
 
     ~GameRender() ; 
@@ -41,9 +45,13 @@ private:
     bool ShowitemButton = false ; 
     Hero* currentHero = nullptr ; 
     bool showingHeroInfo = false ; 
+    bool showingVillagerInfo = false ;
+    bool savegame = false  ;
     Location* selectedLocation = nullptr ; 
     std::vector<ActionButton> actionButtons ;
     Game& game;
+    bool fileSaved = false ;
+    std::string filename = "" ;
     MonsterType selectedMonsterMat = MonsterType::None;
     Texture2D draculaMat;
     Texture2D invisibleManMat;

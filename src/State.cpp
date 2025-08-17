@@ -1,8 +1,5 @@
 #include "State.hpp"
 #include "Menu.hpp"
-#include "GameRender.hpp"
-
-
 #include <iostream>
 #include <cstring>
 
@@ -18,62 +15,11 @@ Texture2D State::get_background() const{
     return background;
 }
 
-
 MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
-startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 300} , 1.0f)),
-exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{170, 500} , 1.0f)){}
+      startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 100} , 1.0f)),
+      exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{170, 300} , 1.0f)),
+      continueButton(std::make_unique<Button>("../Assets/Menu/continue.png", Vector2{170, 500} , 0.5f)) {}
 
-
-
- 
-
-
-
-
-
- 
-
-
-
-
-  
-
-
-// // class SetupState : public State {
-// // public:
-// //     void update(Menu& menu) override {
-// //         // پس از آماده‌سازی سریع به فاز قهرمان می‌رویم
-// //         menu.SetState(std::make_unique<HeroPhaseState>());
-// //     }
-
-// //     void playState(Menu& menu) override {
-// //         ClearBackground(DARKGRAY);
-// //         DrawText("Setup Game...", 100, 100, 30, WHITE);
-// //     }
-// // };
-// void MenuState::render(Menu& menu)  {
-//     DrawTexture(get_background(), 0, 0, WHITE);
-    
-//     Vector2 mouse = GetMousePosition();
-//     bool click = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
-    
-//     startButton->Draw(mouse);
-//     exitButton->Draw(mouse);
-    
-//     if (startButton->isPressed(mouse, click)) {
-//         auto newstate = std::make_unique<NameInputState>() ;
-//         menu.SetState(std::move(newstate)); 
-//         return ; 
-//     }
-//     if (exitButton->isPressed(mouse, click)) {
-//         auto newstate = std::make_unique<ExitState>() ;
-//         menu.SetState(std::move(newstate)) ;
-//         return ; 
-//     }
-// }
-
-
-// MenuState.cpp
 void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
 
@@ -82,8 +28,10 @@ void MenuState::render(Menu& menu)  {
 
         startButton->Draw(mouse);
         exitButton->Draw(mouse);
+        continueButton->Draw(mouse);
 
         if (startButton->isPressed(mouse, click)) {
+            menu.getGame().distribute_initial_items() ;
             auto newstate = std::make_unique<NameInputState>() ;
             menu.SetState(std::move(newstate)); 
             return ; 
@@ -93,11 +41,12 @@ void MenuState::render(Menu& menu)  {
             menu.SetState(std::move(newstate)) ;
             return ; 
         }
+        if(continueButton->isPressed(mouse , click)){
+            menu.SetState(std::make_unique<ContinueState>()) ;
+            return ;        
+        }
+        
     }
-
-
-
-
 
 ExitState::ExitState() 
     : State("../Assets/Menu/Background.png"),
@@ -135,16 +84,9 @@ void ExitState::render(Menu& menu) {
     }
 }
 
-
 // ExitState::~ExitState() {
 //     UnloadSound(goodbyeSound);
 // }
-
-SetupState::SetupState() : State("nothing"){}
-void SetupState::render(Menu& menu){
-
-}
-
 
 NameInputState::NameInputState() : State("../Assets/Menu/Background.png") ,
     nameBox1(std::make_unique<TextBox>(Rectangle{100, 150, 300, 40}, TextBox::ANY)) ,
@@ -276,10 +218,10 @@ void ChooseCharacterState::render(Menu& menu) {
     Vector2 mousePos = GetMousePosition();
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    ClickableText backButton("back to NameInput", {100, 900}, 30, RED);
+    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
     backButton.Draw(mousePos);
     if (backButton.isClicked(mousePos, mouseClicked)) {
-        auto newstate = std::make_unique<NameInputState>() ;
+        auto newstate = std::make_unique<MenuState>() ;
         menu.SetState(std::move(newstate));
         return;
     }
@@ -324,149 +266,49 @@ void ChooseCharacterState::render(Menu& menu) {
                 EndDrawing();
             }
             menu.startGame(player1, player2);
-            //  menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
             return;
         }
     }
 }
 
-void GameOverState::render(Menu & m) {
-        int screenW = GetScreenWidth();
-        int screenH = GetScreenHeight();
+ContinueState::ContinueState() : State("../Assets/Menu/Background.png"){}
 
-   
-        DrawRectangle(0, 0, screenW, screenH, Fade(GRAY, 0.7f));
+void ContinueState::render(Menu & menu)
+{
+    DrawTexture(get_background(), 0, 0, WHITE);
 
-        int boxW = 400;
-        int boxH = 200;
-        int boxX = (screenW - boxW) / 2;
-        int boxY = (screenH - boxH) / 2;
-
-        DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxW, (float)boxH}, 0.2f, 8, DARKGRAY);
-       DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxW, (float)boxH}, 0.2f, 8, 4.0f, WHITE);
-
-
-        DrawText("Game Over", boxX + 100, boxY + 20, 30, RED);
-        DrawText(message.c_str(), boxX + 40, boxY + 70, 20, WHITE);
-
-        DrawRectangle(boxX + 150, boxY + 130, 100, 40, RED);
-        DrawText("Exit", boxX + 180, boxY + 140, 20, WHITE);
+    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    backButton.Draw(GetMousePosition());
+    if (backButton.isClicked(GetMousePosition(), IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+        auto newstate = std::make_unique<MenuState>() ;
+        menu.SetState(std::move(newstate));
+        return;
     }
 
-void GameOverState::update(Menu & m) {
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                Vector2 mouse = GetMousePosition();
-                int boxX = (GetScreenWidth() - 400) / 2 + 150;
-                int boxY = (GetScreenHeight() - 200) / 2 + 130;
-                Rectangle exitBtn = {(float)boxX, (float)boxY, 100, 40};
+    SaveManager save(menu.getGame()) ;
+    std::vector<std::string> files = save.getFiles() ;
+    if(files.empty())
+        std::cout << "files are empty\n" ;
+    int y = 150 ; 
+    for(const std::string& file : files){
+        fileButtons.emplace_back(file , Vector2{120, (float)y} , 28 , GREEN);
+        y+= 40 ; 
+    }
 
-                if (CheckCollisionPointRec(mouse, exitBtn)) {
-                    CloseWindow(); // بستن بازی
-                }
+    DrawText("select a save file: " , 100 , 80 , 30 , GREEN);
+
+    for(auto & button : fileButtons){
+        button.Draw(GetMousePosition()) ;
+        if(button.isClicked(GetMousePosition() , IsMouseButtonPressed(MOUSE_LEFT_BUTTON))){
+            selectedFile = button.get_text() ;
+            fileselected = true ;
         }
+    }
+    if(fileselected && !selectedFile.empty()){
+        save.loadGame(selectedFile) ;
+        menu.SetState(nullptr) ;
+    }
 }
-
-
-
-// ItemBlockState::ItemBlockState(Hero* h) : hero(h) {
-//     panel = { (GetScreenWidth() - 560) / 2.0f, (GetScreenHeight() - 560) / 2.0f, 560, 560 };
-// }
-
-// void ItemBlockState::handleInput(Game& game) {
-//     const auto& items = hero->GetItems();
-
-//     for (size_t i = 0; i < items.size(); ++i) {
-//         Rectangle btn = { panel.x + 20, panel.y + 70 + (float)i * 50, panel.width - 40, 40 };
-//         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), btn)) {
-//             selectedIndex = (int)i;
-//             return;
-//         }
-//     }
-
-//     Rectangle noBtn = { panel.x + 20, panel.y + 70 + (float)items.size() * 50 + 30, panel.width - 40, 40 };
-//     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), noBtn)) {
-//         selectedIndex = -1;
-//         return;
-//     }
-// }
-
-// void ItemBlockState::update(Menu& menu) {
-//     if (isDone()) {
-//         // مقدار انتخابی رو توی Game برگردون
-//         menu.getGame().setItemBlockChoice(selectedIndex);
-//         // برگشت به State قبلی
-//         menu.getGame().popState();
-//     }
-// }
-
-// void ItemBlockState::render(Menu& menu) {
-//     const auto& items = hero->GetItems();
-
-//     // لایه پنجره
-//     DrawRectangleRec(panel, Fade(DARKGRAY, 0.95f));
-//     DrawRectangleLinesEx(panel, 3, BLACK);
-//     DrawText("Dracula is attacking! Use an item to block?", panel.x + 20, panel.y + 20, 22, RED);
-
-//     for (size_t i = 0; i < items.size(); ++i) {
-//         Rectangle btn = { panel.x + 20, panel.y + 70 + (float)i * 50, panel.width - 40, 40 };
-//         DrawRectangleRec(btn, LIGHTGRAY);
-//         DrawText((std::to_string(i+1) + ". " + items[i].getName() + " (" +
-//                   items[i].color_to_string(items[i].getColor()) + ")").c_str(),
-//                   btn.x + 10, btn.y + 10, 20, BLACK);
-//     }
-
-//     Rectangle noBtn = { panel.x + 20, panel.y + 70 + (float)items.size() * 50 + 30, panel.width - 40, 40 };
-//     DrawRectangleRec(noBtn, MAROON);
-//     DrawText("Don't use any item", noBtn.x + 10, noBtn.y + 10, 20, WHITE);
-// }
-
-// MonsterPhaseState::MonsterPhaseState(): State (""){}
-
-// void MonsterPhaseState::update(Menu& menu) {
-//     menu.getGame().monster_dice();
-//     // اینجا اول دایس رول کن
-//     if (!phase_done) {
-//         phase_done = true;
-//     }
-
-//     // وقتی کاربر تأیید کرد برو فاز هیرو
-//     if (phase_done && IsKeyPressed(KEY_SPACE)) {
-//         menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
-//     }
-// }
-
-// void MonsterPhaseState::render(Menu& menu) {
-   
-
-//     GameRender renderer(menu.getGame());
-//     renderer.draw();
-
-//     const char* msg = "Monster Phase complete - Press SPACE to continue";
-//     int textWidth = MeasureText(msg, 30);
-//     DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
-// }
-
-
-//  void MonsterPhaseState::render(Menu& menu){
-     
-//       DrawTexture(get_background(), 0, 0, WHITE);
-   
-       
-
-//         GameRender renderer(menu.getGame());
-//         renderer.draw();
-//         menu.getGame().monster_dice();
-
-//         // پیام راهنما
-//         const char* msg = "Monster Phase complete - Press SPACE to continue";
-//         int textWidth = MeasureText(msg, 30);
-//         DrawText(msg, (GetScreenWidth() - textWidth) / 2, 100, 30, WHITE);
-
-//         // وقتی بازیکن تأیید کرد برو فاز هیرو
-//         if (phase_done && IsKeyPressed(KEY_SPACE)) {
-//             menu.SetState(std::make_unique<HeroPhaseState>(menu.getGame()));
-//         }
-// }
 
  
 

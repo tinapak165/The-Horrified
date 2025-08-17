@@ -55,18 +55,25 @@ void SaveManager::saveGame(const std::string & filename)
         for( const auto vill : loc->get_villagers())
             file << vill->get_name() << ',' ; 
         file << '\n' ;
-    }   
-    DrawText("Game saved!" , 1100 , 10 , 50 , GREEN)  ;
-    file.close();
+    }
+    file << "coffins: " ;
+    for(auto& pair : game.get_dracula()->get_coffins_map())
+        file << (pair.second ? '1' : '0');
+    file << '\n' ;
 
+    file << "evidence: " ;
+    for(auto & evi : game.get_invisibleMan()->get_evidence_locations())
+        file << evi << ',' ; 
+    file << '\n' ;
+
+    file.close();
 }
 
-bool SaveManager::loadGame(const std::string & filename)
+void SaveManager::loadGame(const std::string & filename)
 {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Could not open saveGame.txt\n";
-        return false;
+        std::cerr << "Could not open " << filename << '\n';
     }
     std::string line;
     Hero* currentHero = nullptr;
@@ -130,7 +137,7 @@ bool SaveManager::loadGame(const std::string & filename)
             std::string perk ; 
             while(getline(ss , perk , ',')){
                 if(!perk.empty()){
-                    auto card = game.create_perk_by_name(perk) ;
+                    auto card = game.find_perk_by_name(perk) ;
                     if(card)
                         currentHero->AddAvailablePerk(std::move(card)) ;
                 }
@@ -142,7 +149,7 @@ bool SaveManager::loadGame(const std::string & filename)
             std::string perk ; 
             while(getline(ss , perk , ',')){
                 if(!perk.empty()){
-                    auto card = game.create_perk_by_name(perk) ;
+                    auto card = game.find_perk_by_name(perk) ;
                     if(card)
                         currentHero->addPlayedCards(std::move(card)) ;
                 }
@@ -231,10 +238,29 @@ bool SaveManager::loadGame(const std::string & filename)
                     currentLocation->add_villager(vill) ;   
             }
         }
+        else if(line.rfind("coffins:" , 0) == 0){
+            std::string flags = line.substr(9);
+            std::vector<std::string> locs = {"Cave", "Dungeon", "Crypt", "Graveyard"};
+            for (size_t i = 0; i < flags.size() && i < locs.size(); ++i) {
+                if (flags[i] == '1') {
+                    std::cout << "in if 1\n" ;
+                  game.get_dracula()->destroy_coffin_at(locs[i]);    
+
+                }
+            }
+        }
+        else if(line.rfind("evidence:" , 0) == 0){
+            std::string loc = line.substr(10) ; 
+            std::stringstream ss(loc) ;
+            std::string evi ;
+            while(getline(ss , evi , ',')){
+                if(!evi.empty())
+                    auto itemlocation = game.get_invisibleMan()->add_evidence(evi) ;
+            }
+        }
     }
     std::cout << "game loaded\n" ;
     file.close() ;
-    return true ; 
 }
 
 std::string SaveManager::generateNextFile()

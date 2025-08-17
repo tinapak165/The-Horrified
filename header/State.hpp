@@ -5,8 +5,6 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-class Menu ;
-
 
 struct PlayerSelection {
     std::string name;
@@ -15,42 +13,33 @@ struct PlayerSelection {
 };
 
 #include "Button.hpp"
-#include "ActionButtons.hpp"
+#include "Menu.hpp"
+#include "GameRender.hpp"
+#include "SaveManager.hpp"
 
-
-
-
+class Menu ;
+class GameRender ; 
 class State{
     private:
-    Texture2D background ; 
-    
-    public :
-    std::vector<ActionButton> actionButtons;
-    State(const std::string&) ; 
-    Texture2D get_background() const ; 
-    virtual void render(Menu&) = 0 ;
-    virtual void update(Menu& menu) {}
-    
-    
-    
-    
-    
-    
-    virtual ~State(); 
-    
-};
+        Texture2D background ; 
 
+    public :
+        State(const std::string&) ; 
+        Texture2D get_background() const ; 
+        virtual void render(Menu&) = 0 ;
+        virtual ~State(); 
+  
+};
 
 class MenuState : public State {
     private:
         std::unique_ptr<Button> startButton ; 
         std::unique_ptr<Button> exitButton ;
+        std::unique_ptr<Button> continueButton;
     public:
-        MenuState() ;
-        void render(Menu&) override ; 
-    
+        MenuState() ; 
+        void render(Menu&) override ;  
 };
-
 
 class ExitState : public State{
     private:
@@ -58,11 +47,10 @@ class ExitState : public State{
         std::unique_ptr<ClickableText> NoText ;
         // Sound goodbyeSound;
         // bool soundPlayed = false;
-    
+
     public:
         ExitState();
         void render(Menu&) override;
-    
 }; 
 
 class NameInputState : public State {
@@ -71,11 +59,10 @@ class NameInputState : public State {
         std::unique_ptr<TextBox>nameBox1 ;std::unique_ptr<TextBox> nameBox2;
         std::unique_ptr<TextBox>timeBox1 ; std::unique_ptr<TextBox>timeBox2 ; 
         Rectangle continueButton;
-        
+
     public:
         NameInputState();
         void render(Menu&) override;
-    
 };
 
 class ChooseCharacterState : public State{
@@ -84,69 +71,35 @@ class ChooseCharacterState : public State{
         PlayerSelection player2 ; 
         bool readyToStart = false;
         double selectionTime = 0.0;
-    
-    
+
+
         bool player1First;
         enum class PlayerTurn {PLAYER1 , PLAYER2} ;
         PlayerTurn currentTurn ; 
         std::vector<bool> selectedHeroes; 
-    
+
         std::vector<std::unique_ptr<Button>> heroButtons;
         const std::vector<std::string> heroNames = {"mayor", "archaeologist", "courier", "scientist"};
         
         ClickableText instructionText; 
         std::string selectedMessage; 
-    
+
     public:
-    
+
         ChooseCharacterState(const PlayerSelection&, const PlayerSelection&);
         void render(Menu&) override;
-    
-    
 };
-class SetupState : public State {
+
+class ContinueState : public State{
+    private:
+        std::vector<ClickableText> fileButtons;
+        bool fileselected = false ;
+        std::string selectedFile ;
     public:
-    SetupState();
-    //  menu.SetState(std::make_unique<HeroPhaseState>());
-    
-    void render(Menu& menu) override; // ClearBackground(DARKGRAY);DrawText("Setup Game...", 100, 100, 30, WHITE);
+        ContinueState() ;
+        void render(Menu&) override;
+
 };
-
-
-// GameOverState.hpp
-#pragma once
-#include "State.hpp"
-#include <string>
-
-class GameOverState : public State {
-    std::string message;
-public:
-    GameOverState(const std::string& msg);
-
-    void render(Menu &) override ;
-
-    void update(Menu&) override;
-};
-
-
-// class MonsterPhaseState : public State {
-//     private:
-//         bool phase_done = false;  
-//     public:
-//     MonsterPhaseState();
-//      // menu.SetState(std::make_unique<HeroPhaseState>());
-
-//     void render(Menu& menu) override ; 
-//     // ClearBackground(RED);DrawText("Monster Phase", 100, 100, 30, WHITE);
-//     void update(Menu& menu) override;
-
-
-    
-// };
-
-
-
-
 
 
 #endif

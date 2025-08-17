@@ -98,6 +98,10 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 PlayerInfo Game::getPlayer1() const{ return player1; }
 PlayerInfo Game::getPlayer2() const { return player2 ;}
 
+void Game::setPlayer1(const std::string& p1 , Hero* h){ player1.name = p1 ; player1.hero = h ;}
+void Game::setPlayer2(const std::string& p2 , Hero* h){ player2.name = p2 ;  player2.hero = h ;}
+
+
 std::string Game::checkString(std::string str){
     for (char &c : str) 
         c = tolower(c); 
@@ -425,7 +429,14 @@ void Game::monster_objectes()  {
         }
     }
 }
+ItemColor Game::string_to_color(const std::string& color)
+{
+    if(color == "Red") return ItemColor::Red ;
+    if(color == "Blue") return ItemColor::Blue ;
+    if(color == "Yellow") return ItemColor::Yellow ;
 
+    return ItemColor::Reset ;
+}
  Hero* Game::create_hero_by_name(const std::string& name) {
     if (name == "courier") {
         courier = std::make_unique<Courier>(map, turnManager);
@@ -457,7 +468,13 @@ std::unique_ptr<Perkcard> Game::find_perk_by_name(const std::string& name) {
 
     std::cerr << "Unknown perk card: " << name << '\n';
     return nullptr;
-}                   
+}   
+ 
+Villager* Game::create_villager(const string & name, Location * current_loc){
+    Villager* v = new Villager(map , name, nullptr, current_loc ,"") ; 
+    all_villagers.push_back(v); 
+    return v;
+}               
                     
  void Game::DrawGameOverPopup(const std::string& message) {
     int screenW = GetScreenWidth();

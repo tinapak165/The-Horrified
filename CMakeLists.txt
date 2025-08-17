@@ -88,6 +88,7 @@ set(SOURCES
     src/Button.cpp
     src/GameRender.cpp
     src/Action.cpp
+    src/SaveManager.cpp
 
 )
 
