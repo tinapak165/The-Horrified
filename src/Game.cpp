@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include <sstream>
 
 using namespace std;
 
@@ -22,7 +21,6 @@ Game::Game() {
 
     monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
-    initializaDeck() ;
     initializaMDeck();
 }
 
@@ -78,6 +76,7 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
     turnManager = TurnManager(heroes);
 
+    initializaDeck() ;
 
     for(Hero* hero : turnManager.get_heroes()){
         getNewCard(hero) ; 
@@ -193,11 +192,9 @@ void Game::monster_dice() {
 
 void Game::initializaDeck(){
 
-    cout << "here in initializing perk cards\n" ;
-    
     for(int i = 0 ; i < 3 ; i++){
        perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map)); 
-       perkDeck.addCard(std::make_unique<Hurrycard>(turnManager.get_heroes(), map)) ; 
+       perkDeck.addCard(std::make_unique<Hurrycard>(heroes, map)) ; 
        perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
        perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
        perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
