@@ -21,13 +21,13 @@ class GameRender ;
 class State{
     private:
         Texture2D background ; 
-
+        Font font;
     public :
         State(const std::string&) ; 
         Texture2D get_background() const ; 
+        Font get_Font() const ;
         virtual void render(Menu&) = 0 ;
         virtual ~State(); 
-  
 };
 
 class MenuState : public State {
@@ -54,10 +54,10 @@ class ExitState : public State{
 
 class NameInputState : public State {
     private:
-        
         std::unique_ptr<TextBox>nameBox1 ;std::unique_ptr<TextBox> nameBox2;
         std::unique_ptr<TextBox>timeBox1 ; std::unique_ptr<TextBox>timeBox2 ; 
         Rectangle continueButton;
+        Font font;
 
     public:
         NameInputState();
@@ -100,5 +100,10 @@ class ContinueState : public State{
 
 };
 
+class ExplainationState : public State {  
+    public:
+        ExplainationState();
+        void render(Menu&) override;
+};
 
 #endif

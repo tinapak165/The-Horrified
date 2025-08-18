@@ -5,15 +5,16 @@
 
 State::State(const std::string& bgPath) {
     background = LoadTexture(bgPath.c_str());
+    font = LoadFont("../Assets/font.ttf");
 }
 
 State::~State(){
     UnloadTexture(background) ;
+    UnloadFont(font);
 }
 
-Texture2D State::get_background() const{
-    return background;
-}
+Texture2D State::get_background() const{ return background; }
+Font State::get_Font() const{ return font; }
 
 MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
       startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 100} , 1.0f)),
@@ -29,7 +30,7 @@ void MenuState::render(Menu& menu)  {
 
         if (startButton->isPressed()) {
             menu.getGame().distribute_initial_items() ;
-            auto newstate = std::make_unique<NameInputState>() ;
+            auto newstate = std::make_unique<ExplainationState>() ;
             menu.SetState(std::move(newstate)); 
             return ; 
         }
@@ -155,7 +156,7 @@ void NameInputState::render(Menu& menu) {
     };
 
     for (int i = 0; i < 4; i++) {
-        DrawText(labels[i], boxes[i]->rect.x, boxes[i]->rect.y - 30, 20, RED);
+        DrawTextEx(get_Font() , labels[i], {boxes[i]->rect.x, boxes[i]->rect.y - 30}, 25 , 0 , RED) ;
         
         DrawRectangleRec(boxes[i]->rect, boxes[i]->active ? LIGHTGRAY : GRAY);
         DrawRectangleLinesEx(boxes[i]->rect, 2, boxes[i]->active ? RED : DARKGRAY);
@@ -222,10 +223,10 @@ void ChooseCharacterState::render(Menu& menu) {
 
     std::string currentName = (currentTurn == PlayerTurn::PLAYER1) ? player1.name : player2.name;
     std::string instruction = currentName + ", choose your hero:";
-    DrawText(instruction.c_str(), 100, 50, 30, RED);
+    DrawTextEx(get_Font() , instruction.c_str(), {100, 70}, 35 , 0, RED) ;
  
     if (!selectedMessage.empty()) 
-        DrawText(selectedMessage.c_str(), 100, 100, 25, YELLOW);
+        DrawTextEx(get_Font() , selectedMessage.c_str(), {100, 100}, 30, 0 , YELLOW) ;
 
     for (int i = 0; i < heroButtons.size(); i++) {
         if (selectedHeroes[i]) 
@@ -288,8 +289,7 @@ void ContinueState::render(Menu & menu)
         fileButtons.emplace_back(file , Vector2{120, (float)y} , 28 , GREEN);
         y+= 40 ; 
     }
-
-    DrawText("select a save file: " , 100 , 80 , 30 , GREEN);
+    DrawTextEx(get_Font() , "select a save file: " , {100 , 80} , 40 , 0 , GREEN);
 
     for(auto & button : fileButtons){
         button.Draw() ;
@@ -302,4 +302,54 @@ void ContinueState::render(Menu & menu)
         save.loadGame(selectedFile) ;
         menu.SetState(nullptr) ;
     }
+}
+
+ExplainationState::ExplainationState(): State("../Assets/Menu/Background.png"){}
+
+void ExplainationState::render(Menu & menu)
+{
+    DrawTexture(get_background(), 0, 0, WHITE);
+
+    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    backButton.Draw();
+    if (backButton.isClicked()) {
+        menu.SetState(std::make_unique<MenuState>());
+        return;
+    }
+
+    ClickableText continueButton("continue", {900, 900}, 30, RED);
+    continueButton.Draw();
+    if (continueButton.isClicked()) {
+        menu.SetState(std::make_unique<NameInputState>());
+        return;
+    }
+    DrawTextEx(get_Font() ,
+    "Welcome to Horrified! Here's your quick-start guide:\n"
+    "1. Missions:\n"
+    "    Work together with fellow heroes to defeat the monsters (Dracula and the Invisible Man)\n"
+    "    by completing their specific tasks (smashing coffins, gathering evidence).\n"
+    "    Escort villagers to their safe places(this will reward you with a Perk card).\n"
+    "    Prevent the terror level from reaching its maximum.\n"
+    "2. Hero Phase:\n"
+    "    Take a number of actions equal to the value on your Hero Badge.\n"
+    "    You may play any number of Perk cards (playing a Perk does not cost an action).\n"
+    "    Learn more about actions by clicking on Help.\n"
+    "    End your turn anytime by clicking Quit\n"
+    "    Villagers cannot defend themselves. If monsters attack them, they are defeated, which raises the terror level.\n"
+    "    If a hero is attacked they may discard an item to avoid being defeated and sent to the hospital.\n "
+    "3. Monster Phase:\n"
+    "     Draw a Monster card: place items, resolve an event, roll dice then move/attack monsters\n"
+    "     Each monster has unique behavior and its own defeat conditions.\n  (click on each monster to learn more.)\n"
+    "     Dice results: Attack, Power or Empty\n"
+    "       Attack: If a monster shares a space with a hero, it may attack\n"
+    "       Power: Activates that monster's special ability:\n"
+    "         Dracula-> Dark Charm: pulls the current Hero into his place\n"
+    "         InvisibleMan-> Stalk Unseen: moves 2 extra places toward the nearest villager\n"
+    "     You can track what happened in the sidebar\n"
+    "4. Terror level:\n"
+    "    The Terror rises when heroes or villagers are defeated.\n"
+    "    If the track reaches the end, the town falls and you lose.\n"
+    "5. Victory:\n"
+    "    Complete every active monster's objectives to save the town!\n"
+      , Vector2{80 , 60 } , 28 , 0 , WHITE);
 }
