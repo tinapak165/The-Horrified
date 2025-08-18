@@ -111,6 +111,7 @@ void GameRender::draw_sidebar() {
     Rectangle mapRect = game.get_map().get_drawn_rect();
 
     int sidebarX = mapRect.x + mapRect.width + 10;
+    int sidebarY = mapRect.y; 
     int sidebarWidth = 400;
     int sidebarHeight = mapRect.height;
 
@@ -124,48 +125,83 @@ void GameRender::draw_sidebar() {
     // پس‌زمینه کارت
     DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
 
+
     if (card) {
         DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
 
-        Texture2D tex = card->get_texture();
-        if (tex.id != 0) {
-            float aspect = (float)tex.width / (float)tex.height;
-            float destHeight = cardBoxHeight - 60;
-            float destWidth = destHeight * aspect;
+      Texture2D tex = card->get_texture();
+if (tex.id != 0) {
+    float aspect = (float)tex.width / (float)tex.height;
+    float destHeight = cardBoxHeight - 60;
+    float destWidth = destHeight * aspect;
 
-            float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
-            float destY = cardBoxY + 40;
+    float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
+    float destY = cardBoxY + 40;
 
-            Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
-            Rectangle dest = {destX, destY, destWidth, destHeight};
-            DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
-        } else {
-            DrawText("Texture not loaded!", sidebarX + 20, cardBoxY + 50, 20, RED);
+    Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
+    Rectangle dest = {destX, destY, destWidth, destHeight};
+    DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
+
+   
+    float boxWidth  = destWidth;
+    float boxHeight = 70; 
+    float boxX = destX;
+    float boxY = destY + destHeight + 15; 
+
+    DrawRectangleRounded({boxX, boxY, boxWidth, boxHeight}, 0.2f, 6, GRAY);
+
+ 
+    auto dracula = game.get_dracula();
+    auto invisibleMan = game.get_invisibleMan();
+
+    if (dracula) {
+        int destroyed = 0;
+        for (const auto& entry : dracula->get_coffins_map()) {
+            if (entry.second) destroyed++;
         }
-    //      std::string lastResult = card->get_last_dice_result();
-    //      if (!lastResult.empty())
-    //      DrawText(("Dice: " + lastResult).c_str(), sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
-    // else
-    //     DrawText("Dice: No roll yet", sidebarX + 20, cardBoxY + cardBoxHeight - 20, 20, DARKGRAY);
-    
+        DrawText(("Coffins: " + std::to_string(destroyed) + "/4").c_str(),
+                 boxX + 10, boxY + 10, 18, BLACK);
+    }
 
-    
-  
-    int logBoxY = cardBoxY + cardBoxHeight + 20;
-    int logBoxHeight = sidebarHeight - (cardBoxHeight + 40);
+    if (invisibleMan) {
+        int collected = invisibleMan->get_evidence_count();
+        DrawText(("Evidence: " + std::to_string(collected) + "/5").c_str(),
+                 boxX + 10, boxY + 35, 18, BLACK);
+    }
+}
 
-     DrawText("MonsterCard Effects :", sidebarX, logBoxY + 10, 20, RED);
+        } 
 
-    int y = logBoxY + 40;
-    int maxLines = (logBoxHeight - 40) / 25;
+    // 📦 موقعیت و ابعاد جعبه‌ی لاگ
+    float padding = 10.0f;
+    float logBoxX = sidebarX ;  
+    float logBoxY = sidebarY + sidebarHeight / 2 ;   // نیمه پایین سایدبار
+    float logBoxWidth  = sidebarWidth - 2*padding;  // فاصله از چپ و راست
+    float logBoxHeight = sidebarHeight / 2 - 2*padding; 
+
+    float effectBoxWidth  = std::min(sidebarWidth - 2*padding, sidebarWidth  - padding);
+    float effectBoxHeight = std::min(logBoxHeight - 2*padding, sidebarHeight - logBoxY - padding);
+
+    // موقعیت داخل سایدبار
+    float effectBoxX = sidebarX + padding;
+    float effectBoxY = logBoxY + padding;
+
+    DrawRectangleRounded({effectBoxX, effectBoxY, effectBoxWidth - 100, effectBoxHeight}, 
+                        0.15f, 6, GRAY);
+
+    // 📝 عنوان داخل کادر
+    DrawText("MonsterCard Effects :", effectBoxX + 10, effectBoxY + 10, 20, RED);
+
+    int y = logBoxY + 70 ;
+    int maxLines = (logBoxHeight  - 40 ) / 25;
     int count = 0;
 
     for (const auto& log : game.get_logs()) {
         std::istringstream iss(log);
         std::string word, currentLine;
-
+      
         while (iss >> word) {
-            if (currentLine.length() + word.length() + 1 <= 36) {
+            if (currentLine.length() + word.length() + 1 <= 32) {
                 if (!currentLine.empty()) currentLine += " ";
                 currentLine += word;
             } else {
@@ -184,10 +220,9 @@ void GameRender::draw_sidebar() {
             if (count >= maxLines) return;
         }
     }
-   }
- } 
+}
 
- void GameRender::draw_monsters() {
+void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
     const float spacing = 30.0f;  
     const float offsetY = -monsterSize - 5.0f;
