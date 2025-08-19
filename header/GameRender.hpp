@@ -58,6 +58,7 @@ private:
     Texture2D invisibleManMat;
     Texture2D coffinTex;
     Texture2D smashedCoffinTex; 
+    Font logFont ;
     static const Vector2 terrorLevelPositions[8] ;
 };
 

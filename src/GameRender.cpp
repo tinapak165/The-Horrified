@@ -7,6 +7,8 @@ GameRender::GameRender(Game& game) : game(game) {
     invisibleManMat = LoadTexture("../Assets/Monster_Mat/InvisibleManMat.png");
     coffinTex = LoadTexture("../Assets/Items/Coffins/Coffin.png"); 
       smashedCoffinTex = LoadTexture("../Assets/Items/Coffins/SmashedCoffin.png");
+      
+
 
 }
 
@@ -146,18 +148,21 @@ void GameRender::draw_sidebar() {
     int sidebarHeight = mapRect.height;
 
  // پس زمینه برای ساید بار
-    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(WHITE, 0.15f));
+    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.5f));
 
     const auto& card = game.get_current_card();
-    int cardBoxY = mapRect.y + 20;
+    int cardBoxY = mapRect.y ;
     int cardBoxHeight = 290;
 
-    // پس‌زمینه کارت
-    DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
+   
+ 
+
+
+ 
 
 
     if (card) {
-        DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
+    DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, RED);
 
       Texture2D tex = card->get_texture();
 if (tex.id != 0) {
@@ -165,7 +170,7 @@ if (tex.id != 0) {
     float destHeight = cardBoxHeight - 60;
     float destWidth = destHeight * aspect;
 
-    float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
+    float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 50; // کارت اومد وسط ساید بار
     float destY = cardBoxY + 40;
 
     Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
@@ -202,7 +207,7 @@ if (tex.id != 0) {
 
         } 
 
-    // 📦 موقعیت و ابعاد جعبه‌ی لاگ
+   
     float padding = 10.0f;
     float logBoxX = sidebarX ;  
     float logBoxY = sidebarY + sidebarHeight / 2 ;   // نیمه پایین سایدبار
@@ -213,29 +218,30 @@ if (tex.id != 0) {
     float effectBoxHeight = std::min(logBoxHeight - 2*padding, sidebarHeight - logBoxY - padding);
 
     // موقعیت داخل سایدبار
-    float effectBoxX = sidebarX + padding;
-    float effectBoxY = logBoxY + padding;
+    float effectBoxX = sidebarX + padding ;
+    float effectBoxY = logBoxY + padding - 100; // بیاد بالاتر 
 
     DrawRectangleRounded({effectBoxX, effectBoxY, effectBoxWidth - 100, effectBoxHeight}, 
                         0.15f, 6, GRAY);
 
-    // 📝 عنوان داخل کادر
+    
     DrawText("MonsterCard Effects :", effectBoxX + 10, effectBoxY + 10, 20, RED);
 
-    int y = logBoxY + 70 ;
-    int maxLines = (logBoxHeight  - 40 ) / 25;
+    int y = effectBoxY + 30;   /// یه خط  پایین تر
+    int maxLines = (effectBoxHeight - 20) / 25;  // چند خط جا میشه
     int count = 0;
 
     for (const auto& log : game.get_logs()) {
         std::istringstream iss(log);
         std::string word, currentLine;
-      
+
         while (iss >> word) {
             if (currentLine.length() + word.length() + 1 <= 32) {
                 if (!currentLine.empty()) currentLine += " ";
                 currentLine += word;
             } else {
-                DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+                
+                DrawText( currentLine.c_str(),effectBoxX , y, 16, RAYWHITE);
                 y += 24;
                 count++;
                 if (count >= maxLines) return;
@@ -244,12 +250,14 @@ if (tex.id != 0) {
         }
 
         if (!currentLine.empty()) {
-            DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+           
+            DrawText(currentLine.c_str(),effectBoxX , y, 16, RAYWHITE);
             y += 24;
             count++;
             if (count >= maxLines) return;
         }
     }
+
    }
  
   
@@ -748,4 +756,6 @@ GameRender::~GameRender(){
     UnloadTexture(invisibleManMat);
     UnloadTexture(coffinTex); 
     UnloadTexture(smashedCoffinTex); 
+    UnloadFont(logFont);
+
 }
