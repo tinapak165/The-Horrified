@@ -88,7 +88,7 @@ bool GameRender::handleDisplays()
         }
 
         std::string text = "Game saved to: " + filename;
-        DrawText(text.c_str(), 100, 100, 30, GREEN);
+        DrawText(text.c_str(), 1095, 355, 20, GREEN);
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             currentHero = nullptr;
@@ -121,18 +121,21 @@ void GameRender::draw_sidebar() {
     int sidebarHeight = mapRect.height;
 
  // پس زمینه برای ساید بار
-    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
+    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.5f));
 
     const auto& card = game.get_current_card();
-    int cardBoxY = mapRect.y + 20;
+    int cardBoxY = mapRect.y ;
     int cardBoxHeight = 290;
 
-    // پس‌زمینه کارت
-    DrawRectangle(sidebarX + 10, cardBoxY, sidebarWidth - 20, cardBoxHeight, Fade(BLACK, 0.2f));
+   
+ 
+
+
+ 
 
 
     if (card) {
-        DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, BLACK);
+    DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, RED);
 
       Texture2D tex = card->get_texture();
 if (tex.id != 0) {
@@ -140,7 +143,7 @@ if (tex.id != 0) {
     float destHeight = cardBoxHeight - 60;
     float destWidth = destHeight * aspect;
 
-    float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 20;
+    float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 50; // کارت اومد وسط ساید بار
     float destY = cardBoxY + 40;
 
     Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
@@ -177,7 +180,7 @@ if (tex.id != 0) {
 
         } 
 
-    // 📦 موقعیت و ابعاد جعبه‌ی لاگ
+   
     float padding = 10.0f;
     float logBoxX = sidebarX ;  
     float logBoxY = sidebarY + sidebarHeight / 2 ;   // نیمه پایین سایدبار
@@ -188,29 +191,30 @@ if (tex.id != 0) {
     float effectBoxHeight = std::min(logBoxHeight - 2*padding, sidebarHeight - logBoxY - padding);
 
     // موقعیت داخل سایدبار
-    float effectBoxX = sidebarX + padding;
-    float effectBoxY = logBoxY + padding;
+    float effectBoxX = sidebarX + padding ;
+    float effectBoxY = logBoxY + padding - 100; // بیاد بالاتر 
 
     DrawRectangleRounded({effectBoxX, effectBoxY, effectBoxWidth - 100, effectBoxHeight}, 
                         0.15f, 6, GRAY);
 
-    // 📝 عنوان داخل کادر
+    
     DrawText("MonsterCard Effects :", effectBoxX + 10, effectBoxY + 10, 20, RED);
 
-    int y = logBoxY + 70 ;
-    int maxLines = (logBoxHeight  - 40 ) / 25;
+    int y = effectBoxY + 30;   /// یه خط  پایین تر
+    int maxLines = (effectBoxHeight - 20) / 25;  // چند خط جا میشه
     int count = 0;
 
     for (const auto& log : game.get_logs()) {
         std::istringstream iss(log);
         std::string word, currentLine;
-      
+
         while (iss >> word) {
             if (currentLine.length() + word.length() + 1 <= 32) {
                 if (!currentLine.empty()) currentLine += " ";
                 currentLine += word;
             } else {
-                DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+                
+                DrawText( currentLine.c_str(),effectBoxX , y, 16, RAYWHITE);
                 y += 24;
                 count++;
                 if (count >= maxLines) return;
@@ -219,12 +223,14 @@ if (tex.id != 0) {
         }
 
         if (!currentLine.empty()) {
-            DrawText(currentLine.c_str(), sidebarX, y, 16, RAYWHITE);
+           
+            DrawText(currentLine.c_str(),effectBoxX , y, 16, RAYWHITE);
             y += 24;
             count++;
             if (count >= maxLines) return;
         }
     }
+
 }
 
 void GameRender::draw_monsters() {
@@ -419,10 +425,8 @@ void GameRender::draw_users(){
     auto p1 = game.getPlayer1() ;
     auto p2 = game.getPlayer2() ; 
 
-    ClickableText user1(p1.name,{90, 90} , 40, BLACK);
-    ClickableText user2(p2.name,{90, 150} , 40, BLACK);
-
-    Vector2 mouse = GetMousePosition();
+    ClickableText user1(p1.name,{90, 80} , 40, BLACK);
+    ClickableText user2(p2.name,{90, 140} , 40, BLACK);
 
     user1.Draw();
     user2.Draw();
@@ -442,52 +446,39 @@ void GameRender::draw_users(){
 void GameRender::draw_action_panel() {
     Hero* activeHero = game.get_turnManager().get_active_hero();
 
-    std::string heroName = activeHero->GetName();
-    int remaining = activeHero->GetRemainingActions();
-    int maxActions = activeHero->getMaxActions();
-
-    std::string infoText = heroName + " | Actions left: " + std::to_string(remaining) + "/" + std::to_string(maxActions);
-
     std::vector<ActionButton> actionButtons = {
-        {"Move", {50, 500, 120, 40}},
-        {"Special", {190, 500, 120, 40}},
-        {"Guide", {330, 500, 120, 40}},
-        {"Pickup", {50, 550, 120, 40}},
-        {"Advance", {190, 550, 120, 40}},
-        {"Defeat", {330, 550, 120, 40}},
-        {"Perk", {50, 600, 120, 40}},
-        {"Help", {190, 600, 120, 40}},
-        {"Quit", {330, 600, 120, 40}},
+        {"Move", {0, 250, 90, 40}},
+        {"Special", {0, 300, 90, 40}},
+        {"Guide", {0, 350, 90, 40}},
+        {"Pickup", {0, 400, 90, 40}},
+        {"Advance", {0, 450, 90, 40}},
+        {"Defeat", {0, 500, 90, 40}},
+        {"Perk", {0, 550, 90, 40}},
+        {"Help", {0, 600, 90, 40}},
+        {"Quit", {0, 650, 90, 40}},
     };
+    std::string infoText = activeHero->GetName() + " | Actions: " + std::to_string(activeHero->GetRemainingActions()) + "/" + std::to_string(activeHero->getMaxActions());
 
-    DrawRectangle(40, 480, 420, 180, Fade(DARKGRAY, 0.9f));
-    DrawRectangleLines(40, 480, 420, 180, GRAY);
-    Vector2 mousepos = GetMousePosition();
+    DrawText(infoText.c_str(), 1095, 900, 20, WHITE);
 
-    DrawText(infoText.c_str(), 50, 460, 20, BLACK);
-
-    bool hasActionsLeft = (remaining > 0);
+    bool hasActionsLeft = (activeHero->GetRemainingActions() > 0);
 
     for (const auto& button : actionButtons) {
-        bool hovered = CheckCollisionPointRec(mousepos, button.bounds);
+        bool hovered = CheckCollisionPointRec(GetMousePosition(), button.bounds);
 
         Color buttonColor;
-        if (!hasActionsLeft ) {
+        if (!hasActionsLeft ) 
             buttonColor = DARKGRAY;
-        } else {
-            buttonColor = hovered ? LIGHTGRAY : GRAY;
-        }
-
+        else 
+            buttonColor = hovered ? LIGHTGRAY : WHITE;
+        
         DrawRectangleRec(button.bounds, buttonColor);
-        DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
+        DrawText(button.label.c_str(), button.bounds.x + 3, button.bounds.y + 10, 20, BLACK);
 
-        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) { 
-            handle_action(button.label, activeHero);
-        }
+        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) 
+            handle_action(button.label, activeHero);  
     }
 }
-
-
 
 void GameRender::handle_action(const std::string& action , Hero* h){
 
@@ -578,9 +569,8 @@ void GameRender::draw_location_icon() {
 }
 
 void GameRender::draw_collected_items(){
-    Rectangle itemButton = { 750, 120, 170, 40 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, itemButton);
+    Rectangle itemButton = { 900, 80, 170, 40 }; 
+    bool hover = CheckCollisionPointRec(GetMousePosition(), itemButton);
 
     Color btnColor = hover ? LIGHTGRAY : GRAY;
     DrawRectangleRec(itemButton, btnColor);
@@ -594,13 +584,13 @@ void GameRender::draw_collected_items(){
 }
 void GameRender::draw_played_Perkcards(){
 
-    Rectangle perkButton = { 750, 180, 195, 40 }; 
+    Rectangle perkButton = { 900, 30, 170, 40 }; 
     Vector2 mouse = GetMousePosition();
     bool hover = CheckCollisionPointRec(mouse, perkButton);
 
     Color btnColor = hover ? LIGHTGRAY : GRAY;
     DrawRectangleRec(perkButton, btnColor);
-    DrawText("Perkcards played", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+    DrawText("Perkcards", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
 
     if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         ShowPLAYEDPerkButton = true;
@@ -610,9 +600,8 @@ void GameRender::draw_played_Perkcards(){
 
 void GameRender::draw_saveGame()
 {
-    Rectangle saveGame = { 650, 60, 200, 45 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, saveGame);
+    Rectangle saveGame = { 720, 30, 170, 40 }; 
+    bool hover = CheckCollisionPointRec(GetMousePosition(), saveGame);
 
     Color btnColor = hover ? LIGHTGRAY : GRAY;
     DrawRectangleRec(saveGame, btnColor);
@@ -626,7 +615,7 @@ void GameRender::draw_saveGame()
 
 void GameRender::draw_villagerButton()
 {
-    Rectangle vill = { 650, 100, 200, 45 }; 
+    Rectangle vill = { 600, 30, 100, 40 }; 
     Vector2 mouse = GetMousePosition();
     bool hover = CheckCollisionPointRec(mouse, vill);
 
@@ -701,4 +690,5 @@ GameRender::~GameRender()
     UnloadTexture(invisibleManMat);
     UnloadTexture(coffinTex); 
     UnloadTexture(smashedCoffinTex);
+    actionButtons.clear();
 }
