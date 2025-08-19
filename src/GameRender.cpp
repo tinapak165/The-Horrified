@@ -100,7 +100,9 @@ bool GameRender::handleDisplays()
     }
 
 
+
     
+
     if(showingVillagerInfo){
         Villager::DisplayInfo() ;
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
