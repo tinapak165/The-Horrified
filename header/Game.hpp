@@ -83,9 +83,7 @@ private:
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
-   // std::vector<std::string> event_log;
-   // std::unique_ptr<State*> currentState;
-    
+
     static int terror_Level ;
     bool game_over = false;
     bool heroTurnInProgress = false ;
@@ -141,7 +139,6 @@ public:
     void Changing_frenzy_marker();
     Monster* get_frenzied_monster();
     
-   // std::vector<std::string> get_last_events(int count) ;
 
     Villager* create_villager(const std::string& , Location*) ;
     Hero* create_hero_by_name(const std::string& ) ;
@@ -153,7 +150,6 @@ public:
     void log(const std::string& message);
     const std::vector<std::string>& get_logs() const;
     void clear_logs();
-    //void Game_over_check();
     void DrawGameOverPopup(const std::string& message);
     int get_terror_level() ;
     void set_terror_level(int);
