@@ -423,4 +423,6 @@ Game::~Game(){
     if(frenziedMonster)
         delete frenziedMonster ;
     pool.unload_in_use_items() ;
+    heroes.clear();
+    all_villagers.clear();
 }
