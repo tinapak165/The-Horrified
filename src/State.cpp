@@ -16,9 +16,9 @@ Texture2D State::get_background() const{
 }
 
 MenuState::MenuState() : State("../Assets/Menu/firstbackground.png"), 
-      startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{1000, 50 } , 0.50f)),
-      exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{1000, 200} , 0.50f)),
-      continueButton(std::make_unique<Button>("../Assets/Menu/continue.png", Vector2{1000, 400} , 0.2f)) {}
+      startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{500, 500 } , 0.50f)),
+      exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{500, 600} , 0.50f)),
+      continueButton(std::make_unique<Button>("../Assets/Menu/continue.png", Vector2{500, 700} , 0.2f)) {}
 
 void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
