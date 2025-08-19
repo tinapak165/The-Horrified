@@ -2,13 +2,13 @@
 
 void HeroAction::DrawPanel()
 {
-    float panelX = 80, panelY = 80, panelWidth = 600, panelHeight = 400;
+    float panelX = 100, panelY = 80, panelWidth = 600, panelHeight = 400;
     DrawRectangleRec({panelX, panelY, panelWidth, panelHeight}, Fade(DARKGRAY, 0.95f));
     DrawRectangleLinesEx({panelX, panelY, panelWidth, panelHeight}, 3, RAYWHITE);
 }
 
 bool HeroAction::drawCancelButton(){
-    ClickableText Backbutton("Cancel" , {100 , 400} , 20 , RAYWHITE) ;
+    ClickableText Backbutton("Cancel" , {110 , 400} , 20 , RAYWHITE) ;
     Backbutton.Draw() ; 
     if(Backbutton.isClicked()) 
         return true ; 
@@ -24,7 +24,7 @@ bool HeroAction::drawDoneButton(){
 }
 
 void HeroAction::DrawMessage(int y , Color color){
-    DrawText(message.c_str(), 100, y, 20, color);
+    DrawText(message.c_str(), 110, y, 20, color);
 }
 void HeroAction::DrawTypingText(const std::string &text) {
 
@@ -65,9 +65,6 @@ bool HeroAction::handleShouldClose()
 
 void HeroAction::set_ShouldClose(bool val){ shouldClose = val ; }
 bool HeroAction::get_shouldClose(){ return shouldClose ;}
-
-
-
 
 MoveAction::MoveAction(GameMap &map, Hero *hero): map(map) , hero(hero){
     set_message("Which neighboring place do you want to move to?");
@@ -134,7 +131,7 @@ void MoveAction::draw(){
         set_ShouldClose(true) ;
     }
 
-    DrawText("[Playing Move Action]" , 115 , 105 , 24 , RAYWHITE) ;
+    DrawText("[Playing Move Action]" , 120 , 105 , 24 , RAYWHITE) ;
     DrawMessage(130 , RAYWHITE) ;
     if(typing) 
         DrawTypingText(chosenPlace) ;
