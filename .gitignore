@@ -1,0 +1,29 @@
+    *.o
+    *.obj
+    *.exe
+    *.dll
+    *.so
+    *.dylib
+    build/
+    bin/
+    debug/
+    release/
+    # Visual Studio
+    .vs/
+    *.suo
+    *.user
+    *.aps
+    *.ncb
+    *.opendb
+    *.sdf
+    *.cachefile
+    *.VC.db
+
+    # Xcode
+    *.xcodeproj/xcuserdata/
+    *.xcworkspace/xcuserdata/
+    DerivedData/
+
+    # CLion
+    .idea/
+    cmake-build-*/
