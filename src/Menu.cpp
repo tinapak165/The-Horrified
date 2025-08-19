@@ -4,6 +4,7 @@ Menu::Menu(Game& gameRef) : current_state(nullptr) , game(gameRef){}
 
 void Menu::SetState(std::unique_ptr<State> s) {
     current_state = std::move(s);
+    
 }
 void Menu::renderCurrentState() {
     if (current_state) 

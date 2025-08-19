@@ -146,7 +146,7 @@ void GameRender::draw_sidebar() {
     int sidebarHeight = mapRect.height;
 
  // پس زمینه برای ساید بار
-    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.15f));
+    DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(WHITE, 0.15f));
 
     const auto& card = game.get_current_card();
     int cardBoxY = mapRect.y + 20;
