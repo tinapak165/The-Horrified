@@ -11,7 +11,7 @@ string Perkcard::get_name() const {return name ;}
 Texture2D Perkcard::get_texture() const { return texture ;}
 
 void Perkcard::DrawInfoPanel(){
-    Rectangle infoPanel = {285.0f, 150.0f, 390.0f, 300.0f};
+    Rectangle infoPanel = {295.0f, 150.0f, 390.0f, 300.0f};
     DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
     DrawRectangleLinesEx(infoPanel, 2, GRAY);
 }
@@ -31,11 +31,11 @@ void Perkcard::set_ShouldClose(bool val){ shouldClose = val ; }
 void Perkcard::Setmessage(std::string msg){ message = msg; }
 
 void Perkcard::Drawmessage(int y, Color color){
-    DrawText(message.c_str(), 300, y, 17, color);
+    DrawText(message.c_str(), 305, y, 17, color);
 }
 
 void Perkcard::Drawtexture(){
-    Rectangle cardRect = {90.0f, 155.0f, 190.0f, 300.0f};
+    Rectangle cardRect = {95.0f, 155.0f, 190.0f, 300.0f};
     Texture2D tex = get_texture();
     DrawTexturePro( tex, {0, 0, (float)tex.width, (float)tex.height}, cardRect, {0, 0}, 0.0f, WHITE);
 }
