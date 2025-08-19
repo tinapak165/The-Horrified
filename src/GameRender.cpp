@@ -98,6 +98,8 @@ bool GameRender::handleDisplays()
         }
         return true; 
     }
+
+
     
     if(showingVillagerInfo){
         Villager::DisplayInfo() ;
