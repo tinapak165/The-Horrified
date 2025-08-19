@@ -79,9 +79,9 @@ void SaveManager::saveGame(const std::string & filename)
 void SaveManager::loadGame(const std::string & filename)
 {
     std::ifstream file(filename);
-    if (!file.is_open()) {
+    if (!file.is_open()) 
         std::cerr << "Could not open " << filename << '\n';
-    }
+
     std::string line;
     Hero* currentHero = nullptr;
     Location* currentLocation = nullptr;
@@ -90,7 +90,7 @@ void SaveManager::loadGame(const std::string & filename)
 
         if(line.empty() || line[0] == '#') continue;
 
-        if(line.rfind("player1:" , 0) == 0){
+        if(line.find("player1:" , 0) == 0){
             std::string data = line.substr(9) ; 
             std::stringstream ss(data) ;
             std::string playername , heroname ;
@@ -105,7 +105,7 @@ void SaveManager::loadGame(const std::string & filename)
             game.setPlayer1(playername , h);
         }
 
-        else if(line.rfind("player2:" , 0) == 0){
+        else if(line.find("player2:" , 0) == 0){
             std::string data = line.substr(9) ; 
             std::stringstream ss(data) ;
             std::string playername , heroname ;
@@ -119,7 +119,7 @@ void SaveManager::loadGame(const std::string & filename)
             }
             game.setPlayer2(playername , hero);
         }
-        else if(line.rfind("hero:" , 0) == 0){
+        else if(line.find("hero:" , 0) == 0){
             std::string name = line.substr(6); 
             currentHero = game.get_turnManager().find_hero_by_name(name);
 
@@ -129,12 +129,12 @@ void SaveManager::loadGame(const std::string & filename)
                     game.get_turnManager().add_hero(currentHero);  
             }
         }
-        else if(line.rfind("location: " , 0) == 0 && currentHero){
+        else if(line.find("location: " , 0) == 0 && currentHero){
             std::string name = line.substr(10) ; 
             Location* loc = game.get_map().get_location_by_name(name) ;
-            currentHero->SetCurrentLocation(loc ? loc : nullptr) ;
+            currentHero->SetCurrentLocation(loc) ;
         }
-        else if(line.rfind("available perk:" , 0) == 0 && currentHero){
+        else if(line.find("available perk:" , 0) == 0 && currentHero){
             std::string perkLine = line.substr(16) ;
             std::stringstream ss(perkLine) ;
             std::string perk ; 
@@ -146,7 +146,7 @@ void SaveManager::loadGame(const std::string & filename)
                 }
             }
         }
-        else if(line.rfind("played perk:" , 0) == 0 && currentHero){
+        else if(line.find("played perk:" , 0) == 0 && currentHero){
             std::string perkLine = line.substr(13) ;
             std::stringstream ss(perkLine) ;
             std::string perk ; 
@@ -158,7 +158,7 @@ void SaveManager::loadGame(const std::string & filename)
                 }
             }
         }
-        else if(line.rfind("items:" , 0 ) == 0 && currentHero){
+        else if(line.find("items:" , 0 ) == 0 && currentHero){
             while(getline(file , line) && !line.empty()){
                 std::stringstream itemStream(line);
                 std::string name , colorStr , strengthStr , LocName , texture ;
@@ -177,14 +177,14 @@ void SaveManager::loadGame(const std::string & filename)
             }
             currentHero = nullptr ;
         }
-        else if(line.rfind("turn:" , 0) == 0){
+        else if(line.find("turn:" , 0) == 0){
             std::string active_name = line.substr(6) ;
             game.get_turnManager().set_active_hero(active_name) ;
         }
-        else if(line.rfind("monster:" , 0) == 0) {
+        else if(line.find("monster:" , 0) == 0) {
             std::string monstername = line.substr(9); 
             getline(file , line); 
-            if(line.rfind("location: " , 0 ) == 0){
+            if(line.find("location: " , 0 ) == 0){
                 std::string locname = line.substr(10);
                 Location* loc = game.get_map().get_location_by_name(locname);
 
@@ -193,11 +193,11 @@ void SaveManager::loadGame(const std::string & filename)
             
             }
         }
-        else if(line.rfind("location: " , 0) == 0){
+        else if(line.find("location: " , 0) == 0){
             std::string locname = line.substr(10) ;
             currentLocation = game.get_map().get_location_by_name(locname) ; 
         }
-        else if(line.rfind("items:", 0) == 0 && currentLocation){
+        else if(line.find("items:", 0) == 0 && currentLocation){
             std::string itemstr = line.substr(6);
             if(!itemstr.empty() && itemstr[0] == ' ')
                 itemstr = itemstr.substr(1);
@@ -227,7 +227,7 @@ void SaveManager::loadGame(const std::string & filename)
                 currentLocation->add_item(item);
             }
         }
-        else if(line.rfind("villagers:" , 0) == 0 && currentLocation){
+        else if(line.find("villagers:" , 0) == 0 && currentLocation){
             std::string villagerStr = line.substr(11) ; 
             std::stringstream ss(villagerStr) ; 
             std::string villName ; 
@@ -241,16 +241,15 @@ void SaveManager::loadGame(const std::string & filename)
                     currentLocation->add_villager(vill) ;   
             }
         }
-        else if(line.rfind("coffins:" , 0) == 0){
+        else if(line.find("coffins:" , 0) == 0){
             std::string flags = line.substr(9);
             std::vector<std::string> locs = {"Cave", "Dungeon", "Crypt", "Graveyard"};
             for (size_t i = 0; i < flags.size() && i < locs.size(); ++i) {
                 if (flags[i] == '1') 
                   game.get_dracula()->destroy_coffin_at(locs[i]);    
-                
             }
         }
-        else if(line.rfind("evidence:" , 0) == 0){
+        else if(line.find("evidence:" , 0) == 0){
             std::string loc = line.substr(10) ; 
             std::stringstream ss(loc) ;
             std::string evi ;
@@ -259,7 +258,7 @@ void SaveManager::loadGame(const std::string & filename)
                     auto itemlocation = game.get_invisibleMan()->add_evidence(evi) ;
             }
         }
-        else if(line.rfind("played monstercards:" , 0) == 0){
+        else if(line.find("played monstercards:" , 0) == 0){
             std::string name = line.substr(20) ; 
             std::stringstream ss(name) ;
             std::string card ;
@@ -269,7 +268,7 @@ void SaveManager::loadGame(const std::string & filename)
                 }
             }
         }
-        else if(line.rfind("terror level:" , 0) == 0){
+        else if(line.find("terror level:" , 0) == 0){
             int level = std::stoi(line.substr(13)) ; 
             game.set_terror_level(level) ;
         }
