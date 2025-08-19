@@ -73,7 +73,6 @@ class Hero{
 
         bool hasvillagerHere() const ; 
         std::vector<Villager*> villagerHere() const ;
-        void showvillagersHere()const ; 
 
         std::string GetName()const ; 
         void DisplayInfo() const;
@@ -86,7 +85,6 @@ class Hero{
         void resetMaxActions() ; 
 
         void AddAvailablePerk(std::unique_ptr<Perkcard>) ;
-        void displayavailblecards() const;
         void displayPlayedCards() const; 
         std::vector<std::unique_ptr<Perkcard>>& GetAvailablePerkCards() ; 
         std::vector<std::unique_ptr<Perkcard>>& GetPlayedPerkCards() ; 

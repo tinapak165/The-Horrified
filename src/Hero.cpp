@@ -27,7 +27,7 @@ bool Hero::drawCancelButton(){
 }
 
 void Hero::DisplayActions() const{
-    const float panelX = 80 ; const float panelY = 80 ; 
+    const float panelX = 100 ; const float panelY = 80 ; 
     const float panelW = 750 ; const float panelH = 300 ; 
 
     DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
@@ -82,51 +82,25 @@ void Hero::AddAvailablePerk(std::unique_ptr<Perkcard> card){
     availableCards.push_back(std::move(card)) ;   
 }
 
-void Hero::displayavailblecards() const{
-
-    const float panelX = 600 ; const float panelY = 50 ; 
-    const float panelW = 400 ; const float panelH = 400 ; 
-    const int lineHeight = 30 ; 
-    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
-    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
-
-    float y = panelY + 20 ; 
-
-    DrawText("----available Perk cards----" , panelX+20 , y , 25 , YELLOW) ; 
-    y+=40 ;
-    if(availableCards.empty())
-        DrawText("-", panelX + 20 , y , 20 , WHITE ) ;
-    else{
-        for (size_t i = 0 ; i < availableCards.size() ; i++) {
-            string line = availableCards[i]->get_name() ;
-            
-            DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
-            y += lineHeight;
-        }        
-    }
-
-}
-
 void Hero::displayPlayedCards() const{
 
-    const float panelX = 600 ; const float panelY = 50 ; 
-    const float panelW = 400 ; const float panelH = 400 ; 
-    const int lineHeight = 30 ; 
-    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
-    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
+    const float panelX = 80 ; const float panelY = 80 ; 
+    const float panelW = 600 ; const float panelH = 400 ; 
+    DrawRectangleRec({panelX , panelY , panelW , panelH} , Fade(DARKGRAY , 0.95f)) ;
+    DrawRectangleLinesEx({panelX , panelY , panelW , panelH} , 3 , RAYWHITE) ;
 
-    float y = panelY + 20 ; 
+    float y = 100; 
 
-    DrawText("----Played Perk cards----" , panelX+20 , y , 25 , YELLOW) ; 
+    DrawText("Played Perk cards:" , 115 , 105 , 24 , RAYWHITE) ; 
     y+=40 ;
     if(playedCards.empty())
-        DrawText("-", panelX + 20 , y , 20 , WHITE ) ;
+        DrawText("-", 350 , 105 , 24 , WHITE ) ;
     else{
         for (size_t i = 0 ; i < playedCards.size() ; i++) {
             string line = playedCards[i]->get_name() ;
             
             DrawText(line.c_str(), panelX + 20, y, 20, WHITE);
-            y += lineHeight;
+            y += 30;
         }        
     }
 
@@ -157,29 +131,26 @@ void Hero::removeItems(const Item & i){
     }
 }
 
-
 void Hero::DisplayItem(){
 
-    DrawRectangle(50, 50, 700, 500, Fade(DARKGRAY, 0.8f)); 
+    float panelX = 100, panelY = 80, panelWidth = 600, panelHeight = 400;
+    
+    DrawRectangleRec({panelX, panelY, panelWidth, panelHeight}, Fade(DARKGRAY, 0.95f));
+    DrawRectangleLinesEx({panelX, panelY, panelWidth, panelHeight}, 3, RAYWHITE);
 
-    DrawText("Items Collected:", 70, 60, 28, YELLOW);
+    DrawText("Items Collected:", 115, 105, 24, RAYWHITE);
 
-    if (GetItems().empty()) {
-        DrawText("-", 80, 100, 24, RAYWHITE);
-        return;
-    }
+    if (this->GetItems().empty()) 
+        DrawText("-", 350, 105, 24, RAYWHITE);
 
-    int startY = 100;
-    int index = 1;
+    int startY = 150;
 
     for (const auto& item : GetItems()) {
-        std::string itemStr = std::to_string(index) + ". " + item.getName() +
-            " (Color: " + Item::color_to_string(item.getColor()) +
+        std::string itemStr = item.getName() + " (Color: " + Item::color_to_string(item.getColor()) +
             ", Strength: " + std::to_string(item.getStrength()) + ")";
         
-        DrawText(itemStr.c_str(), 80, startY, 22, LIGHTGRAY);
+        DrawText(itemStr.c_str(), 100, startY, 22, LIGHTGRAY);
         startY += 30;
-        index++;
     }
 }
 
@@ -255,17 +226,6 @@ bool Hero::hasvillagerHere() const
             return true ; 
     } 
     return false ;
-}
-
-void Hero::showvillagersHere() const{
-    vector<Villager*> vill ; 
-    for(auto *v : Villager::all() ){
-        if(v->get_currentLocation() == (*this).GetCurrentLocation()){
-            vill.push_back(v) ; 
-        }
-    }
-    for(auto *v : vill)
-        cout << v->get_name() << " , " ; 
 }
 
 vector<Villager*> Hero::villagerHere() const
