@@ -1,0 +1,88 @@
+# players info
+player1: f,courier
+player2: q,scientist
+
+# Hero
+hero: scientist
+location: Theatre
+available perk: Late into the Night,
+played perk: 
+items: 
+
+hero: courier
+location: Camp
+available perk: Hurry,
+played perk: 
+items: 
+
+# turn info
+turn: scientist
+
+# Monster
+monster: Dracula
+location: Camp
+monster: InvisibleMan
+location: Camp
+
+# locations:
+location: Cave
+items: 
+villagers: 
+location: Camp
+items: Fossil,Blue,3,Camp,../Assets/Items/Blue/Fossil.png;Violin,Yellow,3,Camp,../Assets/Items/Yellow/Violin.png;
+villagers: Maleva,
+location: Precinct
+items: 
+villagers: 
+location: Inn
+items: Garlic,Yellow,2,Inn,../Assets/Items/Yellow/Garlic.png;Monocane Mixture,Blue,3,Inn,../Assets/Items/Blue/MonocaneMixture.png;Dart,Red,2,Inn,../Assets/Items/Red/Dart.png;
+villagers: 
+location: Barn
+items: Rifle,Red,6,Barn,../Assets/Items/Red/Rifle.png;Pitchfork,Red,4,Barn,../Assets/Items/Red/Pitchfork.png;
+villagers: 
+location: Dungeon
+items: 
+villagers: 
+location: Tower
+items: Kite,Blue,1,Tower,../Assets/Items/Blue/Kite.png;Research,Blue,2,Tower,../Assets/Items/Blue/Research.png;Cosmic Ray Diffuser,Blue,3,Tower,../Assets/Items/Blue/CosmicRayDiffuser.png;Nebularium,Blue,3,Tower,../Assets/Items/Blue/Nebularium.png;
+villagers: 
+location: Theatre
+items: Rapier,Red,5,Theatre,../Assets/Items/Red/Rapier.png;
+villagers: 
+location: Mansion
+items: Fire Poker,Red,3,Mansion,../Assets/Items/Red/FirePoker.png;Telescope,Blue,2,Mansion,../Assets/Items/Blue/Telescope.png;MirroRed Box,Yellow,3,Mansion,../Assets/Items/Yellow/Mirrored_Box.png;Fire Poker,Red,3,Mansion,../Assets/Items/Red/FirePoker.png;
+villagers: 
+location: Abbey
+items: 
+villagers: 
+location: Crypt
+items: 
+villagers: 
+location: Museum
+items: Tablet,Yellow,3,Museum,../Assets/Items/Yellow/Tablet.png;Tablet,Yellow,3,Museum,../Assets/Items/Yellow/Tablet.png;
+villagers: 
+location: Hospital
+items: 
+villagers: 
+location: Church
+items: 
+villagers: 
+location: Graveyard
+items: 
+villagers: 
+location: Institute
+items: Analysis,Blue,2,Institute,../Assets/Items/Blue/Analysis.png;Speargun,Red,4,Institute,../Assets/Items/Red/Speargun.png;Speargun,Red,4,Institute,../Assets/Items/Red/Speargun.png;
+villagers: Dr. Reed,
+location: Laboratory
+items: 
+villagers: Dr. Cranly,
+location: Shop
+items: 
+villagers: 
+location: Docks
+items: Flower,Yellow,2,Docks,../Assets/Items/Yellow/Flower.png;Flower,Yellow,2,Docks,../Assets/Items/Yellow/Flower.png;
+villagers: 
+coffins: 0000
+evidence: 
+played monstercards:Thief,Former employer,Former employer,Fortune teller,
+terror level:0

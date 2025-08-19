@@ -1,0 +1,88 @@
+# players info
+player1: f,mayor
+player2: q,archaeologist
+
+# Hero
+hero: archaeologist
+location: Docks
+available perk: Late into the Night,
+played perk: 
+items: 
+
+hero: mayor
+location: Hospital
+available perk: Visit from the Detective,
+played perk: 
+items: 
+
+# turn info
+turn: mayor
+
+# Monster
+monster: Dracula
+location: Theatre
+monster: InvisibleMan
+location: Barn
+
+# locations:
+location: Cave
+items: 
+villagers: Prof. Pearson,
+location: Camp
+items: Tarot Card,Yellow,3,Camp,../Assets/Items/Yellow/Tarot.png;Violin,Yellow,3,Camp,../Assets/Items/Yellow/Violin.png;Fossil,Blue,3,Camp,../Assets/Items/Blue/Fossil.png;
+villagers: 
+location: Precinct
+items: Searchlight,Blue,2,Precinct,../Assets/Items/Blue/Searchlight.png;
+villagers: 
+location: Inn
+items: Garlic,Yellow,2,Inn,../Assets/Items/Yellow/Garlic.png;
+villagers: 
+location: Barn
+items: Pitchfork,Red,4,Barn,../Assets/Items/Red/Pitchfork.png;Pitchfork,Red,4,Barn,../Assets/Items/Red/Pitchfork.png;
+villagers: 
+location: Dungeon
+items: 
+villagers: 
+location: Tower
+items: Nebularium,Blue,3,Tower,../Assets/Items/Blue/Nebularium.png;
+villagers: 
+location: Theatre
+items: 
+villagers: 
+location: Mansion
+items: Fire Poker,Red,3,Mansion,../Assets/Items/Red/FirePoker.png;
+villagers: 
+location: Abbey
+items: 
+villagers: 
+location: Crypt
+items: 
+villagers: 
+location: Museum
+items: Scroll of Thoth,Yellow,4,Museum,../Assets/Items/Yellow/Scroll.png;
+villagers: 
+location: Hospital
+items: 
+villagers: 
+location: Church
+items: 
+villagers: 
+location: Graveyard
+items: Shovel,Red,2,Graveyard,../Assets/Items/Red/Shovel.png;Shovel,Red,2,Graveyard,../Assets/Items/Red/Shovel.png;
+villagers: 
+location: Institute
+items: 
+villagers: 
+location: Laboratory
+items: Centrifuge,Blue,1,Laboratory,../Assets/Items/Blue/Centrifuge.png;
+villagers: 
+location: Shop
+items: Silver Cane,Red,6,Shop,../Assets/Items/Red/SilverCane.png;
+villagers: 
+location: Docks
+items: Flower,Yellow,2,Docks,../Assets/Items/Yellow/Flower.png;
+villagers: 
+coffins: 0000
+evidence: 
+played monstercards:Egyptian Expert,
+terror level:1

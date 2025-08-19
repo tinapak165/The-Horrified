@@ -1,0 +1,88 @@
+# players info
+player1: g,mayor
+player2: q,archaeologist
+
+# Hero
+hero: mayor
+location: Theatre
+available perk: Visit from the Detective,
+played perk: 
+items: 
+
+hero: archaeologist
+location: Docks
+available perk: Visit from the Detective,
+played perk: 
+items: 
+
+# turn info
+turn: archaeologist
+
+# Monster
+monster: Dracula
+location: Cave
+monster: InvisibleMan
+location: Barn
+
+# locations:
+location: Cave
+items: 
+villagers: 
+location: Camp
+items: Wolfsbane,Yellow,4,Camp,../Assets/Items/Yellow/Wolfsbane.png;Tarot Card,Yellow,3,Camp,../Assets/Items/Yellow/Tarot.png;Charm,Yellow,4,Camp,../Assets/Items/Yellow/Charm.png;
+villagers: 
+location: Precinct
+items: Pistol,Red,6,Precinct,../Assets/Items/Red/Pistol.png;
+villagers: 
+location: Inn
+items: 
+villagers: 
+location: Barn
+items: Pitchfork,Red,4,Barn,../Assets/Items/Red/Pitchfork.png;Torch,Red,5,Barn,../Assets/Items/Red/Torch.png;
+villagers: 
+location: Dungeon
+items: 
+villagers: 
+location: Tower
+items: 
+villagers: 
+location: Theatre
+items: Rapier,Red,5,Theatre,../Assets/Items/Red/Rapier.png;
+villagers: 
+location: Mansion
+items: MirroRed Box,Yellow,3,Mansion,../Assets/Items/Yellow/Mirrored_Box.png;
+villagers: 
+location: Abbey
+items: Stake,Yellow,3,Abbey,../Assets/Items/Yellow/Stake.png;
+villagers: 
+location: Crypt
+items: 
+villagers: 
+location: Museum
+items: 
+villagers: 
+location: Hospital
+items: 
+villagers: 
+location: Church
+items: 
+villagers: 
+location: Graveyard
+items: 
+villagers: 
+location: Institute
+items: Analysis,Blue,2,Institute,../Assets/Items/Blue/Analysis.png;Analysis,Blue,2,Institute,../Assets/Items/Blue/Analysis.png;
+villagers: 
+location: Laboratory
+items: 
+villagers: 
+location: Shop
+items: Bear Trap,Red,4,Shop,../Assets/Items/Red/BearTrap.png;
+villagers: 
+location: Docks
+items: 
+villagers: 
+coffins: 0000
+evidence: 
+played monstercards:
+terror level:0

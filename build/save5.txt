@@ -1,0 +1,88 @@
+# players info
+player1: f,scientist
+player2: q,courier
+
+# Hero
+hero: scientist
+location: Institute
+available perk: Hurry,
+played perk: 
+items: 
+
+hero: courier
+location: Shop
+available perk: Hurry,
+played perk: 
+items: 
+
+# turn info
+turn: scientist
+
+# Monster
+monster: Dracula
+location: Cave
+monster: InvisibleMan
+location: Barn
+
+# locations:
+location: Cave
+items: 
+villagers: 
+location: Camp
+items: 
+villagers: 
+location: Precinct
+items: Searchlight,Blue,2,Precinct,../Assets/Items/Blue/Searchlight.png;Pistol,Red,6,Precinct,../Assets/Items/Red/Pistol.png;Pistol,Red,6,Precinct,../Assets/Items/Red/Pistol.png;
+villagers: 
+location: Inn
+items: Dart,Red,2,Inn,../Assets/Items/Red/Dart.png;Monocane Mixture,Blue,3,Inn,../Assets/Items/Blue/MonocaneMixture.png;
+villagers: 
+location: Barn
+items: Rifle,Red,6,Barn,../Assets/Items/Red/Rifle.png;Pitchfork,Red,4,Barn,../Assets/Items/Red/Pitchfork.png;Torch,Red,5,Barn,../Assets/Items/Red/Torch.png;
+villagers: 
+location: Dungeon
+items: 
+villagers: 
+location: Tower
+items: 
+villagers: 
+location: Theatre
+items: 
+villagers: 
+location: Mansion
+items: 
+villagers: 
+location: Abbey
+items: Stake,Yellow,3,Abbey,../Assets/Items/Yellow/Stake.png;
+villagers: 
+location: Crypt
+items: 
+villagers: 
+location: Museum
+items: Scroll of Thoth,Yellow,4,Museum,../Assets/Items/Yellow/Scroll.png;
+villagers: 
+location: Hospital
+items: 
+villagers: 
+location: Church
+items: 
+villagers: 
+location: Graveyard
+items: 
+villagers: 
+location: Institute
+items: Speargun,Red,4,Institute,../Assets/Items/Red/Speargun.png;
+villagers: 
+location: Laboratory
+items: Experiment,Blue,2,Laboratory,../Assets/Items/Blue/Experiments.png;
+villagers: 
+location: Shop
+items: 
+villagers: 
+location: Docks
+items: 
+villagers: 
+coffins: 0000
+evidence: 
+played monstercards:
+terror level:0
