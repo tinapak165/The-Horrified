@@ -1,3 +1,0 @@
-/home/lenovo/Desktop/Final/The-Horrified/build/CMakeFiles/Horrified.dir
-/home/lenovo/Desktop/Final/The-Horrified/build/CMakeFiles/edit_cache.dir
-/home/lenovo/Desktop/Final/The-Horrified/build/CMakeFiles/rebuild_cache.dir
