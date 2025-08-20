@@ -1,21 +1,19 @@
 #include "Button.hpp"
-#include <iostream>
+
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
     int width = MeasureText(text.c_str(), fontSize);
     bounds = { pos.x, pos.y, (float)width, (float)fontSize };
 }
-void ClickableText::Draw(Vector2 mousePos) {
+void ClickableText::Draw() {
     DrawText(text.c_str(), position.x, position.y, fontSize, color);
-    if (CheckCollisionPointRec(mousePos, bounds)) {
+    if (CheckCollisionPointRec(GetMousePosition(), bounds)) 
         DrawRectangleLines(bounds.x, bounds.y, bounds.width, bounds.height, RED);
-    }
 }
 
-bool ClickableText::isClicked(Vector2 mousePos, bool click) const {
-    return click && CheckCollisionPointRec(mousePos, bounds);
+bool ClickableText::isClicked() const {
+    return  IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), bounds);
 }
-
 
 std::string ClickableText::get_text(){ return text;}
 
@@ -26,17 +24,17 @@ Button::Button(const std::string& path, Vector2 position , float scale) : scale(
             (float)texture.width*scale, (float)texture.height*scale};
 }
 
-void Button::Draw(Vector2 mousePos) {
+void Button::Draw() {
        
       //  DrawTexture(texture, static_cast<int>(bounds.x),static_cast<int>(bounds.y), WHITE);
     DrawTextureEx(texture, (Vector2){bounds.x, bounds.y}, 0.0f, scale, WHITE); //with scale
-    if (CheckCollisionPointRec(mousePos, bounds)) {
+    if (CheckCollisionPointRec(GetMousePosition(), bounds)) {
         DrawRectangleLinesEx(bounds, 2.0f, RED);
     }
 }    
 
-bool Button::isPressed(Vector2 mousePos, bool click)const {
-    return click && CheckCollisionPointRec(mousePos, bounds);
+bool Button::isPressed()const {
+    return IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), bounds);
 }
 
 Vector2 Button::GetPosition() const{
@@ -51,9 +49,9 @@ Rectangle Button::GetBounds() const{
  return bounds;
 }
 
-void Button::DrawWithFade(Vector2 mousepos, float alpha){
+void Button::DrawWithFade(){
     Color fadeColor = WHITE ; 
-    fadeColor.a = static_cast<unsigned char> (alpha) ;
+    fadeColor.a = static_cast<unsigned char> (100) ;
     DrawTextureEx(texture , {bounds.x , bounds.y} , 0.0f , scale , fadeColor) ;
 }
 

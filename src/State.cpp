@@ -5,6 +5,7 @@
 
 State::State(const std::string& bgPath) {
     background = LoadTexture(bgPath.c_str());
+    font = LoadFont("../Assets/font.ttf");
 }
 
 State::~State(){
@@ -14,11 +15,12 @@ State::~State(){
 Texture2D State::get_background() const{
     return background;
 }
+Font State::get_Font() const{ return font; }
 
 MenuState::MenuState() : State("../Assets/Menu/firstbackground.png"), 
       startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{500, 500 } , 0.50f)),
       exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{500, 600} , 0.50f)),
-      continueButton(std::make_unique<Button>("../Assets/Menu/continue.png", Vector2{500, 700} , 0.2f)) {}
+      continueButton(std::make_unique<Button>("../Assets/Menu/continue2.png", Vector2{500, 700} , 0.5f)) {}
 
 void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
@@ -26,22 +28,22 @@ void MenuState::render(Menu& menu)  {
         Vector2 mouse = GetMousePosition();
         bool click = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-        startButton->Draw(mouse);
-        exitButton->Draw(mouse);
-        continueButton->Draw(mouse);
+        startButton->Draw();
+        exitButton->Draw();
+        continueButton->Draw();
 
-        if (startButton->isPressed(mouse, click)) {
+        if (startButton->isPressed()) {
             menu.getGame().distribute_initial_items() ;
             auto newstate = std::make_unique<NameInputState>() ;
             menu.SetState(std::move(newstate)); 
             return ; 
         }
-        if (exitButton->isPressed(mouse, click)) {
+        if (exitButton->isPressed()) {
             auto newstate = std::make_unique<ExitState>() ;
             menu.SetState(std::move(newstate)) ;
             return ; 
         }
-        if(continueButton->isPressed(mouse , click)){
+        if(continueButton->isPressed()){
             menu.SetState(std::make_unique<ContinueState>()) ;
             return ;        
         }
@@ -65,10 +67,10 @@ void ExitState::render(Menu& menu) {
     Vector2 mouse = GetMousePosition();
     bool click = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    YesText->Draw(mouse);
-    NoText->Draw(mouse);
+    YesText->Draw();
+    NoText->Draw();
 
-    if (YesText->isClicked(mouse, click)) {
+    if (YesText->isClicked()) {
         // if (!soundPlayed) {
         //     PlaySound(goodbyeSound);
         //     soundPlayed = true;
@@ -77,7 +79,7 @@ void ExitState::render(Menu& menu) {
         CloseWindow();
     }
 
-    if (NoText->isClicked(mouse, click)) {
+    if (NoText->isClicked()) {
         auto newstate = std::make_unique<MenuState>() ; 
         menu.SetState(std::move(newstate));
         return ; 
@@ -102,9 +104,9 @@ void NameInputState::render(Menu& menu) {
     Vector2 mousePos = GetMousePosition();
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    BackToMenu->Draw(mousePos) ;
+    BackToMenu->Draw() ;
 
-    if(BackToMenu->isClicked(mousePos , mouseClicked)){
+    if(BackToMenu->isClicked()){
         auto newstate = std::make_unique<MenuState>() ; 
         menu.SetState(std::move(newstate)) ;
         return ; 
@@ -219,8 +221,8 @@ void ChooseCharacterState::render(Menu& menu) {
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
     ClickableText backButton("back to Menu", {100, 900}, 30, RED);
-    backButton.Draw(mousePos);
-    if (backButton.isClicked(mousePos, mouseClicked)) {
+    backButton.Draw();
+    if (backButton.isClicked()) {
         auto newstate = std::make_unique<MenuState>() ;
         menu.SetState(std::move(newstate));
         return;
@@ -235,14 +237,14 @@ void ChooseCharacterState::render(Menu& menu) {
 
     for (int i = 0; i < heroButtons.size(); i++) {
         if (selectedHeroes[i]) 
-            heroButtons[i]->DrawWithFade(mousePos, 100);
+            heroButtons[i]->DrawWithFade();
         else
-            heroButtons[i]->Draw(mousePos);      
+            heroButtons[i]->Draw();      
     }
 
     if (mouseClicked) {
         for (int i = 0; i < heroButtons.size(); i++) {
-            if (!selectedHeroes[i] && heroButtons[i]->isPressed(mousePos, mouseClicked)) {
+            if (!selectedHeroes[i] && heroButtons[i]->isPressed()) {
                 selectedHeroes[i] = true;
 
                 if (currentTurn == PlayerTurn::PLAYER1) {
@@ -281,8 +283,8 @@ void ContinueState::render(Menu & menu)
     DrawTexture(get_background(), 0, 0, WHITE);
 
     ClickableText backButton("back to Menu", {100, 900}, 30, RED);
-    backButton.Draw(GetMousePosition());
-    if (backButton.isClicked(GetMousePosition(), IsMouseButtonPressed(MOUSE_LEFT_BUTTON))) {
+    backButton.Draw();
+    if (backButton.isClicked()) {
         auto newstate = std::make_unique<MenuState>() ;
         menu.SetState(std::move(newstate));
         return;
@@ -301,8 +303,8 @@ void ContinueState::render(Menu & menu)
     DrawText("select a save file: " , 100 , 80 , 30 , GREEN);
 
     for(auto & button : fileButtons){
-        button.Draw(GetMousePosition()) ;
-        if(button.isClicked(GetMousePosition() , IsMouseButtonPressed(MOUSE_LEFT_BUTTON))){
+        button.Draw() ;
+        if(button.isClicked()){
             selectedFile = button.get_text() ;
             fileselected = true ;
         }
@@ -313,6 +315,54 @@ void ContinueState::render(Menu & menu)
     }
 }
 
- 
+ ExplainationState::ExplainationState(): State("../Assets/Menu/Background.png"){}
+
+void ExplainationState::render(Menu & menu)
+{
+    DrawTexture(get_background(), 0, 0, WHITE);
+
+    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    backButton.Draw();
+    if (backButton.isClicked()) {
+        menu.SetState(std::make_unique<MenuState>());
+        return;
+    }
+
+    ClickableText continueButton("continue", {900, 900}, 30, RED);
+    continueButton.Draw();
+    if (continueButton.isClicked()) {
+        menu.SetState(std::make_unique<NameInputState>());
+        return;
+    }
+    DrawTextEx(get_Font() ,
+    "Welcome to Horrified! Here's your quick-start guide:\n"
+    "1. Missions:\n"
+    "    Work together with fellow heroes to defeat the monsters (Dracula and the Invisible Man)\n"
+    "    by completing their specific tasks (smashing coffins, gathering evidence).\n"
+    "    Escort villagers to their safe places(this will reward you with a Perk card).\n"
+    "    Prevent the terror level from reaching its maximum.\n"
+    "2. Hero Phase:\n"
+    "    Take a number of actions equal to the value on your Hero Badge.\n"
+    "    You may play any number of Perk cards (playing a Perk does not cost an action).\n"
+    "    Learn more about actions by clicking on Help.\n"
+    "    End your turn anytime by clicking Quit\n"
+    "    Villagers cannot defend themselves. If monsters attack them, they are defeated, which raises the terror level.\n"
+    "    If a hero is attacked they may discard an item to avoid being defeated and sent to the hospital.\n "
+    "3. Monster Phase:\n"
+    "     Draw a Monster card: place items, resolve an event, roll dice then move/attack monsters\n"
+    "     Each monster has unique behavior and its own defeat conditions.\n  (click on each monster to learn more.)\n"
+    "     Dice results: Attack, Power or Empty\n"
+    "       Attack: If a monster shares a space with a hero, it may attack\n"
+    "       Power: Activates that monster's special ability:\n"
+    "         Dracula-> Dark Charm: pulls the current Hero into his place\n"
+    "         InvisibleMan-> Stalk Unseen: moves 2 extra places toward the nearest villager\n"
+    "     You can track what happened in the sidebar\n"
+    "4. Terror level:\n"
+    "    The Terror rises when heroes or villagers are defeated.\n"
+    "    If the track reaches the end, the town falls and you lose.\n"
+    "5. Victory:\n"
+    "    Complete every active monster's objectives to save the town!\n"
+      , Vector2{80 , 60 } , 28 , 0 , WHITE);
+}
 
 

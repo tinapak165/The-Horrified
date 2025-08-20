@@ -22,10 +22,12 @@ class GameRender ;
 class State{
     private:
         Texture2D background ; 
+        Font font;
 
     public :
         State(const std::string&) ; 
         Texture2D get_background() const ; 
+        Font get_Font() const ;
         virtual void render(Menu&) = 0 ;
         virtual ~State(); 
   
@@ -102,4 +104,10 @@ class ContinueState : public State{
 };
 
 
+
+class ExplainationState : public State {  
+    public:
+        ExplainationState();
+        void render(Menu&) override;
+};
 #endif

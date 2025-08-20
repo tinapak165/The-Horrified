@@ -10,282 +10,223 @@ Perkcard::~Perkcard(){ UnloadTexture(texture) ;}
 string Perkcard::get_name() const {return name ;}
 Texture2D Perkcard::get_texture() const { return texture ;}
 
+void Perkcard::DrawInfoPanel(){
+    Rectangle infoPanel = {295.0f, 150.0f, 390.0f, 300.0f};
+    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
+    DrawRectangleLinesEx(infoPanel, 2, GRAY);
+}
+bool Perkcard::handleShouldClose()
+{
+    if (shouldClose) {
+        messageTimer += GetFrameTime();
+        if (messageTimer >= 1.5f) {
+            return true; 
+        }
+        return false; 
+    }  
+    return false ;
+}
+
+void Perkcard::set_ShouldClose(bool val){ shouldClose = val ; }
+void Perkcard::Setmessage(std::string msg){ message = msg; }
+
+void Perkcard::Drawmessage(int y, Color color){
+    DrawText(message.c_str(), 305, y, 17, color);
+}
+
+void Perkcard::Drawtexture(){
+    Rectangle cardRect = {95.0f, 155.0f, 190.0f, 300.0f};
+    Texture2D tex = get_texture();
+    DrawTexturePro( tex, {0, 0, (float)tex.width, (float)tex.height}, cardRect, {0, 0}, 0.0f, WHITE);
+}
+
+std::string Perkcard::type(std::string input){
+    int key = GetCharPressed();
+        while (key > 0) {
+            if (key >= 32 && key <= 125) 
+                input += (char)key;
+            key = GetCharPressed();
+        }
+        if (IsKeyPressed(KEY_BACKSPACE) && !input.empty()) 
+            input.pop_back();    
+    return input ;  
+}
+
 Hurrycard::Hurrycard( const vector<Hero*>& heroes, GameMap &map): Perkcard("Hurry" , "../Assets/Perk_Cards/Hurry.png") , heroes(heroes) , map(map) {}
 
 void Hurrycard::play(Hero*){
 
-    if (showingMessage) {
-        if (GetTime() - messageStartTime >= 1.5) {
-            showingMessage = false;
-            typing = true;  // دوباره اجازه تایپ بده
-        }
-        return; // هنوز صبر کن
-    }
-
-    if(currentHeroIndex == 2){
+    if(currentHeroIndex == 2)
         done = true ; 
-        return ;
-    }
-
+    
     Hero* hero = heroes[currentHeroIndex] ;
     Location* currentLoc = hero->GetCurrentLocation() ; 
 
     if(typing){
-        int key = GetCharPressed() ;
-        while(key>0){
-            if(key >= 32 && key <= 125){
-                chosenPlace += (char)key ; 
-            }
-            key = GetCharPressed() ; 
-        }
-        if(IsKeyPressed(KEY_BACKSPACE) && !chosenPlace.empty()){
-            chosenPlace.pop_back() ; 
-        }
+        chosenPlace = type(chosenPlace);
+
         if(IsKeyPressed(KEY_ENTER)){
             chosenLocation = map.get_location_by_name(chosenPlace) ; 
             if(chosenLocation && currentLoc->findNeighbor(chosenPlace)){
-                validInput = true ; 
                 Finished = true ;
                 typing = false ;
             }else{
-                message = "invalid location or not a neighbor!" ;
+                Setmessage("invalid location or not a neighbor!") ;
                 chosenPlace.clear() ; 
-                typing = false ; 
-                showingMessage = true ; 
-                messageStartTime = GetTime() ; 
+                typing = true ; 
             }
         }
     }
-    if(Finished && validInput && chosenLocation){
+    if(Finished){
         hero->MoveTo(chosenLocation) ; 
-        message = hero->GetName() + " moved to " + chosenPlace ;
+        Setmessage(hero->GetName() + " moved to " + chosenPlace) ;
         moveStep++ ; 
 
         if(moveStep == 2){
             moveStep = 0 ;
             currentHeroIndex++ ; 
 
-            if(currentHeroIndex >= heroes.size()){
-                done = true ; // همه هیروها حرکت کردند
-                return ;
-            }
+            if(currentHeroIndex >= heroes.size())
+                done = true ; 
         }
-
-        // ریست برای هیرو بعدی
-        typing = true;
-        validInput = false;
-        Finished = false;
-        chosenLocation = nullptr;
-        chosenPlace.clear();
+        Reset();
     }     
 }
 
 void Hurrycard::draw() {
+    if (done) return;
 
-    if (done || currentHeroIndex >= heroes.size()) return;
-
-    // بک‌گراند اصلی کارت
-    Rectangle cardRect = {120.0f, 200.0f, 200.0f, 300.0f};
-    Texture2D tex = get_texture();
-    DrawTexturePro(
-        tex,
-        {0, 0, (float)tex.width, (float)tex.height},
-        cardRect,
-        {0, 0},
-        0.0f,
-        WHITE
-    );
-
-    // پنل اطلاعات کارت کنار تصویر
-    Rectangle infoPanel = {340.0f, 200.0f, 480.0f, 300.0f};
-    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
-    DrawRectangleLinesEx(infoPanel, 2, GRAY);
+    Drawtexture();
+    DrawInfoPanel();
 
     Hero* hero = heroes[currentHeroIndex];
 
-    // اطلاعات کارت
-    int x = (int)infoPanel.x + 20;
-    int y = (int)infoPanel.y + 20;
+    int y = 200 ;
 
-    DrawText(("Hero: " + hero->GetName()).c_str(), x, y, 22, DARKBLUE);
+    DrawText(("Hero: " + hero->GetName()).c_str(), 300, y, 22, DARKBLUE);
     y += 40;
 
-    DrawText("Enter a neighboring location name:", x, y, 18, DARKGRAY);
+    DrawText("Enter a neighboring location name:", 300, y, 18, DARKGRAY);
     y += 30;
 
-    DrawText(("> " + chosenPlace).c_str(), x, y, 24, BLUE);
+    DrawText(("> " + chosenPlace).c_str(), 300, y, 24, BLUE);
     y += 40;
-
-    if (!message.empty()) {
-        DrawText(message.c_str(), x, y, 18, MAROON);
-    }
+    Drawmessage(y , RED);
 }
-
 
 bool Hurrycard::isDone() const{ return done ; }
 
-Repelcard::Repelcard(Dracula * d ,InvisibleMan * i, GameMap & map): Perkcard("Repel" , "../Assets/Perk_Cards/Repel.png") , dracula(d) , invisibleman(i) , map(map){}
+void Hurrycard::Reset(){
+    typing = true;
+    Finished = false;
+    chosenLocation = nullptr;
+    chosenPlace.clear(); 
+}
 
+Repelcard::Repelcard(Dracula * d ,InvisibleMan * i, GameMap & map): Perkcard("Repel" , "../Assets/Perk_Cards/Repel.png") , dracula(d) , invisibleman(i) , map(map){}
 
 void Repelcard::play(Hero*){
 
-    if (showingMessage) {
-        if (GetTime() - messageStartTime >= 1.5) {
-            showingMessage = false;
-            typing = true;
-            message.clear()  ;
-        }
-        return;
-    }
-
     Monster* monsters[2] = {dracula , invisibleman} ; 
 
-    if(currentMonsterIndex == 2){
+    if(currentMonsterIndex == 2)
         done = true ; 
-        return ;
-    }
-
+    
     Monster* monster = monsters[currentMonsterIndex] ;
 
     if(typing){
-        int key = GetCharPressed() ;
-        while(key>0){
-            if(key >= 32 && key <= 125){
-                chosenPlace += (char)key ; 
-            }
-            key = GetCharPressed() ; 
-        }
-        if(IsKeyPressed(KEY_BACKSPACE) && !chosenPlace.empty()){
-            chosenPlace.pop_back() ; 
-        }
+
+        chosenPlace = type(chosenPlace);
+
         if(IsKeyPressed(KEY_ENTER)){
             chosenLocation = map.get_location_by_name(chosenPlace) ; 
             if(chosenLocation){
-                validInput = true ; 
                 Finished = true ;
                 typing = false ;
             }else{
-                message = "invalid location!" ;
+                Setmessage("invalid location!") ;
                 chosenPlace.clear() ; 
-                typing = false ; 
-                showingMessage = true ; 
-                messageStartTime = GetTime() ;
+                typing = true ; 
             }
         }
     }
-    if(Finished && validInput && chosenLocation){
+    if(Finished && chosenLocation){
         monster->set_location(chosenLocation) ; 
-        message = monster->get_name() + " moved to " + chosenPlace ;
-        showingMessage = true ; 
-        messageStartTime = GetTime() ; 
+        Setmessage(monster->get_name() + " moved to " + chosenPlace) ;
+
         moveStep++ ; 
 
         if(moveStep == 2){
             moveStep = 0 ;
             currentMonsterIndex++ ; 
 
-            if(currentMonsterIndex == 2){
-                done = true ; 
-                return ;
-            }
+            if(currentMonsterIndex == 2)
+                done = true ;    
         }
-
-        typing = true;
-        validInput = false;
-        Finished = false;
-        chosenLocation = nullptr;
-        chosenPlace.clear();
+        Reset();
     }
 }
 
-
 void Repelcard::draw(){
 
-    if (done || currentMonsterIndex == 2) return;
+    if (done) return;
 
-    // بک‌گراند اصلی کارت
-    Rectangle cardRect = {120.0f, 200.0f, 200.0f, 300.0f};
-    Texture2D tex = get_texture();
-    DrawTexturePro(
-        tex,
-        {0, 0, (float)tex.width, (float)tex.height},
-        cardRect,
-        {0, 0},
-        0.0f,
-        WHITE
-    );
-
-    // پنل اطلاعات کارت کنار تصویر
-    Rectangle infoPanel = {340.0f, 200.0f, 480.0f, 300.0f};
-    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
-    DrawRectangleLinesEx(infoPanel, 2, GRAY);
+    Drawtexture();
+    DrawInfoPanel();
 
     Monster* monsters[2] = {dracula , invisibleman} ; 
     Monster* monster = monsters[currentMonsterIndex] ;
 
-    // اطلاعات کارت
-    int x = (int)infoPanel.x + 20;
-    int y = (int)infoPanel.y + 20;
+    int y = 200;
 
-    DrawText(("Monster: " + monster->get_name()).c_str(), x, y, 22, DARKBLUE);
+    DrawText(("Monster: " + monster->get_name()).c_str(), 300, y, 22, DARKBLUE);
     y += 40;
 
-    DrawText("Enter any location name:", x, y, 18, DARKGRAY);
+    DrawText("Enter any location name:", 300, y, 18, DARKGRAY);
     y += 30;
 
-    DrawText(("> " + chosenPlace).c_str(), x, y, 24, BLUE);
+    DrawText(("> " + chosenPlace).c_str(), 300, y, 24, BLUE);
     y += 40;
 
-    if (!message.empty()) {
-        DrawText(message.c_str(), x, y, 18, MAROON);
-    }
+    Drawmessage(y , RED);
 }
 
 bool Repelcard::isDone() const{ return done; }
 
+void Repelcard::Reset(){
+    typing = true;
+    Finished = false;
+    chosenLocation = nullptr;
+    chosenPlace.clear();
+}
+
 LateintotheNightCARD::LateintotheNightCARD(): Perkcard("Late into the Night" , "../Assets/Perk_Cards/LateIntoTheNight.png") {}
 
 void LateintotheNightCARD::play(Hero* hero){
+
     if(done)return ;
 
     hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
-    message = hero->GetName() + " actions changed to " + to_string(hero->GetRemainingActions()) ;
+    Setmessage(hero->GetName() + " actions changed to " + to_string(hero->GetRemainingActions())) ;
 
+    set_ShouldClose(true);
     messageVisible = true ;
-    messageTimer = GetTime() ;
     done = true ; 
- 
 }
 
 void LateintotheNightCARD::draw(){
-        // اگه پیام قراره نشون داده نشه، هیچی نکش
-    if (!messageVisible) return;
 
-        // اگه زمانش گذشته، پیام رو پاک کن
-    if ((GetTime() - messageTimer >= messageDuration)) {
+    if(handleShouldClose()) {
         messageVisible = false;
-        message.clear();
         return;
     }
-        // بک‌گراند اصلی کارت
-    Rectangle cardRect = {120.0f, 200.0f, 200.0f, 300.0f};
-    Texture2D tex = get_texture();
-    DrawTexturePro( tex, {0, 0, (float)tex.width, (float)tex.height}, cardRect, {0, 0},  0.0f, WHITE );
 
-    // پنل اطلاعات کارت کنار تصویر
-    Rectangle infoPanel = {340.0f, 200.0f, 480.0f, 300.0f};
-    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
-    DrawRectangleLinesEx(infoPanel, 2, GRAY);
-      // اطلاعات کارت
-    int x = (int)infoPanel.x + 20;
-    int y = (int)infoPanel.y + 20;
-
-    if (!message.empty()) 
-        DrawText(message.c_str(), x, y, 18, MAROON);
-        
+    Drawtexture();
+    DrawInfoPanel();
+    Drawmessage(220 , RED);     
 }
 
-bool LateintotheNightCARD::isDone() const { return done && !messageVisible; }
+bool LateintotheNightCARD::isDone() const { return done && !messageVisible ; }
 
 BreakofDawnCARD::BreakofDawnCARD(ItemPool& p , GameMap& m) : Perkcard("Break of Dawn" , "../Assets/Perk_Cards/BreakOfDawn.png") , pool(p) , map(m){}
 
@@ -300,45 +241,25 @@ void BreakofDawnCARD::play(Hero*){
         Location* Loc = map.get_location_by_name(i.getLocationName());
         if(Loc){
             Loc->add_item(i) ;
-            message.push_back("Item " + i.getName() + " placed in location " + i.getLocationName());
+            Setmessage("Item " + i.getName() + " placed in location " + i.getLocationName()) ;
         }
     }
 
+    set_ShouldClose(true);
     messageVisible = true ;
-    messageTimer = GetTime() ;
     done = true ; 
 }
 
 void BreakofDawnCARD::draw(){
-    // اگه پیام قراره نشون داده نشه، هیچی نکش
-    if (!messageVisible) return;
 
-        // اگه زمانش گذشته، پیام رو پاک کن
-    if ((GetTime() - messageTimer >= messageDuration)) {
+    if(handleShouldClose()) {
         messageVisible = false;
-        message.clear();
         return;
     }
-        // بک‌گراند اصلی کارت
-    Rectangle cardRect = {120.0f, 200.0f, 200.0f, 300.0f};
-    Texture2D tex = get_texture();
-    DrawTexturePro( tex, {0, 0, (float)tex.width, (float)tex.height}, cardRect, {0, 0},  0.0f, WHITE );
 
-    // پنل اطلاعات کارت کنار تصویر
-    Rectangle infoPanel = {340.0f, 200.0f, 480.0f, 300.0f};
-    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
-    DrawRectangleLinesEx(infoPanel, 2, GRAY);
-      // اطلاعات کارت
-    int x = (int)infoPanel.x + 20;
-    int y = (int)infoPanel.y + 20;
-
-    if(!message.empty()){
-        for (const auto& msg : message) {
-                DrawText(msg.c_str(), x, y, 18, MAROON);
-                y += 30; // فاصله بین پیام‌ها
-            }          
-    }
-     
+    Drawtexture();
+    DrawInfoPanel();
+    Drawmessage(220 , RED);    
 }
 
 bool BreakofDawnCARD::isDone() const{ return done && !messageVisible; }
@@ -356,43 +277,24 @@ void OverstockCard::play(Hero*){
         Location* Loc = map.get_location_by_name(i.getLocationName());
         if (Loc) {
             Loc->add_item(i);
-            message.push_back(" placed " + i.getName() + " in location " + i.getLocationName());
+            Setmessage(" placed " + i.getName() + " in location " + i.getLocationName());
         }
     }  
+
+    set_ShouldClose(true);
     messageVisible = true ;
-    messageTimer = GetTime() ;
     done = true ; 
 }
 
 void OverstockCard::draw(){
 
-    if (!messageVisible) return;
-
-    if ((GetTime() - messageTimer >= messageDuration)) {
+    if(handleShouldClose()) {
         messageVisible = false;
-        message.clear();
         return;
     }
-        // بک‌گراند اصلی کارت
-    Rectangle cardRect = {120.0f, 200.0f, 200.0f, 300.0f};
-    Texture2D tex = get_texture();
-    DrawTexturePro( tex, {0, 0, (float)tex.width, (float)tex.height}, cardRect, {0, 0},  0.0f, WHITE );
-
-    // پنل اطلاعات کارت کنار تصویر
-    Rectangle infoPanel = {340.0f, 200.0f, 480.0f, 300.0f};
-    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
-    DrawRectangleLinesEx(infoPanel, 2, GRAY);
-      // اطلاعات کارت
-    int x = (int)infoPanel.x + 20;
-    int y = (int)infoPanel.y + 20;
-
-    if(!message.empty()){
-        for (const auto& msg : message) {
-                DrawText(msg.c_str(), x, y, 18, MAROON);
-                y += 30; // فاصله بین پیام‌ها
-            }          
-    }
-
+    Drawtexture();
+    DrawInfoPanel();
+    Drawmessage(220 , RED); 
 }
 bool OverstockCard::isDone()const { return done && !messageVisible ;}
 
@@ -400,55 +302,20 @@ VisitfromtheDetectiveCARD::VisitfromtheDetectiveCARD(InvisibleMan* i , GameMap &
 
 void VisitfromtheDetectiveCARD::play(Hero*){
 
-    if(done) return ;
-
-    // مرحله نمایش پیام (چه خطا، چه موفقیت)
-    if (showingMessage) {
-        if (GetTime() - messageStartTime >= 1.5) {
-            showingMessage = false;
-            message.clear();
-
-            // اگه پیام موفقیت بود، کارتم کامل شده
-            if (!typing && Finished && validInput) {
-                done = true;
-            } else {
-                typing = true; // برای خطا، دوباره اجازه تایپ بده
-            }
-        }
-        return;
-    }
-
     if(typing){
-        int key = GetCharPressed() ;
-        while(key>0){
-            if(key >= 32 && key <= 125){
-                chosenPlace += (char)key ; 
-            }
-            key = GetCharPressed() ; 
-        }
-        if(IsKeyPressed(KEY_BACKSPACE) && !chosenPlace.empty()){
-            chosenPlace.pop_back() ; 
-        }
+
+        chosenPlace = type(chosenPlace);
+
         if(IsKeyPressed(KEY_ENTER)){
-            chosenLocation = map.get_location_by_name(chosenPlace) ; 
+            Location* chosenLocation = map.get_location_by_name(chosenPlace) ; 
             if(chosenLocation){
                 invisibleman->set_location(chosenLocation) ; 
-                message = "invisible man moved to " + chosenPlace ;
-                messageStartTime = GetTime() ;
-                showingMessage = true;
                 typing = false;
-                Finished = true;
-                validInput = true;
-
-
+                done = true;
             }else{
-                message = "invalid location!" ;
-                messageStartTime = GetTime();
-                showingMessage = true;
-                typing = false;
+                Setmessage("invalid location!") ;
+                typing = true;
                 chosenPlace.clear();
-                validInput = false;
-                Finished = false;
             }
         }
     }
@@ -458,36 +325,18 @@ void VisitfromtheDetectiveCARD::draw(){
 
     if (done) return;
 
-    // بک‌گراند اصلی کارت
-    Rectangle cardRect = {120.0f, 200.0f, 200.0f, 300.0f};
-    Texture2D tex = get_texture();
-    DrawTexturePro(
-        tex,
-        {0, 0, (float)tex.width, (float)tex.height},
-        cardRect,
-        {0, 0},
-        0.0f,
-        WHITE
-    );
+    Drawtexture();
+    DrawInfoPanel();
 
-    // پنل اطلاعات کارت کنار تصویر
-    Rectangle infoPanel = {340.0f, 200.0f, 480.0f, 300.0f};
-    DrawRectangleRec(infoPanel, Fade(RAYWHITE, 0.94f));
-    DrawRectangleLinesEx(infoPanel, 2, GRAY);
+    int y = 200;
 
-    // اطلاعات کارت
-    int x = (int)infoPanel.x + 20;
-    int y = (int)infoPanel.y + 20;
-
-    DrawText("Enter any location name:", x, y, 18, DARKGRAY);
+    DrawText("Enter any location name:", 300, y, 18, DARKGRAY);
     y += 30;
 
-    DrawText(("> " + chosenPlace).c_str(), x, y, 24, BLUE);
+    DrawText(("> " + chosenPlace).c_str(), 300, y, 24, BLUE);
     y += 40;
 
-    if (!message.empty()) {
-        DrawText(message.c_str(), x, y, 18, MAROON);
-    }
+    Drawmessage(y , RED);
 }
 
 bool VisitfromtheDetectiveCARD::isDone() const{ return done; }
@@ -500,13 +349,14 @@ void PerkDeck::addCard(unique_ptr<Perkcard> card){
 unique_ptr<Perkcard> PerkDeck::drawcard() {
 
     if (cards.empty()) 
-        throw runtime_error("Deck is empty!");
+        cout << "out of perk\n";
     
     srand(time(0)); 
     int index = rand() % cards.size() ; 
     auto chosen_card = move(cards[index]);
 
     cards.erase(cards.begin() + index);
-
-    return chosen_card;
+    if(chosen_card)
+        return chosen_card;
+    return nullptr;
 }

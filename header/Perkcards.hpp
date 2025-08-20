@@ -17,32 +17,37 @@ class Perkcard{
     private:
         std::string name; 
         Texture2D texture ;
+        std::string message; 
+        bool shouldClose = false;
+        float messageTimer = 0.0f;
     public:
         Perkcard(const std::string  , const std::string&) ; 
         virtual void play(Hero* = nullptr) = 0  ;
         virtual void draw() = 0 ;
         virtual bool isDone() const = 0  ; 
+        virtual void Reset() = 0 ;
         std::string get_name() const ; 
         Texture2D get_texture() const ;
+        void DrawInfoPanel() ;
+        void Drawtexture();
+        std::string type(std::string);
+        bool handleShouldClose() ; 
+        void set_ShouldClose(bool) ;
+        void Drawmessage(int , Color) ;
+        void Setmessage(std::string) ; 
         virtual ~Perkcard() ; 
 };
 
 class Hurrycard :public Perkcard{
     private:
         int currentHeroIndex = 0 ; 
-        int moveStep = 0 ; // 0 -> first move, 1 -> second move
+        int moveStep = 0 ;
         bool done = false ;
-        std::string message ;
         std::string chosenPlace ; 
         Location* chosenLocation = nullptr ;
 
         bool typing = true ; 
-        bool validInput = false ; 
         bool Finished = false ;
-
-        double messageStartTime = 0.0;
-        bool showingMessage = false;
-
 
         std::vector<Hero*> heroes ; 
         GameMap& map ; 
@@ -51,6 +56,7 @@ class Hurrycard :public Perkcard{
         void play(Hero* = nullptr) override ;
         void draw() override ; 
         bool isDone() const override ; 
+        void Reset() override ;
 };
 
 class Repelcard : public Perkcard{
@@ -60,39 +66,34 @@ class Repelcard : public Perkcard{
         GameMap& map ;
         
         int currentMonsterIndex = 0 ; 
-        int moveStep = 0 ; // 0 -> first move, 1 -> second move
+        int moveStep = 0 ; 
         bool done = false ;
-        std::string message ;
         std::string chosenPlace ; 
         Location* chosenLocation = nullptr ;
 
         bool typing = true ; 
-        bool validInput = false ; 
         bool Finished = false ;
-
-        double messageStartTime = 0.0;
-        bool showingMessage = false;
 
     public:
         Repelcard(Dracula * ,InvisibleMan * , GameMap &) ; 
         void play(Hero* = nullptr) override ; 
         void draw() override ; 
         bool isDone() const override ;
+        void Reset() override ;
+
 };
 
 class LateintotheNightCARD : public Perkcard{
    private:
         bool done = false ;
-        std::string message ;
-        float messageTimer = 0.0f;       // زمان شروع نمایش پیام
-        const float messageDuration = 2.5f; // چند ثانیه پیام بمونه (مثلاً 2.5 ثانیه)
-        bool messageVisible = false;     // آیا پیام باید نشون داده بشه؟
+        bool messageVisible = false;
         
         public:
         LateintotheNightCARD() ; 
         void play(Hero*)  ;
         void draw() override ; 
         bool isDone() const override ;
+        void Reset(){} ;
 };
 
 class BreakofDawnCARD : public Perkcard{
@@ -100,16 +101,14 @@ class BreakofDawnCARD : public Perkcard{
         ItemPool& pool ;
         GameMap& map ;
         bool done = false ;
-        std::vector<std::string> message ;
-        float messageTimer = 0.0f;     
-        const float messageDuration = 2.5f; 
         bool messageVisible = false;    
    
     public:
         BreakofDawnCARD(ItemPool& , GameMap&) ; 
         void play(Hero* = nullptr) override ;   
         void draw() override ; 
-        bool isDone() const override ;    
+        bool isDone() const override ; 
+        void Reset() {} ;
 
 };
 
@@ -118,16 +117,14 @@ class OverstockCard : public Perkcard {
         ItemPool& pool ;
         GameMap& map ;
         bool done = false ;
-        std::vector<std::string> message ;
-        float messageTimer = 0.0f;     
-        const float messageDuration = 2.5f; 
         bool messageVisible = false;  
 
     public:
         OverstockCard(ItemPool& , GameMap&) ; 
         void play(Hero* = nullptr) override ; 
         void draw() override ; 
-        bool isDone() const override ;      
+        bool isDone() const override ;  
+        void Reset() {} ;
 };
 
 class VisitfromtheDetectiveCARD : public Perkcard{
@@ -136,22 +133,16 @@ class VisitfromtheDetectiveCARD : public Perkcard{
         GameMap& map ;
         
         bool done = false ;
-        std::string message ;
         std::string chosenPlace ; 
-        Location* chosenLocation = nullptr ;
-
         bool typing = true ; 
-        bool validInput = false ; 
-        bool Finished = false ;
-
-        double messageStartTime = 0.0;
-        bool showingMessage = false; 
 
     public:
         VisitfromtheDetectiveCARD(InvisibleMan*, GameMap&) ; 
         void play(Hero* = nullptr) override ; 
         void draw() override ; 
         bool isDone() const override ;
+        void Reset(){};
+
 };
 
 class PerkDeck{

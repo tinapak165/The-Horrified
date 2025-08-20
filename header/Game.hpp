@@ -81,6 +81,7 @@ private:
     Hero* activeHero ; 
     
     std::vector<std::string> logs;
+    Music music;
  
     
 public:

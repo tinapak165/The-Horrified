@@ -1,35 +1,45 @@
 #ifndef ACTIONS_H
 #define ACTIONS_H
-#include "Hero.hpp"
-#include "GameMap.hpp"
-#include "Item.hpp"
 #include "Game.hpp"
-#include <vector>
+
 class HeroAction{
+    private:
+        std::string message; 
+        bool shouldClose = false;
+        float messageTimer = 0.0f;
     public:
-        virtual ~HeroAction() = default ;
         virtual bool update() = 0 ;
         virtual void draw() = 0 ; 
+        void DrawPanel() ; 
+        bool drawCancelButton() ;
+        bool drawDoneButton() ;
+        void DrawMessage(int y , Color) ;
+        void set_message(std::string) ; 
+        std::string get_message() ;
+        std::string type(std::string) ;
+        bool handleShouldClose() ; 
+        void set_ShouldClose(bool) ;
+        bool get_shouldClose() ;
+        void DrawTypingText(const std::string &) ; 
+        virtual ~HeroAction() = default ;
+
 };
 
 class MoveAction : public HeroAction{
     private:
-    GameMap& map ; 
-    Hero* hero ;
-    std::string chosenPlace = "";
-    bool typing = true;
-    bool validInput = false;
-    bool askVillager = false;
-    bool moveWithVillager = false;
-    bool moveFinished = false;
-    Location* chosenLocation = nullptr;
-    std::string message = "Which neighboring place do you want to move to?";
+        GameMap& map ; 
+        Hero* hero ;
+        std::string chosenPlace;
+        bool askVillager = false;
+        bool moveWithVillager = false;
+        bool moveFinished = false;
+        Location* chosenLocation = nullptr;
+        bool typing = true;
 
     public:
         MoveAction(GameMap& map , Hero* hero) ;
         bool update() override;
         void draw() override ; 
-
 };
 
 class HelpAction : public HeroAction {
@@ -39,16 +49,14 @@ class HelpAction : public HeroAction {
         HelpAction(Hero*) ;
         bool update() override ;
         void draw() override ;
-
 };
 
 class PickUpAction : public HeroAction{
     private:
         Hero* hero ;
-        bool done = false;
-        int frameCounter = 0 ; 
-        std::string message = "Click an item to pick up ( to cancel)";
-        Vector2 mousePos;
+        std::vector<Item>* itemList = nullptr;
+        std::vector<Rectangle> itemHitboxes; 
+        bool ChoseAnItem = false ;
     public:
         PickUpAction(Hero*) ;
         bool update() override ;
@@ -59,13 +67,10 @@ class PickUpAction : public HeroAction{
 class ChoosePerkCardAction : public HeroAction{
     private:
         Hero* hero;
-        Vector2 mousePos;
-        std::string message;
         bool done = false;
         int frameCounter = 0 ; 
         Game& game ; 
         std::unique_ptr<Perkcard> currentCard = nullptr ;
-
     public:
         ChoosePerkCardAction(Hero* , Game&);
         bool update() override;   
@@ -76,16 +81,7 @@ class SpecialAction : public HeroAction{
     private:
         Hero* hero ;
         GameMap & map ; 
-
-        std::string message;
-        std::string chosenPlace = "";
-        bool typing = true;
-        bool validInput = false;
         bool specialFinished = false;
-        Location* chosenLocation = nullptr;
-
-        double messageStartTime = 0.0;
-        bool showingMessage = false;
 
     public:
         SpecialAction(Hero* , GameMap&);
@@ -103,11 +99,7 @@ class AdvanceAction : public HeroAction{
         GameMap& map;
         InvisibleMan* invisibleman;
         Item pendingAbilityItem;
-        float messageTimer = 0.0f;
-        bool shouldClose = false;
         bool waitingForAbility = false ; 
-        bool waitingForAbilityInput = false ; 
-
 
         enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
 
@@ -122,9 +114,9 @@ class AdvanceAction : public HeroAction{
         int hoveredEvidenceIndex = -1;
         bool evidencePlaced = false;
 
-        std::string message;
     public:
         AdvanceAction(Hero*, Dracula* , ItemPool& , GameMap& ,InvisibleMan*);
+        void checkforDestroyingCoffin() ;
         bool update() override;   
         void draw()override; 
 };
@@ -135,40 +127,37 @@ class DefeatAction : public HeroAction{
         Hero* hero;
         InvisibleMan*  invisibleMan;
         Dracula* dracula;
-        std::vector<Item> selectedItems;
         std::vector<Item> availableItems;
         int totalStrength = 0;
         int hoveredIndex = -1 ; 
-        std::string message  ; 
-        float messageTimer = 0.0f;
-        bool shouldClose = false ; 
-        enum class Mode { None, ForDracula, ForInvisibleMan } mode = Mode::None;
-
+        enum class Mode { None, ForDracula, ForInvisibleMan } mode ;
+        Item pendingAbilityItem;
+        bool waitingForAbility = false ; 
 
     public:
         DefeatAction(Hero* , InvisibleMan* , Dracula*) ;
+        void checkForStrength(int, std::string);
         bool update() override;   
         void draw()override;
 
 };
 
+
 class GuideAction : public HeroAction{
     private:
+        enum class GuideStep { ChooseMode, ChooseVillager, ChoosePlace };
+        GuideStep step  ; 
         GameMap& map ; 
         Hero* hero ;
         std::string mode; 
-        std::string message = "Choose mode: current/ neighbor";
-        std::string input = "";
-        std::string chosenPlace = "";
-        std::string chosenVillager = "";
-        std::vector<Location*> availablePlaces ; 
+        std::string input;
+        std::string chosenPlace;
+        std::string chosenVillager;
         bool typing = true ; 
-        bool step2 , step3 = false ; 
     public: 
         GuideAction(GameMap&  ,Hero*) ;
         bool update() override;   
         void draw()override;
-
 };
 
 #endif
