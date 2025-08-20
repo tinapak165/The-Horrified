@@ -44,8 +44,6 @@ class ExitState : public State{
     private:
         std::unique_ptr<ClickableText> YesText ;
         std::unique_ptr<ClickableText> NoText ;
-        // Sound goodbyeSound;
-        // bool soundPlayed = false;
 
     public:
         ExitState();

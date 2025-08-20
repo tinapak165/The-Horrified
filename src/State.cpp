@@ -16,10 +16,10 @@ State::~State(){
 Texture2D State::get_background() const{ return background; }
 Font State::get_Font() const{ return font; }
 
-MenuState::MenuState() : State("../Assets/Menu/Background.png"), 
-      startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{170, 100} , 1.0f)),
-      exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{170, 300} , 1.0f)),
-      continueButton(std::make_unique<Button>("../Assets/Menu/continue.png", Vector2{170, 500} , 0.5f)) {}
+MenuState::MenuState() : State("../Assets/Menu/firstbackground.png"), 
+      startButton(std::make_unique<Button>("../Assets/Menu/Startgame.png", Vector2{500, 500} , 0.50f)),
+      exitButton(std::make_unique<Button>("../Assets/Menu/Exit.png", Vector2{500, 700} , 0.5f)),
+      continueButton(std::make_unique<Button>("../Assets/Menu/continue2.png", Vector2{500, 600} , 0.5f)) {}
 
 void MenuState::render(Menu& menu)  {
         DrawTexture(get_background(), 0, 0, WHITE);
@@ -30,13 +30,11 @@ void MenuState::render(Menu& menu)  {
 
         if (startButton->isPressed()) {
             menu.getGame().distribute_initial_items() ;
-            auto newstate = std::make_unique<ExplainationState>() ;
-            menu.SetState(std::move(newstate)); 
+            menu.SetState(std::move(std::make_unique<ExplainationState>())); 
             return ; 
         }
         if (exitButton->isPressed()) {
-            auto newstate = std::make_unique<ExitState>() ;
-            menu.SetState(std::move(newstate)) ;
+            menu.SetState(std::move(std::make_unique<ExitState>())) ;
             return ; 
         }
         if(continueButton->isPressed()){
@@ -47,12 +45,10 @@ void MenuState::render(Menu& menu)  {
     }
 
 ExitState::ExitState() 
-    : State("../Assets/Menu/Background.png"),
+    : State("../Assets/Menu/background1.png"),
       YesText(std::make_unique<ClickableText>("Yes", Vector2{280, 400}, 30, DARKGRAY)),
       NoText(std::make_unique<ClickableText>("No", Vector2{480, 400}, 30, DARKGRAY) )
-     /*soundPlayed(false) */ {
-    // goodbyeSound = LoadSound("Assets/goodbye.wav");
-}
+     {}
 
 void ExitState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
@@ -64,31 +60,22 @@ void ExitState::render(Menu& menu) {
     NoText->Draw();
 
     if (YesText->isClicked()) {
-        // if (!soundPlayed) {
-        //     PlaySound(goodbyeSound);
-        //     soundPlayed = true;
-        // }
         WaitTime(0.5);
         CloseWindow();
     }
 
     if (NoText->isClicked()) {
-        auto newstate = std::make_unique<MenuState>() ; 
-        menu.SetState(std::move(newstate));
+        menu.SetState(std::move(std::make_unique<MenuState>()));
         return ; 
     }
 }
 
-// ExitState::~ExitState() {
-//     UnloadSound(goodbyeSound);
-// }
-
-NameInputState::NameInputState() : State("../Assets/Menu/Background.png") ,
+NameInputState::NameInputState() : State("../Assets/Menu/background3.png") ,
     nameBox1(std::make_unique<TextBox>(Rectangle{100, 150, 300, 40}, TextBox::ANY)) ,
     nameBox2(std::make_unique<TextBox>(Rectangle{100, 350, 300, 40 }, TextBox::ANY)) ,
     timeBox1(std::make_unique<TextBox>(Rectangle{100, 250, 300, 40}, TextBox::NUMBERS_ONLY)) ,
     timeBox2(std::make_unique<TextBox>(Rectangle{100, 450, 300, 40}, TextBox::NUMBERS_ONLY)) ,    
-    continueButton{300, 500, 200, 50}  {}
+    continueButton{120, 520, 200, 50}  {}
 
 void NameInputState::render(Menu& menu) {
     DrawTexture(get_background(), 0, 0, WHITE);
@@ -165,7 +152,6 @@ void NameInputState::render(Menu& menu) {
             DrawText(boxes[i]->text.c_str(), boxes[i]->rect.x + 10, boxes[i]->rect.y + 10, 20, BLACK);
         }
         
-        // نشانگر چشمک‌زن برای باکس فعال
         if (boxes[i]->active && ((int)(GetTime()*2) % 2 == 0)) {
             int textWidth = MeasureText(boxes[i]->text.c_str(), 20);
             DrawText("|", boxes[i]->rect.x + 10 + textWidth, boxes[i]->rect.y + 10, 20, BLACK);
@@ -183,17 +169,14 @@ void NameInputState::render(Menu& menu) {
 
     if (mouseClicked && CheckCollisionPointRec(mousePos, continueButton)) {
         if (allFilled){
-            auto newstate = std::make_unique<ChooseCharacterState>(p1 , p2) ;
-            menu.SetState(std::move(newstate)) ;
+            menu.SetState(std::move(std::make_unique<ChooseCharacterState>(p1 , p2) )) ;
             return ; 
-        }
-        else 
-            DrawText("Please fill all fields!", 300, 550, 20, RED);  
+        }  
     }
 }
 
 ChooseCharacterState::ChooseCharacterState(const PlayerSelection& p1, const PlayerSelection& p2)
-    : player1(p1) , player2(p2), State("../Assets/Menu/Background.png") , instructionText("",{100, 50},30,BLACK) {
+    : player1(p1) , player2(p2), State("../Assets/Menu/background2.png") , instructionText("",{100, 50},30,BLACK) {
 
     player1First = std::stoi(player1.garlicTime) < std::stoi(player2.garlicTime);
     currentTurn = player1First ? PlayerTurn::PLAYER1 : PlayerTurn::PLAYER2;
@@ -213,7 +196,7 @@ void ChooseCharacterState::render(Menu& menu) {
     Vector2 mousePos = GetMousePosition();
     bool mouseClicked = IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 
-    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    ClickableText backButton("Back to menu", {100, 900}, 30, RED);
     backButton.Draw();
     if (backButton.isClicked()) {
         auto newstate = std::make_unique<MenuState>() ;
@@ -254,25 +237,28 @@ void ChooseCharacterState::render(Menu& menu) {
         }
         if (!player1.heroType.empty() && !player2.heroType.empty()) {
             double selectionTime = GetTime();
-            while (GetTime() - selectionTime < 2.0) { // 2 ثانیه تاخیر
+            Texture2D background = LoadTexture("../Assets/Menu/background2.png");
+            while (GetTime() - selectionTime < 3.0) { 
                 BeginDrawing();
-                ClearBackground(BLACK);
-                DrawText("Starting game...", 400, 500, 30, WHITE);
+                ClearBackground(RAYWHITE);
+                DrawTexture(background , 0 , 0 , WHITE);
+                DrawText("Welcome to the Horror World...", 400, 500, 30, WHITE);
                 EndDrawing();
             }
+            UnloadTexture(background);
             menu.startGame(player1, player2);
             return;
         }
     }
 }
 
-ContinueState::ContinueState() : State("../Assets/Menu/Background.png"){}
+ContinueState::ContinueState() : State("../Assets/Menu/Blackscreen.jpg"){}
 
 void ContinueState::render(Menu & menu)
 {
     DrawTexture(get_background(), 0, 0, WHITE);
 
-    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    ClickableText backButton("Back to menu", {100, 900}, 30, RED);
     backButton.Draw();
     if (backButton.isClicked()) {
         auto newstate = std::make_unique<MenuState>() ;
@@ -304,13 +290,13 @@ void ContinueState::render(Menu & menu)
     }
 }
 
-ExplainationState::ExplainationState(): State("../Assets/Menu/Background.png"){}
+ExplainationState::ExplainationState(): State("../Assets/Menu/Blackscreen.jpg"){}
 
 void ExplainationState::render(Menu & menu)
 {
     DrawTexture(get_background(), 0, 0, WHITE);
 
-    ClickableText backButton("back to Menu", {100, 900}, 30, RED);
+    ClickableText backButton("back to menu", {100, 900}, 30, RED);
     backButton.Draw();
     if (backButton.isClicked()) {
         menu.SetState(std::make_unique<MenuState>());
