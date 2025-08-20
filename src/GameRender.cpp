@@ -26,6 +26,7 @@ void GameRender::draw() {
     draw_played_Perkcards() ;  
     draw_saveGame() ;
     draw_villagerButton() ;
+    Draw_Backtomenu();
     renderTerrorLevel(game.get_terror_level());
 }
 
@@ -99,10 +100,6 @@ bool GameRender::handleDisplays()
         return true; 
     }
 
-
-
-    
-
     if(showingVillagerInfo){
         Villager::DisplayInfo() ;
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -111,6 +108,18 @@ bool GameRender::handleDisplays()
         return true;
     }
     return false ;
+}
+void GameRender::Draw_Backtomenu() {
+
+    std::unique_ptr<ClickableText> BackToMenu = std::make_unique<ClickableText>("Back to menu", Vector2{100, 900} ,30, WHITE);
+
+    BackToMenu->Draw() ;
+
+    if(BackToMenu->isClicked()){
+        ClearBackground(BLACK);
+        game.ResetGame();
+        game.get_menu()->SetState(std::move(std::make_unique<MenuState>())) ;
+    }
 }
 void GameRender::draw_sidebar() {
     Rectangle mapRect = game.get_map().get_drawn_rect();
@@ -482,48 +491,9 @@ void GameRender::draw_action_panel() {
 
 void GameRender::handle_action(const std::string& action , Hero* h){
 
-    if (action == "Help") {
-        currentHero = h ; 
-        currentAction = std::make_unique<HelpAction>(currentHero) ;
- 
-    } else if (action == "Quit") { 
-        game.set_currentPhase(Phase::MonsterPhase) ; 
-        game.set_HeroTurnInProgress(false) ; 
-        game.get_turnManager().next_turn() ; 
-
-    } else if (action == "Perk") {
-        currentHero = h ; 
-        currentAction = std::make_unique<ChoosePerkCardAction>(currentHero , game) ;
-
-    } else if (action == "Move") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
-
-    } else if (action == "Guide") {
-        currentHero = h ; 
-        currentAction = std::make_unique<GuideAction>(game.get_map() , currentHero) ;
-
-    } else if (action == "Pickup") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<PickUpAction>(currentHero) ;
-
-    } else if (action == "Special") {
-        
-        currentHero = h ; 
-        currentAction = std::make_unique<SpecialAction>(currentHero , game.get_map()) ;
-
-    } else if (action == "Advance") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<AdvanceAction>(currentHero , game.get_dracula() , game.get_pool() , game.get_map() ,game.get_invisibleMan());
-
-    } else if (action == "Defeat") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<DefeatAction>(currentHero, game.get_invisibleMan(), game.get_dracula());
-    }
+    currentHero = h ; 
+    Factory factory(game);
+    currentAction = factory.createAction(action , currentHero);
 }
 
 void GameRender::draw_location_icon() {

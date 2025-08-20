@@ -32,7 +32,8 @@ public:
     void draw_saveGame() ; 
     void draw_villagerButton() ; 
     void renderTerrorLevel(int terrorLevel);
-    bool handleDisplays() ;
+    bool handleDisplays() ;     
+    void Draw_Backtomenu() ;
 
     ~GameRender() ; 
 
@@ -46,6 +47,7 @@ private:
     bool showingHeroInfo = false ; 
     bool showingVillagerInfo = false ;
     bool savegame = false  ;
+    bool Backtomenu = false;
     Location* selectedLocation = nullptr ; 
     std::vector<ActionButton> actionButtons ;
     Game& game;
