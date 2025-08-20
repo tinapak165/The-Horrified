@@ -4,9 +4,6 @@
 #include "Game.hpp"
 #include "Action.hpp"
 
-enum class HeroType{ MAYOR , ARCHAEOLOGIST , COURIER , SCIENTIST};
-enum class PerkType {REPEL , LATE_INTO_THE_NIGHT , BREAK_OF_DAWN };
-
 class Factory{
     private:
         Game& game;
