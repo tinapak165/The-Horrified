@@ -6,13 +6,17 @@ int Game::terror_Level = 0;
 Game::Game() {
     InitWindow(1400, 1000, "The Horrified");
 
+    InitAudioDevice();
+    music = LoadMusicStream("../Assets/Music/music.ogg");
+    PlayMusicStream(music);
+
     SetTargetFPS(60);
     
     map.build_map(); 
     menu = make_unique<Menu>(*this) ;
-
-    dracula = std::make_unique<Dracula>(map.get_location_by_name("Cave"));
-    invisibleMan = std::make_unique<InvisibleMan>(map.get_location_by_name("Barn"));
+    
+    dracula = std::make_unique<Dracula>(map.get_location_by_name("Crypt"));
+    invisibleMan = std::make_unique<InvisibleMan>(map.get_location_by_name("Inn"));
 
     monstersMap[MonsterType::Dracula] = dracula.get();
     monstersMap[MonsterType::InvisibleMan] = invisibleMan.get();
@@ -27,50 +31,30 @@ Game::Game() {
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
     heroes.clear() ;
+    Factory herofactory(*this) ;
+    auto h1_unique = herofactory.createHero(p1.heroType) ;
+    auto h2_unique = herofactory.createHero(p2.heroType) ;
 
-    Hero* h1 = nullptr ; Hero* h2 = nullptr ;
+    Hero* h1 = h1_unique.get() ; 
+    Hero* h2 = h2_unique.get()  ;
 
-    if (p1.heroType == "mayor") {
-        mayor = std::make_unique<Mayor>(map) ;
-        h1 = mayor.get() ; 
-    }
-    else if (p1.heroType == "archaeologist") {
-        archaeologist = std::make_unique<Archaeologist>(map);
-        h1 = archaeologist.get() ; 
-    }
-    else if (p1.heroType == "courier") {
-        courier = std::make_unique<Courier>(map , turnManager) ;
-        h1 = courier.get() ; 
-    }
-    else if (p1.heroType == "scientist") {
-        scientist = std::make_unique<Scientist>(map) ;
-        h1 = scientist.get() ; 
-    }
-    if (p2.heroType == "mayor") {
-        mayor = std::make_unique<Mayor>(map) ;
-        h2 = mayor.get() ;
-    } 
-    else if (p2.heroType == "archaeologist") {
-        archaeologist = std::make_unique<Archaeologist>(map);
-        h2 = archaeologist.get() ; 
-    } 
-    else if (p2.heroType == "courier") {
-        courier = std::make_unique<Courier>(map , turnManager) ;
-        h2 = courier.get() ; 
-    } 
-    else if (p2.heroType == "scientist") {
-        scientist = std::make_unique<Scientist>(map) ;
-        h2 = scientist.get() ;
-    } 
-    if(p1.garlicTime > p2.garlicTime){
-        heroes.push_back(h2) ;
-        heroes.push_back(h1) ;
-    }else{
-        if(h1) heroes.push_back(h1) ; 
-        if(h2) heroes.push_back(h2) ; 
+    if(h1_unique) heroStorage.push_back(std::move(h1_unique)); //avoid dangling
+    if(h2_unique) heroStorage.push_back(std::move(h2_unique));
+
+
+    // if (p1.heroType == "mayor") {
+    //     mayor = std::make_unique<Mayor>(map) ;
+    //     h1 = mayor.get() ; 
+    // }
+
+    if(p1.garlicTime > p2.garlicTime) {
+        if(h2) heroes.push_back(h2);
+        if(h1) heroes.push_back(h1);
+    } else {
+        if(h1) heroes.push_back(h1);
+        if(h2) heroes.push_back(h2);
     }
 
-   
     player1 = {p1.name , h1} ; 
     player2 = {p2.name , h2} ;
 
@@ -78,9 +62,8 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
     initializaDeck() ;
 
-    for(Hero* hero : turnManager.get_heroes()){
+    for(Hero* hero : turnManager.get_heroes())
         getNewCard(hero) ; 
-    }
 }
 
 PlayerInfo Game::getPlayer1() const{ return player1; }
@@ -96,7 +79,7 @@ void Game::start() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-       //ClearBackground(RAYWHITE);
+        UpdateMusicStream(music); 
         if(menu->getState() != nullptr){
             menu->renderCurrentState();
         }
@@ -348,36 +331,20 @@ ItemColor Game::string_to_color(const std::string& color)
 }
 
 Hero* Game::create_hero_by_name(const std::string& name) {
-    if (name == "courier") {
-        courier = std::make_unique<Courier>(map, turnManager);
-        return courier.get();
-    }
-    else if (name == "scientist") {
-        scientist = std::make_unique<Scientist>(map);
-        return scientist.get();
-    }
-    else if (name == "mayor") {
-        mayor = std::make_unique<Mayor>(map);
-        return mayor.get();
-    }
-    else if (name == "archaeologist") {
-        archaeologist = std::make_unique<Archaeologist>(map);
-        return archaeologist.get();
-    }
-    std::cerr << "Unknown hero type: " << name << "\n";
-    return nullptr;
+
+    Factory factory(*this);
+
+    auto hero_unique = factory.createHero(name);
+    Hero* hero = hero_unique.get();
+    if(hero_unique) heroStorage.push_back(std::move(hero_unique));
+
+    return hero ;
 }
 
 std::unique_ptr<Perkcard> Game::find_perk_by_name(const std::string& name) {
-    if (name == "Repel") return std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map);
-    if (name == "Hurry") return std::make_unique<Hurrycard>(turnManager.get_heroes(), map);
-    if (name == "Late into the Night") return std::make_unique<LateintotheNightCARD>();
-    if (name == "Break of Dawn") return std::make_unique<BreakofDawnCARD>(pool , map);
-    if (name == "Overstock") return std::make_unique<OverstockCard>( pool , map);
-    if (name == "Visit from the Detective") return std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map);
-
-    std::cerr << "Unknown perk card: " << name << '\n';
-    return nullptr;
+    Factory factory(*this);
+    auto card_unique = factory.createPerkcard(name);
+    return card_unique ;
 }
 
 Villager* Game::create_villager(const string & name, Location * current_loc){
@@ -425,4 +392,26 @@ Game::~Game(){
     pool.unload_in_use_items() ;
     heroes.clear();
     all_villagers.clear();
+    UnloadMusicStream(music); 
+    CloseAudioDevice(); 
+}
+
+void Game::ResetGame() {
+
+    heroes.clear();
+    logs.clear();
+    activeHero = nullptr;
+    dracula = nullptr ; 
+    invisibleMan = nullptr ; 
+    frenziedMonster = nullptr; 
+    currentPhase = Phase::HeroPhase;
+    heroTurnInProgress = false;
+    game_over = false;
+    heroTurnInProgress = false ;
+    monsterPhaseDone = false;
+    heroPhaseDone = false;
+    skipMonsterPhase = false ;
+    terrorAlreadyIncreased = false;
+    terror_Level = 0;
+
 }

@@ -26,6 +26,7 @@
 #include "GameRender.hpp"
 #include "Villager.hpp"
 #include "Menu.hpp"
+#include "Factory.hpp"
 class Menu;
 class State ;
 class GameRender ;
@@ -69,11 +70,12 @@ private:
     MonstercardDeck deck;
     TurnManager turnManager;
     PerkDeck perkDeck ; 
+    Music music;
 
-    std::unique_ptr<Mayor> mayor = nullptr ; 
-    std::unique_ptr<Archaeologist>archaeologist  = nullptr ; 
-    std::unique_ptr<Courier> courier = nullptr ; 
-    std::unique_ptr<Scientist>scientist = nullptr ; 
+    // std::unique_ptr<Mayor> mayor = nullptr ; 
+    // std::unique_ptr<Archaeologist>archaeologist  = nullptr ; 
+    // std::unique_ptr<Courier> courier = nullptr ; 
+    // std::unique_ptr<Scientist>scientist = nullptr ; 
 
     std::unique_ptr<Dracula> dracula = nullptr ; 
     std::unique_ptr<InvisibleMan> invisibleMan = nullptr ; 
@@ -83,6 +85,7 @@ private:
     std::unordered_map<MonsterType, Monster*> monstersMap;
     std::vector<Villager*> all_villagers;
     std::vector<Hero*> heroes;
+    std::vector<std::unique_ptr<Hero>> heroStorage;
 
     static int terror_Level ;
     bool game_over = false;
@@ -153,6 +156,7 @@ public:
     void DrawGameOverPopup(const std::string& message);
     int get_terror_level() ;
     void set_terror_level(int);
+    void ResetGame();
 };
 
 #endif
