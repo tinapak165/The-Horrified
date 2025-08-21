@@ -296,7 +296,7 @@ void ExplainationState::render(Menu & menu)
 {
     DrawTexture(get_background(), 0, 0, WHITE);
 
-    ClickableText backButton("back to menu", {100, 900}, 30, RED);
+    ClickableText backButton("Back to menu", {100, 900}, 30, RED);
     backButton.Draw();
     if (backButton.isClicked()) {
         menu.SetState(std::make_unique<MenuState>());
