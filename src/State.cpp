@@ -275,7 +275,7 @@ void ContinueState::render(Menu & menu)
         fileButtons.emplace_back(file , Vector2{120, (float)y} , 28 , GREEN);
         y+= 40 ; 
     }
-    DrawTextEx(get_Font() , "select a save file: " , {100 , 80} , 40 , 0 , GREEN);
+    DrawTextEx(get_Font() , "select a game: " , {100 , 80} , 40 , 0 , GREEN);
 
     for(auto & button : fileButtons){
         button.Draw() ;
