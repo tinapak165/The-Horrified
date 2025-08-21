@@ -213,15 +213,18 @@ bool Game::both_monsters_defeated() {
 }
 
 void Game::distribute_initial_items() {   
+
+    if (itemsDistributed) return;
+
     auto items = pool.draw_random_items(12);
     
     for (auto& item : items) {
        item.loadTexture() ; 
         Location* loc = map.get_location_by_name(item.getLocationName());
-        if (loc) {
-            loc->add_item(item);
-        }
+        if (loc) 
+            loc->add_item(item);   
     }
+    itemsDistributed = true ;
 }
 
 void Game::monster_phase() {

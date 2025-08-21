@@ -64,18 +64,14 @@ private:
     PlayerInfo player1, player2;
     bool skipMonsterPhase = false ;
     bool terrorAlreadyIncreased = false;
-
+    bool itemsDistributed = false;
+    
     std::unique_ptr<Menu> menu;
     GameMap map;
     MonstercardDeck deck;
     TurnManager turnManager;
     PerkDeck perkDeck ; 
     Music music;
-
-    // std::unique_ptr<Mayor> mayor = nullptr ; 
-    // std::unique_ptr<Archaeologist>archaeologist  = nullptr ; 
-    // std::unique_ptr<Courier> courier = nullptr ; 
-    // std::unique_ptr<Scientist>scientist = nullptr ; 
 
     std::unique_ptr<Dracula> dracula = nullptr ; 
     std::unique_ptr<InvisibleMan> invisibleMan = nullptr ; 
