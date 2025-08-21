@@ -2,7 +2,7 @@
 
 void HeroAction::DrawPanel()
 {
-    float panelX = 100, panelY = 80, panelWidth = 600, panelHeight = 400;
+    float panelX = 100, panelY = 75, panelWidth = 600, panelHeight = 400;
     DrawRectangleRec({panelX, panelY, panelWidth, panelHeight}, Fade(DARKGRAY, 0.95f));
     DrawRectangleLinesEx({panelX, panelY, panelWidth, panelHeight}, 3, RAYWHITE);
 }
@@ -456,7 +456,7 @@ void AdvanceAction::draw() {
     Color messageColor = get_shouldClose() ? GREEN : (mode == Mode::None ? RED : WHITE);
     DrawMessage(120 , messageColor) ;
 
-    float y = 140;
+    float y = 145;
 
     if (mode == Mode::ForDracula) {
 
