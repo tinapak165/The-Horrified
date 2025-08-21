@@ -113,7 +113,7 @@ void Archaeologist::DrawSpecial() {
     y += 30;
 
     if (!message.empty()) {
-        DrawText(message.c_str(), 100, y, 18, MAROON);
+        DrawText(message.c_str(), 110, y, 18, MAROON);
         y+= 30 ;
     }
 
@@ -165,7 +165,7 @@ void Courier::UpdateSpecial(bool &done) {
         if (heroes[i]->GetName() == "courier")
             continue;
 
-        Rectangle heroBox = { 100, float(150 + displayedIndex * 30), 200, 30 };
+        Rectangle heroBox = { 100, float(130 + displayedIndex * 30), 200, 30 };
         if (CheckCollisionPointRec(GetMousePosition(), heroBox)) {
             hoveredIndex = displayedIndex;
             break;
@@ -200,7 +200,7 @@ void Courier::UpdateSpecial(bool &done) {
 void Courier::DrawSpecial() {
 
     drawCancelButton() ;
-    DrawText("Select a Hero to Move To:", 100, 90, 22, WHITE);
+    DrawText("Select a Hero to Move To:", 110, 90, 22, WHITE);
 
     float y = 130;
 
@@ -211,7 +211,7 @@ void Courier::DrawSpecial() {
 
         Color textColor = (hoveredIndex == displayedIndex) ? YELLOW : WHITE;
         std::string text = heroes[i]->GetName() + " (Location: " + heroes[i]->GetCurrentLocation()->get_name() + ")";
-        DrawText(text.c_str(), 100, y, 20, textColor);
+        DrawText(text.c_str(), 110, y, 20, textColor);
 
         y += 28;
         displayedIndex++;

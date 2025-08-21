@@ -146,10 +146,10 @@ void Hero::DisplayItem(){
     int startY = 150;
 
     for (const auto& item : GetItems()) {
-        std::string itemStr = item.getName() + " (Color: " + Item::color_to_string(item.getColor()) +
-            ", Strength: " + std::to_string(item.getStrength()) + ")";
+        std::string itemStr = item.getName() + '('+ item.getLocationName() + ", " + Item::color_to_string(item.getColor()) +
+            ", " + std::to_string(item.getStrength()) + ")";
         
-        DrawText(itemStr.c_str(), 100, startY, 22, LIGHTGRAY);
+        DrawText(itemStr.c_str(), 110, startY, 22, LIGHTGRAY);
         startY += 30;
     }
 }
