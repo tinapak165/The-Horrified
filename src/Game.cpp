@@ -9,9 +9,13 @@ Game::Game() {
     InitAudioDevice();
     music = LoadMusicStream("../Assets/Music/music.ogg");
     PlayMusicStream(music);
-
     SetTargetFPS(60);
-    
+
+    ready();
+}
+
+void Game::ready(){
+
     map.build_map(); 
     menu = make_unique<Menu>(*this) ;
     
@@ -30,7 +34,6 @@ Game::Game() {
 
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
-    heroes.clear() ;
     Factory herofactory(*this) ;
     auto h1_unique = herofactory.createHero(p1.heroType) ;
     auto h2_unique = herofactory.createHero(p2.heroType) ;
@@ -41,11 +44,6 @@ void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
     if(h1_unique) heroStorage.push_back(std::move(h1_unique)); //avoid dangling
     if(h2_unique) heroStorage.push_back(std::move(h2_unique));
 
-
-    // if (p1.heroType == "mayor") {
-    //     mayor = std::make_unique<Mayor>(map) ;
-    //     h1 = mayor.get() ; 
-    // }
 
     if(p1.garlicTime > p2.garlicTime) {
         if(h2) heroes.push_back(h2);
@@ -404,6 +402,7 @@ void Game::ResetGame() {
     dracula = nullptr ; 
     invisibleMan = nullptr ; 
     frenziedMonster = nullptr; 
+    current_card = nullptr;
     currentPhase = Phase::HeroPhase;
     heroTurnInProgress = false;
     game_over = false;

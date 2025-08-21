@@ -101,6 +101,7 @@ public:
     Game();
     ~Game();
     void start() ;
+    void ready();
     void initialize(const PlayerSelection&, const PlayerSelection&) ; 
     PlayerInfo getPlayer1() const ;
     PlayerInfo getPlayer2() const ;
@@ -127,7 +128,6 @@ public:
     void monster_objectes();
     void return_item(const Item& item);
 
-    std::string checkString(std::string) ; 
     std::unique_ptr<Monstercard> current_card = nullptr;
 
 
