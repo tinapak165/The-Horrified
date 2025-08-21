@@ -118,6 +118,7 @@ void GameRender::Draw_Backtomenu() {
     if(BackToMenu->isClicked()){
         ClearBackground(BLACK);
         game.ResetGame();
+        game.ready();
         game.get_menu()->SetState(std::move(std::make_unique<MenuState>())) ;
     }
 }
@@ -332,7 +333,7 @@ void GameRender::draw_monsters() {
         // بستن فقط وقتی کلیک رها شد
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
             Vector2 mp = GetMousePosition();
-            if (CheckCollisionPointRec(mp, closeBtn) || !CheckCollisionPointRec(mp, matArea)) {
+            if (CheckCollisionPointRec(mp, closeBtn)) {
                 selectedMonsterMat = MonsterType::None;
             }
         }
