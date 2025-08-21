@@ -1,100 +1,68 @@
-#include <string>
-#include <map>
-#include <iomanip>
-#include <set>
-#include <limits>
-#include <utility>
 #include "Game.hpp"
-#include "Villager.hpp"
-#include "Menu.hpp"
+
+
 
 using namespace std;
 
 Game::Game() {
-    InitWindow(1400 , 1000 , "The Horrified");
+    InitWindow(1400, 1000, "The Horrified");
+
     InitAudioDevice();
     music = LoadMusicStream("../Assets/Music/music.ogg");
     PlayMusicStream(music);
+    SetTargetFPS(60);
 
-    // SetWorkingDirectory(GetApplicationDirectory());
+    ready();
+}
 
-     SetTargetFPS(60);
-    
+void Game::ready(){
+
     map.build_map(); 
     menu = make_unique<Menu>(*this) ;
-
-    dracula = std::make_unique<Dracula>(map.get_location_by_name("Cave"));
-    invisibleMan = std::make_unique<InvisibleMan>(map.get_location_by_name("Barn"));
+    
+    dracula = std::make_unique<Dracula>(map.get_location_by_name("Crypt"));
+    invisibleMan = std::make_unique<InvisibleMan>(map.get_location_by_name("Inn"));
 
     monstersMap[MonsterType::Dracula] = dracula.get();
     monstersMap[MonsterType::InvisibleMan] = invisibleMan.get();
 
-    frenziedMonster = dracula.get();  
+    frenziedMonster = dracula.get();
+
     monstersMap[MonsterType::Frenzied] = frenziedMonster;
 
     initializaMDeck();
-    initializaDeck() ; 
 }
 
 void Game::initialize(const PlayerSelection &p1, const PlayerSelection &p2){
 
-    heroes.clear() ;
+    Factory herofactory(*this) ;
+    auto h1_unique = herofactory.createHero(p1.heroType) ;
+    auto h2_unique = herofactory.createHero(p2.heroType) ;
 
-    Hero* h1 = nullptr ; Hero* h2 = nullptr ;
+    Hero* h1 = h1_unique.get() ; 
+    Hero* h2 = h2_unique.get()  ;
 
-    if (p1.heroType == "mayor") {
-        mayor = std::make_unique<Mayor>(map) ;
-        h1 = mayor.get() ; 
-    }
-    else if (p1.heroType == "archaeologist") {
-        archaeologist = std::make_unique<Archaeologist>(map);
-        h1 = archaeologist.get() ; 
-    }
-    else if (p1.heroType == "courier") {
-        courier = std::make_unique<Courier>(map , turnManager) ;
-        h1 = courier.get() ; 
-    }
-    else if (p1.heroType == "scientist") {
-        scientist = std::make_unique<Scientist>(map) ;
-        h1 = scientist.get() ; 
-    }
-    if (p2.heroType == "mayor") {
-        mayor = std::make_unique<Mayor>(map) ;
-        h2 = mayor.get() ;
-    } 
-    else if (p2.heroType == "archaeologist") {
-        archaeologist = std::make_unique<Archaeologist>(map);
-        h2 = archaeologist.get() ; 
-    } 
-    else if (p2.heroType == "courier") {
-        courier = std::make_unique<Courier>(map , turnManager) ;
-        h2 = courier.get() ; 
-    } 
-    else if (p2.heroType == "scientist") {
-        scientist = std::make_unique<Scientist>(map) ;
-        h2 = scientist.get() ;
-    } 
-    if(p1.garlicTime > p2.garlicTime){
-        heroes.push_back(h2) ;
-        heroes.push_back(h1) ;
-    }else{
-        if(h1) heroes.push_back(h1) ; 
-        if(h2) heroes.push_back(h2) ; 
+    if(h1_unique) heroStorage.push_back(std::move(h1_unique)); //avoid dangling
+    if(h2_unique) heroStorage.push_back(std::move(h2_unique));
+
+
+    if(p1.garlicTime > p2.garlicTime) {
+        if(h2) heroes.push_back(h2);
+        if(h1) heroes.push_back(h1);
+    } else {
+        if(h1) heroes.push_back(h1);
+        if(h2) heroes.push_back(h2);
     }
 
-   
     player1 = {p1.name , h1} ; 
     player2 = {p2.name , h2} ;
 
     turnManager = TurnManager(heroes);
-    
-    initializaDeck() ; //age to constructor bood onvaght turnmanagar null mifrestad
-    initializaMDeck();
 
+    initializaDeck() ;
 
-    for(Hero* hero : turnManager.get_heroes()){
+    for(Hero* hero : turnManager.get_heroes())
         getNewCard(hero) ; 
-    }
 }
 
 PlayerInfo Game::getPlayer1() const{ return player1; }
@@ -103,25 +71,14 @@ PlayerInfo Game::getPlayer2() const { return player2 ;}
 void Game::setPlayer1(const std::string& p1 , Hero* h){ player1.name = p1 ; player1.hero = h ;}
 void Game::setPlayer2(const std::string& p2 , Hero* h){ player2.name = p2 ;  player2.hero = h ;}
 
-
-std::string Game::checkString(std::string str){
-    for (char &c : str) 
-        c = tolower(c); 
-    return str;
-}
-
-
-
-
 void Game::start() {
-    distribute_initial_items() ;
+
     menu->SetState(std::make_unique<MenuState>());
     GameRender gamerender(*this);
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         UpdateMusicStream(music); 
-       //ClearBackground(RAYWHITE);
         if(menu->getState() != nullptr){
             menu->renderCurrentState();
         }
@@ -129,15 +86,13 @@ void Game::start() {
             if(currentPhase == Phase::HeroPhase){
                 if(!heroTurnInProgress){
                     activeHero = turnManager.get_active_hero();
-                     activeHero->resetMaxActions();
+                    activeHero->resetMaxActions();
                     std::cout << "It's " << activeHero->GetName() << "'s turn!\n";
                     heroTurnInProgress = true ; 
-             
                 }
                 bool phaseDone = hero_phase(activeHero, &gamerender) ;
 
                 if (phaseDone) {
-
                     heroTurnInProgress = false;
                     turnManager.next_turn();
 
@@ -158,32 +113,29 @@ void Game::start() {
         }
         EndDrawing();
 
+    if (terror_Level >= 6 || (deck.is_empty() && !both_monsters_defeated()) || both_monsters_defeated()) {
+        std::string reason;
+        if (terror_Level >= 6) reason = "Terror level reached 6!";
+        else if (deck.is_empty() && !both_monsters_defeated()) reason = "No more Monster Cards!";
+        else reason = "You win!";
 
-        
+        // حلقه‌ی گیم‌اور
+        bool exitRequested = false;
+        while (!WindowShouldClose() && !exitRequested) {
+            BeginDrawing();
+            gamerender.draw();  // نقشه رو همچنان نشون می‌دیم
+            DrawGameOverPopup(reason);
+            EndDrawing();
 
-if (terror_Level >= 6 || /*(deck.is_empty() && !both_monsters_defeated())*/  both_monsters_defeated()) {
-    std::string reason;
-    if (terror_Level >= 6) reason = "Terror level reached 6!";
-    else if (deck.is_empty() && !both_monsters_defeated()) reason = "No more Monster Cards!";
-    else reason = "You win!";
+            if (IsKeyPressed(KEY_ENTER)) exitRequested = true;
+        }
 
-    // حلقه‌ی گیم‌اور
-    bool exitRequested = false;
-    while (!WindowShouldClose() && !exitRequested) {
-        BeginDrawing();
-        gamerender.draw();  // نقشه رو همچنان نشون می‌دیم که بازیکت بفهمه چرا باخته
-        DrawGameOverPopup(reason);
-        EndDrawing();
+        CloseWindow(); // حالا دیگه پنجره رو ببند
+        return;
+        }
 
-        if (IsKeyPressed(KEY_ENTER)) exitRequested = true;
     }
-
-    CloseWindow(); // پنجره کل بازی بسته بشه
-    return;
-     }
-
-   }
- }
+}
 
 void Game::set_currentPhase(Phase newPhase){ currentPhase = newPhase ; }
 
@@ -497,7 +449,9 @@ Villager* Game::create_villager(const string & name, Location * current_loc){
      DrawText(message.c_str(), boxX + 40, boxY + 80, 20, RAYWHITE);
      DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
 }
-                    
+
+Menu *Game::get_menu(){ return menu.get(); }
+
 void Game::log(const std::string& message) {
      logs.push_back(message);
      if (logs.size() > 50) 
@@ -506,6 +460,27 @@ void Game::log(const std::string& message) {
 
 void Game::clear_logs() {
   logs.clear();
+}
+
+void Game::ResetGame() {
+
+    heroes.clear();
+    logs.clear();
+    activeHero = nullptr;
+    dracula = nullptr ; 
+    invisibleMan = nullptr ; 
+    frenziedMonster = nullptr; 
+    current_card = nullptr;
+    currentPhase = Phase::HeroPhase;
+    heroTurnInProgress = false;
+    game_over = false;
+    heroTurnInProgress = false ;
+    monsterPhaseDone = false;
+    heroPhaseDone = false;
+    skipMonsterPhase = false ;
+    terrorAlreadyIncreased = false;
+    terror_Level = 0;
+
 }
 
 Game::~Game(){

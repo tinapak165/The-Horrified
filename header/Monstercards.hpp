@@ -329,6 +329,7 @@ class OnTheMove : public Monstercard {
          int remaining_cards();
          void addCard(std::unique_ptr<Monstercard> card) ; 
          std::unique_ptr<Monstercard> drawcard();
+         void removeCardByName(const std::string& cardName) ;
  };
     
  

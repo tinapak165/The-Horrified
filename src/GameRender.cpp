@@ -1,25 +1,52 @@
 #include "GameRender.hpp"
-#include "Game.hpp"
-#include "ActionButton.hpp"
-#include "SaveManager.hpp"
+
+#include "Menu.hpp"      
+
+#include "State.hpp"     
+#include "Factory.hpp" 
+
 GameRender::GameRender(Game& game) : game(game) {
     draculaMat = LoadTexture("../Assets/Monster_Mat/DraculaMat.png");
     invisibleManMat = LoadTexture("../Assets/Monster_Mat/InvisibleManMat.png");
     coffinTex = LoadTexture("../Assets/Items/Coffins/Coffin.png"); 
-      smashedCoffinTex = LoadTexture("../Assets/Items/Coffins/SmashedCoffin.png");
-      
-
+    smashedCoffinTex = LoadTexture("../Assets/Items/Coffins/SmashedCoffin.png");
 
 }
 
 void GameRender::draw() {
-     if(showingHeroInfo && currentHero != nullptr) {
+
+    if(handleDisplays())
+        return ;
+        
+    draw_map();
+    draw_heroes() ;
+    draw_sidebar() ;
+    draw_location_icon() ;
+    draw_villagers();
+    draw_monsters();
+    draw_coffins();
+    draw_users() ;
+    draw_action_panel() ;
+    draw_collected_items() ;
+    draw_played_Perkcards() ;  
+    draw_saveGame() ;
+    draw_villagerButton() ;
+    Draw_Backtomenu();
+    renderTerrorLevel(game.get_terror_level());
+}
+
+void GameRender::draw_map() {
+    game.get_map().draw_map();   
+}
+bool GameRender::handleDisplays()
+{
+    if(showingHeroInfo && currentHero != nullptr) {
         currentHero->DisplayInfo();   
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingHeroInfo = false;
             currentHero = nullptr;
         }
-        return; 
+        return true; 
     }
 
     if(currentAction && currentHero){
@@ -29,7 +56,7 @@ void GameRender::draw() {
             currentAction = nullptr ; 
             currentHero = nullptr ; 
         }
-        return  ;
+        return true ;
     }
 
     if(selectedLocation){
@@ -37,7 +64,7 @@ void GameRender::draw() {
         if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
             selectedLocation = nullptr ; 
         }
-        return ;
+        return true;
     }
     if (ShowitemButton && currentHero) {
         currentHero->DisplayItem(); 
@@ -45,7 +72,7 @@ void GameRender::draw() {
             ShowitemButton = false;
             currentHero = nullptr;
         }
-        return;
+        return true;
     }
     if (ShowPLAYEDPerkButton && currentHero) {
         currentHero->displayPlayedCards(); 
@@ -53,7 +80,7 @@ void GameRender::draw() {
             ShowPLAYEDPerkButton = false;
             currentHero = nullptr;
         }
-        return;
+        return true;
     }
 
     if (savegame && currentHero) {
@@ -67,7 +94,7 @@ void GameRender::draw() {
         }
 
         std::string text = "Game saved to: " + filename;
-        DrawText(text.c_str(), 100, 100, 30, GREEN);
+        DrawText(text.c_str(), 1095, 355, 20, GREEN);
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             currentHero = nullptr;
@@ -75,70 +102,31 @@ void GameRender::draw() {
             fileSaved = false;  
             filename = "";
         }
-        return;
+        return true; 
     }
+
     if(showingVillagerInfo){
         Villager::DisplayInfo() ;
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             showingVillagerInfo = false;
         }
-        return ;
+        return true;
     }
-    
-    
-    draw_map();
-    draw_heroes() ;
-    draw_location_icon() ;
-    
-    draw_villagers();
-    
-    draw_monsters();
-    draw_coffins();
-
-    draw_sidebar() ;
-    draw_users() ;
-    draw_action_panel() ;
-    draw_collected_items() ;
-    draw_played_Perkcards() ;  
-    draw_saveGame() ;
-    draw_villagerButton() ;
-    renderTerrorLevel(game.get_terror_level());
-    
+    return false ;
 }
+void GameRender::Draw_Backtomenu() {
 
-void GameRender::draw_map() {
-    game.get_map().draw_map();
+    std::unique_ptr<ClickableText> BackToMenu = std::make_unique<ClickableText>("Back to menu", Vector2{100, 900} ,30, WHITE);
+
+    BackToMenu->Draw() ;
+
+    if(BackToMenu->isClicked()){
+        ClearBackground(BLACK);
+        game.ResetGame();
+        game.ready();
+        game.get_menu()->SetState(std::move(std::make_unique<MenuState>())) ;
+    }
 }
-// void GameRender::draw_monster_objects(){
-    
-    //     static int lastDestroyed = -1;
-    //     static int lastCollected = -1;
-    //     auto dracula = game.get_dracula();
-    //     auto invisibleMan = game.get_invisibleMan();
-    //     Location* Dloc = dracula->get_location();
-    //     Location* Iloc = invisibleMan->get_location();
-    //     if (dracula) {
-    //         int destroyed = 0;
-    //         for (const auto& entry : dracula->get_coffins_map()) {
-    //             if (entry.second) destroyed++;
-    //         }
-    //         if (destroyed != lastDestroyed) { // فقط وقتی تغییر کرد
-    //         std::cout << "[DEBUG] Reached before GAME_LOG" << std::endl;
-    //         GAME_LOG_OBJ(game , "Dracula location : " + Dloc->get_name());
-    //         GAME_LOG_OBJ(game, "Coffins destroyed (Dracula): " + std::to_string(destroyed) + "/4");
-    //         std::cout << "[DEBUG] Passed after GAME_LOG" << std::endl;
-    //             lastDestroyed = destroyed;
-    //         }
-    //     }
-    //     if (invisibleMan) {
-    //     int collected = invisibleMan->get_evidence_count();
-    //     if (collected != lastCollected) { // فقط وقتی تغییر کرد
-    //         GAME_LOG_OBJ(game, "Evidence collected (Invisible Man): " + std::to_string(collected) + "/5");
-    //         lastCollected = collected;
-    //     }
-    // }
- 
-
 void GameRender::draw_sidebar() {
     Rectangle mapRect = game.get_map().get_drawn_rect();
 
@@ -258,9 +246,7 @@ if (tex.id != 0) {
         }
     }
 
-   }
- 
-  
+}
 
 void GameRender::draw_monsters() {
     const float monsterSize = 50.0f; 
@@ -352,49 +338,18 @@ void GameRender::draw_monsters() {
         // بستن فقط وقتی کلیک رها شد
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
             Vector2 mp = GetMousePosition();
-            if (CheckCollisionPointRec(mp, closeBtn) || !CheckCollisionPointRec(mp, matArea)) {
+            if (CheckCollisionPointRec(mp, closeBtn)) {
                 selectedMonsterMat = MonsterType::None;
             }
         }
      }
   }
 }
-
-void GameRender::draw_saveGame()
-{
-    Rectangle saveGame = { 650, 60, 200, 45 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, saveGame);
-
-    Color btnColor = hover ? LIGHTGRAY : GRAY;
-    DrawRectangleRec(saveGame, btnColor);
-    DrawText("save game", saveGame.x + 10, saveGame.y + 10, 20, BLACK);
-
-    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        savegame = true;
-        currentHero = game.get_turnManager().get_active_hero(); 
-    }  
-}
-
-void GameRender::draw_villagerButton()
-{
-    Rectangle vill = { 650, 100, 200, 45 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, vill);
-
-    Color btnColor = hover ? LIGHTGRAY : GRAY;
-    DrawRectangleRec(vill, btnColor);
-    DrawText("villagers", vill.x + 10, vill.y + 10, 20, BLACK);
-
-    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        showingVillagerInfo = true ;
-    }  
-}
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
     const float spacing = 10.0f;
-    const float textOffsetY = 5.0f;  // فاصله کم بین عکس و اسم
-    const int fontSize = 16;       // فونت کوچیک‌تر
+    const float textOffsetY = 5.0f;    // فاصله کم بین عکس و اسم
+    const int fontSize = 16;           // فونت کوچیک‌تر
 
     Texture2D mapTex = game.get_map().get_mapTexture();
     float mapScale = std::min(
@@ -438,32 +393,19 @@ void GameRender::draw_villagers() {
     }
 }
 
+void GameRender::draw_monster_card() {
+    const auto& card = game.get_current_card();
+    if (!card) return;
 
+    Texture2D tex = card->get_texture();
+    Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
+    Rectangle dest = { 620, 20, 200, 300 }; // کنار نقشه، بالا سمت راست
+    Vector2 origin = { 0, 0 };
 
-
-void GameRender::draw_collected_items(){
-    Rectangle itemButton = { 750, 120, 170, 40 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, itemButton);
-
-    Color btnColor = hover ? LIGHTGRAY : GRAY;
-    DrawRectangleRec(itemButton, btnColor);
-    DrawText("Items collected", itemButton.x + 10, itemButton.y + 10, 20, BLACK);
-
-    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        ShowitemButton = true;
-        currentHero = game.get_turnManager().get_active_hero(); 
-    }
-
+    DrawTexturePro(tex, src, dest, origin, 0.0f, WHITE);
 }
-
-     
-  
-
-
-
 void GameRender::draw_heroes() {
-    const float heroSize = 100.0f; // سایز مناسب‌تر
+    const float heroSize = 100.0f; 
     const float spacing = 30.0f;  // فاصله بین چند هیرو در یک مکان
     const float offsetY = -heroSize - 5.0f; // کمی بالاتر از لوکیشن
 
@@ -494,15 +436,12 @@ void GameRender::draw_heroes() {
         }
     }
 }
-
 void GameRender::draw_users(){
     auto p1 = game.getPlayer1() ;
     auto p2 = game.getPlayer2() ; 
 
-    ClickableText user1(p1.name,{90, 90} , 40, BLACK);
-    ClickableText user2(p2.name,{90, 150} , 40, BLACK);
-
-    Vector2 mouse = GetMousePosition();
+    ClickableText user1(p1.name,{90, 80} , 40, BLACK);
+    ClickableText user2(p2.name,{90, 140} , 40, BLACK);
 
     user1.Draw();
     user2.Draw();
@@ -512,7 +451,7 @@ void GameRender::draw_users(){
         currentHero = p1.hero ; 
     }
 
-    if (user2.isClicked( )) {
+    if (user2.isClicked()) {
         showingHeroInfo = true ; 
         currentHero = p2.hero ; 
     } 
@@ -522,98 +461,47 @@ void GameRender::draw_users(){
 void GameRender::draw_action_panel() {
     Hero* activeHero = game.get_turnManager().get_active_hero();
 
-    std::string heroName = activeHero->GetName();
-    int remaining = activeHero->GetRemainingActions();
-    int maxActions = activeHero->getMaxActions();
-
-    std::string infoText = heroName + " | Actions left: " + std::to_string(remaining) + "/" + std::to_string(maxActions);
-
     std::vector<ActionButton> actionButtons = {
-        {"Move", {50, 500, 120, 40}},
-        {"Special", {190, 500, 120, 40}},
-        {"Guide", {330, 500, 120, 40}},
-        {"Pickup", {50, 550, 120, 40}},
-        {"Advance", {190, 550, 120, 40}},
-        {"Defeat", {330, 550, 120, 40}},
-        {"Perk", {50, 600, 120, 40}},
-        {"Help", {190, 600, 120, 40}},
-        {"Quit", {330, 600, 120, 40}},
+        {"Move", {0, 250, 90, 40}},
+        {"Special", {0, 300, 90, 40}},
+        {"Guide", {0, 350, 90, 40}},
+        {"Pickup", {0, 400, 90, 40}},
+        {"Advance", {0, 450, 90, 40}},
+        {"Defeat", {0, 500, 90, 40}},
+        {"Perk", {0, 550, 90, 40}},
+        {"Help", {0, 600, 90, 40}},
+        {"Quit", {0, 650, 90, 40}},
     };
+    std::string infoText = activeHero->GetName() + " | Actions: " + std::to_string(activeHero->GetRemainingActions()) + "/" + std::to_string(activeHero->getMaxActions());
 
-    DrawRectangle(40, 480, 420, 180, Fade(DARKGRAY, 0.9f));
-    DrawRectangleLines(40, 480, 420, 180, GRAY);
-    Vector2 mousepos = GetMousePosition();
+    DrawText(infoText.c_str(), 1095, 900, 20, WHITE);
 
-    DrawText(infoText.c_str(), 50, 460, 20, BLACK);
-
-    bool hasActionsLeft = (remaining > 0);
+    bool hasActionsLeft = (activeHero->GetRemainingActions() > 0);
 
     for (const auto& button : actionButtons) {
-        bool hovered = CheckCollisionPointRec(mousepos, button.bounds);
+        bool hovered = CheckCollisionPointRec(GetMousePosition(), button.bounds);
 
         Color buttonColor;
-        if (!hasActionsLeft ) {
+        if (!hasActionsLeft ) 
             buttonColor = DARKGRAY;
-        } else {
-            buttonColor = hovered ? LIGHTGRAY : GRAY;
-        }
-
+        else 
+            buttonColor = hovered ? LIGHTGRAY : WHITE;
+        
         DrawRectangleRec(button.bounds, buttonColor);
-        DrawText(button.label.c_str(), button.bounds.x + 10, button.bounds.y + 10, 20, BLACK);
+        DrawText(button.label.c_str(), button.bounds.x + 3, button.bounds.y + 10, 20, BLACK);
 
-        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) { 
-            handle_action(button.label, activeHero);
-        }
+        if ( hovered && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && hasActionsLeft) 
+            handle_action(button.label, activeHero);  
     }
 }
 
 void GameRender::handle_action(const std::string& action , Hero* h){
 
-    if (action == "Help") {
-        currentHero = h ; 
-        currentAction = std::make_unique<HelpAction>(currentHero) ;
- 
-    } else if (action == "Quit") { 
-        game.set_currentPhase(Phase::MonsterPhase) ; 
-        game.set_HeroTurnInProgress(false) ; 
-        game.get_turnManager().next_turn() ; 
-
-    } else if (action == "Perk") {
-        currentHero = h ; 
-        currentAction = std::make_unique<ChoosePerkCardAction>(currentHero , game) ;
-
-    } else if (action == "Move") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<MoveAction>(game.get_map() , currentHero) ;
-
-    } else if (action == "Guide") {
-        currentHero = h ; 
-        currentAction = std::make_unique<GuideAction>(game.get_map() , currentHero) ;
-    } else if (action == "Pickup") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<PickUpAction>(currentHero) ;
-
-    } else if (action == "Special") {
-        
-        currentHero = h ; 
-        currentAction = std::make_unique<SpecialAction>(currentHero , game.get_map()) ;
-
-    } else if (action == "Advance") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<AdvanceAction>(currentHero , game.get_dracula() , game.get_pool() , game.get_map() ,game.get_invisibleMan());
-
-    } else if (action == "Defeat") {
-
-        currentHero = h ; 
-        currentAction = std::make_unique<DefeatAction>(currentHero, game.get_invisibleMan(), game.get_dracula());
-    }
+    currentHero = h ; 
+    Factory factory(game);
+    currentAction = factory.createAction(action , currentHero);
 }
 
-            
-            
 void GameRender::draw_location_icon() {
     float mapScale = 1.0f;
     float mapDrawX = 0.0f;
@@ -656,21 +544,29 @@ void GameRender::draw_location_icon() {
     }
 }
 
+void GameRender::draw_collected_items(){
+    Rectangle itemButton = { 900, 80, 170, 40 }; 
+    bool hover = CheckCollisionPointRec(GetMousePosition(), itemButton);
 
-std::vector<ActionButton> GameRender::get_actionButtons(){
-    return actionButtons;
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(itemButton, btnColor);
+    DrawText("Items collected", itemButton.x + 10, itemButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowitemButton = true;
+        currentHero = game.get_turnManager().get_active_hero(); 
+    }
+
 }
-
-
 void GameRender::draw_played_Perkcards(){
 
-    Rectangle perkButton = { 750 , 180, 195, 40 }; 
+    Rectangle perkButton = { 900, 30, 170, 40 }; 
     Vector2 mouse = GetMousePosition();
     bool hover = CheckCollisionPointRec(mouse, perkButton);
 
     Color btnColor = hover ? LIGHTGRAY : GRAY;
     DrawRectangleRec(perkButton, btnColor);
-    DrawText("Perkcards played", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+    DrawText("Perkcards", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
 
     if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         ShowPLAYEDPerkButton = true;
@@ -678,20 +574,36 @@ void GameRender::draw_played_Perkcards(){
     }
 }
 
-void GameRender::draw_available_Perkcards(){
-    Rectangle perkButton = { 750, 50, 210, 45 }; 
-    Vector2 mouse = GetMousePosition();
-    bool hover = CheckCollisionPointRec(mouse, perkButton);
+void GameRender::draw_saveGame()
+{
+    Rectangle saveGame = { 720, 30, 170, 40 }; 
+    bool hover = CheckCollisionPointRec(GetMousePosition(), saveGame);
 
     Color btnColor = hover ? LIGHTGRAY : GRAY;
-    DrawRectangleRec(perkButton, btnColor);
-    DrawText("available Perkcards", perkButton.x + 10, perkButton.y + 10, 20, BLACK);
+    DrawRectangleRec(saveGame, btnColor);
+    DrawText("save game", saveGame.x + 10, saveGame.y + 10, 20, BLACK);
 
     if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        ShowAvailablePerkButton = true;
+        savegame = true;
         currentHero = game.get_turnManager().get_active_hero(); 
-    }
+    }  
 }
+
+void GameRender::draw_villagerButton()
+{
+    Rectangle vill = { 600, 30, 100, 40 }; 
+    Vector2 mouse = GetMousePosition();
+    bool hover = CheckCollisionPointRec(mouse, vill);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(vill, btnColor);
+    DrawText("villagers", vill.x + 10, vill.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        showingVillagerInfo = true ;
+    }  
+}
+
 void GameRender::draw_coffins() {
 
     Dracula* drac = dynamic_cast<Dracula*>(game.get_monsters()[MonsterType::Dracula]);
@@ -707,7 +619,6 @@ void GameRender::draw_coffins() {
     float mapDrawY = (GetScreenHeight() - mapTex.height * mapScale) / 2.0f;
 
     for (const auto& [locName, destroyed] : coffins) {
-       
 
         Location* loc = game.get_map().get_location_by_name(locName);
         if (!loc) continue;
@@ -720,11 +631,10 @@ void GameRender::draw_coffins() {
         
         float coffinSize = 30.0f;
         Rectangle dest = { locPos.x, locPos.y - 40, coffinSize, coffinSize };
-        Texture2D& coffin = destroyed ? smashedCoffinTex : coffinTex;
+         Texture2D& coffin = destroyed ? smashedCoffinTex : coffinTex;
         DrawTexturePro(coffin, {0,0,(float)coffin.width,(float)coffin.height}, dest, {0,0}, 0, WHITE);
     }
 }
-
 
 const Vector2 GameRender::terrorLevelPositions[8] = {
     {135, 60},  // 0
@@ -739,23 +649,22 @@ const Vector2 GameRender::terrorLevelPositions[8] = {
 
 
 void GameRender::renderTerrorLevel(int terrorLevel) {
-    
+
     Vector2 pos = terrorLevelPositions[terrorLevel];
-    
+
     // رسم دایره قرمز روی عدد
     DrawCircle(pos.x, pos.y, 7 , RED);
-    
+
     
 }
 
-
-GameRender::~GameRender(){
+GameRender::~GameRender()
+{
     if(currentHero) delete currentHero ; 
     if(selectedLocation) delete selectedLocation ; 
     UnloadTexture(draculaMat);
     UnloadTexture(invisibleManMat);
     UnloadTexture(coffinTex); 
-    UnloadTexture(smashedCoffinTex); 
-    UnloadFont(logFont);
-
+    UnloadTexture(smashedCoffinTex);
+    actionButtons.clear();
 }

@@ -575,6 +575,18 @@ bool MonstercardDeck::is_empty() const {
     return cards.empty();
 }
 
+void MonstercardDeck::removeCardByName(const std::string& cardName) {
+
+   for (auto it = cards.begin(); it != cards.end(); ++it) {
+        if ((*it)->get_card_name() == cardName) {
+            std::cout << "erasing " << (*it)->get_card_name() << '\n' ;
+            cards.erase(it);
+            break;
+        }
+    }
+}
+
+
 std::unique_ptr<Monstercard> MonstercardDeck::drawcard() {
     if (cards.empty())
         throw std::runtime_error("Monster deck is empty!");

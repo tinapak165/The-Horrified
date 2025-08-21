@@ -1,12 +1,18 @@
 #ifndef GAME_H
 #define GAME_H
 
+
+
 #include <iostream>
 #include <unordered_map>
 #include <memory>
 #include <raylib.h>
-#include <sstream>
-
+#include <string>
+#include <map>
+#include <iomanip>
+#include <set>
+#include <limits>
+#include <utility>
 #include "GameMap.hpp"
 #include "Perkcards.hpp"
 #include "Monstercards.hpp"
@@ -20,11 +26,13 @@
 #include "Heroes.hpp"
 #include "State.hpp"
 #include "GameRender.hpp"
-
-
+#include "Villager.hpp"
+#include "Menu.hpp"
+#include "Factory.hpp"
 class Menu;
-class GameRender;
-class State;
+class State ;
+class GameRender ;
+
 struct PlayerInfo{
     std::string name ; 
     Hero* hero ; 
@@ -82,12 +90,15 @@ private:
     
     std::vector<std::string> logs;
     Music music;
+    std::vector<std::unique_ptr<Hero>> heroStorage;
+
  
     
 public:
     Game();
     ~Game();
     void start() ;
+     void ready();
     void initialize(const PlayerSelection&, const PlayerSelection&) ; 
     PlayerInfo getPlayer1() const ;
     PlayerInfo getPlayer2() const ;
@@ -99,6 +110,7 @@ public:
     InvisibleMan* get_invisibleMan() ; 
     ItemPool& get_pool() ;
     static int get_terror_level();
+     Menu* get_menu() ;
 
      void set_skipMonsterPhase(bool) ;
     bool ShouldSkipMonsterPhase() const ; 
@@ -147,6 +159,7 @@ public:
     void clear_logs();
     void Game_over_check();
     void DrawGameOverPopup(const std::string& message);
+     void ResetGame();
     
 
 };

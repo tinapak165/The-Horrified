@@ -89,6 +89,7 @@ set(SOURCES
     src/GameRender.cpp
     src/Action.cpp
     src/SaveManager.cpp
+    src/Factory.cpp
 
 )
 

@@ -95,7 +95,7 @@ void SaveManager::loadGame(const std::string & filename)
                 h = game.create_hero_by_name(heroname) ;
                 game.get_turnManager().add_hero(h);
             }
-            game.setPlayer1(playername , h);
+          
         }
 
         else if(line.rfind("player2:" , 0) == 0){
