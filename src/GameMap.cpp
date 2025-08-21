@@ -10,22 +10,22 @@ void GameMap::build_map() {
     add_location("Cave", {50 - 200, 405 , 150, 30}, "../Assets/Icons/CaveIcon.png");
     add_location("Camp", {310 - 200, 400 , 150, 30}, "../Assets/Icons/CampIcon.png"); 
     add_location("Precinct", {596 - 200, 350,150, 30}, "../Assets/Icons/PrecinctIcon.png"); 
-    add_location("Inn", {870 - 200, 295, 150, 30}, "../Assets/Icons/InnIcon.png");  
-    add_location("Barn", {1179 - 200, 333, 150, 30}, "../Assets/Icons/BarnIcon.png"); 
-    add_location("Dungeon", {1455 - 200, 338, 150, 30}, "../Assets/Icons/DungeonIcon.png"); 
+    add_location("Inn", {875 - 200, 295, 150, 30}, "../Assets/Icons/InnIcon.png");  
+    add_location("Barn", {1185 - 200, 333, 150, 30}, "../Assets/Icons/BarnIcon.png"); 
+    add_location("Dungeon", {1459 - 200, 338, 150, 30}, "../Assets/Icons/DungeonIcon.png"); 
     add_location("Tower", {1322 - 200, 629, 150, 30}, "../Assets/Icons/TowerIcon.png"); 
     add_location("Theatre", {990 - 195, 655, 150, 30}, "../Assets/Icons/TheatreIcon.png"); 
     add_location("Mansion", {300 - 100, 700+210, 150, 30}, "../Assets/Icons/MansionIcon.png");
     add_location("Abbey", {50 - 150, 700 + 320, 150, 30}, "../Assets/Icons/AbbeyIcon.png");
-    add_location("Crypt", {52 -200, 1303, 150, 30}, "../Assets/Icons/CryptIcon.png"); 
-    add_location("Museum", {302-200, 1299, 150, 30}, "../Assets/Icons/MuseumIcon.png"); 
-    add_location("Hospital", {555-200, 1539, 150, 30}, "../Assets/Icons/HospitalIcon.png"); 
-    add_location("Church", {680-200, 1351, 150, 30}, "../Assets/Icons/ChurchIcon.png"); 
-    add_location("Graveyard", {930-200, 1539, 150, 30}, "../Assets/Icons/GraveyardIcon.png"); 
-    add_location("Institute", {1270-200, 1535, 150, 30}, "../Assets/Icons/InstituteIcon.png"); 
-    add_location("Laboratory", {1073-200, 1288,150, 30}, "../Assets/Icons/LaboratoryIcon.png");  
+    add_location("Crypt", {55 -200, 1303, 150, 30}, "../Assets/Icons/CryptIcon.png"); 
+    add_location("Museum", {303-200, 1299, 150, 30}, "../Assets/Icons/MuseumIcon.png"); 
+    add_location("Hospital", {559-200, 1539, 150, 30}, "../Assets/Icons/HospitalIcon.png"); 
+    add_location("Church", {682-200, 1351, 150, 30}, "../Assets/Icons/ChurchIcon.png"); 
+    add_location("Graveyard", {934-200, 1539, 150, 30}, "../Assets/Icons/GraveyardIcon.png"); 
+    add_location("Institute", {1275-200, 1535, 150, 30}, "../Assets/Icons/InstituteIcon.png"); 
+    add_location("Laboratory", {1079-200, 1288,150, 30}, "../Assets/Icons/LaboratoryIcon.png");  
     add_location("Shop", {840-200, 1088, 150, 30}, "../Assets/Icons/ShopIcon.png"); 
-    add_location("Docks", {1415-200, 915, 150, 30}, "../Assets/Icons/DocksIcon.png");
+    add_location("Docks", {1419-200, 915, 150, 30}, "../Assets/Icons/DocksIcon.png");
 
 
     Location* cave = get_location_by_name("Cave");
