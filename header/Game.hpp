@@ -26,6 +26,7 @@
 #include "GameRender.hpp"
 #include "Villager.hpp"
 #include "Menu.hpp"
+#include "Action.hpp"
 #include "Factory.hpp"
 class Menu;
 class State ;
@@ -45,17 +46,9 @@ enum class Phase{
 // for log
 #define GAME_LOG_OBJ(game, msg) \
     do { \
-        std::cout << msg << std::endl; \
         (game).log(msg); \
     } while(0)
-
-#define GAME_LOG_PTR(game, msg) \
-    do { \
-        std::cout << msg << std::endl; \
-        (game)->log(msg); \
-    } while(0)
-
-///  
+ 
 
 class Game {
     friend class Monstercard;

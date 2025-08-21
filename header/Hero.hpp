@@ -10,12 +10,8 @@
 #include "InvisibleMan.hpp"
 #include "Dracula.hpp"
 #include "Itembag.hpp"
-#include "Button.hpp"
-class Location ; 
-class Dracula ; 
-class ItemPool ; 
-class Villager ; 
-class InvisibleMan ; 
+#include "Tools.hpp"
+
 class Perkcard ; 
 
 enum class ActionType{

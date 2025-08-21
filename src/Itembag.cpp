@@ -1,6 +1,5 @@
 #include "Itembag.hpp"
-#include <iostream>
-#include <ctime>
+
 ItemPool::ItemPool() {
     
    // Red items
@@ -89,7 +88,6 @@ std::vector<Item> ItemPool::draw_random_items(int count) {
     shuffle(allItems.begin(), allItems.end(), std::default_random_engine(std::random_device{}()));
     if ((int)allItems.size() < count)
     std::cerr << "Warning: not enough items in pool! Requested: " << count << ", Available: " << allItems.size() << '\n';
-  //  std::cout<<allItems.size();
     std::vector<Item> drawn;
     for (int i = 0; i < count && !allItems.empty(); ++i) {
         drawn.push_back(allItems.back());
@@ -113,6 +111,5 @@ void ItemPool::add_items(const std::vector<Item>& items) {
 void ItemPool::unload_in_use_items() {
     for(auto& item : inUseItems){
         item.unloadTexture() ;
-
     }
 }

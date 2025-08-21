@@ -5,7 +5,6 @@
 #include "GameMap.hpp"
 #include <vector>
 
-class Location ; 
 class GameMap ; 
 class Villager{
 

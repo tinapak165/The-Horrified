@@ -1,9 +1,7 @@
 #ifndef DICE_H
 #define DICE_H
 #include <array>
-#include <vector>
 #include <stdexcept>
-#include <iostream>
 #include <algorithm>
 #include <vector>
 #include <ctime>

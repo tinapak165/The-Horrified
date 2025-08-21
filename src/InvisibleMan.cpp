@@ -1,7 +1,5 @@
 #include "InvisibleMan.hpp"
-#include "Item.hpp"
 #include "Location.hpp"
-#include "Monster.hpp"
 
 InvisibleMan::InvisibleMan(Location* startLocation): Monster("InvisibleMan", startLocation , MonsterType::InvisibleMan , "../Assets/Monsters/InvisibleMan.png"){
     loadTexture() ;   
@@ -26,7 +24,6 @@ std::pair<Hero*, Villager*> InvisibleMan::attack() {
             if (heroes.size() == 1) {
                 chosenHero = heroes[0];
             } else {
-                // انتخاب رندوم
                 size_t index = rand() % heroes.size();
                 chosenHero = heroes[index];
                 
@@ -51,28 +48,6 @@ bool InvisibleMan::can_be_defeated() {
 
 bool InvisibleMan::is_defeated() const {
     return defeated;
-}
-
-bool InvisibleMan::try_place_evidence(Item item) {
-    std::string loc = item.getLocationName();
-
-    
-    if (required_locations.count(loc)) {
-        
-        if (evidence_locations.count(loc)) {
-            std::cout << "You already used an item from " << loc << " as evidence.\n";
-            return false;
-        }
-
-        
-        evidence_locations.insert(loc);
-        std::cout << "Evidence placed from " << loc << " (" 
-                  << evidence_locations.size() << "/5)\n";
-        return true;
-    }
-
-    std::cout << loc << " is not a valid evidence location.\n";
-    return false;
 }
 
 bool InvisibleMan::add_evidence(const std::string& location) {

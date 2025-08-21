@@ -23,7 +23,7 @@ set(SOURCES
     src/Heroes.cpp
     src/State.cpp
     src/Menu.cpp
-    src/Button.cpp
+    src/Tools.cpp
     src/GameRender.cpp
     src/Action.cpp
     src/SaveManager.cpp

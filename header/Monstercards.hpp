@@ -1,7 +1,6 @@
 #ifndef MONSTERCARDS_HPP
 #define MONSTERCARDS_HPP
 
-#include <string>
 #include <vector>
 #include <memory>
 #include <unordered_map>
@@ -14,12 +13,11 @@
 #include "Itembag.hpp"
 #include "Item.hpp"
 #include "Dice.hpp"
+
 class Game;
 
 enum class CardType { VillagersAffecting, MonsterAffecting };
 
-
-// Strike برای اجرای حرکت و تاس هیولا
 struct Strike {
 private:
     std::vector<MonsterType> monsters;
@@ -35,11 +33,7 @@ public:
     const std::vector<MonsterType>& get_monsters() const { return monsters; }
 };
 
-// کلاس پایه کارت هیولا
 class Monstercard {
-friend std::ostream& operator<<(std::ostream& os, const Strike& strike); 
-friend std::ostream& operator<<(std::ostream& os, const Monstercard& card);
-friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monstercard>& cardPtr);
 
     private:
     
@@ -54,7 +48,7 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
 
 
 
-            std::vector<std::pair<Item, Location*>> placed_items; // آیتم‌ها و مکانشون
+            std::vector<std::pair<Item, Location*>> placed_items; 
             Villager* affected_villager = nullptr;
             bool has_villager_event;
            
@@ -91,7 +85,6 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                 void remove_villager(Villager* v);
                 Villager* create_villager(const std::string& ,const std::string& ,  std::vector<Villager*>& all_villagers);
                 void place_or_move_villager( std::vector<Villager*>& all_villagers);
-         //       void set_affected_villager(Villager* v);
                 virtual void play_monster_card(Game& game ,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) = 0;
                 bool has_frenzied_strike() const;
                 
@@ -111,17 +104,12 @@ friend std::ostream& operator<<(std::ostream& os, const std::unique_ptr<Monsterc
                     ItemPool& pool,
                     std::unordered_map<MonsterType, Monster*>& monstersMap,
                     Monster* frenziedMonster);
-
-
-
-                    
-         //           Texture2D load_texture_for_item(const Item& item);
                     
                  int show_item_block_window(Hero* h) ;
 
 };
 
-// کارت 1: Form the Bat (Dracula moves to hero)
+//Form the Bat (Dracula moves to hero)
 class FormTheBat : public Monstercard {
     private:
         ItemPool& pool;
@@ -171,15 +159,6 @@ class TheInnocent : public Monstercard {
     
         void play_monster_card(Game& game,Monster* frenziedMonster , std::vector<Villager*>& all_villagers) override;
     };
-    
-
-
-
-    
-    
-    
-    
-    
     
     class TheDelivary : public Monstercard {
     private:

@@ -1,4 +1,4 @@
-#include "Button.hpp"
+#include "Tools.hpp"
 
 ClickableText::ClickableText(const std::string& txt, Vector2 pos, int size, Color col)
     : text(txt), position(pos), fontSize(size), color(col) {
@@ -26,8 +26,7 @@ Button::Button(const std::string& path, Vector2 position , float scale) : scale(
 
 void Button::Draw() {
        
-      //  DrawTexture(texture, static_cast<int>(bounds.x),static_cast<int>(bounds.y), WHITE);
-    DrawTextureEx(texture, (Vector2){bounds.x, bounds.y}, 0.0f, scale, WHITE); //with scale
+    DrawTextureEx(texture, (Vector2){bounds.x, bounds.y}, 0.0f, scale, WHITE);
     if (CheckCollisionPointRec(GetMousePosition(), bounds)) {
         DrawRectangleLinesEx(bounds, 2.0f, RED);
     }
@@ -38,15 +37,15 @@ bool Button::isPressed()const {
 }
 
 Vector2 Button::GetPosition() const{
-return {bounds.x, bounds.y} ; 
+    return {bounds.x, bounds.y} ; 
 }
 
 Vector2 Button::GetSize() const{
-return {bounds.width, bounds.height}; 
+    return {bounds.width, bounds.height}; 
 }
 
 Rectangle Button::GetBounds() const{
- return bounds;
+    return bounds;
 }
 
 void Button::DrawWithFade(){
@@ -55,7 +54,3 @@ void Button::DrawWithFade(){
     DrawTextureEx(texture , {bounds.x , bounds.y} , 0.0f , scale , fadeColor) ;
 }
 
-// Button::~Button()
-// {
-//     UnloadTexture(texture);
-// }

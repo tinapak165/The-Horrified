@@ -16,6 +16,7 @@ std::unique_ptr<Hero> Factory::createHero(const std::string type){
 }
 
 std::unique_ptr<Perkcard> Factory::createPerkcard(const std::string type){
+    game.initializaDeck();
     if (type == "Repel") return std::make_unique<Repelcard>(game.get_dracula(), game.get_invisibleMan(), game.get_map());
     if (type == "Hurry") return std::make_unique<Hurrycard>(game.get_turnManager().get_heroes(), game.get_map());
     if (type == "Late into the Night") return std::make_unique<LateintotheNightCARD>();

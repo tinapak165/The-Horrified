@@ -130,79 +130,69 @@ void GameRender::draw_sidebar() {
     int sidebarWidth = 400;
     int sidebarHeight = mapRect.height;
 
- // پس زمینه برای ساید بار
     DrawRectangle(sidebarX, mapRect.y, sidebarWidth, sidebarHeight, Fade(BLACK, 0.5f));
 
     const auto& card = game.get_current_card();
     int cardBoxY = mapRect.y ;
     int cardBoxHeight = 290;
 
-   
- 
-
-
- 
-
-
     if (card) {
-    DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, RED);
+        DrawText("Monster Card:", sidebarX + 20, cardBoxY + 10, 20, RED);
 
-      Texture2D tex = card->get_texture();
-if (tex.id != 0) {
-    float aspect = (float)tex.width / (float)tex.height;
-    float destHeight = cardBoxHeight - 60;
-    float destWidth = destHeight * aspect;
+        Texture2D tex = card->get_texture();
+        if (tex.id != 0) {
+            float aspect = (float)tex.width / (float)tex.height;
+            float destHeight = cardBoxHeight - 60;
+            float destWidth = destHeight * aspect;
 
-    float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 50; // کارت اومد وسط ساید بار
-    float destY = cardBoxY + 40;
+            float destX = sidebarX + (sidebarWidth - destWidth) / 2 - 50;
+            float destY = cardBoxY + 40;
 
-    Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
-    Rectangle dest = {destX, destY, destWidth, destHeight};
-    DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
+            Rectangle src = {0, 0, (float)tex.width, (float)tex.height};
+            Rectangle dest = {destX, destY, destWidth, destHeight};
+            DrawTexturePro(tex, src, dest, {0,0}, 0.0f, WHITE);
 
-   
-    float boxWidth  = destWidth;
-    float boxHeight = 70; 
-    float boxX = destX;
-    float boxY = destY + destHeight + 15; 
+        
+            float boxWidth  = destWidth;
+            float boxHeight = 70; 
+            float boxX = destX;
+            float boxY = destY + destHeight + 15; 
 
-    DrawRectangleRounded({boxX, boxY, boxWidth, boxHeight}, 0.2f, 6, GRAY);
+            DrawRectangleRounded({boxX, boxY, boxWidth, boxHeight}, 0.2f, 6, GRAY);
 
- 
-    auto dracula = game.get_dracula();
-    auto invisibleMan = game.get_invisibleMan();
+        
+            auto dracula = game.get_dracula();
+            auto invisibleMan = game.get_invisibleMan();
 
-    if (dracula) {
-        int destroyed = 0;
-        for (const auto& entry : dracula->get_coffins_map()) {
-            if (entry.second) destroyed++;
+            if (dracula) {
+                int destroyed = 0;
+                for (const auto& entry : dracula->get_coffins_map()) {
+                    if (entry.second) destroyed++;
+                }
+                DrawText(("Coffins: " + std::to_string(destroyed) + "/4").c_str(),
+                        boxX + 10, boxY + 10, 18, BLACK);
+            }
+
+            if (invisibleMan) {
+                int collected = invisibleMan->get_evidence_count();
+                DrawText(("Evidence: " + std::to_string(collected) + "/5").c_str(),
+                        boxX + 10, boxY + 35, 18, BLACK);
+            }
         }
-        DrawText(("Coffins: " + std::to_string(destroyed) + "/4").c_str(),
-                 boxX + 10, boxY + 10, 18, BLACK);
-    }
 
-    if (invisibleMan) {
-        int collected = invisibleMan->get_evidence_count();
-        DrawText(("Evidence: " + std::to_string(collected) + "/5").c_str(),
-                 boxX + 10, boxY + 35, 18, BLACK);
-    }
-}
-
-        } 
-
-   
+    } 
+ 
     float padding = 10.0f;
     float logBoxX = sidebarX ;  
-    float logBoxY = sidebarY + sidebarHeight / 2 ;   // نیمه پایین سایدبار
-    float logBoxWidth  = sidebarWidth - 2*padding;  // فاصله از چپ و راست
+    float logBoxY = sidebarY + sidebarHeight / 2 ;   
+    float logBoxWidth  = sidebarWidth - 2*padding; 
     float logBoxHeight = sidebarHeight / 2 - 2*padding; 
 
     float effectBoxWidth  = std::min(sidebarWidth - 2*padding, sidebarWidth  - padding);
     float effectBoxHeight = std::min(logBoxHeight - 2*padding, sidebarHeight - logBoxY - padding);
 
-    // موقعیت داخل سایدبار
     float effectBoxX = sidebarX + padding ;
-    float effectBoxY = logBoxY + padding - 100; // بیاد بالاتر 
+    float effectBoxY = logBoxY + padding - 100; 
 
     DrawRectangleRounded({effectBoxX, effectBoxY, effectBoxWidth - 100, effectBoxHeight}, 
                         0.15f, 6, GRAY);
@@ -210,8 +200,8 @@ if (tex.id != 0) {
     
     DrawText("MonsterCard Effects :", effectBoxX + 10, effectBoxY + 10, 20, RED);
 
-    int y = effectBoxY + 30;   /// یه خط  پایین تر
-    int maxLines = (effectBoxHeight - 20) / 25;  // چند خط جا میشه
+    int y = effectBoxY + 30;   
+    int maxLines = (effectBoxHeight - 20) / 25; 
     int count = 0;
 
     for (const auto& log : game.get_logs()) {
@@ -293,13 +283,11 @@ void GameRender::draw_monsters() {
 
             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
 
-            // نشون دادن حالت Frenzied
             if (monster == frenzied && !frenziedDrawn) {
                 DrawRectangleLinesEx(dest, 2.0f, RED);
                 frenziedDrawn = true;
             }
 
-            // کلیک روی هیولا برای نمایش تصویر
             if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), dest)) {
                 selectedMonsterMat = monster->get_type();  
             }
@@ -308,7 +296,6 @@ void GameRender::draw_monsters() {
         }
     }
 
-    
    if (selectedMonsterMat != MonsterType::None) {
     Texture2D* matTex = nullptr;
     if (selectedMonsterMat == MonsterType::Dracula) 
@@ -325,12 +312,10 @@ void GameRender::draw_monsters() {
         Rectangle matArea = {matX, matY, matW, matH};
         DrawTexturePro(*matTex, {0, 0, (float)matTex->width, (float)matTex->height}, matArea, {0, 0}, 0, WHITE);
 
-        // دکمه بستن
         Rectangle closeBtn = { matX + matW - 40, matY + 10, 30, 30 };
         DrawRectangleRec(closeBtn, MAROON);
         DrawText("X", closeBtn.x + 7, closeBtn.y + 2, 24, WHITE);
 
-        // بستن فقط وقتی کلیک رها شد
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
             Vector2 mp = GetMousePosition();
             if (CheckCollisionPointRec(mp, closeBtn)) {
@@ -343,8 +328,8 @@ void GameRender::draw_monsters() {
 void GameRender::draw_villagers() {
     const float villagerSize = 90.0f;  
     const float spacing = 10.0f;
-    const float textOffsetY = 5.0f;    // فاصله کم بین عکس و اسم
-    const int fontSize = 16;           // فونت کوچیک‌تر
+    const float textOffsetY = 5.0f;   
+    const int fontSize = 16;          
 
     Texture2D mapTex = game.get_map().get_mapTexture();
     float mapScale = std::min(
@@ -375,7 +360,6 @@ void GameRender::draw_villagers() {
 
             DrawTexturePro(tex, src, dest, {0, 0}, 0.0f, WHITE);
 
-            // محاسبه متن و باکس پس‌زمینه
             int textWidth = MeasureText(v->get_name().c_str(), fontSize);
             int textX = dest.x + (villagerSize - textWidth) / 2;  // وسط‌چین زیر عکس
             int textY = dest.y + villagerSize + textOffsetY;
@@ -394,15 +378,15 @@ void GameRender::draw_monster_card() {
 
     Texture2D tex = card->get_texture();
     Rectangle src = { 0, 0, (float)tex.width, (float)tex.height };
-    Rectangle dest = { 620, 20, 200, 300 }; // کنار نقشه، بالا سمت راست
+    Rectangle dest = { 620, 20, 200, 300 }; 
     Vector2 origin = { 0, 0 };
 
     DrawTexturePro(tex, src, dest, origin, 0.0f, WHITE);
 }
 void GameRender::draw_heroes() {
     const float heroSize = 100.0f; 
-    const float spacing = 30.0f;  // فاصله بین چند هیرو در یک مکان
-    const float offsetY = -heroSize - 5.0f; // کمی بالاتر از لوکیشن
+    const float spacing = 30.0f; 
+    const float offsetY = -heroSize - 5.0f;
 
     for (const auto& loc : game.get_map().get_locations()) {
         Vector2 locPos = loc->get_screenPos();
@@ -529,10 +513,8 @@ void GameRender::draw_location_icon() {
             baseArea.height * mapScale
         };
 
-        // آیکون لوکیشن
         DrawTextureEx(loc->get_icon_texture(), screenPos, 0.0f, mapScale, WHITE);
 
-        // اگر کلیک شد، نمایش پنل اطلاعات
         if (CheckCollisionPointRec(mousePos, transformed) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             selectedLocation = loc.get() ;
         }
@@ -626,7 +608,7 @@ void GameRender::draw_coffins() {
         
         float coffinSize = 30.0f;
         Rectangle dest = { locPos.x, locPos.y - 40, coffinSize, coffinSize };
-         Texture2D& coffin = destroyed ? smashedCoffinTex : coffinTex;
+        Texture2D& coffin = destroyed ? smashedCoffinTex : coffinTex;
         DrawTexturePro(coffin, {0,0,(float)coffin.width,(float)coffin.height}, dest, {0,0}, 0, WHITE);
     }
 }
@@ -646,10 +628,7 @@ const Vector2 GameRender::terrorLevelPositions[8] = {
 void GameRender::renderTerrorLevel(int terrorLevel) {
 
     Vector2 pos = terrorLevelPositions[terrorLevel];
-
-    // رسم دایره قرمز روی عدد
     DrawCircle(pos.x, pos.y, 7 , RED);
-
     
 }
 

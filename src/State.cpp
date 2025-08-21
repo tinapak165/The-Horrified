@@ -1,7 +1,4 @@
 #include "State.hpp"
-#include "Menu.hpp"
-#include <iostream>
-#include <cstring>
 
 State::State(const std::string& bgPath) {
     background = LoadTexture(bgPath.c_str());
@@ -30,11 +27,13 @@ void MenuState::render(Menu& menu)  {
 
         if (startButton->isPressed()) {
             menu.getGame().distribute_initial_items() ;
-            menu.SetState(std::move(std::make_unique<ExplainationState>())); 
+            auto newstate = std::make_unique<NameInputState>() ;
+            menu.SetState(std::move(newstate)); 
             return ; 
         }
         if (exitButton->isPressed()) {
-            menu.SetState(std::move(std::make_unique<ExitState>())) ;
+            auto newstate = std::make_unique<ExitState>() ;
+            menu.SetState(std::move(newstate)) ;
             return ; 
         }
         if(continueButton->isPressed()){

@@ -312,6 +312,13 @@ AdvanceAction::AdvanceAction(Hero * h, Dracula * dra, ItemPool& i, GameMap & map
     std::string locName = hero->GetCurrentLocation()->get_name();
 
     if(locName == "Cave" || locName == "Dungeon" || locName == "Crypt" || locName == "Graveyard" ){
+        const auto& coffins = dracula->get_coffins_map();
+        auto it = coffins.find(locName);
+        if(it->second){
+            set_message("This coffin already destroyed!");
+            set_ShouldClose(true);
+            return;
+        }
         mode = Mode::ForDracula ;
         for(auto& item : hero->GetItems() ){
             if(item.getColor() == ItemColor::Red) 

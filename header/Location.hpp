@@ -2,23 +2,20 @@
 #define LOCATION_HPP
 #include <string>
 #include <vector>
+#include <iostream>
+#include <raylib.h>
+
 #include "Item.hpp"
 #include "Monster.hpp"
 #include "Hero.hpp"
 #include "Villager.hpp"
-#include <raylib.h>
-class Item;
-class Monster;
-class Hero;
-class villager ;   
-
 
 class Location {
 
     private:
         Vector2 screenPos ; 
-        Rectangle clickableArea;   // منطقه قابل کلیک روی نقشه
-        Texture2D iconTexture;     // آیکون تصویری برای این مکان
+        Rectangle clickableArea;  
+        Texture2D iconTexture;   
         std::string name;
         std::vector<Texture2D> heroTextures;
         std::vector<Texture2D> monsterTextures;
@@ -43,10 +40,6 @@ class Location {
         void remove_hero(Hero*);
         void remove_monster(Monster* );
         void remove_villager(Villager *);
-
-        bool has_coffin();
-        void place_coffin();
-        void remove_coffin();
 
         const std::string& get_name() const;
         std::vector<Item>& get_items() ; 

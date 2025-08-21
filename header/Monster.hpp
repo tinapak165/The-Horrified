@@ -1,10 +1,9 @@
 #ifndef MONSTER_HPP
 #define MONSTER_HPP
 
-#include <string>
 #include <iostream>
-#include <utility>
 #include <raylib.h>
+
 class Hero;
 class Villager;
 class Location;
@@ -42,9 +41,7 @@ public:
     Location* find_nearest_villager(Location* start);
 
     Location* find_next_step(Location* target);
-    // برای ایونت ها
     void Monster_move_event(Location* new_location); 
-    // برای حرکت از روی استرایک
     void move_towards(int steps);
 
     bool is_alive() const; 

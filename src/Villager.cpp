@@ -1,11 +1,8 @@
 #include "Villager.hpp"
-#include <iostream>
-#include <algorithm>
-using namespace std ;
 
-vector<Villager*> Villager:: vil  ;
+std::vector<Villager*> Villager:: vil  ;
 
-Villager::Villager(GameMap& map , const string& name, Location* safeplace , Location* current , std::string texpath) : name(name), currentLocation(current) , VillagerTex_path(texpath){ 
+Villager::Villager(GameMap& map , const std::string& name, Location* safeplace , Location* current , std::string texpath) : name(name), currentLocation(current) , VillagerTex_path(texpath){ 
 
     vil.push_back(this) ;
     
@@ -39,11 +36,8 @@ Villager::Villager(GameMap& map , const string& name, Location* safeplace , Loca
         (*this).set_safeplace(map.get_location_by_name("Camp")) ; 
         VillagerTex_path = "../Assets/Villager/Maria.png";
     }
-     VillagerTex = LoadTexture(VillagerTex_path.c_str());
+    VillagerTex = LoadTexture(VillagerTex_path.c_str());
 
-    std::cout << "Villager created: " << name << " at " 
-              << (current ? current->get_name() : "NULL") 
-              << " with texture " << VillagerTex_path << std::endl;
 }
 
 bool Villager::in_the_safePlace() const{
@@ -59,7 +53,7 @@ Location* Villager::get_currentLocation(){
     return currentLocation;
 }
 
-string Villager::get_name(){ return name; }
+std::string Villager::get_name(){ return name; }
 
 Location* Villager::get_safeplace(){ return safePlace; }
 
@@ -67,20 +61,19 @@ void Villager::set_safeplace(Location* newplace){
     safePlace = newplace ; 
 }
 
-void Villager::MoveTo(Location* newPlace , string charc){ // only villager move
+void Villager::MoveTo(Location* newPlace , std::string charc){ // only villager move
   
     for(auto *v :vil){
         if(v->get_name() == charc){
             if(newPlace == v->get_currentLocation())
-                throw runtime_error("you are in the current location") ;
+                throw std::runtime_error("you are in the current location") ;
             v->get_currentLocation()->remove_villager(v) ; 
             v->set_currentLocation(newPlace) ; 
             newPlace->add_villager(v) ; 
-            cout << v->get_name() << " " << "moved to " << *(v->get_currentLocation()) << '\n' ;
             return ;  
         }
     }
-    throw invalid_argument("villager not found! in move") ; 
+    throw std::invalid_argument("villager not found!") ; 
 
 }
 void Villager::removeVillager(){
@@ -99,7 +92,6 @@ void Villager::removeVillager(){
 
 void Villager::removevillager(Villager * v){ //killed by attack of monster
     vil.erase(remove(vil.begin() , vil.end() , v) , vil.end()) ; 
-    std::cout << "Removed villager: " << (this)->get_name() << "\n";
 }
 
 
@@ -112,7 +104,7 @@ bool Villager::AnyVillagerInSafePlace(){
     return false ;
 }
 
-vector<Villager*> &Villager::all(){ return vil ;}
+std::vector<Villager*> &Villager::all(){ return vil ;}
 
 Texture2D Villager::getTexture(){ return VillagerTex;}
 
@@ -120,7 +112,6 @@ Texture2D Villager::getTexture(){ return VillagerTex;}
 
 Villager* Villager::find_villager_by_name(const std::string name){
     for(auto vi : all()){
-        cout << "vi.name: " << vi->get_name() << "!!\n" ;
         if(vi->get_name() == name)
             return vi; 
     }

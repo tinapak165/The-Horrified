@@ -109,7 +109,7 @@ void Archaeologist::DrawSpecial() {
     if(typing)
         DrawTypingText(chosenPlace) ;
 
-    DrawText("Enter neighboring location to pick up its items:", 100, y, 18, RAYWHITE);
+    DrawText("Enter neighboring location to pick up its items:", 110, y, 20, RAYWHITE);
     y += 30;
 
     if (!message.empty()) {

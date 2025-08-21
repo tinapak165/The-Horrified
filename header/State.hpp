@@ -12,12 +12,10 @@ struct PlayerSelection {
     std::string garlicTime;
 };
 
-#include "Button.hpp"
+#include "Tools.hpp"
 #include "Menu.hpp"
-#include "GameRender.hpp"
-
 class Menu ;
-class GameRender ; 
+
 class State{
     private:
         Texture2D background ; 

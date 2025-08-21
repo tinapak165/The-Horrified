@@ -1,6 +1,5 @@
 #ifndef MENU_H
 #define MENU_H
-#include "State.hpp"
 #include "Game.hpp"
 class State ; 
 

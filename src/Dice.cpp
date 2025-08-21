@@ -1,10 +1,9 @@
 #include "Dice.hpp"
 
-using namespace std ; 
 Dice::Dice(int c) : count(c) {
     faces[0] = {
-        DiceFace::Power,
-        DiceFace::Attack, 
+        DiceFace::Attack,
+        DiceFace::Power, 
         DiceFace::empty,
         DiceFace::empty,
         DiceFace::empty,
@@ -32,32 +31,21 @@ Dice::Dice(int c) : count(c) {
 }
 
 
-vector<DiceFace> Dice::roll(int numOfDice) {
-
-    cout << "Entered roll() with " << numOfDice << " dice.\n";
+std::vector<DiceFace> Dice::roll(int numOfDice) {
 
     if (numOfDice <= 0 || numOfDice > 3) {
-        cout << "Invalid dice count! Throwing exception...\n";
-        throw out_of_range("invalid dice count");
+        throw std::out_of_range("invalid dice count");
     }
 
-    vector<int> DiceIndices = {0, 1, 2};
+    std::vector<int> DiceIndices = {0, 1, 2};
     std::shuffle(DiceIndices.begin(), DiceIndices.end(), std::default_random_engine(std::random_device{}()));
 
-    vector<DiceFace> res;
+    std::vector<DiceFace> res;
     for (int i = 0; i < numOfDice; i++) {
         int RandomDice = DiceIndices[i];
         int RandomFace = rand() % 6;
         DiceFace face = faces[RandomDice][RandomFace];
         res.push_back(face);
-        cout << "Dice " << RandomDice << " rolled: ";
-        switch (face) {
-            case DiceFace::Power: cout << "Power"; break;
-            case DiceFace::Attack: cout << "Attack"; break;
-            case DiceFace::empty: cout << "Empty"; break;
-            default: cout << "Unknown"; break;
-        }
-        cout << "\n";
     }
 
     return res;

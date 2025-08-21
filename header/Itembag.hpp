@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <iostream>
 
 class ItemPool {
 private:

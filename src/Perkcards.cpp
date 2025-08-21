@@ -1,13 +1,11 @@
 #include "Perkcards.hpp"
-#include <iostream>
-#include <ctime>
-using namespace std ; 
 
-Perkcard::Perkcard(const string name , const string& tex): name(name) , texture(LoadTexture(tex.c_str())) {}
+
+Perkcard::Perkcard(const std::string name , const std::string& tex): name(name) , texture(LoadTexture(tex.c_str())) {}
 
 Perkcard::~Perkcard(){ UnloadTexture(texture) ;}
 
-string Perkcard::get_name() const {return name ;}
+std::string Perkcard::get_name() const {return name ;}
 Texture2D Perkcard::get_texture() const { return texture ;}
 
 void Perkcard::DrawInfoPanel(){
@@ -52,7 +50,7 @@ std::string Perkcard::type(std::string input){
     return input ;  
 }
 
-Hurrycard::Hurrycard( const vector<Hero*>& heroes, GameMap &map): Perkcard("Hurry" , "../Assets/Perk_Cards/Hurry.png") , heroes(heroes) , map(map) {}
+Hurrycard::Hurrycard( const std::vector<Hero*>& heroes, GameMap &map): Perkcard("Hurry" , "../Assets/Perk_Cards/Hurry.png") , heroes(heroes) , map(map) {}
 
 void Hurrycard::play(Hero*){
 
@@ -79,7 +77,8 @@ void Hurrycard::play(Hero*){
     }
     if(Finished){
         hero->MoveTo(chosenLocation) ; 
-        Setmessage(hero->GetName() + " moved to " + chosenPlace) ;
+        std::string heroLoc = hero->GetCurrentLocation()->get_name();
+        Setmessage(hero->GetName() + " moved to " + heroLoc) ;
         moveStep++ ; 
 
         if(moveStep == 2){
@@ -207,7 +206,7 @@ void LateintotheNightCARD::play(Hero* hero){
     if(done)return ;
 
     hero->SetRemainingActions(hero->GetRemainingActions() + 2) ;
-    Setmessage(hero->GetName() + " actions changed to " + to_string(hero->GetRemainingActions())) ;
+    Setmessage(hero->GetName() + " actions changed to " + std::to_string(hero->GetRemainingActions())) ;
 
     set_ShouldClose(true);
     messageVisible = true ;
@@ -234,7 +233,7 @@ void BreakofDawnCARD::play(Hero*){
 
     if(done)return ;
 
-    vector<Item> PoolItems = pool.draw_random_items(2) ;
+    std::vector<Item> PoolItems = pool.draw_random_items(2) ;
     
     for( auto &i : PoolItems){
         i.loadTexture() ;
@@ -343,13 +342,13 @@ bool VisitfromtheDetectiveCARD::isDone() const{ return done; }
 
 PerkDeck::PerkDeck(){}
 
-void PerkDeck::addCard(unique_ptr<Perkcard> card){
-    cards.push_back(move(card)) ; 
+void PerkDeck::addCard(std::unique_ptr<Perkcard> card){
+    cards.push_back(std::move(card)) ; 
 }
-unique_ptr<Perkcard> PerkDeck::drawcard() {
+std::unique_ptr<Perkcard> PerkDeck::drawcard() {
 
     if (cards.empty()) 
-        cout << "out of perk\n";
+        std::cout << "out of perk\n";
     
     srand(time(0)); 
     int index = rand() % cards.size() ; 

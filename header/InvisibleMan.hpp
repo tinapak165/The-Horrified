@@ -3,14 +3,7 @@
 
 #include "Monster.hpp"
 #include <unordered_set>
-#include <string>
-#include <utility>
-#include <algorithm>
 #include "Item.hpp"
-
-class Hero;
-class Location;
-class Villager;
 
 class InvisibleMan : public Monster {
  
@@ -31,7 +24,7 @@ class InvisibleMan : public Monster {
         bool can_be_defeated()override;
 
         
-        bool try_place_evidence(Item ); 
+       // bool try_place_evidence(Item ); 
         int get_evidence_count() const;
         bool add_evidence(const std::string& location);
         std::unordered_set<std::string> get_evidence_locations();

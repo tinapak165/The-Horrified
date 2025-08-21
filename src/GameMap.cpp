@@ -72,7 +72,8 @@ void GameMap::build_map() {
     camp->connect(mansion ) ; 
     camp->connect(precinct ) ;   
     mansion->connect(shop );
-    mansion->connect(museum ) ;  
+    mansion->connect(museum ) ;
+    mansion->connect(precinct);  
  
 }
 std::string GameMap::checkString(std::string str){
@@ -105,17 +106,14 @@ void GameMap::draw_map() {
         return;
     }
 
-    // محاسبه scale مناسب برای حفظ نسبت تصویر و وسط‌چین کردن
      scale = std::min(
         (float)GetScreenWidth() / mapTexture.width,
         (float)GetScreenHeight() / mapTexture.height
     );
 
-    // محاسبه موقعیت برای رسم وسط‌چین
      drawX = (GetScreenWidth() - mapTexture.width * scale) / 1/5.0f;
      drawY = (GetScreenHeight() - mapTexture.height * scale) / 2.0f;
 
-    // رسم نقشه با scale
     DrawTextureEx(mapTexture, {drawX, drawY}, 0.0f, scale, WHITE);
 }
 const Texture2D &GameMap::get_mapTexture() const{
@@ -166,7 +164,6 @@ Location* GameMap::find_next_step(Location* start, Location* goal) {
             q.push(neighbor);
 
             if (neighbor == goal) {
-                // مسیر کامل ساخته شد، حالا مسیر رو از goal به عقب دنبال می‌کنیم
                 Location* step = neighbor;
                 Location* prev = came_from[step];
 
@@ -175,12 +172,12 @@ Location* GameMap::find_next_step(Location* start, Location* goal) {
                     prev = came_from[step];
                 }
 
-                return step;  // این همون همسایهٔ مستقیم start هست که به سمت goal می‌ره
+                return step; 
             }
         }
     }
 
-    return nullptr;  // مسیر پیدا نشد
+    return nullptr;
 }
 
 GameMap::~GameMap(){

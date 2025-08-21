@@ -1,4 +1,3 @@
-#include "Monster.hpp"
 #include "Dracula.hpp"
 
 Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation , MonsterType::Dracula ,"../Assets/Monsters/Dracula.png" )
@@ -10,12 +9,12 @@ Dracula::Dracula(Location* startLocation): Monster("Dracula", startLocation , Mo
     coffinsDestroyed["Graveyard"] = false;
 }
 
-void Dracula::destroy_coffin_at(std::string locationName) {
+void Dracula::destroy_coffin_at(const std::string& locationName) {
     if (coffinsDestroyed.count(locationName) && !coffinsDestroyed[locationName]) {
         coffinsDestroyed[locationName] = true;
-        std::cout << "Coffin at " << locationName << " destroyed!\n";
+        //Coffin destroyed!
     } else {
-        std::cout << "No coffin to destroy at " << locationName << " or already destroyed.\n";
+        //No coffin to destroy or already destroyed.
     }
 }
 
@@ -50,8 +49,7 @@ void Dracula::special_power(Hero* active_hero) {
     
         dracula_location->add_hero(active_hero , active_hero ->getTexture());
         active_hero->SetCurrentLocation(dracula_location);
-        std::cout << "Dracula uses Dark Charm! Pulling " << active_hero->GetName() 
-        << " to " << dracula_location->get_name() << "!" << std::endl;
+
     }
     
 std::pair<Hero*, Villager*> Dracula::attack() {
@@ -67,7 +65,6 @@ std::pair<Hero*, Villager*> Dracula::attack() {
             if (heroes.size() == 1) {
                 chosenHero = heroes[0];
             } else {
-                // انتخاب رندوم
                 size_t index = rand() % heroes.size();
                 chosenHero = heroes[index];
                 

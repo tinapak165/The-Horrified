@@ -1,7 +1,7 @@
 #ifndef GAMERENDER_HPP
 #define GAMERENDER_HPP
 
-#include "Button.hpp"
+#include "Tools.hpp"
 #include "Game.hpp"
 #include "Action.hpp"
 #include "ActionButton.hpp"
@@ -15,12 +15,12 @@ class HeroAction ;
 class GameRender {
 public:
     GameRender(Game& game);
-    void draw();              // کل صفحه رو رسم می‌کنه
+    void draw();              
     void draw_monsters();
     void draw_coffins(); 
     void draw_villagers();
-    void draw_map();          // فقط نقشه و آیکون‌ها
-    void draw_monster_card(); // اگر کارت فعاله، نشونش بده
+    void draw_map();        
+    void draw_monster_card();
     void draw_heroes();
     void draw_users() ;
     void draw_action_panel() ; 

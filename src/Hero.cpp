@@ -46,7 +46,6 @@ void Hero::DisplayActions() const{
     }
 }
 
-
 void Hero::DisplayInfo() const {
     float panelX = 210;
     float panelY = 90;
@@ -107,7 +106,6 @@ void Hero::displayPlayedCards() const{
 }
 
 vector<unique_ptr<Perkcard>>& Hero::GetAvailablePerkCards(){ return availableCards; }
-
 vector<unique_ptr<Perkcard>> &Hero::GetPlayedPerkCards(){ return playedCards ; }
 
 void Hero::addPlayedCards(std::unique_ptr<Perkcard> p){
@@ -119,7 +117,6 @@ vector<Item>& Hero::GetItems(){ return ListOfitems ; }
 void Hero::addItems(Item item)
 {
     GetItems().push_back(item) ; 
-
 }
 
 void Hero::removeItems(const Item & i){
@@ -183,14 +180,11 @@ void Hero::MoveTo(Location *new_location, vector<Villager *> vill){ // move with
     if (!new_location) return;
 
     (*this).SetCurrentLocation(new_location) ;
-
-    cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
     
     for(auto *v : vill){
         v->get_currentLocation()->remove_villager(v) ; 
         v->set_currentLocation(new_location) ;
         new_location->add_villager(v) ; 
-        cout << v->get_name() << " moved with hero to " << *(v->get_currentLocation()) << '\n';
     }
 }
 
@@ -198,8 +192,6 @@ void Hero::MoveTo(Location* new_location){ //without villager
     if (!new_location) return;
     
     (*this).SetCurrentLocation(new_location) ;
-
-    cout << (*this).GetName() << " moved to " << *(*this).GetCurrentLocation() << '\n' ; 
 }
 void Hero::StartSpecial(GameMap &){
     message = "This hero does not have any special action!" ;

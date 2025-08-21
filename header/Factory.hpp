@@ -2,7 +2,6 @@
 #define FACTORY_H
 #include <memory>
 #include "Game.hpp"
-#include "Action.hpp"
 
 class Factory{
     private:

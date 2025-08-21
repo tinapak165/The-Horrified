@@ -274,8 +274,6 @@ void SaveManager::loadGame(const std::string & filename)
         }
 
     }
-    
-    std::cout << "game loaded\n" ;
     file.close() ;
 }
 

@@ -1,18 +1,7 @@
 #include "Monster.hpp"
-#include <algorithm>
-#include <queue>
-#include <unordered_set>
-#include <unordered_map>
 #include "Location.hpp"
-#include "GameMap.hpp"
-#include "Hero.hpp"
 
-using namespace std;
-
-
-Monster::Monster (const string& name, Location* start_location , MonsterType t,std::string path) : name(name), current_location(start_location) , type (t) , MonsterTex_path(path) {
-    
-}
+Monster::Monster (const std::string& name, Location* start_location , MonsterType t,std::string path) : name(name), current_location(start_location) , type (t) , MonsterTex_path(path) {}
 
 const std::string& Monster::get_name() const { return name; }
 Location* Monster::get_location() const { return current_location; }
@@ -73,7 +62,7 @@ Location* Monster::find_nearest_hero(Location* start) {
         q.pop();
 
         if (!current->get_heroes().empty() ) {
-            cout<<"Monster won't move from strike because hero is at"<<current <<"too !";
+            //Monster won't move from strike because hero is here too !
             return current;
         }
 
@@ -123,7 +112,6 @@ void Monster::Monster_move_event(Location* new_location){
     }
     new_location->add_monster(this , this->getTexture());
     current_location = new_location;
-    std::cout<< this->get_name() << " moved to "<< new_location->get_name()<< "\n";
 
 }
 
@@ -192,7 +180,6 @@ void Monster::move_towards(int max_steps) {
     }
 
     if (!target) {
-        std::cout << name << " found no target.\n";
         return;
     }
 
@@ -211,7 +198,6 @@ void Monster::move_towards(int max_steps) {
         current_location = path[i];
         current_location->add_monster(this , this->getTexture());
 
-        std::cout << name << " moved to " << current_location->get_name() << "\n";
     }
    
 }
