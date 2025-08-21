@@ -314,7 +314,7 @@ int Monstercard::show_item_block_window(Hero* h) {
     const auto& items = h->GetItems();
     int selectedIndex = -2; 
 
-    // موقغیت پنجره جدید
+    // موقعیت پنجره جدید
     int screenW = GetScreenWidth();
     int screenH = GetScreenHeight();
     int boxWidth = 500;
@@ -322,16 +322,19 @@ int Monstercard::show_item_block_window(Hero* h) {
     int boxX = (screenW - boxWidth) / 2;
     int boxY = (screenH - boxHeight) / 2;
 
+    // اینجا اسم هیرو رو می‌گیریم
+    std::string heroName = h->GetName();
+    std::string title = "Dracula is attacking " + heroName + "!";
+
     while (selectedIndex == -2 && !WindowShouldClose()) {
         BeginDrawing();
-      
 
         // کادر پنجره
         DrawRectangleRounded({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 10, DARKGRAY);
         DrawRectangleRoundedLinesEx({(float)boxX, (float)boxY, (float)boxWidth, (float)boxHeight}, 0.2f, 8, 3.0f, WHITE);
 
         // عنوان
-        DrawText("Dracula is attacking!", boxX + 40, boxY + 20, 24, RED);
+        DrawText(title.c_str(), boxX + 40, boxY + 20, 24, RED);
         DrawText("Use an item to block?", boxX + 40, boxY + 50, 20, RAYWHITE);
 
         // دکمه‌های آیتم‌ها
@@ -363,6 +366,7 @@ int Monstercard::show_item_block_window(Hero* h) {
 
     return selectedIndex;
 }
+
 
 void Monstercard::play_strike(Game& game,
                                GameMap& map,
