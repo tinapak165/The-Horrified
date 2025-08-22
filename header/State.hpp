@@ -96,10 +96,4 @@ class ContinueState : public State{
 
 };
 
-class ExplainationState : public State {  
-    public:
-        ExplainationState();
-        void render(Menu&) override;
-};
-
 #endif

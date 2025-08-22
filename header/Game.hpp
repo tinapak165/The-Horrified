@@ -65,6 +65,7 @@ private:
     TurnManager turnManager;
     PerkDeck perkDeck ; 
     Music music;
+    Font font;
 
     std::unique_ptr<Dracula> dracula = nullptr ; 
     std::unique_ptr<InvisibleMan> invisibleMan = nullptr ; 
@@ -96,7 +97,7 @@ public:
     PlayerInfo getPlayer2() const ;
     void setPlayer1(const std::string& , Hero*) ; 
     void setPlayer2(const std::string& , Hero*) ; 
-
+    void Help();
     GameMap& get_map();
     std::unordered_map<MonsterType, Monster*>& get_monsters() ;
     Monstercard* get_current_card() const ;

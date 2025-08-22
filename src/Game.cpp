@@ -10,6 +10,8 @@ Game::Game() {
     music = LoadMusicStream("../Assets/Music/music.ogg");
     PlayMusicStream(music);
     SetTargetFPS(60);
+    font = LoadFont("../Assets/font.ttf");
+
 
     ready();
 }
@@ -170,15 +172,15 @@ void Game::monster_dice() {
 void Game::initializaDeck(){
 
     for(int i = 0 ; i < 3 ; i++){
-    //    perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map)); 
+       perkDeck.addCard(std::make_unique<Repelcard>(dracula.get(), invisibleMan.get(), map)); 
        perkDeck.addCard(std::make_unique<Hurrycard>(turnManager.get_heroes(), map)) ; 
-    //    perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
-    //    perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
-    //    perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
-    //    perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
+       perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ;
+       perkDeck.addCard(std::make_unique<BreakofDawnCARD>(pool , map)) ;
+       perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
+       perkDeck.addCard(std::make_unique<VisitfromtheDetectiveCARD>(invisibleMan.get() , map)) ;     
     }
-    //    perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ; 
-    //    perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
+       perkDeck.addCard(std::make_unique<LateintotheNightCARD>()) ; 
+       perkDeck.addCard(std::make_unique<OverstockCard>( pool , map)) ;
 
 }
  void Game::initializaMDeck(){
@@ -373,6 +375,49 @@ const std::vector<std::string>& Game::get_logs() const { return logs; }
     DrawText("Press ENTER to Exit", boxX + 80, boxY + 140, 20, YELLOW);
 }
 
+void Game::Help()
+{
+    const float panelX = 90 ; const float panelY = 10 ; 
+    const float panelW = 900 ; const float panelH = 850 ; 
+
+    DrawRectangle(panelX , panelY , panelW , panelH , Fade(DARKGRAY , 0.9f)) ;
+    DrawRectangleLines(panelX , panelY , panelW , panelH , GRAY) ;
+    DrawRectangleLinesEx({panelX, panelY, panelW, panelH}, 3, RAYWHITE);
+
+    float y = panelY + 20 ; 
+
+    std::string text = "Welcome to Horrified! Here's your quick-start guide:\n"
+    "1. Missions:\n"
+    "    Work together with fellow heroes to defeat the monsters (Dracula and the Invisible Man)\n"
+    "    by completing their specific tasks (smashing coffins, gathering evidence).\n"
+    "    Escort villagers to their safe places(this will reward you with a Perk card).\n"
+    "    Prevent the terror level from reaching its maximum.\n"
+    "2. Hero Phase:\n"
+    "    Take a number of actions equal to the value on your Hero Badge.\n"
+    "    You may play any number of Perk cards (playing a Perk does not cost an action).\n"
+    "    Learn more about actions by clicking on Help.\n"
+    "    End your turn anytime by clicking Quit\n"
+    "    Villagers cannot defend themselves. If monsters attack them, they are defeated, which raises the terror level.\n"
+    "    If a hero is attacked they may discard an item to avoid being defeated and sent to the hospital.\n "
+    "3. Monster Phase:\n"
+    "     Draw a Monster card: place items, resolve an event, roll dice then move/attack monsters\n"
+    "     Each monster has unique behavior and its own defeat conditions.\n  (click on each monster to learn more.)\n"
+    "     Dice results: Attack, Power or Empty\n"
+    "       Attack: If a monster shares a space with a hero, it may attack\n"
+    "       Power: Activates that monster's special ability:\n"
+    "         Dracula-> Dark Charm: pulls the current Hero into his place\n"
+    "         InvisibleMan-> Stalk Unseen: moves 2 extra places toward the nearest villager\n"
+    "     You can track what happened in the sidebar\n"
+    "4. Terror level:\n"
+    "    The Terror rises when heroes or villagers are defeated.\n"
+    "    If the track reaches the end, the town falls and you lose.\n"
+    "5. Victory:\n"
+    "    Complete every active monster's objectives to save the town!\n" ;
+
+    DrawTextEx(font , text.c_str() , {panelX+20 , y} , 25 , 0 , RAYWHITE) ;
+
+}
+
 Game::~Game(){
     if(frenziedMonster)
         delete frenziedMonster ;
@@ -380,6 +425,7 @@ Game::~Game(){
     heroes.clear();
     all_villagers.clear();
     UnloadMusicStream(music); 
+    UnloadFont(font);
     CloseAudioDevice(); 
 }
 

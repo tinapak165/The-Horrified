@@ -27,6 +27,7 @@ void GameRender::draw() {
     draw_saveGame() ;
     draw_villagerButton() ;
     Draw_Backtomenu();
+    Draw_HelpButton();
     renderTerrorLevel(game.get_terror_level());
 }
 
@@ -75,6 +76,12 @@ bool GameRender::handleDisplays()
             ShowPLAYEDPerkButton = false;
             currentHero = nullptr;
         }
+        return true;
+    }
+    if(ShowHelp){
+        game.Help();
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            ShowHelp = false ;
         return true;
     }
 
@@ -535,6 +542,20 @@ void GameRender::draw_collected_items(){
     }
 
 }
+void GameRender::Draw_HelpButton()
+{
+    Rectangle HelpButton = { 720, 80, 140, 40 }; 
+    bool hover = CheckCollisionPointRec(GetMousePosition(), HelpButton);
+
+    Color btnColor = hover ? LIGHTGRAY : GRAY;
+    DrawRectangleRec(HelpButton, btnColor);
+    DrawText("Help", HelpButton.x + 10, HelpButton.y + 10, 20, BLACK);
+
+    if (hover && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        ShowHelp = true;
+    }
+}
+
 void GameRender::draw_played_Perkcards(){
 
     Rectangle perkButton = { 900, 30, 170, 40 }; 

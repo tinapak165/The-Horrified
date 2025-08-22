@@ -289,52 +289,51 @@ void ContinueState::render(Menu & menu)
     }
 }
 
-ExplainationState::ExplainationState(): State("../Assets/Menu/Blackscreen.jpg"){}
 
-void ExplainationState::render(Menu & menu)
-{
-    DrawTexture(get_background(), 0, 0, WHITE);
+// void ExplainationState::render(Menu & menu)
+// {
+//     DrawTexture(get_background(), 0, 0, WHITE);
 
-    ClickableText backButton("Back to menu", {100, 900}, 30, RED);
-    backButton.Draw();
-    if (backButton.isClicked()) {
-        menu.SetState(std::make_unique<MenuState>());
-        return;
-    }
+//     ClickableText backButton("Back to menu", {100, 900}, 30, RED);
+//     backButton.Draw();
+//     if (backButton.isClicked()) {
+//         menu.SetState(std::make_unique<MenuState>());
+//         return;
+//     }
 
-    ClickableText continueButton("continue", {900, 900}, 30, RED);
-    continueButton.Draw();
-    if (continueButton.isClicked()) {
-        menu.SetState(std::make_unique<NameInputState>());
-        return;
-    }
-    DrawTextEx(get_Font() ,
-    "Welcome to Horrified! Here's your quick-start guide:\n"
-    "1. Missions:\n"
-    "    Work together with fellow heroes to defeat the monsters (Dracula and the Invisible Man)\n"
-    "    by completing their specific tasks (smashing coffins, gathering evidence).\n"
-    "    Escort villagers to their safe places(this will reward you with a Perk card).\n"
-    "    Prevent the terror level from reaching its maximum.\n"
-    "2. Hero Phase:\n"
-    "    Take a number of actions equal to the value on your Hero Badge.\n"
-    "    You may play any number of Perk cards (playing a Perk does not cost an action).\n"
-    "    Learn more about actions by clicking on Help.\n"
-    "    End your turn anytime by clicking Quit\n"
-    "    Villagers cannot defend themselves. If monsters attack them, they are defeated, which raises the terror level.\n"
-    "    If a hero is attacked they may discard an item to avoid being defeated and sent to the hospital.\n "
-    "3. Monster Phase:\n"
-    "     Draw a Monster card: place items, resolve an event, roll dice then move/attack monsters\n"
-    "     Each monster has unique behavior and its own defeat conditions.\n  (click on each monster to learn more.)\n"
-    "     Dice results: Attack, Power or Empty\n"
-    "       Attack: If a monster shares a space with a hero, it may attack\n"
-    "       Power: Activates that monster's special ability:\n"
-    "         Dracula-> Dark Charm: pulls the current Hero into his place\n"
-    "         InvisibleMan-> Stalk Unseen: moves 2 extra places toward the nearest villager\n"
-    "     You can track what happened in the sidebar\n"
-    "4. Terror level:\n"
-    "    The Terror rises when heroes or villagers are defeated.\n"
-    "    If the track reaches the end, the town falls and you lose.\n"
-    "5. Victory:\n"
-    "    Complete every active monster's objectives to save the town!\n"
-      , Vector2{80 , 60 } , 28 , 0 , WHITE);
-}
+//     ClickableText continueButton("continue", {900, 900}, 30, RED);
+//     continueButton.Draw();
+//     if (continueButton.isClicked()) {
+//         menu.SetState(std::make_unique<NameInputState>());
+//         return;
+//     }
+//     DrawTextEx(get_Font() ,
+//     "Welcome to Horrified! Here's your quick-start guide:\n"
+//     "1. Missions:\n"
+//     "    Work together with fellow heroes to defeat the monsters (Dracula and the Invisible Man)\n"
+//     "    by completing their specific tasks (smashing coffins, gathering evidence).\n"
+//     "    Escort villagers to their safe places(this will reward you with a Perk card).\n"
+//     "    Prevent the terror level from reaching its maximum.\n"
+//     "2. Hero Phase:\n"
+//     "    Take a number of actions equal to the value on your Hero Badge.\n"
+//     "    You may play any number of Perk cards (playing a Perk does not cost an action).\n"
+//     "    Learn more about actions by clicking on Help.\n"
+//     "    End your turn anytime by clicking Quit\n"
+//     "    Villagers cannot defend themselves. If monsters attack them, they are defeated, which raises the terror level.\n"
+//     "    If a hero is attacked they may discard an item to avoid being defeated and sent to the hospital.\n "
+//     "3. Monster Phase:\n"
+//     "     Draw a Monster card: place items, resolve an event, roll dice then move/attack monsters\n"
+//     "     Each monster has unique behavior and its own defeat conditions.\n  (click on each monster to learn more.)\n"
+//     "     Dice results: Attack, Power or Empty\n"
+//     "       Attack: If a monster shares a space with a hero, it may attack\n"
+//     "       Power: Activates that monster's special ability:\n"
+//     "         Dracula-> Dark Charm: pulls the current Hero into his place\n"
+//     "         InvisibleMan-> Stalk Unseen: moves 2 extra places toward the nearest villager\n"
+//     "     You can track what happened in the sidebar\n"
+//     "4. Terror level:\n"
+//     "    The Terror rises when heroes or villagers are defeated.\n"
+//     "    If the track reaches the end, the town falls and you lose.\n"
+//     "5. Victory:\n"
+//     "    Complete every active monster's objectives to save the town!\n"
+//       , Vector2{80 , 60 } , 28 , 0 , WHITE);
+// }
