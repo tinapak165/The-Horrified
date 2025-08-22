@@ -243,7 +243,7 @@ void SaveManager::loadGame(const std::string & filename)
         }
         else if(line.find("coffins:" , 0) == 0){
             std::string flags = line.substr(9);
-            std::vector<std::string> locs = {"Cave", "Dungeon", "Crypt", "Graveyard"};
+            std::vector<std::string> locs = {"Cave", "Crypt", "Dungeon", "Graveyard"};
             for (size_t i = 0; i < flags.size() && i < locs.size(); ++i) {
                 if (flags[i] == '1') 
                   game.get_dracula()->destroy_coffin_at(locs[i]);    
