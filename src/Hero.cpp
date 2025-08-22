@@ -122,7 +122,6 @@ void Hero::addItems(Item item)
 void Hero::removeItems(const Item & i){
     for(size_t j = 0 ; j < (*this).GetItems().size() ; j++){
         if(ListOfitems[j].getName() == i.getName()){
-            cout << "removing item " << i.getName() << " from " << (*this).GetName() << " list\n" ;
             ListOfitems.erase(ListOfitems.begin() + j) ;
         }
     }
