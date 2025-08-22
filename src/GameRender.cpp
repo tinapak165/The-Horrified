@@ -544,7 +544,7 @@ void GameRender::draw_collected_items(){
 }
 void GameRender::Draw_HelpButton()
 {
-    Rectangle HelpButton = { 720, 80, 140, 40 }; 
+    Rectangle HelpButton = { 720, 80, 170, 40 }; 
     bool hover = CheckCollisionPointRec(GetMousePosition(), HelpButton);
 
     Color btnColor = hover ? LIGHTGRAY : GRAY;
